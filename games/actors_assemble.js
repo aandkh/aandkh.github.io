@@ -159,7 +159,7 @@ function renderGuessInputs() {
     for (var i = 0; i < players.length; i++) {
         var player = players[i];
         var div = document.createElement('div');
-        div.innerHTML = '<label>' + player + ': <input type="text" class="guess-input" data-player="' + player + '" placeholder="Actor Name"></label>';
+        div.innerHTML = '<label>' + player + ': <input type="text" class="guess-input" data-player="' + player + '" placeholder="Movie Title"></label>';
         inputsDiv.appendChild(div);
     }
 }
@@ -396,12 +396,13 @@ function renderFilm() {
     var filmInfo = document.getElementById('film-info');
     var actorInfo = document.getElementById('actor-info');
     if (!filmInfo || !actorInfo) {
-        console.error('Error: Film or actor info div not found');
+        console.error('ERROR: Film or actor info div not found');
         return;
     }
-    filmInfo.innerHTML = '<h3>' + currentFilm.genres.join(' ') + ' (' + currentFilm.releaseYear + ')</h3>';
+    filmInfo.innerHTML = '<h3>' + currentFilm.genres.join(', ') + ' (' + currentFilm.releaseYear + ')</h3>';
     actorInfo.innerHTML = currentActorIndex >= 0 ?
-        `<p>#${5 - currentActorIndex} Actor: ${currentFilm.actors[currentActorIndex]} (${currentActorIndex + 1} point${currentActorIndex + 1 > 1 ? 's' : ''})</p>` :
+        '<p>#' + (5 - currentActorIndex) + ' Actor: ' + currentFilm.actors[currentActorIndex] +
+        ' (' + (currentActorIndex + 1) + ' point' + (currentActorIndex + 1 > 1 ? 's' : '') + ')</p>' :
         '<p>All actors revealed.</p>';
     document.getElementById('result').innerHTML = '';
     var guessInputs = document.querySelectorAll('.guess-input');
@@ -411,26 +412,24 @@ function renderFilm() {
     document.getElementById('reveal-next-actor').style.display = currentActorIndex > 0 ? 'inline-block' : 'none';
 }
 
-function parseGuess(guess, correctActor) {
+function parseGuess(guess, correctTitle) {
     if (!guess || typeof guess !== 'string') {
         console.warn('Invalid guess input:', guess);
         return false;
     }
     guess = guess.trim().toLowerCase();
-    correctActor = correctActor.toLowerCase();
-    var guessParts = guess.split(' ');
-    var correctParts = correctActor.split(' ');
-    var lastNameMatch = guessParts[guessParts.length - 1] === correctParts[correctParts.length - 1];
-    var containsName = correctActor.includes(guess);
-    console.log('Guess:', guess, 'Correct:', correctActor, 'Match:', lastNameMatch || containsName);
-    return lastNameMatch || containsName;
+    correctTitle = correctTitle.toLowerCase();
+    // Allow partial matches, e.g., "avengers" for "The Avengers"
+    var containsTitle = correctTitle.includes(guess) || guess.includes(correctTitle);
+    console.log('Guess:', guess, 'Correct:', correctTitle, 'Match:', containsTitle);
+    return containsTitle;
 }
 
 function setupSubmitGuesses() {
     console.log('Setting up submit guesses');
     var submitButton = document.getElementById('submit-guesses');
     if (!submitButton) {
-        console.error('Error: Submit Guesses button not found');
+        console.error('ERROR: Submit Guesses button not found');
         return;
     }
     submitButton.addEventListener('click', function() {
@@ -443,16 +442,16 @@ function setupSubmitGuesses() {
             var player = input.dataset.player;
             var guess = input.value.trim();
             if (!guess) allGuessed = false;
-            var isCorrect = parseGuess(guess, currentFilm.actors[currentActorIndex]);
+            var isCorrect = parseGuess(guess, currentFilm.title);
             guesses.push({ player: player, guess: guess, isCorrect: isCorrect });
         }
         if (!allGuessed) {
             document.getElementById('result').innerHTML = '<p>Please enter guesses for all players.</p>';
             return;
         }
-        var winners = guesses.filter(function(g) { return g.isCorrect });
+        var winners = guesses.filter(function(g) { return g.isCorrect; });
         var points = currentActorIndex + 1; // 5th actor (index 4) = 5 points, 1st actor (index 0) = 1 point
-        console.log('Points awarded:', points, 'for actor:', currentFilm.actors[currentActorIndex]);
+        console.log('Points awarded:', points, 'for movie:', currentFilm.title);
         if (winners.length > 0) {
             for (var i = 0; i < winners.length; i++) {
                 scores[winners[i].player] = (scores[winners[i].player] || 0) + points;
@@ -460,7 +459,7 @@ function setupSubmitGuesses() {
             localStorage.setItem('aaScores', JSON.stringify(scores));
             updateScoreboard();
             document.getElementById('result').innerHTML = [
-                '<p><strong>Correct!</strong> ' + currentFilm.actors[currentActorIndex] + ' is in ' + currentFilm.title + '.</p>',
+                '<p><strong>Correct!</strong> The movie is ' + currentFilm.title + '.</p>',
                 guesses.map(function(g) {
                     return '<p>' + g.player + ' guessed "' + g.guess + '" (' + (g.isCorrect ? 'Correct' : 'Incorrect') + ')</p>';
                 }).join(''),
@@ -470,12 +469,24 @@ function setupSubmitGuesses() {
             document.getElementById('submit-guesses').style.display = 'none';
             document.getElementById('reveal-next-actor').style.display = 'none';
         } else {
-            document.getElementById('result').innerHTML = [
-                '<p><strong>Incorrect.</strong> Try again or reveal the next actor.</p>',
-                guesses.map(function(g) {
-                    return '<p>' + g.player + ' guessed "' + g.guess + '"</p>';
-                }).join('')
-            ].join('');
+            if (currentActorIndex === 0) {
+                // No correct guesses after 1st actor, reveal movie
+                document.getElementById('result').innerHTML = [
+                    '<p><strong>No correct guesses.</strong> The movie was ' + currentFilm.title + '.</p>',
+                    guesses.map(function(g) {
+                        return '<p>' + g.player + ' guessed "' + g.guess + '" (Incorrect)</p>';
+                    }).join('')
+                ].join('');
+                document.getElementById('submit-guesses').style.display = 'none';
+                document.getElementById('reveal-next-actor').style.display = 'none';
+            } else {
+                document.getElementById('result').innerHTML = [
+                    '<p><strong>Incorrect.</strong> Try again or reveal the next actor.</p>',
+                    guesses.map(function(g) {
+                        return '<p>' + g.player + ' guessed "' + g.guess + '"</p>';
+                    }).join('')
+                ].join('');
+            }
         }
     });
 }
@@ -484,7 +495,7 @@ function setupRevealNextActor() {
     console.log('Setting up reveal next actor');
     var revealButton = document.getElementById('reveal-next-actor');
     if (!revealButton) {
-        console.error('Error: Reveal Next Actor button not found');
+        console.error('ERROR: Reveal Next Actor button not found');
         return;
     }
     revealButton.addEventListener('click', function() {
@@ -502,12 +513,12 @@ function setupNextMovie() {
     console.log('Setting up next movie');
     var nextMovieButton = document.getElementById('next-movie');
     if (!nextMovieButton) {
-        console.error('Error: Next Movie button not found');
+        console.error('ERROR: Next Movie button not found');
         return;
     }
     nextMovieButton.addEventListener('click', function() {
         console.log('Next Movie button clicked');
-        selectFilm();
+        selectFilm(false);
         document.getElementById('submit-guesses').style.display = 'inline-block';
     });
 }
@@ -516,7 +527,7 @@ function setupResetGame() {
     console.log('Setting up reset game');
     var resetButton = document.getElementById('reset-game');
     if (!resetButton) {
-        console.error('Error: Reset Game button not found');
+        console.error('ERROR: Reset Game button not found');
         return;
     }
     resetButton.addEventListener('click', function() {
@@ -529,7 +540,7 @@ function setupResetGame() {
         document.getElementById('player-setup').style.display = 'block';
         document.getElementById('game-area').style.display = 'none';
         var playerList = document.getElementById('player-list');
-        document.getElementById('player-list').innerHTML = '<div class="player-entry"><input type="text" class="player-name" placeholder="Player Name"><button class="remove-player">Remove</button></div>';
+        playerList.innerHTML = '<div class="player-entry"><input type="text" class="player-name" placeholder="Player Name"><button class="remove-player">Remove</button></div>';
         updateRemoveButtons();
     });
 }
