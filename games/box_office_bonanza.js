@@ -3,47 +3,16 @@ var currentFilm = null;
 var scores = JSON.parse(localStorage.getItem('bobScores')) || {};
 
 var fallbackMovies = [
-   { title: "Avatar", releaseYear: "2009", worldwideGross: 2923710708 },
-   { title: "Avengers: Endgame", releaseYear: "2019", worldwideGross: 2799439100 },
-   { title: "Avatar: The Way of Water", releaseYear: "2022", worldwideGross: 2320250281 },
-   { title: "Titanic", releaseYear: "1997", worldwideGross: 2264812968 },
-   { title: "Star Wars: Episode VII – The Force Awakens", releaseYear: "2015", worldwideGross: 2071310218 },
-   { title: "Avengers: Infinity War", releaseYear: "2018", worldwideGross: 2052415039 },
-   { title: "Spider‑Man: No Way Home", releaseYear: "2021", worldwideGross: 1921426073 },
-   { title: "Ne Zha 2", releaseYear: "2025", worldwideGross: 2212370000 }, 
-   { title: "Inside Out 2", releaseYear: "2024", worldwideGross: 1698863816 },
-   { title: "Jurassic World", releaseYear: "2015", worldwideGross: 1671537444 },
-   { title: "The Lion King", releaseYear: "2019", worldwideGross: 1656943394 },
-{ title: "Frozen II", releaseYear: "2019", worldwideGross: 1450026933 },
-{ title: "Barbie", releaseYear: "2023", worldwideGross: 1447038421 },
-{ title: "Avengers: Age of Ultron", releaseYear: "2015", worldwideGross: 1402809540 },
-{ title: "The Super Mario Bros. Movie", releaseYear: "2023", worldwideGross: 1360847665 },
-{ title: "Harry Potter and the Deathly Hallows – Part 2", releaseYear: "2011", worldwideGross: 1380829829 },
-{ title: "Deadpool & Wolverine", releaseYear: "2024", worldwideGross: 1338073645 },
-{ title: "Star Wars: The Last Jedi", releaseYear: "2017", worldwideGross: 1332539889 },
-{ title: "Black Panther", releaseYear: "2018", worldwideGross: 1347280838 },
-{ title: "Jurassic World: Fallen Kingdom", releaseYear: "2018", worldwideGross: 1300000000 },
-{ title: "Frozen", releaseYear: "2013", worldwideGross: 1280000000 },
-{ title: "Beauty and the Beast", releaseYear: "2017", worldwideGross: 1263521126 },
-{ title: "Incredibles 2", releaseYear: "2018", worldwideGross: 1242805359 },
-{ title: "Iron Man 3", releaseYear: "2013", worldwideGross: 1214811252 },
-{ title: "Minions", releaseYear: "2015", worldwideGross: 1159444662 },
-{ title: "Captain America: Civil War", releaseYear: "2016", worldwideGross: 1153337496 },
-{ title: "Aquaman", releaseYear: "2018", worldwideGross: 1148528393 },
-{ title: "Spider‑Man: Far From Home", releaseYear: "2019", worldwideGross: 1132679685 },
-{ title: "Captain Marvel", releaseYear: "2019", worldwideGross: 1128274794 },
-{ title: "Transformers: Dark of the Moon", releaseYear: "2011", worldwideGross: 1123794079 },
-{ title: "Skyfall", releaseYear: "2012", worldwideGross: 1108594137 },
-{ title: "Transformers: Age of Extinction", releaseYear: "2014", worldwideGross: 1104054072 },
-{ title: "The Fate of the Furious", releaseYear: "2017", worldwideGross: 1236400000 },
-{ title: "Rogue One: A Star Wars Story", releaseYear: "2016", worldwideGross: 1051000000 },
-{ title: "Aladdin", releaseYear: "2019", worldwideGross: 1050693953 },
-{ title: "Star Wars: Episode I – The Phantom Menace", releaseYear: "1999", worldwideGross: 1046515409 },
-{ title: "Pirates of the Caribbean: Dead Man's Chest", releaseYear: "2006", worldwideGross: 1066179747 },
-{ title: "Pirates of the Caribbean: On Stranger Tides", releaseYear: "2011", worldwideGross: 1045713802 },
-{ title: "Jurassic Park", releaseYear: "1993", worldwideGross: 1045910000 },
-{ title: "Despicable Me 3", releaseYear: "2017", worldwideGross: 1034800131 }
-
+    { title: "Titanic", releaseYear: "1997", worldwideGross: 2208208395 },
+    { title: "Avengers: Endgame", releaseYear: "2019", worldwideGross: 2797800564 },
+    { title: "Avatar", releaseYear: "2009", worldwideGross: 2847246203 },
+    { title: "Star Wars: The Force Awakens", releaseYear: "2015", worldwideGross: 2068223624 },
+    { title: "Jurassic World", releaseYear: "2015", worldwideGross: 1671713208 },
+    { title: "The Lion King (2019)", releaseYear: "2019", worldwideGross: 1656943394 },
+    { title: "The Avengers", releaseYear: "2012", worldwideGross: 1518812988 },
+    { title: "Furious 7", releaseYear: "2015", worldwideGross: 1516045911 },
+    { title: "Frozen II", releaseYear: "2019", worldwideGross: 1450026933 },
+    { title: "Spider-Man: Far From Home", releaseYear: "2019", worldwideGross: 1131927996 }
 ];
 
 function setupEventListeners() {
@@ -105,7 +74,7 @@ function updateRemoveButtons() {
 
 function initializeGame() {
     console.log('Initializing game');
-    selectFilm();
+    selectFilm(true); // Use cache for initial load
     updateScoreboard();
     renderGuessInputs();
 }
@@ -142,13 +111,13 @@ function renderGuessInputs() {
     }
 }
 
-function selectFilm(attempt) {
+function selectFilm(useCache, attempt) {
     if (!attempt) attempt = 1;
     var maxAttempts = 5;
-    console.log('Selecting film, attempt ' + attempt + ' of ' + maxAttempts);
+    console.log('Selecting film, attempt ' + attempt + ' of ' + maxAttempts + ', useCache: ' + useCache);
 
     var cachedMovies = JSON.parse(localStorage.getItem('cachedMovies')) || [];
-    if (cachedMovies.length > 0) {
+    if (useCache && cachedMovies.length > 0) {
         console.log('Using cached movie');
         currentFilm = cachedMovies[Math.floor(Math.random() * cachedMovies.length)];
         renderFilm();
@@ -175,10 +144,11 @@ function selectFilm(attempt) {
                 } catch (e) {
                     console.error('ERROR: Failed to parse API response:', e);
                     if (attempt < maxAttempts) {
-                        selectFilm(attempt + 1);
+                        selectFilm(useCache, attempt + 1);
                     } else {
                         console.warn('Failed to parse API response after ' + maxAttempts + ' attempts. Using fallback dataset.');
                         currentFilm = fallbackMovies[Math.floor(Math.random() * fallbackMovies.length)];
+                        console.log('Fallback film:', currentFilm);
                         renderFilm();
                     }
                     return;
@@ -187,10 +157,11 @@ function selectFilm(attempt) {
                 if (!data.results || data.results.length === 0) {
                     console.warn('No results in API response');
                     if (attempt < maxAttempts) {
-                        selectFilm(attempt + 1);
+                        selectFilm(useCache, attempt + 1);
                     } else {
                         console.warn('No results after ' + maxAttempts + ' attempts. Using fallback dataset.');
                         currentFilm = fallbackMovies[Math.floor(Math.random() * fallbackMovies.length)];
+                        console.log('Fallback film:', currentFilm);
                         renderFilm();
                     }
                     return;
@@ -217,10 +188,11 @@ function selectFilm(attempt) {
                             } catch (e) {
                                 console.error('ERROR: Failed to parse details API response:', e);
                                 if (attempt < maxAttempts) {
-                                    selectFilm(attempt + 1);
+                                    selectFilm(useCache, attempt + 1);
                                 } else {
                                     console.warn('Failed to parse details after ' + maxAttempts + ' attempts. Using fallback dataset.');
                                     currentFilm = fallbackMovies[Math.floor(Math.random() * fallbackMovies.length)];
+                                    console.log('Fallback film:', currentFilm);
                                     renderFilm();
                                 }
                                 return;
@@ -229,10 +201,11 @@ function selectFilm(attempt) {
                             if (!movieDetails.revenue || movieDetails.revenue <= 0) {
                                 console.warn('Movie ' + movieDetails.title + ' has no revenue');
                                 if (attempt < maxAttempts) {
-                                    selectFilm(attempt + 1);
+                                    selectFilm(useCache, attempt + 1);
                                 } else {
                                     console.warn('No revenue after ' + maxAttempts + ' attempts. Using fallback dataset.');
                                     currentFilm = fallbackMovies[Math.floor(Math.random() * fallbackMovies.length)];
+                                    console.log('Fallback film:', currentFilm);
                                     renderFilm();
                                 }
                                 return;
@@ -243,7 +216,7 @@ function selectFilm(attempt) {
                                 releaseYear: movieDetails.release_date ? movieDetails.release_date.split('-')[0] : 'Unknown',
                                 worldwideGross: movieDetails.revenue
                             };
-                            console.log('Selected film:', currentFilm);
+                            console.log('Selected film from API:', currentFilm);
 
                             cachedMovies.push(currentFilm);
                             cachedMovies = cachedMovies.slice(-50);
@@ -253,10 +226,11 @@ function selectFilm(attempt) {
                         } else {
                             console.error('Details API error, status: ' + detailsXhr.status);
                             if (attempt < maxAttempts) {
-                                selectFilm(attempt + 1);
+                                selectFilm(useCache, attempt + 1);
                             } else {
                                 console.warn('Details API failed after ' + maxAttempts + ' attempts. Using fallback dataset.');
                                 currentFilm = fallbackMovies[Math.floor(Math.random() * fallbackMovies.length)];
+                                console.log('Fallback film:', currentFilm);
                                 renderFilm();
                             }
                         }
@@ -266,10 +240,11 @@ function selectFilm(attempt) {
             } else {
                 console.error('API error, status: ' + xhr.status);
                 if (attempt < maxAttempts) {
-                    selectFilm(attempt + 1);
+                    selectFilm(useCache, attempt + 1);
                 } else {
                     console.warn('API failed after ' + maxAttempts + ' attempts. Using fallback dataset.');
                     currentFilm = fallbackMovies[Math.floor(Math.random() * fallbackMovies.length)];
+                    console.log('Fallback film:', currentFilm);
                     renderFilm();
                 }
             }
@@ -375,7 +350,7 @@ function setupNextFilm() {
     }
     nextFilmButton.addEventListener('click', function() {
         console.log('Next Film button clicked');
-        selectFilm();
+        selectFilm(false); // Force API call for Next Film
     });
 }
 
