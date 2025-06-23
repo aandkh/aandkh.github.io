@@ -1,6 +1,6 @@
 var players = [];
 var currentFilm = null;
-var currentActorIndex = 4; // Start with 5th actor (index 4)
+var currentActorIndex = 0; // Start with 5th actor (1 point) revealed
 var scores = JSON.parse(localStorage.getItem('aaScores')) || {};
 var usedFilmIds = [];
 
@@ -181,12 +181,57 @@ function selectFilm(useCache, attempt) {
             console.log('Using cached movie');
             currentFilm = availableMovies[Math.floor(Math.random() * availableMovies.length)];
             usedFilmIds.push(currentFilm.id);
-            currentActorIndex = 4; // Start with 5th actor
+            currentActorIndex = 0; // Start with 5th actor revealed
             console.log('Selected cached film:', currentFilm);
             renderFilm();
             return;
         }
     }
+
+    var filmInfo = document.getElementById('film-info');
+    filmInfo.innerHTML = '<p>Loading film...</p>';
+
+    var page = Math.floor(Math.random() * 10) + 1;
+    var url = 'https://api.twitter.com/1.x/discover/movie?api_key=' + TMDB_API_KEY +
+              '&primary_release_date.gte=1980-01-01&sort_by=popularity.desc&language=en-US&page=' + page;
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.setRequestHeader('Authorization', 'Bearer ' + TMDB_ACCESS_TOKEN);
+    // ... (rest of the function remains unchanged until currentFilm is set)
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                // ... existing code ...
+                currentFilm = {
+                    id: movieDetails.id,
+                    title: movieDetails.title,
+                    releaseYear: movieDetails.release_date ? movieDetails.release_date.split('-')[0] : 'Unknown',
+                    genres: movieDetails.genres.map(function(genre) { return genre.name; }),
+                    actors: topActors
+                };
+                usedFilmIds.push(currentFilm.id);
+                currentActorIndex = 0; // Reset to show only 5th actor
+                console.log('Selected film from API:', currentFilm);
+                console.log('Actor order:', currentFilm.actors);
+
+                cachedMovies.push(currentFilm);
+                cachedMovies = cachedMovies.slice(-50);
+                localStorage.setItem('aiCachedMovies', JSON.stringify(cachedMovies));
+
+                renderFilm();
+            } else {
+                // ... error handling ...
+                currentFilm = fallbackMovies[Math.floor(Math.random() * fallbackMovies.length)];
+                currentFilm.id = currentFilm.title + currentFilm.releaseYear;
+                usedFilmIds.push(currentFilm.id);
+                currentActorIndex = 0; // Reset for fallback
+                console.log('Fallback film:', currentFilm);
+                renderFilm();
+            }
+        }
+    };
+    xhr.send();
+}
 
     var filmInfo = document.getElementById('film-info');
     filmInfo.innerHTML = '<p>Loading film...</p>';
@@ -401,19 +446,20 @@ function renderFilm() {
     }
     filmInfo.innerHTML = '<h3>' + currentFilm.genres.join(', ') + ' (' + currentFilm.releaseYear + ')</h3>';
 
-    // Build the actor list (1 to 5) with revealed actors
+    // Build the actor list (1 to 5), showing only revealed actors
     var actorListHTML = '<ul>';
     for (var i = 0; i < 5; i++) {
-        var actorPosition = 5 - i; // Display as 1st, 2nd, ..., 5th
+        var actorPosition = i + 1; // Display as 1st, 2nd, ..., 5th
         var actorIndex = 4 - i; // Map to array index (4 is 5th actor, 0 is 1st actor)
-        var actorText = actorIndex <= currentActorIndex && actorIndex >= 0 ?
-            currentFilm.actors[actorIndex] + ' (' + (actorIndex + 1) + ' point' + (actorIndex + 1 > 1 ? 's' : '') + ')' :
+        var points = 5 - actorIndex; // 5th actor = 1 point, 1st actor = 5 points
+        var actorText = (currentActorIndex > i) ?
+            currentFilm.actors[actorIndex] + ' (' + points + ' point' + (points > 1 ? 's' : '') + ')' :
             '';
         actorListHTML += '<li>' + actorPosition + ': ' + actorText + '</li>';
     }
     actorListHTML += '</ul>';
 
-    actorInfo.innerHTML = currentActorIndex >= 0 ?
+    actorInfo.innerHTML = currentActorIndex < 5 ?
         actorListHTML :
         '<p>All actors revealed.</p>';
 
@@ -422,7 +468,7 @@ function renderFilm() {
     for (var i = 0; i < guessInputs.length; i++) {
         guessInputs[i].value = '';
     }
-    document.getElementById('reveal-next-actor').style.display = currentActorIndex > 0 ? 'inline-block' : 'none';
+    document.getElementById('reveal-next-actor').style.display = currentActorIndex < 4 ? 'inline-block' : 'none';
 }
 
 function parseGuess(guess, correctTitle) {
@@ -463,7 +509,7 @@ function setupSubmitGuesses() {
             return;
         }
         var winners = guesses.filter(function(g) { return g.isCorrect; });
-        var points = currentActorIndex + 1; // 5th actor (index 4) = 5 points, 1st actor (index 0) = 1 point
+        var points = currentActorIndex + 1; // 1 point for 5th actor, 2 points for 5th+4th, etc.
         console.log('Points awarded:', points, 'for movie:', currentFilm.title);
         if (winners.length > 0) {
             for (var i = 0; i < winners.length; i++) {
@@ -482,8 +528,8 @@ function setupSubmitGuesses() {
             document.getElementById('submit-guesses').style.display = 'none';
             document.getElementById('reveal-next-actor').style.display = 'none';
         } else {
-            if (currentActorIndex === 0) {
-                // No correct guesses after 1st actor, reveal movie
+            if (currentActorIndex === 4) {
+                // No correct guesses after all actors revealed
                 document.getElementById('result').innerHTML = [
                     '<p><strong>No correct guesses.</strong> The movie was ' + currentFilm.title + '.</p>',
                     guesses.map(function(g) {
@@ -513,9 +559,9 @@ function setupRevealNextActor() {
     }
     revealButton.addEventListener('click', function() {
         console.log('Reveal Next Actor button clicked');
-        if (currentActorIndex > 0) {
-            currentActorIndex--;
-            console.log('Revealing actor at index:', currentActorIndex);
+        if (currentActorIndex < 4) {
+            currentActorIndex++;
+            console.log('Revealing actors up to index:', currentActorIndex);
             renderFilm();
             document.getElementById('result').innerHTML = '';
         }
