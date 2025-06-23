@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="game-master, actors-assemble, game">
+    <meta name="description" content="Actors Assemble - guess the top-billed actors!">
+    <meta name="author" content="Your Name">
+    <title>Actors Assemble</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="actors_assemble.css">
+</head>
+<body>
+    <header>
+        <h1>Actors Assemble</h1>
+        <p>Guess the top-billed actors for a movie based on its genre and year</p>
+    </header>
+    <main>
+        <section id="player-setup" style="display: block;">
+            <h2>Setup Players</h2>
+            <div id="player-list">
+                <div class="player-entry">
+                    <input type="text" class="player-name" placeholder="Player Name">
+                    <button class="remove-player">Remove</button>
+                </div>
+            </div>
+            <button id="add-player">Add Player</button>
+            <button id="start-game">Start Game</button>
+        </section>
+        <section id="game-area" style="display: none;">
+            <div id="film-info"></div>
+            <div id="actor-info"></div>
+            <div id="player-inputs"></div>
+            <button id="submit-guesses">Submit Guesses</button>
+            <button id="reveal-next-actor">Reveal Next Actor</button>
+            <div id="result"></div>
+            <div id="scoreboard">
+                <h3>Scoreboard</h3>
+                <ul id="scores"></ul>
+            </div>
+            <button id="next-movie">Next Movie</button>
+            <button id="reset-game">New Game</button>
+        </section>
+    </main>
+    <footer>
+        <p>Data provided by <a href="https://www.themoviedb.org/">TMDb</a></p>
+    </footer>
+    <script src="../config.js"></script>
+    <script src="../scripts.js"></script>
+    <script src="actors_assemble.js"></script>
+</body>
+</html>
