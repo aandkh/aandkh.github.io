@@ -392,7 +392,7 @@ function selectFilm(useCache, attempt) {
 
 function renderFilm() {
     console.log('Rendering film:', currentFilm);
-    console.log('Current actor index:', currentActorIndex, 'Actor:', currentFilm.actors[currentActorIndex]);
+    console.log('Current actor index:', currentActorIndex);
     var filmInfo = document.getElementById('film-info');
     var actorInfo = document.getElementById('actor-info');
     if (!filmInfo || !actorInfo) {
@@ -400,10 +400,23 @@ function renderFilm() {
         return;
     }
     filmInfo.innerHTML = '<h3>' + currentFilm.genres.join(', ') + ' (' + currentFilm.releaseYear + ')</h3>';
+
+    // Build the actor list (1 to 5) with revealed actors
+    var actorListHTML = '<ul>';
+    for (var i = 0; i < 5; i++) {
+        var actorPosition = 5 - i; // Display as 1st, 2nd, ..., 5th
+        var actorIndex = 4 - i; // Map to array index (4 is 5th actor, 0 is 1st actor)
+        var actorText = actorIndex <= currentActorIndex && actorIndex >= 0 ?
+            currentFilm.actors[actorIndex] + ' (' + (actorIndex + 1) + ' point' + (actorIndex + 1 > 1 ? 's' : '') + ')' :
+            '';
+        actorListHTML += '<li>' + actorPosition + ': ' + actorText + '</li>';
+    }
+    actorListHTML += '</ul>';
+
     actorInfo.innerHTML = currentActorIndex >= 0 ?
-        '<p>#' + (5 - currentActorIndex) + ' Actor: ' + currentFilm.actors[currentActorIndex] +
-        ' (' + (currentActorIndex + 1) + ' point' + (currentActorIndex + 1 > 1 ? 's' : '') + ')</p>' :
+        actorListHTML :
         '<p>All actors revealed.</p>';
+
     document.getElementById('result').innerHTML = '';
     var guessInputs = document.querySelectorAll('.guess-input');
     for (var i = 0; i < guessInputs.length; i++) {
