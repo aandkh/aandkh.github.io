@@ -1,1 +1,44 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box Office Bonanza</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="box_office_bonanza.css">
+</head>
+<body>
+    <header>
+        <h1>Box Office Bonanza</h1>
+        <p>Guess the worldwide box office earnings of a randomly selected film!</p>
+    </header>
+    <main>
+        <section id="player-setup" style="display: block;">
+            <h2>Setup Players</h2>
+            <div id="player-list">
+                <div class="player-entry">
+                    <input type="text" class="player-name" placeholder="Player Name">
+                    <button class="remove-player">Remove</button>
+                </div>
+            </div>
+            <button id="add-player">Add Player</button>
+            <button id="start-game">Start Game</button>
+        </section>
+        <section id="game-area" style="display: none;">
+            <div id="film-info"></div>
+            <div id="player-inputs"></div>
+            <button id="submit-guesses">Submit Guesses</button>
+            <div id="result"></div>
+            <div id="scoreboard">
+                <h3>Scoreboard</h3>
+                <ul id="scores"></ul>
+            </div>
+            <button id="next-film">Next Film</button>
+            <button id="reset-game">New Game</button>
+        </section>
+    </main>
+    <script src="../config.js"></script>
+    <script src="../scripts.js"></script>
+    <script src="box_office_bonanza.js"></script>
+</body>
+</html>
