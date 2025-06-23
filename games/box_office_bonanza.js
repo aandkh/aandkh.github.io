@@ -106,15 +106,120 @@ function renderGuessInputs() {
     for (var i = 0; i < players.length; i++) {
         var player = players[i];
         var div = document.createElement('div');
-        div.innerHTML = '<label>' + player + ': <input type="number" class="guess-input" data-player="' + player + '" placeholder="Guess ($)" min="0"></label>';
+        div.innerHTML = '<label>' + player + ': <input type="text" class="guess-input" data-player="' + player + '" placeholder="Guess (e.g., 20m or 1.5b)"></label>';
         inputsDiv.appendChild(div);
     }
 }
 
-function selectFilm() {
-    console.log('Selecting film from fallback dataset');
-    currentFilm = fallbackMovies[Math.floor(Math.random() * fallbackMovies.length)];
-    renderFilm();
+function selectFilm(attempt) {
+    if (!attempt) attempt = 1;
+    var maxAttempts = 3;
+    console.log('Selecting film, attempt ' + attempt + ' of ' + maxAttempts);
+
+    var cachedMovies = JSON.parse(localStorage.getItem('cachedMovies')) || [];
+    if (cachedMovies.length > 0) {
+        console.log('Using cached movie');
+        currentFilm = cachedMovies[Math.floor(Math.random() * cachedMovies.length)];
+        renderFilm();
+        return;
+    }
+
+    var filmInfo = document.getElementById('film-info');
+    filmInfo.innerHTML = '<p>Loading film...</p>';
+
+    var url = 'https://api.themoviedb.org/3/discover/movie?api_key=' + TMDB_API_KEY +
+              '&primary_release_date.gte=1980-01-01&sort_by=popularity.desc&page=' +
+              (Math.floor(Math.random() * 5) + 1);
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.setRequestHeader('Authorization', 'Bearer ' + TMDB_ACCESS_TOKEN);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                console.log('API response status: 200');
+                var data = JSON.parse(xhr.responseText);
+                console.log('API response data:', data);
+                var movies = data.results.filter(function(movie) {
+                    return movie.revenue > 0;
+                });
+                console.log('Movies with revenue:', movies);
+
+                if (movies.length === 0 && attempt < maxAttempts) {
+                    console.warn('No movies with revenue found. Retrying...');
+                    selectFilm(attempt + 1);
+                    return;
+                }
+
+                if (movies.length === 0) {
+                    console.warn('No movies with revenue after ' + maxAttempts + ' attempts. Using fallback dataset.');
+                    currentFilm = fallbackMovies[Math.floor(Math.random() * fallbackMovies.length)];
+                    renderFilm();
+                    return;
+                }
+
+                var randomMovie = movies[Math.floor(Math.random() * movies.length)];
+                var detailsUrl = 'https://api.themoviedb.org/3/movie/' + randomMovie.id +
+                                 '?api_key=' + TMDB_API_KEY + '&language=en-US';
+                var detailsXhr = new XMLHttpRequest();
+                detailsXhr.open('GET', detailsUrl, true);
+                detailsXhr.setRequestHeader('Authorization', 'Bearer ' + TMDB_ACCESS_TOKEN);
+                detailsXhr.onreadystatechange = function() {
+                    if (detailsXhr.readyState === 4) {
+                        if (detailsXhr.status === 200) {
+                            console.log('Details API response status: 200');
+                            var movieDetails = JSON.parse(detailsXhr.responseText);
+                            console.log('Movie details:', movieDetails);
+
+                            if (!movieDetails.revenue || movieDetails.revenue <= 0) {
+                                console.warn('Movie ' + movieDetails.title + ' has no revenue. Retrying...');
+                                if (attempt < maxAttempts) {
+                                    selectFilm(attempt + 1);
+                                } else {
+                                    console.warn('No revenue after ' + maxAttempts + ' attempts. Using fallback dataset.');
+                                    currentFilm = fallbackMovies[Math.floor(Math.random() * fallbackMovies.length)];
+                                    renderFilm();
+                                }
+                                return;
+                            }
+
+                            currentFilm = {
+                                title: movieDetails.title,
+                                releaseYear: movieDetails.release_date ? movieDetails.release_date.split('-')[0] : 'Unknown',
+                                worldwideGross: movieDetails.revenue
+                            };
+                            console.log('Selected film:', currentFilm);
+
+                            cachedMovies.push(currentFilm);
+                            cachedMovies = cachedMovies.slice(-50); // Keep last 50 movies
+                            localStorage.setItem('cachedMovies', JSON.stringify(cachedMovies));
+
+                            renderFilm();
+                        } else {
+                            console.error('Details API error, status: ' + detailsXhr.status);
+                            if (attempt < maxAttempts) {
+                                selectFilm(attempt + 1);
+                            } else {
+                                console.warn('Details API failed after ' + maxAttempts + ' attempts. Using fallback dataset.');
+                                currentFilm = fallbackMovies[Math.floor(Math.random() * fallbackMovies.length)];
+                                renderFilm();
+                            }
+                        }
+                    }
+                };
+                detailsXhr.send();
+            } else {
+                console.error('API error, status: ' + xhr.status);
+                if (attempt < maxAttempts) {
+                    selectFilm(attempt + 1);
+                } else {
+                    console.warn('API failed after ' + maxAttempts + ' attempts. Using fallback dataset.');
+                    currentFilm = fallbackMovies[Math.floor(Math.random() * fallbackMovies.length)];
+                    renderFilm();
+                }
+            }
+        }
+    };
+    xhr.send();
 }
 
 function renderFilm() {
@@ -132,6 +237,18 @@ function renderFilm() {
     }
 }
 
+function parseGuess(input) {
+    if (!input || typeof input !== 'string') return 0;
+    input = input.trim().toLowerCase();
+    var match = input.match(/^(\d*\.?\d+)([mb])?$/);
+    if (!match) return 0;
+    var number = parseFloat(match[1]);
+    var suffix = match[2] || '';
+    if (suffix === 'm') return number * 1000000;
+    if (suffix === 'b') return number * 1000000000;
+    return number;
+}
+
 function setupSubmitGuesses() {
     console.log('Setting up submit guesses');
     var submitButton = document.getElementById('submit-guesses');
@@ -147,12 +264,12 @@ function setupSubmitGuesses() {
         for (var i = 0; i < guessInputs.length; i++) {
             var input = guessInputs[i];
             var player = input.dataset.player;
-            var guess = parseInt(input.value) || 0;
-            if (!guess) allGuessed = false;
+            var guess = parseGuess(input.value);
+            if (guess === 0) allGuessed = false;
             guesses.push({ player: player, guess: guess, diff: Math.abs(currentFilm.worldwideGross - guess) });
         }
         if (!allGuessed) {
-            document.getElementById('result').innerHTML = '<p>Please enter guesses for all players.</p>';
+            document.getElementById('result').innerHTML = '<p>Please enter valid guesses (e.g., 20m for 20 million, 1.5b for 1.5 billion) for all players.</p>';
             return;
         }
         var minDiff = Math.min.apply(null, guesses.map(function(g) { return g.diff; }));
