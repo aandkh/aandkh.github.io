@@ -2,41 +2,72 @@ let players = [];
 let currentFilm = null;
 let scores = JSON.parse(localStorage.getItem('bobScores')) || {};
 
+// Fallback static dataset
+const fallbackMovies = [
+    { title: "Titanic", releaseYear: "1997", worldwideGross: 2208208395 },
+    { title: "Avengers: Endgame", releaseYear: "2019", worldwideGross: 2797800564 },
+    { title: "Avatar", releaseYear: "2009", worldwideGross: 2847246203 },
+    { title: "Star Wars: The Force Awakens", releaseYear: "2015", worldwideGross: 2068223624 },
+    { title: "Jurassic World", releaseYear: "2015", worldwideGross: 1671713208 },
+    { title: "The Lion King (2019)", releaseYear: "2019", worldwideGross: 1656943394 },
+    { title: "The Avengers", releaseYear: "2012", worldwideGross: 1518812988 },
+    { title: "Furious 7", releaseYear: "2015", worldwideGross: 1516045911 },
+    { title: "Frozen II", releaseYear: "2019", worldwideGross: 1450026933 },
+    { title: "Spider-Man: Far From Home", releaseYear: "2019", worldwideGross: 1131927996 }
+];
+
 // Player Setup
-document.getElementById('add-player').addEventListener('click', () => {
-    const playerList = document.getElementById('player-list');
-    const entry = document.createElement('div');
-    entry.className = 'player-entry';
-    entry.innerHTML = `
-        <input type="text" class="player-name" placeholder="Player Name">
-        <button class="remove-player">Remove</button>
-    `;
-    playerList.appendChild(entry);
-    updateRemoveButtons();
-});
+function setupEventListeners() {
+    const addPlayerButton = document.getElementById('add-player');
+    if (!addPlayerButton) {
+        console.error('Add Player button not found!');
+        return;
+    }
+    addPlayerButton.addEventListener('click', () => {
+        console.log('Add Player clicked');
+        const playerList = document.getElementById('player-list');
+        const entry = document.createElement('div');
+        entry.className = 'player-entry';
+        entry.innerHTML = `
+            <input type="text" class="player-name" placeholder="Player Name">
+            <button class="remove-player">Remove</button>
+        `;
+        playerList.appendChild(entry);
+        updateRemoveButtons();
+    });
+
+    const startGameButton = document.getElementById('start-game');
+    if (!startGameButton) {
+        console.error('Start Game button not found!');
+        return;
+    }
+    startGameButton.addEventListener('click', () => {
+        console.log('Start Game clicked');
+        const playerNames = document.querySelectorAll('.player-name');
+        players = Array.from(playerNames)
+            .map(input => input.value.trim())
+            .filter(name => name !== '');
+        
+        if (players.length < 1) {
+            alert('Please add at least one player.');
+            return;
+        }
+
+        document.getElementById('player-setup').style.display = 'none';
+        document.getElementById('game-area').style.display = 'block';
+        initializeGame();
+    });
+}
 
 function updateRemoveButtons() {
     const removeButtons = document.querySelectorAll('.remove-player');
     removeButtons.forEach(button => {
-        button.onclick = () => button.parentElement.remove();
+        button.onclick = () => {
+            console.log('Remove Player clicked');
+            button.parentElement.remove();
+        };
     });
 }
-
-document.getElementById('start-game').addEventListener('click', () => {
-    const playerNames = document.querySelectorAll('.player-name');
-    players = Array.from(playerNames)
-        .map(input => input.value.trim())
-        .filter(name => name !== '');
-    
-    if (players.length < 1) {
-        alert('Please add at least one player.');
-        return;
-    }
-
-    document.getElementById('player-setup').style.display = 'none';
-    document.getElementById('game-area').style.display = 'block';
-    initializeGame();
-});
 
 // Initialize Game
 function initializeGame() {
@@ -47,6 +78,10 @@ function initializeGame() {
 
 function updateScoreboard() {
     const scoresList = document.getElementById('scores');
+    if (!scoresList) {
+        console.error('Scores list not found!');
+        return;
+    }
     scoresList.innerHTML = '';
     for (const player of players) {
         const li = document.createElement('li');
@@ -57,6 +92,10 @@ function updateScoreboard() {
 
 function renderGuessInputs() {
     const inputsDiv = document.getElementById('player-inputs');
+    if (!inputsDiv) {
+        console.error('Player inputs div not found!');
+        return;
+    }
     inputsDiv.innerHTML = '';
     players.forEach(player => {
         const div = document.createElement('div');
@@ -67,106 +106,118 @@ function renderGuessInputs() {
     });
 }
 
-// Fetch Film from TMDb
-async function selectFilm() {
-    try {
-        const response = await fetch(
-            `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&sort_by=revenue.desc&primary_release_date.gte=1980-01-01`,
-            {
-                headers: {
-                    Authorization: `Bearer ${TMDB_ACCESS_TOKEN}`
-                }
-            }
-        );
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        const data = await response.json();
-        const movies = data.results.filter(movie => movie.revenue > 0);
-        if (movies.length === 0) throw new Error('No movies with revenue found.');
+// Select Film (using fallback dataset)
+function selectFilm() {
+    console.log('Selecting film from fallback dataset');
+    currentFilm = fallbackMovies[Math.floor(Math.random() * fallbackMovies.length)];
+    renderFilm();
+}
 
-        const randomMovie = movies[Math.floor(Math.random() * movies.length)];
-        const detailsResponse = await fetch(
-            `https://api.themoviedb.org/3/movie/${randomMovie.id}?api_key=${TMDB_API_KEY}&language=en-US`,
-            {
-                headers: {
-                    Authorization: `Bearer ${TMDB_ACCESS_TOKEN}`
-                }
-            }
-        );
-        if (!detailsResponse.ok) throw new Error(`HTTP error! status: ${detailsResponse.status}`);
-        const movieDetails = await detailsResponse.json();
-
-        currentFilm = {
-            title: movieDetails.title,
-            releaseYear: movieDetails.release_date ? movieDetails.release_date.split('-')[0] : 'Unknown',
-            worldwideGross: movieDetails.revenue
-        };
-
-        document.getElementById('film-info').innerHTML = `
-            <h3>${currentFilm.title} (${currentFilm.releaseYear})</h3>
-            <p>Guess the worldwide box office gross!</p>
-        `;
-        document.getElementById('result').innerHTML = '';
-        document.querySelectorAll('.guess-input').forEach(input => input.value = '');
-    } catch (error) {
-        console.error('Error fetching film:', error);
-        document.getElementById('film-info').innerHTML = `
-            <p>Error loading film: ${error.message}. Please try again.</p>
-            <button onclick="selectFilm()">Retry</button>
-        `;
+function renderFilm() {
+    console.log('Rendering film:', currentFilm);
+    const filmInfo = document.getElementById('film-info');
+    if (!filmInfo) {
+        console.error('Film info div not found!');
+        return;
     }
+    filmInfo.innerHTML = `
+        <h3>${currentFilm.title} (${currentFilm.releaseYear})</h3>
+        <p>Guess the worldwide box office gross!</p>
+    `;
+    document.getElementById('result').innerHTML = '';
+    document.querySelectorAll('.guess-input').forEach(input => input.value = '');
 }
 
 // Submit Guesses
-document.getElementById('submit-guesses').addEventListener('click', () => {
-    const guesses = [];
-    let allGuessed = true;
-
-    document.querySelectorAll('.guess-input').forEach(input => {
-        const player = input.dataset.player;
-        const guess = parseInt(input.value) || 0;
-        if (!guess) allGuessed = false;
-        guesses.push({ player, guess, diff: Math.abs(currentFilm.worldwideGross - guess) });
-    });
-
-    if (!allGuessed) {
-        document.getElementById('result').innerHTML = '<p>Please enter guesses for all players.</p>';
+function setupSubmitGuesses() {
+    const submitButton = document.getElementById('submit-guesses');
+    if (!submitButton) {
+        console.error('Submit Guesses button not found!');
         return;
     }
+    submitButton.addEventListener('click', () => {
+        console.log('Submit Guesses clicked');
+        const guesses = [];
+        let allGuessed = true;
 
-    const minDiff = Math.min(...guesses.map(g => g.diff));
-    const winners = guesses.filter(g => g.diff === minDiff);
-    winners.forEach(w => {
-        scores[w.player] = (scores[w.player] || 0) + 1;
+        document.querySelectorAll('.guess-input').forEach(input => {
+            const player = input.dataset.player;
+            const guess = parseInt(input.value) || 0;
+            if (!guess) allGuessed = false;
+            guesses.push({ player, guess, diff: Math.abs(currentFilm.worldwideGross - guess) });
+        });
+
+        if (!allGuessed) {
+            document.getElementById('result').innerHTML = '<p>Please enter guesses for all players.</p>';
+            return;
+        }
+
+        const minDiff = Math.min(...guesses.map(g => g.diff));
+        const winners = guesses.filter(g => g.diff === minDiff);
+        winners.forEach(w => {
+            scores[w.player] = (scores[w.player] || 0) + 1;
+        });
+
+        localStorage.setItem('bobScores', JSON.stringify(scores));
+        updateScoreboard();
+
+        document.getElementById('result').innerHTML = `
+            <p><strong>Result:</strong> ${currentFilm.title} made $${currentFilm.worldwideGross.toLocaleString()} worldwide.</p>
+            ${guesses.map(g => `<p>${g.player} guessed $${g.guess.toLocaleString()} (off by $${g.diff.toLocaleString()})</p>`).join('')}
+            <p><strong>Winner${winners.length > 1 ? 's' : ''}:</strong> ${winners.map(w => w.player).join(', ')}</p>
+        `;
     });
-
-    localStorage.setItem('bobScores', JSON.stringify(scores));
-    updateScoreboard();
-
-    document.getElementById('result').innerHTML = `
-        <p><strong>Result:</strong> ${currentFilm.title} made $${currentFilm.worldwideGross.toLocaleString()} worldwide.</p>
-        ${guesses.map(g => `<p>${g.player} guessed $${g.guess.toLocaleString()} (off by $${g.diff.toLocaleString()})</p>`).join('')}
-        <p><strong>Winner${winners.length > 1 ? 's' : ''}:</strong> ${winners.map(w => w.player).join(', ')}</p>
-    `;
-});
+}
 
 // Next Film
-document.getElementById('next-film').addEventListener('click', selectFilm);
+function setupNextFilm() {
+    const nextFilmButton = document.getElementById('next-film');
+    if (!nextFilmButton) {
+        console.error('Next Film button not found!');
+        return;
+    }
+    nextFilmButton.addEventListener('click', () => {
+        console.log('Next Film clicked');
+        selectFilm();
+    });
+}
 
 // Reset Game (New Game)
-document.getElementById('reset-game').addEventListener('click', () => {
-    players = [];
-    scores = {};
-    localStorage.removeItem('bobScores');
-    document.getElementById('player-setup').style.display = 'block';
-    document.getElementById('game-area').style.display = 'none';
-    document.getElementById('player-list').innerHTML = `
-        <div class="player-entry">
-            <input type="text" class="player-name" placeholder="Player Name">
-            <button class="remove-player">Remove</button>
-        </div>
-    `;
+function setupResetGame() {
+    const resetButton = document.getElementById('reset-game');
+    if (!resetButton) {
+        console.error('Reset Game button not found!');
+        return;
+    }
+    resetButton.addEventListener('click', () => {
+        console.log('Reset Game clicked');
+        players = [];
+        scores = {};
+        localStorage.removeItem('bobScores');
+        localStorage.removeItem('cachedMovies');
+        document.getElementById('player-setup').style.display = 'block';
+        document.getElementById('game-area').style.display = 'none';
+        document.getElementById('player-list').innerHTML = `
+            <div class="player-entry">
+                <input type="text" class="player-name" placeholder="Player Name">
+                <button class="remove-player">Remove</button>
+            </div>
+        `;
+        updateRemoveButtons();
+    });
+}
+
+// Initialize Event Listeners
+try {
+    console.log('Setting up event listeners...');
+    setupEventListeners();
+    setupSubmitGuesses();
+    setupNextFilm();
+    setupResetGame();
     updateRemoveButtons();
-});
+} catch (error) {
+    console.error('Error setting up event listeners:', error);
+}
 
 // Initial Setup
-updateRemoveButtons();
+console.log('Script loaded');
