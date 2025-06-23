@@ -1,10 +1,24 @@
 let players = [];
-let currentFilm = null;
-let scores = JSON.parse(localStorage.getItem('bobScores')) || {};
+let scores = JSON.parse(localStorage.getItem('movies')) || [];
+let currentGame = null;
+
+// Fallback static dataset
+const fallbackMovies = [
+    { title: "Titanic", releaseYear: "1997", worldwideGross: 2208208395 },
+    { title: "Avengers: Endgame", releaseYear: "2019", worldwideGross: 2797800564 },
+    { title: "Avatar", releaseYear: "2009", worldwideGross: 2847246203 },
+    { title: "Star Wars: The Force Awakens", releaseYear: "2015", worldwideGross: 2068223624 },
+    { title: "Jurassic World", releaseYear: "2015", worldwideGross: 1671713208 },
+    { title: "The Lion King (2019)", releaseYear: "2019", worldwideGross: 1656943394 },
+    { title: "The Avengers", releaseYear: "2012", worldwideGross: 1518812988 },
+    { title: "Furious 7", releaseYear: "2015", worldwideGross: 1516045911 },
+    { title: "Frozen II", releaseYear: "2019", worldwideGross: 1450026933 },
+    { title: "Spider-Man: Far From Home", releaseYear: "2019", worldwideGross: 1131927996 },
+];
 
 // Player Setup
-document.getElementById('add-player').addEventListener('click', () => {
-    const playerList = document.getElementById('player-list');
+document.getElementById('add-player').addEventListener('click', function() => {
+    const playerList = document.querySelector('#player-list');
     const entry = document.createElement('div');
     entry.className = 'player-entry';
     entry.innerHTML = `
@@ -67,11 +81,25 @@ function renderGuessInputs() {
     });
 }
 
-// Fetch Film from TMDb
-async function selectFilm() {
+// Fetch Film from TMDb with Retry and Fallback
+async function selectFilm(attempt = 1, maxAttempts = 3) {
+    const cachedMovies = JSON.parse(localStorage.getItem('cachedMovies')) || [];
+    
+    // Use cached movie if available
+    if (cachedMovies.length > 0) {
+        currentFilm = cachedMovies[Math.floor(Math.random() * cachedMovies.length)];
+        renderFilm();
+        return;
+    }
+
     try {
+        // Adjust query based on attempt
+        const queryParams = attempt === 1 
+            ? 'sort_by=revenue.desc&primary_release_date.gte=1980-01-01'
+            : 'primary_release_date.gte=1980-01-01&sort_by=popularity.desc';
+        
         const response = await fetch(
-            `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&sort_by=revenue.desc&primary_release_date.gte=1980-01-01`,
+            `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&${queryParams}&page=${Math.floor(Math.random() * 10) + 1}`,
             {
                 headers: {
                     Authorization: `Bearer ${TMDB_ACCESS_TOKEN}`
@@ -79,9 +107,21 @@ async function selectFilm() {
             }
         );
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        
         const data = await response.json();
         const movies = data.results.filter(movie => movie.revenue > 0);
-        if (movies.length === 0) throw new Error('No movies with revenue found.');
+        
+        if (movies.length === 0 && attempt < maxAttempts) {
+            console.warn(`No movies with revenue found on attempt ${attempt}. Retrying...`);
+            return selectFilm(attempt + 1, maxAttempts);
+        }
+        
+        if (movies.length === 0) {
+            console.warn('No movies with revenue found after max attempts. Using fallback.');
+            currentFilm = fallbackMovies[Math.floor(Math.random() * fallbackMovies.length)];
+            renderFilm();
+            return;
+        }
 
         const randomMovie = movies[Math.floor(Math.random() * movies.length)];
         const detailsResponse = await fetch(
@@ -93,7 +133,19 @@ async function selectFilm() {
             }
         );
         if (!detailsResponse.ok) throw new Error(`HTTP error! status: ${detailsResponse.status}`);
+        
         const movieDetails = await detailsResponse.json();
+        if (!movieDetails.revenue || movieDetails.revenue <= 0) {
+            if (attempt < maxAttempts) {
+                console.warn(`Movie ${movieDetails.title} has no revenue. Retrying...`);
+                return selectFilm(attempt + 1, maxAttempts);
+            } else {
+                console.warn(`Movie ${movieDetails.title} has no revenue. Using fallback.`);
+                currentFilm = fallbackMovies[Math.floor(Math.random() * fallbackMovies.length)];
+                renderFilm();
+                return;
+            }
+        }
 
         currentFilm = {
             title: movieDetails.title,
@@ -101,19 +153,31 @@ async function selectFilm() {
             worldwideGross: movieDetails.revenue
         };
 
-        document.getElementById('film-info').innerHTML = `
-            <h3>${currentFilm.title} (${currentFilm.releaseYear})</h3>
-            <p>Guess the worldwide box office gross!</p>
-        `;
-        document.getElementById('result').innerHTML = '';
-        document.querySelectorAll('.guess-input').forEach(input => input.value = '');
+        // Cache valid movie
+        cachedMovies.push(currentFilm);
+        localStorage.setItem('cachedMovies', JSON.stringify(cachedMovies.slice(-50))); // Keep last 50 movies
+        
+        renderFilm();
     } catch (error) {
         console.error('Error fetching film:', error);
-        document.getElementById('film-info').innerHTML = `
-            <p>Error loading film: ${error.message}. Please try again.</p>
-            <button onclick="selectFilm()">Retry</button>
-        `;
+        if (attempt < maxAttempts) {
+            console.warn(`API error on attempt ${attempt}. Retrying...`);
+            return selectFilm(attempt + 1, maxAttempts);
+        }
+        // Fallback to static dataset
+        console.warn('API failed after max attempts. Using fallback.');
+        currentFilm = fallbackMovies[Math.floor(Math.random() * fallbackMovies.length)];
+        renderFilm();
     }
+}
+
+function renderFilm() {
+    document.getElementById('film-info').innerHTML = `
+        <h3>${currentFilm.title} (${currentFilm.releaseYear})</h3>
+        <p>Guess the worldwide box office gross!</p>
+    `;
+    document.getElementById('result').innerHTML = '';
+    document.querySelectorAll('.guess-input').forEach(input => input.value = '');
 }
 
 // Submit Guesses
@@ -121,52 +185,4 @@ document.getElementById('submit-guesses').addEventListener('click', () => {
     const guesses = [];
     let allGuessed = true;
 
-    document.querySelectorAll('.guess-input').forEach(input => {
-        const player = input.dataset.player;
-        const guess = parseInt(input.value) || 0;
-        if (!guess) allGuessed = false;
-        guesses.push({ player, guess, diff: Math.abs(currentFilm.worldwideGross - guess) });
-    });
-
-    if (!allGuessed) {
-        document.getElementById('result').innerHTML = '<p>Please enter guesses for all players.</p>';
-        return;
-    }
-
-    const minDiff = Math.min(...guesses.map(g => g.diff));
-    const winners = guesses.filter(g => g.diff === minDiff);
-    winners.forEach(w => {
-        scores[w.player] = (scores[w.player] || 0) + 1;
-    });
-
-    localStorage.setItem('bobScores', JSON.stringify(scores));
-    updateScoreboard();
-
-    document.getElementById('result').innerHTML = `
-        <p><strong>Result:</strong> ${currentFilm.title} made $${currentFilm.worldwideGross.toLocaleString()} worldwide.</p>
-        ${guesses.map(g => `<p>${g.player} guessed $${g.guess.toLocaleString()} (off by $${g.diff.toLocaleString()})</p>`).join('')}
-        <p><strong>Winner${winners.length > 1 ? 's' : ''}:</strong> ${winners.map(w => w.player).join(', ')}</p>
-    `;
-});
-
-// Next Film
-document.getElementById('next-film').addEventListener('click', selectFilm);
-
-// Reset Game (New Game)
-document.getElementById('reset-game').addEventListener('click', () => {
-    players = [];
-    scores = {};
-    localStorage.removeItem('bobScores');
-    document.getElementById('player-setup').style.display = 'block';
-    document.getElementById('game-area').style.display = 'none';
-    document.getElementById('player-list').innerHTML = `
-        <div class="player-entry">
-            <input type="text" class="player-name" placeholder="Player Name">
-            <button class="remove-player">Remove</button>
-        </div>
-    `;
-    updateRemoveButtons();
-});
-
-// Initial Setup
-updateRemoveButtons();
+    document.querySelectorAll('.guess-input').forEach(input =>
