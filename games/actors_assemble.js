@@ -192,51 +192,6 @@ function selectFilm(useCache, attempt) {
     filmInfo.innerHTML = '<p>Loading film...</p>';
 
     var page = Math.floor(Math.random() * 10) + 1;
-    var url = 'https://api.twitter.com/1.x/discover/movie?api_key=' + TMDB_API_KEY +
-              '&primary_release_date.gte=1980-01-01&sort_by=popularity.desc&language=en-US&page=' + page;
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.setRequestHeader('Authorization', 'Bearer ' + TMDB_ACCESS_TOKEN);
-    // ... (rest of the function remains unchanged until currentFilm is set)
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                // ... existing code ...
-                currentFilm = {
-                    id: movieDetails.id,
-                    title: movieDetails.title,
-                    releaseYear: movieDetails.release_date ? movieDetails.release_date.split('-')[0] : 'Unknown',
-                    genres: movieDetails.genres.map(function(genre) { return genre.name; }),
-                    actors: topActors
-                };
-                usedFilmIds.push(currentFilm.id);
-                currentActorIndex = 0; // Reset to show only 5th actor
-                console.log('Selected film from API:', currentFilm);
-                console.log('Actor order:', currentFilm.actors);
-
-                cachedMovies.push(currentFilm);
-                cachedMovies = cachedMovies.slice(-50);
-                localStorage.setItem('aiCachedMovies', JSON.stringify(cachedMovies));
-
-                renderFilm();
-            } else {
-                // ... error handling ...
-                currentFilm = fallbackMovies[Math.floor(Math.random() * fallbackMovies.length)];
-                currentFilm.id = currentFilm.title + currentFilm.releaseYear;
-                usedFilmIds.push(currentFilm.id);
-                currentActorIndex = 0; // Reset for fallback
-                console.log('Fallback film:', currentFilm);
-                renderFilm();
-            }
-        }
-    };
-    xhr.send();
-}
-
-    var filmInfo = document.getElementById('film-info');
-    filmInfo.innerHTML = '<p>Loading film...</p>';
-
-    var page = Math.floor(Math.random() * 10) + 1;
     var url = 'https://api.themoviedb.org/3/discover/movie?api_key=' + TMDB_API_KEY +
               '&primary_release_date.gte=1980-01-01&sort_by=popularity.desc&language=en-US&page=' + page;
     var xhr = new XMLHttpRequest();
@@ -259,7 +214,7 @@ function selectFilm(useCache, attempt) {
                         currentFilm = fallbackMovies[Math.floor(Math.random() * fallbackMovies.length)];
                         currentFilm.id = currentFilm.title + currentFilm.releaseYear;
                         usedFilmIds.push(currentFilm.id);
-                        currentActorIndex = 4;
+                        currentActorIndex = 0;
                         console.log('Fallback film:', currentFilm);
                         renderFilm();
                     }
@@ -275,7 +230,7 @@ function selectFilm(useCache, attempt) {
                         currentFilm = fallbackMovies[Math.floor(Math.random() * fallbackMovies.length)];
                         currentFilm.id = currentFilm.title + currentFilm.releaseYear;
                         usedFilmIds.push(currentFilm.id);
-                        currentActorIndex = 4;
+                        currentActorIndex = 0;
                         console.log('Fallback film:', currentFilm);
                         renderFilm();
                     }
@@ -308,7 +263,7 @@ function selectFilm(useCache, attempt) {
                                     currentFilm = fallbackMovies[Math.floor(Math.random() * fallbackMovies.length)];
                                     currentFilm.id = currentFilm.title + currentFilm.releaseYear;
                                     usedFilmIds.push(currentFilm.id);
-                                    currentActorIndex = 4;
+                                    currentActorIndex = 0;
                                     console.log('Fallback film:', currentFilm);
                                     renderFilm();
                                 }
@@ -337,7 +292,7 @@ function selectFilm(useCache, attempt) {
                                                 currentFilm = fallbackMovies[Math.floor(Math.random() * fallbackMovies.length)];
                                                 currentFilm.id = currentFilm.title + currentFilm.releaseYear;
                                                 usedFilmIds.push(currentFilm.id);
-                                                currentActorIndex = 4;
+                                                currentActorIndex = 0;
                                                 console.log('Fallback film:', currentFilm);
                                                 renderFilm();
                                             }
@@ -358,7 +313,7 @@ function selectFilm(useCache, attempt) {
                                                 currentFilm = fallbackMovies[Math.floor(Math.random() * fallbackMovies.length)];
                                                 currentFilm.id = currentFilm.title + currentFilm.releaseYear;
                                                 usedFilmIds.push(currentFilm.id);
-                                                currentActorIndex = 4;
+                                                currentActorIndex = 0;
                                                 console.log('Fallback film:', currentFilm);
                                                 renderFilm();
                                             }
@@ -373,7 +328,7 @@ function selectFilm(useCache, attempt) {
                                             actors: topActors
                                         };
                                         usedFilmIds.push(currentFilm.id);
-                                        currentActorIndex = 4;
+                                        currentActorIndex = 0;
                                         console.log('Selected film from API:', currentFilm);
                                         console.log('Actor order:', currentFilm.actors);
 
@@ -391,7 +346,7 @@ function selectFilm(useCache, attempt) {
                                             currentFilm = fallbackMovies[Math.floor(Math.random() * fallbackMovies.length)];
                                             currentFilm.id = currentFilm.title + currentFilm.releaseYear;
                                             usedFilmIds.push(currentFilm.id);
-                                            currentActorIndex = 4;
+                                            currentActorIndex = 0;
                                             console.log('Fallback film:', currentFilm);
                                             renderFilm();
                                         }
@@ -408,7 +363,7 @@ function selectFilm(useCache, attempt) {
                                 currentFilm = fallbackMovies[Math.floor(Math.random() * fallbackMovies.length)];
                                 currentFilm.id = currentFilm.title + currentFilm.releaseYear;
                                 usedFilmIds.push(currentFilm.id);
-                                currentActorIndex = 4;
+                                currentActorIndex = 0;
                                 console.log('Fallback film:', currentFilm);
                                 renderFilm();
                             }
@@ -425,7 +380,7 @@ function selectFilm(useCache, attempt) {
                     currentFilm = fallbackMovies[Math.floor(Math.random() * fallbackMovies.length)];
                     currentFilm.id = currentFilm.title + currentFilm.releaseYear;
                     usedFilmIds.push(currentFilm.id);
-                    currentActorIndex = 4;
+                    currentActorIndex = 0;
                     console.log('Fallback film:', currentFilm);
                     renderFilm();
                 }
@@ -451,9 +406,9 @@ function renderFilm() {
     for (var i = 0; i < 5; i++) {
         var actorPosition = i + 1; // Display as 1st, 2nd, ..., 5th
         var actorIndex = 4 - i; // Map to array index (4 is 5th actor, 0 is 1st actor)
-        var points = 5 - actorIndex; // 5th actor = 1 point, 1st actor = 5 points
-        var actorText = (currentActorIndex > i) ?
-            currentFilm.actors[actorIndex] + ' (' + points + ' point' + (points > 1 ? 's' : '') + ')' :
+        var points = currentActorIndex + 1; // Points based on number of actors revealed
+        var actorText = (currentActorIndex >= i) ?
+            currentFilm.actors[actorIndex] :
             '';
         actorListHTML += '<li>' + actorPosition + ': ' + actorText + '</li>';
     }
@@ -577,7 +532,7 @@ function setupNextMovie() {
     }
     nextMovieButton.addEventListener('click', function() {
         console.log('Next Movie button clicked');
-        selectFilm(false);
+        selectFilm(true);
         document.getElementById('submit-guesses').style.display = 'inline-block';
     });
 }
