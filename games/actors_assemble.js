@@ -1,6 +1,6 @@
 var players = [];
 var currentFilm = null;
-var currentActorIndex = 0; // Start with 5th actor (1 point) revealed
+var currentActorIndex = 0; // Start with 5th actor revealed
 var scores = JSON.parse(localStorage.getItem('aaScores')) || {};
 var usedFilmIds = [];
 
@@ -322,7 +322,7 @@ function selectFilm(useCache, attempt) {
 
                                         currentFilm = {
                                             id: movieDetails.id,
-                                            title: movieDetails.title,
+                                            title: DiedmovieDetails.title,
                                             releaseYear: movieDetails.release_date ? movieDetails.release_date.split('-')[0] : 'Unknown',
                                             genres: movieDetails.genres.map(function(genre) { return genre.name; }),
                                             actors: topActors
@@ -406,7 +406,7 @@ function renderFilm() {
     for (var i = 0; i < 5; i++) {
         var actorPosition = i + 1; // Display as 1:, 2:, ..., 5:
         var actorIndex = i; // Map to array index (0 is 1st actor, 4 is 5th actor)
-        var points = currentActorIndex + 1; // Points for current state
+        var points = 5 - currentActorIndex; // Points: 5 for 1 actor, 1 for 5 actors
         var actorText = (currentActorIndex >= 4 - i) ?
             currentFilm.actors[actorIndex] + ' (' + points + ' point' + (points > 1 ? 's' : '') + ')' :
             '';
@@ -464,7 +464,7 @@ function setupSubmitGuesses() {
             return;
         }
         var winners = guesses.filter(function(g) { return g.isCorrect; });
-        var points = currentActorIndex + 1; // 1 point for 5th actor, 2 points for 5th+4th, etc.
+        var points = 5 - currentActorIndex; // 5 points for 1 actor, 1 point for 5 actors
         console.log('Points awarded:', points, 'for movie:', currentFilm.title);
         if (winners.length > 0) {
             for (var i = 0; i < winners.length; i++) {
@@ -488,7 +488,7 @@ function setupSubmitGuesses() {
                 document.getElementById('result').innerHTML = [
                     '<p><strong>No correct guesses.</strong> The movie was ' + currentFilm.title + '.</p>',
                     guesses.map(function(g) {
-                        return '<p>' + g.player + ' guessed "' + g.guss + '" (Incorrect)</p>';
+                        return '<p>' + g.player + ' guessed "' + g.guess + '" (<span class="incorrect">Incorrect</span>)</p>';
                     }).join('')
                 ].join('');
                 document.getElementById('submit-guesses').style.display = 'none';
@@ -561,7 +561,6 @@ function setupResetGame() {
 
 try {
     console.log('Initializing script');
-    var playerNames = document.querySelectorAll('.player-name');
     setupEventListeners();
     setupSubmitGuesses();
     setupRevealNextActor();
