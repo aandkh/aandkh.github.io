@@ -1,0 +1,12 @@
+#film-info, #actor-info {
+    margin: 1em 0;
+}
+#player-inputs div {
+    margin: 0.5em 0;
+}
+#reveal-next-actor {
+    margin-left: 1em;
+}
+#result {
+    margin-top: 1em;
+}
