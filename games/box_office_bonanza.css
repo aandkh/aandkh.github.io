@@ -1,1 +1,34 @@
-
+#player-setup, #game-area {
+    margin: 20px auto;
+    max-width: 600px;
+}
+.player-entry {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.player-name, .guess-input {
+    padding: 8px;
+    font-size: 16px;
+    flex-grow: 1;
+}
+.remove-player, #add-player, #start-game, #submit-guesses, #next-film, #reset-game {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.remove-player:hover, #add-player:hover, #start-game:hover, #submit-guesses:hover, #next-film:hover, #reset-game:hover {
+    background-color: #0056b3;
+}
+#player-inputs {
+    margin: 20px 0;
+}
+#player-inputs div {
+    margin-bottom: 10px;
+}
+#result, #scoreboard {
+    margin-top: 20px;
+}
