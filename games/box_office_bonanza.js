@@ -2,7 +2,6 @@ var players = [];
 var currentFilm = null;
 var scores = JSON.parse(localStorage.getItem('bobScores')) || {};
 
-// Fallback static dataset
 var fallbackMovies = [
     { title: "Titanic", releaseYear: "1997", worldwideGross: 2208208395 },
     { title: "Avengers: Endgame", releaseYear: "2019", worldwideGross: 2797800564 },
@@ -16,43 +15,46 @@ var fallbackMovies = [
     { title: "Spider-Man: Far From Home", releaseYear: "2019", worldwideGross: 1131927996 }
 ];
 
-// Player Setup
 function setupEventListeners() {
+    console.log('Setting up event listeners');
     var addPlayerButton = document.getElementById('add-player');
     if (!addPlayerButton) {
-        console.error('Add Player button not found!');
+        console.error('ERROR: Add Player button not found');
         return;
     }
     addPlayerButton.addEventListener('click', function() {
-        console.log('Add Player clicked');
+        console.log('Add Player button clicked');
         var playerList = document.getElementById('player-list');
+        if (!playerList) {
+            console.error('ERROR: Player list not found');
+            return;
+        }
         var entry = document.createElement('div');
         entry.className = 'player-entry';
-        entry.innerHTML = [
-            '<input type="text" class="player-name" placeholder="Player Name">',
-            '<button class="remove-player">Remove</button>'
-        ].join('');
+        entry.innerHTML = '<input type="text" class="player-name" placeholder="Player Name"><button class="remove-player">Remove</button>';
         playerList.appendChild(entry);
         updateRemoveButtons();
     });
 
     var startGameButton = document.getElementById('start-game');
     if (!startGameButton) {
-        console.error('Start Game button not found!');
+        console.error('ERROR: Start Game button not found');
         return;
     }
     startGameButton.addEventListener('click', function() {
-        console.log('Start Game clicked');
+        console.log('Start Game button clicked');
         var playerNames = document.querySelectorAll('.player-name');
-        players = Array.from(playerNames)
-            .map(function(input) { return input.value.trim(); })
-            .filter(function(name) { return name !== ''; });
-        
+        players = [];
+        for (var i = 0; i < playerNames.length; i++) {
+            var name = playerNames[i].value.trim();
+            if (name !== '') {
+                players.push(name);
+            }
+        }
         if (players.length < 1) {
             alert('Please add at least one player.');
             return;
         }
-
         document.getElementById('player-setup').style.display = 'none';
         document.getElementById('game-area').style.display = 'block';
         initializeGame();
@@ -60,26 +62,28 @@ function setupEventListeners() {
 }
 
 function updateRemoveButtons() {
+    console.log('Updating remove buttons');
     var removeButtons = document.querySelectorAll('.remove-player');
-    removeButtons.forEach(function(button) {
-        button.onclick = function() {
-            console.log('Remove Player clicked');
-            button.parentElement.remove();
+    for (var i = 0; i < removeButtons.length; i++) {
+        removeButtons[i].onclick = function() {
+            console.log('Remove Player button clicked');
+            this.parentElement.remove();
         };
-    });
+    }
 }
 
-// Initialize Game
 function initializeGame() {
+    console.log('Initializing game');
     selectFilm();
     updateScoreboard();
     renderGuessInputs();
 }
 
 function updateScoreboard() {
+    console.log('Updating scoreboard');
     var scoresList = document.getElementById('scores');
     if (!scoresList) {
-        console.error('Scores list not found!');
+        console.error('ERROR: Scores list not found');
         return;
     }
     scoresList.innerHTML = '';
@@ -92,25 +96,21 @@ function updateScoreboard() {
 }
 
 function renderGuessInputs() {
+    console.log('Rendering guess inputs');
     var inputsDiv = document.getElementById('player-inputs');
     if (!inputsDiv) {
-        console.error('Player inputs div not found!');
+        console.error('ERROR: Player inputs div not found');
         return;
     }
     inputsDiv.innerHTML = '';
     for (var i = 0; i < players.length; i++) {
         var player = players[i];
         var div = document.createElement('div');
-        div.innerHTML = [
-            '<label>' + player + ': ',
-            '<input type="number" class="guess-input" data-player="' + player + '" placeholder="Guess ($)" min="0">',
-            '</label>'
-        ].join('');
+        div.innerHTML = '<label>' + player + ': <input type="number" class="guess-input" data-player="' + player + '" placeholder="Guess ($)" min="0"></label>';
         inputsDiv.appendChild(div);
     }
 }
 
-// Select Film (using fallback dataset)
 function selectFilm() {
     console.log('Selecting film from fallback dataset');
     currentFilm = fallbackMovies[Math.floor(Math.random() * fallbackMovies.length)];
@@ -121,13 +121,10 @@ function renderFilm() {
     console.log('Rendering film:', currentFilm);
     var filmInfo = document.getElementById('film-info');
     if (!filmInfo) {
-        console.error('Film info div not found!');
+        console.error('ERROR: Film info div not found');
         return;
     }
-    filmInfo.innerHTML = [
-        '<h3>' + currentFilm.title + ' (' + currentFilm.releaseYear + ')</h3>',
-        '<p>Guess the worldwide box office gross!</p>'
-    ].join('');
+    filmInfo.innerHTML = '<h3>' + currentFilm.title + ' (' + currentFilm.releaseYear + ')</h3><p>Guess the worldwide box office gross!</p>';
     document.getElementById('result').innerHTML = '';
     var guessInputs = document.querySelectorAll('.guess-input');
     for (var i = 0; i < guessInputs.length; i++) {
@@ -135,40 +132,36 @@ function renderFilm() {
     }
 }
 
-// Submit Guesses
 function setupSubmitGuesses() {
+    console.log('Setting up submit guesses');
     var submitButton = document.getElementById('submit-guesses');
     if (!submitButton) {
-        console.error('Submit Guesses button not found!');
+        console.error('ERROR: Submit Guesses button not found');
         return;
     }
     submitButton.addEventListener('click', function() {
-        console.log('Submit Guesses clicked');
+        console.log('Submit Guesses button clicked');
         var guesses = [];
         var allGuessed = true;
-
         var guessInputs = document.querySelectorAll('.guess-input');
-        guessInputs.forEach(function(input) {
+        for (var i = 0; i < guessInputs.length; i++) {
+            var input = guessInputs[i];
             var player = input.dataset.player;
             var guess = parseInt(input.value) || 0;
             if (!guess) allGuessed = false;
             guesses.push({ player: player, guess: guess, diff: Math.abs(currentFilm.worldwideGross - guess) });
-        });
-
+        }
         if (!allGuessed) {
             document.getElementById('result').innerHTML = '<p>Please enter guesses for all players.</p>';
             return;
         }
-
         var minDiff = Math.min.apply(null, guesses.map(function(g) { return g.diff; }));
         var winners = guesses.filter(function(g) { return g.diff === minDiff; });
-        winners.forEach(function(w) {
-            scores[w.player] = (scores[w.player] || 0) + 1;
-        });
-
+        for (var i = 0; i < winners.length; i++) {
+            scores[winners[i].player] = (scores[winners[i].player] || 0) + 1;
+        }
         localStorage.setItem('bobScores', JSON.stringify(scores));
         updateScoreboard();
-
         document.getElementById('result').innerHTML = [
             '<p><strong>Result:</strong> ' + currentFilm.title + ' made $' + currentFilm.worldwideGross.toLocaleString() + ' worldwide.</p>',
             guesses.map(function(g) {
@@ -179,54 +172,48 @@ function setupSubmitGuesses() {
     });
 }
 
-// Next Film
 function setupNextFilm() {
+    console.log('Setting up next film');
     var nextFilmButton = document.getElementById('next-film');
     if (!nextFilmButton) {
-        console.error('Next Film button not found!');
+        console.error('ERROR: Next Film button not found');
         return;
     }
     nextFilmButton.addEventListener('click', function() {
-        console.log('Next Film clicked');
+        console.log('Next Film button clicked');
         selectFilm();
     });
 }
 
-// Reset Game (New Game)
 function setupResetGame() {
+    console.log('Setting up reset game');
     var resetButton = document.getElementById('reset-game');
     if (!resetButton) {
-        console.error('Reset Game button not found!');
+        console.error('ERROR: Reset Game button not found');
         return;
     }
     resetButton.addEventListener('click', function() {
-        console.log('Reset Game clicked');
+        console.log('Reset Game button clicked');
         players = [];
         scores = {};
         localStorage.removeItem('bobScores');
         localStorage.removeItem('cachedMovies');
         document.getElementById('player-setup').style.display = 'block';
         document.getElementById('game-area').style.display = 'none';
-        document.getElementById('player-list').innerHTML = [
-            '<div class="player-entry">',
-            '<input type="text" class="player-name" placeholder="Player Name">',
-            '<button class="remove-player">Remove</button>',
-            '</div>'
-        ].join('');
+        var playerList = document.getElementById('player-list');
+        playerList.innerHTML = '<div class="player-entry"><input type="text" class="player-name" placeholder="Player Name"><button class="remove-player">Remove</button></div>';
         updateRemoveButtons();
     });
 }
 
-// Initialize Event Listeners
 try {
-    console.log('Setting up event listeners...');
+    console.log('Initializing script');
     setupEventListeners();
     setupSubmitGuesses();
     setupNextFilm();
     setupResetGame();
     updateRemoveButtons();
 } catch (error) {
-    console.error('Error setting up event listeners:', error);
+    console.error('ERROR: Failed to initialize script:', error);
 }
-
-console.log('Script loaded');
+console.log('Script loaded successfully');
