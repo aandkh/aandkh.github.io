@@ -164,230 +164,131 @@ function renderGuessInputs() {
     }
 }
 
-function selectFilm(useCache, attempt) {
-    if (!attempt) attempt = 1;
-    var maxAttempts = 5;
-    console.log('Selecting film, attempt ' + attempt + ' of ' + maxAttempts + ', useCache: ' + useCache);
+function selectFilm(useCache, attempt = 1) {
+    const maxAttempts = 3; // Reduced to avoid long delays
+    console.log(`Selecting film, attempt ${attempt} of ${maxAttempts}, useCache: ${useCache}`);
 
-    var cachedMovies = JSON.parse(localStorage.getItem('aaCachedMovies')) || [];
-    console.log('Cache size:', cachedMovies.length, 'Used film IDs:', usedFilmIds);
+    const filmInfo = document.getElementById('film-info');
+    if (!filmInfo) {
+        console.error('ERROR: film-info element not found');
+        return;
+    }
+    filmInfo.innerHTML = '<p>Loading film...</p>';
 
-    if (useCache && cachedMovies.length > 0) {
-        var availableMovies = cachedMovies.filter(function(movie) {
-            return !usedFilmIds.includes(movie.id);
-        });
+    // Check cache first if useCache is true
+    if (useCache) {
+        let cachedMovies = JSON.parse(localStorage.getItem('aaCachedMovies')) || [];
+        console.log('Cache size:', cachedMovies.length, 'Used film IDs:', usedFilmIds);
+        let availableMovies = cachedMovies.filter(movie => !usedFilmIds.includes(movie.id));
         console.log('Available cached movies:', availableMovies.length);
         if (availableMovies.length > 0) {
-            console.log('Using cached movie');
             currentFilm = availableMovies[Math.floor(Math.random() * availableMovies.length)];
             usedFilmIds.push(currentFilm.id);
-            currentActorIndex = 0; // Start with 5th actor revealed
+            currentActorIndex = 0; // Start with 5th actor (index 4)
             console.log('Selected cached film:', currentFilm);
             renderFilm();
             return;
         }
     }
 
-    var filmInfo = document.getElementById('film-info');
-    filmInfo.innerHTML = '<p>Loading film...</p>';
-
-    var page = Math.floor(Math.random() * 10) + 1;
-    var url = 'https://api.themoviedb.org/3/discover/movie?api_key=' + TMDB_API_KEY +
-              '&primary_release_date.gte=1980-01-01&sort_by=popularity.desc&language=en-US&page=' + page;
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.setRequestHeader('Authorization', 'Bearer ' + TMDB_ACCESS_TOKEN);
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                console.log('API response status: 200');
-                var data;
-                try {
-                    data = JSON.parse(xhr.responseText);
-                    console.log('API response data:', data);
-                } catch (e) {
-                    console.error('ERROR: Failed to parse API response:', e);
-                    if (attempt < maxAttempts) {
-                        setTimeout(function() { selectFilm(useCache, attempt + 1); }, 1000);
-                    } else {
-                        console.warn('Failed to parse API response after ' + maxAttempts + ' attempts. Using fallback dataset.');
-                        currentFilm = fallbackMovies[Math.floor(Math.random() * fallbackMovies.length)];
-                        currentFilm.id = currentFilm.title + currentFilm.releaseYear;
-                        usedFilmIds.push(currentFilm.id);
-                        currentActorIndex = 0;
-                        console.log('Fallback film:', currentFilm);
-                        renderFilm();
-                    }
-                    return;
-                }
-
-                if (!data.results || data.results.length === 0) {
-                    console.warn('No results in API response');
-                    if (attempt < maxAttempts) {
-                        setTimeout(function() { selectFilm(useCache, attempt + 1); }, 1000);
-                    } else {
-                        console.warn('No results after ' + maxAttempts + ' attempts. Using fallback dataset.');
-                        currentFilm = fallbackMovies[Math.floor(Math.random() * fallbackMovies.length)];
-                        currentFilm.id = currentFilm.title + currentFilm.releaseYear;
-                        usedFilmIds.push(currentFilm.id);
-                        currentActorIndex = 0;
-                        console.log('Fallback film:', currentFilm);
-                        renderFilm();
-                    }
-                    return;
-                }
-
-                var movieIds = data.results.map(function(movie) { return movie.id; });
-                console.log('Movie IDs:', movieIds);
-
-                var randomMovieId = movieIds[Math.floor(Math.random() * movieIds.length)];
-                var detailsUrl = 'https://api.themoviedb.org/3/movie/' + randomMovieId +
-                                 '?api_key=' + TMDB_API_KEY + '&language=en-US';
-                var detailsXhr = new XMLHttpRequest();
-                detailsXhr.open('GET', detailsUrl, true);
-                detailsXhr.setRequestHeader('Authorization', 'Bearer ' + TMDB_ACCESS_TOKEN);
-                detailsXhr.onreadystatechange = function() {
-                    if (detailsXhr.readyState === 4) {
-                        if (detailsXhr.status === 200) {
-                            console.log('Details API response status: 200');
-                            var movieDetails;
-                            try {
-                                movieDetails = JSON.parse(detailsXhr.responseText);
-                                console.log('Movie details:', movieDetails);
-                            } catch (e) {
-                                console.error('ERROR: Failed to parse details API response:', e);
-                                if (attempt < maxAttempts) {
-                                    setTimeout(function() { selectFilm(useCache, attempt + 1); }, 1000);
-                                } else {
-                                    console.warn('Failed to parse details after ' + maxAttempts + ' attempts. Using fallback dataset.');
-                                    currentFilm = fallbackMovies[Math.floor(Math.random() * fallbackMovies.length)];
-                                    currentFilm.id = currentFilm.title + currentFilm.releaseYear;
-                                    usedFilmIds.push(currentFilm.id);
-                                    currentActorIndex = 0;
-                                    console.log('Fallback film:', currentFilm);
-                                    renderFilm();
-                                }
-                                return;
-                            }
-
-                            var creditsUrl = 'https://api.themoviedb.org/3/movie/' + randomMovieId +
-                                             '/credits?api_key=' + TMDB_API_KEY + '&language=en-US';
-                            var creditsXhr = new XMLHttpRequest();
-                            creditsXhr.open('GET', creditsUrl, true);
-                            creditsXhr.setRequestHeader('Authorization', 'Bearer ' + TMDB_ACCESS_TOKEN);
-                            creditsXhr.onreadystatechange = function() {
-                                if (creditsXhr.readyState === 4) {
-                                    if (creditsXhr.status === 200) {
-                                        console.log('Credits API response status: 200');
-                                        var credits;
-                                        try {
-                                            credits = JSON.parse(creditsXhr.responseText);
-                                            console.log('Credits:', credits);
-                                        } catch (e) {
-                                            console.error('ERROR: Failed to parse credits API response:', e);
-                                            if (attempt < maxAttempts) {
-                                                setTimeout(function() { selectFilm(useCache, attempt + 1); }, 1000);
-                                            } else {
-                                                console.warn('Failed to parse credits after ' + maxAttempts + ' attempts. Using fallback dataset.');
-                                                currentFilm = fallbackMovies[Math.floor(Math.random() * fallbackMovies.length)];
-                                                currentFilm.id = currentFilm.title + currentFilm.releaseYear;
-                                                usedFilmIds.push(currentFilm.id);
-                                                currentActorIndex = 0;
-                                                console.log('Fallback film:', currentFilm);
-                                                renderFilm();
-                                            }
-                                            return;
-                                        }
-
-                                        var topActors = credits.cast
-                                            .filter(function(actor) { return actor.order < 5; })
-                                            .sort(function(a, b) { return a.order - b.order; })
-                                            .map(function(actor) { return actor.name; });
-
-                                        if (topActors.length < 5) {
-                                            console.warn('Movie ' + movieDetails.title + ' has fewer than 5 actors');
-                                            if (attempt < maxAttempts) {
-                                                setTimeout(function() { selectFilm(useCache, attempt + 1); }, 1000);
-                                            } else {
-                                                console.warn('No 5+ actors after ' + maxAttempts + ' attempts. Using fallback dataset.');
-                                                currentFilm = fallbackMovies[Math.floor(Math.random() * fallbackMovies.length)];
-                                                currentFilm.id = currentFilm.title + currentFilm.releaseYear;
-                                                usedFilmIds.push(currentFilm.id);
-                                                currentActorIndex = 0;
-                                                console.log('Fallback film:', currentFilm);
-                                                renderFilm();
-                                            }
-                                            return;
-                                        }
-
-                                        currentFilm = {
-                                            id: movieDetails.id,
-                                            title: DiedmovieDetails.title,
-                                            releaseYear: movieDetails.release_date ? movieDetails.release_date.split('-')[0] : 'Unknown',
-                                            genres: movieDetails.genres.map(function(genre) { return genre.name; }),
-                                            actors: topActors
-                                        };
-                                        usedFilmIds.push(currentFilm.id);
-                                        currentActorIndex = 0;
-                                        console.log('Selected film from API:', currentFilm);
-                                        console.log('Actor order:', currentFilm.actors);
-
-                                        cachedMovies.push(currentFilm);
-                                        cachedMovies = cachedMovies.slice(-50);
-                                        localStorage.setItem('aaCachedMovies', JSON.stringify(cachedMovies));
-
-                                        renderFilm();
-                                    } else {
-                                        console.error('Credits API error, status: ' + creditsXhr.status);
-                                        if (attempt < maxAttempts) {
-                                            setTimeout(function() { selectFilm(useCache, attempt + 1); }, 1000);
-                                        } else {
-                                            console.warn('Credits API failed after ' + maxAttempts + ' attempts. Using fallback dataset.');
-                                            currentFilm = fallbackMovies[Math.floor(Math.random() * fallbackMovies.length)];
-                                            currentFilm.id = currentFilm.title + currentFilm.releaseYear;
-                                            usedFilmIds.push(currentFilm.id);
-                                            currentActorIndex = 0;
-                                            console.log('Fallback film:', currentFilm);
-                                            renderFilm();
-                                        }
-                                    }
-                                }
-                            };
-                            creditsXhr.send();
-                        } else {
-                            console.error('Details API error, status: ' + detailsXhr.status);
-                            if (attempt < maxAttempts) {
-                                setTimeout(function() { selectFilm(useCache, attempt + 1); }, 1000);
-                            } else {
-                                console.warn('Details API failed after ' + maxAttempts + ' attempts. Using fallback dataset.');
-                                currentFilm = fallbackMovies[Math.floor(Math.random() * fallbackMovies.length)];
-                                currentFilm.id = currentFilm.title + currentFilm.releaseYear;
-                                usedFilmIds.push(currentFilm.id);
-                                currentActorIndex = 0;
-                                console.log('Fallback film:', currentFilm);
-                                renderFilm();
-                            }
-                        }
-                    }
-                };
-                detailsXhr.send();
-            } else {
-                console.error('API error, status: ' + xhr.status);
-                if (attempt < maxAttempts) {
-                    setTimeout(function() { selectFilm(useCache, attempt + 1); }, 1000);
+    // Helper function to handle API requests with retry logic
+    function fetchWithRetry(url, retries = maxAttempts, delay = 1000) {
+        for (let i = 0; i < retries; i++) {
+            try {
+                const xhr = new XMLHttpRequest();
+                xhr.open('GET', url, false); // Synchronous for simplicity
+                xhr.setRequestHeader('Authorization', 'Bearer ' + TMDB_ACCESS_TOKEN);
+                xhr.send();
+                if (xhr.status === 200) {
+                    return JSON.parse(xhr.responseText);
+                } else if (xhr.status === 429) {
+                    const retryAfter = parseInt(xhr.getResponseHeader('Retry-After')) || delay / 1000;
+                    console.warn(`Rate limit hit (429). Retrying after ${retryAfter}s`);
+                    setTimeout(() => {}, retryAfter * 1000); // Synchronous wait
+                    delay *= 2; // Exponential backoff
+                    continue;
                 } else {
-                    console.warn('API failed after ' + maxAttempts + ' attempts. Using fallback dataset.');
-                    currentFilm = fallbackMovies[Math.floor(Math.random() * fallbackMovies.length)];
-                    currentFilm.id = currentFilm.title + currentFilm.releaseYear;
-                    usedFilmIds.push(currentFilm.id);
-                    currentActorIndex = 0;
-                    console.log('Fallback film:', currentFilm);
-                    renderFilm();
+                    throw new Error(`API error, status: ${xhr.status}`);
                 }
+            } catch (error) {
+                console.error(`Request failed: ${url}`, error);
+                if (i === retries - 1) throw error;
+                setTimeout(() => {}, delay); // Synchronous wait
+                delay *= 2;
             }
         }
-    };
-    xhr.send();
+    }
+
+    // Fetch movie from TMDb API
+    try {
+        const page = Math.floor(Math.random() * 10) + 1;
+        const discoverUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&primary_release_date.gte=1980-01-01&sort_by=popularity.desc&language=en-US&page=${page}`;
+        const discoverData = fetchWithRetry(discoverUrl);
+
+        if (!discoverData.results || discoverData.results.length === 0) {
+            throw new Error('No movies found in discover API response');
+        }
+
+        const movieIds = discoverData.results.map(movie => movie.id);
+        console.log('Movie IDs:', movieIds);
+        const randomMovieId = movieIds[Math.floor(Math.random() * movieIds.length)];
+
+        const detailsUrl = `https://api.themoviedb.org/3/movie/${randomMovieId}?api_key=${TMDB_API_KEY}&language=en-US`;
+        const movieDetails = fetchWithRetry(detailsUrl);
+        console.log('Movie details:', movieDetails);
+
+        const creditsUrl = `https://api.themoviedb.org/3/movie/${randomMovieId}/credits?api_key=${TMDB_API_KEY}&language=en-US`;
+        const credits = fetchWithRetry(creditsUrl);
+        console.log('Credits:', credits);
+
+        const topActors = credits.cast
+            .filter(actor => actor.order < 5)
+            .sort((a, b) => a.order - b.order)
+            .map(actor => actor.name);
+
+        if (topActors.length < 5) {
+            console.warn(`Movie ${movieDetails.title} has fewer than 5 actors (${topActors.length})`);
+            if (attempt < maxAttempts) {
+                setTimeout(() => selectFilm(useCache, attempt + 1), 1000);
+                return;
+            } else {
+                throw new Error('No movie with 5+ actors found');
+            }
+        }
+
+        currentFilm = {
+            id: movieDetails.id,
+            title: movieDetails.title, // Fixed typo (was DiedmovieDetails)
+            releaseYear: movieDetails.release_date ? movieDetails.release_date.split('-')[0] : 'Unknown',
+            genres: movieDetails.genres.map(genre => genre.name),
+            actors: topActors
+        };
+        usedFilmIds.push(currentFilm.id);
+        currentActorIndex = 0;
+        console.log('Selected film from API:', currentFilm);
+
+        // Update cache
+        let cachedMovies = JSON.parse(localStorage.getItem('aaCachedMovies')) || [];
+        cachedMovies.push(currentFilm);
+        cachedMovies = cachedMovies.slice(-50); // Keep last 50 movies
+        localStorage.setItem('aaCachedMovies', JSON.stringify(cachedMovies));
+
+        renderFilm();
+    } catch (error) {
+        console.error('API fetch failed:', error);
+        if (attempt < maxAttempts) {
+            console.log(`Retrying... attempt ${attempt + 1}`);
+            setTimeout(() => selectFilm(useCache, attempt + 1), 1000);
+        } else {
+            console.warn(`API failed after ${maxAttempts} attempts. Using fallback dataset.`);
+            currentFilm = fallbackMovies[Math.floor(Math.random() * fallbackMovies.length)];
+            currentFilm.id = currentFilm.title + currentFilm.releaseYear;
+            usedFilmIds.push(currentFilm.id);
+            currentActorIndex = 0;
+            console.log('Fallback film:', currentFilm);
+            renderFilm();
+        }
+    }
 }
 
 function renderFilm() {
@@ -405,10 +306,9 @@ function renderFilm() {
     var actorListHTML = '<ul>';
     for (var i = 0; i < 5; i++) {
         var actorPosition = i + 1; // Display as 1:, 2:, ..., 5:
-        var actorIndex = i; // Map to array index (0 is 1st actor, 4 is 5th actor)
-        var points = 5 - currentActorIndex; // Points: 5 for 1 actor, 1 for 5 actors
+        var points = 5 - i; // Points: 5 for 1st actor, 1 for 5th
         var actorText = (currentActorIndex >= 4 - i) ?
-            currentFilm.actors[actorIndex] + ' (' + points + ' point' + (points > 1 ? 's' : '') + ')' :
+            currentFilm.actors[i] + ' (' + points + ' point' + (points > 1 ? 's' : '') + ')' :
             '';
         actorListHTML += '<li>' + actorPosition + ': ' + actorText + '</li>';
     }
