@@ -113,7 +113,7 @@ function renderGuessInputs() {
 
 function selectFilm(attempt) {
     if (!attempt) attempt = 1;
-    var maxAttempts = 3;
+    var maxAttempts = 5;
     console.log('Selecting film, attempt ' + attempt + ' of ' + maxAttempts);
 
     var cachedMovies = JSON.parse(localStorage.getItem('cachedMovies')) || [];
@@ -127,9 +127,9 @@ function selectFilm(attempt) {
     var filmInfo = document.getElementById('film-info');
     filmInfo.innerHTML = '<p>Loading film...</p>';
 
+    var page = Math.floor(Math.random() * 10) + 1; // Random page 1-10
     var url = 'https://api.themoviedb.org/3/discover/movie?api_key=' + TMDB_API_KEY +
-              '&primary_release_date.gte=1980-01-01&sort_by=popularity.desc&page=' +
-              (Math.floor(Math.random() * 5) + 1);
+              '&primary_release_date.gte=1980-01-01&sort_by=popularity.desc&language=en-US&page=' + page;
     var xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);
     xhr.setRequestHeader('Authorization', 'Bearer ' + TMDB_ACCESS_TOKEN);
@@ -137,28 +137,40 @@ function selectFilm(attempt) {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 console.log('API response status: 200');
-                var data = JSON.parse(xhr.responseText);
-                console.log('API response data:', data);
-                var movies = data.results.filter(function(movie) {
-                    return movie.revenue > 0;
-                });
-                console.log('Movies with revenue:', movies);
-
-                if (movies.length === 0 && attempt < maxAttempts) {
-                    console.warn('No movies with revenue found. Retrying...');
-                    selectFilm(attempt + 1);
+                var data;
+                try {
+                    data = JSON.parse(xhr.responseText);
+                    console.log('API response data:', data);
+                } catch (e) {
+                    console.error('ERROR: Failed to parse API response:', e);
+                    if (attempt < maxAttempts) {
+                        selectFilm(attempt + 1);
+                    } else {
+                        console.warn('Failed to parse API response after ' + maxAttempts + ' attempts. Using fallback dataset.');
+                        currentFilm = fallbackMovies[Math.floor(Math.random() * fallbackMovies.length)];
+                        renderFilm();
+                    }
                     return;
                 }
 
-                if (movies.length === 0) {
-                    console.warn('No movies with revenue after ' + maxAttempts + ' attempts. Using fallback dataset.');
-                    currentFilm = fallbackMovies[Math.floor(Math.random() * fallbackMovies.length)];
-                    renderFilm();
+                if (!data.results || data.results.length === 0) {
+                    console.warn('No results in API response');
+                    if (attempt < maxAttempts) {
+                        selectFilm(attempt + 1);
+                    } else {
+                        console.warn('No results after ' + maxAttempts + ' attempts. Using fallback dataset.');
+                        currentFilm = fallbackMovies[Math.floor(Math.random() * fallbackMovies.length)];
+                        renderFilm();
+                    }
                     return;
                 }
 
-                var randomMovie = movies[Math.floor(Math.random() * movies.length)];
-                var detailsUrl = 'https://api.themoviedb.org/3/movie/' + randomMovie.id +
+                var movieIds = data.results.map(function(movie) { return movie.id; });
+                console.log('Movie IDs:', movieIds);
+
+                // Fetch details for a random movie
+                var randomMovieId = movieIds[Math.floor(Math.random() * movieIds.length)];
+                var detailsUrl = 'https://api.themoviedb.org/3/movie/' + randomMovieId +
                                  '?api_key=' + TMDB_API_KEY + '&language=en-US';
                 var detailsXhr = new XMLHttpRequest();
                 detailsXhr.open('GET', detailsUrl, true);
@@ -167,11 +179,24 @@ function selectFilm(attempt) {
                     if (detailsXhr.readyState === 4) {
                         if (detailsXhr.status === 200) {
                             console.log('Details API response status: 200');
-                            var movieDetails = JSON.parse(detailsXhr.responseText);
-                            console.log('Movie details:', movieDetails);
+                            var movieDetails;
+                            try {
+                                movieDetails = JSON.parse(detailsXhr.responseText);
+                                console.log('Movie details:', movieDetails);
+                            } catch (e) {
+                                console.error('ERROR: Failed to parse details API response:', e);
+                                if (attempt < maxAttempts) {
+                                    selectFilm(attempt + 1);
+                                } else {
+                                    console.warn('Failed to parse details after ' + maxAttempts + ' attempts. Using fallback dataset.');
+                                    currentFilm = fallbackMovies[Math.floor(Math.random() * fallbackMovies.length)];
+                                    renderFilm();
+                                }
+                                return;
+                            }
 
                             if (!movieDetails.revenue || movieDetails.revenue <= 0) {
-                                console.warn('Movie ' + movieDetails.title + ' has no revenue. Retrying...');
+                                console.warn('Movie ' + movieDetails.title + ' has no revenue');
                                 if (attempt < maxAttempts) {
                                     selectFilm(attempt + 1);
                                 } else {
@@ -190,7 +215,7 @@ function selectFilm(attempt) {
                             console.log('Selected film:', currentFilm);
 
                             cachedMovies.push(currentFilm);
-                            cachedMovies = cachedMovies.slice(-50); // Keep last 50 movies
+                            cachedMovies = cachedMovies.slice(-50);
                             localStorage.setItem('cachedMovies', JSON.stringify(cachedMovies));
 
                             renderFilm();
@@ -238,15 +263,32 @@ function renderFilm() {
 }
 
 function parseGuess(input) {
-    if (!input || typeof input !== 'string') return 0;
+    if (!input || typeof input !== 'string') {
+        console.warn('Invalid guess input:', input);
+        return { value: 0, error: 'Please enter a number (e.g., 20m for 20 million, 1.5b for 1.5 billion)' };
+    }
     input = input.trim().toLowerCase();
-    var match = input.match(/^(\d*\.?\d+)([mb])?$/);
-    if (!match) return 0;
+    var match = input.match(/^(\d*\.?\d*)([mb])?$/i);
+    if (!match) {
+        console.warn('Invalid guess format:', input);
+        return { value: 0, error: 'Invalid format: use numbers like 20m or 1.5b' };
+    }
     var number = parseFloat(match[1]);
+    if (isNaN(number)) {
+        console.warn('Invalid number in guess:', input);
+        return { value: 0, error: 'Invalid number: use numbers like 20m or 1.5b' };
+    }
     var suffix = match[2] || '';
-    if (suffix === 'm') return number * 1000000;
-    if (suffix === 'b') return number * 1000000000;
-    return number;
+    var value;
+    if (suffix === 'm') {
+        value = number * 1000000;
+    } else if (suffix === 'b') {
+        value = number * 1000000000;
+    } else {
+        value = number;
+    }
+    console.log('Parsed guess:', input, '->', value);
+    return { value: value, error: null };
 }
 
 function setupSubmitGuesses() {
@@ -259,17 +301,21 @@ function setupSubmitGuesses() {
     submitButton.addEventListener('click', function() {
         console.log('Submit Guesses button clicked');
         var guesses = [];
-        var allGuessed = true;
+        var allValid = true;
+        var errorMessages = [];
         var guessInputs = document.querySelectorAll('.guess-input');
         for (var i = 0; i < guessInputs.length; i++) {
             var input = guessInputs[i];
             var player = input.dataset.player;
-            var guess = parseGuess(input.value);
-            if (guess === 0) allGuessed = false;
-            guesses.push({ player: player, guess: guess, diff: Math.abs(currentFilm.worldwideGross - guess) });
+            var result = parseGuess(input.value);
+            if (result.value === 0) {
+                allValid = false;
+                errorMessages.push(player + ': ' + result.error);
+            }
+            guesses.push({ player: player, guess: result.value, diff: Math.abs(currentFilm.worldwideGross - result.value) });
         }
-        if (!allGuessed) {
-            document.getElementById('result').innerHTML = '<p>Please enter valid guesses (e.g., 20m for 20 million, 1.5b for 1.5 billion) for all players.</p>';
+        if (!allValid) {
+            document.getElementById('result').innerHTML = '<p>' + errorMessages.join('<br>') + '</p>';
             return;
         }
         var minDiff = Math.min.apply(null, guesses.map(function(g) { return g.diff; }));
