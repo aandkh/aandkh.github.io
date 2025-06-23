@@ -401,14 +401,14 @@ function renderFilm() {
     }
     filmInfo.innerHTML = '<h3>' + currentFilm.genres.join(', ') + ' (' + currentFilm.releaseYear + ')</h3>';
 
-    // Build the actor list (1 to 5), showing only revealed actors
+    // Build the actor list (1 to 5, top to bottom)
     var actorListHTML = '<ul>';
     for (var i = 0; i < 5; i++) {
-        var actorPosition = i + 1; // Display as 1st, 2nd, ..., 5th
-        var actorIndex = 4 - i; // Map to array index (4 is 5th actor, 0 is 1st actor)
-        var points = currentActorIndex + 1; // Points based on number of actors revealed
-        var actorText = (currentActorIndex >= i) ?
-            currentFilm.actors[actorIndex] :
+        var actorPosition = i + 1; // Display as 1:, 2:, ..., 5:
+        var actorIndex = i; // Map to array index (0 is 1st actor, 4 is 5th actor)
+        var points = currentActorIndex + 1; // Points for current state
+        var actorText = (currentActorIndex >= 4 - i) ?
+            currentFilm.actors[actorIndex] + ' (' + points + ' point' + (points > 1 ? 's' : '') + ')' :
             '';
         actorListHTML += '<li>' + actorPosition + ': ' + actorText + '</li>';
     }
@@ -475,7 +475,7 @@ function setupSubmitGuesses() {
             document.getElementById('result').innerHTML = [
                 '<p><strong>Correct!</strong> The movie is ' + currentFilm.title + '.</p>',
                 guesses.map(function(g) {
-                    return '<p>' + g.player + ' guessed "' + g.guess + '" (' + (g.isCorrect ? 'Correct' : 'Incorrect') + ')</p>';
+                    return '<p>' + g.player + ' guessed "' + g.guess + '" (<span class="' + (g.isCorrect ? 'correct' : 'incorrect') + '">' + (g.isCorrect ? 'Correct' : 'Incorrect') + '</span>)</p>';
                 }).join(''),
                 '<p><strong>Winner' + (winners.length > 1 ? 's' : '') + ':</strong> ' +
                 winners.map(function(w) { return w.player; }).join(', ') + ' (+' + points + ' point' + (points > 1 ? 's' : '') + ')</p>'
@@ -488,7 +488,7 @@ function setupSubmitGuesses() {
                 document.getElementById('result').innerHTML = [
                     '<p><strong>No correct guesses.</strong> The movie was ' + currentFilm.title + '.</p>',
                     guesses.map(function(g) {
-                        return '<p>' + g.player + ' guessed "' + g.guess + '" (Incorrect)</p>';
+                        return '<p>' + g.player + ' guessed "' + g.guss + '" (Incorrect)</p>';
                     }).join('')
                 ].join('');
                 document.getElementById('submit-guesses').style.display = 'none';
@@ -561,6 +561,7 @@ function setupResetGame() {
 
 try {
     console.log('Initializing script');
+    var playerNames = document.querySelectorAll('.player-name');
     setupEventListeners();
     setupSubmitGuesses();
     setupRevealNextActor();
