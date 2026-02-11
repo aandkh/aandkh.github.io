@@ -1,261 +1,66 @@
-/* Reset default margins and ensure box-sizing */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* General body styling */
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    padding: 1rem;
-    max-width: 800px;
-    margin: 0 auto;
-    background-color: #f9f9f9;
-}
-
-/* Headings for film info */
 #film-info h3 {
-    font-size: 1.5rem;
-    color: #333;
-    margin: 1rem 0;
-    text-align: center;
+    margin-bottom: 16px;
+    font-size: 1.4rem;
 }
 
-/* Actor info list */
 #actor-info {
-    margin: 1rem 0;
+    margin: 14px 0 20px;
 }
 
 #actor-info ul {
     list-style: none;
     padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 10px;
 }
 
 #actor-info li {
-    margin-bottom: 0.5rem;
-    font-size: 1.1rem;
-    color: #444;
-    display: flex;
+    text-align: left;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(7, 11, 22, 0.45);
+}
+
+#player-list .player-entry,
+#player-inputs > div {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px;
     align-items: center;
+    margin-bottom: 10px;
 }
 
-#actor-info li::before {
-    content: attr(data-position) ": ";
-    width: 2rem;
-    font-weight: bold;
-    color: #666;
-}
-
-/* Player setup section */
-#player-setup {
-    background: #fff;
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 1rem;
-}
-
-#player-list .player-entry {
-    display: flex;
+#player-inputs > div label {
+    display: grid;
+    grid-template-columns: 100px 1fr;
     align-items: center;
-    margin-bottom: 0.5rem;
+    gap: 10px;
+    text-align: left;
 }
 
-.player-name {
-    flex: 1;
-    padding: 0.5rem;
-    margin-right: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
+#scoreboard {
+    margin-top: 16px;
+    padding: 14px;
 }
 
-.player-name:focus {
-    outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
-}
-
-.remove-player {
-    padding: 0.5rem 1rem;
-    background: #dc3545;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.9rem;
-}
-
-.remove-player:hover {
-    background: #c82333;
-}
-
-/* Game area */
-#game-area {
-    background: #fff;
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Player input fields */
-#player-inputs div {
-    margin: 0.5rem 0;
-    display: flex;
-    align-items: center;
-}
-
-#player-inputs label {
-    flex: 0 0 120px;
-    font-weight: bold;
-    color: #555;
-}
-
-.guess-input {
-    flex: 1;
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-}
-
-.guess-input:focus {
-    outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
-}
-
-/* Buttons */
-button {
-    padding: 0.5rem 1rem;
-    margin: 0.5rem 0.5rem 0.5rem 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background 0.2s;
-}
-
+#reveal-next-actor,
+#next-movie,
+#reset-game,
+#submit-guesses,
+#start-game,
 #add-player {
-    background: #28a745;
-    color: #fff;
+    min-width: 130px;
 }
 
-#add-player:hover {
-    background: #218838;
-}
-
-#start-game {
-    background: #007bff;
-    color: #fff;
-}
-
-#start-game:hover {
-    background: #0069d9;
-}
-
-#submit-guesses {
-    background: #17a2b8;
-    color: #fff;
-}
-
-#submit-guesses:hover {
-    background: #138496;
-}
-
-#reveal-next-actor {
-    background: #ffc107;
-    color: #333;
-    margin-left: 1rem;
-}
-
-#reveal-next-actor:hover {
-    background: #e0a800;
-}
-
-#next-movie {
-    background: #6c757d;
-    color: #fff;
-}
-
-#next-movie:hover {
-    background: #5a6268;
-}
-
-#reset-game {
-    background: #dc3545;
-    color: #fff;
-}
-
-#reset-game:hover {
-    background: #c82333;
-}
-
-/* Scoreboard */
-#scores {
-    list-style: none;
-    padding: 0;
-    margin: 1rem 0;
-}
-
-#scores li {
-    padding: 0.5rem;
-    background: #e9ecef;
-    margin-bottom: 0.5rem;
-    border-radius: 4px;
-    font-size: 1.1rem;
-}
-
-/* Result messages */
-#result {
-    margin-top: 1rem;
-    padding: 1rem;
-    border-radius: 4px;
-}
-
-#result p {
-    margin: 0.5rem 0;
-}
-
-#result strong {
-    color: #333;
-}
-
-#result .correct {
-    color: #28a745;
-}
-
-#result .incorrect {
-    color: #dc3545;
-}
-
-/* Responsive design */
-@media (max-width: 600px) {
-    body {
-        padding: 0.5rem;
-    }
-
-    #player-inputs label {
-        flex: 0 0 80px;
-        font-size: 0.9rem;
-    }
-
-    .guess-input, .player-name {
-        font-size: 0.9rem;
-    }
-
-    button {
-        font-size: 0.9rem;
-        padding: 0.4rem 0.8rem;
-    }
-
-    #film-info h3 {
-        font-size: 1.3rem;
-    }
-
-    #actor-info li {
-        font-size: 1rem;
-    }
+#round-points {
+    display: inline-block;
+    margin-bottom: 6px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(140, 247, 208, 0.18);
+    border: 1px solid rgba(140, 247, 208, 0.45);
+    color: #d5fff1;
+    font-weight: 600;
 }

@@ -1,28 +1,200 @@
+:root {
+    --bg: #070b16;
+    --bg-soft: #101935;
+    --panel: rgba(255, 255, 255, 0.08);
+    --panel-border: rgba(255, 255, 255, 0.14);
+    --text: #eef2ff;
+    --muted: #b7c2e8;
+    --primary: #6aa4ff;
+    --primary-hover: #87b7ff;
+    --accent: #8cf7d0;
+    --danger: #ff7d94;
+    --shadow: 0 20px 45px rgba(2, 8, 30, 0.45);
+}
+
+* {
+    box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
     margin: 0;
-    padding: 20px;
-    background-color: #f0f0f0;
+    min-height: 100vh;
+    font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text);
+    text-align: center;
+    background:
+        radial-gradient(circle at 15% -5%, rgba(113, 156, 255, 0.26), transparent 38%),
+        radial-gradient(circle at 90% 10%, rgba(140, 247, 208, 0.16), transparent 30%),
+        linear-gradient(170deg, #060914 0%, #0c1430 45%, #0b1b45 100%);
+    padding: 28px 18px 36px;
 }
-header {
-    margin-bottom: 40px;
+
+.page-shell {
+    max-width: 1080px;
+    margin: 0 auto;
 }
+
+header,
+.site-header {
+    margin-bottom: 34px;
+}
+
+.eyebrow {
+    margin: 0;
+    font-size: 0.88rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+}
+
+h1 {
+    margin: 8px 0;
+    font-size: clamp(2rem, 5vw, 3.3rem);
+    letter-spacing: -0.025em;
+}
+
+.subtitle,
+header p {
+    margin: 0 auto;
+    max-width: 700px;
+    color: var(--muted);
+    font-size: 1rem;
+}
+
+main {
+    max-width: 980px;
+    margin: 0 auto;
+}
+
 .game-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
 }
+
 .game-button {
-    display: inline-block;
-    padding: 15px 30px;
-    background-color: #007bff;
-    color: white;
+    display: grid;
+    gap: 10px;
+    text-align: left;
     text-decoration: none;
-    border-radius: 5px;
-    font-size: 18px;
+    padding: 20px;
+    color: var(--text);
+    border: 1px solid var(--panel-border);
+    border-radius: 16px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04));
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 }
+
 .game-button:hover {
-    background-color: #0056b3;
+    transform: translateY(-3px);
+    border-color: rgba(140, 247, 208, 0.55);
+    background: linear-gradient(180deg, rgba(120, 166, 255, 0.26), rgba(255, 255, 255, 0.07));
+}
+
+.game-title {
+    font-size: 1.24rem;
+    font-weight: 700;
+}
+
+.game-description {
+    color: var(--muted);
+    line-height: 1.45;
+    font-size: 0.95rem;
+}
+
+#player-setup,
+#game-area,
+#scoreboard,
+#hint-area {
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    backdrop-filter: blur(8px);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+}
+
+#player-setup,
+#game-area {
+    margin: 0 auto 20px;
+    max-width: 860px;
+    padding: 20px;
+}
+
+h2,
+h3 {
+    margin-top: 0;
+}
+
+input[type="text"],
+input[type="number"],
+#guess-input,
+.guess-input,
+.player-name {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    background: rgba(7, 11, 22, 0.55);
+    color: var(--text);
+    font-size: 0.98rem;
+}
+
+input::placeholder {
+    color: rgba(219, 228, 255, 0.5);
+}
+
+input:focus {
+    outline: 2px solid rgba(106, 164, 255, 0.55);
+    border-color: transparent;
+}
+
+button {
+    padding: 10px 16px;
+    margin: 6px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.96rem;
+    color: #0d1736;
+    background: linear-gradient(180deg, #8ec3ff, var(--primary));
+    transition: transform 0.2s ease, filter 0.2s ease;
+    font-weight: 600;
+}
+
+button:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.05);
+}
+
+.remove-player {
+    background: linear-gradient(180deg, #ffc1cd, var(--danger));
+}
+
+#result {
+    min-height: 30px;
+    margin-top: 14px;
+}
+
+.correct {
+    color: var(--accent);
+}
+
+.incorrect {
+    color: #ffb4c2;
+}
+
+ul#scores {
+    list-style: none;
+    padding-left: 0;
+    margin: 12px 0 0;
+}
+
+ul#scores li {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+ul#scores li:last-child {
+    border-bottom: 0;
 }
