@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Six Degrees of AndrewHanes.com</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: '#050a19',
+            panel: 'rgba(255,255,255,0.09)',
+            neon: '#64b5ff',
+            mint: '#9de9ff'
+          },
+          boxShadow: {
+            glow: '0 0 0 1px rgba(100,181,255,0.35), 0 0 28px rgba(100,181,255,0.25)',
+            deep: '0 24px 55px rgba(0,0,0,0.42)'
+          }
+        }
+      }
+    }
+    } catch (err) {
+      const mount = document.getElementById('app');
+      if (mount) {
+        mount.innerHTML = `<div style="padding:24px;color:#fecaca;font-family:Inter,Segoe UI,sans-serif"><h2 style="margin:0 0 8px">Game failed to load</h2><p style="margin:0">${String(err && err.message ? err.message : err)}</p></div>`;
+      }
+      console.error(err);
+    }
+  </script>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/framer-motion/dist/framer-motion.js"></script>
+  <style>
+    body {
+      background: radial-gradient(circle at 15% -10%, rgba(100, 149, 255, 0.27), transparent 35%),
+                  radial-gradient(circle at 90% 15%, rgba(108, 213, 255, 0.2), transparent 30%),
+                  linear-gradient(155deg, #060b1b 0%, #0b1538 48%, #16124a 100%);
+    }
+    .glass {
+      background: rgba(255, 255, 255, 0.09);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      backdrop-filter: blur(10px);
+    }
+    .glow-ring { animation: pulse 2.2s ease-in-out infinite; }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 2px rgba(110, 180, 255, 0.25), 0 0 20px rgba(110, 180, 255, 0.2); }
+      50% { box-shadow: 0 0 0 2px rgba(147, 229, 255, 0.45), 0 0 28px rgba(147, 229, 255, 0.3); }
+    }
+    .skeleton { background: linear-gradient(90deg, rgba(255,255,255,0.09), rgba(255,255,255,0.19), rgba(255,255,255,0.09)); background-size: 200% 100%; animation: shimmer 1.3s infinite; }
+    @keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+  </style>
+</head>
+<body class="min-h-screen text-slate-100">
+  <div id="app"></div>
+
+  <script src="../config.js"></script>
+  <script type="text/babel" data-presets="env,react">
+    try {
+    const { useEffect, useMemo, useState } = React;
+    const MotionLib = window.framerMotion || window['framer-motion'] || {};
+    const motion = MotionLib.motion || {
+      div: (props) => <div {...props} />,
+      button: (props) => <button {...props} />
+    };
+    const AnimatePresence = MotionLib.AnimatePresence || React.Fragment;
+
+    const IMG = 'https://image.tmdb.org/t/p/w185';
+    const NO_FACE = 'https://placehold.co/200x300/0a122f/c5e2ff?text=No+Image';
+    const POP_MOVIE_THRESHOLD = 300;
+
+    const difficultyCaps = { easy: 3, medium: 4, hard: 5 };
+
+    const seededPairs = {
+      easy: [['Tom Hanks', 'Meg Ryan'], ['Emma Stone', 'Ryan Gosling'], ['Brad Pitt', 'George Clooney']],
+      medium: [['Meryl Streep', 'Matt Damon'], ['Scarlett Johansson', 'Hugh Jackman'], ['Zendaya', 'Benedict Cumberbatch']],
+      hard: [['Tilda Swinton', 'Vin Diesel'], ['Anya Taylor-Joy', 'Al Pacino'], ['Saoirse Ronan', 'Keanu Reeves']]
+    };
+
+    const jsonCache = {
+      get(key) {
+        try { return JSON.parse(localStorage.getItem(key) || 'null'); } catch { return null; }
+      },
+      set(key, value) {
+        localStorage.setItem(key, JSON.stringify({ t: Date.now(), d: value }));
+      }
+    };
+
+    async function tmdbFetch(url) {
+      const headers = TMDB_ACCESS_TOKEN ? { Authorization: `Bearer ${TMDB_ACCESS_TOKEN}` } : {};
+      const res = await fetch(url, { headers });
+      if (!res.ok) throw new Error('TMDB request failed');
+      return res.json();
+    }
+
+    async function withCache(key, ttlMs, fn) {
+      const c = jsonCache.get(key);
+      if (c && Date.now() - c.t < ttlMs) return c.d;
+      const v = await fn();
+      jsonCache.set(key, v);
+      return v;
+    }
+
+    async function searchActors(query) {
+      return withCache(`actor-search:${query.toLowerCase()}`, 1000 * 60 * 60 * 24 * 7, async () => {
+        const d = await tmdbFetch(`https://api.themoviedb.org/3/search/person?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}&include_adult=false`);
+        return (d.results || []).slice(0, 8).map(a => ({
+          id: a.id,
+          name: a.name,
+          profile_path: a.profile_path,
+          known_for_department: a.known_for_department
+        }));
+      });
+    }
+
+    async function actorDetails(id) {
+      return withCache(`actor-details:${id}`, 1000 * 60 * 60 * 24 * 30, async () => {
+        const d = await tmdbFetch(`https://api.themoviedb.org/3/person/${id}?api_key=${TMDB_API_KEY}`);
+        const credits = await tmdbFetch(`https://api.themoviedb.org/3/person/${id}/movie_credits?api_key=${TMDB_API_KEY}`);
+        const films = (credits.cast || []).filter(m => m.vote_count > POP_MOVIE_THRESHOLD && m.release_date);
+        return {
+          id: d.id,
+          name: d.name,
+          profile_path: d.profile_path,
+          filmCount: films.length,
+          films: films.map(m => ({
+            id: m.id,
+            title: m.title,
+            release_date: m.release_date,
+            vote_average: m.vote_average,
+            vote_count: m.vote_count,
+            poster_path: m.poster_path,
+            popularity: m.popularity || 0
+          }))
+        };
+      });
+    }
+
+    async function movieCast(movieId) {
+      return withCache(`movie-cast:${movieId}`, 1000 * 60 * 60 * 24 * 30, async () => {
+        const d = await tmdbFetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${TMDB_API_KEY}`);
+        return (d.cast || []).slice(0, 16).map(c => ({ id: c.id, name: c.name, profile_path: c.profile_path }));
+      });
+    }
+
+    async function bestSharedMovie(actorA, actorB) {
+      const [a, b] = await Promise.all([actorDetails(actorA.id), actorDetails(actorB.id)]);
+      const bSet = new Set(b.films.map(m => m.id));
+      const shared = a.films.filter(m => bSet.has(m.id));
+      if (!shared.length) return null;
+      shared.sort((x, y) => (y.popularity + y.vote_count * 0.02) - (x.popularity + x.vote_count * 0.02));
+      return shared[0];
+    }
+
+    async function shortestPath(startId, targetId, maxDepth = 4) {
+      const queue = [[startId, []]];
+      const seen = new Set([startId]);
+      while (queue.length) {
+        const [cur, path] = queue.shift();
+        if (path.length / 2 >= maxDepth) continue;
+
+        const actor = await actorDetails(cur);
+        const movies = actor.films.slice(0, 12);
+
+        for (const mv of movies) {
+          const cast = await movieCast(mv.id);
+          for (const c of cast) {
+            if (seen.has(c.id)) continue;
+            const nextPath = [...path, { type: 'movie', data: mv }, { type: 'actor', data: c }];
+            if (c.id === targetId) return nextPath;
+            seen.add(c.id);
+            queue.push([c.id, nextPath]);
+          }
+        }
+      }
+      return null;
+    }
+
+    function Headshot({ actor }) {
+      const src = actor?.profile_path ? `${IMG}${actor.profile_path}` : NO_FACE;
+      return (
+        <div className="flex items-center gap-3">
+          <img loading="lazy" src={src} alt={actor?.name} className="w-20 h-20 rounded-full object-cover glow-ring border border-white/30" />
+          <div>
+            <p className="font-semibold text-lg">{actor?.name || 'Select actor'}</p>
+            {actor?.filmCount !== undefined && <p className="text-xs text-cyan-100/90">{actor.filmCount} films</p>}
+          </div>
+        </div>
+      );
+    }
+
+    function ActorCard({ actor, active, onClick }) {
+      return (
+        <motion.button whileHover={{ y: -2, boxShadow: '0 0 0 1px rgba(120,190,255,.48), 0 0 35px rgba(90,160,255,.3)' }}
+          onClick={onClick}
+          className={`glass rounded-2xl p-4 text-left w-full transition ${active ? 'ring-2 ring-cyan-300/80' : ''}`}>
+          <Headshot actor={actor} />
+        </motion.button>
+      );
+    }
+
+    function MovieCard({ movie }) {
+      const year = movie.release_date ? movie.release_date.slice(0,4) : '—';
+      return (
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0, transition: { type: 'spring', bounce: .35 } }}
+          className="glass rounded-2xl p-3 flex items-center gap-3">
+          <img loading="lazy" src={movie.poster_path ? `${IMG}${movie.poster_path}` : NO_FACE} alt={movie.title} className="w-14 h-20 rounded object-cover"/>
+          <div className="text-left">
+            <p className="font-semibold">{movie.title}</p>
+            <p className="text-sm text-cyan-100/85">{year} · ⭐ {movie.vote_average?.toFixed?.(1) || movie.vote_average}</p>
+          </div>
+        </motion.div>
+      );
+    }
+
+    function App() {
+      const [difficulty, setDifficulty] = useState('medium');
+      const [source, setSource] = useState(null);
+      const [target, setTarget] = useState(null);
+      const [activeEnd, setActiveEnd] = useState('source');
+      const [query, setQuery] = useState('');
+      const [suggestions, setSuggestions] = useState([]);
+      const [chain, setChain] = useState([]);
+      const [status, setStatus] = useState('Connected.');
+      const [shaking, setShaking] = useState(false);
+      const [loading, setLoading] = useState(false);
+      const [optimal, setOptimal] = useState(null);
+      const [showOptimal, setShowOptimal] = useState(false);
+
+      useEffect(() => {
+        resetRound();
+      }, [difficulty]);
+
+      useEffect(() => {
+        if (!query.trim()) return setSuggestions([]);
+        const handle = setTimeout(async () => {
+          try {
+            const found = await searchActors(query);
+            setSuggestions(found.filter(a => a.known_for_department === 'Acting' || !a.known_for_department));
+          } catch {
+            setSuggestions([]);
+          }
+        }, 220);
+        return () => clearTimeout(handle);
+      }, [query]);
+
+      async function resetRound() {
+        setChain([]);
+        setOptimal(null);
+        setShowOptimal(false);
+        setStatus('Connected.');
+
+        const pair = seededPairs[difficulty][Math.floor(Math.random() * seededPairs[difficulty].length)];
+        const [a, b] = await Promise.all([searchActors(pair[0]), searchActors(pair[1])]);
+        if (!a[0] || !b[0]) return;
+        const [src, tgt] = await Promise.all([actorDetails(a[0].id), actorDetails(b[0].id)]);
+        setSource(src);
+        setTarget(tgt);
+      }
+
+      async function pickActor(actor) {
+        if (!source || !target) return;
+        setQuery('');
+        setSuggestions([]);
+        if (!chain.length && actor.id === source.id) {
+          return;
+        }
+
+        const prevActor = chain.length ? chain[chain.length - 1].actor : source;
+        setLoading(true);
+        try {
+          const shared = await bestSharedMovie(prevActor, actor);
+          if (!shared) {
+            setStatus('No shared film.');
+            setShaking(true);
+            setTimeout(() => setShaking(false), 380);
+            return;
+          }
+          const next = [...chain, { movie: shared, actor }];
+          setChain(next);
+          setStatus('Connected.');
+          if (actor.id === target.id) {
+            const shortest = await shortestPath(source.id, target.id, difficultyCaps[difficulty]);
+            setOptimal(shortest);
+            setStatus('Optimal Path.');
+          }
+        } finally {
+          setLoading(false);
+        }
+      }
+
+      const reached = useMemo(() => chain.length && chain[chain.length - 1].actor.id === target?.id, [chain, target]);
+      const degreeCount = chain.length;
+      const optimalDegrees = optimal ? optimal.filter(n => n.type === 'actor').length : null;
+      const extraMoves = optimalDegrees === null ? 0 : Math.max(0, degreeCount - optimalDegrees);
+      const score = reached ? Math.max(50, 1000 - degreeCount * 100 - extraMoves * 10 + (degreeCount <= optimalDegrees ? 200 : 0)) : null;
+
+      const stars = reached
+        ? (degreeCount <= optimalDegrees ? 3 : degreeCount === optimalDegrees + 1 ? 2 : 1)
+        : 0;
+
+      return (
+        <div className="max-w-5xl mx-auto px-4 py-7 md:py-10">
+          <a href="../index.html" className="text-cyan-200/80 hover:text-cyan-100 text-sm">← Back</a>
+          <h1 className="text-3xl md:text-5xl font-bold tracking-tight mt-3">Six Degrees of AndrewHanes.com</h1>
+          <p className="text-cyan-100/80 mt-2">Connect actors through shared films. Minimal moves. Maximum flex.</p>
+
+          <div className="mt-5 flex items-center gap-2">
+            {['easy','medium','hard'].map(level => (
+              <button key={level} onClick={() => setDifficulty(level)} className={`px-3 py-2 rounded-full text-sm ${difficulty===level?'bg-cyan-300 text-slate-900':'glass text-cyan-100'}`}>{level}</button>
+            ))}
+            <button onClick={resetRound} className="ml-auto glass px-4 py-2 rounded-full">New matchup</button>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-4 mt-5">
+            <ActorCard actor={source} active={activeEnd==='source'} onClick={() => setActiveEnd('source')} />
+            <ActorCard actor={target} active={activeEnd==='target'} onClick={() => setActiveEnd('target')} />
+          </div>
+
+          <motion.div animate={shaking ? { x: [0,-8,8,-5,5,0] } : { x: 0 }} className="mt-6 space-y-3">
+            {chain.map((step, idx) => (
+              <div key={`${step.actor.id}-${idx}`} className="space-y-2">
+                <MovieCard movie={step.movie} />
+                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0, transition: { type: 'spring', bounce: .3 } }} className="glass rounded-2xl p-4">
+                  <Headshot actor={step.actor} />
+                </motion.div>
+              </div>
+            ))}
+          </motion.div>
+
+          <div className="glass rounded-2xl p-4 mt-6">
+            <div className="flex flex-col md:flex-row gap-3">
+              <input value={query} onChange={(e) => setQuery(e.target.value)}
+                placeholder="Add next actor"
+                className="w-full bg-slate-900/40 border border-white/20 rounded-xl px-4 py-3 outline-none focus:ring-2 ring-cyan-300" />
+              <button disabled={loading} className="px-5 py-3 rounded-xl bg-cyan-300 text-slate-900 font-semibold">{loading ? 'Checking…' : 'Search'}</button>
+            </div>
+
+            <div className="mt-3 space-y-2">
+              <AnimatePresence>
+              {suggestions.map(s => (
+                <motion.button key={s.id} initial={{ opacity:0, y:8 }} animate={{ opacity:1, y:0 }} exit={{ opacity:0 }}
+                  onClick={() => pickActor(s)}
+                  className="w-full text-left glass rounded-xl p-2 flex items-center gap-3 hover:shadow-glow transition">
+                  <img loading="lazy" src={s.profile_path ? `${IMG}${s.profile_path}` : NO_FACE} className="w-12 h-12 rounded-full object-cover" alt={s.name} />
+                  <span className="font-medium">{s.name}</span>
+                </motion.button>
+              ))}
+              </AnimatePresence>
+            </div>
+
+            <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-sm text-cyan-100/85">
+              <span>{status}</span>
+              {reached && <span>Degrees: {degreeCount}</span>}
+              {reached && <span>Moves: {degreeCount}</span>}
+              {reached && <span>Score: {score}</span>}
+              {reached && <span>{'⭐'.repeat(stars)}</span>}
+            </div>
+
+            {reached && (
+              <div className="mt-4 flex flex-wrap gap-2">
+                <button onClick={() => setShowOptimal(v => !v)} className="glass px-4 py-2 rounded-full">Show shortest path</button>
+                <button onClick={() => {
+                  const url = `${location.origin}${location.pathname}?d=${difficulty}`;
+                  navigator.clipboard.writeText(url);
+                  setStatus('Challenge link copied.');
+                }} className="glass px-4 py-2 rounded-full">Challenge a friend</button>
+              </div>
+            )}
+
+            {showOptimal && optimal && (
+              <div className="mt-4 glass rounded-2xl p-3 text-sm text-cyan-100/90">
+                <p className="font-semibold mb-2">Shortest path preview</p>
+                <ol className="list-decimal pl-5 space-y-1">
+                  {optimal.map((n, i) => (
+                    <li key={i}>{n.type === 'movie' ? `🎬 ${n.data.title}` : `🧑 ${n.data.name}`}</li>
+                  ))}
+                </ol>
+              </div>
+            )}
+
+            <div className="mt-4 text-xs text-cyan-100/70">Daily leaderboard placeholder: server precompute required for persistent ranking.</div>
+          </div>
+        </div>
+      );
+    }
+
+    const mount = document.getElementById('app');
+    if (!mount) {
+      throw new Error('Missing #app root element');
+    }
+
+    if (!window.React || !window.ReactDOM) {
+      mount.innerHTML = '<div style="padding:24px;color:#dbeafe;font-family:Inter,Segoe UI,sans-serif">App failed to load. Missing React dependencies.</div>';
+    } else {
+      const root = ReactDOM.createRoot ? ReactDOM.createRoot(mount) : null;
+      if (root) {
+        root.render(<App />);
+      } else {
+        ReactDOM.render(<App />, mount);
+      }
+    }
+    } catch (err) {
+      const mount = document.getElementById('app');
+      if (mount) {
+        mount.innerHTML = `<div style="padding:24px;color:#fecaca;font-family:Inter,Segoe UI,sans-serif"><h2 style="margin:0 0 8px">Game failed to load</h2><p style="margin:0">${String(err && err.message ? err.message : err)}</p></div>`;
+      }
+      console.error(err);
+    }
+  </script>
+</body>
+</html>
