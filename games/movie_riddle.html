@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="game-master, movie-riddle, game">
+    <meta name="description" content="Movie Riddle - guess the movie from progressive hints!">
+    <meta name="author" content="Your Name">
+    <title>Movie Riddle</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="movie_riddle.css">
+</head>
+<body>
+    <header>
+        <h1>Movie Riddle</h1>
+        <p>Guess the movie in 3 tries with progressive hints</p>
+    </header>
+    <main>
+        <section id="game-area">
+            <div id="scoreboard">
+                <h3>Score</h3>
+                <p id="score">0</p>
+            </div>
+
+            <div id="hint-area">
+                <h3>Hints</h3>
+                <ol id="hint-list"></ol>
+            </div>
+
+            <div id="guess-area">
+                <label for="guess-input">Your Guess</label>
+                <input type="text" id="guess-input" placeholder="Enter movie title">
+                <button id="submit-guess">Submit Guess</button>
+            </div>
+
+            <p id="attempts-left">Guesses left: 3</p>
+            <div id="result"></div>
+
+            <button id="new-round">Next Movie</button>
+        </section>
+    </main>
+    <script src="../config.js"></script>
+    <script src="../scripts.js"></script>
+    <script src="movie_riddle.js"></script>
+</body>
+</html>
