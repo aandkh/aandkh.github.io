@@ -22,13 +22,6 @@
         }
       }
     }
-    } catch (err) {
-      const mount = document.getElementById('app');
-      if (mount) {
-        mount.innerHTML = `<div style="padding:24px;color:#fecaca;font-family:Inter,Segoe UI,sans-serif"><h2 style="margin:0 0 8px">Game failed to load</h2><p style="margin:0">${String(err && err.message ? err.message : err)}</p></div>`;
-      }
-      console.error(err);
-    }
   </script>
   <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -59,7 +52,6 @@
 
   <script src="../config.js"></script>
   <script type="text/babel" data-presets="env,react">
-    try {
     const { useEffect, useMemo, useState } = React;
     const MotionLib = window.framerMotion || window['framer-motion'] || {};
     const motion = MotionLib.motion || {
@@ -402,13 +394,6 @@
       } else {
         ReactDOM.render(<App />, mount);
       }
-    }
-    } catch (err) {
-      const mount = document.getElementById('app');
-      if (mount) {
-        mount.innerHTML = `<div style="padding:24px;color:#fecaca;font-family:Inter,Segoe UI,sans-serif"><h2 style="margin:0 0 8px">Game failed to load</h2><p style="margin:0">${String(err && err.message ? err.message : err)}</p></div>`;
-      }
-      console.error(err);
     }
   </script>
 </body>
