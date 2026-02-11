@@ -7,17 +7,31 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>Vacation Game Master</h1>
-        <p>Games to play while waiting in line</p>
-    </header>
-    <main>
-        <section class="game-list">
-            <a href="games/box_office_bonanza.html" class="game-button">Box Office Bonanza</a>
-            <a href="games/actors_assemble.html" class="game-button">Actors Assemble</a>
-            <a href="games/movie_riddle.html" class="game-button">Movie Riddle</a>
-        </section>
-    </main>
+    <div class="page-shell">
+        <header class="site-header">
+            <p class="eyebrow">🎬 Family Night Collection</p>
+            <h1>Vacation Game Master</h1>
+            <p class="subtitle">Fast, party-friendly movie games for the queue, the hotel, or the ride home.</p>
+        </header>
+
+        <main>
+            <section class="game-list" aria-label="Available games">
+                <a href="games/box_office_bonanza.html" class="game-button">
+                    <span class="game-title">Box Office Bonanza</span>
+                    <span class="game-description">Estimate box office totals and compete by closest guess.</span>
+                </a>
+                <a href="games/actors_assemble.html" class="game-button">
+                    <span class="game-title">Actors Assemble</span>
+                    <span class="game-description">Name the movie from a top-billed cast reveal.</span>
+                </a>
+                <a href="games/movie_riddle.html" class="game-button">
+                    <span class="game-title">Movie Riddle</span>
+                    <span class="game-description">Solve progressive clues before your three guesses run out.</span>
+                </a>
+            </section>
+        </main>
+    </div>
+
     <script src="scripts.js"></script>
 </body>
 </html>
