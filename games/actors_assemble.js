@@ -291,6 +291,10 @@ function selectFilm(useCache, attempt = 1) {
     }
 }
 
+function getCurrentGuessPoints() {
+    return Math.max(1, 5 - currentActorIndex);
+}
+
 function renderFilm() {
     console.log('Rendering film:', currentFilm);
     console.log('Current actor index:', currentActorIndex);
@@ -302,21 +306,22 @@ function renderFilm() {
     }
     filmInfo.innerHTML = '<h3>' + currentFilm.genres.join(', ') + ' (' + currentFilm.releaseYear + ')</h3>';
 
+    var roundPoints = getCurrentGuessPoints();
+    var roundPointsElement = document.getElementById('round-points');
+    if (roundPointsElement) {
+        roundPointsElement.textContent = 'Current guess value: ' + roundPoints + ' point' + (roundPoints > 1 ? 's' : '');
+    }
+
     // Build the actor list (1 to 5, top to bottom)
     var actorListHTML = '<ul>';
     for (var i = 0; i < 5; i++) {
-        var actorPosition = i + 1; // Display as 1:, 2:, ..., 5:
-        var points = 5 - i; // Points: 5 for 1st actor, 1 for 5th
-        var actorText = (currentActorIndex >= 4 - i) ?
-            currentFilm.actors[i] + ' (' + points + ' point' + (points > 1 ? 's' : '') + ')' :
-            '';
+        var actorPosition = i + 1;
+        var actorText = currentActorIndex >= 4 - i ? currentFilm.actors[i] : '••••••••••';
         actorListHTML += '<li>' + actorPosition + ': ' + actorText + '</li>';
     }
     actorListHTML += '</ul>';
 
-    actorInfo.innerHTML = currentActorIndex < 5 ?
-        actorListHTML :
-        '<p>All actors revealed.</p>';
+    actorInfo.innerHTML = actorListHTML;
 
     document.getElementById('result').innerHTML = '';
     var guessInputs = document.querySelectorAll('.guess-input');
@@ -364,7 +369,7 @@ function setupSubmitGuesses() {
             return;
         }
         var winners = guesses.filter(function(g) { return g.isCorrect; });
-        var points = 5 - currentActorIndex; // 5 points for 1 actor, 1 point for 5 actors
+        var points = getCurrentGuessPoints(); // 5 points on first guess down to 1 on final guess
         console.log('Points awarded:', points, 'for movie:', currentFilm.title);
         if (winners.length > 0) {
             for (var i = 0; i < winners.length; i++) {
@@ -434,6 +439,7 @@ function setupNextMovie() {
         console.log('Next Movie button clicked');
         selectFilm(true);
         document.getElementById('submit-guesses').style.display = 'inline-block';
+        document.getElementById('reveal-next-actor').style.display = 'inline-block';
     });
 }
 
