@@ -6,7 +6,6 @@
     --text: #eef2ff;
     --muted: #b7c2e8;
     --primary: #6aa4ff;
-    --primary-hover: #87b7ff;
     --accent: #8cf7d0;
     --danger: #ff7d94;
     --shadow: 0 20px 45px rgba(2, 8, 30, 0.45);
@@ -72,35 +71,323 @@ main {
     gap: 18px;
 }
 
-.game-button {
+.game-card {
+    position: relative;
     display: grid;
-    gap: 10px;
+    gap: 12px;
     text-align: left;
     text-decoration: none;
-    padding: 20px;
+    padding: 22px;
+    overflow: hidden;
+    min-height: 248px;
     color: var(--text);
-    border: 1px solid var(--panel-border);
-    border-radius: 16px;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04));
-    box-shadow: var(--shadow);
-    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 22px;
+    backdrop-filter: blur(9px);
+    box-shadow:
+        0 24px 44px rgba(2, 8, 30, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+    isolation: isolate;
 }
 
-.game-button:hover {
-    transform: translateY(-3px);
-    border-color: rgba(140, 247, 208, 0.55);
-    background: linear-gradient(180deg, rgba(120, 166, 255, 0.26), rgba(255, 255, 255, 0.07));
+.game-card::before {
+    content: "";
+    position: absolute;
+    inset: -45% -70%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.15), transparent 52%);
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+.card-shine {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent 20%, rgba(255, 255, 255, 0.26) 45%, transparent 70%);
+    transform: translateX(-130%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.game-card:hover,
+.game-card:focus-visible {
+    transform: translateY(-6px) scale(1.015);
+    box-shadow:
+        0 28px 56px rgba(2, 8, 30, 0.62),
+        inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.game-card:hover .card-shine,
+.game-card:focus-visible .card-shine {
+    animation: sweep 1.2s ease;
+    opacity: 1;
+}
+
+.game-card:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.45);
+    outline-offset: 2px;
+}
+
+.card-icon {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 88px;
+    height: 88px;
+    border-radius: 24px;
+    margin-bottom: 8px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
 }
 
 .game-title {
-    font-size: 1.24rem;
-    font-weight: 700;
+    position: relative;
+    font-size: 1.22rem;
+    font-weight: 760;
+    letter-spacing: 0.01em;
+    z-index: 1;
 }
 
 .game-description {
-    color: var(--muted);
+    position: relative;
+    color: rgba(230, 236, 255, 0.92);
     line-height: 1.45;
-    font-size: 0.95rem;
+    font-size: 0.93rem;
+    z-index: 1;
+}
+
+.card-box-office {
+    background:
+        linear-gradient(150deg, rgba(7, 22, 17, 0.94), rgba(14, 43, 28, 0.94) 42%, rgba(80, 62, 20, 0.9) 100%),
+        radial-gradient(circle at 80% 12%, rgba(244, 197, 74, 0.18), transparent 42%);
+    border-color: rgba(233, 196, 80, 0.42);
+}
+
+.card-box-office:hover,
+.card-box-office:focus-visible {
+    border-color: rgba(245, 208, 96, 0.76);
+    box-shadow: 0 0 0 1px rgba(248, 216, 129, 0.26), 0 26px 56px rgba(9, 26, 16, 0.75);
+}
+
+.money-icon {
+    background: linear-gradient(160deg, rgba(39, 122, 66, 0.82), rgba(166, 129, 36, 0.76));
+    border: 1px solid rgba(244, 212, 120, 0.44);
+    box-shadow: inset 0 0 22px rgba(8, 20, 14, 0.35);
+}
+
+.money-ring,
+.money-chip {
+    position: absolute;
+    color: #ffe79f;
+    text-shadow: 0 0 12px rgba(255, 218, 118, 0.6);
+}
+
+.money-ring {
+    font-size: 2.25rem;
+}
+
+.money-chip {
+    font-size: 1.2rem;
+    transform: translate(26px, 20px);
+    opacity: 0.75;
+}
+
+.card-box-office .card-shine {
+    animation: slow-shimmer 3.3s linear infinite;
+    opacity: 0.45;
+}
+
+.card-actors {
+    background:
+        radial-gradient(circle at 15% 20%, rgba(87, 166, 255, 0.16), transparent 42%),
+        radial-gradient(circle at 87% 86%, rgba(255, 98, 98, 0.16), transparent 34%),
+        linear-gradient(145deg, rgba(11, 15, 24, 0.96), rgba(28, 33, 48, 0.95) 60%, rgba(21, 22, 36, 0.94));
+    border-color: rgba(148, 181, 226, 0.4);
+}
+
+.avengers-icon {
+    background: linear-gradient(155deg, rgba(220, 225, 236, 0.26), rgba(126, 145, 164, 0.16));
+    border: 1px solid rgba(201, 211, 224, 0.38);
+}
+
+.emblem-ring {
+    position: absolute;
+    inset: 9px;
+    border-radius: 50%;
+    border: 4px solid rgba(213, 220, 229, 0.74);
+    box-shadow: inset 0 0 15px rgba(199, 213, 231, 0.22);
+}
+
+.hero-a {
+    position: relative;
+    font-size: 3.1rem;
+    font-weight: 900;
+    color: #e0e7f1;
+    text-shadow:
+        0 2px 0 rgba(39, 51, 71, 0.9),
+        0 0 16px rgba(160, 181, 208, 0.42);
+    transform: translateY(-2px);
+}
+
+.card-actors .hero-a::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(108deg, transparent 25%, rgba(255, 255, 255, 0.8) 48%, transparent 62%);
+    mix-blend-mode: screen;
+    opacity: 0;
+    animation: hero-shine 3.6s ease-in-out infinite;
+}
+
+.card-riddle {
+    background:
+        radial-gradient(circle at center, rgba(255, 255, 255, 0.12), transparent 45%),
+        radial-gradient(circle at 20% 8%, rgba(130, 146, 255, 0.16), transparent 30%),
+        linear-gradient(145deg, rgba(8, 10, 18, 0.96), rgba(17, 19, 35, 0.95));
+    border-color: rgba(148, 162, 255, 0.35);
+}
+
+.riddle-icon {
+    background: linear-gradient(165deg, rgba(44, 56, 88, 0.85), rgba(10, 14, 27, 0.8));
+    border: 1px solid rgba(167, 180, 239, 0.32);
+}
+
+.reel {
+    position: absolute;
+    font-size: 2.2rem;
+    filter: drop-shadow(0 0 10px rgba(190, 204, 255, 0.25));
+}
+
+.question-mark {
+    position: absolute;
+    right: 14px;
+    top: 6px;
+    font-size: 2rem;
+    color: rgba(232, 238, 255, 0.85);
+    text-shadow: 0 0 12px rgba(146, 167, 255, 0.42);
+}
+
+.card-riddle::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0.32));
+    mix-blend-mode: soft-light;
+    pointer-events: none;
+    animation: projector-flicker 2.8s linear infinite;
+}
+
+.card-six-degrees {
+    background:
+        linear-gradient(150deg, rgba(15, 19, 37, 0.96), rgba(19, 31, 52, 0.94) 52%, rgba(10, 35, 53, 0.92)),
+        radial-gradient(circle at 85% 16%, rgba(112, 203, 255, 0.16), transparent 34%);
+    border-color: rgba(127, 191, 227, 0.4);
+}
+
+.network-icon {
+    background: linear-gradient(165deg, rgba(35, 51, 79, 0.72), rgba(15, 27, 46, 0.82));
+    border: 1px solid rgba(153, 206, 232, 0.32);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.face {
+    font-size: 2rem;
+    color: rgba(228, 241, 255, 0.88);
+}
+
+.connect-line {
+    width: 28px;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(165, 220, 248, 0.36), rgba(129, 245, 207, 0.95), rgba(165, 220, 248, 0.36));
+    box-shadow: 0 0 8px rgba(119, 223, 239, 0.65);
+    animation: pulse-line 1.8s ease-in-out infinite;
+}
+
+@keyframes sweep {
+    to {
+        transform: translateX(130%);
+    }
+}
+
+@keyframes slow-shimmer {
+    0% {
+        transform: translateX(-145%);
+    }
+
+    50% {
+        transform: translateX(15%);
+    }
+
+    100% {
+        transform: translateX(145%);
+    }
+}
+
+@keyframes hero-shine {
+    0%,
+    40%,
+    100% {
+        opacity: 0;
+        transform: translateX(-120%);
+    }
+
+    55% {
+        opacity: 0.85;
+        transform: translateX(5%);
+    }
+
+    72% {
+        opacity: 0;
+        transform: translateX(125%);
+    }
+}
+
+@keyframes projector-flicker {
+    0%,
+    9%,
+    18%,
+    45%,
+    62%,
+    100% {
+        opacity: 0.4;
+    }
+
+    12%,
+    49% {
+        opacity: 0.16;
+    }
+}
+
+@keyframes pulse-line {
+    0%,
+    100% {
+        transform: scaleX(0.92);
+        opacity: 0.58;
+    }
+
+    50% {
+        transform: scaleX(1.08);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 740px) {
+    .game-card {
+        min-height: 220px;
+        padding: 20px;
+    }
+
+    .card-icon {
+        width: 80px;
+        height: 80px;
+    }
+
+    .game-title {
+        font-size: 1.14rem;
+    }
 }
 
 #player-setup,
