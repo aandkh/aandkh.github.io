@@ -1,3 +1,5 @@
+window.TMDB_API_KEY = "91a1ed2c83fc7c0f6fc193825e438650";
+
 (() => {
   const IMG = 'https://image.tmdb.org/t/p/w185';
   const NO_FACE = 'https://placehold.co/200x300/0a122f/c5e2ff?text=Actor';
