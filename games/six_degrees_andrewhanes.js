@@ -1,441 +1,358 @@
-(() => {
-  const IMG = 'https://image.tmdb.org/t/p/w185';
-  const NO_FACE = 'https://placehold.co/200x300/0a122f/c5e2ff?text=Actor';
-  const NO_POSTER = 'https://placehold.co/200x300/121d42/d7e8ff?text=Movie';
-  const POP_MOVIE_THRESHOLD = 300;
-
-  const ERAS = [
-    { label: '1970s', from: 1970, to: 1979 },
-    { label: '1980s', from: 1980, to: 1989 },
-    { label: '1990s', from: 1990, to: 1999 },
-    { label: '2000s', from: 2000, to: 2009 },
-    { label: '2010s', from: 2010, to: 2019 },
-    { label: '2020s', from: 2020, to: 2026 }
-  ];
-
-  const DEPTH = { easy: 3, medium: 4, hard: 5 };
-
-  // Offline fallback graph, used only if TMDB is unavailable.
-  const FALLBACK_MOVIES = [
-    { id: 1, title: 'Sleepless in Seattle', year: 1993, rating: 6.8, actors: ['Tom Hanks', 'Meg Ryan'] },
-    { id: 2, title: 'Catch Me If You Can', year: 2002, rating: 8.1, actors: ['Tom Hanks', 'Leonardo DiCaprio'] },
-    { id: 3, title: 'Titanic', year: 1997, rating: 7.9, actors: ['Leonardo DiCaprio', 'Kate Winslet'] },
-    { id: 4, title: 'The Departed', year: 2006, rating: 8.1, actors: ['Leonardo DiCaprio', 'Matt Damon'] },
-    { id: 5, title: 'The Devil Wears Prada', year: 2006, rating: 7.0, actors: ['Meryl Streep', 'Anne Hathaway'] },
-    { id: 6, title: 'Interstellar', year: 2014, rating: 8.4, actors: ['Anne Hathaway', 'Matt Damon'] },
-    { id: 7, title: 'The Prestige', year: 2006, rating: 8.2, actors: ['Hugh Jackman', 'Christian Bale'] },
-    { id: 8, title: 'Avengers: Endgame', year: 2019, rating: 8.3, actors: ['Scarlett Johansson', 'Chris Evans', 'Robert Downey Jr.'] },
-    { id: 9, title: 'Tropic Thunder', year: 2008, rating: 6.7, actors: ['Tom Cruise', 'Robert Downey Jr.'] },
-    { id: 10, title: 'Edge of Tomorrow', year: 2014, rating: 7.9, actors: ['Tom Cruise', 'Emily Blunt'] }
-  ];
-
-  const FALLBACK_PAIRS = [
-    ['Tom Hanks', 'Kate Winslet'],
-    ['Meryl Streep', 'Matt Damon'],
-    ['Tom Cruise', 'Scarlett Johansson']
-  ];
-
-  const state = {
-    difficulty: 'medium',
-    source: null,
-    target: null,
-    sourceEra: null,
-    targetEra: null,
-    chain: [],
-    suggestions: [],
-    shortest: null,
-    tmdbAvailable: true,
-    loading: false
-  };
-
-  const el = {
-    source: document.getElementById('source-card'),
-    target: document.getElementById('target-card'),
-    chain: document.getElementById('chain'),
-    input: document.getElementById('actor-input'),
-    useTop: document.getElementById('use-top'),
-    showShortest: document.getElementById('show-shortest'),
-    suggestions: document.getElementById('suggestions'),
-    status: document.getElementById('status'),
-    path: document.getElementById('path')
-  };
-
-  function setStatus(msg, tone = 'info') {
-    el.status.textContent = msg;
-    el.status.classList.remove('error', 'ok');
-    if (tone === 'error') el.status.classList.add('error');
-    if (tone === 'ok') el.status.classList.add('ok');
-  }
-
-  function cacheGet(k) { try { return JSON.parse(localStorage.getItem(k) || 'null'); } catch { return null; } }
-  function cacheSet(k, v) { localStorage.setItem(k, JSON.stringify({ t: Date.now(), d: v })); }
-  async function withCache(key, ttlMs, fn) {
-    const c = cacheGet(key);
-    if (c && Date.now() - c.t < ttlMs) return c.d;
-    const d = await fn();
-    cacheSet(key, d);
-    return d;
-  }
-
-  async function tmdb(path, params = {}) {
-    if (!window.TMDB_API_KEY) throw new Error('TMDB key missing');
-    const q = new URLSearchParams({ api_key: window.TMDB_API_KEY, language: 'en-US', ...params });
-    const headers = window.TMDB_ACCESS_TOKEN ? { Authorization: 'Bearer ' + window.TMDB_ACCESS_TOKEN } : {};
-    const r = await fetch(`https://api.themoviedb.org/3${path}?${q.toString()}`, { headers });
-    if (!r.ok) throw new Error(`TMDB ${r.status}`);
-    return r.json();
-  }
-
-  function normalizeMovie(m) {
-    return {
-      id: m.id,
-      title: m.title,
-      year: m.release_date ? Number(m.release_date.slice(0, 4)) : null,
-      rating: Number(m.vote_average || 0),
-      vote_count: Number(m.vote_count || 0),
-      poster: m.poster_path ? `${IMG}${m.poster_path}` : NO_POSTER,
-      release_date: m.release_date || null,
-      popularity: Number(m.popularity || 0)
+    const { useEffect, useMemo, useState } = React;
+    const MotionLib = window.framerMotion || window['framer-motion'] || {};
+    const motion = MotionLib.motion || {
+      div: (props) => <div {...props} />,
+      button: (props) => <button {...props} />
     };
-  }
+    const AnimatePresence = MotionLib.AnimatePresence || React.Fragment;
 
-  async function actorDetails(actorId) {
-    if (!state.tmdbAvailable) return fallbackActorDetails(actorId);
+    const IMG = 'https://image.tmdb.org/t/p/w185';
+    const NO_FACE = 'https://placehold.co/200x300/0a122f/c5e2ff?text=No+Image';
+    const POP_MOVIE_THRESHOLD = 300;
 
-    return withCache(`tmdb-actor-${actorId}`, 1000 * 60 * 60 * 24, async () => {
-      const [person, credits] = await Promise.all([
-        tmdb(`/person/${actorId}`),
-        tmdb(`/person/${actorId}/movie_credits`)
-      ]);
+    const difficultyCaps = { easy: 3, medium: 4, hard: 5 };
 
-      const films = (credits.cast || [])
-        .filter(m => m.vote_count > POP_MOVIE_THRESHOLD && m.release_date)
-        .map(normalizeMovie);
+    const seededPairs = {
+      easy: [['Tom Hanks', 'Meg Ryan'], ['Emma Stone', 'Ryan Gosling'], ['Brad Pitt', 'George Clooney']],
+      medium: [['Meryl Streep', 'Matt Damon'], ['Scarlett Johansson', 'Hugh Jackman'], ['Zendaya', 'Benedict Cumberbatch']],
+      hard: [['Tilda Swinton', 'Vin Diesel'], ['Anya Taylor-Joy', 'Al Pacino'], ['Saoirse Ronan', 'Keanu Reeves']]
+    };
 
-      return {
-        id: person.id,
-        name: person.name,
-        img: person.profile_path ? `${IMG}${person.profile_path}` : NO_FACE,
-        filmCount: films.length,
-        films
-      };
-    });
-  }
+    const jsonCache = {
+      get(key) {
+        try { return JSON.parse(localStorage.getItem(key) || 'null'); } catch { return null; }
+      },
+      set(key, value) {
+        localStorage.setItem(key, JSON.stringify({ t: Date.now(), d: value }));
+      }
+    };
 
-  async function searchActors(query) {
-    if (!state.tmdbAvailable) return fallbackSearchActors(query);
+    async function tmdbFetch(url) {
+      const headers = TMDB_ACCESS_TOKEN ? { Authorization: `Bearer ${TMDB_ACCESS_TOKEN}` } : {};
+      const res = await fetch(url, { headers });
+      if (!res.ok) throw new Error('TMDB request failed');
+      return res.json();
+    }
 
-    const q = query.trim();
-    if (!q) return [];
+    async function withCache(key, ttlMs, fn) {
+      const c = jsonCache.get(key);
+      if (c && Date.now() - c.t < ttlMs) return c.d;
+      const v = await fn();
+      jsonCache.set(key, v);
+      return v;
+    }
 
-    return withCache(`tmdb-search-${q.toLowerCase()}`, 1000 * 60 * 10, async () => {
-      const d = await tmdb('/search/person', { query: q, include_adult: 'false', page: 1 });
-      return (d.results || [])
-        .filter(a => a.known_for_department === 'Acting' || !a.known_for_department)
-        .slice(0, 10)
-        .map(a => ({
+    async function searchActors(query) {
+      return withCache(`actor-search:${query.toLowerCase()}`, 1000 * 60 * 60 * 24 * 7, async () => {
+        const d = await tmdbFetch(`https://api.themoviedb.org/3/search/person?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(query)}&include_adult=false`);
+        return (d.results || []).slice(0, 8).map(a => ({
           id: a.id,
           name: a.name,
-          img: a.profile_path ? `${IMG}${a.profile_path}` : NO_FACE
+          profile_path: a.profile_path,
+          known_for_department: a.known_for_department
         }));
-    });
-  }
+      });
+    }
 
-  async function movieCast(movieId) {
-    if (!state.tmdbAvailable) return fallbackMovieCast(movieId);
-    return withCache(`tmdb-movie-cast-${movieId}`, 1000 * 60 * 60 * 24, async () => {
-      const d = await tmdb(`/movie/${movieId}/credits`);
-      return (d.cast || []).slice(0, 18).map(c => ({ id: c.id, name: c.name, img: c.profile_path ? `${IMG}${c.profile_path}` : NO_FACE }));
-    });
-  }
+    async function actorDetails(id) {
+      return withCache(`actor-details:${id}`, 1000 * 60 * 60 * 24 * 30, async () => {
+        const d = await tmdbFetch(`https://api.themoviedb.org/3/person/${id}?api_key=${TMDB_API_KEY}`);
+        const credits = await tmdbFetch(`https://api.themoviedb.org/3/person/${id}/movie_credits?api_key=${TMDB_API_KEY}`);
+        const films = (credits.cast || []).filter(m => m.vote_count > POP_MOVIE_THRESHOLD && m.release_date);
+        return {
+          id: d.id,
+          name: d.name,
+          profile_path: d.profile_path,
+          filmCount: films.length,
+          films: films.map(m => ({
+            id: m.id,
+            title: m.title,
+            release_date: m.release_date,
+            vote_average: m.vote_average,
+            vote_count: m.vote_count,
+            poster_path: m.poster_path,
+            popularity: m.popularity || 0
+          }))
+        };
+      });
+    }
 
-  async function bestSharedMovie(actorA, actorB) {
-    const [a, b] = await Promise.all([actorDetails(actorA.id), actorDetails(actorB.id)]);
-    const bSet = new Set(b.films.map(m => m.id));
-    const shared = a.films.filter(m => bSet.has(m.id));
-    if (!shared.length) return null;
-    shared.sort((x, y) => (y.popularity + y.vote_count * 0.02) - (x.popularity + x.vote_count * 0.02));
-    return shared[0];
-  }
+    async function movieCast(movieId) {
+      return withCache(`movie-cast:${movieId}`, 1000 * 60 * 60 * 24 * 30, async () => {
+        const d = await tmdbFetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${TMDB_API_KEY}`);
+        return (d.cast || []).slice(0, 16).map(c => ({ id: c.id, name: c.name, profile_path: c.profile_path }));
+      });
+    }
 
-  async function shortestPath(startId, targetId, maxDepth) {
-    const queue = [[startId, []]];
-    const seen = new Set([startId]);
+    async function bestSharedMovie(actorA, actorB) {
+      const [a, b] = await Promise.all([actorDetails(actorA.id), actorDetails(actorB.id)]);
+      const bSet = new Set(b.films.map(m => m.id));
+      const shared = a.films.filter(m => bSet.has(m.id));
+      if (!shared.length) return null;
+      shared.sort((x, y) => (y.popularity + y.vote_count * 0.02) - (x.popularity + x.vote_count * 0.02));
+      return shared[0];
+    }
 
-    while (queue.length) {
-      const [cur, path] = queue.shift();
-      if (path.length / 2 >= maxDepth) continue;
+    async function shortestPath(startId, targetId, maxDepth = 4) {
+      const queue = [[startId, []]];
+      const seen = new Set([startId]);
+      while (queue.length) {
+        const [cur, path] = queue.shift();
+        if (path.length / 2 >= maxDepth) continue;
 
-      const actor = await actorDetails(cur);
-      for (const movie of actor.films.slice(0, 12)) {
-        const cast = await movieCast(movie.id);
-        for (const c of cast) {
-          if (seen.has(c.id)) continue;
-          const np = path.concat([{ type: 'movie', data: movie }, { type: 'actor', data: c }]);
-          if (c.id === targetId) return np;
-          seen.add(c.id);
-          queue.push([c.id, np]);
+        const actor = await actorDetails(cur);
+        const movies = actor.films.slice(0, 12);
+
+        for (const mv of movies) {
+          const cast = await movieCast(mv.id);
+          for (const c of cast) {
+            if (seen.has(c.id)) continue;
+            const nextPath = [...path, { type: 'movie', data: mv }, { type: 'actor', data: c }];
+            if (c.id === targetId) return nextPath;
+            seen.add(c.id);
+            queue.push([c.id, nextPath]);
+          }
         }
       }
-    }
-    return null;
-  }
-
-  function randomInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
-  function randomPick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
-
-  async function randomFamousActorFromEra(era) {
-    const page = randomInt(1, 5);
-    const discover = await tmdb('/discover/movie', {
-      include_adult: 'false',
-      include_video: 'false',
-      sort_by: 'popularity.desc',
-      'primary_release_date.gte': `${era.from}-01-01`,
-      'primary_release_date.lte': `${era.to}-12-31`,
-      'vote_count.gte': '1000',
-      page
-    });
-
-    const movies = (discover.results || []).filter(m => m.release_date);
-    if (!movies.length) throw new Error('No famous movies in era');
-
-    for (let i = 0; i < Math.min(8, movies.length); i++) {
-      const mv = randomPick(movies);
-      const credits = await tmdb(`/movie/${mv.id}/credits`);
-      const cast = (credits.cast || []).filter(c => c.known_for_department === 'Acting' || c.popularity > 1).slice(0, 8);
-      if (!cast.length) continue;
-      const person = randomPick(cast);
-      const actor = await actorDetails(person.id);
-      if (actor.filmCount > 2) return actor;
+      return null;
     }
 
-    throw new Error('Could not pick famous actor from era');
-  }
-
-  async function newMatchupLive() {
-    const sourceEra = randomPick(ERAS);
-    let targetEra = randomPick(ERAS);
-    if (targetEra.label === sourceEra.label) targetEra = randomPick(ERAS);
-
-    const source = await randomFamousActorFromEra(sourceEra);
-    let target = await randomFamousActorFromEra(targetEra);
-
-    // avoid same actor
-    let guard = 0;
-    while (target.id === source.id && guard < 5) {
-      target = await randomFamousActorFromEra(targetEra);
-      guard += 1;
+    function Headshot({ actor }) {
+      const src = actor?.profile_path ? `${IMG}${actor.profile_path}` : NO_FACE;
+      return (
+        <div className="flex items-center gap-3">
+          <img loading="lazy" src={src} alt={actor?.name} className="w-20 h-20 rounded-full object-cover glow-ring border border-white/30" />
+          <div>
+            <p className="font-semibold text-lg">{actor?.name || 'Select actor'}</p>
+            {actor?.filmCount !== undefined && <p className="text-xs text-cyan-100/90">{actor.filmCount} films</p>}
+          </div>
+        </div>
+      );
     }
 
-    state.source = source;
-    state.target = target;
-    state.sourceEra = sourceEra.label;
-    state.targetEra = targetEra.label;
-  }
+    function ActorCard({ actor }) {
+      return (
+        <motion.div whileHover={{ y: -2, boxShadow: '0 0 0 1px rgba(120,190,255,.48), 0 0 35px rgba(90,160,255,.3)' }}
+          className="glass rounded-2xl p-4 text-left w-full transition">
+          <Headshot actor={actor} />
+        </motion.div>
+      );
+    }
 
-  function fallbackActorsList() {
-    const s = new Set();
-    FALLBACK_MOVIES.forEach(m => m.actors.forEach(a => s.add(a)));
-    return [...s];
-  }
+    function MovieCard({ movie }) {
+      const year = movie.release_date ? movie.release_date.slice(0,4) : '—';
+      return (
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0, transition: { type: 'spring', bounce: .35 } }}
+          className="glass rounded-2xl p-3 flex items-center gap-3">
+          <img loading="lazy" src={movie.poster_path ? `${IMG}${movie.poster_path}` : NO_FACE} alt={movie.title} className="w-14 h-20 rounded object-cover"/>
+          <div className="text-left">
+            <p className="font-semibold">{movie.title}</p>
+            <p className="text-sm text-cyan-100/85">{year} · ⭐ {movie.vote_average?.toFixed?.(1) || movie.vote_average}</p>
+          </div>
+        </motion.div>
+      );
+    }
 
-  function fallbackActorDetails(name) {
-    const films = FALLBACK_MOVIES.filter(m => m.actors.includes(name)).map(m => ({
-      id: m.id,
-      title: m.title,
-      year: m.year,
-      rating: m.rating,
-      vote_count: 1000,
-      poster: NO_POSTER,
-      popularity: m.rating * 10
-    }));
-    return Promise.resolve({ id: name, name, img: NO_FACE, filmCount: films.length, films });
-  }
+    function App() {
+      const [difficulty, setDifficulty] = useState('medium');
+      const [source, setSource] = useState(null);
+      const [target, setTarget] = useState(null);
+      const [query, setQuery] = useState('');
+      const [suggestions, setSuggestions] = useState([]);
+      const [chain, setChain] = useState([]);
+      const [status, setStatus] = useState('Connected.');
+      const [shaking, setShaking] = useState(false);
+      const [loading, setLoading] = useState(false);
+      const [initializing, setInitializing] = useState(true);
+      const [optimal, setOptimal] = useState(null);
+      const [showOptimal, setShowOptimal] = useState(false);
 
-  function fallbackSearchActors(query) {
-    const q = query.toLowerCase();
-    const all = fallbackActorsList();
-    const filtered = all.filter(n => n.toLowerCase().includes(q)).slice(0, 10);
-    return Promise.resolve(filtered.map(name => ({ id: name, name, img: NO_FACE })));
-  }
+      useEffect(() => {
+        resetRound();
+      }, [difficulty]);
 
-  function fallbackMovieCast(movieId) {
-    const m = FALLBACK_MOVIES.find(x => x.id === movieId);
-    const cast = (m ? m.actors : []).map(name => ({ id: name, name, img: NO_FACE }));
-    return Promise.resolve(cast);
-  }
+      useEffect(() => {
+        if (!query.trim()) return setSuggestions([]);
+        const handle = setTimeout(async () => {
+          try {
+            const found = await searchActors(query);
+            setSuggestions(found.filter(a => a.known_for_department === 'Acting' || !a.known_for_department));
+          } catch {
+            setSuggestions([]);
+          }
+        }, 220);
+        return () => clearTimeout(handle);
+      }, [query]);
 
-  function fallbackBestSharedMovie(a, b) {
-    const movie = FALLBACK_MOVIES.find(m => m.actors.includes(a.id) && m.actors.includes(b.id));
-    return movie ? { id: movie.id, title: movie.title, year: movie.year, rating: movie.rating, poster: NO_POSTER, popularity: movie.rating * 10, vote_count: 1000 } : null;
-  }
-
-  function actorCardHTML(actor, eraLabel) {
-    return `<div class="head"><img src="${actor?.img || NO_FACE}" alt=""><div><div class="name">${actor?.name || 'Loading…'}</div><div class="muted">${actor?.filmCount || 0} films${eraLabel ? ` · ${eraLabel}` : ''}</div></div></div>`;
-  }
-
-  function renderChain() {
-    el.chain.innerHTML = state.chain.map(step => `
-      <div class="glass movie"><img src="${step.movie.poster || NO_POSTER}"><div><div class="name">${step.movie.title}</div><div class="muted">${step.movie.year || '—'} · ⭐ ${(step.movie.rating || 0).toFixed(1)}</div></div></div>
-      <div class="glass actor"><img src="${step.actor.img || NO_FACE}" style="width:52px;height:52px;border-radius:999px"><div class="name">${step.actor.name}</div></div>
-    `).join('');
-  }
-
-  function renderSuggestions() {
-    el.useTop.disabled = !state.suggestions.length || state.loading;
-    el.suggestions.innerHTML = state.suggestions.map(a => `
-      <div class="glass suggestion" data-id="${a.id}"><img src="${a.img || NO_FACE}"><div>${a.name}</div></div>
-    `).join('');
-  }
-
-  function render() {
-    el.source.innerHTML = actorCardHTML(state.source, state.sourceEra);
-    el.target.innerHTML = actorCardHTML(state.target, state.targetEra);
-    renderChain();
-    renderSuggestions();
-  }
-
-  function scoreWin() {
-    const degrees = state.chain.length;
-    const optimalDegrees = state.shortest ? state.shortest.filter(x => x.type === 'actor').length : degrees;
-    const extra = Math.max(0, degrees - optimalDegrees);
-    const score = Math.max(50, 1000 - degrees * 100 - extra * 10 + (degrees <= optimalDegrees ? 200 : 0));
-    const stars = degrees <= optimalDegrees ? 3 : degrees === optimalDegrees + 1 ? 2 : 1;
-    setStatus(`Connected. Score ${score}. ${'⭐'.repeat(stars)}`, 'ok');
-  }
-
-  async function selectActor(actor) {
-    if (!state.source || !state.target) return;
-    const prev = state.chain.length ? state.chain[state.chain.length - 1].actor : state.source;
-    if (prev.id === actor.id) return setStatus('Pick a different actor.', 'error');
-
-    state.loading = true;
-    renderSuggestions();
-    setStatus('Checking connection…');
-
-    try {
-      const movie = state.tmdbAvailable ? await bestSharedMovie(prev, actor) : fallbackBestSharedMovie(prev, actor);
-      if (!movie) return setStatus('No shared film.', 'error');
-
-      state.chain.push({ movie, actor });
-      state.suggestions = [];
-      el.input.value = '';
-      render();
-
-      if (actor.id === state.target.id) {
-        scoreWin();
-        el.showShortest.disabled = false;
-      } else {
+      async function resetRound() {
+        setInitializing(true);
+        setChain([]);
+        setOptimal(null);
+        setShowOptimal(false);
+        setSuggestions([]);
+        setQuery('');
+        setSource(null);
+        setTarget(null);
         setStatus('Connected.');
-      }
-    } catch (e) {
-      setStatus('Validation failed.', 'error');
-      if (state.tmdbAvailable) {
-        state.tmdbAvailable = false;
-        setStatus('TMDB unavailable. Switched to offline mode.', 'error');
-      }
-    } finally {
-      state.loading = false;
-      renderSuggestions();
-    }
-  }
 
-  async function computeShortestPath() {
-    try {
-      if (state.tmdbAvailable) {
-        state.shortest = await shortestPath(state.source.id, state.target.id, DEPTH[state.difficulty]);
+        try {
+          const pair = seededPairs[difficulty][Math.floor(Math.random() * seededPairs[difficulty].length)];
+          const [a, b] = await Promise.all([searchActors(pair[0]), searchActors(pair[1])]);
+          if (!a[0] || !b[0]) {
+            setStatus('Could not load actor pair.');
+            return;
+          }
+          const [src, tgt] = await Promise.all([actorDetails(a[0].id), actorDetails(b[0].id)]);
+          setSource(src);
+          setTarget(tgt);
+        } catch (error) {
+          console.error(error);
+          setStatus('Unable to load match.');
+        } finally {
+          setInitializing(false);
+        }
+      }
+
+      async function pickActor(actor) {
+        if (!source || !target) return;
+        setQuery('');
+        setSuggestions([]);
+        if (!chain.length && actor.id === source.id) {
+          return;
+        }
+
+        const prevActor = chain.length ? chain[chain.length - 1].actor : source;
+        setLoading(true);
+        try {
+          const shared = await bestSharedMovie(prevActor, actor);
+          if (!shared) {
+            setStatus('No shared film.');
+            setShaking(true);
+            setTimeout(() => setShaking(false), 380);
+            return;
+          }
+          const next = [...chain, { movie: shared, actor }];
+          setChain(next);
+          setStatus('Connected.');
+          if (actor.id === target.id) {
+            const shortest = await shortestPath(source.id, target.id, difficultyCaps[difficulty]);
+            setOptimal(shortest);
+            setStatus('Optimal Path.');
+          }
+        } finally {
+          setLoading(false);
+        }
+      }
+
+      const reached = useMemo(() => chain.length && chain[chain.length - 1].actor.id === target?.id, [chain, target]);
+      const degreeCount = chain.length;
+      const optimalDegreesRaw = optimal ? optimal.filter(n => n.type === 'actor').length : null;
+      const optimalDegrees = Number.isFinite(optimalDegreesRaw) ? optimalDegreesRaw : degreeCount;
+      const extraMoves = Math.max(0, degreeCount - optimalDegrees);
+      const score = reached ? Math.max(50, 1000 - degreeCount * 100 - extraMoves * 10 + (degreeCount <= optimalDegrees ? 200 : 0)) : null;
+
+      const stars = reached
+        ? (degreeCount <= optimalDegrees ? 3 : degreeCount === optimalDegrees + 1 ? 2 : 1)
+        : 0;
+
+      return (
+        <div className="max-w-5xl mx-auto px-4 py-7 md:py-10">
+          <a href="../index.html" className="text-cyan-200/80 hover:text-cyan-100 text-sm">← Back</a>
+          <h1 className="text-3xl md:text-5xl font-bold tracking-tight mt-3">Six Degrees of AndrewHanes.com</h1>
+          <p className="text-cyan-100/80 mt-2">Connect actors through shared films. Minimal moves. Maximum flex.</p>
+
+          <div className="mt-5 flex items-center gap-2">
+            {['easy','medium','hard'].map(level => (
+              <button key={level} onClick={() => setDifficulty(level)} className={`px-3 py-2 rounded-full text-sm ${difficulty===level?'bg-cyan-300 text-slate-900':'glass text-cyan-100'}`}>{level}</button>
+            ))}
+            <button onClick={resetRound} className="ml-auto glass px-4 py-2 rounded-full">New matchup</button>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-4 mt-5">
+            <ActorCard actor={source} />
+            <ActorCard actor={target} />
+          </div>
+
+          <motion.div animate={shaking ? { x: [0,-8,8,-5,5,0] } : { x: 0 }} className="mt-6 space-y-3">
+            {chain.map((step, idx) => (
+              <div key={`${step.actor.id}-${idx}`} className="space-y-2">
+                <MovieCard movie={step.movie} />
+                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0, transition: { type: 'spring', bounce: .3 } }} className="glass rounded-2xl p-4">
+                  <Headshot actor={step.actor} />
+                </motion.div>
+              </div>
+            ))}
+          </motion.div>
+
+          <div className="glass rounded-2xl p-4 mt-6">
+            <div className="flex flex-col md:flex-row gap-3">
+              <input value={query} onChange={(e) => setQuery(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter' && suggestions[0] && !loading) pickActor(suggestions[0]); }}
+                placeholder="Add next actor"
+                className="w-full bg-slate-900/40 border border-white/20 rounded-xl px-4 py-3 outline-none focus:ring-2 ring-cyan-300" />
+              <button disabled={loading || !suggestions.length} onClick={() => suggestions[0] && pickActor(suggestions[0])} className="px-5 py-3 rounded-xl bg-cyan-300 text-slate-900 font-semibold disabled:opacity-50 disabled:cursor-not-allowed">{loading ? 'Checking…' : 'Use top match'}</button>
+            </div>
+
+            <div className="mt-3 space-y-2">
+              <AnimatePresence>
+              {suggestions.map(s => (
+                <motion.button key={s.id} initial={{ opacity:0, y:8 }} animate={{ opacity:1, y:0 }} exit={{ opacity:0 }}
+                  onClick={() => pickActor(s)}
+                  className="w-full text-left glass rounded-xl p-2 flex items-center gap-3 hover:shadow-glow transition">
+                  <img loading="lazy" src={s.profile_path ? `${IMG}${s.profile_path}` : NO_FACE} className="w-12 h-12 rounded-full object-cover" alt={s.name} />
+                  <span className="font-medium">{s.name}</span>
+                </motion.button>
+              ))}
+              </AnimatePresence>
+            </div>
+
+            <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-sm text-cyan-100/85">
+              <span>{initializing ? 'Loading matchup…' : status}</span>
+              {reached && <span>Degrees: {degreeCount}</span>}
+              {reached && <span>Moves: {degreeCount}</span>}
+              {reached && <span>Score: {score}</span>}
+              {reached && <span>{'⭐'.repeat(stars)}</span>}
+            </div>
+
+            {reached && (
+              <div className="mt-4 flex flex-wrap gap-2">
+                <button onClick={() => setShowOptimal(v => !v)} className="glass px-4 py-2 rounded-full">Show shortest path</button>
+                <button onClick={() => {
+                  const url = `${location.origin}${location.pathname}?d=${difficulty}`;
+                  navigator.clipboard.writeText(url);
+                  setStatus('Challenge link copied.');
+                }} className="glass px-4 py-2 rounded-full">Challenge a friend</button>
+              </div>
+            )}
+
+            {showOptimal && optimal && (
+              <div className="mt-4 glass rounded-2xl p-3 text-sm text-cyan-100/90">
+                <p className="font-semibold mb-2">Shortest path preview</p>
+                <ol className="list-decimal pl-5 space-y-1">
+                  {optimal.map((n, i) => (
+                    <li key={i}>{n.type === 'movie' ? `🎬 ${n.data.title}` : `🧑 ${n.data.name}`}</li>
+                  ))}
+                </ol>
+              </div>
+            )}
+
+            <div className="mt-4 text-xs text-cyan-100/70">Daily leaderboard placeholder: server precompute required for persistent ranking.</div>
+          </div>
+        </div>
+      );
+    }
+
+    const mount = document.getElementById('app');
+    if (!mount) {
+      throw new Error('Missing #app root element');
+    }
+
+    if (!window.React || !window.ReactDOM) {
+      mount.innerHTML = '<div style="padding:24px;color:#dbeafe;font-family:Inter,Segoe UI,sans-serif">App failed to load. Missing React dependencies.</div>';
+    } else {
+      const root = ReactDOM.createRoot ? ReactDOM.createRoot(mount) : null;
+      if (root) {
+        root.render(<App />);
       } else {
-        state.shortest = null;
+        ReactDOM.render(<App />, mount);
       }
-    } catch {
-      state.shortest = null;
     }
-  }
-
-  async function newMatchup() {
-    state.loading = true;
-    state.chain = [];
-    state.suggestions = [];
-    state.shortest = null;
-    el.path.style.display = 'none';
-    el.path.textContent = '';
-    el.showShortest.disabled = true;
-    setStatus('Generating random famous actors…');
-    render();
-
-    try {
-      if (!window.TMDB_API_KEY) throw new Error('No TMDB key');
-      await newMatchupLive();
-      await computeShortestPath();
-      setStatus(`Ready. ${state.sourceEra} → ${state.targetEra}`);
-      state.tmdbAvailable = true;
-    } catch {
-      state.tmdbAvailable = false;
-      const [a, b] = randomPick(FALLBACK_PAIRS);
-      state.source = await fallbackActorDetails(a);
-      state.target = await fallbackActorDetails(b);
-      state.sourceEra = 'offline';
-      state.targetEra = 'offline';
-      setStatus('TMDB unavailable. Offline mode active.', 'error');
-    } finally {
-      state.loading = false;
-      render();
-    }
-  }
-
-  async function updateSearch(query) {
-    const q = query.trim();
-    if (!q) { state.suggestions = []; renderSuggestions(); return; }
-
-    try {
-      const found = await searchActors(q);
-      state.suggestions = found.slice(0, 8);
-      if (!state.suggestions.length && !state.tmdbAvailable) state.suggestions = (await fallbackSearchActors('')).slice(0, 8);
-      renderSuggestions();
-    } catch {
-      state.tmdbAvailable = false;
-      state.suggestions = (await fallbackSearchActors(q)).slice(0, 8);
-      renderSuggestions();
-      setStatus('Search switched to offline mode.', 'error');
-    }
-  }
-
-  el.input.addEventListener('input', e => updateSearch(e.target.value));
-  el.input.addEventListener('keydown', e => {
-    if (e.key === 'Enter' && state.suggestions[0]) selectActor(state.suggestions[0]);
-  });
-
-  el.useTop.addEventListener('click', () => state.suggestions[0] && selectActor(state.suggestions[0]));
-
-  el.suggestions.addEventListener('click', e => {
-    const row = e.target.closest('[data-id]');
-    if (!row) return;
-    const id = row.getAttribute('data-id');
-    const actor = state.suggestions.find(a => String(a.id) === String(id));
-    if (actor) selectActor(actor);
-  });
-
-  el.showShortest.addEventListener('click', () => {
-    if (!state.shortest) {
-      el.path.style.display = 'block';
-      el.path.textContent = 'Shortest path unavailable in current mode.';
-      return;
-    }
-
-    const items = [state.source.name].concat(state.shortest.map(n => n.type === 'movie' ? `🎬 ${n.data.title}` : `🧑 ${n.data.name}`));
-    el.path.style.display = 'block';
-    el.path.textContent = items.join(' → ');
-  });
-
-  document.getElementById('new-match').addEventListener('click', newMatchup);
-  document.querySelectorAll('[data-diff]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('[data-diff]').forEach(b => b.classList.remove('primary'));
-      btn.classList.add('primary');
-      state.difficulty = btn.getAttribute('data-diff');
-      newMatchup();
-    });
-  });
-
-  newMatchup();
-})();
