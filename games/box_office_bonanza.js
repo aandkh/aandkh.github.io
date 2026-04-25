@@ -126,9 +126,20 @@ function updateFinancialDisplay(wrapper) {
     var display = wrapper.querySelector('.money-readout');
     var previousTotal = Number(display.dataset.lastValue || 0);
     var intensity = Math.min(currentTotal / maxGuess, 1);
+    var rumbleStartThreshold = 0.88;
+    var rumbleIntensity = 0;
+
+    if (intensity >= rumbleStartThreshold) {
+        rumbleIntensity = (intensity - rumbleStartThreshold) / (1 - rumbleStartThreshold);
+        rumbleIntensity = Math.min(Math.max(rumbleIntensity, 0), 1);
+        display.classList.add('rumble');
+    } else {
+        display.classList.remove('rumble');
+    }
 
     display.textContent = formatFinancialValue(currentTotal);
     display.style.setProperty('--guess-intensity', intensity.toFixed(4));
+    display.style.setProperty('--rumble-intensity', rumbleIntensity.toFixed(4));
 
     if (currentTotal > previousTotal) {
         display.classList.remove('decrease');
