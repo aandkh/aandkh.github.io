@@ -1,34 +1,267 @@
-#player-setup, #game-area {
-    margin: 20px auto;
-    max-width: 600px;
+:root {
+    --bg: #0b0f0d;
+    --panel: rgba(17, 24, 20, 0.78);
+    --panel-border: rgba(22, 163, 74, 0.45);
+    --primary: #16a34a;
+    --neon: #4ade80;
+    --gold: #d4af37;
+    --text: #f3f5f4;
+    --muted: #95a59a;
 }
+
+body {
+    background: radial-gradient(circle at top, #121a16, var(--bg) 52%);
+    color: var(--text);
+    font-family: "Inter", "Segoe UI", Roboto, sans-serif;
+}
+
+header {
+    text-align: center;
+}
+
+header h1 {
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+header p {
+    color: var(--muted);
+}
+
+#player-setup,
+#game-area {
+    margin: 20px auto;
+    max-width: 980px;
+    padding: 22px;
+    border-radius: 16px;
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.12), 0 22px 40px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(8px);
+}
+
 .player-entry {
     display: flex;
     gap: 10px;
     margin-bottom: 10px;
 }
-.player-name, .guess-input {
-    padding: 8px;
+
+.player-name {
+    padding: 10px 12px;
     font-size: 16px;
     flex-grow: 1;
+    border-radius: 10px;
+    border: 1px solid rgba(212, 175, 55, 0.38);
+    background: #0f1613;
+    color: var(--text);
 }
-.remove-player, #add-player, #start-game, #submit-guesses, #next-film, #reset-game {
-    padding: 8px 16px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
+
+.remove-player,
+#add-player,
+#start-game,
+#next-film,
+#reset-game {
+    padding: 10px 16px;
+    border: 1px solid rgba(22, 163, 74, 0.6);
+    border-radius: 10px;
+    background: linear-gradient(180deg, #163021, #102518);
+    color: var(--text);
     cursor: pointer;
+    transition: transform 0.18s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
-.remove-player:hover, #add-player:hover, #start-game:hover, #submit-guesses:hover, #next-film:hover, #reset-game:hover {
-    background-color: #0056b3;
+
+.remove-player:hover,
+#add-player:hover,
+#start-game:hover,
+#next-film:hover,
+#reset-game:hover {
+    transform: translateY(-1px);
+    border-color: var(--neon);
+    box-shadow: 0 0 16px rgba(74, 222, 128, 0.18);
 }
+
+#submit-guesses {
+    display: block;
+    margin: 14px auto;
+    min-width: 220px;
+    padding: 12px 24px;
+    border-radius: 999px;
+    border: 1px solid rgba(212, 175, 55, 0.9);
+    background: linear-gradient(135deg, #0f6e32, #16a34a 50%, #d4af37);
+    color: #fefce8;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: transform 0.18s ease, box-shadow 0.22s ease;
+}
+
+#submit-guesses:hover {
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 0 18px rgba(212, 175, 55, 0.35), 0 0 28px rgba(22, 163, 74, 0.32);
+}
+
+#film-info {
+    margin-bottom: 20px;
+}
+
+.film-panel {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    background: rgba(11, 15, 13, 0.82);
+}
+
+.movie-poster {
+    width: 134px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid rgba(212, 175, 55, 0.45);
+    box-shadow: 0 0 18px rgba(22, 163, 74, 0.2), 0 18px 28px rgba(0, 0, 0, 0.45);
+    flex-shrink: 0;
+}
+
+.poster-fallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #c9d3cd;
+    background: linear-gradient(160deg, #16231c, #0d1310);
+    font-size: 14px;
+    padding: 0 12px;
+}
+
+.film-meta h3 {
+    margin-bottom: 8px;
+    font-size: 28px;
+}
+
+.film-meta p {
+    margin: 0;
+    color: var(--muted);
+}
+
 #player-inputs {
     margin: 20px 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
 }
-#player-inputs div {
-    margin-bottom: 10px;
+
+.guess-card {
+    padding: 16px;
+    border-radius: 14px;
+    border: 1px solid rgba(22, 163, 74, 0.38);
+    background: rgba(10, 16, 13, 0.92);
+    box-shadow: inset 0 1px 0 rgba(74, 222, 128, 0.1);
 }
-#result, #scoreboard {
+
+.player-title {
+    margin: 0 0 10px;
+    font-size: 18px;
+    letter-spacing: 0.03em;
+}
+
+.money-readout {
+    font-size: clamp(2rem, 2.5vw, 3rem);
+    text-align: center;
+    line-height: 1.1;
+    font-weight: 900;
+    color: #bbf7d0;
+    text-shadow: 0 0 16px rgba(74, 222, 128, 0.26);
+    margin-bottom: 16px;
+    transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.money-readout.increase {
+    color: #4ade80;
+    text-shadow: 0 0 22px rgba(74, 222, 128, 0.45);
+    transform: scale(1.02);
+}
+
+.money-readout.decrease {
+    color: #facc15;
+    text-shadow: 0 0 16px rgba(250, 204, 21, 0.32);
+}
+
+.slider-group {
+    margin-bottom: 12px;
+}
+
+.slider-group label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #e7efe9;
+}
+
+.slider-value {
+    color: var(--gold);
+}
+
+.finance-slider {
+    --fill-percent: 0%;
+    appearance: none;
+    width: 100%;
+    height: 8px;
+    border-radius: 999px;
+    background: linear-gradient(to right, var(--primary) 0%, var(--primary) var(--fill-percent), #243127 var(--fill-percent), #243127 100%);
+    outline: none;
+    border: 1px solid rgba(74, 222, 128, 0.2);
+}
+
+.finance-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1px solid #fef3c7;
+    background: radial-gradient(circle at 30% 30%, #fde68a, var(--gold));
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
+    cursor: pointer;
+}
+
+.finance-slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1px solid #fef3c7;
+    background: radial-gradient(circle at 30% 30%, #fde68a, var(--gold));
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
+    cursor: pointer;
+}
+
+#result,
+#scoreboard {
     margin-top: 20px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: rgba(11, 15, 13, 0.7);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+#scores {
+    padding-left: 18px;
+}
+
+#scores li {
+    margin-bottom: 4px;
+}
+
+@media (max-width: 700px) {
+    .film-panel {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .movie-poster {
+        width: 100%;
+        max-width: 230px;
+    }
 }
