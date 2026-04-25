@@ -168,25 +168,38 @@ header p {
 }
 
 .money-readout {
+    --guess-intensity: 0;
+    --display-scale: 1;
     font-size: clamp(2rem, 2.5vw, 3rem);
     text-align: center;
     line-height: 1.1;
     font-weight: 900;
-    color: #bbf7d0;
-    text-shadow: 0 0 16px rgba(74, 222, 128, 0.26);
+    color: hsl(calc(52 + (var(--guess-intensity) * 68)), 94%, 56%);
+    text-shadow: 0 0 calc(10px + (var(--guess-intensity) * 20px))
+        hsla(calc(52 + (var(--guess-intensity) * 68)), 95%, 56%, 0.46);
     margin-bottom: 16px;
     transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease;
+    animation: value-shake calc(0.8s - (var(--guess-intensity) * 0.45s)) ease-in-out infinite;
 }
 
 .money-readout.increase {
-    color: #4ade80;
-    text-shadow: 0 0 22px rgba(74, 222, 128, 0.45);
-    transform: scale(1.02);
+    --display-scale: 1.02;
 }
 
 .money-readout.decrease {
-    color: #facc15;
-    text-shadow: 0 0 16px rgba(250, 204, 21, 0.32);
+    --display-scale: 0.99;
+}
+
+@keyframes value-shake {
+    0%, 100% {
+        transform: translateX(0) scale(var(--display-scale));
+    }
+    25% {
+        transform: translateX(calc(var(--guess-intensity) * 1.5px)) scale(var(--display-scale));
+    }
+    75% {
+        transform: translateX(calc(var(--guess-intensity) * -1.5px)) scale(var(--display-scale));
+    }
 }
 
 .slider-group {
