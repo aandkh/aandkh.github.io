@@ -122,13 +122,26 @@ function getGuessFromControls(wrapper) {
 
 function updateFinancialDisplay(wrapper) {
     var maxGuess = 3999999000;
+    var rumbleStartValue = 1200000000;
+    var minRumbleIntensity = 0.1;
     var currentTotal = getGuessFromControls(wrapper);
     var display = wrapper.querySelector('.money-readout');
     var previousTotal = Number(display.dataset.lastValue || 0);
     var intensity = Math.min(currentTotal / maxGuess, 1);
+    var rumbleIntensity = 0;
+
+    if (currentTotal >= rumbleStartValue) {
+        var rumbleProgress = (currentTotal - rumbleStartValue) / (maxGuess - rumbleStartValue);
+        rumbleProgress = Math.min(Math.max(rumbleProgress, 0), 1);
+        rumbleIntensity = minRumbleIntensity + (rumbleProgress * (1 - minRumbleIntensity));
+        display.classList.add('rumble');
+    } else {
+        display.classList.remove('rumble');
+    }
 
     display.textContent = formatFinancialValue(currentTotal);
     display.style.setProperty('--guess-intensity', intensity.toFixed(4));
+    display.style.setProperty('--rumble-intensity', rumbleIntensity.toFixed(4));
 
     if (currentTotal > previousTotal) {
         display.classList.remove('decrease');

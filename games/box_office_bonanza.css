@@ -169,6 +169,7 @@ header p {
 
 .money-readout {
     --guess-intensity: 0;
+    --rumble-intensity: 0;
     --display-scale: 1;
     font-size: clamp(2rem, 2.5vw, 3rem);
     text-align: center;
@@ -179,7 +180,6 @@ header p {
         hsla(calc(52 + (var(--guess-intensity) * 68)), 95%, 56%, 0.46);
     margin-bottom: 16px;
     transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease;
-    animation: value-shake calc(0.8s - (var(--guess-intensity) * 0.45s)) ease-in-out infinite;
 }
 
 .money-readout.increase {
@@ -190,15 +190,28 @@ header p {
     --display-scale: 0.99;
 }
 
-@keyframes value-shake {
-    0%, 100% {
-        transform: translateX(0) scale(var(--display-scale));
+.money-readout.rumble {
+    animation: value-rumble calc(0.22s - (var(--rumble-intensity) * 0.1s)) linear infinite;
+}
+
+@keyframes value-rumble {
+    0% {
+        transform: translate(0, 0) rotate(0deg) scale(var(--display-scale));
     }
-    25% {
-        transform: translateX(calc(var(--guess-intensity) * 1.5px)) scale(var(--display-scale));
+    20% {
+        transform: translate(calc(var(--rumble-intensity) * -2px), calc(var(--rumble-intensity) * 1.5px)) rotate(calc(var(--rumble-intensity) * -0.7deg)) scale(var(--display-scale));
     }
-    75% {
-        transform: translateX(calc(var(--guess-intensity) * -1.5px)) scale(var(--display-scale));
+    40% {
+        transform: translate(calc(var(--rumble-intensity) * 2px), calc(var(--rumble-intensity) * -1.5px)) rotate(calc(var(--rumble-intensity) * 0.7deg)) scale(var(--display-scale));
+    }
+    60% {
+        transform: translate(calc(var(--rumble-intensity) * -2.6px), calc(var(--rumble-intensity) * 1px)) rotate(calc(var(--rumble-intensity) * -0.45deg)) scale(var(--display-scale));
+    }
+    80% {
+        transform: translate(calc(var(--rumble-intensity) * 2.6px), calc(var(--rumble-intensity) * -1px)) rotate(calc(var(--rumble-intensity) * 0.45deg)) scale(var(--display-scale));
+    }
+    100% {
+        transform: translate(0, 0) rotate(0deg) scale(var(--display-scale));
     }
 }
 
