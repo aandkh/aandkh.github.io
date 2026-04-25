@@ -5,70 +5,176 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Six Degrees of AndrewHanes.com</title>
   <style>
-    :root { --bg:#060b1b; --bg2:#0b1538; --panel:rgba(255,255,255,.09); --border:rgba(255,255,255,.18); --text:#e6efff; --muted:#b6c8ee; --accent:#85d3ff; --ok:#98f5d6; --bad:#ff9ab0; }
+    :root {
+      --bg: #070b1d;
+      --bg2: #0d1740;
+      --panel: rgba(255, 255, 255, 0.1);
+      --border: rgba(255, 255, 255, 0.2);
+      --text: #ecf3ff;
+      --muted: #b9c8ef;
+      --accent: #7ed2ff;
+      --error: #ff9ca9;
+      --ok: #8cf6bb;
+    }
+
     * { box-sizing: border-box; }
-    body { margin:0; min-height:100vh; color:var(--text); font-family:Inter,Segoe UI,Arial,sans-serif;
-      background:radial-gradient(circle at 15% -10%, rgba(100,149,255,.27), transparent 35%),radial-gradient(circle at 90% 15%, rgba(108,213,255,.2), transparent 30%),linear-gradient(155deg, var(--bg) 0%, var(--bg2) 48%, #16124a 100%); }
-    .wrap { max-width:1020px; margin:0 auto; padding:24px 16px 40px; }
-    .glass { background:var(--panel); border:1px solid var(--border); border-radius:16px; backdrop-filter:blur(10px); }
-    h1 { margin:8px 0 0; font-size:clamp(1.8rem,4.6vw,3rem); }
-    .muted { color:var(--muted); }
-    .actions { margin-top:14px; display:flex; gap:8px; flex-wrap:wrap; }
-    button, input { border-radius:12px; border:1px solid var(--border); background:rgba(12,20,48,.55); color:var(--text); }
-    button { cursor:pointer; padding:10px 14px; font-weight:600; }
-    button.primary { background:linear-gradient(180deg,#bde8ff,#84d3ff); color:#122036; border:0; }
-    button:disabled { opacity:.5; cursor:not-allowed; }
-    .top { display:grid; grid-template-columns:1fr; gap:12px; margin-top:14px; }
-    @media(min-width:780px){ .top { grid-template-columns:1fr 1fr; } }
-    .card { padding:14px; }
-    .head { display:flex; gap:12px; align-items:center; }
-    .head img { width:74px; height:74px; border-radius:999px; object-fit:cover; border:1px solid rgba(255,255,255,.3); }
-    .name { font-weight:700; font-size:1.1rem; }
-    .chain { margin-top:16px; display:grid; gap:10px; }
-    .movie, .actor { padding:10px; display:flex; gap:10px; align-items:center; }
-    .movie img { width:52px; height:74px; border-radius:8px; object-fit:cover; }
-    input { width:100%; padding:12px; }
-    .suggestions { display:grid; gap:8px; margin-top:10px; max-height:280px; overflow:auto; }
-    .suggestion { padding:8px; display:flex; gap:10px; align-items:center; cursor:pointer; }
-    .suggestion img { width:42px; height:42px; border-radius:999px; object-fit:cover; }
-    .status { margin-top:10px; color:var(--accent); font-weight:600; }
-    .error { color:var(--bad); }
-    .ok { color:var(--ok); }
-    .compact { font-size:.9rem; }
-    a { color:#bde8ff; text-decoration:none; }
-    .path { margin-top:10px; padding:10px; border-radius:12px; border:1px dashed rgba(255,255,255,.25); }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, Segoe UI, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% -10%, rgba(100, 149, 255, 0.3), transparent 36%),
+        radial-gradient(circle at 90% 20%, rgba(133, 211, 255, 0.2), transparent 30%),
+        linear-gradient(160deg, var(--bg), var(--bg2));
+    }
+
+    .wrap { max-width: 980px; margin: 0 auto; padding: 24px 16px 40px; }
+    .glass { background: var(--panel); border: 1px solid var(--border); border-radius: 16px; backdrop-filter: blur(9px); }
+    h1 { margin: 6px 0 0; font-size: clamp(1.8rem, 4.8vw, 3rem); }
+    .muted { color: var(--muted); }
+    .row { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    .panel { padding: 14px; }
+
+    input, button {
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(10, 18, 45, 0.6);
+      color: var(--text);
+      font: inherit;
+    }
+
+    input { width: 100%; padding: 12px; }
+
+    button {
+      padding: 10px 14px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    button.primary {
+      background: linear-gradient(180deg, #bce9ff, #7fd3ff);
+      color: #10233f;
+      border: 0;
+    }
+
+    button:disabled { opacity: 0.45; cursor: not-allowed; }
+
+    .head {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .head img,
+    .suggestion img,
+    .actor img {
+      width: 52px;
+      height: 52px;
+      border-radius: 999px;
+      object-fit: cover;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .name { font-weight: 700; }
+
+    .status {
+      margin-top: 10px;
+      color: var(--accent);
+      font-weight: 600;
+      min-height: 1.2em;
+    }
+
+    .status.error { color: var(--error); }
+    .status.ok { color: var(--ok); }
+
+    .suggestions {
+      margin-top: 10px;
+      display: grid;
+      gap: 8px;
+      max-height: 260px;
+      overflow: auto;
+    }
+
+    .suggestion {
+      padding: 8px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .chain { margin-top: 14px; display: grid; gap: 10px; }
+
+    .movie,
+    .actor {
+      padding: 10px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .movie img {
+      width: 52px;
+      height: 74px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .path {
+      margin-top: 10px;
+      display: none;
+      white-space: normal;
+      word-break: break-word;
+    }
+
+    a { color: #bce9ff; text-decoration: none; }
   </style>
 </head>
 <body>
   <div class="wrap">
     <a href="../index.html">← Back</a>
     <h1>Six Degrees of AndrewHanes.com</h1>
-    <p class="muted">Connect Actor A to Actor B through shared movies.</p>
+    <p class="muted">API mode: Actor → Movie → Actor ... until target actor.</p>
 
-    <div class="actions">
-      <button data-diff="easy">Easy</button>
-      <button data-diff="medium" class="primary">Medium</button>
-      <button data-diff="hard">Hard</button>
-      <button id="new-match" style="margin-left:auto">New matchup</button>
-    </div>
+    <div class="glass panel" style="margin-top: 14px;">
+      <div class="row">
+        <button id="new-match" class="primary">New Matchup</button>
+        <button class="primary" data-diff="easy">Easy</button>
+        <button class="primary" data-diff="medium">Medium</button>
+        <button class="primary" data-diff="hard">Hard</button>
+      </div>
 
-    <div class="top">
-      <div class="glass card" id="source-card"></div>
-      <div class="glass card" id="target-card"></div>
+      <div class="row" style="margin-top: 14px;">
+        <div id="source-card" class="glass panel" style="flex: 1 1 280px;"></div>
+        <div id="target-card" class="glass panel" style="flex: 1 1 280px;"></div>
+      </div>
+
+      <div style="margin-top: 14px;">
+        <label class="muted" for="actor-input">Add next actor</label>
+        <input id="actor-input" type="text" placeholder="Type actor name" autocomplete="off" />
+        <div class="toolbar">
+          <button id="use-top">Use top match</button>
+          <button id="show-shortest" disabled>Show shortest path</button>
+        </div>
+        <div id="suggestions" class="suggestions"></div>
+      </div>
+
+      <div id="status" class="status">Loading matchup...</div>
+      <div id="path" class="glass panel path"></div>
     </div>
 
     <div id="chain" class="chain"></div>
-
-    <div class="glass card" style="margin-top:14px">
-      <input id="actor-input" placeholder="Add next actor" autocomplete="off" />
-      <div class="actions" style="margin-top:10px">
-        <button id="use-top" class="primary" disabled>Use top match</button>
-        <button id="show-shortest" disabled>Show shortest path</button>
-      </div>
-      <div id="suggestions" class="suggestions"></div>
-      <div id="status" class="status">Ready.</div>
-      <div id="path" class="path compact muted" style="display:none"></div>
-    </div>
   </div>
 
   <script src="../config.js"></script>
