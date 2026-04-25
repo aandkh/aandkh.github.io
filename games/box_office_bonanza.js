@@ -96,9 +96,6 @@ function updateScoreboard() {
 }
 
 function formatFinancialValue(value) {
-    if (value >= 1000000000000) {
-        return '$' + (value / 1000000000000).toFixed(2).replace(/\.00$/, '') + 'T';
-    }
     if (value >= 1000000000) {
         return '$' + (value / 1000000000).toFixed(1).replace(/\.0$/, '') + 'B';
     }
@@ -114,21 +111,24 @@ function updateSliderFill(input) {
 }
 
 function getGuessFromControls(wrapper) {
-    var trillions = Number(wrapper.querySelector('.trillions-slider').value);
     var billions = Number(wrapper.querySelector('.billions-slider').value);
     var millions = Number(wrapper.querySelector('.millions-slider').value);
+    var thousands = Number(wrapper.querySelector('.thousands-slider').value);
 
-    return (trillions * 1000000000000) +
-           (billions * 1000000000) +
-           (millions * 1000000);
+    return (billions * 1000000000) +
+           (millions * 1000000) +
+           (thousands * 1000);
 }
 
 function updateFinancialDisplay(wrapper) {
+    var maxGuess = 3999999000;
     var currentTotal = getGuessFromControls(wrapper);
     var display = wrapper.querySelector('.money-readout');
     var previousTotal = Number(display.dataset.lastValue || 0);
+    var intensity = Math.min(currentTotal / maxGuess, 1);
 
     display.textContent = formatFinancialValue(currentTotal);
+    display.style.setProperty('--guess-intensity', intensity.toFixed(4));
 
     if (currentTotal > previousTotal) {
         display.classList.remove('decrease');
@@ -160,16 +160,16 @@ function renderGuessInputs() {
             '<h4 class="player-title">' + player + '</h4>',
             '<div class="money-readout" data-last-value="0">$0M</div>',
             '<div class="slider-group">',
-            '  <label>Trillions <span class="slider-value trillions-value">0</span></label>',
-            '  <input type="range" class="finance-slider trillions-slider" min="0" max="3" step="1" value="0">',
-            '</div>',
-            '<div class="slider-group">',
             '  <label>Billions <span class="slider-value billions-value">0</span></label>',
-            '  <input type="range" class="finance-slider billions-slider" min="0" max="999" step="1" value="0">',
+            '  <input type="range" class="finance-slider billions-slider" min="0" max="3" step="1" value="0">',
             '</div>',
             '<div class="slider-group">',
             '  <label>Millions <span class="slider-value millions-value">0</span></label>',
             '  <input type="range" class="finance-slider millions-slider" min="0" max="999" step="1" value="0">',
+            '</div>',
+            '<div class="slider-group">',
+            '  <label>Thousands <span class="slider-value thousands-value">0</span></label>',
+            '  <input type="range" class="finance-slider thousands-slider" min="0" max="999" step="1" value="0">',
             '</div>'
         ].join('');
 
@@ -180,9 +180,9 @@ function renderGuessInputs() {
             updateSliderFill(sliders[j]);
             sliders[j].addEventListener('input', function() {
                 var card = this.closest('.guess-card');
-                card.querySelector('.trillions-value').textContent = card.querySelector('.trillions-slider').value;
                 card.querySelector('.billions-value').textContent = card.querySelector('.billions-slider').value;
                 card.querySelector('.millions-value').textContent = card.querySelector('.millions-slider').value;
+                card.querySelector('.thousands-value').textContent = card.querySelector('.thousands-slider').value;
                 updateSliderFill(this);
                 updateFinancialDisplay(card);
             });
@@ -353,9 +353,9 @@ function renderFilm() {
             sliders[j].value = 0;
             updateSliderFill(sliders[j]);
         }
-        guessCards[i].querySelector('.trillions-value').textContent = '0';
         guessCards[i].querySelector('.billions-value').textContent = '0';
         guessCards[i].querySelector('.millions-value').textContent = '0';
+        guessCards[i].querySelector('.thousands-value').textContent = '0';
         guessCards[i].querySelector('.money-readout').dataset.lastValue = '0';
         updateFinancialDisplay(guessCards[i]);
     }
