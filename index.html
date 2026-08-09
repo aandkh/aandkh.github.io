@@ -13,15 +13,18 @@
     }
 
     body {
-      display: grid;
       min-height: 100svh;
-      place-items: center;
-      overflow: hidden;
+      overflow-x: hidden;
+    }
+
+    .page {
+      width: 100%;
     }
 
     .splash {
       position: relative;
       width: min(100vw, 150vh);
+      margin: 0 auto;
       aspect-ratio: 3 / 2;
     }
 
@@ -42,18 +45,52 @@
     }
 
     .hitbox-download {
-      left: 27.9%;
-      top: 87.3%;
-      width: 31.4%;
-      height: 9.6%;
+      left: 27.6%;
+      top: 87.2%;
+      width: 45.4%;
+      height: 9.4%;
     }
 
+    .screenshots {
+      width: 100%;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      -webkit-overflow-scrolling: touch;
+      padding: clamp(12px, 2vw, 24px) 0 28px;
+      scrollbar-color: #ff5b18 #080015;
+    }
+
+    .screenshots-track {
+      display: flex;
+      width: max-content;
+      gap: clamp(10px, 1.6vw, 18px);
+      padding: 0 clamp(12px, 3vw, 36px);
+    }
+
+    .screenshots img {
+      display: block;
+      flex: 0 0 auto;
+      width: min(86vw, 760px);
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border: 1px solid rgba(255, 91, 24, 0.55);
+      box-shadow: 0 0 24px rgba(255, 91, 24, 0.22);
+    }
   </style>
 </head>
 <body>
-  <main class="splash">
-    <img src="images/SPLASH.png" alt="A Page Through Time II">
-    <a class="hitbox hitbox-download" href="https://github.com/aandkh/aandkh.github.io/releases/download/v1.0.0/APageThroughTimeII.zip" download aria-label="Click to download"></a>
+  <main class="page">
+    <section class="splash" aria-label="A Page Through Time II download">
+      <img src="images/SPLASH.png" alt="A Page Through Time II">
+      <a class="hitbox hitbox-download" href="https://github.com/aandkh/aandkh.github.io/releases/download/v1.0.0/APageThroughTimeII.zip" download aria-label="Click to download"></a>
+    </section>
+    <section class="screenshots" aria-label="Gameplay screenshots">
+      <div class="screenshots-track">
+        <img src="images/screenshot-1.png" alt="Gameplay screenshot showing a rainy city battle">
+        <img src="images/screenshot-2.png" alt="Gameplay screenshot showing the blessing selection screen">
+        <img src="images/screenshot-3.png" alt="Gameplay screenshot showing street combat">
+      </div>
+    </section>
   </main>
 </body>
 </html>
