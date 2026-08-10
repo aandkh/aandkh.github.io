@@ -10,6 +10,8 @@
       margin: 0;
       min-height: 100%;
       background: #000;
+      color: #f4f0ff;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
     body {
@@ -51,12 +53,74 @@
       height: 9.4%;
     }
 
+    .download-info {
+      width: min(86vw, 760px);
+      box-sizing: border-box;
+      margin: clamp(8px, 1.6vw, 18px) auto 0;
+      padding: clamp(18px, 3vw, 30px);
+      text-align: center;
+      background: linear-gradient(180deg, rgba(23, 14, 43, 0.96), rgba(8, 5, 18, 0.96));
+      border: 1px solid rgba(255, 91, 24, 0.58);
+      box-shadow: 0 0 28px rgba(255, 91, 24, 0.16);
+    }
+
+    .download-info h1 {
+      margin: 0 0 6px;
+      font-size: clamp(22px, 4vw, 34px);
+      line-height: 1.1;
+    }
+
+    .download-meta {
+      margin: 0 0 18px;
+      color: #c8bedc;
+      font-size: clamp(14px, 2.4vw, 17px);
+    }
+
+    .download-button {
+      display: inline-block;
+      padding: 13px 22px;
+      margin-bottom: 18px;
+      color: #fff;
+      background: #b83d0d;
+      border: 1px solid #ff6a25;
+      text-decoration: none;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      font-size: clamp(14px, 2.4vw, 17px);
+      box-shadow: 0 0 18px rgba(255, 91, 24, 0.2);
+    }
+
+    .download-button:hover,
+    .download-button:focus-visible {
+      background: #d84b12;
+      outline: 2px solid #ff8b57;
+      outline-offset: 2px;
+    }
+
+    .trust-list {
+      display: inline-grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      text-align: left;
+      list-style: none;
+      color: #ddd5ea;
+      font-size: clamp(13px, 2.2vw, 16px);
+    }
+
+    .trust-list li::before {
+      content: "✓";
+      margin-right: 9px;
+      color: #85e59a;
+      font-weight: 700;
+    }
+
     .screenshots {
       width: 100%;
       overflow-x: auto;
       overscroll-behavior-x: contain;
       -webkit-overflow-scrolling: touch;
-      padding: clamp(12px, 2vw, 24px) 0 28px;
+      padding: clamp(18px, 3vw, 32px) 0 28px;
       scrollbar-color: #ff5b18 #080015;
     }
 
@@ -85,6 +149,19 @@
       <img src="images/SPLASH.png" alt="A Page Through Time II">
       <a class="hitbox hitbox-download" href="https://github.com/aandkh/aandkh.github.io/releases/download/v1.1.0/PageThroughTime2.zip" download aria-label="Click to download"></a>
     </section>
+
+    <section class="download-info" aria-label="Download information">
+      <h1>A Page Through Time 2</h1>
+      <p class="download-meta">Free Windows game • ~200 MB</p>
+      <a class="download-button" href="https://github.com/aandkh/aandkh.github.io/releases/download/v1.1.0/PageThroughTime2.zip" download>DOWNLOAD FOR WINDOWS</a>
+      <ul class="trust-list">
+        <li>Hosted on GitHub Releases</li>
+        <li>No installer — portable game</li>
+        <li>No account required</li>
+        <li>SHA-256 checksum available</li>
+      </ul>
+    </section>
+
     <section class="screenshots" aria-label="Gameplay screenshots">
       <div class="screenshots-track">
         <img src="images/screenshot-2.png" alt="Gameplay screenshot showing the blessing selection screen">
