@@ -68,7 +68,6 @@
     },
     order: function (key, value) { return call("/api/order", { order: key, value: value }); },
     commit: function () { return call("/api/commit", {}); },
-    unlock: function () { return call("/api/unlock", {}); },
     quit: function () { return call("/api/quit", { confirm: "END MY CAMPAIGN" }); }
   };
 })(window);

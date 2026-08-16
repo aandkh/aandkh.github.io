@@ -149,7 +149,6 @@
       b2.type = "button";
       b2.onclick = function () {
         if (c.action === "breakthrough") return send("breakthrough", c.arg, true);
-        if (c.action === "unlock") return doUnlock();
       };
       wrap.appendChild(b2);
       return wrap;
@@ -320,12 +319,11 @@
 
     if (tab.id === "command") {
       m.appendChild(adSlot());
-      m.appendChild(supportCard());
       m.appendChild(accountCard());
     }
   }
 
-  /* ---- the one banner, and the tip jar ---------------------------- */
+  /* ---- the one banner --------------------------------------------- */
 
   function adSlot() {
     var s = el("section", "card");
@@ -339,31 +337,8 @@
     return s;
   }
 
-  function supportCard() {
-    var s = el("section", "card");
-    var h = el("h2", null, "SUPPORT THE GAME");
-    h.appendChild(el("span", "note", "entirely optional, and it changes nothing in play"));
-    s.appendChild(h);
-    var b = el("div", "body");
-    b.appendChild(el("p", "empty",
-      "Stronghold is free and always will be. If you want to buy the " +
-      "author a coffee, these go straight to him."));
-    var row = el("div", "support");
-    // All three handles confirmed by the author. The PayPal one was
-    // checked against the live page (slug "apttii", "Andrew H") rather
-    // than guessed from an email address. A vanity URL that is one
-    // letter out sends a player's money to a stranger.
-    [["PayPal", "https://www.paypal.com/paypalme/apttii"],
-     ["Cash App", "https://cash.app/$andyviainternet"],
-     ["Venmo", "https://venmo.com/u/aaandkh"]].forEach(function (p) {
-      var a = el("a", null, p[0]);
-      a.href = p[1]; a.target = "_blank"; a.rel = "noopener noreferrer";
-      row.appendChild(a);
-    });
-    b.appendChild(row);
-    s.appendChild(b);
-    return s;
-  }
+  /* The tip jar was removed at the author's request. No payment details
+     of any kind are shown to players anywhere on the site. */
 
   function accountCard() {
     var s = el("section", "card");
@@ -401,9 +376,9 @@
 
   /* ---- day actions ------------------------------------------------ */
 
-  function doUnlock() {
-    SH.unlock().then(function (s) { if (s.ok) { S = s; repaint(); toast("The day has been released."); } });
-  }
+  /* doUnlock() is gone. A closed day stays closed on the web — that is
+     the rule the whole thing is built on, and the server no longer has
+     an endpoint to ask anyway. */
 
   $("commit").onclick = function () {
     if (busy || S.state !== "open") return;
