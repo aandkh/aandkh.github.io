@@ -117,19 +117,24 @@ html, body {
     0 0 12px rgba(224,187,85,.35),
     0 0 40px rgba(224,187,85,.18);
 }
-/* The mark, above the word. Drawn as a mask rather than a coloured
-   image so it takes the same gold as every other glyph on the page and
-   stays right if the palette is ever moved again. */
+/* The mark, above the word. It is a mask rather than a coloured image,
+   so the artwork carries no colour of its own and takes whatever the
+   theme paints behind it — struck metal lit from the candle above,
+   bright at the crown and falling to dim gold at the plinth. Swap the
+   background-image for a flat colour and it goes flat. */
 .gate h1::before {
   content: "";
   display: block;
+  /* the mark is 200 x 271.95, so height is width x 1.36 */
   width: min(94px, 24vw);
-  height: min(118px, 30vw);   /* the mark is 200x250 */
+  height: min(128px, 32.6vw);
   margin: 0 auto 14px;
-  background-color: var(--gold-dim);
+  background-color: var(--gold);     /* if the gradient is ever dropped */
+  background-image: linear-gradient(180deg, #f0d074 0%, #d2ac42 46%, #8a6f2e 100%);
   -webkit-mask: url("sym/mark.svg") center/contain no-repeat;
           mask: url("sym/mark.svg") center/contain no-repeat;
-  filter: drop-shadow(0 0 16px rgba(224, 187, 85, .28));
+  filter: drop-shadow(0 1px 0 rgba(0,0,0,.55))
+          drop-shadow(0 0 18px rgba(224, 187, 85, .26));
 }
 .gate .sub {
   color: #9d8c6f; text-align: center; margin: 0 0 22px;
