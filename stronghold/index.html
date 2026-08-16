@@ -31,22 +31,23 @@
       <label for="u">Username</label>
       <input id="u" type="text" inputmode="text" maxlength="10" required
              autocapitalize="off" autocorrect="off" spellcheck="false"
-             placeholder="1 to 10 characters">
-      <div class="hint" id="uhint">Letters, numbers, - and _ . Up to 10 characters.</div>
+             placeholder="your name">
+      <div class="hint" id="uhint">The name you chose when you began.</div>
 
       <label for="p">Password</label>
       <input id="p" type="password" maxlength="6" required
              autocapitalize="off" autocorrect="off" spellcheck="false"
-             placeholder="exactly 6 characters">
-      <div class="hint" id="phint">Exactly 6 characters.</div>
-      <div class="warn">
-        <strong>Write it down.</strong> There is no password recovery.
-        No email is asked for, so there is no way to send you a reset,
-        and a kingdom whose password is forgotten cannot be reached
-        again by anyone.
-      </div>
+             placeholder="your password">
+      <div class="hint" id="phint" hidden></div>
 
       <div id="found" hidden>
+        <div class="warn">
+          <strong>Write it down.</strong> There is no password recovery.
+          No email is asked for, so there is no way to send you a reset,
+          and a kingdom whose password is forgotten cannot be reached
+          again by anyone.
+        </div>
+
         <div class="rule-orn founding">Name what is yours</div>
 
         <label for="n-prov">Your province <span class="role">the land you rule</span></label>
@@ -108,13 +109,21 @@
     $("tab-login").setAttribute("aria-selected", mode === "login");
     $("tab-new").setAttribute("aria-selected", mode === "new");
     $("go").textContent = mode === "login" ? "Sign in" : "Start a Kingdom";
-    $("uhint").textContent = mode === "login"
-      ? "The name you chose when you began."
-      : "Letters, numbers, - and _ . Up to 10 characters.";
-    $("phint").textContent = mode === "login"
-      ? "Exactly 6 characters."
-      : "Exactly 6 characters. Make it one you use nowhere else.";
-    $("found").hidden = mode !== "new";
+    // Signing in is not the moment to recite the rules for making a
+    // name: the player already has one, and the only thing that matters
+    // is whether it matches. The constraints belong to founding, and
+    // only appear there — in the hints and in the boxes themselves.
+    var founding = mode === "new";
+    $("u").placeholder = founding ? "1 to 10 characters" : "your name";
+    $("p").placeholder = founding ? "up to 6 characters" : "your password";
+    $("uhint").textContent = founding
+      ? "Letters, numbers, - and _ . Up to 10 characters."
+      : "The name you chose when you began.";
+    $("phint").hidden = !founding;
+    $("phint").textContent = founding
+      ? "Up to 6 characters. Make it one you use nowhere else."
+      : "";
+    $("found").hidden = !founding;
     styling();
     hide();
   }
@@ -153,7 +162,11 @@
     hide();
     var u = $("u").value.trim(), p = $("p").value;
     if (u.length < 1 || u.length > 10) return say("Username must be 1 to 10 characters.");
-    if (p.length !== 6) return say("Password must be exactly 6 characters.");
+    // Only the shape of a new password is checked here. An existing one
+    // is whatever the player set, so at sign-in the server is the judge
+    // and the only useful answer is match or no match.
+    if (p.length < 1) return say("Please enter your password.");
+    if (mode === "new" && p.length > 6) return say("Password can be at most 6 characters.");
     $("go").disabled = true;
     var call = mode === "login" ? SH.login(u, p) : SH.register(u, p, {
       province: $("n-prov").value,
