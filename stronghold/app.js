@@ -1,4 +1,4 @@
-/* STRONGHOLD — the client's whole conversation with the server.
+/* STRONGHOLD: the client's whole conversation with the server.
  *
  * There is deliberately no game logic in the browser. Every rule lives
  * in the same Python simulation the desktop game runs, so a phone, a
@@ -8,7 +8,7 @@
  * The one thing it must never do is hold your staged day in a form:
  * every control posts the moment it changes, and the server keeps it
  * with the campaign. Switch tabs, lock your phone, come back on another
- * machine — the day you were building is still there.
+ * machine, and the day you were building is still there.
  */
 (function (global) {
   "use strict";

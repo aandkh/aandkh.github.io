@@ -27,9 +27,9 @@
     .screenshots { width:100%; overflow-x:auto; overscroll-behavior-x:contain; -webkit-overflow-scrolling:touch; padding:clamp(18px,3vw,32px) 0 28px; scrollbar-color:#ff5b18 #080015; }
     .screenshots-track { display:flex; width:max-content; gap:clamp(10px,1.6vw,18px); padding:0 clamp(12px,3vw,36px); margin:0 auto; }
     .screenshots img { display:block; flex:0 0 auto; width:min(86vw,760px); aspect-ratio:16/9; object-fit:cover; border:1px solid rgba(255,91,24,.55); box-shadow:0 0 24px rgba(255,91,24,.22); }
-    /* --- Stronghold gate: a stone lintel above everything else. The
-       page is orange-on-black, so this leans gold-on-stone rather than
-       introducing a third accent. --- */
+    /* Stronghold gate: a stone lintel above everything else. The page
+       is orange-on-black, so this leans gold-on-stone rather than
+       introducing a third accent. */
     .keep { width:min(86vw,760px); margin:clamp(14px,2.4vw,26px) auto clamp(6px,1.4vw,14px); }
     .keep-gate { position:relative; display:block; padding:clamp(16px,3vw,26px) clamp(14px,3vw,28px);
       text-align:center; text-decoration:none; border:1px solid #6b5a24;
@@ -42,9 +42,6 @@
       font-size:clamp(26px,7vw,50px); letter-spacing:.24em; text-transform:uppercase;
       color:#c9a227; text-shadow:0 2px 0 #000,0 0 22px rgba(201,162,39,.3); }
     .keep-sub { display:block; margin-top:7px; color:#b9ae90; font-size:clamp(11px,2.1vw,14px); letter-spacing:.04em; }
-    .keep-links { margin:9px 0 0; text-align:center; font-size:clamp(11px,2vw,13px); color:#6b6250; }
-    .keep-links a { color:#9a8f74; text-decoration:none; }
-    .keep-links a:hover { color:#c9a227; text-decoration:underline; }
     .keep-gate:hover { border-color:#c9a227; background:linear-gradient(180deg,#272213,#12100a); }
     .keep-gate:hover .keep-word { color:#e6c351; }
     .keep-gate:focus-visible { outline:2px solid #c9a227; outline-offset:3px; }
@@ -57,7 +54,7 @@
       .release-badge svg { width:23px; height:23px; }
     }
   </style>
-  <!-- Google AdSense — site verification and ad serving. Async, so it
+  <!-- Google AdSense: site verification and ad serving. Async, so it
        never blocks the page; the game works identically if it is
        blocked by an ad blocker or fails to load. -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8173323521375339"
@@ -68,13 +65,8 @@
     <section class="keep" aria-label="Play Stronghold in your browser">
       <a class="keep-gate" href="stronghold/">
         <span class="keep-word">Stronghold</span>
-        <span class="keep-sub">Rule a kingdom · one move a day · play free in any browser</span>
+        <span class="keep-sub">Rule your kingdom, one move a day</span>
       </a>
-      <p class="keep-links">
-        <a href="stronghold/about.html">What it is</a> ·
-        <a href="stronghold/how-to-play.html">How a turn works</a> ·
-        <a href="stronghold/rooms.html">The fifteen rooms</a>
-      </p>
     </section>
     <section class="splash" aria-label="A Page Through Time II download">
       <img src="images/SPLASH.png" alt="A Page Through Time II">

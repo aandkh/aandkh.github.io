@@ -3,13 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Stronghold — take a seat</title>
+<title>Stronghold</title>
 <meta name="description" content="Stronghold: a kingdom you rule one move a day. One hundred seats, free to play in any browser.">
 <meta name="color-scheme" content="dark">
 <link rel="stylesheet" href="style.css">
-  <!-- Google AdSense — site verification and ad serving. Async, so it
-       never blocks the page; the game works identically if it is
-       blocked by an ad blocker or fails to load. -->
+  <!-- Google AdSense: site verification and ad serving. -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8173323521375339"
      crossorigin="anonymous"></script>
 </head>
@@ -28,7 +26,7 @@
       <label for="u">Username</label>
       <input id="u" type="text" inputmode="text" maxlength="10" required
              autocapitalize="off" autocorrect="off" spellcheck="false"
-             placeholder="1–10 characters">
+             placeholder="1 to 10 characters">
       <div class="hint" id="uhint">Letters, numbers, - and _ . Up to 10 characters.</div>
 
       <label for="p">Password</label>
@@ -44,21 +42,16 @@
     <div class="notice">
       <strong>Use a throwaway name and password.</strong> Do not reuse
       anything you use anywhere else. This is a game and there is nothing
-      here worth stealing — no email, no payment details, nothing about
+      here worth stealing: no email, no payment details, nothing about
       you. The username and password exist for one reason: to keep your
       kingdom apart from everybody else's.
     </div>
 
-    <div class="slots" id="slots">Counting the seats…</div>
   </div>
 
   <p class="foot" style="max-width:440px">
-    There are one hundred seats. When a ruler ends their campaign their
-    seat opens again immediately for somebody else.
-    <br><br>
     New here? <a href="about.html">What Stronghold is</a> ·
-    <a href="how-to-play.html">How a turn works</a> ·
-    <a href="rooms.html">The rooms</a>
+    <a href="how-to-play.html">How a turn works</a>
     <br><br>
     <a href="../">← back to andrewhanes.com</a> ·
     <a href="privacy.html">privacy</a> · <a href="terms.html">terms</a>
@@ -93,23 +86,11 @@
   $("tab-login").onclick = function () { setMode("login"); };
   $("tab-new").onclick = function () { setMode("new"); };
 
-  SH.slots().then(function (s) {
-    if (!s || !s.slots) { $("slots").textContent = ""; return; }
-    $("slots").innerHTML = "<b>" + s.slots.free + "</b> of <b>" +
-      s.slots.max + "</b> seats open";
-    if (s.slots.free === 0 && mode === "new") {
-      say("Every seat is taken right now. One opens the moment another " +
-          "ruler ends their campaign — try again shortly.", "err");
-    }
-  }).catch(function () {
-    $("slots").textContent = "The hall is not answering. Try again shortly.";
-  });
-
   $("form").onsubmit = function (e) {
     e.preventDefault();
     hide();
     var u = $("u").value.trim(), p = $("p").value;
-    if (u.length < 1 || u.length > 10) return say("Username must be 1–10 characters.");
+    if (u.length < 1 || u.length > 10) return say("Username must be 1 to 10 characters.");
     if (p.length !== 6) return say("Password must be exactly 6 characters.");
     $("go").disabled = true;
     var call = mode === "login" ? SH.login(u, p) : SH.register(u, p);
