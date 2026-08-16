@@ -34,6 +34,12 @@
              autocapitalize="off" autocorrect="off" spellcheck="false"
              placeholder="exactly 6 characters">
       <div class="hint" id="phint">Exactly 6 characters.</div>
+      <div class="warn">
+        <strong>Write it down.</strong> There is no password recovery.
+        No email is asked for, so there is no way to send you a reset,
+        and a kingdom whose password is forgotten cannot be reached
+        again by anyone.
+      </div>
 
       <button class="btn" id="go" type="submit">Sign in</button>
       <div id="msg" hidden></div>
@@ -48,6 +54,11 @@
     </div>
 
   </div>
+
+  <section class="honours" id="honours" hidden>
+    <h2>Honorable Kingdoms</h2>
+    <ol id="honours-list"></ol>
+  </section>
 
   <p class="foot" style="max-width:440px">
     New here? <a href="about.html">What Stronghold is</a> ·
@@ -104,6 +115,25 @@
       say("Could not reach the hall: " + err.message);
     });
   };
+
+  SH.honours().then(function (r) {
+    if (!r || !r.ok || !r.honours || !r.honours.length) return;
+    var list = $("honours-list");
+    r.honours.slice(0, 8).forEach(function (h) {
+      var li = document.createElement("li");
+      var who = document.createElement("b");
+      who.textContent = h.username;
+      li.appendChild(who);
+      li.appendChild(document.createTextNode(
+        " of " + h.province + ", " + h.realm));
+      var d = document.createElement("span");
+      d.className = "honour-day";
+      d.textContent = "day " + h.day;
+      li.appendChild(d);
+      list.appendChild(li);
+    });
+    $("honours").hidden = false;
+  }).catch(function () {});
 
   if (SH.getToken()) {
     SH.state().then(function (s) { if (s && s.ok) location.href = "play.html"; })

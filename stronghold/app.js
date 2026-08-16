@@ -55,6 +55,7 @@
     getToken: token,
     setToken: setToken,
     slots: function () { return call("/api/slots"); },
+    honours: function () { return call("/api/honours"); },
     health: function () { return call("/api/health"); },
     register: function (u, p) { return call("/api/register", { username: u, password: p }); },
     login: function (u, p) { return call("/api/login", { username: u, password: p }); },

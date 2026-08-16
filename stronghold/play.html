@@ -215,6 +215,12 @@
 
   function paintStaged() {
     var box = $("staged");
+    if (S.victory) {
+      $("commit").disabled = true;
+      $("commit").textContent = "Won";
+      box.textContent = "The campaign is finished. Look around as long as you like.";
+      return;
+    }
     var open = S.state === "open";
     $("commit").disabled = !open;
     $("commit").textContent = open ? "Submit the day"
@@ -225,7 +231,51 @@
       : "Nothing staged. The day will pass on standing policy.";
   }
 
-  function tabList() { return S.tab_names || S.tabs || []; }
+  function tabList() {
+    var list = (S.tab_names || S.tabs || []).slice();
+    // A won campaign puts its account at the front of the strip. The
+    // other rooms stay open: the point is to look around afterwards and
+    // see how you did, not to be thrown out at the end.
+    if (S.victory) { list.unshift({ id: "victory", name: "Victory" }); }
+    return list;
+  }
+
+  function victoryScreen(v) {
+    var out = [];
+    var head = el("section", "card victory-card");
+    var h = el("h2", null, "THE WORLD IS YOURS");
+    head.appendChild(h);
+    var b = el("div", "body");
+    b.appendChild(el("p", "victory-line",
+      v.ruler + " of " + v.province + ", " + v.realm + "."));
+    b.appendChild(el("p", "victory-sub",
+      v.total_conquest
+        ? "Every acre in the world answers to your realm, and held long enough to prove it was not an accident."
+        : "The world answers to your realm."));
+    if (v.won_on_day) {
+      b.appendChild(el("p", "victory-sub", "Won on day " + v.won_on_day + "."));
+    }
+    head.appendChild(b);
+    out.push(head);
+
+    [["THE REIGN", v.figures],
+     ["THE PROVINCE", v.province_figures],
+     ["THE WAR", v.war_figures],
+     ["ALL TOLD", v.reign_figures]].forEach(function (pair) {
+      if (!pair[1] || !pair[1].length) return;
+      out.push(drawCard({ title: pair[0], rows: pair[1] }));
+    });
+
+    var foot = el("section", "card");
+    foot.appendChild(el("h2", null, "AFTERWARD"));
+    var fb = el("div", "body");
+    fb.appendChild(el("p", "empty",
+      "Every room is still open. Walk back through the chronicle, read " +
+      "the last of the post, and look at the map you finished with."));
+    foot.appendChild(fb);
+    out.push(foot);
+    return out;
+  }
 
   function paintTabs() {
     var bar = $("tabbar"); bar.innerHTML = "";
@@ -253,6 +303,10 @@
   function paintMain() {
     var m = $("main"); m.innerHTML = "";
     var want = tabList()[active];
+    if (want && want.id === "victory" && S.victory) {
+      victoryScreen(S.victory).forEach(function (c) { m.appendChild(c); });
+      return;
+    }
     var tab = (S.tabs || []).filter(function (t) {
       return want && t.id === want.id;
     })[0];

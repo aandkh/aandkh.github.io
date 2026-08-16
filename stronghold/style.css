@@ -131,8 +131,47 @@ input:focus, select:focus, button:focus-visible {
 .msg { margin-top: 14px; padding: 11px; border-radius: 3px; font-size: 14px; }
 .msg.err { background: #241a19; border: 1px solid #4a2b28; color: #e2a49d; }
 .msg.ok  { background: #16201a; border: 1px solid #2b4430; color: #a8d8ad; }
-.slots { text-align: center; margin-top: 16px; color: var(--faint); font-size: 13px; }
-.slots b { color: var(--gold); font-family: var(--mono); }
+/* the one warning on the sign-up form that actually costs something
+   if it is ignored */
+.warn {
+  margin-top: 9px; padding: 9px 11px; border-radius: 3px;
+  background: #1c1409; border: 1px solid #4a3a18;
+  color: #cbb98d; font-size: 12.5px; line-height: 1.5;
+}
+.warn strong { color: var(--gold); }
+
+/* THE ROLL. Deliberately small: it is a line of names under the gate,
+   not a leaderboard. It only appears once somebody has actually won. */
+.honours {
+  width: min(440px, 100%); margin: 22px auto 0;
+  border-top: 1px solid var(--edge); padding-top: 16px;
+}
+.honours h2 {
+  margin: 0 0 10px; text-align: center;
+  font-family: var(--serif); font-size: 11px; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--gold-dim); font-weight: 600;
+}
+.honours ol { margin: 0; padding: 0; list-style: none; }
+.honours li {
+  display: flex; align-items: baseline; gap: 8px;
+  padding: 5px 2px; font-size: 12.5px; color: var(--muted);
+  border-bottom: 1px solid var(--rule);
+}
+.honours li:last-child { border-bottom: 0; }
+.honours li b { color: var(--gold); font-weight: 600; }
+.honours .honour-day {
+  margin-left: auto; color: var(--faint); font-family: var(--mono);
+  font-size: 11px; white-space: nowrap;
+}
+
+/* the victory screen */
+.victory-card { border-color: var(--gold-dim); }
+.victory-card > h2 { color: var(--gold); letter-spacing: .22em; }
+.victory-line {
+  margin: 0 0 6px; font-family: var(--serif); color: var(--value);
+  font-size: 18px; line-height: 1.4;
+}
+.victory-sub { margin: 0 0 4px; color: var(--muted); font-size: 14px; }
 
 /* ---------- the game ---------- */
 
