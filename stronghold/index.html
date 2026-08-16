@@ -2,6 +2,23 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>
+/* HTTPS OR NOTHING. Over plain http the page still renders, which is
+   the trap: the API only answers browser requests from the https
+   origins, so every call fails CORS and the player is told the hall
+   cannot be reached — "Load failed" in Safari, "Failed to fetch" in
+   Chrome. A phone that opens a bare andrewhanes.com link lands on http
+   and hits exactly that. Upgrade before anything else runs, and use
+   replace() so the back button does not bounce them into it again.
+   localhost is left alone so local work still works. */
+(function () {
+  var h = location.hostname;
+  if (location.protocol === "http:" && h !== "localhost" && h !== "127.0.0.1") {
+    location.replace("https://" + location.host + location.pathname +
+                     location.search + location.hash);
+  }
+})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Stronghold</title>
 <meta name="description" content="Stronghold: a kingdom you rule one move a day, free, in any browser.">
