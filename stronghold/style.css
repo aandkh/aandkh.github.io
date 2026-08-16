@@ -80,6 +80,14 @@ html, body {
   color: var(--muted); text-align: center; margin: 0 0 22px;
   font-family: var(--serif); font-style: italic;
 }
+/* The tagline sits close to the links below it: they read as one
+   introduction, with the breathing room saved for above the panel. */
+.gate .sub-tight { margin-bottom: 9px; }
+.gate .intro-links {
+  color: var(--faint); font-size: 12px; text-align: center;
+  max-width: 440px; margin: 0 0 22px;
+}
+.gate .intro-links a { color: var(--muted); }
 .panel {
   width: min(440px, 100%);
   background: linear-gradient(180deg, var(--stone), #0f141b);
