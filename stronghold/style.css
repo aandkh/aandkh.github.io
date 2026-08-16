@@ -53,6 +53,8 @@
 
   /* Soot. One noise tile, reused, so flat blocks stop reading as flat. */
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  /* Tooled hide. Seamless 256px tile, generated rather than licensed. */
+  --leather: url("tex/leather.webp");
 
   --serif: "Cinzel", "EB Garamond", Georgia, "Times New Roman", serif;
   --sans: "EB Garamond", Georgia, "Times New Roman", serif;
@@ -115,6 +117,20 @@ html, body {
     0 0 12px rgba(224,187,85,.35),
     0 0 40px rgba(224,187,85,.18);
 }
+/* The mark, above the word. Drawn as a mask rather than a coloured
+   image so it takes the same gold as every other glyph on the page and
+   stays right if the palette is ever moved again. */
+.gate h1::before {
+  content: "";
+  display: block;
+  width: min(94px, 24vw);
+  height: min(118px, 30vw);   /* the mark is 200x250 */
+  margin: 0 auto 14px;
+  background-color: var(--gold-dim);
+  -webkit-mask: url("sym/mark.svg") center/contain no-repeat;
+          mask: url("sym/mark.svg") center/contain no-repeat;
+  filter: drop-shadow(0 0 16px rgba(224, 187, 85, .28));
+}
 .gate .sub {
   color: #9d8c6f; text-align: center; margin: 0 0 22px;
   font-family: var(--sans); font-style: italic;
@@ -128,17 +144,31 @@ html, body {
 }
 .gate .intro-links a { color: #b39a63; }
 
-/* Oak boards, with the top edge catching what light there is. */
+/* Hide stretched over oak, lit from above. The texture is a seamless
+   256px tile laid over the gradient with overlay, so it darkens and
+   lightens what is already there rather than painting its own colour. */
 .panel {
+  position: relative;
   width: min(440px, 100%);
-  background: linear-gradient(180deg, var(--oak), var(--oak-deep));
-  border: 1px solid var(--oak-edge);
+  background-color: var(--oak);
+  background-image: var(--leather), linear-gradient(180deg, var(--oak), var(--oak-deep));
+  background-blend-mode: overlay, normal;
+  background-size: 256px 256px, auto;
+  border: 1px solid #55452c;
   border-radius: 3px;
   box-shadow:
-    0 1px 0 rgba(226,190,116,.08) inset,
-    0 0 0 1px rgba(0,0,0,.5),
-    0 18px 46px rgba(0,0,0,.62);
+    0 1px 0 rgba(226,190,116,.10) inset,
+    0 0 0 1px rgba(0,0,0,.55),
+    0 20px 50px rgba(0,0,0,.66);
   padding: 20px;
+}
+/* the stitched line a bound cover carries just inside its edge */
+.panel::after {
+  content: "";
+  position: absolute; inset: 7px;
+  border: 1px dashed rgba(226,190,116,.16);
+  border-radius: 2px;
+  pointer-events: none;
 }
 .tabs-2 { display: flex; gap: 0; margin: -20px -20px 18px; }
 .tabs-2 button {
@@ -169,15 +199,41 @@ input:focus, select:focus, button:focus-visible {
   outline: 2px solid var(--gold); outline-offset: 1px;
 }
 .hint { font-size: 12px; color: var(--faint); margin-top: 5px; }
+
+/* ---------- founding: naming the province, realm and house ---------- */
+
+.rule-orn.founding {
+  margin: 20px 0 4px;
+  font-family: var(--serif); letter-spacing: .18em;
+  text-transform: uppercase; color: var(--gold-dim); font-size: 11px;
+}
+/* Each label carries its role, so the three are never confused for
+   one another: the land, the kingdom above it, and the family. */
+label .role {
+  float: right; font-weight: 400; text-transform: none;
+  letter-spacing: 0; color: var(--faint); font-size: 12px;
+  font-style: italic;
+}
+.styling {
+  margin: 16px 0 0; padding: 10px 12px;
+  background: #191307; border: 1px solid var(--gold-dim);
+  border-radius: 2px;
+  font-family: var(--sans); font-size: 13.5px; line-height: 1.5;
+  color: #cbb98d;
+}
+.styling b { color: var(--gold-lit); font-weight: 600; }
 .btn {
   display: block; width: 100%; margin-top: 18px; padding: 14px;
-  background: linear-gradient(180deg, #33270f, #1f1708);
+  background-color: #33270f;
+  background-image: var(--leather), linear-gradient(180deg, #3a2c11, #221909);
+  background-blend-mode: overlay, normal;
+  background-size: 256px 256px, auto;
   color: #e6c368; border: 1px solid var(--gold-dim); border-radius: 2px;
   font-family: var(--serif); font-size: 15px; letter-spacing: .16em;
   text-transform: uppercase; cursor: pointer;
-  box-shadow: 0 1px 0 rgba(226,190,116,.12) inset;
+  box-shadow: 0 1px 0 rgba(226,190,116,.16) inset, 0 2px 6px rgba(0,0,0,.45);
 }
-.btn:hover { background: linear-gradient(180deg, #453413, #2a1f0b); }
+.btn:hover { background-color: #453413; }
 .btn[disabled] { opacity: .5; cursor: not-allowed; }
 .btn.plain { background: var(--stone-hi); color: var(--text); border-color: var(--edge); }
 .btn.danger { color: #d07a60; border-color: #5c3323; }
@@ -211,6 +267,14 @@ input:focus, select:focus, button:focus-visible {
   font-family: var(--serif); font-size: 11px; letter-spacing: .22em;
   text-transform: uppercase; color: var(--gold-dim); font-weight: 600;
 }
+.honours h2::before, .honours h2::after {
+  content: "";
+  display: inline-block; vertical-align: -1px;
+  width: 11px; height: 11px; margin: 0 8px;
+  background-color: var(--gold-dim);
+  -webkit-mask: url("sym/fleuron.svg") center/contain no-repeat;
+          mask: url("sym/fleuron.svg") center/contain no-repeat;
+}
 .honours ol { margin: 0; padding: 0; list-style: none; }
 .honours li {
   display: flex; align-items: baseline; gap: 8px;
@@ -237,7 +301,10 @@ input:focus, select:focus, button:focus-visible {
 
 .top {
   position: sticky; top: 0; z-index: 20;
-  background: linear-gradient(180deg, #1c160e, #12100b);
+  background-color: #1c160e;
+  background-image: var(--leather), linear-gradient(180deg, #1c160e, #12100b);
+  background-blend-mode: overlay, normal;
+  background-size: 256px 256px, auto;
   border-bottom: 1px solid var(--edge);
 }
 .top-row {
@@ -273,7 +340,10 @@ input:focus, select:focus, button:focus-visible {
 main { padding: 12px 12px 120px; max-width: 780px; margin: 0 auto; }
 
 .card {
-  background: linear-gradient(180deg, #1f1911, #1a150e);
+  background-color: #1f1911;
+  background-image: var(--leather), linear-gradient(180deg, #1f1911, #1a150e);
+  background-blend-mode: overlay, normal;
+  background-size: 256px 256px, auto;
   border: 1px solid var(--edge);
   border-radius: 3px; margin-bottom: 12px; overflow: hidden;
 }
@@ -283,6 +353,16 @@ main { padding: 12px 12px 120px; max-width: 780px; margin: 0 auto; }
   font-family: var(--serif); font-size: 12px; letter-spacing: .14em;
   text-transform: uppercase; color: #d8c9a8; font-weight: 600;
   display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline;
+}
+/* A tooled mark on each heading. A heading is not a control, so
+   nothing the player aims at moves. */
+.card > h2::before {
+  content: "";
+  flex: none; align-self: center;
+  width: 13px; height: 13px;
+  background-color: var(--gold-dim);
+  -webkit-mask: url("sym/fleuron.svg") center/contain no-repeat;
+          mask: url("sym/fleuron.svg") center/contain no-repeat;
 }
 .card > h2 .note {
   font-family: var(--sans); font-size: 11px; letter-spacing: 0;

@@ -57,7 +57,15 @@
     slots: function () { return call("/api/slots"); },
     honours: function () { return call("/api/honours"); },
     health: function () { return call("/api/health"); },
-    register: function (u, p) { return call("/api/register", { username: u, password: p }); },
+    register: function (u, p, names) {
+      names = names || {};
+      return call("/api/register", {
+        username: u, password: p,
+        province: names.province || "",
+        realm: names.realm || "",
+        house: names.house || ""
+      });
+    },
     login: function (u, p) { return call("/api/login", { username: u, password: p }); },
     logout: function () { return call("/api/logout", {}); },
     // `tab` asks the server to build only the room being looked at.

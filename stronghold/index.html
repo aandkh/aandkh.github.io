@@ -46,6 +46,32 @@
         again by anyone.
       </div>
 
+      <div id="found" hidden>
+        <div class="rule-orn founding">Name what is yours</div>
+
+        <label for="n-prov">Your province <span class="role">the land you rule</span></label>
+        <input id="n-prov" type="text" maxlength="24" autocapitalize="words"
+               autocorrect="off" spellcheck="false" placeholder="Everfield Downs">
+        <div class="hint">Your home. One province among ninety-six, and the
+          only ground that answers to you.</div>
+
+        <label for="n-realm">Your realm <span class="role">the kingdom it sits in</span></label>
+        <input id="n-realm" type="text" maxlength="24" autocapitalize="words"
+               autocorrect="off" spellcheck="false" placeholder="Valemark">
+        <div class="hint">The larger kingdom your province belongs to. You do
+          not rule this — its crown sits on somebody else's head.</div>
+
+        <label for="n-house">Your house <span class="role">your family name</span></label>
+        <input id="n-house" type="text" maxlength="24" autocapitalize="words"
+               autocorrect="off" spellcheck="false" placeholder="Calder">
+        <div class="hint">Your line. You will be styled of House this, and so
+          will your heirs.</div>
+
+        <p class="styling" id="styleline"></p>
+        <div class="hint">Leave any of the three blank and the heralds will
+          supply one.</div>
+      </div>
+
       <button class="btn" id="go" type="submit">Sign in</button>
       <div id="msg" hidden></div>
     </form>
@@ -88,8 +114,31 @@
     $("phint").textContent = mode === "login"
       ? "Exactly 6 characters."
       : "Exactly 6 characters. Make it one you use nowhere else.";
+    $("found").hidden = mode !== "new";
+    styling();
     hide();
   }
+
+  // Say back what they have written, in the form the game will use it.
+  // Three names in three roles is easy to muddle; seeing the sentence
+  // assembled makes which-is-which obvious before anything is founded.
+  function styling() {
+    if (mode !== "new") return;
+    var prov = $("n-prov").value.trim() || "your province";
+    var realm = $("n-realm").value.trim() || "your realm";
+    var house = $("n-house").value.trim() || "your house";
+    $("styleline").innerHTML =
+      "You will rule <b>" + esc(prov) + "</b>, of House <b>" + esc(house) +
+      "</b>, in the realm of <b>" + esc(realm) + "</b>.";
+  }
+  function esc(s) {
+    return s.replace(/[&<>"]/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+    });
+  }
+  ["n-prov", "n-realm", "n-house"].forEach(function (id) {
+    $(id).addEventListener("input", styling);
+  });
   function hide() { $("msg").hidden = true; }
   function say(text, kind) {
     var m = $("msg");
@@ -106,7 +155,11 @@
     if (u.length < 1 || u.length > 10) return say("Username must be 1 to 10 characters.");
     if (p.length !== 6) return say("Password must be exactly 6 characters.");
     $("go").disabled = true;
-    var call = mode === "login" ? SH.login(u, p) : SH.register(u, p);
+    var call = mode === "login" ? SH.login(u, p) : SH.register(u, p, {
+      province: $("n-prov").value,
+      realm: $("n-realm").value,
+      house: $("n-house").value
+    });
     call.then(function (r) {
       if (!r.ok) { $("go").disabled = false; return say(r.error || "That did not work."); }
       SH.setToken(r.token);
