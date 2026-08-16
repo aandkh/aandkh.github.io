@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Stronghold</title>
+<meta name="color-scheme" content="dark">
+<link rel="stylesheet" href="style.css">
+  <!-- Google AdSense — site verification and ad serving. Async, so it
+       never blocks the page; the game works identically if it is
+       blocked by an ad blocker or fails to load. -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8173323521375339"
+     crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-row">
+    <span class="name crest" id="province">—</span>
+    <span class="spacer"></span>
+    <span class="pill" id="day">Day —</span>
+    <button class="pill" id="menu" title="Account">☰</button>
+  </div>
+  <div class="figs" id="figs"></div>
+  <nav class="tabbar" id="tabbar" aria-label="Rooms"></nav>
+</header>
+
+<main id="main"><p class="empty">Opening the gate…</p></main>
+
+<div class="commitbar">
+  <div class="inner">
+    <div class="staged" id="staged"></div>
+    <button class="btn" id="commit">Submit the day</button>
+  </div>
+</div>
+
+<script src="app.js"></script>
+<script>
+(function () {
+  "use strict";
+  var $ = function (id) { return document.getElementById(id); };
+  var S = null, active = 0, busy = false;
+
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+
+  /* ---- posting a control ------------------------------------------
+     Fires on change, not on submit. The server keeps the staged day
+     with the campaign, so nothing here needs to remember anything. */
+  var pending = {};
+  function send(key, value, immediate) {
+    clearTimeout(pending[key]);
+    var go = function () {
+      SH.order(key, value).then(function (s) {
+        if (s && s.ok) {
+          // The server answers a staged control with the summary and
+          // the figures, not fifteen rebuilt rooms — so MERGE it. The
+          // tabs we already hold are still correct: staging changes the
+          // order sheet and nothing else until the day is committed.
+          for (var k in s) { if (s.hasOwnProperty(k)) S[k] = s[k]; }
+          paintStaged(); paintFigs();
+        } else if (s && s.error) { toast(s.error); }
+      }).catch(function (e) { toast(e.message); });
+    };
+    if (immediate) go(); else pending[key] = setTimeout(go, 350);
+  }
+
+  function toast(text) {
+    var t = $("toast") || (function () {
+      var d = el("div", "msg err"); d.id = "toast";
+      d.style.cssText = "position:fixed;left:12px;right:12px;bottom:76px;z-index:60";
+      document.body.appendChild(d); return d;
+    })();
+    t.textContent = text; t.style.display = "block";
+    clearTimeout(t._t); t._t = setTimeout(function () { t.style.display = "none"; }, 4000);
+  }
+
+  /* ---- the renderer: one function, fifteen rooms ------------------ */
+
+  function drawControl(c) {
+    var wrap = el("div", "ctrl");
+
+    if (c.kind === "number") {
+      var l = el("label", null, c.label); wrap.appendChild(l);
+      var i = el("input"); i.type = "number"; i.min = 0; i.value = c.value || 0;
+      if (c.max != null) i.max = c.max;
+      i.inputMode = "numeric";
+      i.onchange = i.oninput = function () { send(c.order, i.value); };
+      wrap.appendChild(i);
+      if (c.hint || c.sub) wrap.appendChild(el("div", "hint", c.hint || c.sub));
+      return wrap;
+    }
+
+    if (c.kind === "segment") {
+      wrap.appendChild(el("label", null, c.label));
+      var seg = el("div", "seg");
+      c.options.forEach(function (name, idx) {
+        var b = el("button", null, name);
+        b.type = "button";
+        b.setAttribute("aria-pressed", idx === c.value);
+        b.onclick = function () {
+          c.value = idx;
+          [].forEach.call(seg.children, function (x, j) {
+            x.setAttribute("aria-pressed", j === idx);
+          });
+          send(c.order, idx, true);
+        };
+        seg.appendChild(b);
+      });
+      wrap.appendChild(seg);
+      return wrap;
+    }
+
+    if (c.kind === "toggle") {
+      var row = el("label", "tog" + (c.value ? " on" : ""));
+      var cb = el("input"); cb.type = "checkbox"; cb.checked = !!c.value;
+      cb.onchange = function () {
+        row.className = "tog" + (cb.checked ? " on" : "");
+        send(c.order, { item: c.item, on: cb.checked, accept: true }, true);
+      };
+      row.appendChild(cb);
+      var txt = el("span", null, c.label);
+      if (c.hint) { txt.appendChild(el("div", "sub", c.hint)); }
+      row.appendChild(txt);
+      wrap.appendChild(row);
+      return wrap;
+    }
+
+    if (c.kind === "choice") {
+      wrap.appendChild(el("label", null, c.label));
+      var sel = el("select");
+      sel.appendChild(el("option", null, "— none —")).value = "";
+      (c.options || []).forEach(function (o) {
+        var op = el("option", null, o.label);
+        op.value = o.value;
+        if (String(o.value) === String(c.value)) op.selected = true;
+        sel.appendChild(op);
+      });
+      sel.onchange = function () { send(c.order, sel.value, true); };
+      wrap.appendChild(sel);
+      if (c.sub) wrap.appendChild(el("div", "hint", c.sub));
+      return wrap;
+    }
+
+    if (c.kind === "button") {
+      var b2 = el("button", "btn" + (c.style === "primary" ? "" : " plain"), c.label);
+      b2.type = "button";
+      b2.onclick = function () {
+        if (c.action === "breakthrough") return send("breakthrough", c.arg, true);
+        if (c.action === "unlock") return doUnlock();
+      };
+      wrap.appendChild(b2);
+      return wrap;
+    }
+    return wrap;
+  }
+
+  function drawCard(card) {
+    var c = el("section", "card");
+    if (card.title) {
+      var h = el("h2", null, card.title);
+      if (card.note) h.appendChild(el("span", "note", card.note));
+      c.appendChild(h);
+    }
+    var body = el("div", "body");
+
+    if (card.rows && card.rows.length) {
+      var dl = el("dl", "kv");
+      card.rows.forEach(function (r) {
+        dl.appendChild(el("dt", null, r[0]));
+        dl.appendChild(el("dd", null, r[1]));
+      });
+      body.appendChild(dl);
+    }
+    if (card.lines && card.lines.length) {
+      var ln = el("div", "lines");
+      card.lines.forEach(function (t) { ln.appendChild(el("p", null, t)); });
+      body.appendChild(ln);
+    }
+    if (card.table) {
+      var box = el("div", "tbl"), tb = el("table");
+      card.table.rows.forEach(function (row) {
+        var tr = el("tr");
+        tr.appendChild(el("td", null, row[0]));
+        var td = el("td", "letter");
+        td.appendChild(el("div", null, row[1]));
+        if (row[2]) { var p = el("div", null, row[2]); p.style.color = "var(--muted)"; td.appendChild(p); }
+        tr.appendChild(td);
+        tb.appendChild(tr);
+      });
+      box.appendChild(tb); body.appendChild(box);
+    }
+    if (card.empty) body.appendChild(el("p", "empty", card.empty));
+    (card.controls || []).forEach(function (ctl) { body.appendChild(drawControl(ctl)); });
+
+    c.appendChild(body);
+    return c;
+  }
+
+  function paintFigs() {
+    var h = S.headline;
+    $("province").textContent = h.name + " of " + h.realm;
+    $("day").textContent = "Day " + S.day;
+    var f = $("figs"); f.innerHTML = "";
+    [["Land", h.land.toLocaleString() + " sq mi"],
+     ["People", h.pop.toLocaleString()],
+     ["Coin", h.coin.toLocaleString()],
+     ["Grain", h.grain.toLocaleString()],
+     ["Standing", S.influence + " · " + S.rank]].forEach(function (p) {
+      f.appendChild(el("span", "pill", p[0] + " " + p[1]));
+    });
+  }
+
+  function paintStaged() {
+    var box = $("staged");
+    var open = S.state === "open";
+    $("commit").disabled = !open;
+    $("commit").textContent = open ? "Submit the day"
+      : (S.state === "done" ? "Submitted" : "Closed");
+    if (!open) { box.textContent = S.state_note; return; }
+    box.textContent = S.staged.length
+      ? S.staged.join(" · ")
+      : "Nothing staged — the day will pass on standing policy.";
+  }
+
+  function tabList() { return S.tab_names || S.tabs || []; }
+
+  function paintTabs() {
+    var bar = $("tabbar"); bar.innerHTML = "";
+    tabList().forEach(function (t, i) {
+      var b = el("button", null, t.name);
+      b.setAttribute("aria-selected", i === active);
+      b.onclick = function () {
+        active = i; paintTabs(); paintMain(); window.scrollTo(0, 0);
+        // Refresh the rooms on a tab change rather than on every
+        // keystroke: one 44 KB fetch when you move, instead of one per
+        // number typed. Repaint only if the player has not moved on
+        // again in the meantime.
+        var want = i, id = t.id;
+        SH.state(id).then(function (s) {
+          if (!s || !s.ok) return;
+          for (var k in s) { if (s.hasOwnProperty(k)) S[k] = s[k]; }
+          if (active === want) { paintMain(); }
+          paintStaged(); paintFigs();
+        }).catch(function () {});
+      };
+      bar.appendChild(b);
+    });
+  }
+
+  function paintMain() {
+    var m = $("main"); m.innerHTML = "";
+    var want = tabList()[active];
+    var tab = (S.tabs || []).filter(function (t) {
+      return want && t.id === want.id;
+    })[0];
+    if (!tab) { m.appendChild(el("p", "empty", "Opening the room…")); return; }
+    if (S.state !== "open") {
+      var w = el("div", "notice");
+      w.textContent = S.state_note;
+      m.appendChild(w);
+    }
+    tab.cards.forEach(function (c) { m.appendChild(drawCard(c)); });
+
+    if (tab.id === "command") {
+      m.appendChild(adSlot());
+      m.appendChild(supportCard());
+      m.appendChild(accountCard());
+    }
+  }
+
+  /* ---- the one banner, and the tip jar ---------------------------- */
+
+  function adSlot() {
+    var s = el("section", "card");
+    s.appendChild(el("h2", null, " "));
+    var b = el("div", "body");
+    var slot = el("div", "adslot");
+    slot.id = "ad-banner";
+    slot.textContent = "advertisement";
+    b.appendChild(slot);
+    s.appendChild(b);
+    return s;
+  }
+
+  function supportCard() {
+    var s = el("section", "card");
+    var h = el("h2", null, "SUPPORT THE GAME");
+    h.appendChild(el("span", "note", "entirely optional — it changes nothing in play"));
+    s.appendChild(h);
+    var b = el("div", "body");
+    b.appendChild(el("p", "empty",
+      "Stronghold is free and always will be. If you want to buy the " +
+      "author a coffee, these go straight to him."));
+    var row = el("div", "support");
+    // All three handles confirmed by the author. The PayPal one was
+    // checked against the live page (slug "apttii", "Andrew H") rather
+    // than guessed from an email address — a vanity URL that is one
+    // letter out sends a player's money to a stranger.
+    [["PayPal", "https://www.paypal.com/paypalme/apttii"],
+     ["Cash App", "https://cash.app/$andyviainternet"],
+     ["Venmo", "https://venmo.com/u/aaandkh"]].forEach(function (p) {
+      var a = el("a", null, p[0]);
+      a.href = p[1]; a.target = "_blank"; a.rel = "noopener noreferrer";
+      row.appendChild(a);
+    });
+    b.appendChild(row);
+    s.appendChild(b);
+    return s;
+  }
+
+  function accountCard() {
+    var s = el("section", "card");
+    s.appendChild(el("h2", null, "YOUR SEAT"));
+    var b = el("div", "body");
+    var dl = el("dl", "kv");
+    dl.appendChild(el("dt", null, "Signed in as"));
+    dl.appendChild(el("dd", null, S.user));
+    dl.appendChild(el("dt", null, "Seats open"));
+    dl.appendChild(el("dd", null, S.slots.free + " of " + S.slots.max));
+    b.appendChild(dl);
+
+    var out = el("button", "btn plain", "Sign out on this device");
+    out.onclick = function () {
+      SH.logout().catch(function () {}).then(function () {
+        SH.setToken(""); location.href = "index.html";
+      });
+    };
+    b.appendChild(out);
+
+    var end = el("button", "btn danger", "End my campaign and free my seat");
+    end.onclick = function () {
+      var typed = prompt(
+        "This deletes your kingdom, your account and everything in it, " +
+        "and gives your seat to somebody else. It cannot be undone.\n\n" +
+        "Type END MY CAMPAIGN to confirm.");
+      if (typed !== "END MY CAMPAIGN") return;
+      SH.quit().then(function (r) {
+        if (r.ok) { SH.setToken(""); alert("Your seat is free again. Thank you for playing."); location.href = "index.html"; }
+        else toast(r.error || "Could not end the campaign.");
+      }).catch(function (e) { toast(e.message); });
+    };
+    b.appendChild(end);
+    s.appendChild(b);
+    return s;
+  }
+
+  /* ---- day actions ------------------------------------------------ */
+
+  function doUnlock() {
+    SH.unlock().then(function (s) { if (s.ok) { S = s; repaint(); toast("The day has been released."); } });
+  }
+
+  $("commit").onclick = function () {
+    if (busy || S.state !== "open") return;
+    if (!confirm("Submit the day? These orders resolve at once and cannot be recalled.")) return;
+    busy = true; $("commit").disabled = true;
+    SH.commit().then(function (s) {
+      busy = false;
+      if (!s.ok) { toast(s.error || "Could not submit."); $("commit").disabled = false; return; }
+      S = s; repaint();
+      toast("The day is submitted. Come back tomorrow.");
+    }).catch(function (e) { busy = false; $("commit").disabled = false; toast(e.message); });
+  };
+
+  $("menu").onclick = function () {
+    active = 0; paintTabs(); paintMain();
+    window.scrollTo(0, document.body.scrollHeight);
+  };
+
+  function repaint() { paintFigs(); paintTabs(); paintMain(); paintStaged(); }
+
+  function boot() {
+    if (!SH.getToken()) { location.href = "index.html"; return; }
+    SH.state().then(function (s) {
+      if (!s || !s.ok) { SH.setToken(""); location.href = "index.html"; return; }
+      S = s; repaint();
+    }).catch(function (e) {
+      $("main").innerHTML = "";
+      var d = el("div", "notice");
+      d.textContent = "The hall is not answering (" + e.message +
+        "). Your kingdom is safe on the server — try again shortly.";
+      $("main").appendChild(d);
+    });
+  }
+  boot();
+})();
+</script>
+</body>
+</html>
