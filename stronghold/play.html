@@ -318,22 +318,40 @@
     tab.cards.forEach(function (c) { m.appendChild(drawCard(c)); });
 
     if (tab.id === "command") {
-      m.appendChild(adSlot());
+      var ad = adSlot();
+      if (ad) m.appendChild(ad);
       m.appendChild(accountCard());
     }
   }
 
   /* ---- the one banner --------------------------------------------- */
 
+  /* Set this to the ad unit's slot id once AdSense approves the site.
+     While it is empty NO BOX IS DRAWN AT ALL — an empty bordered card
+     holding room for an advert that cannot load yet just reads as a bug
+     to a player, and a slot held open for weeks is worse than one that
+     appears the day it has something to show. */
+  var AD_SLOT = "";
+
   function adSlot() {
+    if (!AD_SLOT) return null;
     var s = el("section", "card");
     s.appendChild(el("h2", null, " "));
     var b = el("div", "body");
     var slot = el("div", "adslot");
     slot.id = "ad-banner";
-    slot.textContent = "advertisement";
+    var ins = document.createElement("ins");
+    ins.className = "adsbygoogle";
+    ins.style.display = "block";
+    ins.setAttribute("data-ad-client", "ca-pub-8173323521375339");
+    ins.setAttribute("data-ad-slot", AD_SLOT);
+    ins.setAttribute("data-ad-format", "auto");
+    ins.setAttribute("data-full-width-responsive", "true");
+    slot.appendChild(ins);
     b.appendChild(slot);
     s.appendChild(b);
+    try { (window.adsbygoogle = window.adsbygoogle || []).push({}); }
+    catch (e) {}
     return s;
   }
 
