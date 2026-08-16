@@ -1,30 +1,62 @@
 /* STRONGHOLD: medieval administration through a modern terminal.
-   The palette is the desktop game's own (game_stronghold.py), warmed
-   with candle-light and parchment so the web version reads as the same
-   product rather than a different one. No webfonts: a system serif with
-   real letterspacing carries the register and costs nothing to load. */
+
+   CANDLE & OAK. The palette began as the desktop game's own
+   (game_stronghold.py). Every cool blue has since been pulled out of the
+   greys and replaced with soot, oak and tallow, so the gold that was
+   always in the design reads as candlelight rather than as decoration.
+
+   Type is Cinzel for anything inscribed — the wordmark, headings, tab
+   labels — and EB Garamond for everything read. Both are self-hosted
+   below: a phone on a slow connection makes no third-party round-trip
+   before it can read the page. */
+
+@font-face {
+  font-family: "Cinzel";
+  src: url("fonts/cinzel.woff2") format("woff2");
+  font-weight: 400 600; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "EB Garamond";
+  src: url("fonts/garamond.woff2") format("woff2");
+  font-weight: 400 600; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "EB Garamond";
+  src: url("fonts/garamond-italic.woff2") format("woff2");
+  font-weight: 400 600; font-style: italic; font-display: swap;
+}
 
 :root {
-  --ink:        #0b0e13;
-  --stone:      #141920;
-  --stone-hi:   #1a212a;
-  --edge:       #2a3340;
-  --rule:       #1d242e;
-  --text:       #d6dbe4;
-  --value:      #e9edf3;
-  --muted:      #8d97a5;
-  --faint:      #5d6673;
-  --gold:       #c9a227;
-  --gold-dim:   #7d6a2c;
-  --good:       #6fae74;
-  --bad:        #b8574f;
-  --accent:     #5b7fa8;
+  --ink:        #12100b;
+  --stone:      #1d1811;
+  --stone-hi:   #262017;
+  --edge:       #3b3122;
+  --rule:       #2a2318;
+  --text:       #ddd0b6;
+  --value:      #f2e8d2;
+  --muted:      #a29174;
+  --faint:      #71644f;
+  --gold:       #d2ac42;
+  --gold-lit:   #e0bb55;   /* the flame itself: wordmark, selected tabs */
+  --gold-dim:   #8a6f2e;
+  --good:       #82a262;
+  --bad:        #bd6046;
+  --accent:     #9c7c3c;
   --parchment:  #e8dcc0;
 
-  --serif: "Palatino Linotype", Palatino, "Book Antiqua", Georgia,
-           "Times New Roman", serif;
-  --sans: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
-  --mono: Consolas, "SF Mono", Menlo, monospace;
+  --oak:        #241d14;   /* panel and card faces */
+  --oak-deep:   #171208;
+  --well:       #0d0a06;   /* inputs and pills: cut into the surface */
+  --sunk:       #16120b;   /* unselected tabs and controls */
+  --lit:        #2b2110;   /* selected tabs and controls */
+  --oak-edge:   #4a3c27;
+
+  /* Soot. One noise tile, reused, so flat blocks stop reading as flat. */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+
+  --serif: "Cinzel", "EB Garamond", Georgia, "Times New Roman", serif;
+  --sans: "EB Garamond", Georgia, "Times New Roman", serif;
+  --mono: "Courier New", Consolas, "SF Mono", Menlo, monospace;
 }
 
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -32,9 +64,10 @@
 html, body {
   margin: 0; padding: 0;
   background: var(--ink);
+  background-image: var(--grain);
   color: var(--text);
   font-family: var(--sans);
-  font-size: 16px;
+  font-size: 17px;
   line-height: 1.5;
   -webkit-text-size-adjust: 100%;
 }
@@ -46,7 +79,7 @@ html, body {
   letter-spacing: .28em;
   text-transform: uppercase;
   color: var(--gold);
-  text-shadow: 0 0 18px rgba(201,162,39,.28);
+  text-shadow: 0 0 18px rgba(210,172,66,.28);
 }
 
 .rule-orn {
@@ -60,25 +93,31 @@ html, body {
 
 /* ---------- gate (login / create) ---------- */
 
+/* One warm source above, everything falling away from it. */
 .gate {
   min-height: 100svh;
   display: flex; flex-direction: column; align-items: center;
   justify-content: center;
   padding: 24px 18px 60px;
-  background:
-    radial-gradient(120% 80% at 50% 0%, #191426 0%, transparent 60%),
-    var(--ink);
+  background-color: var(--ink);
+  background-image:
+    radial-gradient(90% 55% at 50% -5%, rgba(228,178,72,.20) 0%, transparent 62%),
+    radial-gradient(140% 100% at 50% 0%, #241c11 0%, transparent 70%),
+    var(--grain);
 }
 .gate h1 {
   font-family: var(--serif);
   font-size: clamp(30px, 9vw, 56px);
-  letter-spacing: .2em; text-transform: uppercase;
-  color: var(--gold); margin: 0 0 4px; text-align: center;
-  text-shadow: 0 2px 0 #000, 0 0 26px rgba(201,162,39,.25);
+  letter-spacing: .18em; text-transform: uppercase;
+  color: var(--gold-lit); margin: 0 0 4px; text-align: center;
+  text-shadow:
+    0 1px 0 #000,
+    0 0 12px rgba(224,187,85,.35),
+    0 0 40px rgba(224,187,85,.18);
 }
 .gate .sub {
-  color: var(--muted); text-align: center; margin: 0 0 22px;
-  font-family: var(--serif); font-style: italic;
+  color: #9d8c6f; text-align: center; margin: 0 0 22px;
+  font-family: var(--sans); font-style: italic;
 }
 /* The tagline sits close to the links below it: they read as one
    introduction, with the breathing room saved for above the panel. */
@@ -87,32 +126,44 @@ html, body {
   color: var(--faint); font-size: 12px; text-align: center;
   max-width: 440px; margin: 0 0 22px;
 }
-.gate .intro-links a { color: var(--muted); }
+.gate .intro-links a { color: #b39a63; }
+
+/* Oak boards, with the top edge catching what light there is. */
 .panel {
   width: min(440px, 100%);
-  background: linear-gradient(180deg, var(--stone), #0f141b);
-  border: 1px solid var(--edge);
-  border-radius: 4px;
-  box-shadow: 0 18px 50px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.03);
+  background: linear-gradient(180deg, var(--oak), var(--oak-deep));
+  border: 1px solid var(--oak-edge);
+  border-radius: 3px;
+  box-shadow:
+    0 1px 0 rgba(226,190,116,.08) inset,
+    0 0 0 1px rgba(0,0,0,.5),
+    0 18px 46px rgba(0,0,0,.62);
   padding: 20px;
 }
 .tabs-2 { display: flex; gap: 0; margin: -20px -20px 18px; }
 .tabs-2 button {
-  flex: 1; padding: 13px 8px; background: #0d1117; color: var(--muted);
-  border: 0; border-bottom: 1px solid var(--edge);
-  font-family: var(--serif); letter-spacing: .12em; text-transform: uppercase;
+  flex: 1; padding: 13px 8px; background: #15110a; color: #93826a;
+  border: 0; border-bottom: 1px solid var(--oak-edge);
+  font-family: var(--serif); letter-spacing: .1em; text-transform: uppercase;
   font-size: 13px; cursor: pointer;
 }
 .tabs-2 button[aria-selected="true"] {
-  background: var(--stone); color: var(--gold);
+  background: var(--oak); color: var(--gold-lit);
   border-bottom-color: var(--gold-dim);
+  box-shadow: inset 0 1px 0 rgba(226,190,116,.12);
 }
 label { display: block; margin: 14px 0 6px; font-size: 13px; color: var(--muted); }
 input[type=text], input[type=password], input[type=number], select {
   width: 100%; padding: 12px; font-size: 16px;
-  background: #090d12; color: var(--value);
-  border: 1px solid var(--edge); border-radius: 3px;
+  background: var(--well); color: var(--value);
+  border: 1px solid var(--oak-edge); border-radius: 2px;
   font-family: var(--mono);
+}
+/* The prompts inside the boxes are a suggestion, not an instruction, and
+   should never compete with what the player types over them. */
+input::placeholder {
+  color: #6b5c45;
+  opacity: .6;
 }
 input:focus, select:focus, button:focus-visible {
   outline: 2px solid var(--gold); outline-offset: 1px;
@@ -120,33 +171,34 @@ input:focus, select:focus, button:focus-visible {
 .hint { font-size: 12px; color: var(--faint); margin-top: 5px; }
 .btn {
   display: block; width: 100%; margin-top: 18px; padding: 14px;
-  background: linear-gradient(180deg, #2a2113, #1a1509);
-  color: var(--gold); border: 1px solid var(--gold-dim); border-radius: 3px;
-  font-family: var(--serif); font-size: 15px; letter-spacing: .18em;
+  background: linear-gradient(180deg, #33270f, #1f1708);
+  color: #e6c368; border: 1px solid var(--gold-dim); border-radius: 2px;
+  font-family: var(--serif); font-size: 15px; letter-spacing: .16em;
   text-transform: uppercase; cursor: pointer;
+  box-shadow: 0 1px 0 rgba(226,190,116,.12) inset;
 }
-.btn:hover { background: linear-gradient(180deg, #3a2d18, #221a0b); }
+.btn:hover { background: linear-gradient(180deg, #453413, #2a1f0b); }
 .btn[disabled] { opacity: .5; cursor: not-allowed; }
 .btn.plain { background: var(--stone-hi); color: var(--text); border-color: var(--edge); }
-.btn.danger { color: var(--bad); border-color: #4a2b28; }
+.btn.danger { color: #d07a60; border-color: #5c3323; }
 
 .notice {
-  margin-top: 18px; padding: 13px 14px; border-radius: 3px;
-  background: #14110a; border: 1px solid var(--gold-dim);
-  color: #d8cfae; font-size: 13px; line-height: 1.55;
+  margin-top: 18px; padding: 13px 14px; border-radius: 2px;
+  background: #191307; border: 1px solid #6b5526;
+  color: #cbb98d; font-size: 13px; line-height: 1.55;
 }
-.notice strong { color: var(--gold); }
-.msg { margin-top: 14px; padding: 11px; border-radius: 3px; font-size: 14px; }
-.msg.err { background: #241a19; border: 1px solid #4a2b28; color: #e2a49d; }
-.msg.ok  { background: #16201a; border: 1px solid #2b4430; color: #a8d8ad; }
+.notice strong { color: var(--gold-lit); }
+.msg { margin-top: 14px; padding: 11px; border-radius: 2px; font-size: 14px; }
+.msg.err { background: #24160f; border: 1px solid #5c3323; color: #e0a891; }
+.msg.ok  { background: #1a2011; border: 1px solid #3f5228; color: #bcd39a; }
 /* the one warning on the sign-up form that actually costs something
    if it is ignored */
 .warn {
-  margin-top: 9px; padding: 9px 11px; border-radius: 3px;
-  background: #1c1409; border: 1px solid #4a3a18;
-  color: #cbb98d; font-size: 12.5px; line-height: 1.5;
+  margin-top: 9px; padding: 9px 11px; border-radius: 2px;
+  background: #1f1608; border: 1px solid #6b5526;
+  color: #d0bb8a; font-size: 12.5px; line-height: 1.5;
 }
-.warn strong { color: var(--gold); }
+.warn strong { color: var(--gold-lit); }
 
 /* THE ROLL. Deliberately small: it is a line of names under the gate,
    not a leaderboard. It only appears once somebody has actually won. */
@@ -166,7 +218,7 @@ input:focus, select:focus, button:focus-visible {
   border-bottom: 1px solid var(--rule);
 }
 .honours li:last-child { border-bottom: 0; }
-.honours li b { color: var(--gold); font-weight: 600; }
+.honours li b { color: var(--gold-lit); font-weight: 600; }
 .honours .honour-day {
   margin-left: auto; color: var(--faint); font-family: var(--mono);
   font-size: 11px; white-space: nowrap;
@@ -174,7 +226,7 @@ input:focus, select:focus, button:focus-visible {
 
 /* the victory screen */
 .victory-card { border-color: var(--gold-dim); }
-.victory-card > h2 { color: var(--gold); letter-spacing: .22em; }
+.victory-card > h2 { color: var(--gold-lit); letter-spacing: .22em; }
 .victory-line {
   margin: 0 0 6px; font-family: var(--serif); color: var(--value);
   font-size: 18px; line-height: 1.4;
@@ -185,7 +237,7 @@ input:focus, select:focus, button:focus-visible {
 
 .top {
   position: sticky; top: 0; z-index: 20;
-  background: linear-gradient(180deg, #10141b, #0b0e13);
+  background: linear-gradient(180deg, #1c160e, #12100b);
   border-bottom: 1px solid var(--edge);
 }
 .top-row {
@@ -193,14 +245,14 @@ input:focus, select:focus, button:focus-visible {
   padding: 9px 12px;
 }
 .top .name {
-  font-family: var(--serif); color: var(--gold);
+  font-family: var(--serif); color: var(--gold-lit);
   letter-spacing: .14em; text-transform: uppercase; font-size: 14px;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .top .spacer { flex: 1; }
 .pill {
   font-family: var(--mono); font-size: 12px; color: var(--value);
-  background: #090d12; border: 1px solid var(--edge);
+  background: var(--well); border: 1px solid var(--edge);
   border-radius: 999px; padding: 4px 10px; white-space: nowrap;
 }
 .figs { display: flex; gap: 6px; overflow-x: auto; padding: 0 12px 9px; }
@@ -212,23 +264,24 @@ input:focus, select:focus, button:focus-visible {
 }
 .tabbar button {
   flex: none; padding: 8px 13px; font-size: 13px;
-  background: #0d1117; color: var(--muted);
+  background: var(--sunk); color: #93826a;
   border: 1px solid var(--edge); border-radius: 3px;
   font-family: var(--serif); letter-spacing: .08em; cursor: pointer;
 }
-.tabbar button[aria-selected="true"] { background: #241d0f; color: var(--gold); border-color: var(--gold-dim); }
+.tabbar button[aria-selected="true"] { background: var(--lit); color: var(--gold-lit); border-color: var(--gold-dim); }
 
 main { padding: 12px 12px 120px; max-width: 780px; margin: 0 auto; }
 
 .card {
-  background: var(--stone); border: 1px solid var(--edge);
-  border-radius: 4px; margin-bottom: 12px; overflow: hidden;
+  background: linear-gradient(180deg, #1f1911, #1a150e);
+  border: 1px solid var(--edge);
+  border-radius: 3px; margin-bottom: 12px; overflow: hidden;
 }
 .card > h2 {
   margin: 0; padding: 10px 14px 8px;
   border-bottom: 1px solid var(--rule);
-  font-family: var(--serif); font-size: 12px; letter-spacing: .16em;
-  text-transform: uppercase; color: var(--text); font-weight: 600;
+  font-family: var(--serif); font-size: 12px; letter-spacing: .14em;
+  text-transform: uppercase; color: #d8c9a8; font-weight: 600;
   display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline;
 }
 .card > h2 .note {
@@ -254,17 +307,17 @@ main { padding: 12px 12px 120px; max-width: 780px; margin: 0 auto; }
 .seg { display: flex; flex-wrap: wrap; gap: 5px; }
 .seg button {
   flex: 1 1 auto; min-width: 74px; padding: 9px 6px; font-size: 13px;
-  background: #0d1117; color: var(--muted);
+  background: var(--sunk); color: #93826a;
   border: 1px solid var(--edge); border-radius: 3px; cursor: pointer;
 }
-.seg button[aria-pressed="true"] { background: #241d0f; color: var(--gold); border-color: var(--gold-dim); }
+.seg button[aria-pressed="true"] { background: var(--lit); color: var(--gold-lit); border-color: var(--gold-dim); }
 .tog {
   display: flex; align-items: center; gap: 10px; padding: 10px;
-  background: #0d1117; border: 1px solid var(--edge); border-radius: 3px;
+  background: var(--sunk); border: 1px solid var(--edge); border-radius: 3px;
   margin-bottom: 6px; cursor: pointer;
 }
 .tog input { width: 20px; height: 20px; accent-color: var(--gold); }
-.tog.on { border-color: var(--gold-dim); background: #191408; }
+.tog.on { border-color: var(--gold-dim); background: #201808; }
 
 .tbl { width: 100%; overflow-x: auto; }
 .tbl table { width: 100%; border-collapse: collapse; font-size: 13px; }
@@ -274,7 +327,7 @@ main { padding: 12px 12px 120px; max-width: 780px; margin: 0 auto; }
 
 .commitbar {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
-  background: linear-gradient(180deg, rgba(11,14,19,.92), #0b0e13);
+  background: linear-gradient(180deg, rgba(18,16,11,.93), #12100b);
   border-top: 1px solid var(--edge);
   padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
 }
@@ -284,7 +337,7 @@ main { padding: 12px 12px 120px; max-width: 780px; margin: 0 auto; }
 
 .adslot {
   margin: 14px 0; padding: 10px; text-align: center;
-  background: #0d1117; border: 1px dashed var(--edge); border-radius: 4px;
+  background: var(--sunk); border: 1px dashed var(--edge); border-radius: 4px;
   color: var(--faint); font-size: 12px; min-height: 60px;
   display: flex; align-items: center; justify-content: center;
 }
