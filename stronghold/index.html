@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Stronghold</title>
-<meta name="description" content="Stronghold: a kingdom you rule one move a day. One hundred seats, free to play in any browser.">
+<meta name="description" content="Stronghold: a kingdom you rule one move a day, free, in any browser.">
 <meta name="color-scheme" content="dark">
 <link rel="stylesheet" href="style.css">
   <!-- Google AdSense: site verification and ad serving. -->
@@ -19,7 +19,7 @@
   <div class="panel">
     <div class="tabs-2" role="tablist">
       <button id="tab-login" role="tab" aria-selected="true">Sign in</button>
-      <button id="tab-new" role="tab" aria-selected="false">Take a seat</button>
+      <button id="tab-new" role="tab" aria-selected="false">Start a Kingdom</button>
     </div>
 
     <form id="form" autocomplete="off">
@@ -68,9 +68,9 @@
     mode = next;
     $("tab-login").setAttribute("aria-selected", mode === "login");
     $("tab-new").setAttribute("aria-selected", mode === "new");
-    $("go").textContent = mode === "login" ? "Sign in" : "Found my seat";
+    $("go").textContent = mode === "login" ? "Sign in" : "Start a Kingdom";
     $("uhint").textContent = mode === "login"
-      ? "The name you chose when you took your seat."
+      ? "The name you chose when you began."
       : "Letters, numbers, - and _ . Up to 10 characters.";
     $("phint").textContent = mode === "login"
       ? "Exactly 6 characters."
@@ -97,7 +97,7 @@
     call.then(function (r) {
       if (!r.ok) { $("go").disabled = false; return say(r.error || "That did not work."); }
       SH.setToken(r.token);
-      say(mode === "login" ? "Welcome back." : "Your seat is yours.", "ok");
+      say(mode === "login" ? "Welcome back." : "It is yours.", "ok");
       location.href = "play.html";
     }).catch(function (err) {
       $("go").disabled = false;

@@ -313,13 +313,11 @@
 
   function accountCard() {
     var s = el("section", "card");
-    s.appendChild(el("h2", null, "YOUR SEAT"));
+    s.appendChild(el("h2", null, "YOUR ACCOUNT"));
     var b = el("div", "body");
     var dl = el("dl", "kv");
     dl.appendChild(el("dt", null, "Signed in as"));
     dl.appendChild(el("dd", null, S.user));
-    dl.appendChild(el("dt", null, "Seats open"));
-    dl.appendChild(el("dd", null, S.slots.free + " of " + S.slots.max));
     b.appendChild(dl);
 
     var out = el("button", "btn plain", "Sign out on this device");
@@ -330,15 +328,15 @@
     };
     b.appendChild(out);
 
-    var end = el("button", "btn danger", "End my campaign and free my seat");
+    var end = el("button", "btn danger", "End my campaign");
     end.onclick = function () {
       var typed = prompt(
-        "This deletes your kingdom, your account and everything in it, " +
-        "and gives your seat to somebody else. It cannot be undone.\n\n" +
+        "This deletes your kingdom, your account and everything in " +
+        "it. It cannot be undone.\n\n" +
         "Type END MY CAMPAIGN to confirm.");
       if (typed !== "END MY CAMPAIGN") return;
       SH.quit().then(function (r) {
-        if (r.ok) { SH.setToken(""); alert("Your seat is free again. Thank you for playing."); location.href = "index.html"; }
+        if (r.ok) { SH.setToken(""); alert("It is done. Thank you for playing."); location.href = "index.html"; }
         else toast(r.error || "Could not end the campaign.");
       }).catch(function (e) { toast(e.message); });
     };
