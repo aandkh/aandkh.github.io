@@ -106,7 +106,12 @@
       i.inputMode = "numeric";
       i.onchange = i.oninput = function () { send(c.order, i.value); };
       wrap.appendChild(i);
-      if (c.hint || c.sub) wrap.appendChild(el("div", "hint", c.hint || c.sub));
+      /* Both, not one or the other. A building carries a description in
+         hint AND how many you already have in sub; rendering only the
+         first would have silently dropped the count the moment the
+         descriptions were added. */
+      if (c.hint) wrap.appendChild(el("div", "hint", c.hint));
+      if (c.sub) wrap.appendChild(el("div", "hint sub-count", c.sub));
       return wrap;
     }
 

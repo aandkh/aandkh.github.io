@@ -442,3 +442,7 @@ main { padding: 12px 12px 120px; max-width: 780px; margin: 0 auto; }
   font-variant-numeric: tabular-nums;
   margin-top: 2px;
 }
+
+/* "have 3" under a building, below its description. Dimmer than the
+   description so the two do not read as one run-on sentence. */
+.hint.sub-count { color: var(--gold-dim); font-family: var(--mono); font-size: 11.5px; }
