@@ -433,3 +433,12 @@ main { padding: 12px 12px 120px; max-width: 780px; margin: 0 auto; }
   .kv dt, .kv dd { font-size: 15px; }
   main { padding: 18px 18px 120px; }
 }
+
+/* The day's price, under the day's orders, in the bar that is always
+   on screen. Gold because it is the number that decides things. */
+.commitbar .staged .cost {
+  color: var(--gold-lit);
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}

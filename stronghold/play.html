@@ -242,9 +242,23 @@
     $("commit").textContent = open ? "Submit the day"
       : (S.state === "done" ? "Submitted" : "Closed");
     if (!open) { box.textContent = S.state_note; return; }
-    box.textContent = S.staged.length
-      ? S.staged.join(" · ")
-      : "Nothing staged. The day will pass on standing policy.";
+    if (!S.staged.length) {
+      box.textContent = "Nothing staged. The day will pass on standing policy.";
+      return;
+    }
+    /* What was ordered, and under it what it comes to. The cost line is
+       the whole point: the summary alone told you what you had chosen
+       and never what you were paying for it. */
+    box.textContent = "";
+    var what = document.createElement("div");
+    what.textContent = S.staged.join(" · ");
+    box.appendChild(what);
+    if (S.cost && S.cost.length) {
+      var cost = document.createElement("div");
+      cost.className = "cost";
+      cost.textContent = "Costs " + S.cost.join(" · ");
+      box.appendChild(cost);
+    }
   }
 
   function tabList() {
