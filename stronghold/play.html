@@ -441,7 +441,9 @@
     SH.commit().then(function (s) {
       busy = false;
       if (!s.ok) { toast(s.error || "Could not submit."); $("commit").disabled = false; return; }
-      S = s; repaint();
+      S = s;
+      repaint();
+      if (s.finale) { theEnd(); }
       toast("The day is submitted. Come back tomorrow.");
     }).catch(function (e) { busy = false; $("commit").disabled = false; toast(e.message); });
   };
@@ -452,6 +454,57 @@
   };
 
   function repaint() { paintFigs(); paintTabs(); paintMain(); paintStaged(); }
+
+  /* ---- the end of the world ---------------------------------------
+     Shown once, over everything, when the kingdom loads. There is no
+     way past it that is not the button: no close, no escape key, no
+     clicking the backdrop. The world has ended; the only thing left to
+     do is sign the wall. */
+  function theEnd() {
+    var back = el("div", "endveil");
+    var box = el("div", "endbox");
+
+    var h = el("h2", null, "Congratulations!");
+    box.appendChild(h);
+
+    var p1 = el("p", null,
+      "Your kingdom is the only one to survive a sudden asteroid strike. " +
+      "90% of your population has died, but the final 10% carry the torch " +
+      "for a brighter future of the world.");
+    box.appendChild(p1);
+
+    var p2 = el("p", "endwin",
+      "You win the game! Please etch your name in Stronghold history:");
+    box.appendChild(p2);
+
+    var ta = el("textarea");
+    ta.maxLength = 240;
+    ta.rows = 3;
+    box.appendChild(ta);
+
+    var ok = el("button", "btn", "Ok");
+    ok.onclick = function () {
+      ok.disabled = true;
+      ok.textContent = "…";
+      SH.finale(ta.value).then(function () {
+        SH.setToken("");
+        box.innerHTML = "";
+        box.appendChild(el("h2", null, "The torch is carried."));
+        box.appendChild(el("p", null,
+          "Stronghold is ended. Thank you for playing."));
+      }).catch(function (e) {
+        ok.disabled = false;
+        ok.textContent = "Ok";
+        box.appendChild(el("div", "msg err",
+          "The heralds did not hear you (" + e.message + "). Try again."));
+      });
+    };
+    box.appendChild(ok);
+
+    back.appendChild(box);
+    document.body.appendChild(back);
+    ta.focus();
+  }
 
   function boot() {
     if (!SH.getToken()) { location.href = "index.html"; return; }

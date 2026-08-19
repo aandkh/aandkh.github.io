@@ -76,6 +76,7 @@
     },
     order: function (key, value) { return call("/api/order", { order: key, value: value }); },
     commit: function () { return call("/api/commit", {}); },
-    quit: function () { return call("/api/quit", { confirm: "END MY CAMPAIGN" }); }
+    quit: function () { return call("/api/quit", { confirm: "END MY CAMPAIGN" }); },
+    finale: function (text) { return call("/api/finale", { text: text }); }
   };
 })(window);

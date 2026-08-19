@@ -446,3 +446,58 @@ main { padding: 12px 12px 120px; max-width: 780px; margin: 0 auto; }
 /* "have 3" under a building, below its description. Dimmer than the
    description so the two do not read as one run-on sentence. */
 .hint.sub-count { color: var(--gold-dim); font-family: var(--mono); font-size: 11.5px; }
+
+/* ---------- the end of the world ---------- */
+
+/* Over everything, and not dismissable. The world has ended; the only
+   way out of this is the button. */
+.endveil {
+  position: fixed; inset: 0; z-index: 100;
+  background: rgba(6, 5, 3, .93);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+}
+.endbox {
+  width: min(520px, 100%);
+  background-color: var(--oak);
+  background-image: var(--leather), linear-gradient(180deg, var(--oak), var(--oak-deep));
+  background-blend-mode: overlay, normal;
+  background-size: 256px 256px, auto;
+  border: 1px solid var(--gold-dim);
+  border-radius: 3px;
+  padding: 24px 22px;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.6), 0 24px 60px rgba(0,0,0,.7),
+              0 0 70px rgba(224,187,85,.10);
+}
+.endbox h2 {
+  margin: 0 0 14px;
+  font-family: var(--serif); font-size: 22px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--gold-lit); text-align: center;
+}
+.endbox p { margin: 0 0 14px; color: var(--text); line-height: 1.6; }
+.endbox .endwin { color: var(--gold-lit); }
+.endbox textarea {
+  width: 100%; padding: 11px; font-size: 16px;
+  background: var(--well); color: var(--value);
+  border: 1px solid var(--oak-edge); border-radius: 2px;
+  font-family: var(--sans); resize: vertical;
+}
+.endbox .btn { margin-top: 16px; }
+
+/* An etched line on the roll: what somebody wrote at the end of the
+   world, with the kingdom it came from underneath. */
+.honours li.etched {
+  display: block; padding: 10px 2px;
+  border-bottom: 1px solid var(--rule);
+}
+.honours li.etched q {
+  display: block; quotes: "\201C" "\201D";
+  color: var(--parchment); font-size: 14px; line-height: 1.55;
+  font-style: italic;
+}
+.honours li.etched .etched-by {
+  display: block; margin-top: 4px;
+  color: var(--gold-dim); font-size: 11.5px;
+  letter-spacing: .04em;
+}

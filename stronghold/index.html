@@ -204,17 +204,33 @@
   SH.honours().then(function (r) {
     if (!r || !r.ok || !r.honours || !r.honours.length) return;
     var list = $("honours-list");
-    r.honours.slice(0, 8).forEach(function (h) {
+    r.honours.slice(0, 20).forEach(function (h) {
       var li = document.createElement("li");
-      var who = document.createElement("b");
-      who.textContent = h.username;
-      li.appendChild(who);
-      li.appendChild(document.createTextNode(
-        " of " + h.province + ", " + h.realm));
-      var d = document.createElement("span");
-      d.className = "honour-day";
-      d.textContent = "day " + h.day;
-      li.appendChild(d);
+      /* What they wrote comes first and largest: it is the thing a
+         person actually left behind. The kingdom it belonged to sits
+         under it, the way a name sits under an inscription.
+         textContent throughout — these are strangers' words on a public
+         wall, and they are shown as text, never as markup. */
+      if (h.note) {
+        li.className = "etched";
+        var said = document.createElement("q");
+        said.textContent = h.note;
+        li.appendChild(said);
+        var by = document.createElement("span");
+        by.className = "etched-by";
+        by.textContent = h.province + ", " + h.realm + " — " + h.username;
+        li.appendChild(by);
+      } else {
+        var who = document.createElement("b");
+        who.textContent = h.username;
+        li.appendChild(who);
+        li.appendChild(document.createTextNode(
+          " of " + h.province + ", " + h.realm));
+        var d = document.createElement("span");
+        d.className = "honour-day";
+        d.textContent = "day " + h.day;
+        li.appendChild(d);
+      }
       list.appendChild(li);
     });
     $("honours").hidden = false;
