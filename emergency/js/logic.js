@@ -56,7 +56,7 @@ export function createDemoState(now) {
     incidents: [],
     log: [],
     peace: { lastRunAt: null },
-    disguise: { on: false, style: "auto", preset: "jess", customName: "", customLines: "", sent: [] },
+    disguise: { on: false, style: "auto", preset: "jess", customName: "", customLines: "", sent: [], inbox: [] },
     sound: true,
   };
   // The demo evening: Dad is out and sharing for half an hour, Leo is
@@ -75,6 +75,12 @@ export function nameOf(s, id) {
 
 export function fmtClock(ms) {
   return new Date(ms).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+}
+
+/* "23:00" to "11:00 PM". */
+export function fmtHHMM(hhmm) {
+  const [h, m] = hhmm.split(":").map(Number);
+  return fmtClock(new Date(2000, 0, 1, h, m).getTime());
 }
 
 export function fmtElapsed(ms) {
@@ -414,5 +420,6 @@ export function addSentText(s, text, now) {
 export function pruneTexts(s, now) {
   const before = s.disguise.sent.length;
   s.disguise.sent = s.disguise.sent.filter((m) => now - m.at < TEXT_TTL);
+  s.disguise.inbox = (s.disguise.inbox || []).filter((m) => now - m.at < TEXT_TTL);
   return before - s.disguise.sent.length;
 }

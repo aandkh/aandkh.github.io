@@ -49,3 +49,11 @@ export function onAct(root, handlers) {
     if (fn) fn(btn, e);
   });
 }
+
+/* Add .is-open after the element's first style is in place, so its CSS
+ * transition runs. A forced layout does this without waiting for a frame,
+ * which never comes while a page is in the background. */
+export function open(node, cls = "is-open") {
+  void node.offsetWidth;
+  node.classList.add(cls);
+}
