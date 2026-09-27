@@ -39,10 +39,9 @@ export function mountHome(container, ctx) {
           <span class="sos__ring sos__ring--a" aria-hidden="true"></span>
           <span class="sos__ring sos__ring--b" aria-hidden="true"></span>
           <span class="sos__fill" aria-hidden="true"></span>
-          <span class="chip chip--glass">SOS</span>
           <span class="sos__text">
-            <span class="sos__title">Hold for help</span>
-            <span class="sos__sub">Press and hold. Alerts everyone and shares where you are.</span>
+            <span class="sos__title">Emergency</span>
+            <span class="sos__sub">Alert the group</span>
           </span>
         </button>
 
