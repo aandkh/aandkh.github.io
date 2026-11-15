@@ -1,4 +1,4 @@
-import {openingState,isHoursPlaceLayer} from './opening-hours.js?v=20261115-gyms-nav1';
+import {openingState,isHoursPlaceLayer} from './opening-hours.js?v=20261115-gyms-nav2';
 
 // An explicit source check supersedes a downloaded listing, including failures.
 // Keep this separate from the source feature and saved/shared place snapshot.

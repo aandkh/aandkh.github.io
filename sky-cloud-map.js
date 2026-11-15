@@ -1,4 +1,4 @@
-import {apiFetch} from './api-client.js?v=20261115-gyms-nav1';
+import {apiFetch} from './api-client.js?v=20261115-gyms-nav2';
 const cache=new Map();
 export function createSkyCloudMap(map,{beforeOpen,format}){
  let group=null,controller=null,session=0;const panel=document.createElement('section');panel.className='sky-cloud-controls';panel.hidden=true;map.getContainer().parentElement.append(panel);

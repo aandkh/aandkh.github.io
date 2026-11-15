@@ -1,5 +1,5 @@
-import {BY_ID} from './catalog.js?v=20261115-gyms-nav1';
-import {coordinate,cleanState} from './core.js?v=20261115-gyms-nav1';
+import {BY_ID} from './catalog.js?v=20261115-gyms-nav2';
+import {coordinate,cleanState} from './core.js?v=20261115-gyms-nav2';
 
 // Stable 64-bit reference, independent of feed ordering and changing event details.
 export function placeToken(id){

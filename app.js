@@ -1,42 +1,42 @@
-import {gymPlaces,gymGroup,GYM_GROUPS,sortGyms} from './gyms.js?v=20261115-gyms-nav1';
-import {enrichMovies,movieFacts} from './movie-screenings.js?v=20261115-gyms-nav1';
-import {metroWeatherReadings} from './metro-weather.js?v=20261115-gyms-nav1';
-import {TERRAIN_OPTIONS,GEOLOGY_MODES,terrainGeology} from './terrain-geology.js?v=20261115-gyms-nav1';
-import {recentIncidents,incidentExplorer,incidentFilters,filterIncidents} from './recent-incidents.js?v=20261115-gyms-nav1';
-import {eventDay,eventOrder,eventTime,eventStamp,groupEventCards} from './event-dates.js?v=20261115-gyms-nav1';
-import {venueConcerts,addVenueConcerts} from './concert-calendar.js?v=20261115-gyms-nav1';
-import {createSkyCloudMap} from './sky-cloud-map.js?v=20261115-gyms-nav1';
-import {COMMUNITY_SOURCES,HIDDEN_LAYERS,CRIME_TYPES,combineCrime,appendAirAdvice,distance,routeMiles,pointInGeometry,sortRivers,enrichRivers,riverAverages,appendProviderLinks,appendSkySummary} from './layer-insights.js?v=20261115-gyms-nav1';
-import {createTrafficIncidents} from './traffic-incidents.js?v=20261115-gyms-nav1';
-import {attachSuggestions} from './search-suggestions.js?v=20261115-gyms-nav1';
-import {createFutureRadar} from './future-radar.js?v=20261115-gyms-nav1';
-import {searchLayers} from './explore.js?v=20261115-gyms-nav1';
-import {placeHash,readPlaceHash,placeState,findSharedFeature} from './short-links.js?v=20261115-gyms-nav1';
-import {appendPlaceNavigation} from './place-navigation.js?v=20261115-gyms-nav1';
-import {TODAY_LAYERS,happeningToday} from './today-filter.js?v=20261115-gyms-nav1';
-import {createWeatherReadings} from './weather-readings.js?v=20261115-gyms-nav1';
-import {enrichCultureFeature,cultureFeatureDisplayable} from './place-enrichment.js?v=20261115-gyms-nav1';
-import {apiFetch,apiUrl} from './api-client.js?v=20261115-gyms-nav1';
-import {regionalViewportBounds} from './viewport-bounds.js?v=20261115-gyms-nav1';
-import {placeMatchesSearch} from './place-search.js?v=20261115-gyms-nav1';
-import {filterPlaceFeatures,isExcludedChainPlace} from './chain-places.js?v=20261115-gyms-nav1';
-import {openingState,isHoursPlaceLayer} from './opening-hours.js?v=20261115-gyms-nav1';
-import {createHoursChecks,placeOpeningState} from './open-now-filter.js?v=20261115-gyms-nav1';
-import {createMapKey} from './map-key.js?v=20261115-gyms-nav1';
-import {layerMatchesSearch} from './layer-search.js?v=20261115-gyms-nav1';
-import {measureUI,startMeasurement} from './ui-performance.js?v=20261115-gyms-nav1';
-import {clusterPlaceFeatures,separateSelectedPlace,aggregateOverviewGroups,layoutPlaceBadges} from './place-clusters.js?v=20261115-gyms-nav1';
-import {appendSkyDiagram} from './forecast-visuals.js?v=20261115-gyms-nav1';
-import {appendVehicleInspector} from './vehicles.js?v=20261115-gyms-nav1';
-import {symbol} from './symbols.js?v=20261115-gyms-nav1';
-import {overlayStyles,routeOverlayStyles,aircraftDirectionStyles,markerPaint} from './overlay-style.js?v=20261115-gyms-nav1';
-import {uiIcon} from './ui-icons.js?v=20261115-gyms-nav1';
-import {MODE_DEFAULTS,OPACITY_DEFAULTS,cleanOverlayOpacity,cleanLayerModes,unexpiredFeatures} from './expansion-options.js?v=20261115-gyms-nav1';
-import {appendWeather,appendSkyExtras,createOpeningNotices} from './expansion-ui.js?v=20261115-gyms-nav1';
-import {LAYERS,BY_ID,EXAMPLES} from './catalog.js?v=20261115-gyms-nav1';
-import {RADAR_MODES,RADAR_TYPE_KEY,AQI,AIR_MODES} from './environment.js?v=20261115-gyms-nav1';
-import {CONFIG} from './config.js?v=20261115-gyms-nav1';
-import {REGION,coordinate,safeUrl,placeUrl,placeLinks,encodeState,decodeState,cleanState,cleanStop,loadPresets,savePresets,cleanPreset,browserStorage,layerSelectable,skyCloudRows,currentRoadworks,centroid,directionEnd,clusterPoints} from './core.js?v=20261115-gyms-nav1';
+import {gymPlaces,gymGroup,GYM_GROUPS,sortGyms} from './gyms.js?v=20261115-gyms-nav2';
+import {enrichMovies,movieFacts} from './movie-screenings.js?v=20261115-gyms-nav2';
+import {metroWeatherReadings} from './metro-weather.js?v=20261115-gyms-nav2';
+import {TERRAIN_OPTIONS,GEOLOGY_MODES,terrainGeology} from './terrain-geology.js?v=20261115-gyms-nav2';
+import {recentIncidents,incidentExplorer,incidentFilters,filterIncidents} from './recent-incidents.js?v=20261115-gyms-nav2';
+import {eventDay,eventOrder,eventTime,eventStamp,groupEventCards} from './event-dates.js?v=20261115-gyms-nav2';
+import {venueConcerts,addVenueConcerts} from './concert-calendar.js?v=20261115-gyms-nav2';
+import {createSkyCloudMap} from './sky-cloud-map.js?v=20261115-gyms-nav2';
+import {COMMUNITY_SOURCES,HIDDEN_LAYERS,CRIME_TYPES,combineCrime,appendAirAdvice,distance,routeMiles,pointInGeometry,sortRivers,enrichRivers,riverAverages,appendProviderLinks,appendSkySummary} from './layer-insights.js?v=20261115-gyms-nav2';
+import {createTrafficIncidents} from './traffic-incidents.js?v=20261115-gyms-nav2';
+import {attachSuggestions} from './search-suggestions.js?v=20261115-gyms-nav2';
+import {createFutureRadar} from './future-radar.js?v=20261115-gyms-nav2';
+import {searchLayers} from './explore.js?v=20261115-gyms-nav2';
+import {placeHash,readPlaceHash,placeState,findSharedFeature} from './short-links.js?v=20261115-gyms-nav2';
+import {appendPlaceNavigation} from './place-navigation.js?v=20261115-gyms-nav2';
+import {TODAY_LAYERS,happeningToday} from './today-filter.js?v=20261115-gyms-nav2';
+import {createWeatherReadings} from './weather-readings.js?v=20261115-gyms-nav2';
+import {enrichCultureFeature,cultureFeatureDisplayable} from './place-enrichment.js?v=20261115-gyms-nav2';
+import {apiFetch,apiUrl} from './api-client.js?v=20261115-gyms-nav2';
+import {regionalViewportBounds} from './viewport-bounds.js?v=20261115-gyms-nav2';
+import {placeMatchesSearch} from './place-search.js?v=20261115-gyms-nav2';
+import {filterPlaceFeatures,isExcludedChainPlace} from './chain-places.js?v=20261115-gyms-nav2';
+import {openingState,isHoursPlaceLayer} from './opening-hours.js?v=20261115-gyms-nav2';
+import {createHoursChecks,placeOpeningState} from './open-now-filter.js?v=20261115-gyms-nav2';
+import {createMapKey} from './map-key.js?v=20261115-gyms-nav2';
+import {layerMatchesSearch} from './layer-search.js?v=20261115-gyms-nav2';
+import {measureUI,startMeasurement} from './ui-performance.js?v=20261115-gyms-nav2';
+import {clusterPlaceFeatures,separateSelectedPlace,aggregateOverviewGroups,layoutPlaceBadges} from './place-clusters.js?v=20261115-gyms-nav2';
+import {appendSkyDiagram} from './forecast-visuals.js?v=20261115-gyms-nav2';
+import {appendVehicleInspector} from './vehicles.js?v=20261115-gyms-nav2';
+import {symbol} from './symbols.js?v=20261115-gyms-nav2';
+import {overlayStyles,routeOverlayStyles,aircraftDirectionStyles,markerPaint} from './overlay-style.js?v=20261115-gyms-nav2';
+import {uiIcon} from './ui-icons.js?v=20261115-gyms-nav2';
+import {MODE_DEFAULTS,OPACITY_DEFAULTS,cleanOverlayOpacity,cleanLayerModes,unexpiredFeatures} from './expansion-options.js?v=20261115-gyms-nav2';
+import {appendWeather,appendSkyExtras,createOpeningNotices} from './expansion-ui.js?v=20261115-gyms-nav2';
+import {LAYERS,BY_ID,EXAMPLES} from './catalog.js?v=20261115-gyms-nav2';
+import {RADAR_MODES,RADAR_TYPE_KEY,AQI,AIR_MODES} from './environment.js?v=20261115-gyms-nav2';
+import {CONFIG} from './config.js?v=20261115-gyms-nav2';
+import {REGION,coordinate,safeUrl,placeUrl,placeLinks,encodeState,decodeState,cleanState,cleanStop,loadPresets,savePresets,cleanPreset,browserStorage,layerSelectable,skyCloudRows,currentRoadworks,centroid,directionEnd,clusterPoints} from './core.js?v=20261115-gyms-nav2';
 const $=s=>document.querySelector(s),el=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;};
 const mapKey=createMapKey($('#environment-key'));if(mapKey.toggle.getAttribute('aria-expanded')==='true')mapKey.toggle.click();
 const btn=(text,fn,cls='')=>{const b=el('button',cls,text);b.type='button';b.addEventListener('click',fn);return b;};
@@ -377,7 +377,7 @@ function renderPlaceResults(){
   if(openNow&&isHoursPlaceLayer(id))for(const f of candidates){const p=f.properties||{},key=p.sourceId||p.id||f.id||id+JSON.stringify(f.geometry);if(counted.has(key))overlap=true;counted.add(key);counts[featureOpening(id,f,now).state]++;}
   let features=visibleFeatures(id,candidates,now);if(isHoursPlaceLayer(id))features.sort((a,b)=>(featureOpening(id,a,now).state==='unknown')-(featureOpening(id,b,now).state==='unknown'));if(features.some(f=>eventDay(f.properties?.start)))features.sort(eventOrder);if(id==='gyms')features=sortGyms(features,center,f=>featureOpening(id,f,now).state);if(id==='rivers')features=sortRivers(features,center);if(id==='crime'&&layerModes.crime==='recent')features=filterIncidents(features);if(id==='crime'&&layerModes.crime!=='recent')features.sort((a,b)=>crimeSort==='count'?b.properties.offenses-a.properties.offenses:crimeSort==='high'?b.properties.value-a.properties.value:a.properties.value-b.properties.value);if(id==='cycling'){for(const f of features){f.properties.mappedMiles??=routeMiles(f);}features.sort((a,b)=>cyclingSort==='short'?(a.properties.mappedMiles??Infinity)-(b.properties.mappedMiles??Infinity):cyclingSort==='long'?(b.properties.mappedMiles??-1)-(a.properties.mappedMiles??-1):routeDistance(a,center)-routeDistance(b,center));}
   if(!features.length)continue;if(!currentResultsLayer||currentResultsLayer==='food')section.append(el('h2','',BY_ID[id].name));
-  let lastGymGroup='';const datedLayer=features.some(f=>eventDay(f.properties?.start))&&id!=='crime';for(const f of (datedLayer||id==='gyms'||id==='crime'&&layerModes.crime==='recent'?features:features.slice(0,60))){const p=f.properties||{};if(id==='gyms'&&gymGroup(f)!==lastGymGroup){lastGymGroup=gymGroup(f);section.append(el('h3','gym-group-heading',GYM_GROUPS[lastGymGroup]));}const b=btn('',()=>showFeature(id,f),'result-card');if(id==='gyms')b.dataset.gymGroup=gymGroup(f);b.dataset.resultKey=id+':'+(p.id||f.id||JSON.stringify(f.geometry));const preview=id==='movies'&&p.start?(p.venue||p.address||''):id==='demographics'?[p.metricLabel,Number.isFinite(p.value)?new Intl.NumberFormat('en-US',{maximumFractionDigits:1}).format(p.value)+' '+p.unit:'No published estimate',Number.isFinite(p.moe)?'±'+new Intl.NumberFormat('en-US',{maximumFractionDigits:1}).format(p.moe)+' (90% MOE)':'',p.sourcePeriod].filter(Boolean).join(' · '):p.address||p.description||BY_ID[id].name;b.append(el('strong','',p.title||p.name||BY_ID[id].name));if(eventDay(p.start))b.append(el('small','event-entry-when',eventStamp(p.start,now)));b.append(el('small','',preview));if(id==='movies'&&movieFacts(p))b.append(el('small','movie-facts',movieFacts(p)));if(id==='cycling'&&Number.isFinite(p.mappedMiles))b.append(el('small','',p.mappedMiles.toFixed(1)+' mapped miles · may be a route segment'));if(id==='rivers'&&preview!==p.description)b.append(el('small','',p.description));if(isHoursPlaceLayer(id)&&!eventDay(p.start)&&featureOpening(id,f,now).state==='unknown'){b.dataset.hoursUnknown='true';b.append(el('small','','Hours unknown'));}if(p.incidentAt){b.append(el('small','result-event-time','Incident: '+format(p.incidentAt)),el('small','',(p.jurisdiction==='county'?'St. Louis County':'St. Louis City')+' · '+(p.locationAccuracy||'Approximate area')+(Number.isFinite(p.deaths)?' · '+p.deaths+' reported deaths':'')));}if(datedLayer&&eventDay(p.start)){if(!currentResultsLayer)b.append(el('small','',BY_ID[id].name));agenda.push({feature:f,card:b});}else{if(datedLayer&&!section.querySelector('.undated-heading'))section.append(el('h3','undated-heading',id==='movies'?'Theaters · schedules on their websites':'Places · date not supplied'));section.append(b);}total++;}
+  let lastGymGroup='';const datedLayer=features.some(f=>eventDay(f.properties?.start))&&id!=='crime';for(const f of (datedLayer||id==='gyms'||id==='crime'&&layerModes.crime==='recent'?features:features.slice(0,60))){const p=f.properties||{};if(id==='gyms'&&gymGroup(f)!==lastGymGroup){lastGymGroup=gymGroup(f);section.append(el('h3','gym-group-heading',GYM_GROUPS[lastGymGroup]));}const b=btn('',()=>showFeature(id,f),'result-card');if(id==='gyms')b.dataset.gymGroup=gymGroup(f);b.dataset.resultKey=id+':'+(p.id||f.id||JSON.stringify(f.geometry));const preview=id==='gyms'?(p.address||'View gym details'):id==='movies'&&p.start?(p.venue||p.address||''):id==='demographics'?[p.metricLabel,Number.isFinite(p.value)?new Intl.NumberFormat('en-US',{maximumFractionDigits:1}).format(p.value)+' '+p.unit:'No published estimate',Number.isFinite(p.moe)?'±'+new Intl.NumberFormat('en-US',{maximumFractionDigits:1}).format(p.moe)+' (90% MOE)':'',p.sourcePeriod].filter(Boolean).join(' · '):p.address||p.description||BY_ID[id].name;b.append(el('strong','',p.title||p.name||BY_ID[id].name));if(eventDay(p.start))b.append(el('small','event-entry-when',eventStamp(p.start,now)));b.append(el('small','',preview));if(id==='movies'&&movieFacts(p))b.append(el('small','movie-facts',movieFacts(p)));if(id==='cycling'&&Number.isFinite(p.mappedMiles))b.append(el('small','',p.mappedMiles.toFixed(1)+' mapped miles · may be a route segment'));if(id==='rivers'&&preview!==p.description)b.append(el('small','',p.description));if(isHoursPlaceLayer(id)&&!eventDay(p.start)&&featureOpening(id,f,now).state==='unknown'){b.dataset.hoursUnknown='true';b.append(el('small','','Hours unknown'));}if(p.incidentAt){b.append(el('small','result-event-time','Incident: '+format(p.incidentAt)),el('small','',(p.jurisdiction==='county'?'St. Louis County':'St. Louis City')+' · '+(p.locationAccuracy||'Approximate area')+(Number.isFinite(p.deaths)?' · '+p.deaths+' reported deaths':'')));}if(datedLayer&&eventDay(p.start)){if(!currentResultsLayer)b.append(el('small','',BY_ID[id].name));agenda.push({feature:f,card:b});}else{if(datedLayer&&!section.querySelector('.undated-heading'))section.append(el('h3','undated-heading',id==='movies'?'Theaters · schedules on their websites':'Places · date not supplied'));section.append(b);}total++;}
   if(!datedLayer&&id!=='gyms'&&!(id==='crime'&&layerModes.crime==='recent')&&features.length>60)section.append(el('p','small',`Showing 60 of ${features.length} results. Search or zoom in to narrow the list.`));host.append(section);
  }
  groupEventCards(host,agenda,now);
@@ -434,7 +434,7 @@ async function openSharedPlace(place){
  const request=placeLinkRequest;
  try{
   if(place.layer==='crime'){const feature=findSharedFeature(place,(await recentIncidents(Date.now(),{...incidentFilters,range:'all',types:[],jurisdiction:'all',fatal:'all'})).features);if(request!==placeLinkRequest)return;if(feature){layerModes.crime='recent';showDetail(toStop(place.layer,feature),feature.properties,place.layer);return;}}
-  if(place.layer==='gyms'){const feature=findSharedFeature(place,(await gymPlaces()).features);if(request!==placeLinkRequest)return;if(feature){showDetail(toStop('gyms',feature),feature.properties,'gyms',true);return;}throw Error('This gym is no longer in the directory.');}
+  if(place.layer==='gyms'){const feature=findSharedFeature(place,(await gymPlaces()).features);if(request!==placeLinkRequest)return;if(feature){showDetail(toStop('gyms',feature),feature.properties,'gyms');return;}throw Error('This gym is no longer in the directory.');}
   if(place.layer==='concerts'){const feature=findSharedFeature(place,await venueConcerts());if(request!==placeLinkRequest)return;if(feature){showDetail(toStop(place.layer,feature),feature.properties,place.layer);return;}}
   const bbox=[Math.max(REGION.west,place.lng-.02),Math.max(REGION.south,place.lat-.02),Math.min(REGION.east,place.lng+.02),Math.min(REGION.north,place.lat+.02)].join(',');
   const response=await apiFetch('/api/layers/'+place.layer+'?bbox='+bbox,{signal:AbortSignal.timeout(20000)});
@@ -562,7 +562,7 @@ $('#explore-map').onclick=()=>{
 $('#shared-return').onclick=()=>{
  if(!sharedReturn)return;const saved=sharedReturn;
  history.replaceState(null,'',location.pathname+location.search+saved.hash);
- applyState(saved.state,{shared:true});navigationState();
+ const place=readPlaceHash(saved.hash);if(place)openSharedPlace(place);else applyState(saved.state,{shared:true});navigationState();
 };
 new MutationObserver(navigationState).observe(document.body,{attributes:true,attributeFilter:['class']});
 for(const panel of [$('#detail'),$('#results')])new MutationObserver(navigationState).observe(panel,{attributes:true,attributeFilter:['hidden']});
