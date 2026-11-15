@@ -2,7 +2,7 @@ import {searchLayers} from './explore.js';
 import {placeHash,readPlaceHash,placeState,findSharedFeature} from './short-links.js';
 import {appendPlaceNavigation} from './place-navigation.js';
 import {TODAY_LAYERS,happeningToday} from './today-filter.js';
-import {createWeatherReadings} from './weather-readings.js?v=20261115-wind';
+import {createWeatherReadings} from './weather-readings.js?v=20261115-fit7';
 import {enrichCultureFeature,cultureFeatureDisplayable} from './place-enrichment.js';
 import {apiFetch,apiUrl} from './api-client.js';
 import {regionalViewportBounds} from './viewport-bounds.js';
@@ -56,7 +56,7 @@ const map=L.map('map',{preferCanvas:true,attributionControl:false,zoomControl:tr
 map.createPane('weather-overlay');map.getPane('weather-overlay').style.zIndex='350';
 map.createPane('traffic-overlay');map.getPane('traffic-overlay').style.zIndex='450';
 const placeMarkers=L.layerGroup().addTo(map);
-const weatherReadings=createWeatherReadings(map,{formatTime:format});let weatherReadingsAt=0,weatherReadingsRequest=null;
+const weatherReadings=createWeatherReadings(map,{formatTime:format,fitOnLoad:!initial});let weatherReadingsAt=0,weatherReadingsRequest=null;
 async function refreshWeatherReadings(){if(!enabled.has('radar')||document.hidden||weatherReadingsRequest)return;const controller=new AbortController();weatherReadingsRequest=controller;try{const r=await apiFetch('/api/weather-readings',{signal:controller.signal});if(!r.ok)throw Error('Weather unavailable');const d=await r.json();weatherReadingsAt=Date.now();weatherReadings.render(d.readings,enabled.has('radar'));}catch(e){if(e.name!=='AbortError'){weatherReadingsAt=Date.now();weatherReadings.render([],enabled.has('radar'));}}finally{if(weatherReadingsRequest===controller)weatherReadingsRequest=null;}}
 function refreshTodayView(){for(const id of enabled){const d=data.get(id);if(d?.features?.length){removeDrawing(id);drawFeatures(id,d);}}renderPlaceMarkers();renderResults();renderLayers();}
 function setTodayOnly(value){todayOnly=value===true;if(todayOnly){for(const id of TODAY_LAYERS)if(!requestedLayers.has(id)){todayAdded.add(id);toggle(id,true,false);}}else{for(const id of todayAdded)toggle(id,false);todayAdded.clear();}refreshTodayView();}
@@ -332,13 +332,13 @@ async function checkPlace(stop,host,old,closureNotice,lookup,freshness,hoursLine
 }
 function renderResults(){return measureUI('place-results',renderPlaceResults);}
 function renderPlaceResults(){
- $('#results-title').textContent=currentResultsLayer?BY_ID[currentResultsLayer].name:'Results';$('#all-results').hidden=!currentResultsLayer;const resultLayers=currentResultsLayer?[currentResultsLayer]:[...requestedLayers];
+ $('#results-title').textContent=currentResultsLayer==='food'?'Food':currentResultsLayer?BY_ID[currentResultsLayer].name:'Results';$('#all-results').hidden=!currentResultsLayer;const resultLayers=currentResultsLayer==='food'?['restaurants','bars']:currentResultsLayer?[currentResultsLayer]:[...requestedLayers];
  const host=$('#results-list'),focused=host.contains(document.activeElement)?document.activeElement.dataset.resultKey:null;host.replaceChildren();const q=$('#place-search').value.trim().toLowerCase(),now=Date.now(),counts={open:0,closed:0,unknown:0},counted=new Set();let total=0,overlap=false;
- for(const id of enabled){if(currentResultsLayer&&id!==currentResultsLayer)continue;const d=data.get(id),section=el('div','result-group');
+ for(const id of enabled){if(currentResultsLayer&&!resultLayers.includes(id))continue;const d=data.get(id),section=el('div','result-group');
   const candidates=localPlaceFeatures(id,id==='roadworks'?currentRoadworks(d?.features):Array.isArray(d?.features)?d.features:[]).filter(f=>{const c=f.geometry?.coordinates;return f.geometry?.type!=='Point'||(coordinate(c?.[1],c?.[0])&&map.getBounds().contains([c[1],c[0]]));}).filter(f=>placeMatchesSearch(f,id,q));
   if(openNow&&isHoursPlaceLayer(id))for(const f of candidates){const p=f.properties||{},key=p.sourceId||p.id||f.id||id+JSON.stringify(f.geometry);if(counted.has(key))overlap=true;counted.add(key);counts[featureOpening(id,f,now).state]++;}
   const features=visibleFeatures(id,candidates,now);
-  if(!features.length)continue;if(!currentResultsLayer)section.append(el('h2','',BY_ID[id].name));
+  if(!features.length)continue;if(!currentResultsLayer||currentResultsLayer==='food')section.append(el('h2','',BY_ID[id].name));
   for(const f of features.slice(0,60)){const p=f.properties||{},b=btn('',()=>showFeature(id,f),'result-card');b.dataset.resultKey=id+':'+(p.id||f.id||JSON.stringify(f.geometry));const preview=id==='demographics'?[p.metricLabel,Number.isFinite(p.value)?new Intl.NumberFormat('en-US',{maximumFractionDigits:1}).format(p.value)+' '+p.unit:'No published estimate',Number.isFinite(p.moe)?'±'+new Intl.NumberFormat('en-US',{maximumFractionDigits:1}).format(p.moe)+' (90% MOE)':'',p.sourcePeriod].filter(Boolean).join(' · '):p.address||p.description||BY_ID[id].name;b.append(el('strong','',p.title||p.name||BY_ID[id].name),el('small','',preview));if(p.start)b.append(el('small','result-event-time',format(p.start)));section.append(b);total++;}
   if(features.length>60)section.append(el('p','small',`Showing 60 of ${features.length} results. Search or zoom in to narrow the list.`));host.append(section);
  }
@@ -349,7 +349,7 @@ function renderPlaceResults(){
  if(focused)([...host.querySelectorAll('[data-result-key]')].find(n=>n.dataset.resultKey===focused)||$('#place-search')).focus({preventScroll:true});
 }
 function currentState(){const c=map.getCenter();return{v:1,todayOnly,openNow,mapStyle,radarMode,airMode,layerModes:{...layerModes},overlayOpacity:{...overlayOpacity},center:[c.lat,c.lng],zoom:map.getZoom(),layers:[...requestedLayers],focus,imageryDate};}
-function applyState(value,{explain=false,shared=false}={}){const s=cleanState({...value,mapStyle:value.mapStyle||mapStyle});closeDetail();document.body.classList.toggle('shared-view',shared);document.body.classList.remove('shared-peek');map.invalidateSize({pan:false});currentResultsLayer=null;if(shared&&s.focus){s.layers=s.focus.layer?[s.focus.layer]:[];s.todayOnly=false;s.openNow=false;}todayOnly=s.todayOnly;todayAdded.clear();openNow=s.openNow;$('#open-now').checked=openNow;radarMode=s.radarMode;airMode=s.airMode;layerModes=cleanLayerModes(s.layerModes);overlayOpacity=cleanOverlayOpacity(s.overlayOpacity);if(s.mapStyle!==mapStyle)setMapStyle(s.mapStyle);for(const id of [...requestedLayers])toggle(id,false);imageryDate=s.imageryDate;map.setView(s.center,s.zoom,{animate:false});for(const id of s.layers)toggle(id,true,false);if(todayOnly)setTodayOnly(true);if(s.focus)showDetail(s.focus,{},s.focus.layer,true);renderLegend();renderResults();setControls(false);if(explain&&Object.keys(capabilities).length){const missing=s.layers.filter(id=>!selectable(id));if(missing.length)toast('This view could not load '+missing.map(id=>BY_ID[id].name).join(', ')+'.');}}
+function applyState(value,{explain=false,shared=false}={}){weatherReadings.stopOverview();const s=cleanState({...value,mapStyle:value.mapStyle||mapStyle});closeDetail();document.body.classList.toggle('shared-view',shared);document.body.classList.remove('shared-peek');map.invalidateSize({pan:false});currentResultsLayer=null;if(shared&&s.focus){s.layers=s.focus.layer?[s.focus.layer]:[];s.todayOnly=false;s.openNow=false;}todayOnly=s.todayOnly;todayAdded.clear();openNow=s.openNow;$('#open-now').checked=openNow;radarMode=s.radarMode;airMode=s.airMode;layerModes=cleanLayerModes(s.layerModes);overlayOpacity=cleanOverlayOpacity(s.overlayOpacity);if(s.mapStyle!==mapStyle)setMapStyle(s.mapStyle);for(const id of [...requestedLayers])toggle(id,false);imageryDate=s.imageryDate;map.setView(s.center,s.zoom,{animate:false});for(const id of s.layers)toggle(id,true,false);if(todayOnly)setTodayOnly(true);if(s.focus)showDetail(s.focus,{},s.focus.layer,true);renderLegend();renderResults();setControls(false);if(explain&&Object.keys(capabilities).length){const missing=s.layers.filter(id=>!selectable(id));if(missing.length)toast('This view could not load '+missing.map(id=>BY_ID[id].name).join(', ')+'.');}}
 function listFocus(host){const active=document.activeElement;if(!host.contains(active))return null;const card=active.closest('[data-item-id]');return card?{id:card.dataset.itemId,action:active.dataset.action,index:[...host.children].indexOf(card)}:null;}
 function restoreListFocus(host,saved,fallback){if(!saved)return;const cards=[...host.querySelectorAll('[data-item-id]')],card=cards.find(c=>c.dataset.itemId===saved.id)||cards[Math.min(saved.index,cards.length-1)],buttons=card?[...card.querySelectorAll('button:not(:disabled)')]:[];(buttons.find(b=>b.dataset.action===saved.action)||buttons[0]||fallback)?.focus({preventScroll:true});}
 function storePresets(){try{savePresets(storage,presets);return true;}catch{toast('Saved maps could not be stored in this browser. Export them to keep a copy.');return false;}}
@@ -370,7 +370,7 @@ async function share(){try{
  catch{$('#share-dialog').showModal();$('#share-url').focus();$('#share-url').select();$('#share-url').scrollLeft=0;}
  }catch(e){toast(e.message);}}
 $('#copy-link').onclick=async()=>{try{await navigator.clipboard.writeText($('#share-url').value);$('#share-dialog').close();toast('Link copied.');}catch{$('#share-url').focus();$('#share-url').select();$('#share-url').scrollLeft=0;toast('Select and copy the link above.');}};
-$('#share').onclick=()=>share();$('#home').onclick=()=>map.setView(CONFIG.center,defaultZoom());$('#refresh').onclick=()=>measureUI('interaction:refresh-dispatch',()=>{for(const id of enabled)loadLayer(id);openingNotices.refresh();});
+$('#share').onclick=()=>share();$('#home').onclick=()=>{closeDetail({restoreFocus:true});setResults(false);setControls(false);map.invalidateSize({pan:false});map.setView(CONFIG.center,defaultZoom());weatherReadings.fitOverview();};$('#refresh').onclick=()=>measureUI('interaction:refresh-dispatch',()=>{for(const id of enabled)loadLayer(id);openingNotices.refresh();});
 for(const button of document.querySelectorAll('[data-layer-filter]'))button.onclick=()=>measureUI('interaction:layer-filter',()=>{layerFilter=button.dataset.layerFilter;renderLayers();});
 $('#clear-layers').onclick=()=>{todayOnly=false;todayAdded.clear();for(const id of [...requestedLayers])toggle(id,false);};$('#layer-search').oninput=()=>measureUI('interaction:layer-search',renderLayers);$('#place-search').oninput=()=>{clearTimeout(searchTimer);searchTimer=setTimeout(()=>runSearch(),140);};$('#open-now').onchange=e=>setOpenNow(e.target.checked);
 function setResults(open){const wasOpen=!$('#results').hidden;if(open){closeDetail();setControls(false);$('#results').hidden=false;renderResults();}else{$('#results').hidden=true;if(wasOpen)$('#results-toggle').focus({preventScroll:true});}$('#results-toggle').setAttribute('aria-expanded',String(open));}
@@ -418,7 +418,7 @@ const openingNotices=createOpeningNotices({format});
 if(sharedPlace)openSharedPlace(sharedPlace);
 
 let searchTimer;
-function runSearch(){
+function runSearch(){weatherReadings.stopOverview();
  currentResultsLayer=null;const query=$('#place-search').value.trim();
  if(query){const suggested=searchLayers(query).filter(id=>Object.hasOwn(BY_ID,id));const ids=suggested.length?suggested:([...requestedLayers].some(id=>['osm','events','publicevents','snapshot'].includes(BY_ID[id]?.kind))?[]:['restaurants','parks','culture']);for(const id of ids)if(!requestedLayers.has(id))toggle(id,true,false);}
  setResults(true);
@@ -428,13 +428,17 @@ $('#place-search').onfocus=()=>setResults(true);
 $('#close-layers').onclick=()=>setControls(false);
 $('#layers-backdrop').onclick=()=>setControls(false);
 for(const button of document.querySelectorAll('[data-quick]'))button.onclick=()=>{
- const id=button.dataset.quick;
- if(id==='saved'){switchTab('presets');setResults(false);setControls(true);return;}
- $('#place-search').value=id==='coffee'?'coffee':'';
- if(id==='today'){currentResultsLayer=null;setTodayOnly(true);}else{if(todayOnly)setTodayOnly(false);const layer=id==='coffee'?'restaurants':id;toggle(layer,true,false);currentResultsLayer=layer;}
- setResults(true);syncQuickCategories();
+ const id=button.dataset.quick;weatherReadings.stopOverview();$('#place-search').value='';
+ if(id==='today'){currentResultsLayer=null;setTodayOnly(true);setResults(true);}
+ else{
+  if(todayOnly)setTodayOnly(false);
+  if(id==='food'){currentResultsLayer='food';for(const layer of ['restaurants','bars'])if(!requestedLayers.has(layer))toggle(layer,true,false);setResults(true);}
+  else if(id==='weather'){$('#results').hidden=true;toggle('weather',true,false);renderWeather();setControls(false);}
+  else if(id==='air'){setResults(false);closeDetail();toggle('air',true,false);setControls(false);if(mapKey.toggle.getAttribute('aria-expanded')!=='true')mapKey.toggle.click();}
+ }
+ syncQuickCategories();
 };
-function syncQuickCategories(){for(const button of document.querySelectorAll('[data-quick]')){const id=button.dataset.quick;button.setAttribute('aria-pressed',String(id==='today'?todayOnly:id==='coffee'?$('#place-search').value.toLowerCase()==='coffee':id==='saved'?false:requestedLayers.has(id)));}}
+function syncQuickCategories(){for(const button of document.querySelectorAll('[data-quick]')){const id=button.dataset.quick;button.setAttribute('aria-pressed',String(id==='today'?todayOnly:id==='food'?requestedLayers.has('restaurants')&&requestedLayers.has('bars'):requestedLayers.has(id)));}}
 function backToResults(){closeDetail();if(resultView)map.setView(resultView.center,resultView.zoom,{animate:false});$('#results').hidden=false;renderResults();$('#results').scrollTop=resultScroll;const key=detailReturnTarget?.dataset.resultKey;const target=[...$('#results-list').querySelectorAll('[data-result-key]')].find(node=>node.dataset.resultKey===key);(target||$('#results-close')).focus({preventScroll:true});}
 document.addEventListener('keydown',event=>{if(event.key==='/'&&!event.ctrlKey&&!event.metaKey&&!event.altKey&&!event.target.closest('input,textarea,select,[contenteditable=true]')&&!document.querySelector('dialog[open]')){event.preventDefault();$('#place-search').focus();}});
 syncQuickCategories();
@@ -442,7 +446,7 @@ syncQuickCategories();
 $('#explore-map').onclick=()=>{closeDetail();document.body.classList.remove('shared-view','shared-peek');map.invalidateSize({pan:false});$('#place-search').focus();};
 
 function browseable(id){return !!BY_ID[id]&&!['radar','traffic','air','flood','history','light','sky','weather','terrain','gap'].includes(BY_ID[id].kind);}
-function browseLayer(id){
+function browseLayer(id){weatherReadings.stopOverview();
  if(!browseable(id))return;
  document.body.classList.remove('shared-view','shared-peek');map.invalidateSize({pan:false});
  currentResultsLayer=id;$('#place-search').value='';if(todayOnly)setTodayOnly(false);

@@ -11,8 +11,22 @@ export function windPresentation(reading){
 export function weatherMarkerReadings(readings,now=Date.now()){
  return (Array.isArray(readings)?readings:[]).filter(r=>r&&typeof r.id==='string'&&Number.isFinite(r.lat)&&Number.isFinite(r.lng)&&r.lat>=38.1&&r.lat<=39.2&&r.lng>=-91.2&&r.lng<=-89.4&&Number.isFinite(r.temperatureF)&&Number.isFinite(Date.parse(r.expiresAt))&&Date.parse(r.expiresAt)>now);
 }
-export function createWeatherReadings(map,{formatTime,leaflet=globalThis.L}={}){
- const group=leaflet.layerGroup(),markers=new Map();let saved=[];
+export function createWeatherReadings(map,{formatTime,leaflet=globalThis.L,fitOnLoad=false}={}){
+ const group=leaflet.layerGroup(),markers=new Map();let saved=[],overview=fitOnLoad,fitFrame;
+ const container=map.getContainer();
+ const stopOverview=()=>{overview=false;};
+ container.addEventListener('pointerdown',stopOverview,{passive:true});container.addEventListener('wheel',stopOverview,{passive:true});container.addEventListener('keydown',stopOverview);
+ function fitOverview(){overview=true;fit();}
+ function fit(){
+  if(!overview||!map.hasLayer(group))return;const readings=weatherMarkerReadings(saved);if(readings.length<2)return;
+  const rect=container.getBoundingClientRect(),shell=container.parentElement;let top=12,bottom=16;
+  for(const selector of ['#map-search','#quick-categories']){const node=shell.querySelector(selector);if(node&&node.getClientRects().length&&getComputedStyle(node).visibility!=='hidden')top=Math.max(top,node.getBoundingClientRect().bottom-rect.top+12);}
+  for(const selector of ['.map-toolbar','#legend','#environment-key']){const node=shell.querySelector(selector);if(node&&node.getClientRects().length&&getComputedStyle(node).visibility!=='hidden')bottom=Math.max(bottom,rect.bottom-node.getBoundingClientRect().top+12);}
+  let cardHeight=90,cardWidth=100;for(const node of container.querySelectorAll('.weather-reading')){cardHeight=Math.max(cardHeight,node.offsetHeight);cardWidth=Math.max(cardWidth,node.offsetWidth);}
+  const side=cardWidth/2+18;map.fitBounds(readings.map(r=>[r.lat,r.lng]),{paddingTopLeft:[side,top+cardHeight+14],paddingBottomRight:[side,bottom+10],maxZoom:10,animate:false});
+ }
+ function scheduleFit(){cancelAnimationFrame(fitFrame);fitFrame=requestAnimationFrame(fit);}
+ map.on('resize',scheduleFit);
  if(!map.getPane('weather-stations'))map.createPane('weather-stations');
  map.getPane('weather-stations').style.zIndex='610';
  function render(readings=saved,visible=true,now=Date.now()){
@@ -33,7 +47,7 @@ export function createWeatherReadings(map,{formatTime,leaflet=globalThis.L}={}){
    if(markers.has(r.id))markers.get(r.id).setLatLng([r.lat,r.lng]).setIcon(icon);
    else{const marker=leaflet.marker([r.lat,r.lng],{icon,pane:'weather-stations',interactive:false,keyboard:false}).addTo(group);markers.set(r.id,marker);}
   }
-  if(!map.hasLayer(group))group.addTo(map);
+  if(!map.hasLayer(group))group.addTo(map);if(overview)scheduleFit();
  }
- return{render,hide(){group.remove();},expire(visible,now=Date.now()){render(saved,visible,now);}};
+ return{render,fitOverview,stopOverview,hide(){group.remove();},expire(visible,now=Date.now()){render(saved,visible,now);}};
 }

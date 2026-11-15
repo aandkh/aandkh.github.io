@@ -119,3 +119,26 @@ body.shared-view .map-shell{margin-left:12px}
 .result-card .result-event-time{font-size:12px;font-weight:600;color:var(--ink);margin-top:7px}
 @media(min-width:801px){#results{width:min(380px,calc(100% - 96px));bottom:84px;max-height:calc(100% - 220px)}}
 @media(max-width:800px){.floating-head .detail-layer-link{max-width:52%;font-size:11px}.floating-head:has(.back-results) .detail-layer-link{max-width:34%}body.shared-view .floating-head .detail-layer-link{font-size:10px;max-width:48%;min-height:36px;padding:6px}}
+/* Keep every shortcut on screen, without a clipped horizontal strip. */
+#quick-categories{flex-wrap:wrap;overflow:visible}
+#quick-categories button{padding:8px 14px}
+@media(max-width:800px){
+ #quick-categories{left:12px;right:12px;gap:5px;display:grid;grid-template-columns:1.35fr 1.1fr 1fr .7fr;padding:3px 0 8px}
+ #quick-categories button{min-width:0;padding:7px 4px;font-size:11px;min-height:42px}
+ /* Layer browsing is a sheet, with the unobstructed map above it. */
+ #sidebar{top:auto;bottom:83px;left:8px;right:8px;width:auto;height:52%;max-height:52%;border-radius:22px;box-shadow:0 -3px 25px #0003}
+ #layers-backdrop{background:transparent;z-index:640}
+ body.controls-open .map-toolbar{visibility:visible;pointer-events:auto}
+ body.controls-open #mobile-controls{position:static;visibility:visible;pointer-events:auto;min-width:0;max-width:none;flex:1;width:auto;height:46px;background:var(--surface-soft)}
+ body.controls-open #mobile-controls>.ui-icon,body.controls-open #mobile-controls>.control-label{display:inline}
+ body.controls-open #mobile-controls:after{display:none}
+ body.controls-open .map-toolbar select,body.controls-open #results-toggle{visibility:visible;pointer-events:auto}
+ body.controls-open .map-tools-left>*{pointer-events:auto}
+ #detail:not(.sky-panel),.floating.sky-panel,body.detail-expanded #detail{top:auto;bottom:83px;height:auto;max-height:52%}
+ #results{top:auto;bottom:83px;max-height:45%}
+ .map-shell:has(#detail:not([hidden])) #map-search,.map-shell:has(#detail:not([hidden])) #quick-categories{visibility:hidden}
+ body.shared-view #detail:not(.sky-panel){max-height:56%}
+ #environment-key{max-height:35%}
+ #share-dialog,.notices-dialog{max-height:58dvh}
+}
+@media(min-width:801px){#detail,#results,.floating.weather-panel{width:min(380px,44%)}#share-dialog,.notices-dialog{max-height:65dvh}}
