@@ -2,7 +2,7 @@ import {searchLayers} from './explore.js';
 import {placeHash,readPlaceHash,placeState,findSharedFeature} from './short-links.js';
 import {appendPlaceNavigation} from './place-navigation.js';
 import {TODAY_LAYERS,happeningToday} from './today-filter.js';
-import {createWeatherReadings} from './weather-readings.js';
+import {createWeatherReadings} from './weather-readings.js?v=20261115-wind';
 import {enrichCultureFeature,cultureFeatureDisplayable} from './place-enrichment.js';
 import {apiFetch,apiUrl} from './api-client.js';
 import {regionalViewportBounds} from './viewport-bounds.js';
@@ -344,6 +344,7 @@ function renderPlaceResults(){
  const summary=$('#open-now-summary');summary.hidden=!openNow;summary.textContent=[...enabled].some(isHoursPlaceLayer)?`${counts.open} open results · ${counts.closed} closed · ${counts.unknown} with unknown hours in this search.${overlap?' A listing appears once per selected layer, so some results repeat.':''} Other layer types stay visible.`:'Select a place layer, such as Restaurants or Bars, to use this filter.';
  const loading=[...requestedLayers].some(id=>requests.has(id)||(!data.has(id)&&!Object.keys(capabilities).length));const failed=[...enabled].some(id=>data.get(id)?.status==='unavailable');$('#results-count').textContent=loading?'Finding places…':total?`${total} result${total===1?'':'s'} in this area`:'';
  if(!total)host.append(el('p','',loading?'Loading places for this area…':failed?'Some places could not load. Use Refresh to try again.':!enabled.size?'Select a layer to explore places.':openNow?'No places with matching listed hours in this view. Turn off Open now to include closed places and unknown hours.':q?'No matching places in this view. Try another search or move the map.':'No places in this view. Select a place layer or move the map.'));
+ if(!total&&failed&&!loading)host.append(btn('Try again',()=>{for(const id of enabled)loadLayer(id);},'primary'));
  if(focused)([...host.querySelectorAll('[data-result-key]')].find(n=>n.dataset.resultKey===focused)||$('#place-search')).focus({preventScroll:true});
 }
 function currentState(){const c=map.getCenter();return{v:1,todayOnly,openNow,mapStyle,radarMode,airMode,layerModes:{...layerModes},overlayOpacity:{...overlayOpacity},center:[c.lat,c.lng],zoom:map.getZoom(),layers:[...requestedLayers],focus,imageryDate};}

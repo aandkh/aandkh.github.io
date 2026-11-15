@@ -69,3 +69,5 @@
  #toast{bottom:85px;font-size:13px}
 }
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+
+.weather-reading-time{display:block;margin-top:5px;font-size:9px;font-weight:500;opacity:.78;white-space:nowrap}
