@@ -1,11 +1,11 @@
-import {createTrafficIncidents} from './traffic-incidents.js?v=20261115-fast1';
-import {attachSuggestions} from './search-suggestions.js?v=20261115-fast1';
-import {createFutureRadar} from './future-radar.js?v=20261115-fast1';
+import {createTrafficIncidents} from './traffic-incidents.js?v=20261115-fast2';
+import {attachSuggestions} from './search-suggestions.js?v=20261115-fast2';
+import {createFutureRadar} from './future-radar.js?v=20261115-fast2';
 import {searchLayers} from './explore.js';
 import {placeHash,readPlaceHash,placeState,findSharedFeature} from './short-links.js';
 import {appendPlaceNavigation} from './place-navigation.js';
 import {TODAY_LAYERS,happeningToday} from './today-filter.js';
-import {createWeatherReadings} from './weather-readings.js?v=20261115-fast1';
+import {createWeatherReadings} from './weather-readings.js?v=20261115-fast2';
 import {enrichCultureFeature,cultureFeatureDisplayable} from './place-enrichment.js';
 import {apiFetch,apiUrl} from './api-client.js';
 import {regionalViewportBounds} from './viewport-bounds.js';
@@ -24,7 +24,7 @@ import {overlayStyles,routeOverlayStyles,aircraftDirectionStyles,markerPaint} fr
 import {uiIcon} from './ui-icons.js';
 import {MODE_DEFAULTS,OPACITY_DEFAULTS,cleanOverlayOpacity,cleanLayerModes,unexpiredFeatures} from './expansion-options.js';
 import {appendWeather,appendSkyExtras,createOpeningNotices} from './expansion-ui.js';
-import {LAYERS,BY_ID,EXAMPLES} from './catalog.js?v=20261115-fast1';
+import {LAYERS,BY_ID,EXAMPLES} from './catalog.js?v=20261115-fast2';
 import {RADAR_MODES,RADAR_TYPE_KEY,AQI,AIR_MODES} from './environment.js';
 import {CONFIG} from './config.js?v=20261115-play9';
 import {REGION,coordinate,safeUrl,placeUrl,placeLinks,encodeState,decodeState,cleanState,cleanStop,loadPresets,savePresets,cleanPreset,browserStorage,layerSelectable,skyCloudRows,currentRoadworks,centroid,directionEnd,clusterPoints} from './core.js';
@@ -63,7 +63,7 @@ const weatherReadings=createWeatherReadings(map,{formatTime:format,fitOnLoad:!in
 const futureRadar=createFutureRadar(map,{weatherReadings,onStart(){closeDetail();setResults(false);setControls(false);drawn.get('radar')?.setOpacity(0);},onClose(){drawn.get('radar')?.setOpacity(overlayOpacity.radar);weatherReadings.endForecast(enabled.has('radar'));}});
 const trafficNote=el('div','traffic-note');trafficNote.hidden=true;$('#map').parentElement.append(trafficNote);
 const trafficIncidents=createTrafficIncidents(map,{onStatus(text){trafficNote.textContent=text;trafficNote.hidden=!text;},onSelect(r){
- if(futureRadar.active)futureRadar.stop();closeDetail();setResults(false);setControls(false);const box=$('#detail');box.replaceChildren();box.hidden=false;const head=el('div','floating-head'),close=btn('×',()=>closeDetail({restoreFocus:true}));close.setAttribute('aria-label','Close traffic incident');head.append(el('span','eyebrow','TRAFFIC'),close);box.append(head,el('h2','',r.title),el('p','event-time',r.delay?'Reported delay: '+r.delay:'Delay time not reported'),el('p','',r.road),el('p','',r.description),el('p','small','MoDOT · Updated '+format(r.updated)),link('Official traffic map ↗','https://traveler.modot.org/mapv3/index.html'));focusDetailHeading();
+ if(futureRadar.active)futureRadar.stop();closeDetail();setResults(false);setControls(false);const box=$('#detail');box.replaceChildren();box.hidden=false;const head=el('div','floating-head'),close=btn('×',()=>closeDetail({restoreFocus:true}));close.setAttribute('aria-label','Close traffic incident');head.append(el('span','eyebrow','TRAFFIC'),close);box.append(head,el('h2','',r.title),el('p','event-time',r.delay?'Reported delay: '+r.delay:'Delay time not reported'),el('p','',r.road),el('p','traffic-description',r.description),el('p','small','MoDOT · Updated '+format(r.updated?new Date(r.updated).toISOString():null)),link('Official traffic map ↗','https://traveler.modot.org/mapv3/index.html'));focusDetailHeading();
 }});
 async function refreshWeatherReadings(){if(!enabled.has('radar')||document.hidden||weatherReadingsRequest)return;const controller=new AbortController();weatherReadingsRequest=controller;try{const r=await apiFetch('/api/weather-readings',{signal:controller.signal});if(!r.ok)throw Error('Weather unavailable');const d=await r.json();weatherReadingsAt=Date.now();weatherReadings.render(d.readings,enabled.has('radar'));if(!initial&&!navigator.connection?.saveData)(window.requestIdleCallback||((fn)=>setTimeout(fn,1500)))(()=>futureRadar.warm());}catch(e){if(e.name!=='AbortError'){weatherReadingsAt=Date.now();weatherReadings.render([],enabled.has('radar'));}}finally{if(weatherReadingsRequest===controller)weatherReadingsRequest=null;}}
 function refreshTodayView(){for(const id of enabled){const d=data.get(id);if(d?.features?.length){removeDrawing(id);drawFeatures(id,d);}}renderPlaceMarkers();renderResults();renderLayers();}
