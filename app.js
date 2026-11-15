@@ -22,7 +22,7 @@ import {recentIncidents,incidentExplorer,incidentFilters,filterIncidents,inciden
 import {eventDay,eventOrder,eventTime,eventStamp,groupEventCards} from './event-dates.js?v=20261115-core-polish';
 import {venueEvents,mergeVenueEvents} from './concert-calendar.js?v=20261115-core-polish';
 import {createSkyCloudMap} from './sky-cloud-map.js?v=20261115-road-insights';
-import {COMMUNITY_SOURCES,HIDDEN_LAYERS,CRIME_TYPES,combineCrime,appendAirAdvice,distance,routeMiles,pointInGeometry} from './layer-insights.js?v=20261115-core-polish';
+import {COMMUNITY_SOURCES,HIDDEN_LAYERS,CRIME_TYPES,combineCrime,appendAirAdvice,distance,routeMiles,pointInGeometry} from './layer-insights.js?v=20261115-air-clarity';
 import {createTrafficIncidents} from './traffic-incidents.js?v=20261115-road-insights';
 import {attachSuggestions} from './search-suggestions.js?v=20261115-road-insights';
 import {createFutureRadar} from './future-radar.js?v=20261115-road-insights';

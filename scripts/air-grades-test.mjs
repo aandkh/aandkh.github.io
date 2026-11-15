@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
-import {AIR_GRADES,airPollutant,airAdvice,tierForAQI,pm25Comparison,appendAirAdvice} from '../air-grades.js';
+import {AIR_GRADES,airPollutant,airAdvice,tierForAQI,appendAirAdvice} from '../air-grades.js';
 import {airAdvice as publicAdvice} from '../layer-insights.js';
 
 const order=['HELL','F-','F','D-','D','D+','C-','C','C+','B-','B','B+','A-','A','A+','S','S+'];
@@ -11,15 +11,15 @@ for(let aqi=0;aqi<=500;aqi++){
  const advice=airAdvice({aqi,title:'PM2.5'});assert.equal(advice.precision,'value');assert.equal(advice.grade,candidates[0].grade);assert.equal(advice.category,candidates[0].category);
 }
 for(const tier of AIR_GRADES){assert.equal(tierForAQI(tier.min).grade,tier.grade);if(Number.isFinite(tier.max))assert.equal(tierForAQI(tier.max).grade,tier.grade);assert(tier.detail.length>100);}
-for(const [category,grade] of [[1,'A–S+'],[2,'C+–A-'],[3,'D+–C'],[4,'D-–D'],[5,'F-–F'],[6,'HELL']]){
- const advice=airAdvice({category,title:'PM2.5 · test'});assert.equal(advice.grade,grade);assert.equal(advice.aqi,null);assert.equal(advice.precision,'band');assert.match(advice.precisionNote,/exact AQI|category, not an exact AQI/);
+for(const [category,official,grade] of [[1,'Good','A+'],[2,'Moderate','B'],[3,'Unhealthy for Sensitive Groups','C-'],[4,'Unhealthy','D'],[5,'Very Unhealthy','F'],[6,'Hazardous','HELL']]){
+ const advice=airAdvice({category,title:'PM2.5 · test'});assert.equal(advice.grade,grade,'one representative grade from the category midpoint');assert.equal(advice.official,official);assert.equal(advice.aqi,null);assert.equal(advice.precision,'band');assert.match(advice.precisionNote,/Estimated from/);
 }
-assert.equal(publicAdvice({category:1}).grade,'A–S+');
+assert.equal(publicAdvice({category:1}).grade,'A+');
 for(const aqi of [null,undefined,NaN,Infinity,-1,'0'])assert.equal(tierForAQI(aqi),null);
 for(const category of [0,7,-1,null,undefined,1.5])assert.equal(airAdvice({category}).grade,'Unknown');
 for(const category of [true,false,[],[1],{},new Number(1),{valueOf:()=>1},'','1.0','true'])assert.equal(airAdvice({category}).grade,'Unknown','no coercion of '+String(category));
-for(const category of ['1',' 1 '])assert.equal(airAdvice({category}).grade,'A–S+');
-assert.equal(airAdvice(null).grade,'Unknown');assert.equal(pm25Comparison(null),null);
+for(const category of ['1',' 1 '])assert.equal(airAdvice({category}).grade,'A+');
+assert.equal(airAdvice(null).grade,'Unknown');
 assert.equal(airAdvice({category:1,aqi:null}).precision,'band');
 assert.equal(airAdvice({category:1,aqi:0}).grade,'S+');
 assert.equal(airAdvice({category:2,aqi:5}).grade,'Unknown');assert.match(airAdvice({category:2,aqi:5}).precisionNote,/disagree/);assert.equal(airAdvice({category:1,aqi:300}).grade,'Unknown');assert.match(airAdvice({category:1,aqi:300}).tip,/cannot support a window recommendation/);
@@ -29,22 +29,18 @@ assert.equal(airPollutant({id:'aqi-pm25-51'}),'PM2.5');assert.equal(airPollutant
 assert.match(airAdvice({category:3,pollutant:'Ozone'}).sensitive,/Particle filters do not remove ozone/);
 assert.match(airAdvice({category:3,pollutant:'PM2.5'}).sensitive,/heart or lung/);
 
-const now=Date.parse('2026-11-15T19:00:00Z'),mean={value:22,unit:'µg/m³',measurementType:'measured',periodStart:'2026-11-14T18:00:00Z',periodEnd:'2026-11-15T18:00:00Z',sourceUrl:'https://official.example/monitor'};
-const p={pollutant:'PM2.5',pm25DailyMean:mean};assert.equal(pm25Comparison(p,now).equivalent,1);
-for(const invalidNow of [NaN,Infinity,-Infinity,null,true,String(now),new Date(now)])assert.equal(pm25Comparison(p,invalidNow),null,'clock must be a finite epoch number');
-assert.equal(pm25Comparison({aqi:100,category:2,pollutant:'PM2.5'},now),null,'AQI never substitutes for concentration');
-assert.equal(pm25Comparison({...p,pollutant:'Ozone'},now),null);
-for(const invalid of [{value:null},{value:-1},{value:NaN},{value:'22'},{unit:'ppm'},{measurementType:'modeled'},{measurementType:'NowCast'},{periodStart:'2026-11-15T17:00:00Z'},{periodEnd:'2026-11-20T18:00:00Z'},{sourceUrl:'javascript:alert(1)'}])assert.equal(pm25Comparison({...p,pm25DailyMean:{...mean,...invalid}},now),null,JSON.stringify(invalid));
-assert.equal(pm25Comparison(p,now+72*3600000),null,'stale observed exposure is not current');
-
-// Render actual output without a browser dependency. Native details keep the long
-// reference guide compact until the user opens an item.
+// Render the production card and check that compact output never brings back
+// the reference/exposure menus or multiple grades.
 function documentFixture(){const doc={};doc.createElement=tag=>({tag,ownerDocument:doc,children:[],dataset:{},textContent:'',className:'',append(...children){this.children.push(...children);},classList:{add(){}}});doc.createTextNode=text=>({textContent:text,children:[]});return doc;}
-const doc=documentFixture(),host=doc.createElement('div');appendAirAdvice(host,{category:1,title:'PM2.5 · Good',observedAt:'2026-11-15T18:00:00Z'});
-const flatten=n=>[n,...n.children.flatMap(flatten)],initial=flatten(host);assert(initial.filter(n=>n.tag==='details').every(n=>!n.open),'reference guide initially collapsed');assert.equal(initial.filter(n=>n.dataset?.grade).length,0,'long guide builds only on demand');const guide=initial.find(n=>typeof n.ontoggle==='function');guide.open=true;guide.ontoggle();guide.ontoggle();const nodes=flatten(host),text=nodes.map(n=>n.textContent).join(' ');
-assert.equal(nodes.filter(n=>n.dataset?.grade).length,17);assert.match(text,/A–S\+/);assert.match(text,/No local cigarette-equivalent is calculated/);assert.match(text,/Burning Man is not a fixed pollution level/);assert.match(text,/preliminary data/);assert.match(text,/Central/);
-assert(nodes.filter(n=>n.dataset?.grade).every(n=>!n.open),'individual tiers initially collapsed');
-assert(nodes.filter(n=>n.tag==='a').every(n=>/^https:\/\//.test(n.href)&&n.rel==='noopener noreferrer'));
-const current=Date.now(),tinyHost=doc.createElement('div');appendAirAdvice(tinyHost,{pollutant:'PM2.5',pm25DailyMean:{...mean,value:.01,periodStart:new Date(current-86400000).toISOString(),periodEnd:new Date(current).toISOString()}});const tinyText=flatten(tinyHost).map(n=>n.textContent).join(' ');assert.match(tinyText,/mean: <0\.1 µg\/m³/);assert.match(tinyText,/approximately <0\.1 cigarette-equivalents/);assert.doesNotMatch(tinyText,/approximately 0\.0 cigarette-equivalents/);
+const flatten=n=>[n,...n.children.flatMap(flatten)],doc=documentFixture();
+for(const [input,badge] of [[{category:1},'A+'],[{category:3},'C-'],[{category:6},'HELL'],[{aqi:0},'S+'],[{aqi:30},'A+'],[{aqi:55},'A-'],[{category:1,aqi:80},'Unknown'],[{},'Unknown']]){
+ const host=doc.createElement('div');appendAirAdvice(host,{...input,pollutant:'PM2.5',observedAt:'2026-11-15T18:00:00Z'});
+ const nodes=flatten(host),text=nodes.map(n=>n.textContent).join(' ');
+ const badges=nodes.filter(n=>n.className==='air-grade-value');assert.equal(badges.length,1);assert.equal(badges[0].textContent,badge,'one clear grade');
+ assert.equal(nodes.filter(n=>n.className==='air-grade-estimated').length,input.category&&!('aqi' in input)?1:0,'category estimates visibly labeled');
+ assert.equal(nodes.filter(n=>n.tag==='details'||n.tag==='summary').length,0,'no reference or exposure menus');
+ assert.doesNotMatch(text,/Cigarette|Burning Man|All 17|A–S\+|midpoint/i);assert.match(text,/EPA AirNow/);assert.match(text,/preliminary data/);assert.match(text,/Central/);
+ assert(nodes.filter(n=>n.tag==='a').every(n=>/^https:\/\//.test(n.href)&&n.rel==='noopener noreferrer'));
+}
 const source=await fs.readFile(new URL('../air-grades.js',import.meta.url),'utf8');assert(!source.includes('SSS'),'retired tiers absent');
-console.log('PASS: all 17 grades, every AQI boundary, honest category ranges, inconsistent/missing data, pollutant-specific guidance, measured-only 24-hour comparison, compact accessible disclosure structure.');
+console.log('PASS: all 17 grade boundaries; one labeled category estimate; exact AQI precedence; inconsistent/missing data; compact card without grade/exposure menus; provider attribution.');

@@ -56,50 +56,33 @@ export function airAdvice(p={}){
  // Neither conflicting field is enough to support window/activity advice.
  if(conflict)return{grade:'Unknown',precision:'unknown',pollutant,text:pollutant+' · inconsistent source fields',meaning:'The source’s AQI and category disagree. No grade is assigned until those values can be reconciled.',precisionNote:'The source’s AQI and category disagree; check the official reading.',tip:'This inconsistent record cannot support a window recommendation. Check current official air information.',grades:[]};
  const cat=category,info=CATEGORIES[cat],grades=AIR_GRADES.filter(t=>t.category===cat),exact=reported!==null?tierForAQI(reported):null;
- return{grade:exact?.grade||(grades.length===1?grades[0].grade:grades[0].grade+'–'+grades.at(-1).grade),precision:exact?'value':'band',aqi:exact?reported:null,category:cat,pollutant,official:info.name,band:bandLabel(info),grades,
+ // Category midpoint is a display estimate, never an invented numeric observation.
+ const representative=exact||tierForAQI(Number.isFinite(info.max)?Math.floor((info.min+info.max)/2):info.min);
+ return{grade:representative.grade,precision:exact?'value':'band',aqi:exact?reported:null,category:cat,pollutant,official:info.name,band:bandLabel(info),grades,
   text:pollutant+' · AQI '+(exact?reported:bandLabel(info))+' · '+info.name+(reported>500?' · beyond the AQI scale':''),
   meaning:exact?exact.detail:info.meaning,tip:info.windows,activity:info.activity,example:info.example,sensitive:sensitivity(pollutant),
-  precisionNote:exact?'Andymap subgrade from the supplied numeric AQI; it does not add measurement precision.':grades.length===1?'The reported Hazardous band maps to one Andymap grade; no exact AQI is supplied.':'The regional feed supplies a category, not an exact AQI. Any of these grades could apply; no midpoint is guessed.'};
+  precisionNote:exact?'Andymap grade from the supplied numeric AQI.':cat===6?'Estimated from the reported Hazardous category; no numeric AQI was supplied.':'Estimated from the midpoint of the reported '+info.name+' range (AQI '+bandLabel(info)+'). No numeric AQI was supplied.'};
 }
 export function tierForAQI(aqi){return finite(aqi)&&aqi>=0?AIR_GRADES.find(t=>Math.round(aqi)>=t.min&&Math.round(aqi)<=t.max)||null:null;}
-const safeUrl=value=>{try{const u=new URL(value);return /^https?:$/.test(u.protocol)?u.href:null;}catch{return null;}};
-
-// Optional future source contract. Never reverse-calculate concentration from
-// an AQI contour/NowCast. A sourced, measured 24-hour mean must be supplied.
-export function pm25Comparison(p={},now=Date.now()){
- p=p||{};
- const m=p.pm25DailyMean,start=Date.parse(m?.periodStart),end=Date.parse(m?.periodEnd),sourceUrl=safeUrl(m?.sourceUrl);
- if(!finite(now)||airPollutant(p)!=='PM2.5'||!m||m.measurementType!=='measured'||!['µg/m³','ug/m3'].includes(m.unit)||!finite(m.value)||m.value<0||!sourceUrl||!Number.isFinite(start)||!Number.isFinite(end)||end-start!==86400000||end>now+300000||now-end>48*3600000)return null;
- return{concentration:m.value,equivalent:m.value/22,periodStart:m.periodStart,periodEnd:m.periodEnd,sourceUrl};
-}
-
 const node=(doc,tag,text,cls='')=>{const n=doc.createElement(tag);if(text!==undefined)n.textContent=text;n.className=cls;return n;};
-const comparisonNumber=value=>value>0&&value<.1?'<0.1':value.toFixed(1);
 function link(doc,text,url){const a=node(doc,'a',text);a.href=url;a.target='_blank';a.rel='noopener noreferrer';return a;}
-function paragraph(doc,label,text){const p=node(doc,'p');p.append(node(doc,'strong',label+' '),doc.createTextNode(text));return p;}
-function disclosure(doc,title){const d=node(doc,'details',undefined,'air-grade-disclosure');d.append(node(doc,'summary',title));return d;}
+const WINDOW_SUMMARIES={
+ 1:'This pollutant looks favorable for airing out. Check pollen, nearby smoke and outdoor comfort.',
+ 2:'Consider your sensitivity before opening. Check other pollutants and outdoor comfort.',
+ 3:'Limit airing out if sensitive to this pollutant; prefer cleaner indoor air.',
+ 4:'Keep windows closed if indoor air is cleaner and comfortably cool.',
+ 5:'Keep windows closed; use a cool, cleaner indoor space.',
+ 6:'Keep polluted air out and follow local alerts. Stay in a cool, cleaner space.'
+};
 export function appendAirAdvice(host,p={}){
  p=p||{};
  const doc=host.ownerDocument||document,a=airAdvice(p),box=node(doc,'section',undefined,'insight-card air-advice');
- const heading=node(doc,'div',undefined,'air-grade-heading');heading.append(node(doc,'strong','Open The Windows Score'),node(doc,'span',a.grade,'air-grade-value'));box.append(heading,node(doc,'p',a.text,'air-grade-reading'));
+ const heading=node(doc,'div',undefined,'air-grade-heading');heading.dataset.precision=a.precision;
+ const result=node(doc,'span',undefined,'air-grade-result');result.append(node(doc,'span',a.grade,'air-grade-value'));
+ if(a.precision==='band')result.append(node(doc,'small','Estimated','air-grade-estimated'));
+ heading.append(node(doc,'strong','Open The Windows Score'),result);box.append(heading,node(doc,'p',a.text,'air-grade-reading'));
  if(a.category){const official=node(doc,'span','EPA · '+a.official,'air-official-band');official.dataset.category=String(a.category);box.append(official);}
- box.append(node(doc,'p',a.precisionNote||a.meaning,'air-grade-precision'),paragraph(doc,'Windows:',a.tip));
- if(a.category){
-  const personal=disclosure(doc,'What this means for you');personal.append(node(doc,'p',a.meaning),paragraph(doc,'Outdoor plans:',a.activity),paragraph(doc,'For example:',a.example),paragraph(doc,'Who needs extra care:',a.sensitive));box.append(personal);
- }
- const guide=disclosure(doc,'All 17 grades · worst to best');guide.append(node(doc,'p','These are Andymap’s comparison tiers. Only the six named EPA categories have official health meanings; subdivisions within one category share the same guidance. A change within a category is not a new medical threshold.'));
- let guideBuilt=false;guide.ontoggle=()=>{if(!guide.open||guideBuilt)return;guideBuilt=true;for(const t of AIR_GRADES){
-  const item=disclosure(doc,t.grade+' · AQI '+bandLabel(t)+' · '+t.title);item.classList.add('air-tier');item.dataset.grade=t.grade;
-  if(a.precision==='value'?a.grade===t.grade:a.grades.some(g=>g.grade===t.grade)){item.classList.add('air-tier-current');item.append(node(doc,'p',a.precision==='value'?'Matches the supplied AQI.':'Within the currently reported category.','air-tier-match'));}
-  const info=CATEGORIES[t.category];item.append(node(doc,'p','Official category: '+info.name+'. '+t.detail),paragraph(doc,'Windows:',info.windows),paragraph(doc,'Activity:',info.activity),paragraph(doc,'Everyday example:',info.example));guide.append(item);
- }};
- box.append(guide);
- const comparisons=disclosure(doc,'Cigarettes, Burning Man & everyday exposure'),comparison=pm25Comparison(p);
- comparisons.append(node(doc,'p','Cigarettes: Berkeley Earth’s 2015 rough comparison puts a full day at a PM2.5 concentration of 22 µg/m³ at about one cigarette-equivalent of population-level health impact. It is a communication benchmark from population mortality estimates, not the same chemicals, inhaled dose, or a prediction of one person’s harm from one day.'));
- if(comparison){const period=new Date(comparison.periodEnd).toLocaleString('en-US',{timeZone:'America/Chicago',month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'});comparisons.append(node(doc,'p',`Supplied measured 24-hour PM2.5 mean: ${comparisonNumber(comparison.concentration)} µg/m³, ending ${period} Central. Dividing by 22 gives approximately ${comparisonNumber(comparison.equivalent)} cigarette-equivalents on that rough scale, assuming full-day exposure at that concentration. This is not your personal exposure.`),link(doc,'24-hour measurement source ↗',comparison.sourceUrl));}
- else comparisons.append(node(doc,'p','No local cigarette-equivalent is calculated: this record does not supply a verified measured 24-hour PM2.5 mean. An AQI band, a current NowCast, and ozone cannot stand in for that exposure.'));
- comparisons.append(link(doc,'Berkeley Earth’s method and limitations ↗','https://berkeleyearth.org/air-pollution-and-cigarette-equivalence/'),node(doc,'p','Burning Man is not a fixed pollution level. Its organizers describe variable alkaline playa dust; a dusty festival, a wildfire and traffic pollution are different exposures. Without matching pollutant measurements and duration, “like a day at Burning Man” would be an invented equivalence.'),link(doc,'Burning Man’s playa-weather guidance ↗','https://burningman.org/black-rock-city/preparation/playa-living/weather/'),node(doc,'p','Everyday activities: time and breathing effort matter. Waiting outside briefly and exercising hard for hours are not interchangeable exposures. This map does not track your breathing, indoor air, route or time outside, so it does not calculate a personal dose.'));box.append(comparisons);
- const method=disclosure(doc,'Sources, scope & window guidance');method.append(node(doc,'p','This is a pollution-only score for the selected pollutant, not a complete ventilation recommendation. A low PM2.5 grade does not establish low ozone, and vice versa. Regional contours estimate conditions between monitors; they are not measurements at your window.'),node(doc,'p','Indoor air, pollen, nearby exhaust or smoke, outdoor temperature and humidity are not included. Ventilation can remove indoor pollutants when outdoor air is suitable. During high outdoor pollution, prefer a cooler, cleaner indoor space; never let a closed room become dangerously hot.'),node(doc,'p','Source observations and official alerts take precedence over these custom labels. The map retains official AQI category colors. Guidance reviewed November 15, 2026.'),link(doc,'EPA / AirNow AQI categories ↗','https://www.airnow.gov/aqi/aqi-basics/'),link(doc,'Particle-pollution activity guide ↗','https://document.airnow.gov/air-quality-guide-for-particle-pollution.pdf'),link(doc,'Ozone activity guide ↗','https://document.airnow.gov/air-quality-guide-for-ozone.pdf'),link(doc,'EPA ventilation guidance ↗','https://www.epa.gov/indoor-air-quality-iaq/improving-indoor-air-quality'),link(doc,'EPA smoke and heat guidance ↗','https://www.epa.gov/wildfires/frequent-questions-about-wildland-fire-smoke-individuals'));box.append(method);
+ box.append(node(doc,'p',WINDOW_SUMMARIES[a.category]||'A reliable reading is unavailable. Check current local air information.','air-window-tip'));
  const credit=node(doc,'p',undefined,'small provider-credit');credit.append(link(doc,'EPA AirNow','https://www.airnow.gov/'),doc.createTextNode(' & '),link(doc,'reporting agencies','https://www.airnow.gov/partners/'),doc.createTextNode(' · preliminary data'));
  const at=Date.parse(p.observedAt);if(Number.isFinite(at))credit.append(doc.createTextNode(' · '+new Date(at).toLocaleString('en-US',{timeZone:'America/Chicago',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})+' Central'));
  box.append(credit);host.append(box);
