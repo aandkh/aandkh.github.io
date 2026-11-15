@@ -1,13 +1,13 @@
 export const CONFIG = {
   "shareOrigin": "https://www.andrewhanes.com",
   "tileUrl": "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
-  "tileAttribution": "&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors",
   "contactUrl": "https://www.andrewhanes.com",
   "center": [
-    38.635,
-    -90.245
+    38.72,
+    -90.43
   ],
-  "zoom": 12,
-  "mobileZoom": 11,
+  "zoom": 10,
+  "mapStyle": "dark",
+  "mobileZoom": 9.5,
   "apiOrigin": "https://andymap-hanes-api.fly.dev"
 };

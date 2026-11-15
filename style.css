@@ -352,17 +352,19 @@ body[data-map-style=dark] .listed-opening[data-opening-state=open]{color:#b8d99e
 
 .featured-layers{padding-bottom:8px;border-bottom:1px solid var(--line,#dce4db)}
 .featured-options:empty{display:none}
-.weather-readings{position:absolute;z-index:405;inset:22% 18%;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;align-items:center;justify-items:center;gap:clamp(36px,11vw,160px);pointer-events:none}
-.weather-readings[hidden]{display:none}
-.weather-reading{min-width:102px;text-align:center;padding:9px 13px 10px;border:1px solid rgba(255,255,255,.86);border-radius:19px;background:rgba(255,255,255,.84);box-shadow:0 3px 18px rgba(20,48,49,.11),inset 0 1px 0 #fff;backdrop-filter:blur(8px);color:#16363c;pointer-events:auto;line-height:1.15}
-.weather-reading-place{display:block;font-size:10px;font-weight:600;letter-spacing:.025em;color:#405d60}
-.weather-reading-temperature{display:block;font-size:35px;font-weight:600;letter-spacing:-.055em;margin:3px 0 4px;font-variant-numeric:tabular-nums}
-.weather-reading-temperature small{font-size:12px;font-weight:500;letter-spacing:0;margin-left:3px}
-.weather-reading-wind{display:flex;align-items:center;justify-content:center;gap:6px;font-size:11px;font-weight:600;white-space:nowrap;color:#405d60}
-.weather-wind-arrow{display:inline-block;width:10px;height:13px;background:currentColor;clip-path:polygon(50% 0,100% 45%,65% 40%,65% 100%,35% 100%,35% 40%,0 45%)}
-body[data-map-style="dark"] .weather-reading{background:rgba(15,33,40,.88);border-color:#66808b;color:#fff;box-shadow:0 3px 18px #07121b55}
-body[data-map-style="dark"] .weather-reading-place,body[data-map-style="dark"] .weather-reading-wind{color:#cce1e5}
-@media(max-width:800px){.weather-readings{inset:25% 9% 20%;gap:clamp(24px,9vw,60px)}.weather-reading{min-width:90px;padding:8px 10px;border-radius:16px}.weather-reading-temperature{font-size:30px}.weather-reading-place{font-size:9px}.weather-reading-wind{font-size:10px}}
+.weather-station-marker{background:none;border:0;pointer-events:none!important}
+.weather-station-marker:after{content:'';position:absolute;left:-4px;top:-4px;width:8px;height:8px;border-radius:50%;background:#177bca;border:2px solid #fff;box-shadow:0 1px 5px #0007}
+.weather-reading{position:absolute;bottom:12px;left:0;transform:translateX(-50%);min-width:86px;text-align:center;padding:7px 10px 8px;border:1px solid #d4e2e3;border-radius:12px;background:rgba(255,255,255,.96);box-shadow:0 3px 14px #122e3330;color:#16363c;line-height:1.15}
+.weather-reading:after{content:'';position:absolute;left:calc(50% - 4px);bottom:-5px;width:8px;height:8px;transform:rotate(45deg);background:inherit;border-right:1px solid #d4e2e3;border-bottom:1px solid #d4e2e3}
+.weather-reading-place{display:block;font-size:10px;font-weight:600;color:#405d60;white-space:nowrap}
+.weather-reading-temperature{display:block;font-size:27px;font-weight:650;letter-spacing:-.045em;margin:3px 0;font-variant-numeric:tabular-nums}
+.weather-reading-temperature small{font-size:11px;font-weight:500;letter-spacing:0;margin-left:2px}
+.weather-reading-wind{display:flex;align-items:center;justify-content:center;gap:5px;font-size:10px;font-weight:600;white-space:nowrap;color:#405d60}
+.weather-wind-arrow{display:inline-block;width:9px;height:12px;background:currentColor;clip-path:polygon(50% 0,100% 45%,65% 40%,65% 100%,35% 100%,35% 40%,0 45%)}
+body[data-map-style=dark] .weather-reading{background:rgba(15,33,40,.96);border-color:#66808b;color:#fff;box-shadow:0 3px 14px #07121b55}
+body[data-map-style=dark] .weather-reading:after{border-color:#66808b}
+body[data-map-style=dark] .weather-reading-place,body[data-map-style=dark] .weather-reading-wind{color:#cce1e5}
+@media(max-width:800px){.weather-reading{min-width:76px;padding:6px 8px;border-radius:11px}.weather-reading-temperature{font-size:25px}.weather-reading-place{font-size:9px}.weather-reading-wind{font-size:9px}}
 
 /* A direct address and a small, always-visible choice of navigation apps. */
 .place-navigation{margin:16px 0 18px;padding:13px 14px;background:var(--surface-soft,#f3f6f1);border:1px solid var(--line,#dce4db);border-radius:13px}
