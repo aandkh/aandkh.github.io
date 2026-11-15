@@ -346,3 +346,28 @@ body[data-map-style=dark] .vehicle-selection-ring{border-color:#e6bc5d;box-shado
 .listed-opening[data-opening-state=open]{color:var(--green)}
 .hours-provenance{display:block;margin-top:6px;font-size:11px;color:var(--muted)}
 body[data-map-style=dark] .listed-opening[data-opening-state=open]{color:#b8d99e}
+
+/* White road edging separates traffic colors from the translucent radar field. */
+.traffic-flow-tile{filter:drop-shadow(0 0 1px #fff) drop-shadow(0 0 1px #fff)}
+
+.featured-layers{padding-bottom:8px;border-bottom:1px solid var(--line,#dce4db)}
+.featured-options:empty{display:none}
+.weather-readings{position:absolute;z-index:405;inset:22% 18%;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;align-items:center;justify-items:center;gap:clamp(36px,11vw,160px);pointer-events:none}
+.weather-readings[hidden]{display:none}
+.weather-reading{min-width:102px;text-align:center;padding:9px 13px 10px;border:1px solid rgba(255,255,255,.86);border-radius:19px;background:rgba(255,255,255,.84);box-shadow:0 3px 18px rgba(20,48,49,.11),inset 0 1px 0 #fff;backdrop-filter:blur(8px);color:#16363c;pointer-events:auto;line-height:1.15}
+.weather-reading-place{display:block;font-size:10px;font-weight:600;letter-spacing:.025em;color:#405d60}
+.weather-reading-temperature{display:block;font-size:35px;font-weight:600;letter-spacing:-.055em;margin:3px 0 4px;font-variant-numeric:tabular-nums}
+.weather-reading-temperature small{font-size:12px;font-weight:500;letter-spacing:0;margin-left:3px}
+.weather-reading-wind{display:flex;align-items:center;justify-content:center;gap:6px;font-size:11px;font-weight:600;white-space:nowrap;color:#405d60}
+.weather-wind-arrow{display:inline-block;width:10px;height:13px;background:currentColor;clip-path:polygon(50% 0,100% 45%,65% 40%,65% 100%,35% 100%,35% 40%,0 45%)}
+body[data-map-style="dark"] .weather-reading{background:rgba(15,33,40,.88);border-color:#66808b;color:#fff;box-shadow:0 3px 18px #07121b55}
+body[data-map-style="dark"] .weather-reading-place,body[data-map-style="dark"] .weather-reading-wind{color:#cce1e5}
+@media(max-width:800px){.weather-readings{inset:25% 9% 20%;gap:clamp(24px,9vw,60px)}.weather-reading{min-width:90px;padding:8px 10px;border-radius:16px}.weather-reading-temperature{font-size:30px}.weather-reading-place{font-size:9px}.weather-reading-wind{font-size:10px}}
+
+/* A direct address and a small, always-visible choice of navigation apps. */
+.place-navigation{margin:16px 0 18px;padding:13px 14px;background:var(--surface-soft,#f3f6f1);border:1px solid var(--line,#dce4db);border-radius:13px}
+.place-address-row{display:flex;align-items:center;gap:10px}
+.place-address-row .place-address{flex:1;min-width:0;overflow-wrap:anywhere;color:var(--ink,#173c43);font-size:14px;line-height:1.5;text-decoration:underline;text-underline-offset:3px;user-select:text}
+.copy-address{flex:none;padding:8px 10px;min-height:40px;font-size:12px;border-radius:9px}
+.navigation-apps{display:flex;flex-wrap:wrap;gap:4px 15px;margin-top:8px}
+.navigation-apps a{display:inline-flex;align-items:center;min-height:40px;font-size:12px;font-weight:600;color:var(--ink,#173c43);text-underline-offset:3px}

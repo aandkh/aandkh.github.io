@@ -1,5 +1,5 @@
-export const MODE_DEFAULTS={recreation:'all',localfood:'all',culture:'all',communityevents:'community',civic:'counties',demographics:'population',terrain:'hillshade'};
-export const OPACITY_DEFAULTS={radar:.72,air:.25,demographics:.58,terrain:.6,history:.8,light:.78,traffic:.75,floodplains:.65};
+export const MODE_DEFAULTS={crime:'violent',recreation:'all',localfood:'all',culture:'all',communityevents:'community',civic:'counties',demographics:'population',terrain:'hillshade'};
+export const OPACITY_DEFAULTS={radar:.42,air:.25,demographics:.58,terrain:.6,history:.8,light:.78,traffic:1,floodplains:.65};
 export function cleanOverlayOpacity(raw){const result={...OPACITY_DEFAULTS};if(raw&&typeof raw==='object')for(const id of Object.keys(result))if(typeof raw[id]==='number'&&Number.isFinite(raw[id]))result[id]=Math.max(0,Math.min(1,raw[id]));return result;}
 export function cleanLayerModes(raw){const result={...MODE_DEFAULTS};if(raw&&typeof raw==='object'&&!Array.isArray(raw))for(const id of Object.keys(result)){const value=raw[id];if(typeof value==='string'&&/^[a-z0-9_-]{1,40}$/.test(value))result[id]=value;}return result;}
 export function unexpiredFeatures(features,now=Date.now()){return(Array.isArray(features)?features:[]).filter(f=>{const p=f?.properties||{};return(!p.expiresAt||Number.isFinite(Date.parse(p.expiresAt))&&Date.parse(p.expiresAt)>now)&&(!p.end||Number.isFinite(Date.parse(p.end))&&Date.parse(p.end)>now);});}

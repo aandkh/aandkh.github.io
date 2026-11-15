@@ -25,7 +25,7 @@ function casing(foreground,mapStyle){
 export function overlayStyles(id,feature,{zoom=13,fillOpacity,mapStyle='light'}={}){
  if(RASTER_LAYERS.has(id))return{foreground:null,casing:null};
  const z=zoomLevel(zoom),type=feature?.geometry?.type||'',polygon=/Polygon$/.test(type),line=/LineString$/.test(type),color=layerColor(id);
- if(id==='air'||id==='demographics'){
+ if(['air','demographics','outages','foliage','crime'].includes(id)){
   const sourceColor=hex(feature?.properties?.color,'#b8bdbd');
   const foreground={color:id==='air'?sourceColor:'#344b60',weight:id==='air'?1.8:1.15,opacity:1,fillColor:sourceColor,fillOpacity:opacity(fillOpacity,id==='air'?.25:.58),lineJoin:'round'};
   const outline=id==='air'?{...casing(foreground,mapStyle),color:contrast(sourceColor,'#ffffff')>=3?'#ffffff':'#14253a',weight:3.4}:null;

@@ -51,7 +51,7 @@ export function cleanOuting(value){
 export function cleanState(s){
  if(!s||s.v!==1||!Array.isArray(s.center)||!coordinate(...s.center))throw Error('This map link has invalid coordinates.');
  const layers=Array.isArray(s.layers)?[...new Set(s.layers.filter(id=>typeof id==='string'&&Object.hasOwn(BY_ID,id)))].slice(0,Object.keys(BY_ID).length):[];
- return {v:1,openNow:s.openNow===true,mapStyle:['positron','dark','liberty'].includes(s.mapStyle)?s.mapStyle:'positron',radarMode:['intensity','types','winter'].includes(s.radarMode)?s.radarMode:'intensity',airMode:s.airMode==='ozone'?'ozone':'pm25',layerModes:cleanLayerModes(s.layerModes),overlayOpacity:cleanOverlayOpacity(s.overlayOpacity),center:s.center.slice(0,2),zoom:Math.min(18,Math.max(8,Number(s.zoom)||12)),layers,focus:cleanStop(s.focus),...cleanOuting(s),imageryDate:validLocalDate(s.imageryDate)?s.imageryDate:'2025-10-15'};
+ return {v:1,todayOnly:s.todayOnly===true,openNow:s.openNow===true,mapStyle:['positron','dark','liberty'].includes(s.mapStyle)?s.mapStyle:'positron',radarMode:['intensity','types','winter'].includes(s.radarMode)?s.radarMode:'intensity',airMode:s.airMode==='ozone'?'ozone':'pm25',layerModes:cleanLayerModes(s.layerModes),overlayOpacity:cleanOverlayOpacity(s.overlayOpacity),center:s.center.slice(0,2),zoom:Math.min(18,Math.max(8,Number(s.zoom)||12)),layers,focus:cleanStop(s.focus),...cleanOuting(s),imageryDate:validLocalDate(s.imageryDate)?s.imageryDate:'2025-10-15'};
 }
 export function encodeState(s){const state=cleanState(s);if(!state.stops.length)delete state.stops;if(!state.notes)delete state.notes;if(!state.when)delete state.when;const json=JSON.stringify(state);const bytes=new TextEncoder().encode(json);const encoded=btoa(Array.from(bytes,b=>String.fromCharCode(b)).join('')).replaceAll('+','-').replaceAll('/','_').replace(/=+$/,'');if(encoded.length>18000)throw Error('This map link is too long.');return '#map='+encoded;}
 export function decodeState(hash){if(!hash.startsWith('#map='))return null;if(hash.length>18005)throw Error('This map link is too long.');try{const raw=hash.slice(5).replaceAll('-','+').replaceAll('_','/');return cleanState(JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(Uint8Array.from(atob(raw),c=>c.charCodeAt(0)))));}catch{throw Error('This map link is invalid or uses an unsupported format.');}}
@@ -60,7 +60,7 @@ export function browserStorage(accessor){try{return accessor();}catch{return nul
 export function layerSelectable(id,capabilities={}){
  const layer=Object.hasOwn(BY_ID,id)?BY_ID[id]:null;if(!layer)return false;
  if(Object.hasOwn(capabilities,id)&&typeof capabilities[id]==='boolean')return capabilities[id];
- return !['gap','events','publicevents','traffic'].includes(layer.kind)&&!['roadworks','restrooms','birding','sky','weather','recreation','localfood','culture','communityevents','civic','demographics','terrain'].includes(id);
+ return !['gap','events','publicevents','traffic'].includes(layer.kind)&&!['crime','foliage','outages','foodtrucks','businesses','roadworks','restrooms','birding','sky','weather','recreation','localfood','culture','communityevents','civic','demographics','terrain'].includes(id);
 }
 export function skyCloudRows(sky,now=Date.now()){
  return (Array.isArray(sky?.clouds)?sky.clouds:[]).filter(row=>row&&typeof row.time==='string'&&Number.isFinite(Date.parse(row.time))&&Date.parse(row.time)>=now&&Number.isFinite(row.percent)&&row.percent>=0&&row.percent<=100).slice(0,24);

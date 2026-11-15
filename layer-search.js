@@ -5,7 +5,7 @@ const ALIASES=Object.freeze({
  bus:['transit'],buses:['transit'],train:['transit'],trains:['transit'],
  bathroom:['restrooms'],bathrooms:['restrooms'],toilet:['restrooms'],toilets:['restrooms'],
  bike:['cycling'],bikes:['cycling'],bicycle:['cycling'],bicycles:['cycling'],
- rain:['radar','weather'],snow:['radar','weather'],sleet:['radar','weather'],
+ weather:['radar','weather'],rain:['radar','weather'],snow:['radar','weather'],sleet:['radar','weather'],
  movies:['movies'],
  bar:['bars','nightlife','localfood'],bars:['bars','nightlife','localfood'],pub:['bars','nightlife','localfood'],pubs:['bars','nightlife','localfood'],
  restaurant:['restaurants','localfood'],restaurants:['restaurants','localfood'],food:['restaurants','localfood','foodtrucks','markets'],eating:['restaurants','localfood'],dinner:['restaurants','localfood'],
