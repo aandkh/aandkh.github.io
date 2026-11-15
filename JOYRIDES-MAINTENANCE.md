@@ -1,10 +1,35 @@
 # Joyrides
 
-Sixteen continuous public-road touring loops/corridors combine St. Louis city,
+Twenty-seven continuous public-road touring loops/corridors combine St. Louis city,
 St. Louis County, and nearby Missouri/Illinois river-country drives. The list is
 regional, with no city/county toggle. Every map line comes from OSRM's OSM driving
 graph through audited named-road waypoints. No straight-line route links are
 invented. These are Andymap selections; area guides do not endorse the itineraries.
+
+Eleven additions were researched in actual driving-community discussions:
+Ossenfort/Melrose/Bouquet; Route T through St. Albans and Labadie; Meramec
+Bottom/Baumgartner; Highway 79 from Winfield to Elsberry; Route F to New Melle;
+D/DD toward Broemmelsiek; Femme Osage Creek; Cappeln Osage's D/T loop;
+Pere Marquette's bluff loop; Beaumont–Antire to High Ridge; and Old Lemay Ferry
+toward Sandy Creek. Their `communityMentions` retain the source URL, concise
+attributed explanation, known post date and actual review date. Those dates are
+not renewed by the daily cache pass. Community recommendation details are
+visible in the route card, separate from calculated metrics.
+
+Forum descriptions are leads, not geometry or current road-condition evidence.
+The Antire post loosely refers to Eureka, but the mapped public corridor actually
+ends in High Ridge. The Highway 79 discussion recommends a longer drive toward
+Hannibal; the included route clearly identifies its regional Winfield–Elsberry
+segment. The Cappeln rider report covers a one-way road; Andymap adds the real
+D/T return to make a loop. Extra waypoints keep OSRM from taking a quicker
+Brandt Lane/T shortcut that bypasses the recommended Cappeln Osage road.
+
+Known access context has its own source link/date. Route T carries the MoDOT
+2026 work-project link. Illinois DNR listed Pere Marquette Scenic Drive open
+when checked November 15, 2026; park hours and changing closures still apply.
+Sandy Creek ends on the public approach road and never crosses the preserved
+pedestrian covered bridge. An old Ossenfort tree-removal closure was checked
+and identified as a February 2026 notice, not misrepresented as a current closure.
 
 ## Runtime contract
 
@@ -76,15 +101,21 @@ fabricating values. `--cache-dir` selects a persistent download/sample cache.
 
 The public OSRM service has a one-request-per-second limit; this generator makes
 serial requests with a 1.1-second gap, a descriptive user-agent and website
-referrer. Do not turn it into a high-volume routing job. There are at most 16
-monthly route requests. USGS terrain uses deduplicated batches of 60 points, at
+referrer. Do not turn it into a high-volume routing job. There are at most 27
+monthly route requests, one per catalog entry. USGS terrain uses deduplicated batches of 60 points, at
 most four concurrent requests, and one retry for a transient failure. Local
-cached batches are reused. No runtime service availability promise is made.
+cached point samples are reused even when retrying partially completed routes.
+No runtime service availability promise is made.
 
-Initial curation used public OSM named-road way geometry via Overpass. Each
+Initial curation used public OSM named-road way geometry via Overpass and the
+official OSM map API when Overpass was unavailable. Both are normalized into
+the same `{elements:[{id,tags,geometry}]}` input structure. Each
 waypoint persists its `osmWayId`, exact requested road node, intended road name,
 OSRM snap distance and snapped road name. `--roadways-cache FILE` is for a
-deliberate recuration from an Overpass JSON `out geom` response. Ordinary refresh
+deliberate recuration from normalized OSM way geometry or an Overpass JSON
+`out geom` response. Proposed/construction ways, non-driving path classes and
+private/prohibited motor-vehicle access are excluded from waypoint selection.
+Each requested waypoint must have an explicit matching road name/ref. Ordinary refresh
 uses the approved nodes already in the snapshot; it does not move endpoints to
 town centroids or random nearby subdivision streets. A 75 m router snap limit
 rejects shifted endpoints. Non-driving/ferry routes are rejected.
@@ -99,6 +130,16 @@ rejects shifted endpoints. Non-driving/ferry routes are rejected.
 - [Missouri Tourism: Highway 94](https://www.visitmo.com/articles/scenic-drives-on-highway-94)
 - [Meeting of the Great Rivers](https://www.riversandroutes.com/things-to-do/road-trips/meeting-of-the-great-rivers/)
 - [Illinois Great River Road: Bluff Road](https://www.greatriverroad-illinois.org/bluff-road)
+- [r/StLouis: Good driving roads in the County/City](https://www.reddit.com/r/StLouis/comments/d5p0m1/good_driving_roads_in_the_county_city/)
+- [r/StLouis: Fun Driving Roads](https://www.reddit.com/r/StLouis/comments/1usrgob/fun_driving_roads/)
+- [r/StLouis: Convertible drives](https://www.reddit.com/r/StLouis/comments/1ih4tdw/)
+- [St. Louis MINI Club: Favorite rides](https://www.northamericanmotoring.com/forums/st-louis-mini-club/246837-favorite-rides.html)
+- [Rider report: Femme Osage Creek Road](https://www.motorcycleroads.com/motorcycle-roads/missouri/femme-osage-creek-road)
+- [Rider report: Cappeln Osage Road](https://www.motorcycleroads.com/motorcycle-roads/missouri/cappeln-osage-road)
+- [r/StLouis: Fall-foliage drives](https://www.reddit.com/r/StLouis/comments/1xl9y8p/where_is_a_place_to_drive_to_see_fall_foliage/)
+- [MoDOT: Route T work](https://www.modot.org/projects/route-t-pavement-resurfacing-franklin-and-st-louis-counties)
+- [Illinois DNR: Pere Marquette](https://dnr.illinois.gov/parks/park.peremarquette)
+- [Missouri State Parks: Sandy Creek](https://mostateparks.com/historic-site/sandy-creek-covered-bridge-state-historic-site)
 
 Official area-guide links and individual OSM way links are also preserved in
 each route. Live traffic, closures and construction remain the Traffic layer's

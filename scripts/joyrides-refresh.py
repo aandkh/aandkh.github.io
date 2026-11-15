@@ -18,7 +18,45 @@ SOURCES={
  'bluff':'https://www.greatriverroad-illinois.org/bluff-road',
  '66':'https://www.visitmo.com/itineraries/route-66-part-one',
  'county':'https://stlouiscountymo.gov/st-louis-county-departments/parks/places/',
+ 'route-t':'https://www.modot.org/projects/route-t-pavement-resurfacing-franklin-and-st-louis-counties',
+ 'sandy':'https://mostateparks.com/historic-site/sandy-creek-covered-bridge-state-historic-site',
+ 'pere':'https://dnr.illinois.gov/parks/park.peremarquette',
+ 'lower-meramec':'https://greatriversgreenway.org/greenways/meramec-greenway-lower-meramec-park/',
+ '79':'https://www.recreation.gov/gateways/13737',
 }
+FORUMS={
+ 'local2019':('r/StLouis · local driving roads','https://www.reddit.com/r/StLouis/comments/d5p0m1/good_driving_roads_in_the_county_city/','2019-09-17'),
+ 'local2026':('r/StLouis · Fun Driving Roads','https://www.reddit.com/r/StLouis/comments/1usrgob/fun_driving_roads/',None),
+ 'convertibles':('r/StLouis · convertible drives','https://www.reddit.com/r/StLouis/comments/1ih4tdw/','2025-02-04'),
+ 'mini':('St. Louis MINI Club · Favorite rides','https://www.northamericanmotoring.com/forums/st-louis-mini-club/246837-favorite-rides.html','2013-03-06'),
+ 'femme':('Motorcycle Roads · rider route report','https://www.motorcycleroads.com/motorcycle-roads/missouri/femme-osage-creek-road','2025-02-15'),
+ 'cappeln':('Motorcycle Roads · rider route report','https://www.motorcycleroads.com/motorcycle-roads/missouri/cappeln-osage-road','2025-02-16'),
+ 'fall2026':('r/StLouis · fall-foliage drives','https://www.reddit.com/r/StLouis/comments/1xl9y8p/where_is_a_place_to_drive_to_see_fall_foliage/','2026-11-01'),
+}
+COMMUNITY={
+ 'ossenfort-melrose':{'character':'Ossenfort, Melrose and Bouquet connect the rolling roads of western Wildwood.','mentions':[('local2019','Locals specifically suggest Ossenfort, Melrose and Bouquet among their Wildwood driving roads.')]},
+ 'st-albans-labadie':{'character':'A countryside route through the St. Albans and Labadie area.','mentions':[('mini','A St. Louis MINI Club member recommends Route T through Labadie west of Wildwood.'),('local2026','The local discussion names Highway T through St. Albans and Labadie.')],'access':'MoDOT lists 2026 resurfacing, slide repairs and guardrail work on Route T, with late-fall completion anticipated. Check Traffic and the linked project page for current restrictions.','accessUrl':SOURCES['route-t']},
+ 'new-melle-f':{'character':'A road through the hills between Defiance and New Melle.','mentions':[('local2026','A local car-and-motorcycle driver specifically recommends Highway F near New Melle.'),('local2019','The discussion lists F among the New Melle-area roads worth exploring.')]},
+ 'new-melle-dd':{'character':'A countryside connection on D and DD between New Melle and the Broemmelsiek area.','mentions':[('local2026','Drivers discuss D and DD alongside Highway F near New Melle.')]},
+ 'femme-osage-creek':{'character':'A creek-valley road with woods, farmland and bluff views described by a local rider.','mentions':[('femme','A rider documents the complete T-to-F corridor and describes its wooded approach and creek-valley scenery.')]},
+ 'cappeln-osage':{'character':'A rural loop combining the Cappeln Osage hillside road with D and T.','mentions':[('cappeln','A rider describes Cappeln Osage as a hilly, wooded alternative to T, with open fields at its northern end.')]},
+ 'antire':{'character':'Beaumont-Antire and Antire roads, from I-44 toward High Ridge.','mentions':[('local2026','A local driver singles out Antire Road. This mapped corridor follows its actual public-road connection to High Ridge.')]},
+ 'old-lemay':{'character':'Old Lemay Ferry Road toward the Sandy Creek Covered Bridge area.','access':'The drive ends on Old Lemay Ferry Road by the historic-site approach. The preserved covered bridge is a pedestrian feature, not part of the driving route. Check the official site for visitor hours.','accessUrl':SOURCES['sandy'],'mentions':[('convertibles','A local suggests Old Lemay Ferry Road as an approach to Sandy Creek Covered Bridge.'),('mini','A MINI Club member recommends Old Lemay Ferry and its connecting Jefferson County roads.')]},
+ 'meramec-bottom':{'character':'A valley drive connecting Meramec Bottom and Baumgartner roads in South County.','mentions':[('convertibles','The suggested route follows Meramec Bottom through wooded and farm areas, then continues onto Baumgartner.')]},
+ 'pere-scenic':{'character':'A park-road climb into the wooded bluffs above the Illinois River.','mentions':[('local2026','A local recommends the park drive toward the bluff overlooks in addition to the riverside highway.')],'access':'Illinois DNR listed Scenic Drive open for drive-through outings when checked on November 15, 2026. Park hours, weather and later closures still apply.','accessUrl':SOURCES['pere']},
+ '79-winfield-elsberry':{'character':'A regional portion of the longer Highway 79 drive north from the St. Louis area.','mentions':[('fall2026','The fall-drive discussion recommends Highway 79 toward Hannibal. This route covers the nearer Winfield–Elsberry section, not the full trip.')]},
+}
+def community_properties(slug):
+ info=COMMUNITY.get(slug)
+ if not info:return {}
+ mentions=[]
+ for key,note in info['mentions']:
+  label,url,posted=FORUMS[key];item={'label':label,'url':url,'note':note,'checkedAt':'2026-11-15'}
+  if posted:item['postedAt']=posted
+  mentions.append(item)
+ result={'routeCharacter':info['character'],'communityMentions':mentions,'communityBasis':'Community mentions explain why a road was considered. They are personal recommendations, not measured popularity, pavement ratings, speed advice or a current access guarantee.'}
+ if info.get('access'):result.update(accessNote=info['access'],accessSourceUrl=info['accessUrl'],accessCheckedAt='2026-11-15')
+ return result
 # Waypoints are publicly named road/town locations selected by Andymap, then
 # snapped by OSRM to its routable road graph. The snapped location and road name
 # are saved for audit. Guides identify the area, not endorsement of these routes.
@@ -55,7 +93,87 @@ SEEDS=[
   ('Grafton / Main Street',-90.4314,38.9701),('Great River Road west of Grafton',-90.4824,38.9821),('Pere Marquette / Route 100',-90.5412,38.9724)]),
  ('bluff-road','Bluff Road · Columbia to Old Valmeyer','One way','Monroe County, Illinois','bluff',[
   ('Columbia / Palmer Road',-90.2201,38.4371),('Bluff Road / Fountain',-90.2544,38.3868),('Bluff Road / Old Valmeyer',-90.3114,38.3020)]),
+ ('ossenfort-melrose','Ossenfort, Melrose & Bouquet','One way','St. Louis County','wildwood',[
+  ('Ossenfort Road north',-90.713832,38.6086947),('Ossenfort / Melrose',-90.7211115,38.5724655),('Melrose / Bouquet',-90.7224362,38.5728587),('Bouquet Road south',-90.7220933,38.5522073)]),
+ ('st-albans-labadie','Route T · Wildwood to Labadie','One way','St. Louis and Franklin counties','route-t',[
+  ('Route T / Route 100 in Wildwood',-90.6863103,38.5787421),('St. Albans area / Route T',-90.7937748,38.5551359),('Labadie / Route T',-90.8472901,38.5281101)]),
+ ('meramec-bottom','Meramec Bottom & Baumgartner','One way','St. Louis County','lower-meramec',[
+  ('Meramec Bottom / Tesson Ferry',-90.4123047,38.4632249),('Meramec Bottom / Lemay Ferry',-90.3571406,38.4647605),('Baumgartner / Telegraph',-90.3049608,38.4702874)]),
+ ('79-winfield-elsberry','Highway 79 · Winfield to Elsberry','One way','Lincoln County','79',[
+  ('Winfield / Highway 79',-90.7385629,38.9988449),('Foley / Highway 79',-90.7416301,39.0413582),('Elsberry / Highway 79',-90.780945,39.166511)]),
 ]
+
+SEEDS.extend([('new-melle-f',
+  'Defiance to New Melle · Route F',
+  'One way',
+  'St. Charles County',
+  '94',
+  [('Defiance / Highway 94', -90.7768155, 38.6345146, 'MO 94'),
+   ('Route F south', -90.8100841, 38.6397009, 'MO F'),
+   ('Route F / Femme Osage Creek', -90.8736649, 38.6649461, 'MO F'),
+   ('New Melle / Routes F and D', -90.879563, 38.709899, 'MO F')]),
+ ('new-melle-dd',
+  'New Melle to Broemmelsiek · D & DD',
+  'One way',
+  'St. Charles County',
+  '94',
+  [('New Melle / Route D', -90.879563, 38.709899, 'MO D'),
+   ('Route D countryside', -90.8390294, 38.706914, 'MO D'),
+   ('Routes D and DD', -90.8060158, 38.6944794, 'MO DD'),
+   ('Route DD / Schwede Road', -90.8008644, 38.7226444, 'MO DD'),
+   ('Broemmelsiek area / Route DD', -90.7994204, 38.739925, 'MO DD')]),
+ ('femme-osage-creek',
+  'Femme Osage Creek Road',
+  'One way',
+  'St. Charles County',
+  '94',
+  [('Femme Osage Creek / Route T', -90.9563446, 38.6435149, 'Femme Osage Creek Road'),
+   ('Femme Osage Creek valley', -90.9115459, 38.6515311, 'Femme Osage Creek Road'),
+   ('Femme Osage Creek / Route F', -90.8736649, 38.6649461, 'Femme Osage Creek Road')]),
+ ('cappeln-osage',
+  'Cappeln Osage · D and T country loop',
+  'Loop',
+  'St. Charles County',
+  '94',
+  [('Cappeln Osage / Route D', -90.9390388, 38.6845419, 'Cappeln Osage Road'),
+   ('Cappeln Osage north bend', -90.9390933, 38.6788986, 'Cappeln Osage Road'),
+   ('Cappeln Osage hills', -90.9390956, 38.6567067, 'Cappeln Osage Road'),
+   ('Cappeln Osage / Femme Osage village', -90.936795, 38.6442841, 'Cappeln Osage Road'),
+   ('Cappeln Osage / Route T', -90.94267, 38.6348653, 'Cappeln Osage Road'),
+   ('Route T / Femme Osage Creek', -90.9563446, 38.6435149, 'MO T'),
+   ('Route T / Route D north junction', -90.9520455, 38.6858946, 'MO D'),
+   ('Cappeln Osage / Route D', -90.9390388, 38.6845419, 'Cappeln Osage Road')])])
+
+SEEDS.extend([('pere-scenic',
+  'Pere Marquette bluff loop',
+  'Loop',
+  'Jersey County, Illinois',
+  'pere',
+  [('Scenic Drive / River Road', -90.543335, 38.9717129),
+   ('Pere Marquette bluff drive', -90.530208, 38.979151),
+   ('Scenic Drive / Army Road', -90.5026165, 38.9862491),
+   ('Army Road / Graham Hollow', -90.492404, 38.985623),
+   ('Graham Hollow south', -90.4825148, 38.9775939),
+   ('River Road return', -90.4951293, 38.9679372),
+   ('Scenic Drive / River Road', -90.543335, 38.9717129)]),
+ ('antire',
+  'Beaumont–Antire · I-44 to High Ridge',
+  'One way',
+  'St. Louis and Jefferson counties',
+  'county',
+  [('Beaumont–Antire south of I-44', -90.5488036, 38.5146741),
+   ('Beaumont–Antire / Antire Road', -90.5600322, 38.5057724),
+   ('Antire Road south', -90.5628662, 38.4796954),
+   ('Antire Road / High Ridge', -90.5363013, 38.4611603)]),
+ ('old-lemay',
+  'Old Lemay Ferry · Antonia to Sandy Creek',
+  'One way',
+  'Jefferson County',
+  'sandy',
+  [('Old Lemay Ferry / northern connector', -90.4682047, 38.3592624),
+   ('Old Lemay Ferry countryside', -90.4949978, 38.330717),
+   ('Goldman approach', -90.5194686, 38.2989593),
+   ('Sandy Creek historic-site approach', -90.5255584, 38.294624)])])
 
 ROAD_MATCHES={
  'forest-park':['Grand Drive','Fine Arts Drive','Wells Drive','McKinley Drive','Grand Drive','Grand Drive'],
@@ -71,17 +189,29 @@ ROAD_MATCHES={
  'north94':['North Second Street','MO 94','MO 94','Main Street'],
  'river-alton':['Broadway','IL 100','IL 100'],
  'river-pere':['IL 100']*3,'bluff-road':['Palmer Road','Bluff Road','Bluff Road'],
+ 'ossenfort-melrose':['Ossenfort Road','Ossenfort Road','Melrose Road','Bouquet Road'],
+ 'st-albans-labadie':['MO T']*3,'meramec-bottom':['Meramec Bottom Road','Meramec Bottom Road','Baumgartner Road'],'79-winfield-elsberry':['MO 79']*3,
 }
+ROAD_MATCHES.update({'new-melle-f': ['MO 94', 'MO F', 'MO F', 'MO F'],
+ 'new-melle-dd': ['MO D', 'MO D', 'MO DD', 'MO DD', 'MO DD'],
+ 'femme-osage-creek': ['Femme Osage Creek Road', 'Femme Osage Creek Road', 'Femme Osage Creek Road'],
+ 'cappeln-osage': ['Cappeln Osage Road']*5+['MO T','MO D','Cappeln Osage Road']})
+
+ROAD_MATCHES.update({'pere-scenic': ['Scenic Drive', 'Scenic Drive', 'Scenic Drive', 'Army Road', 'Graham Hollow Road', 'IL 100', 'Scenic Drive'],
+ 'antire': ['Beaumont-Antire Road', 'Antire Road', 'Antire Road', 'Antire Road'],
+ 'old-lemay': ['Old Lemay Ferry Road', 'Old Lemay Ferry Road', 'Old Lemay Ferry Road', 'Old Lemay Ferry Road']})
+
 def select_road_points(seeds,roadways):
  records=roadways.get('elements',[]);output=[]
  for slug,title,kind,area,source,waypoints in seeds:
+  if len(waypoints)!=len(ROAD_MATCHES.get(slug,[])):raise RuntimeError('Every waypoint must have a named-road match: '+slug)
   chosen=[]
   for w,expected in zip(waypoints,ROAD_MATCHES[slug]):
    candidates=[]
    for f in records:
-    tags=f.get('tags',{});name=tags.get('name','');refs=tags.get('ref','').split(';')
+    tags=f.get('tags',{});name=tags.get('name','');refs=[ref.strip() for ref in tags.get('ref','').split(';')]
     match=name==expected or expected in refs or expected.split()[-1] in refs and expected.startswith(('MO ','IL ')) or expected=='Broadway' and name in ['West Broadway','East Broadway']
-    if not match or tags.get('access') in ['private','no'] or tags.get('motor_vehicle') in ['private','no'] or tags.get('highway') in ['footway','cycleway','path','steps','service']:continue
+    if not match or any(tags.get(key) in ['private','no'] for key in ['access','vehicle','motor_vehicle','motorcar']) or tags.get('highway') not in ['motorway','motorway_link','trunk','trunk_link','primary','primary_link','secondary','secondary_link','tertiary','tertiary_link','residential','unclassified','living_street','road']:continue
     for c in f.get('geometry',[]):
      coord=[c['lon'],c['lat']];candidates.append((geo.meters([w[1],w[2]],coord),coord,f['id']))
    if not candidates:raise RuntimeError('No public OSM road geometry for '+expected)
@@ -201,7 +331,17 @@ def main():
   except Exception as e:
    if previous:records.append({**previous,'_reuse':True});print('Preserved prior route',slug,str(e),flush=True)
    else:raise RuntimeError(f'{slug}: {e}') from e
- points=list(allpoints.values());batches=[points[i:i+60] for i in range(0,len(points),60)];elevations={}
+ # Reuse successful point samples even if their former batch belonged to a
+ # partially completed route. A transient failure must not make the next run
+ # remeasure the good points just because the outstanding batch boundaries shift.
+ elevations={}
+ if not args.refresh_elevation:
+  for saved in cache.glob('dem-*.json'):
+   try:
+    values=json.loads(saved.read_text())
+    if isinstance(values,dict):elevations.update({key:value for key,value in values.items() if key in allpoints and isinstance(value,(int,float)) and not isinstance(value,bool) and math.isfinite(value) and -100<value<2000})
+   except (OSError,ValueError):pass
+ points=[coord for key,coord in allpoints.items() if key not in elevations];batches=[points[i:i+60] for i in range(0,len(points),60)]
  def dem(coords):
   path=cache/('dem-'+hashlib.sha256(json.dumps(coords).encode()).hexdigest()+'.json')
   if path.exists() and not args.refresh_elevation:return json.loads(path.read_text())
@@ -222,6 +362,8 @@ def main():
   with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
    for i,result in enumerate(pool.map(dem,batches)):elevations.update(result);print('DEM',i+1,'/',len(batches),flush=True)
  for f in records:
+  p=f['properties'];p.update(community_properties(p['id'].split(':',1)[1]))
+  if p.get('routeCharacter'):p['description']=p['routeCharacter']+' '+p['routeKind']+' through '+p['area']+'.'
   reuse=f.pop('_reuse',False);samples=f.pop('_samples',[])
   if not reuse:
    f['properties'].update(terrain_metrics(samples,[elevations.get(','.join(map(str,c))) for c in samples]))

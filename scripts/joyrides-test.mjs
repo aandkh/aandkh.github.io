@@ -4,8 +4,18 @@ import {availableJoyrideSorts,sortJoyrides,joyrideSummary,joyrideRoutes,JOYRIDES
 import {centroid,cleanStop} from '../core.js';
 import {placeHash,readPlaceHash,findSharedFeature} from '../short-links.js';
 const data=JSON.parse(await readFile(new URL('../joyrides.json',import.meta.url)));
-assert.equal(data.features.length,16);
-assert.equal(new Set(data.features.map(f=>f.properties.id)).size,16);
+assert.equal(data.features.length,27);
+assert.equal(new Set(data.features.map(f=>f.properties.id)).size,27);
+assert.equal(new Set(data.features.map(f=>JSON.stringify(f.geometry))).size,27,'new route entries must not duplicate existing map lines');
+const community=data.features.filter(f=>f.properties.communityMentions?.length);
+assert.equal(community.length,11);
+for(const f of community){assert(f.properties.routeCharacter);for(const source of f.properties.communityMentions){assert(source.url.startsWith('https://'));assert(source.note&&source.label&&source.checkedAt);}}
+const cappeln=data.features.find(f=>f.properties.id==='joyrides:cappeln-osage');
+assert(cappeln.properties.roadNames.includes('Cappeln Osage Road'));
+assert(!cappeln.properties.roadNames.some(name=>/Brandt/i.test(name)),'do not substitute the router shortcut for the community-recommended road');
+assert.deepEqual(cappeln.geometry.coordinates[0],cappeln.geometry.coordinates.at(-1),'Cappeln return is a complete road loop');
+const sandy=data.features.find(f=>f.properties.id==='joyrides:old-lemay');
+assert(sandy.properties.roadNames.every(name=>name==='Old Lemay Ferry Road'),'historic-site drive stays on its road approach, away from the pedestrian covered bridge');
 assert(data.features.every(f=>f.properties.terrainSampleCoverage===1),'Review incomplete terrain before replacing the complete shipped catalog');
 for(const f of data.features){
  const p=f.properties;

@@ -28,6 +28,12 @@ export function appendJoyrideDetails(host,p={},options={}){
  }
  if(finite(p.netElevationFt))section.append(node('p',`${p.netElevationFt>0?'+':''}${p.netElevationFt} ft net terrain change · ${p.directionChangeCount??0} mapped direction-change groups`,'small'));
  section.append(node('p','Terrain estimates describe the ground below the road. Drive time excludes live traffic and stops.','joyride-note'));
+ if(p.communityMentions?.length){
+  const community=node('details','','extra-disclosure');community.append(node('summary','Community recommendations'));
+  for(const mention of p.communityMentions){if(mention.note)community.append(node('p',mention.note,'small'));if(typeof mention.url==='string'&&/^https:\/\//.test(mention.url)){const a=node('a',mention.label+(mention.postedAt?' · '+mention.postedAt.slice(0,4):'')+' ↗');a.href=mention.url;a.target='_blank';a.rel='noopener noreferrer';community.append(a);}}
+  community.append(node('p',p.communityBasis||'Personal recommendations, not a measured popularity rating. Road geometry and terrain are checked separately.','small'));section.append(community);
+ }
+ if(p.accessSourceUrl&&/^https:\/\//.test(p.accessSourceUrl)){const a=node('a','Road / park access updates ↗');a.href=p.accessSourceUrl;a.target='_blank';a.rel='noopener noreferrer';section.append(a);}
  const route=node('details','','extra-disclosure');route.append(node('summary','Route & roads'));
  if(Array.isArray(p.waypoints)){const list=node('ol','','joyride-waypoints');for(const w of p.waypoints){const li=node('li',w.name);if(w.road&&w.road!==w.name)li.append(node('small',w.road));list.append(li);}route.append(list);}
  if(p.roadNames?.length)route.append(node('p',p.roadNames.join(' · '),'small'));

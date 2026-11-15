@@ -26,4 +26,15 @@ class MetricsTest(unittest.TestCase):
  def test_flat_ground_is_genuinely_zero(self):
   points=m.geo.sample([[-90,38],[-89.98,38]],200);result=m.terrain_metrics(points,[100]*len(points))
   self.assertEqual(result['climbFt'],0);self.assertEqual(result['steepestSustainedPct'],0)
+ def test_waypoints_exclude_private_proposed_and_non_driving_roads(self):
+  seeds=[('new-melle-dd','Test','One way','Test','94',[(str(i),-90.8,38.7) for i in range(5)])]
+  ways=[]
+  for i,tags in enumerate([{'highway':'proposed'},{'highway':'construction'},{'highway':'footway'},{'highway':'secondary','motor_vehicle':'private'},{'highway':'secondary','vehicle':'no'},{'highway':'secondary','ref':'MO D; MO DD'}]):
+   ways.append({'id':i+1,'tags':{'ref':'MO D; MO DD',**tags},'geometry':[{'lon':-90.8,'lat':38.7}]})
+  result=m.select_road_points(seeds,{'elements':ways})
+  self.assertTrue(all(w[4]==6 for w in result[0][-1]))
+  with self.assertRaisesRegex(RuntimeError,'No public OSM road'):m.select_road_points(seeds,{'elements':ways[:-1]})
+ def test_each_waypoint_needs_a_road_match(self):
+  seeds=[('new-melle-dd','Test','One way','Test','94',[('one',-90.8,38.7)])]
+  with self.assertRaisesRegex(RuntimeError,'Every waypoint'):m.select_road_points(seeds,{'elements':[]})
 if __name__=='__main__':unittest.main()
