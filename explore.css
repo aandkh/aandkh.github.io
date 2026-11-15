@@ -110,3 +110,12 @@ body.shared-view .map-shell{margin-left:12px}
  body.shared-view.shared-peek #detail> :not(.floating-head):not(h2):not(.event-time){display:none}
  body.shared-view.shared-peek #detail .event-time{font-size:11px;margin:4px 0}
 }
+
+#layer-list .layer-row:has(.layer-browse){grid-template-columns:18px minmax(0,1fr) 36px}
+#layer-list .layer-row .layer-browse{width:36px;height:40px;font-size:24px;border-radius:8px;color:var(--muted)}
+#layer-list .layer-row .layer-browse:hover{background:var(--surface-raised);color:var(--ink)}
+.floating-head .detail-layer-link{width:auto;height:auto;min-height:40px;max-width:70%;padding:7px 9px;text-align:left;white-space:normal;font-size:11px;font-weight:650;line-height:1.4;border-radius:9px;background:var(--surface-soft);color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+#all-results{font-size:12px;border-radius:18px;margin:3px 0 9px;min-height:40px}
+.result-card .result-event-time{font-size:12px;font-weight:600;color:var(--ink);margin-top:7px}
+@media(min-width:801px){#results{width:min(380px,calc(100% - 96px));bottom:84px;max-height:calc(100% - 220px)}}
+@media(max-width:800px){.floating-head .detail-layer-link{max-width:52%;font-size:11px}.floating-head:has(.back-results) .detail-layer-link{max-width:34%}body.shared-view .floating-head .detail-layer-link{font-size:10px;max-width:48%;min-height:36px;padding:6px}}

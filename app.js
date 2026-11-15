@@ -32,7 +32,7 @@ const link=(label,url)=>{const a=el('a','',label);a.href=safeUrl(url);a.target='
 const format=t=>{if(/^\d{4}-\d{2}-\d{2}$/.test(t||''))return t+' (time not supplied)';const n=Date.parse(t);return Number.isFinite(n)?new Intl.DateTimeFormat('en-US',{timeZone:'America/Chicago',month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'}).format(n):'Time not supplied';};
 const enabled=new Set(),data=new Map(),drawn=new Map(),requests=new Map(),tileHealth=new Map();
 const requestedLayers=new Set();let capabilities={};
-let todayOnly=false;const todayAdded=new Set();
+let currentResultsLayer=null;let todayOnly=false;const todayAdded=new Set();
 let openNow=false;const hoursChecks=createHoursChecks(),excludedPlaceSources=new Set();
 function featureOpening(id,f,now=Date.now()){return placeOpeningState(id,f,data.get(id),hoursChecks,now);}
 function localPlaceFeatures(id,features){if(id==='culture')features=features.map(f=>enrichCultureFeature(f)).filter(cultureFeatureDisplayable);return filterPlaceFeatures(id,features).filter(f=>!excludedPlaceSources.has(f.properties?.sourceId));}
@@ -84,8 +84,8 @@ function switchTab(next){if(!['layers','presets'].includes(next))return;for(cons
 for(const b of document.querySelectorAll('[data-tab]'))b.onclick=()=>switchTab(b.dataset.tab);
 function renderLayers(){return measureUI('layer-controls',renderLayerControls);}
 function appendLayerRow(body,l){
-   const available=selectable(l.id),row=el('div','layer-row'+(enabled.has(l.id)?' active':'')+(!available?' unconfigured':'')),input=el('input');input.type='checkbox';input.id='layer-'+l.id;input.checked=enabled.has(l.id);input.disabled=!available;input.onchange=()=>toggle(l.id,input.checked);
-   const label=el('label');label.htmlFor=input.id;label.append(el('span','layer-name',(l.id==='radar'?'Weather':l.name)));row.append(input,label);body.append(row);
+   const available=selectable(l.id),row=el('div','layer-row'+(enabled.has(l.id)?' active':'')+(!available?' unconfigured':'')),input=el('input');input.type='checkbox';input.id='layer-'+l.id;input.checked=enabled.has(l.id);input.disabled=!available;input.onchange=()=>{toggle(l.id,input.checked);if(input.checked&&browseable(l.id))browseLayer(l.id);};
+   const label=el('label');label.htmlFor=input.id;label.append(el('span','layer-name',(l.id==='radar'?'Weather':l.name)));row.append(input,label);if(available&&browseable(l.id)){const browse=btn('›',()=>browseLayer(l.id),'layer-browse');browse.setAttribute('aria-label','Browse '+l.name);browse.title='Browse '+l.name;row.append(browse);}body.append(row);
 }
 function appendLayerOptions(body,l){
    if(enabled.has(l.id)&&['radar','air'].includes(l.id))body.append(modeControl(l.id));if(enabled.has(l.id)&&Object.hasOwn(MODE_DEFAULTS,l.id))body.append(extraModeControl(l.id));
@@ -97,7 +97,7 @@ function renderLayerControls(){
  const host=$('#layer-list'),focused=host.contains(document.activeElement)?document.activeElement.id:'',oldRows=[...host.querySelectorAll('input[type="checkbox"]:not(:disabled)')].map(node=>node.id),oldIndex=oldRows.indexOf(focused);host.replaceChildren();
  const q=$('#layer-search').value.trim().toLowerCase();
  const featured=el('section','featured-layers');for(const id of ['radar','traffic']){const l=BY_ID[id];if(layerMatchesSearch(l,q)&&(layerFilter!=='selected'||enabled.has(id)))appendLayerRow(featured,l);}
- if(!q||'happening today events shows'.includes(q)){const row=el('div','layer-row'+(todayOnly?' active':'')),input=el('input'),label=el('label');input.type='checkbox';input.id='happening-today';input.checked=todayOnly;input.onchange=()=>setTodayOnly(input.checked);label.htmlFor=input.id;label.append(el('span','layer-name','Happening Today'));row.append(input,label);featured.append(row);}
+ if(!q||'happening today events shows'.includes(q)){const row=el('div','layer-row'+(todayOnly?' active':'')),input=el('input'),label=el('label');input.type='checkbox';input.id='happening-today';input.checked=todayOnly;input.onchange=()=>{setTodayOnly(input.checked);if(input.checked){currentResultsLayer=null;setResults(true);}};label.htmlFor=input.id;label.append(el('span','layer-name','Happening Today'));row.append(input,label);featured.append(row);}
  if(featured.childElementCount){host.append(featured);const options=el('div','featured-options');for(const id of ['radar','traffic'])if(enabled.has(id)&&layerMatchesSearch(BY_ID[id],q))appendLayerOptions(options,BY_ID[id]);host.append(options);}
  for(const group of ['Conditions','Get around','Go out','Explore']){
   const rows=LAYERS.filter(l=>!['radar','traffic'].includes(l.id)&&l.group===group&&layerMatchesSearch(l,q)&&(layerFilter!=='selected'||enabled.has(l.id)));if(!rows.length)continue;
@@ -137,7 +137,7 @@ function renderLegend(){syncQuickCategories();renderEnvironmentKey();const host=
 function boundsParam(){const b=map.getBounds(),bounds=regionalViewportBounds([b.getWest(),b.getSouth(),b.getEast(),b.getNorth()])||[REGION.west,REGION.south,REGION.east,REGION.north];return bounds.map(n=>n.toFixed(5)).join(',');}
 function removeDrawing(id){const layer=drawn.get(id);if(layer)map.removeLayer(layer);drawn.delete(id);tileHealth.delete(id);renderPlaceMarkers();}
 function expireRoadworks(){const result=data.get('roadworks');if(!enabled.has('roadworks')||!Array.isArray(result?.features))return;const current=currentRoadworks(result.features);if(current.length===result.features.length)return;data.set('roadworks',{...result,features:current,status:current.length?result.status:'stale',displayExpiry:true,note:result.displayExpiry?result.note:(result.note||BY_ID.roadworks.note)+' Expired records are hidden until a current source response is available.'});removeDrawing('roadworks');if(current.length)drawFeatures('roadworks',{...result,features:current});renderResults();}
-function toggle(id,on,adjustZoom=true){if(!Object.hasOwn(BY_ID,id))return;if(on){requestedLayers.add(id);if(!selectable(id)){renderLayers();return;}enabled.add(id);if(adjustZoom&&id==='floodplains'&&map.getZoom()<14)map.setZoom(14);loadLayer(id);if(id==='radar'){weatherReadings.expire(true);refreshWeatherReadings();}if(id==='sky'&&(adjustZoom||$('#detail').hidden)){renderSky();setControls(false);}if(id==='weather'&&(adjustZoom||$('#detail').hidden)){renderWeather();setControls(false);}}else{requestedLayers.delete(id);enabled.delete(id);if(id==='radar'){weatherReadings.hide();weatherReadingsRequest?.abort();}requests.get(id)?.abort();requests.delete(id);removeDrawing(id);if(id==='sky'&&skyPanelOpen||id==='weather'&&weatherPanelOpen)closeDetail();renderLayers();renderResults();}}
+function toggle(id,on,adjustZoom=true){if(!Object.hasOwn(BY_ID,id))return;if(on){requestedLayers.add(id);if(!selectable(id)){renderLayers();return;}enabled.add(id);if(adjustZoom&&id==='floodplains'&&map.getZoom()<14)map.setZoom(14);loadLayer(id);if(id==='radar'){weatherReadings.expire(true);refreshWeatherReadings();}if(id==='sky'&&(adjustZoom||$('#detail').hidden)){renderSky();setControls(false);}if(id==='weather'&&(adjustZoom||$('#detail').hidden)){renderWeather();setControls(false);}}else{if(currentResultsLayer===id)currentResultsLayer=null;requestedLayers.delete(id);enabled.delete(id);if(id==='radar'){weatherReadings.hide();weatherReadingsRequest?.abort();}requests.get(id)?.abort();requests.delete(id);removeDrawing(id);if(id==='sky'&&skyPanelOpen||id==='weather'&&weatherPanelOpen)closeDetail();renderLayers();renderResults();}}
 function raster(id){let layer;
  if(id==='terrain'){const d=data.get(id);if(!d?.imageUrl||!Array.isArray(d.bounds))return;if(d.minZoom&&map.getZoom()<d.minZoom){map.setZoom(d.minZoom);return;}layer=L.imageOverlay(d.imageUrl,d.bounds,{opacity:overlayOpacity.terrain});layer.on('error',()=>{tileHealth.set(id,'error');renderLegend();});}
 
@@ -173,7 +173,7 @@ function closeDetail({restoreFocus=false}={}){
 function showCluster(id,cluster){
  rememberDetailOrigin();closeDetail();const box=$('#detail');box.replaceChildren();box.hidden=false;$('#results').hidden=true;
  const head=el('div','floating-head'),close=btn('×',()=>closeDetail({restoreFocus:true}));close.setAttribute('aria-label','Close place details');
- head.append(el('span','eyebrow',BY_ID[id].name),close);detailExpansion(head);box.append(head,el('h2','',cluster.features.length+' at this location'));
+ head.append(detailCategory(id,false),close);detailExpansion(head);box.append(head,el('h2','',cluster.features.length+' at this location'));
  for(const feature of cluster.features){const p=feature.properties||{},button=btn('',()=>showFeature(id,feature),'result-card');button.append(el('strong','',p.title||p.name||BY_ID[id].name),el('small','',p.address||p.description||''));box.append(button);}
  setControls(false);focusDetailHeading();
 }
@@ -261,7 +261,7 @@ function renderSky(){
 }
 function toStop(id,f,anchor){const p=f.properties||{},c=coordinate(anchor?.lat,anchor?.lng)?[anchor.lat,anchor.lng]:centroid(f.geometry);return c&&coordinate(...c)?cleanStop({id:String(p.id||f.id||''),layer:id,title:p.title||p.name||BY_ID[id].name,lat:c[0],lng:c[1],description:p.description||p.address||'',address:p.address,ownershipEvidence:p.ownershipEvidence,vehicle:p.vehicle,url:placeUrl(p.canonicalWebsite,p.website,p.url),socialLinks:p.socialLinks,start:p.start,end:p.end,source:p.source||BY_ID[id].source,observedAt:p.observedAt||data.get(id)?.observedAt,sourceId:p.sourceId,sourceCheckedAt:p.sourceCheckedAt,sourceUrl:p.sourceUrl,accessNote:p.accessNote,openingHours:p.openingHours,hoursSourceUrl:p.hoursSourceUrl,hoursCheckedAt:p.hoursCheckedAt,hoursExpiresAt:p.hoursExpiresAt}):null;}
 function showFeature(id,f,anchor){showDetail(toStop(id,f,anchor),f.properties||{},id);}
-function showDetail(stop,properties={},id=stop?.layer,shared=false){if(isExcludedChainPlace('',{...stop,...properties})||excludedPlaceSources.has(stop?.sourceId)){closeDetail();return;}if(['aircraft','transit'].includes(id))return showVehicle(stop,properties,id,shared);properties={...stop,...properties};rememberDetailOrigin();closeDetail();focus=stop;sharedFocus=shared;const box=$('#detail');box.replaceChildren();box.hidden=false;$('#results').hidden=true;const head=el('div','floating-head'),close=btn('×',()=>closeDetail({restoreFocus:true}));close.setAttribute('aria-label','Close place details');head.append(el('span','eyebrow',id?BY_ID[id]?.name||'MAP PIN':'MAP PIN'),close);detailExpansion(head);box.append(head,el('h2','',stop?.title||properties.title||properties.name||'Selected place'));const description=stop?.description||properties.description||'A location selected on the map.';const category=/^OpenStreetMap (.+)\.$/.exec(description)?.[1]?.replaceAll('_',' ');if(description!==properties.address&&(!category||category.toLowerCase()!==String(BY_ID[id]?.name||'').toLowerCase().replace(/s$/,'')))box.append(el('p','place-description',category?category[0].toUpperCase()+category.slice(1):description));
+function showDetail(stop,properties={},id=stop?.layer,shared=false){if(isExcludedChainPlace('',{...stop,...properties})||excludedPlaceSources.has(stop?.sourceId)){closeDetail();return;}if(['aircraft','transit'].includes(id))return showVehicle(stop,properties,id,shared);properties={...stop,...properties};rememberDetailOrigin();closeDetail();focus=stop;sharedFocus=shared;const box=$('#detail');box.replaceChildren();box.hidden=false;$('#results').hidden=true;const head=el('div','floating-head'),close=btn('×',()=>closeDetail({restoreFocus:true}));close.setAttribute('aria-label','Close place details');head.append(detailCategory(id,!!properties.start),close);detailExpansion(head);box.append(head,el('h2','',stop?.title||properties.title||properties.name||'Selected place'));const description=stop?.description||properties.description||'A location selected on the map.';const category=/^OpenStreetMap (.+)\.$/.exec(description)?.[1]?.replaceAll('_',' ');if(description!==properties.address&&(!category||category.toLowerCase()!==String(BY_ID[id]?.name||'').toLowerCase().replace(/s$/,'')))box.append(el('p','place-description',category?category[0].toUpperCase()+category.slice(1):description));
  const isCalendarEvent=!!properties.start&&['concerts','festivals','sports','arts','free','exhibitions','movies','communityevents','foodtrucks'].includes(id);const sourceDetails=el('details','place-source-details');sourceDetails.append(el('summary','','Hours & details'));
  if(shared)sourceDetails.append(el('p','source-date','Shared snapshot — details have not been reverified.'));
  if(properties.start)box.append(el('p','event-time',`${id==='roadworks'?'Listed start':'Event'}: ${format(properties.start)}`));if(properties.end)box.append(el('p','','Listed end: '+format(properties.end)));if(stop||properties.address)appendPlaceNavigation(box,{...stop,address:properties.address},{notify:toast});
@@ -283,7 +283,7 @@ function showDetail(stop,properties={},id=stop?.layer,shared=false){if(isExclude
 }
 function showVehicle(stop,properties,id,shared){
  properties={...stop,...properties};rememberDetailOrigin();closeDetail();focus=stop;sharedFocus=shared;const box=$('#detail');box.replaceChildren();box.hidden=false;$('#results').hidden=true;
- const head=el('div','floating-head'),close=btn('×',()=>closeDetail({restoreFocus:true}));close.setAttribute('aria-label','Close vehicle details');head.append(el('span','eyebrow',BY_ID[id].name),close);detailExpansion(head);box.append(head,el('h2','',properties.title||BY_ID[id].name));appendVehicleInspector(box,properties,{format,shared});
+ const head=el('div','floating-head'),close=btn('×',()=>closeDetail({restoreFocus:true}));close.setAttribute('aria-label','Close vehicle details');head.append(detailCategory(id,false),close);detailExpansion(head);box.append(head,el('h2','',properties.title||BY_ID[id].name));appendVehicleInspector(box,properties,{format,shared});
  const sourceDetails=el('details','place-source-details');sourceDetails.append(el('summary','','Position'));
  if(id==='transit')appendTransitRoute(box,properties);
  if(stop){const transit=id==='transit';selectedMarker=L.marker([stop.lat,stop.lng],{icon:L.divIcon({className:transit?'place-symbol place-selected':'',html:transit?'<span style="background:'+markerPaint('transit').color+';--marker-ink:'+markerPaint('transit').ink+'">'+symbol('transit')+'</span>':'<div class="vehicle-selection-ring"></div>',iconSize:[44,44],iconAnchor:[22,22]}),interactive:false,keyboard:false,title:stop.title,alt:stop.title,zIndexOffset:1000}).addTo(map);selectedMarker.getElement()?.setAttribute('aria-current','true');const actions=el('div','minor-actions');actions.append(btn('Share reported position',()=>share()));box.append(actions);sourceDetails.append(el('p','small',stop.lat.toFixed(5)+', '+stop.lng.toFixed(5)));}box.append(sourceDetails);
@@ -332,23 +332,24 @@ async function checkPlace(stop,host,old,closureNotice,lookup,freshness,hoursLine
 }
 function renderResults(){return measureUI('place-results',renderPlaceResults);}
 function renderPlaceResults(){
+ $('#results-title').textContent=currentResultsLayer?BY_ID[currentResultsLayer].name:'Results';$('#all-results').hidden=!currentResultsLayer;const resultLayers=currentResultsLayer?[currentResultsLayer]:[...requestedLayers];
  const host=$('#results-list'),focused=host.contains(document.activeElement)?document.activeElement.dataset.resultKey:null;host.replaceChildren();const q=$('#place-search').value.trim().toLowerCase(),now=Date.now(),counts={open:0,closed:0,unknown:0},counted=new Set();let total=0,overlap=false;
- for(const id of enabled){const d=data.get(id),section=el('div','result-group');
+ for(const id of enabled){if(currentResultsLayer&&id!==currentResultsLayer)continue;const d=data.get(id),section=el('div','result-group');
   const candidates=localPlaceFeatures(id,id==='roadworks'?currentRoadworks(d?.features):Array.isArray(d?.features)?d.features:[]).filter(f=>{const c=f.geometry?.coordinates;return f.geometry?.type!=='Point'||(coordinate(c?.[1],c?.[0])&&map.getBounds().contains([c[1],c[0]]));}).filter(f=>placeMatchesSearch(f,id,q));
   if(openNow&&isHoursPlaceLayer(id))for(const f of candidates){const p=f.properties||{},key=p.sourceId||p.id||f.id||id+JSON.stringify(f.geometry);if(counted.has(key))overlap=true;counted.add(key);counts[featureOpening(id,f,now).state]++;}
   const features=visibleFeatures(id,candidates,now);
-  if(!features.length)continue;section.append(el('h2','',BY_ID[id].name));
-  for(const f of features.slice(0,60)){const p=f.properties||{},b=btn('',()=>showFeature(id,f),'result-card');b.dataset.resultKey=id+':'+(p.id||f.id||JSON.stringify(f.geometry));const preview=id==='demographics'?[p.metricLabel,Number.isFinite(p.value)?new Intl.NumberFormat('en-US',{maximumFractionDigits:1}).format(p.value)+' '+p.unit:'No published estimate',Number.isFinite(p.moe)?'±'+new Intl.NumberFormat('en-US',{maximumFractionDigits:1}).format(p.moe)+' (90% MOE)':'',p.sourcePeriod].filter(Boolean).join(' · '):p.address||p.description||BY_ID[id].name;b.append(el('strong','',p.title||p.name||BY_ID[id].name),el('small','',preview));section.append(b);total++;}
+  if(!features.length)continue;if(!currentResultsLayer)section.append(el('h2','',BY_ID[id].name));
+  for(const f of features.slice(0,60)){const p=f.properties||{},b=btn('',()=>showFeature(id,f),'result-card');b.dataset.resultKey=id+':'+(p.id||f.id||JSON.stringify(f.geometry));const preview=id==='demographics'?[p.metricLabel,Number.isFinite(p.value)?new Intl.NumberFormat('en-US',{maximumFractionDigits:1}).format(p.value)+' '+p.unit:'No published estimate',Number.isFinite(p.moe)?'±'+new Intl.NumberFormat('en-US',{maximumFractionDigits:1}).format(p.moe)+' (90% MOE)':'',p.sourcePeriod].filter(Boolean).join(' · '):p.address||p.description||BY_ID[id].name;b.append(el('strong','',p.title||p.name||BY_ID[id].name),el('small','',preview));if(p.start)b.append(el('small','result-event-time',format(p.start)));section.append(b);total++;}
   if(features.length>60)section.append(el('p','small',`Showing 60 of ${features.length} results. Search or zoom in to narrow the list.`));host.append(section);
  }
  const summary=$('#open-now-summary');summary.hidden=!openNow;summary.textContent=[...enabled].some(isHoursPlaceLayer)?`${counts.open} open results · ${counts.closed} closed · ${counts.unknown} with unknown hours in this search.${overlap?' A listing appears once per selected layer, so some results repeat.':''} Other layer types stay visible.`:'Select a place layer, such as Restaurants or Bars, to use this filter.';
- const loading=[...requestedLayers].some(id=>requests.has(id)||(!data.has(id)&&!Object.keys(capabilities).length));const failed=[...enabled].some(id=>data.get(id)?.status==='unavailable');$('#results-count').textContent=loading?'Finding places…':total?`${total} result${total===1?'':'s'} in this area`:'';
+ const loading=resultLayers.some(id=>requests.has(id)||(!data.has(id)&&!Object.keys(capabilities).length));const failed=resultLayers.some(id=>data.get(id)?.status==='unavailable');$('#results-count').textContent=loading?'Finding places…':total?`${total} result${total===1?'':'s'} in this area`:'';
  if(!total)host.append(el('p','',loading?'Loading places for this area…':failed?'Some places could not load. Use Refresh to try again.':!enabled.size?'Select a layer to explore places.':openNow?'No places with matching listed hours in this view. Turn off Open now to include closed places and unknown hours.':q?'No matching places in this view. Try another search or move the map.':'No places in this view. Select a place layer or move the map.'));
  if(!total&&failed&&!loading)host.append(btn('Try again',()=>{for(const id of enabled)loadLayer(id);},'primary'));
  if(focused)([...host.querySelectorAll('[data-result-key]')].find(n=>n.dataset.resultKey===focused)||$('#place-search')).focus({preventScroll:true});
 }
 function currentState(){const c=map.getCenter();return{v:1,todayOnly,openNow,mapStyle,radarMode,airMode,layerModes:{...layerModes},overlayOpacity:{...overlayOpacity},center:[c.lat,c.lng],zoom:map.getZoom(),layers:[...requestedLayers],focus,imageryDate};}
-function applyState(value,{explain=false,shared=false}={}){const s=cleanState({...value,mapStyle:value.mapStyle||mapStyle});closeDetail();document.body.classList.toggle('shared-view',shared);document.body.classList.remove('shared-peek');if(shared&&s.focus){s.layers=s.focus.layer?[s.focus.layer]:[];s.todayOnly=false;s.openNow=false;}todayOnly=s.todayOnly;todayAdded.clear();openNow=s.openNow;$('#open-now').checked=openNow;radarMode=s.radarMode;airMode=s.airMode;layerModes=cleanLayerModes(s.layerModes);overlayOpacity=cleanOverlayOpacity(s.overlayOpacity);if(s.mapStyle!==mapStyle)setMapStyle(s.mapStyle);for(const id of [...requestedLayers])toggle(id,false);imageryDate=s.imageryDate;map.setView(s.center,s.zoom,{animate:false});for(const id of s.layers)toggle(id,true,false);if(todayOnly)setTodayOnly(true);if(s.focus)showDetail(s.focus,{},s.focus.layer,true);renderLegend();renderResults();setControls(false);if(explain&&Object.keys(capabilities).length){const missing=s.layers.filter(id=>!selectable(id));if(missing.length)toast('This view could not load '+missing.map(id=>BY_ID[id].name).join(', ')+'.');}}
+function applyState(value,{explain=false,shared=false}={}){const s=cleanState({...value,mapStyle:value.mapStyle||mapStyle});closeDetail();document.body.classList.toggle('shared-view',shared);document.body.classList.remove('shared-peek');map.invalidateSize({pan:false});currentResultsLayer=null;if(shared&&s.focus){s.layers=s.focus.layer?[s.focus.layer]:[];s.todayOnly=false;s.openNow=false;}todayOnly=s.todayOnly;todayAdded.clear();openNow=s.openNow;$('#open-now').checked=openNow;radarMode=s.radarMode;airMode=s.airMode;layerModes=cleanLayerModes(s.layerModes);overlayOpacity=cleanOverlayOpacity(s.overlayOpacity);if(s.mapStyle!==mapStyle)setMapStyle(s.mapStyle);for(const id of [...requestedLayers])toggle(id,false);imageryDate=s.imageryDate;map.setView(s.center,s.zoom,{animate:false});for(const id of s.layers)toggle(id,true,false);if(todayOnly)setTodayOnly(true);if(s.focus)showDetail(s.focus,{},s.focus.layer,true);renderLegend();renderResults();setControls(false);if(explain&&Object.keys(capabilities).length){const missing=s.layers.filter(id=>!selectable(id));if(missing.length)toast('This view could not load '+missing.map(id=>BY_ID[id].name).join(', ')+'.');}}
 function listFocus(host){const active=document.activeElement;if(!host.contains(active))return null;const card=active.closest('[data-item-id]');return card?{id:card.dataset.itemId,action:active.dataset.action,index:[...host.children].indexOf(card)}:null;}
 function restoreListFocus(host,saved,fallback){if(!saved)return;const cards=[...host.querySelectorAll('[data-item-id]')],card=cards.find(c=>c.dataset.itemId===saved.id)||cards[Math.min(saved.index,cards.length-1)],buttons=card?[...card.querySelectorAll('button:not(:disabled)')]:[];(buttons.find(b=>b.dataset.action===saved.action)||buttons[0]||fallback)?.focus({preventScroll:true});}
 function storePresets(){try{savePresets(storage,presets);return true;}catch{toast('Saved maps could not be stored in this browser. Export them to keep a copy.');return false;}}
@@ -418,7 +419,7 @@ if(sharedPlace)openSharedPlace(sharedPlace);
 
 let searchTimer;
 function runSearch(){
- const query=$('#place-search').value.trim();
+ currentResultsLayer=null;const query=$('#place-search').value.trim();
  if(query){const suggested=searchLayers(query).filter(id=>Object.hasOwn(BY_ID,id));const ids=suggested.length?suggested:([...requestedLayers].some(id=>['osm','events','publicevents','snapshot'].includes(BY_ID[id]?.kind))?[]:['restaurants','parks','culture']);for(const id of ids)if(!requestedLayers.has(id))toggle(id,true,false);}
  setResults(true);
 }
@@ -430,7 +431,7 @@ for(const button of document.querySelectorAll('[data-quick]'))button.onclick=()=
  const id=button.dataset.quick;
  if(id==='saved'){switchTab('presets');setResults(false);setControls(true);return;}
  $('#place-search').value=id==='coffee'?'coffee':'';
- if(id==='today')setTodayOnly(true);else{if(todayOnly)setTodayOnly(false);const layer=id==='coffee'?'restaurants':id;toggle(layer,true,false);}
+ if(id==='today'){currentResultsLayer=null;setTodayOnly(true);}else{if(todayOnly)setTodayOnly(false);const layer=id==='coffee'?'restaurants':id;toggle(layer,true,false);currentResultsLayer=layer;}
  setResults(true);syncQuickCategories();
 };
 function syncQuickCategories(){for(const button of document.querySelectorAll('[data-quick]')){const id=button.dataset.quick;button.setAttribute('aria-pressed',String(id==='today'?todayOnly:id==='coffee'?$('#place-search').value.toLowerCase()==='coffee':id==='saved'?false:requestedLayers.has(id)));}}
@@ -438,4 +439,20 @@ function backToResults(){closeDetail();if(resultView)map.setView(resultView.cent
 document.addEventListener('keydown',event=>{if(event.key==='/'&&!event.ctrlKey&&!event.metaKey&&!event.altKey&&!event.target.closest('input,textarea,select,[contenteditable=true]')&&!document.querySelector('dialog[open]')){event.preventDefault();$('#place-search').focus();}});
 syncQuickCategories();
 
-$('#explore-map').onclick=()=>{closeDetail();document.body.classList.remove('shared-view','shared-peek');$('#place-search').focus();};
+$('#explore-map').onclick=()=>{closeDetail();document.body.classList.remove('shared-view','shared-peek');map.invalidateSize({pan:false});$('#place-search').focus();};
+
+function browseable(id){return !!BY_ID[id]&&!['radar','traffic','air','flood','history','light','sky','weather','terrain','gap'].includes(BY_ID[id].kind);}
+function browseLayer(id){
+ if(!browseable(id))return;
+ document.body.classList.remove('shared-view','shared-peek');map.invalidateSize({pan:false});
+ currentResultsLayer=id;$('#place-search').value='';if(todayOnly)setTodayOnly(false);
+ if(!requestedLayers.has(id))toggle(id,true,false);
+ if(['publicevents','calendar'].includes(BY_ID[id].kind)&&map.getZoom()>12)map.setZoom(12,{animate:false});
+ setResults(true);$('#results').scrollTop=0;$('#results-title').tabIndex=-1;$('#results-title').focus({preventScroll:true});
+}
+function detailCategory(id,event){
+ if(!BY_ID[id])return el('span','eyebrow','MAP PIN');
+ const label=(event?'Event · ':'')+BY_ID[id].name;
+ const category=btn(label,()=>browseLayer(id),'detail-layer-link');category.title='Browse '+BY_ID[id].name;category.setAttribute('aria-label','Browse '+(event?'events in ':'')+BY_ID[id].name);return category;
+}
+$('#all-results').onclick=()=>{currentResultsLayer=null;renderResults();};
