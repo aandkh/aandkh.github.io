@@ -79,7 +79,7 @@ body.shared-view #map-search,body.shared-view #quick-categories,body.shared-view
 body.shared-view #home,body.shared-view header #share{display:none}
 body.shared-view .leaflet-top.leaflet-left{top:10px}
 body.shared-view #detail{top:16px;max-height:calc(100% - 32px)}
-.more-map{display:none}
+#detail .more-map{display:none}
 body.shared-view #sidebar{display:none}
 body.shared-view main{grid-template-columns:minmax(0,1fr)}
 body.shared-view .map-shell{margin-left:12px}
