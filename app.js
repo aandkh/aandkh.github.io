@@ -445,6 +445,12 @@ $('#close-layers').onclick=()=>setControls(false);
 $('#layers-backdrop').onclick=()=>setControls(false);
 for(const button of document.querySelectorAll('[data-quick]'))button.onclick=()=>{
  const id=button.dataset.quick;weatherReadings.stopOverview();$('#place-search').value='';
+ if(quickCategorySelected(id)){
+  if(id==='today'){if(currentResultsLayer===null)setResults(false);if(focus&&TODAY_LAYERS.includes(focus.layer))closeDetail();setTodayOnly(false);}
+  else if(id==='food'){if(['food','restaurants','bars'].includes(currentResultsLayer))setResults(false);if(focus&&['restaurants','bars'].includes(focus.layer))closeDetail();for(const layer of ['restaurants','bars'])toggle(layer,false);}
+  else{if(id==='weather'&&futureRadar.active)futureRadar.stop();if(id==='air'){if(focus?.layer==='air')closeDetail();if(mapKey.toggle.getAttribute('aria-expanded')==='true')mapKey.toggle.click();}toggle(id,false);}
+  syncQuickCategories();button.focus({preventScroll:true});return;
+ }
  if(id==='today'){currentResultsLayer=null;setTodayOnly(true);setResults(true);}
  else{
   if(todayOnly)setTodayOnly(false);
@@ -454,7 +460,8 @@ for(const button of document.querySelectorAll('[data-quick]'))button.onclick=()=
  }
  syncQuickCategories();
 };
-function syncQuickCategories(){for(const button of document.querySelectorAll('[data-quick]')){const id=button.dataset.quick;button.setAttribute('aria-pressed',String(id==='today'?todayOnly:id==='food'?requestedLayers.has('restaurants')&&requestedLayers.has('bars'):requestedLayers.has(id)));}}
+function quickCategorySelected(id){return id==='today'?todayOnly:id==='food'?requestedLayers.has('restaurants')&&requestedLayers.has('bars'):requestedLayers.has(id);}
+function syncQuickCategories(){for(const button of document.querySelectorAll('[data-quick]'))button.setAttribute('aria-pressed',String(quickCategorySelected(button.dataset.quick)));}
 function backToResults(){closeDetail();if(resultView)map.setView(resultView.center,resultView.zoom,{animate:false});$('#results').hidden=false;renderResults();$('#results').scrollTop=resultScroll;const key=detailReturnTarget?.dataset.resultKey;const target=[...$('#results-list').querySelectorAll('[data-result-key]')].find(node=>node.dataset.resultKey===key);(target||$('#results-close')).focus({preventScroll:true});}
 document.addEventListener('keydown',event=>{if(event.key==='/'&&!event.ctrlKey&&!event.metaKey&&!event.altKey&&!event.target.closest('input,textarea,select,[contenteditable=true]')&&!document.querySelector('dialog[open]')){event.preventDefault();$('#place-search').focus();}});
 syncQuickCategories();

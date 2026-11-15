@@ -136,7 +136,7 @@ body.shared-view .map-shell{margin-left:12px}
  body.controls-open .map-tools-left>*{pointer-events:auto}
  #detail:not(.sky-panel),.floating.sky-panel,body.detail-expanded #detail{top:auto;bottom:83px;height:auto;max-height:52%}
  #results{top:auto;bottom:83px;max-height:45%}
- .map-shell:has(#detail:not([hidden])) #map-search,.map-shell:has(#detail:not([hidden])) #quick-categories{visibility:hidden}
+ .map-shell:has(#detail:not([hidden]):not(.weather-panel)) #map-search,.map-shell:has(#detail:not([hidden]):not(.weather-panel)) #quick-categories{visibility:hidden}
  body.shared-view #detail:not(.sky-panel){max-height:56%}
  #environment-key{max-height:35%}
  #share-dialog,.notices-dialog{max-height:58dvh}
