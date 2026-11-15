@@ -155,3 +155,5 @@ body.forecast-playing #legend,body.forecast-playing #environment-key{visibility:
 .weather-card-grid{bottom:210px}.map-shell:has(#environment-key[data-expanded=true]:not([hidden])) .weather-card-grid{visibility:hidden}body.forecast-playing .weather-card-grid{visibility:visible}
 .map-shell:has(.weather-card-grid:not([hidden]) .weather-reading) .leaflet-top.leaflet-left{top:45%}
 @media(max-width:800px){body:not(.controls-open) #sidebar{visibility:hidden;pointer-events:none}body.controls-open #sidebar{transform:none;visibility:visible;pointer-events:auto}}
+body.forecast-playing .weather-card-grid{visibility:visible!important}
+@media(max-width:800px){body.controls-open .map-toolbar{background:var(--surface-raised)!important;box-shadow:var(--ui-shadow)!important}}
