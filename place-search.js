@@ -1,11 +1,12 @@
-import {BY_ID} from './catalog.js';
-import {isExcludedChainPlace} from './chain-places.js';
+import {BY_ID} from './catalog.js?v=20261115-gyms-nav1';
+import {isExcludedChainPlace} from './chain-places.js?v=20261115-gyms-nav1';
 
 const normalize=value=>typeof value==='string'||typeof value==='number'?String(value).normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase().replace(/[^\p{L}\p{N}]+/gu,' ').trim():'';
 const values=value=>Array.isArray(value)?value.filter(v=>typeof v==='string').slice(0,40):typeof value==='string'||typeof value==='number'?[value]:[];
 const TYPE_FIELDS=['featureType','category','categories','subcategory','subcategories','cuisine','sport','amenity','leisure','shop','craft','tourism','historic','artwork_type'];
 const TAG_FIELDS=['amenity','cuisine','sport','leisure','shop','craft','tourism','historic','artwork_type','name','addr:street','addr:city','addr:suburb'];
 const groups=[
+ {queries:['gym','gyms','fitness','workout'],types:['gym','fitness','fitness centre'],layers:['gyms']},
  {queries:['bar','bars','pub','pubs'],types:['bar','pub'],layers:['bars']},
  {queries:['restaurant','restaurants','dining','dinner'],types:['restaurant','dining'],layers:['restaurants']},
  {queries:['food','eating'],types:['restaurant','dining','fast food','cafe','bakery','ice cream','food court'],layers:['restaurants','localfood','foodtrucks','markets']},

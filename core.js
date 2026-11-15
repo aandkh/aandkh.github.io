@@ -1,8 +1,8 @@
-import {enrichCultureFeature,cultureFeatureDisplayable} from './place-enrichment.js';
-import {cleanVehicle} from './vehicles.js';
-import {BY_ID} from './catalog.js';
-import {isExcludedChainPlace} from './chain-places.js';
-import {cleanLayerModes,cleanOverlayOpacity} from './expansion-options.js?v=20261115-agenda10';
+import {enrichCultureFeature,cultureFeatureDisplayable} from './place-enrichment.js?v=20261115-gyms-nav1';
+import {cleanVehicle} from './vehicles.js?v=20261115-gyms-nav1';
+import {BY_ID} from './catalog.js?v=20261115-gyms-nav1';
+import {isExcludedChainPlace} from './chain-places.js?v=20261115-gyms-nav1';
+import {cleanLayerModes,cleanOverlayOpacity} from './expansion-options.js?v=20261115-gyms-nav1';
 export const REGION = {south:38.1,north:39.2,west:-91.2,east:-89.4};
 export function coordinate(lat,lng) { return typeof lat==='number'&&typeof lng==='number'&&Number.isFinite(lat)&&Number.isFinite(lng)&&lat>=REGION.south&&lat<=REGION.north&&lng>=REGION.west&&lng<=REGION.east; }
 export function safeUrl(value) { try {const u=new URL(value);return ['https:','http:'].includes(u.protocol)&&!u.username&&!u.password?u.href:'';}catch{return '';} }
@@ -25,7 +25,7 @@ function cleanOwnershipEvidence(value){
  return evidence;
 }
 export function cleanStop(s){
- if(!s||!coordinate(s.lat,s.lng)||isExcludedChainPlace('',s))return null;
+ if(!s||!coordinate(s.lat,s.lng)||isExcludedChainPlace(s.layer==='gyms'?'gyms':'',s))return null;
  const layer=Object.hasOwn(BY_ID,s.layer)?s.layer:'';
  if(layer==='culture'){const f=enrichCultureFeature({type:'Feature',geometry:{type:'Point',coordinates:[s.lng,s.lat]},properties:s});if(!cultureFeatureDisplayable(f))return null;s={...s,...f.properties};}
  return {id:textLimit(s.id,180)||`${layer||'pin'}:${s.lat.toFixed(6)},${s.lng.toFixed(6)}`,layer,vehicle:cleanVehicle(s.vehicle),title:textLimit(s.title,140).trim()||'Pinned place',lat:s.lat,lng:s.lng,description:textLimit(s.description,800),address:textLimit(s.address,300),ownershipEvidence:cleanOwnershipEvidence(s.ownershipEvidence),url:placeUrl(s.url),socialLinks:placeLinks({socialLinks:s.socialLinks}),start:textLimit(s.start,40),end:textLimit(s.end,40),source:textLimit(s.source,120),observedAt:textLimit(s.observedAt,40),sourceId:textLimit(s.sourceId,180),sourceCheckedAt:textLimit(s.sourceCheckedAt,40),sourceUrl:placeUrl(s.sourceUrl),accessNote:textLimit(s.accessNote,500),openingHours:textLimit(s.openingHours,500),hoursSourceUrl:placeUrl(s.hoursSourceUrl),hoursCheckedAt:textLimit(s.hoursCheckedAt,40),hoursExpiresAt:textLimit(s.hoursExpiresAt,40)};

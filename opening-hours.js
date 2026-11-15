@@ -13,7 +13,7 @@ const DAY=Object.freeze({Mo:0,Tu:1,We:2,Th:3,Fr:4,Sa:5,Su:6});
 // every expression on each redraw. Packed minute bits cap schedule storage at
 // ~2.5 MiB, rather than retaining 20 MiB of byte-per-minute schedules.
 const WEEK=7*1440,cache=new Map(),MAX_CACHE=2048;
-const placeLayers=new Set(['restaurants','bars','nightlife','localfood','markets','movies','parks','family','recreation','culture','birding','restrooms','parking','ev']);
+const placeLayers=new Set(['gyms','restaurants','bars','nightlife','localfood','markets','movies','parks','family','recreation','culture','birding','restrooms','parking','ev']);
 export const isHoursPlaceLayer=id=>placeLayers.has(id);
 const formatter=new Intl.DateTimeFormat('en-US',{timeZone:OPENING_TIME_ZONE,weekday:'short',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'});
 const weekday={Mon:0,Tue:1,Wed:2,Thu:3,Fri:4,Sat:5,Sun:6};

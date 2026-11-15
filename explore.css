@@ -193,3 +193,30 @@ body.forecast-playing .weather-card-grid{visibility:visible!important}
  #sidebar .layer-group{margin-top:10px}
  #layers-backdrop{top:60px;bottom:83px;left:min(380px,78vw);right:0;background:transparent}
 }
+
+
+/* Panels do not intercept gestures on the uncovered map. */
+#layers-backdrop{pointer-events:none!important}
+.map-shell:has(.floating:not([hidden])) .leaflet-control-zoom{display:block}
+#map-return{font-weight:700;min-height:44px;background:var(--surface-soft)}
+#results-close,#close-layers{width:auto!important;min-width:46px;font-size:12px!important;font-weight:650;padding:8px!important}
+#map-resume,#shared-return{position:absolute;bottom:90px;left:50%;transform:translateX(-50%);z-index:630;border:1px solid var(--line);border-radius:24px;background:var(--surface-raised);box-shadow:var(--ui-shadow);max-width:calc(100% - 28px)}
+#map-resume{display:flex;align-items:center;padding:3px}
+#map-resume[hidden],#shared-return[hidden],#map-return[hidden]{display:none}
+#map-resume button{background:transparent;border:0;min-height:44px}
+#resume-panel{max-width:260px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:8px 15px;font-size:13px}
+#dismiss-resume{width:40px;padding:8px;font-size:20px}
+#shared-return{font-size:13px;min-height:44px;padding:10px 18px}
+.gym-group-heading{font-size:14px;margin:20px 0 5px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.gym-kind{font-size:12px;color:var(--muted);margin:5px 0}
+@media(max-width:800px){
+ body.controls-open .leaflet-top.leaflet-left{left:auto;right:8px;top:12px}
+ body.controls-open .leaflet-control-zoom{margin:0}
+ body:has(#map-return:not([hidden])) header #home{display:none}
+ body:has(#map-return:not([hidden])) header #share{min-width:44px;width:44px;padding:10px}
+ body:has(#map-return:not([hidden])) header #share .control-label{display:none}
+ .floating-head .detail-actions{gap:3px}
+ .floating-head .back-results{min-width:62px;font-size:11px;margin-right:2px;padding:5px}
+ .floating-head:has(.back-results) .detail-layer-link{max-width:30%;font-size:10px}
+ #detail:not([hidden])~#map-resume{display:none}
+}

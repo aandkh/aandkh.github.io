@@ -1,6 +1,7 @@
 // Exact, deliberate query aliases. These aid discovery; they do not imply
 // that a layer is configured or that its source supplies every named condition.
 const ALIASES=Object.freeze({
+ gym:['gyms'],gyms:['gyms'],fitness:['gyms'],workout:['gyms'],weightlifting:['gyms'],pilates:['gyms'],yoga:['gyms'],
  plane:['aircraft'],planes:['aircraft'],airplane:['aircraft'],airplanes:['aircraft'],flight:['aircraft'],flights:['aircraft'],
  bus:['transit'],buses:['transit'],train:['transit'],trains:['transit'],
  bathroom:['restrooms'],bathrooms:['restrooms'],toilet:['restrooms'],toilets:['restrooms'],

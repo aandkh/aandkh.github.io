@@ -48,3 +48,7 @@ Checked all 46 catalog layer endpoints with a metro-wide bounding box (-90.8,38.
 ## Maintenance obligations
 
 Repeat both geographic source checks daily, inspect pagination and result limits, and expand the missing-side source inventory. Preserve one merged feed per layer. Never treat a source outage, zero current events, an unmapped record or a partial directory as proof that the area has no activity. Backend source/deployment access is unavailable; changes to that service cannot be claimed. Frontend curated supplements can be maintained and published through GitHub.
+
+## Gyms — added November 15, 2026
+
+One combined regional snapshot covers city, county and nearby communities. 87 named gyms/studios; partial OSM coverage plus an explicit Memento Fitness Club entry in Eureka. Local/neighborhood listings first, regional/community clubs second, national chains last. Source-backed hours only, unknown hours last within each group. See `GYMS-MAINTENANCE.md` for sources and refresh requirements.
