@@ -53,9 +53,9 @@
                 L.DomEvent.off(this._map._proxy, L.DomUtil.TRANSITION_END, this._transitionEnd, this);
             }
             var paneName = this.getPaneName();
-            map.getPane(paneName).removeChild(this._container);
+            if (this._container && this._container.parentNode) this._container.parentNode.removeChild(this._container);
 
-            this._glMap.remove();
+            if (this._glMap) this._glMap.remove();
             this._glMap = null;
         },
 
