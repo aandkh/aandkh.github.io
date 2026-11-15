@@ -151,3 +151,7 @@ body.shared-view .map-shell{margin-left:12px}
 body.forecast-playing #legend,body.forecast-playing #environment-key{visibility:hidden}body.forecast-playing .weather-card-grid{bottom:240px}
 @media(max-width:800px){.weather-card-grid{inset:135px 18px 165px;grid-template-columns:100px 100px}.radar-launch{bottom:152px}.map-shell:has(.floating:not([hidden])) .radar-launch,body.controls-open .radar-launch,body.shared-view .radar-launch{display:none}}
 @media(max-height:600px){.weather-card-grid{top:120px;bottom:150px;grid-template-columns:repeat(4,minmax(0,100px));grid-template-rows:auto;gap:8px;align-content:start}.weather-reading-temperature{font-size:20px}.weather-reading-time{font-size:8px}}
+
+.weather-card-grid{bottom:210px}.map-shell:has(#environment-key[data-expanded=true]:not([hidden])) .weather-card-grid{visibility:hidden}body.forecast-playing .weather-card-grid{visibility:visible}
+.map-shell:has(.weather-card-grid:not([hidden]) .weather-reading) .leaflet-top.leaflet-left{top:45%}
+@media(max-width:800px){body:not(.controls-open) #sidebar{visibility:hidden;pointer-events:none}body.controls-open #sidebar{transform:none;visibility:visible;pointer-events:auto}}
