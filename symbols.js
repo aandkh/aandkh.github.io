@@ -1,0 +1,33 @@
+// Small source-independent category symbols. Vehicle positions still come only from feeds.
+const paths={
+ weather:'<circle cx="8" cy="8" r="4"/><path d="M8 1v2m0 10v2M1 8h2m10 0h2M3 3l2 2m6 6 2 2M3 13l2-2m6-6 2-2M8 21h11a4 4 0 0 0 0-8 6 6 0 0 0-11 2 3 3 0 0 0 0 6Z"/>',
+ recreation:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3v18M5 5q14 4 14 14M19 5Q5 9 5 19"/>',
+ localfood:'<path d="M5 3v7m3-7v7m3-7v7M5 9q3 5 6 0M8 13v9M18 3v19m0-19q-5 6 0 10"/>',
+ culture:'<path d="m2 8 10-6 10 6H2ZM4 11v8m5-8v8m6-8v8m5-8v8M2 22h20"/>',
+ communityevents:'<rect x="3" y="5" width="18" height="17" rx="2"/><path d="M7 2v6m10-6v6M3 11h18m-13 4h3m3 0h3m-9 4h3"/>',
+ comment:'<path d="M20 3H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h3v4l5-4h8a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2ZM7 8h10M7 12h7"/>',
+ roadworks:'<path d="M3 6h18v8H3zM6 14v7m12-7v7M3 10l4-4m1 8 8-8m1 8 4-4"/>',
+ restrooms:'<circle cx="7" cy="4" r="2"/><circle cx="17" cy="4" r="2"/><path d="M4 9h6v7H4zM6 16v6m2-6v6m6-13h6l2 8H12l2-8ZM16 17v5m2-5v5"/>',
+ birding:'<circle cx="5" cy="16" r="4"/><circle cx="19" cy="16" r="4"/><path d="M2 13 5 4h4l1 12m12-3-3-9h-4l-1 12m-4-4h4M8 4V2m8 2V2"/>',
+ sky:'<path d="M20 14.5A9 9 0 0 1 9.5 4a9 9 0 1 0 10.5 10.5Z"/>',
+ transit:'<rect x="5" y="3" width="14" height="17" rx="3"/><path d="M5 12h14M8 20v2m8-2v2M8 6h8"/><circle cx="8" cy="16" r="1"/><circle cx="16" cy="16" r="1"/>',
+ bars:'<path d="M5 3h10v15H5zM15 6h4v8h-4M8 7v7m4-7v7M4 21h13"/>',
+ restaurants:'<path d="M5 3v7m3-7v7m3-7v7M5 9q3 5 6 0M8 13v9M18 3v19m0-19q-5 6 0 10"/>',
+ movies:'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="m10 8 6 4-6 4zM3 8h3m12 0h3M3 16h3m12 0h3"/>',
+ parks:'<path d="m12 2-7 8h4l-6 7h18l-6-7h4zM12 17v5"/>',
+ family:'<path d="m12 2 3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/>',
+ nightlife:'<path d="M9 18V5l11-2v13M9 8l11-2"/><ellipse cx="6" cy="18" rx="3" ry="2"/><ellipse cx="17" cy="16" rx="3" ry="2"/>',
+ markets:'<path d="M3 9h18l-2-6H5zM5 9v12h14V9M9 21v-7h6v7M3 9q3 5 6 0 3 5 6 0 3 5 6 0"/>',
+ concerts:'<path d="M9 18V5l11-2v13M9 8l11-2"/><ellipse cx="6" cy="18" rx="3" ry="2"/><ellipse cx="17" cy="16" rx="3" ry="2"/>',
+ festivals:'<path d="m2 15 10-12 10 12H2ZM5 15v7m14-7v7M8 22v-7h8v7M12 3v12"/>',
+ sports:'<circle cx="12" cy="12" r="9"/><path d="m12 7 5 4-2 6H9l-2-6 5-4ZM12 3v4m5 4 4-2m-6 8 2 3m-8-3-2 3m0-9L3 9"/>',
+ arts:'<path d="M3 4c3 2 6 2 9 0v7c0 4-3 7-4.5 7S3 15 3 11V4Zm9 4c3 2 6 2 9 0v7c0 4-3 7-4.5 7S12 19 12 15"/><path d="M5 9h2m2 0h1M5 13q2 3 5 0m4 0h2m2 0h1m-5 5q2-3 5 0"/>',
+ cycling:'<circle cx="5" cy="17" r="4"/><circle cx="19" cy="17" r="4"/><path d="m5 17 5-9 5 9H5l8-12h4m-9 3h5m2 9 4-10"/>',
+ development:'<path d="M4 22V3h12M8 3v19m-4-9h4M8 3l12 8H8m12 0v5m-2 0h4M2 22h8"/>',
+ exhibitions:'<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8" cy="8" r="2"/><path d="m3 18 6-6 4 4 4-6 4 5"/>',
+ rivers:'<path d="M2 7q3-4 6 0t6 0 8 0M2 13q3-4 6 0t6 0 8 0M2 19q3-4 6 0t6 0 8 0"/>',
+ ev:'<path d="m13 2-8 12h6l-1 8 9-13h-6z"/>',
+ places:'<rect x="3" y="3" width="6" height="6" rx="1"/><rect x="15" y="3" width="6" height="6" rx="1"/><rect x="3" y="15" width="6" height="6" rx="1"/><rect x="15" y="15" width="6" height="6" rx="1"/>',
+ pin:'<path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0z"/><circle cx="12" cy="10" r="2"/>'
+};
+export function symbol(id){if(id==='parking')return '<b>P</b>';return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+(paths[id]||paths.pin)+'</svg>';}

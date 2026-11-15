@@ -1,0 +1,32 @@
+/* Color identifies the official route; neutral surfaces keep every label legible. */
+.transit-route-card{--route-color:#4d7486;border-top:1px solid var(--line);margin:18px 0 0;padding:16px 0 0;min-width:0}
+.transit-route-heading{display:flex;align-items:flex-start;gap:11px;margin:0 0 10px;min-width:0}
+.transit-route-badge{display:inline-flex;align-items:center;justify-content:center;flex:none;min-width:42px;min-height:36px;max-width:112px;padding:6px 10px 6px 8px;border:1px solid var(--line);border-left:5px solid var(--route-color);border-radius:7px;background:var(--surface-raised,#fff);color:var(--ink);font-size:14px;line-height:1.2;font-weight:750;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.transit-route-title,.floating .transit-route-title{display:block;font-size:17px;line-height:1.35;font-weight:650;letter-spacing:-.25px;margin:5px 0 0;color:var(--ink);min-width:0;overflow-wrap:anywhere}
+.transit-route-heading small{display:block;font-size:11px;line-height:1.5;font-weight:400;color:var(--muted);margin:4px 0 0}
+.transit-route-heading p,.floating .transit-route-heading p{font-size:12px;line-height:1.5;font-weight:400;color:var(--muted);margin:5px 0 0}
+.transit-route-note,.floating .transit-route-note{font-size:11px;line-height:1.6;color:var(--muted);margin:8px 0 12px;overflow-wrap:anywhere}
+.transit-route-stops{margin:14px 0 0;border-top:1px solid var(--line)}
+.transit-route-stops>summary{min-height:44px;padding:12px 2px;font-size:13px;line-height:1.5;font-weight:650;color:var(--ink);cursor:pointer}
+.transit-route-stops>summary::marker{color:var(--muted);font-size:11px}
+.transit-route-stops>summary:focus-visible{outline:3px solid #c18b34;outline-offset:2px;border-radius:4px}
+.transit-stop-list{list-style:none;margin:2px 0 0;padding:0}
+.transit-stop-list>li{position:relative;margin:0;padding:0;isolation:isolate}
+.transit-stop-list>li:before{content:'';position:absolute;z-index:-1;left:18px;top:0;bottom:0;width:2px;background:var(--route-color);box-shadow:-1px 0 0 var(--line),1px 0 0 var(--line);opacity:.75}
+.transit-stop-list>li:first-child:before{top:50%}
+.transit-stop-list>li:last-child:before{bottom:50%}
+.transit-stop-list>li:only-child:before{display:none}
+.transit-stop-button{display:grid;grid-template-columns:28px minmax(0,1fr);align-items:center;gap:9px;width:100%;min-height:44px;margin:0;padding:7px 6px 7px 4px;border:1px solid transparent;border-radius:7px;background:transparent;text-align:left;color:var(--ink);font-size:13px;line-height:1.45;font-weight:500}
+.transit-stop-button:hover{background:var(--surface-soft)}
+.transit-stop-button:focus-visible{outline:3px solid #c18b34;outline-offset:1px;background:var(--surface-soft)}
+.transit-stop-button[aria-current=true],.transit-stop-button[aria-pressed=true]{background:var(--surface-soft);border-color:var(--line)}
+.transit-stop-number{position:relative;display:grid;place-items:center;justify-self:center;width:24px;height:24px;border:1.5px solid var(--route-color);border-radius:50%;background:var(--surface-raised,#fff);box-shadow:0 0 0 1px var(--line);color:var(--ink);font-size:10px;font-weight:650;line-height:1;font-variant-numeric:tabular-nums}
+.transit-stop-name{display:block;min-width:0;overflow-wrap:anywhere}
+.transit-stop-name small{display:block;font-size:10px;line-height:1.4;color:var(--muted);font-weight:400;margin-top:2px}
+.transit-route-actions{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin:12px 0}
+.transit-route-actions button,.transit-route-actions a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;margin:0;font-size:12px;line-height:1.4}
+.transit-route-actions button{padding:9px 12px}
+.transit-route-actions a{padding:8px 2px;text-underline-offset:3px}
+body[data-map-style=dark] .transit-route-badge,body[data-map-style=dark] .transit-stop-number{background:var(--surface-raised);color:var(--ink)}
+body[data-map-style=dark] .transit-stop-list>li:before{opacity:.85}
+@media(max-width:800px){.transit-route-card{margin-top:16px;padding-top:14px}.transit-route-title,.floating .transit-route-title{font-size:17px}.transit-stop-button{min-height:46px;padding-top:8px;padding-bottom:8px}}

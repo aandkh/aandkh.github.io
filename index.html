@@ -1,79 +1,31 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>A Page Through Time II</title>
-  <style>
-    html, body { margin:0; min-height:100%; background:#000; color:#f4f0ff; font-family:Arial,Helvetica,sans-serif; }
-    body { min-height:100svh; overflow-x:hidden; }
-    .page { width:100%; }
-    .splash { position:relative; width:min(80vw,120vh); margin:0 auto; aspect-ratio:3/2; }
-    .splash img { display:block; width:100%; height:100%; object-fit:contain; }
-    .hitbox { position:absolute; display:block; text-indent:-9999px; overflow:hidden; background:transparent; outline:none; }
-    .hitbox-download { left:27.6%; top:87.2%; width:45.4%; height:9.4%; }
-    .download-info { width:min(86vw,760px); box-sizing:border-box; margin:clamp(8px,1.6vw,18px) auto 0; padding:clamp(18px,3vw,30px); background:linear-gradient(180deg,rgba(23,14,43,.96),rgba(8,5,18,.96)); border:1px solid rgba(255,91,24,.58); box-shadow:0 0 28px rgba(255,91,24,.16); }
-    .info-columns { display:grid; grid-template-columns:1fr 1fr; gap:clamp(22px,5vw,56px); align-items:center; }
-    .download-side { text-align:center; }
-    .trust-list { display:inline-grid; gap:8px; margin:0; padding:0; text-align:left; list-style:none; color:#ddd5ea; font-size:clamp(13px,2.2vw,16px); }
-    .trust-list li::before { content:"✓"; margin-right:9px; color:#85e59a; font-weight:700; }
-    .file-size { margin:0 0 9px; color:#c8bedc; font-size:clamp(12px,2vw,14px); }
-    .description-side { text-align:center; }
-    .game-description { margin:0; color:#ddd5ea; font-size:clamp(17px,3vw,24px); line-height:1.45; text-align:center; }
-    .release-badges { display:flex; justify-content:center; align-items:center; gap:20px; margin-top:18px; flex-wrap:wrap; }
-    .release-badge { display:inline-flex; align-items:center; justify-content:center; color:#ddd5ea; text-decoration:none; }
-    .release-badge svg { width:30px; height:30px; display:block; flex:none; }
-    .release-badge:hover { color:#fff; }
-    .screenshots { width:100%; overflow-x:auto; overscroll-behavior-x:contain; -webkit-overflow-scrolling:touch; padding:clamp(18px,3vw,32px) 0 28px; scrollbar-color:#ff5b18 #080015; }
-    .screenshots-track { display:flex; width:max-content; gap:clamp(10px,1.6vw,18px); padding:0 clamp(12px,3vw,36px); margin:0 auto; }
-    .screenshots img { display:block; flex:0 0 auto; width:min(86vw,760px); aspect-ratio:16/9; object-fit:cover; border:1px solid rgba(255,91,24,.55); box-shadow:0 0 24px rgba(255,91,24,.22); }
-    @media (max-width:620px) {
-      .info-columns { grid-template-columns:1fr 1fr; gap:16px; }
-      .trust-list { font-size:11px; gap:6px; }
-      .game-description { font-size:15px; }
-      .release-badges { gap:14px; margin-top:13px; }
-      .release-badge svg { width:23px; height:23px; }
-    }
-  </style>
-  <!-- Google AdSense: site verification and ad serving. Async, so it
-       never blocks the page; the game works identically if it is
-       blocked by an ad blocker or fails to load. -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8173323521375339"
-     crossorigin="anonymous"></script>
-</head>
+ <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+ <title>Andymap</title><meta name="description" content="Choose map layers, explore Greater St. Louis, save your maps.">
+ <link rel="icon" href="/icon.svg" type="image/svg+xml"><link rel="stylesheet" href="/vendor/leaflet.css"><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/brand.css"><link rel="stylesheet" href="/forecast-visuals.css"><link rel="stylesheet" href="/transit-ui.css"><link rel="stylesheet" href="/visual-polish.css"><link rel="preload" href="/vendor/fonts/InstrumentSans.ttf" as="font" type="font/ttf" crossorigin>
+ <script defer src="/vendor/leaflet.js"></script>
+<link rel="stylesheet" href="/vendor/maplibre-gl.css"><script defer src="/vendor/maplibre-gl.js"></script><script defer src="/vendor/leaflet-maplibre-gl.js"></script><script src="/app.js" type="module"></script></head>
 <body>
-  <main class="page">
-    <section class="splash" aria-label="A Page Through Time II download">
-      <img src="images/SPLASH.png" alt="A Page Through Time II">
-      <a class="hitbox hitbox-download" href="https://github.com/aandkh/aandkh.github.io/releases/download/v1.1.0/PageThroughTime2.zip" download aria-label="Click to download"></a>
-    </section>
-    <section class="download-info" aria-label="Download information">
-      <div class="info-columns">
-        <div class="download-side">
-          <ul class="trust-list">
-            <li>Hosted on GitHub Releases</li>
-            <li>No installer</li>
-            <li>No account required</li>
-            <li>SHA-256 checksum available</li>
-          </ul>
-        </div>
-        <div class="description-side">
-          <p class="file-size">200 MB</p>
-          <p class="game-description">A side scrolling building smasher with surprise musical guests and more!</p>
-          <div class="release-badges" aria-label="Release details">
-            <span class="release-badge" title="Windows game" aria-label="Windows game"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M3 5.1 10.3 4v7H3V5.1Zm8.2-1.25L21 2.4V11h-9.8V3.85ZM3 12h7.3v7L3 17.9V12Zm8.2 0H21v8.6l-9.8-1.45V12Z"/></svg></span>
-            <span class="release-badge" title="ZIP download" aria-label="ZIP download"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M6 2h8l4 4v16H6V2Zm8 1.8V7h3.2L14 3.8ZM10 4h2v2h-2V4Zm2 2h2v2h-2V6Zm-2 2h2v2h-2V8Zm2 2h2v2h-2v-2Zm-2 2h2v2h-2v-2Zm0 3h4v4h-4v-4Zm1 1v2h2v-2h-2Z"/></svg></span>
-            <a class="release-badge" href="https://github.com/aandkh/aandkh.github.io/releases/tag/v1.1.0" target="_blank" rel="noopener noreferrer" title="View the v1.1.0 release on GitHub" aria-label="GitHub Release"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M12 .7a11.5 11.5 0 0 0-3.64 22.41c.58.11.79-.25.79-.56v-2.23c-3.22.7-3.9-1.37-3.9-1.37-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.72 1.27 3.38.97.1-.75.41-1.27.74-1.56-2.57-.29-5.27-1.28-5.27-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.47.11-3.05 0 0 .97-.31 3.16 1.18A11 11 0 0 1 12 6.12c.98 0 1.96.13 2.87.39 2.19-1.49 3.16-1.18 3.16-1.18.63 1.58.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.71 5.38-5.29 5.67.42.36.79 1.07.79 2.16v3.25c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .7Z"/></svg></a>
-            <a class="release-badge" href="https://www.anthropic.com/claude/fable" target="_blank" rel="noopener noreferrer" title="Built with Claude" aria-label="Built with Claude"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M13.4 2.5 21 21h-4.5l-1.55-4H8.8l-1.5 4H3L10.45 2.5h2.95Zm.25 11.05L11.9 8.7l-1.78 4.85h3.53Z"/></svg></a>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="screenshots" aria-label="Gameplay screenshots">
-      <div class="screenshots-track">
-        <img src="images/screenshot-2.png" alt="Gameplay screenshot showing the blessing selection screen">
-      </div>
-    </section>
-  </main>
-</body>
-</html>
+ <a class="skip" href="#workspace">Skip to map controls</a>
+ <header><a class="brand" href="/" aria-label="Andymap home"><span class="brand-mark" aria-hidden="true"><img src="/brand/andymap-star.png" alt=""></span>Andymap</a><div class="header-actions"><button id="home" aria-label="Reset view" title="Reset view"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/><circle cx="12" cy="12" r="3"/></svg><span class="control-label">Reset view</span></button><button id="share" class="primary"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 3h7v7m0-7L10 14M10 4H5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h13a2 2 0 0 0 2-2v-5"/></svg><span class="control-label">Share map</span></button></div></header>
+ <main id="workspace">
+  <aside id="sidebar" aria-label="Map controls">
+   <nav class="tabs" aria-label="Map tools"><button data-tab="layers" aria-pressed="true"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 3 9 5-9 5-9-5 9-5Zm-9 9 9 5 9-5M3 16l9 5 9-5"/></svg>Layers</button><button data-tab="presets" aria-pressed="false"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 4h12v17l-6-4-6 4V4Z"/></svg>Saved maps</button><button data-tab="sources" aria-pressed="false"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v.1"/></svg>Sources</button></nav>
+   <section id="layers-panel" class="panel"><div class="layers-head"><div class="section-head"><h1>Layers</h1></div>
+    <label class="search"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="layer-search" type="search" placeholder="Find a layer…" aria-label="Find a layer"></label>
+    <div class="layer-filter-bar" role="group" aria-label="Layer selection"><button data-layer-filter="all" aria-pressed="true">All</button><button data-layer-filter="selected" aria-pressed="false">Selected</button><button id="clear-layers" class="text-button" title="Remove all selected layers">Clear all</button></div></div><div id="layer-list"></div>
+   </section>
+   <section id="presets-panel" class="panel" hidden><h1>Saved maps</h1><p>Save your layers and view. Stored in this browser.</p><form id="save-form"><label for="preset-name">Map name</label><div class="input-row"><input id="preset-name" maxlength="60" required placeholder="My Saturday map"><button class="primary">Save</button></div></form><div id="saved-list"></div><div class="section-head"><h2>Try a starting point</h2></div><div id="example-list"></div><button id="export-presets">Export saved maps</button><button id="import-presets-button" type="button">Import saved maps</button><input id="import-presets" type="file" accept="application/json,.json" hidden><p class="small">Saving an example lets you make it your own. Data access varies by layer.</p></section>
+
+   <section id="sources-panel" class="panel" hidden><h1>Data & sources</h1><p>Live feeds, reference snapshots, and missing connections are labeled separately.</p><div class="privacy"><h2>Your privacy</h2><p>Saved maps stay in this browser. No analytics or sign-in. Map imagery providers receive your IP address and visible tile area. Shared details are encoded in the link.</p></div><div id="source-list"></div></section>
+  </aside>
+  <div class="map-shell"><div id="map" aria-label="Interactive map of Greater St. Louis"></div><div class="map-toolbar"><div class="map-tools-left"><select id="map-style" aria-label="Map style"><option value="positron">Light</option><option value="dark">Dark</option><option value="liberty">Streets</option></select><button id="mobile-controls"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 3 9 5-9 5-9-5 9-5Zm-9 9 9 5 9-5M3 16l9 5 9-5"/></svg><span class="control-label">Layers</span></button><button id="locate" title="Use my location"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="6.5"/><circle cx="12" cy="12" r="2"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></svg><span class="control-label">My location</span></button><button id="refresh"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 7v5h-5M4 17v-5h5M5.2 7a8 8 0 0 1 13.3-1L20 8M4 16l1.5 2A8 8 0 0 0 18.8 17"/></svg><span class="control-label">Refresh feeds</span></button></div><button id="results-toggle"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 5h12M9 12h12M9 19h12M3 5h.1M3 12h.1M3 19h.1"/></svg><span class="control-label">Places & updates</span></button></div><div id="tile-warning" class="map-warning" role="status" hidden>Some map imagery could not load. Data and controls remain available.</div><div id="map-caption"><strong>ST. LOUIS</strong><span id="view-caption">Choose your layers. Find your way.</span></div><div id="environment-key" tabindex="0" aria-label="Map color key" hidden></div><div id="legend" aria-label="Selected layers"></div>
+   <section id="results" class="floating" hidden><div class="floating-head"><h2>Places & updates</h2><button id="results-close" aria-label="Close results">×</button></div><input id="place-search" type="search" placeholder="Name, food, category or address…" aria-label="Search places on the map" aria-describedby="place-search-help"><p id="place-search-help" class="small">Search selected layers in this view. Try coffee, pizza, pub or a place name.</p><div class="hours-filter"><label for="open-now"><input id="open-now" type="checkbox">Open now</label></div><p id="open-now-summary" class="small" role="status" hidden></p><div id="results-list"></div></section>
+   <section id="detail" class="floating" aria-label="Place details" hidden></section>
+  </div>
+ </main>
+ <div id="toast" role="status" aria-live="polite" hidden></div>
+ <dialog id="share-dialog" aria-labelledby="share-title"><form method="dialog"><button class="dialog-close" aria-label="Close share dialog">×</button></form><h2 id="share-title">Share map</h2><label for="share-url">Website link</label><input id="share-url" type="url" readonly><div class="input-row"><button id="copy-link" class="primary">Copy link</button></div></dialog>
+ <noscript>Andymap needs JavaScript for its interactive map.</noscript>
+</body></html>
