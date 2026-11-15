@@ -40,16 +40,16 @@ export function appendSkyExtras(box,sky,{format}){
 export function createOpeningNotices({format,onResult}){
  const trigger=node('button','notices-trigger');trigger.type='button';trigger.hidden=true;document.querySelector('.header-actions').prepend(trigger);
  const dialog=node('dialog','notices-dialog');dialog.setAttribute('aria-labelledby','notice-heading');document.body.append(dialog);
- let response=null,pending=false,seen=new Set(),signature='';
+ let response=null,pending=false,lastChecked=0,seen=new Set(),signature='';
  const current=()=>response&&Date.parse(response.validUntil)>Date.now()?activeNotices(response.notices):[];
  function render(){const notices=current(),next=notices.map(n=>n.id+'|'+n.revision).join('\n');trigger.hidden=!notices.length;trigger.textContent=`Active notices · ${notices.length}`;if(!notices.length){if(dialog.open)dialog.close();signature='';return;}if(next===signature)return;signature=next;dialog.replaceChildren();const head=node('div','floating-head'),title=node('h2','','Active notices');title.id='notice-heading';const close=node('button','','×');close.type='button';close.setAttribute('aria-label','Close active notices');close.onclick=()=>dialog.close();head.append(title,close);dialog.append(head,node('p','small','Official notices affecting parts of Greater St. Louis. Check the named area and source time.'));
   for(const n of notices){const card=node('article','notice-card');card.append(node('h3','',n.title));if(n.area)card.append(node('p','',n.area));if(n.description)card.append(node('p','',n.description));if(n.instruction)card.append(node('p','notice-instruction',n.instruction));card.append(node('p','small',`${format(n.sent||n.sourceUpdatedAt)} · Until ${format(n.expires)}`));if(safeUrl(n.url))card.append(link('Official notice ↗',n.url));dialog.append(card);}
  }
  function showPending(force=false){const notices=current();if(document.hidden||!notices.length||dialog.open||document.querySelector('dialog[open]'))return;if(!force&&!notices.some(n=>!seen.has(n.id+'|'+n.revision)))return;dialog.showModal();for(const n of notices)seen.add(n.id+'|'+n.revision);while(seen.size>200)seen.delete(seen.values().next().value);}
  trigger.onclick=()=>{render();showPending(true);};
- async function refresh(){if(pending)return;pending=true;try{const r=await apiFetch('/api/notices',{cache:'no-store',signal:AbortSignal.timeout(30000)});if(!r.ok)throw Error('Notices unavailable');response=await r.json();onResult?.(response);render();showPending();}catch{response=null;onResult?.({status:'unavailable',notices:[],note:'Current official notices could not be checked. No all-clear is implied.'});render();}finally{pending=false;}}
- setInterval(()=>{render();showPending();if(!document.hidden&&(!response||Date.parse(response.validUntil)<=Date.now()+10000))refresh();},15000);
- document.addEventListener('visibilitychange',()=>{if(!document.hidden){render();refresh();}});refresh();return{refresh};
+ async function refresh(){if(pending)return;pending=true;try{const r=await apiFetch('/api/notices',{cache:'no-store',signal:AbortSignal.timeout(30000)});if(!r.ok)throw Error('Notices unavailable');response=await r.json();lastChecked=Date.now();onResult?.(response);render();showPending();}catch{response=null;onResult?.({status:'unavailable',notices:[],note:'Current official notices could not be checked. No all-clear is implied.'});render();}finally{pending=false;}}
+ setInterval(()=>{render();showPending();if(!document.hidden&&(!response||Date.now()-lastChecked>=60000||Date.parse(response.validUntil)<=Date.now()+10000))refresh();},15000);
+ document.addEventListener('visibilitychange',()=>{if(!document.hidden){render();refresh();}});document.addEventListener('close',()=>{render();showPending();},true);refresh();return{refresh};
 }
 
 

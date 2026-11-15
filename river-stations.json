@@ -1,0 +1,302 @@
+{
+  "05514500": {
+    "name": "Cuivre River near Troy, MO",
+    "drainageSqMi": 903.0
+  },
+  "05514705": {
+    "name": "Cuivre River at Old Monroe, MO",
+    "drainageSqMi": 1230.0
+  },
+  "05514840": {
+    "name": "Dardenne Creek at O'Fallon, MO",
+    "drainageSqMi": 61.0
+  },
+  "05514860": {
+    "name": "Dardenne Creek at Old Town St. Peters, MO",
+    "drainageSqMi": 102.0
+  },
+  "05587060": {
+    "name": "ILLINOIS RIVER AT HARDIN, IL",
+    "drainageSqMi": 28690.0
+  },
+  "05587450": {
+    "name": "Mississippi River at Grafton, IL",
+    "drainageSqMi": 171300.0
+  },
+  "05587480": {
+    "name": "PIASA CREEK NEAR MELVILLE, IL",
+    "drainageSqMi": 102.54
+  },
+  "05587498": {
+    "name": "Mississippi River Pool Lock and Dam 26 at Alton,IL",
+    "drainageSqMi": null
+  },
+  "05587900": {
+    "name": "CAHOKIA CREEK AT EDWARDSVILLE, IL",
+    "drainageSqMi": 212.0
+  },
+  "05588000": {
+    "name": "INDIAN CREEK AT WANDA, IL",
+    "drainageSqMi": 36.7
+  },
+  "05588720": {
+    "name": "JUDYS BRANCH AT RTE 157 AT GLEN CARBON, IL",
+    "drainageSqMi": 8.33
+  },
+  "05593575": {
+    "name": "LITTLE CROOKED CREEK NEAR NEW MINDEN, IL",
+    "drainageSqMi": 84.3
+  },
+  "05593945": {
+    "name": "SHOAL CREEK NEAR PIERRON, IL",
+    "drainageSqMi": 678.0
+  },
+  "05594000": {
+    "name": "SHOAL CREEK NEAR BREESE, IL",
+    "drainageSqMi": 735.0
+  },
+  "05594070": {
+    "name": "SUGAR CREEK NEAR AVISTON, IL",
+    "drainageSqMi": null
+  },
+  "05594100": {
+    "name": "KASKASKIA RIVER NEAR VENEDY STATION, IL",
+    "drainageSqMi": 4393.0
+  },
+  "05594450": {
+    "name": "SILVER CREEK NEAR TROY, IL",
+    "drainageSqMi": 154.0
+  },
+  "05594600": {
+    "name": "SILVER CREEK AT ROUTE 161 NR MASCOUTAH, IL",
+    "drainageSqMi": null
+  },
+  "05594800": {
+    "name": "SILVER CREEK NEAR FREEBURG, IL",
+    "drainageSqMi": 464.0
+  },
+  "05595000": {
+    "name": "KASKASKIA RIVER AT NEW ATHENS, IL",
+    "drainageSqMi": 5189.0
+  },
+  "05595200": {
+    "name": "RICHLAND CREEK NEAR HECKER, IL",
+    "drainageSqMi": 129.0
+  },
+  "05595240": {
+    "name": "KASKASKIA RIVER NEAR RED BUD, IL",
+    "drainageSqMi": 5505.0
+  },
+  "06935450": {
+    "name": "Missouri River at Washington, MO",
+    "drainageSqMi": 523200.0
+  },
+  "06935550": {
+    "name": "Missouri River near Labadie, MO",
+    "drainageSqMi": 523300.0
+  },
+  "06935755": {
+    "name": "Bonhomme Creek near Ellisville, MO",
+    "drainageSqMi": 4.44
+  },
+  "06935770": {
+    "name": "Bonhomme Creek near Clarkson Valley, MO",
+    "drainageSqMi": 11.3
+  },
+  "06935830": {
+    "name": "Caulks Creek at Chesterfield, MO",
+    "drainageSqMi": 17.1
+  },
+  "06935850": {
+    "name": "Creve Coeur Creek at Chesterfield, MO",
+    "drainageSqMi": 5.62
+  },
+  "06935890": {
+    "name": "Creve Coeur Creek near Creve Coeur, MO",
+    "drainageSqMi": 22.0
+  },
+  "06935955": {
+    "name": "Fee Fee Creek near Bridgeton, MO",
+    "drainageSqMi": 11.7
+  },
+  "06935965": {
+    "name": "Missouri River at St. Charles, MO",
+    "drainageSqMi": 524000.0
+  },
+  "06935980": {
+    "name": "Cowmire Creek at Bridgeton, MO",
+    "drainageSqMi": 3.74
+  },
+  "06935997": {
+    "name": "Mill Creek near Florissant, MO",
+    "drainageSqMi": 2.12
+  },
+  "06936475": {
+    "name": "Coldwater Creek near Black Jack, MO",
+    "drainageSqMi": 40.4
+  },
+  "06936530": {
+    "name": "Spanish Lake Trib. nr Black Jack, MO",
+    "drainageSqMi": 0.25
+  },
+  "07001910": {
+    "name": "Watkins Creek near Bellefontaine Neighbors, MO",
+    "drainageSqMi": 1.15
+  },
+  "07001960": {
+    "name": "Watkins Ck at Belgrove Dr, Bellefontaine Neighbors",
+    "drainageSqMi": 3.86
+  },
+  "07001985": {
+    "name": "Watkins Creek at Bellefontaine Neighbors, MO",
+    "drainageSqMi": 5.19
+  },
+  "07005000": {
+    "name": "Maline Creek at Bellefontaine Neighbors, MO",
+    "drainageSqMi": 24.4
+  },
+  "07010000": {
+    "name": "Mississippi River at St. Louis, MO",
+    "drainageSqMi": 697000.0
+  },
+  "07010022": {
+    "name": "River Des Peres near University City, MO",
+    "drainageSqMi": 8.94
+  },
+  "07010030": {
+    "name": "River Des Peres Tributary at Pagedale, MO",
+    "drainageSqMi": 2.01
+  },
+  "07010035": {
+    "name": "Engelholm Creek near Wellston, MO",
+    "drainageSqMi": 1.4
+  },
+  "07010038": {
+    "name": "River Des Peres at Macklind Ave, St Louis, MO",
+    "drainageSqMi": 28.3
+  },
+  "07010040": {
+    "name": "Denny Creek at Ladue, MO",
+    "drainageSqMi": 0.48
+  },
+  "07010055": {
+    "name": "Deer Creek at Litzinger Road at Ladue, MO",
+    "drainageSqMi": 12.0
+  },
+  "07010061": {
+    "name": "Two Mile Creek at Ladue, MO",
+    "drainageSqMi": 6.45
+  },
+  "07010070": {
+    "name": "Sebago Creek near Rock Hill, MO",
+    "drainageSqMi": 1.87
+  },
+  "07010075": {
+    "name": "Deer Creek at Ladue, MO",
+    "drainageSqMi": 21.4
+  },
+  "07010082": {
+    "name": "Black Creek near Brentwood, MO",
+    "drainageSqMi": 5.81
+  },
+  "07010086": {
+    "name": "Deer Creek at Maplewood, MO",
+    "drainageSqMi": 36.5
+  },
+  "07010088": {
+    "name": "River Des Peres at Shrewsbury, MO",
+    "drainageSqMi": 71.6
+  },
+  "07010090": {
+    "name": "MacKenzie Creek near Shrewsbury, MO",
+    "drainageSqMi": 3.49
+  },
+  "07010094": {
+    "name": "Grammond Creek near Wilbur Park, MO",
+    "drainageSqMi": 0.62
+  },
+  "07010097": {
+    "name": "River Des Peres at St. Louis, MO",
+    "drainageSqMi": 85.2
+  },
+  "07010180": {
+    "name": "Gravois Creek near Mehlville, MO",
+    "drainageSqMi": 18.1
+  },
+  "07010208": {
+    "name": "Martigney Creek near Arnold, MO",
+    "drainageSqMi": 2.64
+  },
+  "07014500": {
+    "name": "Meramec River near Sullivan, MO",
+    "drainageSqMi": 1475.0
+  },
+  "07016500": {
+    "name": "Bourbeuse River at Union, MO",
+    "drainageSqMi": 808.0
+  },
+  "07017020": {
+    "name": "Meramec River at Pacific, MO",
+    "drainageSqMi": 2740.0
+  },
+  "07018100": {
+    "name": "Big River near Richwoods, MO",
+    "drainageSqMi": 735.0
+  },
+  "07018500": {
+    "name": "Big River at Byrnesville, MO",
+    "drainageSqMi": 917.0
+  },
+  "07019000": {
+    "name": "Meramec River near Eureka, MO",
+    "drainageSqMi": 3788.0
+  },
+  "07019072": {
+    "name": "Keifer Creek near Ballwin, MO",
+    "drainageSqMi": 3.91
+  },
+  "07019090": {
+    "name": "Williams Creek near Peerless Park, MO",
+    "drainageSqMi": 7.62
+  },
+  "07019120": {
+    "name": "Fishpot Creek at Valley Park, MO",
+    "drainageSqMi": 9.58
+  },
+  "07019130": {
+    "name": "Meramec River at Valley Park, MO",
+    "drainageSqMi": 3850.0
+  },
+  "07019150": {
+    "name": "Grand Glaize Creek near Manchester, MO",
+    "drainageSqMi": 5.09
+  },
+  "07019175": {
+    "name": "Sugar Creek at Kirkwood, MO",
+    "drainageSqMi": 5.08
+  },
+  "07019185": {
+    "name": "Grand Glaize Creek near Valley Park, MO",
+    "drainageSqMi": 21.8
+  },
+  "07019195": {
+    "name": "Yarnell Creek at Fenton, MO",
+    "drainageSqMi": 2.71
+  },
+  "07019210": {
+    "name": "Meramec River at Fenton, MO",
+    "drainageSqMi": 3880.0
+  },
+  "07019220": {
+    "name": "Fenton Creek near Fenton, MO",
+    "drainageSqMi": 4.29
+  },
+  "07019317": {
+    "name": "Mattese Creek near Mattese, MO",
+    "drainageSqMi": 7.88
+  },
+  "07019500": {
+    "name": "Joachim Creek at De Soto, MO",
+    "drainageSqMi": 42.4
+  }
+}
