@@ -183,21 +183,23 @@ function closeDetail({restoreFocus=false}={}){
  if(selectedMarker)map.removeLayer(selectedMarker);selectedMarker=null;if(hadSelection)renderPlaceMarkers();if(restoreFocus)(detailReturnTarget?.isConnected&&detailReturnTarget!==document.body&&!detailReturnTarget.closest('[inert],[hidden]')&&detailReturnTarget.getClientRects().length?detailReturnTarget:$('#map')).focus({preventScroll:true});
 }
 function showCluster(id,cluster){
+ skyCloudMap.close();if(futureRadar.active)futureRadar.stop();document.body.classList.remove('shared-view','shared-peek');
  rememberDetailOrigin();closeDetail();const box=$('#detail');box.replaceChildren();box.hidden=false;$('#results').hidden=true;
  const head=el('div','floating-head'),close=btn('×',()=>closeDetail({restoreFocus:true}));close.setAttribute('aria-label','Close place details');
- head.append(detailCategory(id,false),close);detailExpansion(head);box.append(head,el('h2','',cluster.features.length+' at this location'));
+ head.append(detailCategory(id,false),close);detailExpansion(head);box.append(head,el('h2','',cluster.features.length+' places in this group'));
  for(const feature of cluster.features){const p=feature.properties||{},button=btn('',()=>showFeature(id,feature),'result-card');button.append(el('strong','',p.title||p.name||BY_ID[id].name),el('small','',p.address||p.description||''));box.append(button);}
  setControls(false);focusDetailHeading();
 }
 function clusterMarker(id,cluster,displayCenter=cluster.center){
- const {color,ink}=markerPaint(id),count=cluster.features.length,title=`${count} ${BY_ID[id].name.toLowerCase()} — select to zoom in`;
+ const {color,ink}=markerPaint(id),count=cluster.features.length,title=`${count} ${BY_ID[id].name.toLowerCase()} — select to see all places`;
  const icon=L.divIcon({className:'place-cluster',html:`<span class="cluster-badge" style="--cluster-color:${color};--marker-ink:${ink}">${symbol(id)}<b>${count}</b></span>`,iconSize:[44,44],iconAnchor:[22,22]});
  const marker=L.marker(displayCenter,{icon,title,alt:title});
  marker.on('add',()=>marker.getElement()?.setAttribute('aria-label',title));
- marker.on('click',event=>{L.DomEvent.stopPropagation(event);if(map.getZoom()>=map.getMaxZoom())showCluster(id,cluster);else map.setView(cluster.center,Math.min(map.getMaxZoom(),map.getZoom()+2));});
+ marker.on('click',event=>{L.DomEvent.stopPropagation(event);const zoom=Math.min(map.getMaxZoom(),map.getZoom()+2);map.setView(cluster.center,zoom,{animate:false});showCluster(id,cluster);positionForDetails(cluster.center,zoom);});
  marker.bindTooltip(el('span','',title));return marker;
 }
 function showMixedCluster(cluster){
+ skyCloudMap.close();if(futureRadar.active)futureRadar.stop();document.body.classList.remove('shared-view','shared-peek');
  rememberDetailOrigin();closeDetail();const box=$('#detail');box.replaceChildren();box.hidden=false;$('#results').hidden=true;const head=el('div','floating-head'),close=btn('×',()=>closeDetail({restoreFocus:true}));close.setAttribute('aria-label','Close grouped places');head.append(el('span','eyebrow','PLACES IN THIS AREA'),close);detailExpansion(head);box.append(head,el('h2','',cluster.features.length+' results'));
  for(const f of cluster.features){const id=f._layer,p=f.properties||{},b=btn('',()=>showFeature(id,f),'result-card');b.append(el('strong','',p.title||p.name||BY_ID[id].name),el('small','',BY_ID[id].name+(p.address?' · '+p.address:'')));box.append(b);}setControls(false);focusDetailHeading();
 }
@@ -232,7 +234,7 @@ function drawPlaceMarkersContent(){
   if(badge.provider==='transit'){const marker=clusterMarker('transit',cluster,displayCenter);marker.on('add',()=>marker.getElement()?.setAttribute('data-badge-displaced',String(badge.displaced)));placeMarkers.addLayer(marker);continue;}
   const mixed=cluster.layerIds.length>1,id=cluster.layerIds[0],names=cluster.layerIds.map(key=>BY_ID[key].name).join(', '),title=cluster.features.length+' results · '+names;
   const {color,ink}=markerPaint(id,{mixed});
-  const icon=L.divIcon({className:'place-cluster'+(mixed?' mixed':''),html:'<span class="cluster-badge" style="--cluster-color:'+color+';--marker-ink:'+ink+'">'+symbol(mixed?'places':id)+'<b>'+cluster.features.length+'</b></span>',iconSize:[44,44],iconAnchor:[22,22]});const marker=L.marker(displayCenter,{icon,title,alt:title});marker.on('add',()=>{marker.getElement()?.setAttribute('aria-label',title);marker.getElement()?.setAttribute('data-badge-displaced',String(badge.displaced));});marker.bindTooltip(el('span','',title));marker.on('click',event=>{L.DomEvent.stopPropagation(event);if(map.getZoom()>=17)showMixedCluster(cluster);else map.setView(center,Math.min(17,map.getZoom()+2));});placeMarkers.addLayer(marker);
+  const icon=L.divIcon({className:'place-cluster'+(mixed?' mixed':''),html:'<span class="cluster-badge" style="--cluster-color:'+color+';--marker-ink:'+ink+'">'+symbol(mixed?'places':id)+'<b>'+cluster.features.length+'</b></span>',iconSize:[44,44],iconAnchor:[22,22]});const marker=L.marker(displayCenter,{icon,title,alt:title});marker.on('add',()=>{marker.getElement()?.setAttribute('aria-label',title);marker.getElement()?.setAttribute('data-badge-displaced',String(badge.displaced));});marker.bindTooltip(el('span','',title));marker.on('click',event=>{L.DomEvent.stopPropagation(event);const zoom=Math.min(map.getMaxZoom(),Math.max(map.getZoom(),Math.min(17,map.getZoom()+2)));map.setView(center,zoom,{animate:false});showMixedCluster(cluster);positionForDetails(center,zoom);});placeMarkers.addLayer(marker);
  }
 }
 function drawFeatures(id,result){
