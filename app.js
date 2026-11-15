@@ -1,12 +1,12 @@
-import {createSkyCloudMap} from './sky-cloud-map.js?v=20261115-insights2';
-import {COMMUNITY_SOURCES,HIDDEN_LAYERS,CRIME_TYPES,combineCrime,appendAirAdvice,distance,routeMiles,pointInGeometry,sortRivers,enrichRivers,riverAverages,appendProviderLinks,appendRegistryLinks,appendSkySummary} from './layer-insights.js?v=20261115-insights2';
+import {createSkyCloudMap} from './sky-cloud-map.js?v=20261115-insights3';
+import {COMMUNITY_SOURCES,HIDDEN_LAYERS,CRIME_TYPES,combineCrime,appendAirAdvice,distance,routeMiles,pointInGeometry,sortRivers,enrichRivers,riverAverages,appendProviderLinks,appendRegistryLinks,appendSkySummary} from './layer-insights.js?v=20261115-insights3';
 import {createTrafficIncidents} from './traffic-incidents.js?v=20261115-fast2';
 import {attachSuggestions} from './search-suggestions.js?v=20261115-fast2';
 import {createFutureRadar} from './future-radar.js?v=20261115-fast2';
 import {searchLayers} from './explore.js';
 import {placeHash,readPlaceHash,placeState,findSharedFeature} from './short-links.js';
 import {appendPlaceNavigation} from './place-navigation.js';
-import {TODAY_LAYERS,happeningToday} from './today-filter.js?v=20261115-insights2';
+import {TODAY_LAYERS,happeningToday} from './today-filter.js?v=20261115-insights3';
 import {createWeatherReadings} from './weather-readings.js?v=20261115-fast3';
 import {enrichCultureFeature,cultureFeatureDisplayable} from './place-enrichment.js';
 import {apiFetch,apiUrl} from './api-client.js';
@@ -25,8 +25,8 @@ import {symbol} from './symbols.js';
 import {overlayStyles,routeOverlayStyles,aircraftDirectionStyles,markerPaint} from './overlay-style.js';
 import {uiIcon} from './ui-icons.js';
 import {MODE_DEFAULTS,OPACITY_DEFAULTS,cleanOverlayOpacity,cleanLayerModes,unexpiredFeatures} from './expansion-options.js';
-import {appendWeather,appendSkyExtras,createOpeningNotices} from './expansion-ui.js?v=20261115-insights2';
-import {LAYERS,BY_ID,EXAMPLES} from './catalog.js?v=20261115-insights2';
+import {appendWeather,appendSkyExtras,createOpeningNotices} from './expansion-ui.js?v=20261115-insights3';
+import {LAYERS,BY_ID,EXAMPLES} from './catalog.js?v=20261115-insights3';
 import {RADAR_MODES,RADAR_TYPE_KEY,AQI,AIR_MODES} from './environment.js';
 import {CONFIG} from './config.js?v=20261115-play9';
 import {REGION,coordinate,safeUrl,placeUrl,placeLinks,encodeState,decodeState,cleanState,cleanStop,loadPresets,savePresets,cleanPreset,browserStorage,layerSelectable,skyCloudRows,currentRoadworks,centroid,directionEnd,clusterPoints} from './core.js';
@@ -346,7 +346,7 @@ async function checkPlace(stop,host,old,closureNotice,lookup,freshness,hoursLine
 function renderResults(){return measureUI('place-results',renderPlaceResults);}
 function renderPlaceResults(){
  $('#results-title').textContent=currentResultsLayer==='food'?'Food':currentResultsLayer?BY_ID[currentResultsLayer].name:'Results';$('#all-results').hidden=!currentResultsLayer;const resultLayers=currentResultsLayer==='food'?['restaurants','bars']:currentResultsLayer?[currentResultsLayer]:[...requestedLayers];
- const host=$('#results-list'),focused=host.contains(document.activeElement)?document.activeElement.dataset.resultKey:null;host.replaceChildren();const q=$('#place-search').value.trim().toLowerCase(),now=Date.now(),counts={open:0,closed:0,unknown:0},counted=new Set();let total=0,overlap=false;const center=[map.getCenter().lng,map.getCenter().lat];if(currentResultsLayer==='outages')appendProviderLinks(host);if(currentResultsLayer==='crime'){host.append(crimeControls());appendRegistryLinks(host);host.append(btn('Recent road incidents & crashes',()=>{toggle('traffic',true);setResults(false);},'sky-refresh'));}if(currentResultsLayer==='rivers')host.append(el('p','small','Order: largest absolute difference from recent 30-day mean (when available), major rivers (Mississippi, Missouri, Meramec), drainage area, then distance from map center. Recent differences are not seasonal anomaly scores.'));if(currentResultsLayer==='cycling')host.append(cyclingControls());
+ $('#results .hours-filter').hidden=!(currentResultsLayer==='food'||(currentResultsLayer?isHoursPlaceLayer(currentResultsLayer):[...enabled].some(isHoursPlaceLayer)));const host=$('#results-list'),focused=host.contains(document.activeElement)?document.activeElement.dataset.resultKey:null;host.replaceChildren();const q=$('#place-search').value.trim().toLowerCase(),now=Date.now(),counts={open:0,closed:0,unknown:0},counted=new Set();let total=0,overlap=false;const center=[map.getCenter().lng,map.getCenter().lat];if(currentResultsLayer==='outages')appendProviderLinks(host);if(currentResultsLayer==='crime'){host.append(crimeControls());appendRegistryLinks(host);host.append(btn('Recent road incidents & crashes',()=>{toggle('traffic',true);setResults(false);},'sky-refresh'));}if(currentResultsLayer==='rivers')host.append(el('p','small','Order: largest absolute difference from recent 30-day mean (when available), major rivers (Mississippi, Missouri, Meramec), drainage area, then distance from map center. Recent differences are not seasonal anomaly scores.'));if(currentResultsLayer==='cycling')host.append(cyclingControls());
  for(const id of enabled){if(currentResultsLayer&&!resultLayers.includes(id))continue;const d=data.get(id),section=el('div','result-group');
   const candidates=localPlaceFeatures(id,id==='roadworks'?currentRoadworks(d?.features):Array.isArray(d?.features)?d.features:[]).filter(f=>{const c=f.geometry?.coordinates;return f.geometry?.type!=='Point'||(coordinate(c?.[1],c?.[0])&&map.getBounds().contains([c[1],c[0]]));}).filter(f=>placeMatchesSearch(f,id,q));
   if(openNow&&isHoursPlaceLayer(id))for(const f of candidates){const p=f.properties||{},key=p.sourceId||p.id||f.id||id+JSON.stringify(f.geometry);if(counted.has(key))overlap=true;counted.add(key);counts[featureOpening(id,f,now).state]++;}
