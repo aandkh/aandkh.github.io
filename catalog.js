@@ -75,3 +75,6 @@ export const EXAMPLES = [
   { id:'commute', name:'Across town', layers:['transit','radar','alerts'], center:[38.635,-90.245], zoom:12 },
   { id:'river', name:'Along the rivers', layers:['rivers','floodplains','alerts'], center:[38.7,-90.3], zoom:10 },
 ];
+
+const comedy=LAYERS.find(l=>l.id==='arts');comedy.source='Official comedy clubs / venue calendars / community calendars';comedy.note='Reviewed shows from Helium, Westport Funny Bone, The Factory, the Fabulous Fox and Stifel Theatre, plus community listings. Partial regional coverage; separate performances and source check dates are retained.';
+concerts.note='Reviewed calendars for The Pageant, Delmar Hall, Blueberry Hill Duck Room, Enterprise Center, Stifel Theatre, The Factory, Off Broadway, Old Rock House, Red Flag, the Fabulous Fox and Hollywood Casino Amphitheater, plus university listings. Partial regional coverage; verify showtimes and changes with each official listing.';

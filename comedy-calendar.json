@@ -1,0 +1,4785 @@
+{
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.588485,
+          38.670028
+        ]
+      },
+      "properties": {
+        "id": "venue-event:5622be05b4462bcf125e8369",
+        "title": "GenX Takeover Comedy Tour",
+        "start": "2026-11-20",
+        "expiresAt": "2026-11-21T00:00:00-06:00",
+        "description": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://thefactorystl.com/events/",
+        "url": "https://thefactorystl.com/events/genx-takeover-comedy-tour/",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.588485,
+          38.670028
+        ]
+      },
+      "properties": {
+        "id": "venue-event:ea5164491977a34fe6d03c7d",
+        "title": "The Unauthorized Hallmark(ish) Parody Musical",
+        "start": "2026-12-06",
+        "expiresAt": "2026-12-07T00:00:00-06:00",
+        "description": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://thefactorystl.com/events/",
+        "url": "https://thefactorystl.com/events/the-unauthorized-hallmarkish-parody-musical/",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.588485,
+          38.670028
+        ]
+      },
+      "properties": {
+        "id": "venue-event:06eb44770a1be3d4ff961653",
+        "title": "Rene Vaca & That Mexican OT",
+        "start": "2026-12-16",
+        "expiresAt": "2026-12-17T00:00:00-06:00",
+        "description": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://thefactorystl.com/events/",
+        "url": "https://thefactorystl.com/events/rene-vaca-that-mexican-ot/",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.588485,
+          38.670028
+        ]
+      },
+      "properties": {
+        "id": "venue-event:c538068b218f226ad7921ecf",
+        "title": "A Drag Queen Christmas",
+        "start": "2026-12-22",
+        "expiresAt": "2026-12-23T00:00:00-06:00",
+        "description": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://thefactorystl.com/events/",
+        "url": "https://thefactorystl.com/events/a-drag-queen-christmas/",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.588485,
+          38.670028
+        ]
+      },
+      "properties": {
+        "id": "venue-event:2af99b87b8dae6708c2a5288",
+        "title": "Elmo’s Got the Moves",
+        "start": "2027-01-17",
+        "expiresAt": "2027-01-18T00:00:00-06:00",
+        "description": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://thefactorystl.com/events/",
+        "url": "https://thefactorystl.com/events/elmos-got-the-moves/",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.588485,
+          38.670028
+        ]
+      },
+      "properties": {
+        "id": "venue-event:1701b608ada19c2fee9d7cf7",
+        "title": "Little Shop of Horrors",
+        "start": "2027-01-22",
+        "expiresAt": "2027-01-23T00:00:00-06:00",
+        "description": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://thefactorystl.com/events/",
+        "url": "https://thefactorystl.com/events/little-shop-of-horrors/",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.588485,
+          38.670028
+        ]
+      },
+      "properties": {
+        "id": "venue-event:e2cdc43e7629aa9e9bf5d4a0",
+        "title": "Charlie Berens: The Lost and Found Tour",
+        "start": "2027-01-23",
+        "expiresAt": "2027-01-24T00:00:00-06:00",
+        "description": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://thefactorystl.com/events/",
+        "url": "https://thefactorystl.com/events/charlie-berens-the-lost-and-found-tour/",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.588485,
+          38.670028
+        ]
+      },
+      "properties": {
+        "id": "venue-event:01e5c86718b7bc9c8c1e59fa",
+        "title": "Bored Teachers: Is It Friday Yet?! Comedy Tour",
+        "start": "2027-02-13",
+        "expiresAt": "2027-02-14T00:00:00-06:00",
+        "description": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://thefactorystl.com/events/",
+        "url": "https://thefactorystl.com/events/bored-teachers-is-it-friday-yet-comedy-tour/",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.588485,
+          38.670028
+        ]
+      },
+      "properties": {
+        "id": "venue-event:f0f1e44cca71ca091fd6b18e",
+        "title": "Vicki Lawrence & Mama",
+        "start": "2027-02-21",
+        "expiresAt": "2027-02-22T00:00:00-06:00",
+        "description": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://thefactorystl.com/events/",
+        "url": "https://thefactorystl.com/events/vicki-lawrence-mama/",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.588485,
+          38.670028
+        ]
+      },
+      "properties": {
+        "id": "venue-event:daef6b905ed1f7101cb3b85a",
+        "title": "Bianca Del Rio: It Gets Bitter – World Comedy Tour",
+        "start": "2027-02-22",
+        "expiresAt": "2027-02-23T00:00:00-06:00",
+        "description": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://thefactorystl.com/events/",
+        "url": "https://thefactorystl.com/events/bianca-del-rio-it-gets-bitter-world-comedy-tour/",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.588485,
+          38.670028
+        ]
+      },
+      "properties": {
+        "id": "venue-event:c13336d6c1681e05523f1a4b",
+        "title": "#IMOMSOHARD: THE CRASHING OUT TOUR",
+        "start": "2027-03-06",
+        "expiresAt": "2027-03-07T00:00:00-06:00",
+        "description": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://thefactorystl.com/events/",
+        "url": "https://thefactorystl.com/events/imomsohard-the-crashing-out-tour/",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.588485,
+          38.670028
+        ]
+      },
+      "properties": {
+        "id": "venue-event:8a2e99adb0a8497205afab95",
+        "title": "John Cleese",
+        "start": "2027-03-11",
+        "expiresAt": "2027-03-12T00:00:00-06:00",
+        "description": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://thefactorystl.com/events/",
+        "url": "https://thefactorystl.com/events/john-cleese/",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2316,
+          38.6389
+        ]
+      },
+      "properties": {
+        "id": "venue-event:ef43c4e1a65ff77ec39fee13",
+        "title": "A Beautiful Noise",
+        "start": "2026-11-15T13:00:00-06:00",
+        "expiresAt": "2026-11-16T00:00:00-06:00",
+        "description": "The Fabulous Fox, 527 N Grand Blvd, St Louis MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Fabulous Fox, 527 N Grand Blvd, St Louis MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://www.fabulousfox.com/events",
+        "url": "https://www.fabulousfox.com/events/detail/a-beautiful-noise",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2316,
+          38.6389
+        ]
+      },
+      "properties": {
+        "id": "venue-event:746d85f720e56f238f7b062c",
+        "title": "A Beautiful Noise",
+        "start": "2026-11-15T18:30:00-06:00",
+        "expiresAt": "2026-11-16T00:00:00-06:00",
+        "description": "The Fabulous Fox, 527 N Grand Blvd, St Louis MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Fabulous Fox, 527 N Grand Blvd, St Louis MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://www.fabulousfox.com/events",
+        "url": "https://www.fabulousfox.com/events/detail/a-beautiful-noise",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2316,
+          38.6389
+        ]
+      },
+      "properties": {
+        "id": "venue-event:672c90b2be94ae285b8b1a8f",
+        "title": "Leanne Morgan",
+        "start": "2026-11-21T16:00:00-06:00",
+        "expiresAt": "2026-11-22T00:00:00-06:00",
+        "description": "The Fabulous Fox, 527 N Grand Blvd, St Louis MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Fabulous Fox, 527 N Grand Blvd, St Louis MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://www.fabulousfox.com/events",
+        "url": "https://www.fabulousfox.com/events/detail/leanne-morgan",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2316,
+          38.6389
+        ]
+      },
+      "properties": {
+        "id": "venue-event:02e0134bb7475d5296030d2d",
+        "title": "Leanne Morgan",
+        "start": "2026-11-21T19:30:00-06:00",
+        "expiresAt": "2026-11-22T00:00:00-06:00",
+        "description": "The Fabulous Fox, 527 N Grand Blvd, St Louis MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Fabulous Fox, 527 N Grand Blvd, St Louis MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://www.fabulousfox.com/events",
+        "url": "https://www.fabulousfox.com/events/detail/leanne-morgan",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2316,
+          38.6389
+        ]
+      },
+      "properties": {
+        "id": "venue-event:40a7a2d9905cbe86c3c81c6f",
+        "title": "Justin Willman",
+        "start": "2026-11-28",
+        "expiresAt": "2026-11-29T00:00:00-06:00",
+        "description": "The Fabulous Fox, 527 N Grand Blvd, St Louis MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Fabulous Fox, 527 N Grand Blvd, St Louis MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://www.fabulousfox.com/events",
+        "url": "https://www.fabulousfox.com/events/detail/justin-willman",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2316,
+          38.6389
+        ]
+      },
+      "properties": {
+        "id": "venue-event:3ebfa831aeae5408ad0dbd82",
+        "title": "The Hip Hop Nutcracker",
+        "start": "2026-12-17",
+        "expiresAt": "2026-12-18T00:00:00-06:00",
+        "description": "The Fabulous Fox, 527 N Grand Blvd, St Louis MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Fabulous Fox, 527 N Grand Blvd, St Louis MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://www.fabulousfox.com/events",
+        "url": "https://www.fabulousfox.com/events/detail/hip-hop-nutcracker",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2316,
+          38.6389
+        ]
+      },
+      "properties": {
+        "id": "venue-event:d17b8a1bc812f8860997806f",
+        "title": "Cirque Dreams Holidaze",
+        "start": "2026-12-18T19:00:00-06:00",
+        "expiresAt": "2026-12-19T00:00:00-06:00",
+        "description": "The Fabulous Fox, 527 N Grand Blvd, St Louis MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Fabulous Fox, 527 N Grand Blvd, St Louis MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://www.fabulousfox.com/events",
+        "url": "https://www.fabulousfox.com/events/detail/cirque-dreams-holidaze",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2316,
+          38.6389
+        ]
+      },
+      "properties": {
+        "id": "venue-event:bc552516de1962d0b82f883a",
+        "title": "Cirque Dreams Holidaze",
+        "start": "2026-12-19T11:00:00-06:00",
+        "expiresAt": "2026-12-20T00:00:00-06:00",
+        "description": "The Fabulous Fox, 527 N Grand Blvd, St Louis MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Fabulous Fox, 527 N Grand Blvd, St Louis MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://www.fabulousfox.com/events",
+        "url": "https://www.fabulousfox.com/events/detail/cirque-dreams-holidaze",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2316,
+          38.6389
+        ]
+      },
+      "properties": {
+        "id": "venue-event:5ed3bfb0ed67e5a7ebd93d07",
+        "title": "Cirque Dreams Holidaze",
+        "start": "2026-12-19T15:00:00-06:00",
+        "expiresAt": "2026-12-20T00:00:00-06:00",
+        "description": "The Fabulous Fox, 527 N Grand Blvd, St Louis MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Fabulous Fox, 527 N Grand Blvd, St Louis MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://www.fabulousfox.com/events",
+        "url": "https://www.fabulousfox.com/events/detail/cirque-dreams-holidaze",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2316,
+          38.6389
+        ]
+      },
+      "properties": {
+        "id": "venue-event:9e0dab2ed167ba1d8bcaf49e",
+        "title": "Cirque Dreams Holidaze",
+        "start": "2026-12-19T19:00:00-06:00",
+        "expiresAt": "2026-12-20T00:00:00-06:00",
+        "description": "The Fabulous Fox, 527 N Grand Blvd, St Louis MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Fabulous Fox, 527 N Grand Blvd, St Louis MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://www.fabulousfox.com/events",
+        "url": "https://www.fabulousfox.com/events/detail/cirque-dreams-holidaze",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2016,
+          38.6273
+        ]
+      },
+      "properties": {
+        "id": "venue-event:528b83a2e325707acae7ffc1",
+        "title": "Jeff Arcuri",
+        "start": "2027-03-03T19:30:00-06:00",
+        "expiresAt": "2027-03-04T00:00:00-06:00",
+        "description": "Stifel Theatre, 1400 Market St, St Louis MO · Check the official listing for showtime, tickets and changes.",
+        "address": "Stifel Theatre, 1400 Market St, St Louis MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://www.stifeltheatre.com/events/category/comedy",
+        "url": "https://www.stifeltheatre.com/events/detail/jeff-arcuri",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2016,
+          38.6273
+        ]
+      },
+      "properties": {
+        "id": "venue-event:5be7d255788c2a2331bc8cc2",
+        "title": "Legends of Laughter",
+        "start": "2027-03-05T20:00:00-06:00",
+        "expiresAt": "2027-03-06T00:00:00-06:00",
+        "description": "Stifel Theatre, 1400 Market St, St Louis MO · Check the official listing for showtime, tickets and changes.",
+        "address": "Stifel Theatre, 1400 Market St, St Louis MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://www.stifeltheatre.com/events/category/comedy",
+        "url": "https://www.stifeltheatre.com/events/detail/legends-of-laughter-2",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2016,
+          38.6273
+        ]
+      },
+      "properties": {
+        "id": "venue-event:a7edcf95b9ee7ed0ab2c6231",
+        "title": "Matt Mathews: Not What I Ordered World Tour",
+        "start": "2027-05-14T19:00:00-05:00",
+        "expiresAt": "2027-05-15T00:00:00-05:00",
+        "description": "Stifel Theatre, 1400 Market St, St Louis MO · Check the official listing for showtime, tickets and changes.",
+        "address": "Stifel Theatre, 1400 Market St, St Louis MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://www.stifeltheatre.com/events/category/comedy",
+        "url": "https://www.stifeltheatre.com/events/detail/matt-mathews-not-what-i-ordered-world-tour",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:8503a796cb09d5c6:2026-11-16T00:00:00+00:00",
+        "title": "Natalie Cuomo",
+        "start": "2026-11-16T00:00:00+00:00",
+        "expiresAt": "2026-11-16T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/345133",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:721ec2b03289e1d5:2026-11-19T01:30:00+00:00",
+        "title": "Damon Darling",
+        "start": "2026-11-19T01:30:00+00:00",
+        "expiresAt": "2026-11-19T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/345117",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:f6d17406a96a25ce:2026-11-20T01:30:00+00:00",
+        "title": "Damon Darling",
+        "start": "2026-11-20T01:30:00+00:00",
+        "expiresAt": "2026-11-20T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/355075",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:9ae89f1e05207cde:2026-11-20T02:00:00+00:00",
+        "title": "Open Mic",
+        "start": "2026-11-20T02:00:00+00:00",
+        "expiresAt": "2026-11-20T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/390123",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:28cfa1be9f47c83d:2026-11-21T01:00:00+00:00",
+        "title": "Chico Bean",
+        "start": "2026-11-21T01:00:00+00:00",
+        "expiresAt": "2026-11-21T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/383463",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:dbd8b04490c47357:2026-11-21T03:15:00+00:00",
+        "title": "Chico Bean",
+        "start": "2026-11-21T03:15:00+00:00",
+        "expiresAt": "2026-11-21T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/383464",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:c7932aea6454fd78:2026-11-22T01:00:00+00:00",
+        "title": "Chico Bean",
+        "start": "2026-11-22T01:00:00+00:00",
+        "expiresAt": "2026-11-22T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/383466",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:a034fb5e145bc7ad:2026-11-22T03:30:00+00:00",
+        "title": "Chico Bean",
+        "start": "2026-11-22T03:30:00+00:00",
+        "expiresAt": "2026-11-22T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/383467",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:bb163c4bd0a840df:2026-11-22T20:00:00+00:00",
+        "title": "Selena Drag Brunch",
+        "start": "2026-11-22T20:00:00+00:00",
+        "expiresAt": "2026-11-23T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/391551",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:20b86166e3d22583:2026-11-22T22:30:00+00:00",
+        "title": "Teachers Gone Bad",
+        "start": "2026-11-22T22:30:00+00:00",
+        "expiresAt": "2026-11-23T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/389330",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:a34bbe7ee0c0c366:2026-11-23T01:00:00+00:00",
+        "title": "Chico Bean",
+        "start": "2026-11-23T01:00:00+00:00",
+        "expiresAt": "2026-11-23T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/383465",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:3345327ef7138ab3:2026-11-25T01:30:00+00:00",
+        "title": "Sarper Guven",
+        "start": "2026-11-25T01:30:00+00:00",
+        "expiresAt": "2026-11-25T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/387872",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:5506d850e78b08aa:2026-11-26T01:30:00+00:00",
+        "title": "Tahir Moore",
+        "start": "2026-11-26T01:30:00+00:00",
+        "expiresAt": "2026-11-26T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/384133",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:475f429513cb42ad:2026-11-28T01:00:00+00:00",
+        "title": "Lavell Crawford",
+        "start": "2026-11-28T01:00:00+00:00",
+        "expiresAt": "2026-11-28T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/384134",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:7e95dad27ea6af82:2026-11-28T03:15:00+00:00",
+        "title": "Lavell Crawford",
+        "start": "2026-11-28T03:15:00+00:00",
+        "expiresAt": "2026-11-28T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/384135",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:a5f364f917531f44:2026-11-29T01:00:00+00:00",
+        "title": "Lavell Crawford",
+        "start": "2026-11-29T01:00:00+00:00",
+        "expiresAt": "2026-11-29T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/384137",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:fb9b481c4221ed9c:2026-11-29T03:30:00+00:00",
+        "title": "Lavell Crawford",
+        "start": "2026-11-29T03:30:00+00:00",
+        "expiresAt": "2026-11-29T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/384138",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:774f643c2ec68f6d:2026-11-30T00:00:00+00:00",
+        "title": "Lavell Crawford",
+        "start": "2026-11-30T00:00:00+00:00",
+        "expiresAt": "2026-11-30T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/384136",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:0e048a59a5d557b7:2026-11-30T02:15:00+00:00",
+        "title": "Lavell Crawford",
+        "start": "2026-11-30T02:15:00+00:00",
+        "expiresAt": "2026-11-30T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/384202",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:5ff673762af5f3ba:2026-12-03T01:30:00+00:00",
+        "title": "Ray Lau",
+        "start": "2026-12-03T01:30:00+00:00",
+        "expiresAt": "2026-12-03T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/339007",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:02ef1190008c7748:2026-12-04T01:30:00+00:00",
+        "title": "Christian Johnson",
+        "start": "2026-12-04T01:30:00+00:00",
+        "expiresAt": "2026-12-04T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/364661",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:2a1b00b363431450:2026-12-04T02:00:00+00:00",
+        "title": "Open Mic",
+        "start": "2026-12-04T02:00:00+00:00",
+        "expiresAt": "2026-12-04T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/390124",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:9d75ace7ea223cc1:2026-12-05T01:00:00+00:00",
+        "title": "Chris D'Elia",
+        "start": "2026-12-05T01:00:00+00:00",
+        "expiresAt": "2026-12-05T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/394191",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:e751db0ceb2c7b2f:2026-12-05T03:15:00+00:00",
+        "title": "Chris D'Elia",
+        "start": "2026-12-05T03:15:00+00:00",
+        "expiresAt": "2026-12-05T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/394192",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:f8363057f1291923:2026-12-06T01:00:00+00:00",
+        "title": "Chris D'Elia",
+        "start": "2026-12-06T01:00:00+00:00",
+        "expiresAt": "2026-12-06T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/394193",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:18f2344a9610435d:2026-12-06T01:15:00+00:00",
+        "title": "Paint & Punchlines",
+        "start": "2026-12-06T01:15:00+00:00",
+        "expiresAt": "2026-12-06T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/390647",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:253576cb2a8ae9d2:2026-12-06T03:30:00+00:00",
+        "title": "Chris D'Elia",
+        "start": "2026-12-06T03:30:00+00:00",
+        "expiresAt": "2026-12-06T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/394194",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:ee0e8229e8d8ec5e:2026-12-09T01:30:00+00:00",
+        "title": "Dovi Neuburger",
+        "start": "2026-12-09T01:30:00+00:00",
+        "expiresAt": "2026-12-09T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/383207",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:80c1c03b9240ab0e:2026-12-10T01:30:00+00:00",
+        "title": "Caitlin Peluffo",
+        "start": "2026-12-10T01:30:00+00:00",
+        "expiresAt": "2026-12-10T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/371158",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:8266a6645b935b94:2026-12-11T01:15:00+00:00",
+        "title": "Trish Suhr",
+        "start": "2026-12-11T01:15:00+00:00",
+        "expiresAt": "2026-12-11T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/370576",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:d369ce2cbd3bebc5:2026-12-11T03:15:00+00:00",
+        "title": "Scuffed Realtor",
+        "start": "2026-12-11T03:15:00+00:00",
+        "expiresAt": "2026-12-11T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/386007",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:2b6d62d3abb0180b:2026-12-12T01:00:00+00:00",
+        "title": "Preacher Lawson",
+        "start": "2026-12-12T01:00:00+00:00",
+        "expiresAt": "2026-12-12T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/367784",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:221ced81a51c5a3c:2026-12-12T03:15:00+00:00",
+        "title": "Preacher Lawson",
+        "start": "2026-12-12T03:15:00+00:00",
+        "expiresAt": "2026-12-12T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/367785",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:f63b50b70f8e4598:2026-12-12T18:00:00+00:00",
+        "title": "Grinch Drag Brunch",
+        "start": "2026-12-12T18:00:00+00:00",
+        "expiresAt": "2026-12-13T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/395405",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:c5eef1ae5b7b28d0:2026-12-13T01:00:00+00:00",
+        "title": "Preacher Lawson",
+        "start": "2026-12-13T01:00:00+00:00",
+        "expiresAt": "2026-12-13T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/367787",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:f1ca653b58af1e06:2026-12-13T03:30:00+00:00",
+        "title": "Preacher Lawson",
+        "start": "2026-12-13T03:30:00+00:00",
+        "expiresAt": "2026-12-13T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/367788",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:65bb5b51c2086381:2026-12-13T22:00:00+00:00",
+        "title": "Ed Larson",
+        "start": "2026-12-13T22:00:00+00:00",
+        "expiresAt": "2026-12-14T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/387246",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:c2081e69fcb85252:2026-12-14T01:00:00+00:00",
+        "title": "Preacher Lawson",
+        "start": "2026-12-14T01:00:00+00:00",
+        "expiresAt": "2026-12-14T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/367786",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:767bd123083371d5:2026-12-18T01:00:00+00:00",
+        "title": "Rob Anderson",
+        "start": "2026-12-18T01:00:00+00:00",
+        "expiresAt": "2026-12-18T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/385041",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:7c7e11bf7bb7e086:2026-12-19T01:00:00+00:00",
+        "title": "Ryan Davis",
+        "start": "2026-12-19T01:00:00+00:00",
+        "expiresAt": "2026-12-19T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/386751",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:6d21556a26e195f3:2026-12-19T03:15:00+00:00",
+        "title": "Ryan Davis",
+        "start": "2026-12-19T03:15:00+00:00",
+        "expiresAt": "2026-12-19T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/386752",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:a01f3a443a7599f4:2026-12-20T01:00:00+00:00",
+        "title": "Ryan Davis",
+        "start": "2026-12-20T01:00:00+00:00",
+        "expiresAt": "2026-12-20T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/386754",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:ade0c8d9fbb61bcf:2026-12-20T03:30:00+00:00",
+        "title": "Ryan Davis",
+        "start": "2026-12-20T03:30:00+00:00",
+        "expiresAt": "2026-12-20T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/386755",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:fc1da932419759ac:2026-12-21T01:00:00+00:00",
+        "title": "Ryan Davis",
+        "start": "2026-12-21T01:00:00+00:00",
+        "expiresAt": "2026-12-21T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/386753",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:5bddbb807819fa2f:2026-12-30T01:30:00+00:00",
+        "title": "Jalen Hinton",
+        "start": "2026-12-30T01:30:00+00:00",
+        "expiresAt": "2026-12-30T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/382694",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:c8a2474e0d4ad2fa:2026-12-31T01:30:00+00:00",
+        "title": "Charleston White",
+        "start": "2026-12-31T01:30:00+00:00",
+        "expiresAt": "2026-12-31T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/394190",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:37d4ba6b0b02a801:2027-01-01T01:00:00+00:00",
+        "title": "Helium Presents: New Year's Eve with: Benji Brown",
+        "start": "2027-01-01T01:00:00+00:00",
+        "expiresAt": "2027-01-01T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/393722",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:6b278d10597a2292:2027-01-01T03:30:00+00:00",
+        "title": "Helium Presents: New Year's Eve with: Benji Brown",
+        "start": "2027-01-01T03:30:00+00:00",
+        "expiresAt": "2027-01-01T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/393721",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:8c5007d931634da9:2027-01-02T01:00:00+00:00",
+        "title": "Eddie Griffin",
+        "start": "2027-01-02T01:00:00+00:00",
+        "expiresAt": "2027-01-02T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/394670",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:b7ac41a137a34503:2027-01-02T03:15:00+00:00",
+        "title": "Eddie Griffin",
+        "start": "2027-01-02T03:15:00+00:00",
+        "expiresAt": "2027-01-02T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/394671",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:7d8818509febb32c:2027-01-03T01:00:00+00:00",
+        "title": "Eddie Griffin",
+        "start": "2027-01-03T01:00:00+00:00",
+        "expiresAt": "2027-01-03T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/394672",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:4b4f75b7826fad15:2027-01-03T03:30:00+00:00",
+        "title": "Eddie Griffin",
+        "start": "2027-01-03T03:30:00+00:00",
+        "expiresAt": "2027-01-03T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/394673",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:8fcfc087514305fa:2027-01-07T02:00:00+00:00",
+        "title": "The Garage at Helium: Erin Cholakian",
+        "start": "2027-01-07T02:00:00+00:00",
+        "expiresAt": "2027-01-07T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/387377",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:df63dd263a14e734:2027-01-08T01:30:00+00:00",
+        "title": "Conor Janda",
+        "start": "2027-01-08T01:30:00+00:00",
+        "expiresAt": "2027-01-08T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/390967",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:2329c509980ac023:2027-01-15T01:30:00+00:00",
+        "title": "Zainab Johnson",
+        "start": "2027-01-15T01:30:00+00:00",
+        "expiresAt": "2027-01-15T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/390969",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:947c278f7a24f72c:2027-01-21T01:30:00+00:00",
+        "title": "Dan Docimo",
+        "start": "2027-01-21T01:30:00+00:00",
+        "expiresAt": "2027-01-21T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/391614",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:38ea76366e23e5b1:2027-01-22T01:30:00+00:00",
+        "title": "Crystal Marie",
+        "start": "2027-01-22T01:30:00+00:00",
+        "expiresAt": "2027-01-22T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/392809",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:00ecb7cef1b37ec5:2027-01-23T01:00:00+00:00",
+        "title": "Helium Presents: DC Curry",
+        "start": "2027-01-23T01:00:00+00:00",
+        "expiresAt": "2027-01-23T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/392848",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:4821b2b4b137ef02:2027-01-23T03:15:00+00:00",
+        "title": "Helium Presents: DC Curry",
+        "start": "2027-01-23T03:15:00+00:00",
+        "expiresAt": "2027-01-23T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/392849",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:51066c8ba900e4ef:2027-01-24T01:00:00+00:00",
+        "title": "Helium Presents: DC Curry",
+        "start": "2027-01-24T01:00:00+00:00",
+        "expiresAt": "2027-01-24T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/392851",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:358e0af7660ab055:2027-01-24T03:30:00+00:00",
+        "title": "Helium Presents: DC Curry",
+        "start": "2027-01-24T03:30:00+00:00",
+        "expiresAt": "2027-01-24T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/392852",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:d02b54f168b3d77c:2027-01-25T01:00:00+00:00",
+        "title": "Helium Presents: DC Curry",
+        "start": "2027-01-25T01:00:00+00:00",
+        "expiresAt": "2027-01-25T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/392850",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:5cf60e01cc08eb30:2027-01-30T01:00:00+00:00",
+        "title": "Marlon Wayans",
+        "start": "2027-01-30T01:00:00+00:00",
+        "expiresAt": "2027-01-30T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/392855",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:f5ed520add522ad7:2027-01-30T03:15:00+00:00",
+        "title": "Marlon Wayans",
+        "start": "2027-01-30T03:15:00+00:00",
+        "expiresAt": "2027-01-30T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/392856",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:d2c327020a9644a8:2027-01-31T01:00:00+00:00",
+        "title": "Marlon Wayans",
+        "start": "2027-01-31T01:00:00+00:00",
+        "expiresAt": "2027-01-31T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/392857",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:865cc48d2f2ef477:2027-01-31T03:30:00+00:00",
+        "title": "Marlon Wayans",
+        "start": "2027-01-31T03:30:00+00:00",
+        "expiresAt": "2027-01-31T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/392859",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:49cfa63d147e8649:2027-02-01T01:00:00+00:00",
+        "title": "Marlon Wayans",
+        "start": "2027-02-01T01:00:00+00:00",
+        "expiresAt": "2027-02-01T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/392858",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:bb3708a545f014ad:2027-02-05T01:30:00+00:00",
+        "title": "Andrew Stanley",
+        "start": "2027-02-05T01:30:00+00:00",
+        "expiresAt": "2027-02-05T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/391679",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:3c24472313e964ef:2027-02-06T01:00:00+00:00",
+        "title": "Nurse Blake",
+        "start": "2027-02-06T01:00:00+00:00",
+        "expiresAt": "2027-02-06T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/392196",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:98dc76cdd20b9910:2027-02-06T03:15:00+00:00",
+        "title": "Nurse Blake",
+        "start": "2027-02-06T03:15:00+00:00",
+        "expiresAt": "2027-02-06T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/392197",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:f17824d8b94a579b:2027-02-07T01:00:00+00:00",
+        "title": "Nurse Blake",
+        "start": "2027-02-07T01:00:00+00:00",
+        "expiresAt": "2027-02-07T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/392198",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:f9294ec84381c2ff:2027-02-07T03:30:00+00:00",
+        "title": "Nurse Blake",
+        "start": "2027-02-07T03:30:00+00:00",
+        "expiresAt": "2027-02-07T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/392199",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:1938f361aeed1f12:2027-02-08T01:00:00+00:00",
+        "title": "Nurse Blake",
+        "start": "2027-02-08T01:00:00+00:00",
+        "expiresAt": "2027-02-08T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/392200",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:79083eda00d7c958:2027-02-11T01:30:00+00:00",
+        "title": "Yurie Collins",
+        "start": "2027-02-11T01:30:00+00:00",
+        "expiresAt": "2027-02-11T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/393490",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:cb2504d78b50594e:2027-02-18T01:30:00+00:00",
+        "title": "Brendan Sagalow",
+        "start": "2027-02-18T01:30:00+00:00",
+        "expiresAt": "2027-02-18T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/394511",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:8d60a1700b0c62df:2027-02-19T01:00:00+00:00",
+        "title": "Don McMillan: The Venn Master",
+        "start": "2027-02-19T01:00:00+00:00",
+        "expiresAt": "2027-02-19T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/377111",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:1138e6baaf001cd2:2027-02-24T01:30:00+00:00",
+        "title": "Yohay Sponder",
+        "start": "2027-02-24T01:30:00+00:00",
+        "expiresAt": "2027-02-24T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/390968",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:2ebcbf686210a018:2027-02-25T01:30:00+00:00",
+        "title": "Floss the Mack",
+        "start": "2027-02-25T01:30:00+00:00",
+        "expiresAt": "2027-02-25T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/393496",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:ee525c7d4454ae1d:2027-02-26T01:30:00+00:00",
+        "title": "Corey B",
+        "start": "2027-02-26T01:30:00+00:00",
+        "expiresAt": "2027-02-26T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/375819",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:daa11d066b352e51:2027-02-27T01:00:00+00:00",
+        "title": "Corey B",
+        "start": "2027-02-27T01:00:00+00:00",
+        "expiresAt": "2027-02-27T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/375820",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:506a5417944276a0:2027-02-27T03:15:00+00:00",
+        "title": "Corey B",
+        "start": "2027-02-27T03:15:00+00:00",
+        "expiresAt": "2027-02-27T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/375821",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:278fb0d48523aec8:2027-02-28T00:00:00+00:00",
+        "title": "Corey B",
+        "start": "2027-02-28T00:00:00+00:00",
+        "expiresAt": "2027-02-28T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/375822",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:dab54eaafad8c0b2:2027-02-28T02:30:00+00:00",
+        "title": "Corey B",
+        "start": "2027-02-28T02:30:00+00:00",
+        "expiresAt": "2027-02-28T00:00:00-06:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/375823",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:a1582284cb528d2d:2027-03-20T00:00:00+00:00",
+        "title": "Tony Baker",
+        "start": "2027-03-20T00:00:00+00:00",
+        "expiresAt": "2027-03-20T00:00:00-05:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/392840",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:6e13510383f2d0ea:2027-03-20T02:15:00+00:00",
+        "title": "Tony Baker",
+        "start": "2027-03-20T02:15:00+00:00",
+        "expiresAt": "2027-03-20T00:00:00-05:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/392841",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:4d1a8d26139cd6c8:2027-03-21T00:00:00+00:00",
+        "title": "Tony Baker",
+        "start": "2027-03-21T00:00:00+00:00",
+        "expiresAt": "2027-03-21T00:00:00-05:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/392842",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:55477f29cb4de662:2027-03-21T02:30:00+00:00",
+        "title": "Tony Baker",
+        "start": "2027-03-21T02:30:00+00:00",
+        "expiresAt": "2027-03-21T00:00:00-05:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/392843",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:7daf7f934f27e743:2027-03-22T00:00:00+00:00",
+        "title": "Tony Baker",
+        "start": "2027-03-22T00:00:00+00:00",
+        "expiresAt": "2027-03-22T00:00:00-05:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/392844",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:f3870bd1e4a602ee:2027-04-01T00:30:00+00:00",
+        "title": "Denny Love",
+        "start": "2027-04-01T00:30:00+00:00",
+        "expiresAt": "2027-04-01T00:00:00-05:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/395029",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:7d80f99ce5be4e88:2027-04-02T00:30:00+00:00",
+        "title": "Lucas Zelnick",
+        "start": "2027-04-02T00:30:00+00:00",
+        "expiresAt": "2027-04-02T00:00:00-05:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/383097",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:25b07ba3eec956f7:2027-04-03T00:00:00+00:00",
+        "title": "Lucas Zelnick",
+        "start": "2027-04-03T00:00:00+00:00",
+        "expiresAt": "2027-04-03T00:00:00-05:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/383098",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:ad74b000f5b1a696:2027-04-03T02:15:00+00:00",
+        "title": "Lucas Zelnick",
+        "start": "2027-04-03T02:15:00+00:00",
+        "expiresAt": "2027-04-03T00:00:00-05:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/383099",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:087099a92390c189:2027-04-04T00:00:00+00:00",
+        "title": "Lucas Zelnick",
+        "start": "2027-04-04T00:00:00+00:00",
+        "expiresAt": "2027-04-04T00:00:00-05:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/383100",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:4e9b78659db6ef88:2027-04-04T02:30:00+00:00",
+        "title": "Lucas Zelnick",
+        "start": "2027-04-04T02:30:00+00:00",
+        "expiresAt": "2027-04-04T00:00:00-05:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/383101",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:a11e732f736158af:2027-04-10T00:00:00+00:00",
+        "title": "Arynne Wexler",
+        "start": "2027-04-10T00:00:00+00:00",
+        "expiresAt": "2027-04-10T00:00:00-05:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/387401",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:143363ff85752ad8:2027-04-10T02:15:00+00:00",
+        "title": "Arynne Wexler",
+        "start": "2027-04-10T02:15:00+00:00",
+        "expiresAt": "2027-04-10T00:00:00-05:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/387402",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:1392293226fb5b0b:2027-04-10T20:30:00+00:00",
+        "title": "Dustin Anderson",
+        "start": "2027-04-10T20:30:00+00:00",
+        "expiresAt": "2027-04-11T00:00:00-05:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/394824",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:f1d6755b37e9cb61:2027-04-11T00:00:00+00:00",
+        "title": "Arynne Wexler",
+        "start": "2027-04-11T00:00:00+00:00",
+        "expiresAt": "2027-04-11T00:00:00-05:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/387403",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:59b3a5fbe0d7b8a1:2027-04-11T02:30:00+00:00",
+        "title": "Arynne Wexler",
+        "start": "2027-04-11T02:30:00+00:00",
+        "expiresAt": "2027-04-11T00:00:00-05:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/387404",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:6e9f1b2baf2c49fb:2027-04-17T00:00:00+00:00",
+        "title": "Geoffrey Asmus",
+        "start": "2027-04-17T00:00:00+00:00",
+        "expiresAt": "2027-04-17T00:00:00-05:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/368223",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:a2c62572679657b8:2027-04-17T02:15:00+00:00",
+        "title": "Geoffrey Asmus",
+        "start": "2027-04-17T02:15:00+00:00",
+        "expiresAt": "2027-04-17T00:00:00-05:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/368224",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:27149db508e19dc8:2027-04-18T00:00:00+00:00",
+        "title": "Geoffrey Asmus",
+        "start": "2027-04-18T00:00:00+00:00",
+        "expiresAt": "2027-04-18T00:00:00-05:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/368226",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:5a52ca9f8287631f:2027-04-18T02:30:00+00:00",
+        "title": "Geoffrey Asmus",
+        "start": "2027-04-18T02:30:00+00:00",
+        "expiresAt": "2027-04-18T00:00:00-05:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/368225",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:a8c3ddf2590690b8:2027-04-22T00:30:00+00:00",
+        "title": "Steve Hofstetter",
+        "start": "2027-04-22T00:30:00+00:00",
+        "expiresAt": "2027-04-22T00:00:00-05:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/377114",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:1c289a3af9910d19:2027-05-20T00:30:00+00:00",
+        "title": "Maggie Hughes DePalo",
+        "start": "2027-05-20T00:30:00+00:00",
+        "expiresAt": "2027-05-20T00:00:00-05:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/393498",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:b6b56e487d7a9080:2027-05-21T00:30:00+00:00",
+        "title": "Joe Fenti",
+        "start": "2027-05-21T00:30:00+00:00",
+        "expiresAt": "2027-05-21T00:00:00-05:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/389257",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:08de7b9890a1e955:2027-05-28T00:30:00+00:00",
+        "title": "Usama Siddiquee",
+        "start": "2027-05-28T00:30:00+00:00",
+        "expiresAt": "2027-05-28T00:00:00-05:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/390784",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:d5f77c2f7a277613:2027-05-29T00:00:00+00:00",
+        "title": "Usama Siddiquee",
+        "start": "2027-05-29T00:00:00+00:00",
+        "expiresAt": "2027-05-29T00:00:00-05:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/390785",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:d7bebdce68f6d2f2:2027-05-29T02:15:00+00:00",
+        "title": "Usama Siddiquee",
+        "start": "2027-05-29T02:15:00+00:00",
+        "expiresAt": "2027-05-29T00:00:00-05:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/390786",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:4612d1eed3cf2b8e:2027-05-30T00:00:00+00:00",
+        "title": "Usama Siddiquee",
+        "start": "2027-05-30T00:00:00+00:00",
+        "expiresAt": "2027-05-30T00:00:00-05:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/390787",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:5f39bc36a4f1b27a:2027-05-30T02:30:00+00:00",
+        "title": "Usama Siddiquee",
+        "start": "2027-05-30T02:30:00+00:00",
+        "expiresAt": "2027-05-30T00:00:00-05:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/390788",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:afe94baa43d55086:2026-11-17T19:30:00-06:00",
+        "title": "Open Mic Night",
+        "start": "2026-11-17T19:30:00-06:00",
+        "expiresAt": "2026-11-18T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=d6cf88b1-3441-442a-bf5b-dc856a1d048a",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:8a6548a45c621b34:2026-11-24T19:30:00-06:00",
+        "title": "Open Mic Night",
+        "start": "2026-11-24T19:30:00-06:00",
+        "expiresAt": "2026-11-25T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=c1c51fe7-0e10-4350-97b0-33da33e2e62d",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:37d4745fc07d7b4b:2026-12-01T19:30:00-06:00",
+        "title": "Open Mic Night",
+        "start": "2026-12-01T19:30:00-06:00",
+        "expiresAt": "2026-12-02T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=368f2986-e61c-44c7-8ba9-e465f94681fb",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:9b46045f625cdfb6:2026-12-08T19:30:00-06:00",
+        "title": "Open Mic Night",
+        "start": "2026-12-08T19:30:00-06:00",
+        "expiresAt": "2026-12-09T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=ee4c4210-7225-4997-8efb-4bb5a94afe73",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:623a895603e47a44:2026-12-15T19:30:00-06:00",
+        "title": "Open Mic Night",
+        "start": "2026-12-15T19:30:00-06:00",
+        "expiresAt": "2026-12-16T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=767fd749-8041-48e3-ae76-30d8abf1eddb",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:4c453ad56898b029:2026-12-22T19:30:00-06:00",
+        "title": "Open Mic Night",
+        "start": "2026-12-22T19:30:00-06:00",
+        "expiresAt": "2026-12-23T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=5a72b15d-e659-451e-9583-cd12493d9c4f",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:aee9d1f40d985066:2026-12-29T19:30:00-06:00",
+        "title": "Open Mic Night",
+        "start": "2026-12-29T19:30:00-06:00",
+        "expiresAt": "2026-12-30T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=69bcff10-7c04-40d8-9e3f-4ef9178f94fc",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:b1c5a5139acd61b2:2027-01-05T19:30:00-06:00",
+        "title": "Open Mic Night",
+        "start": "2027-01-05T19:30:00-06:00",
+        "expiresAt": "2027-01-06T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=6455bf48-e518-4998-9527-e85cf198186d",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:a1759760335c7176:2027-01-12T19:30:00-06:00",
+        "title": "Open Mic Night",
+        "start": "2027-01-12T19:30:00-06:00",
+        "expiresAt": "2027-01-13T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=c59041b9-3a0d-484e-a9f3-f96a06703615",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:2dc87ff905db9e9c:2027-01-19T19:30:00-06:00",
+        "title": "Open Mic Night",
+        "start": "2027-01-19T19:30:00-06:00",
+        "expiresAt": "2027-01-20T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=a04bbd0b-48ee-4b96-a1e8-3d62a323854c",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:9ad556cf318b5dbc:2027-01-26T19:30:00-06:00",
+        "title": "Open Mic Night",
+        "start": "2027-01-26T19:30:00-06:00",
+        "expiresAt": "2027-01-27T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=369c81b6-ffe0-4c2f-bccb-602ea5ab8eb4",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:7a961751c7fd651b:2027-02-02T19:30:00-06:00",
+        "title": "Open Mic Night",
+        "start": "2027-02-02T19:30:00-06:00",
+        "expiresAt": "2027-02-03T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=29e6ed5f-adae-4195-945b-69f3e7e398fb",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:3a585e339e7255f6:2027-02-09T19:30:00-06:00",
+        "title": "Open Mic Night",
+        "start": "2027-02-09T19:30:00-06:00",
+        "expiresAt": "2027-02-10T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=9975aa23-3331-48cc-a854-78caf13941e9",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:dd57e926f2290389:2027-02-16T19:30:00-06:00",
+        "title": "Open Mic Night",
+        "start": "2027-02-16T19:30:00-06:00",
+        "expiresAt": "2027-02-17T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=6694f9b6-99c3-4c52-96c4-4ddf289b2c7b",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:211c98be4c8ab2c9:2027-02-23T19:30:00-06:00",
+        "title": "Open Mic Night",
+        "start": "2027-02-23T19:30:00-06:00",
+        "expiresAt": "2027-02-24T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=6e81e2e7-a085-44ff-afa3-c08d592b51ec",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:4e262f1bde5c5287:2027-03-02T19:00:00-06:00",
+        "title": "Open Mic Night",
+        "start": "2027-03-02T19:00:00-06:00",
+        "expiresAt": "2027-03-03T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=9cdfda1b-2116-444d-84d5-9c77896a5e11",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:db2be31474e242ef:2027-03-09T19:00:00-06:00",
+        "title": "Open Mic Night",
+        "start": "2027-03-09T19:00:00-06:00",
+        "expiresAt": "2027-03-10T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=29329cf3-573c-4e7f-93ae-711171d52824",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:d4e91622c3f11176:2027-03-16T19:00:00-05:00",
+        "title": "Open Mic Night",
+        "start": "2027-03-16T19:00:00-05:00",
+        "expiresAt": "2027-03-17T00:00:00-05:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=33a4c5a7-a40f-46d5-a5f5-409d5be9f3ab",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:edc928be3616c1df:2027-03-23T19:00:00-05:00",
+        "title": "Open Mic Night",
+        "start": "2027-03-23T19:00:00-05:00",
+        "expiresAt": "2027-03-24T00:00:00-05:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=a2e36b4c-01e0-4a7e-afb9-6e05382c9166",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:98ffe96822d052cf:2027-03-30T19:00:00-05:00",
+        "title": "Open Mic Night",
+        "start": "2027-03-30T19:00:00-05:00",
+        "expiresAt": "2027-03-31T00:00:00-05:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=f6fec342-e96e-4778-a825-3c7557b395d2",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:8378cc34717c0187:2027-04-06T19:00:00-05:00",
+        "title": "Open Mic Night",
+        "start": "2027-04-06T19:00:00-05:00",
+        "expiresAt": "2027-04-07T00:00:00-05:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=9615fccf-5f4e-4eae-8c4d-539a18e846f5",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:c503550c4906e8ca:2027-04-13T19:00:00-05:00",
+        "title": "Open Mic Night",
+        "start": "2027-04-13T19:00:00-05:00",
+        "expiresAt": "2027-04-14T00:00:00-05:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=c2fedc96-4aa9-4430-8cff-c5d045ae9360",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:2f1fcf584792d8db:2027-04-20T19:00:00-05:00",
+        "title": "Open Mic Night",
+        "start": "2027-04-20T19:00:00-05:00",
+        "expiresAt": "2027-04-21T00:00:00-05:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=f45bb8cc-e207-4f6e-82c2-b1042db6ab63",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:0a74013ad3d90d12:2027-04-27T19:00:00-05:00",
+        "title": "Open Mic Night",
+        "start": "2027-04-27T19:00:00-05:00",
+        "expiresAt": "2027-04-28T00:00:00-05:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=2e805cac-4716-44fd-9a66-bbea9ffb8f1a",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:b631142b2cc6fdd4:2027-05-04T19:00:00-05:00",
+        "title": "Open Mic Night",
+        "start": "2027-05-04T19:00:00-05:00",
+        "expiresAt": "2027-05-05T00:00:00-05:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=552b7210-3133-4f78-9277-355935b6daa2",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:74900df14a87a446:2027-05-11T19:00:00-05:00",
+        "title": "Open Mic Night",
+        "start": "2027-05-11T19:00:00-05:00",
+        "expiresAt": "2027-05-12T00:00:00-05:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=9625ef0c-909d-4443-bc7b-ec21fc81ebcf",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:8348f3fcec844550:2026-11-19T19:30:00-06:00",
+        "title": "Lev Fer",
+        "start": "2026-11-19T19:30:00-06:00",
+        "expiresAt": "2026-11-20T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=444bbc59-2f61-4c8b-ab8a-21c4815857b2&sid=c219d1eb-67d5-44fd-9d90-93273d713557",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:d542b2f2e1555d29:2026-11-20T19:00:00-06:00",
+        "title": "Lev Fer",
+        "start": "2026-11-20T19:00:00-06:00",
+        "expiresAt": "2026-11-21T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=444bbc59-2f61-4c8b-ab8a-21c4815857b2&sid=7b1da152-3f9f-4a71-a4bb-da4bec2d890a",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:e1cfc448e0fe3d7d:2026-11-20T21:00:00-06:00",
+        "title": "Lev Fer",
+        "start": "2026-11-20T21:00:00-06:00",
+        "expiresAt": "2026-11-21T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=444bbc59-2f61-4c8b-ab8a-21c4815857b2&sid=65ad8aba-8753-41fd-8f00-97a0cacad4e7",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:096638d124878a1a:2026-11-21T18:30:00-06:00",
+        "title": "Lev Fer",
+        "start": "2026-11-21T18:30:00-06:00",
+        "expiresAt": "2026-11-22T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=444bbc59-2f61-4c8b-ab8a-21c4815857b2&sid=b68ff0e2-0c19-43c7-965e-73493c6803fd",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:d06aa37b76636992:2026-11-21T21:00:00-06:00",
+        "title": "Lev Fer",
+        "start": "2026-11-21T21:00:00-06:00",
+        "expiresAt": "2026-11-22T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=444bbc59-2f61-4c8b-ab8a-21c4815857b2&sid=53e7d2ce-6cf2-49cb-ad96-2d010ebfad52",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:eb2cc9b876de8dd1:2026-11-27T19:00:00-06:00",
+        "title": "Kris Fried",
+        "start": "2026-11-27T19:00:00-06:00",
+        "expiresAt": "2026-11-28T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=6b28744d-dd64-4533-be9e-7a3877e4115a&sid=002a6d3b-3629-4270-b7bf-57a350a72eb0",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:1770071174faeca2:2026-11-27T21:00:00-06:00",
+        "title": "Kris Fried",
+        "start": "2026-11-27T21:00:00-06:00",
+        "expiresAt": "2026-11-28T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=6b28744d-dd64-4533-be9e-7a3877e4115a&sid=ec95be5b-14dd-48e2-b59d-234ca41c9960",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:6dfa2e5b018680bb:2026-11-28T18:30:00-06:00",
+        "title": "Kris Fried",
+        "start": "2026-11-28T18:30:00-06:00",
+        "expiresAt": "2026-11-29T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=6b28744d-dd64-4533-be9e-7a3877e4115a&sid=9d83d5f1-c666-4413-9c4d-b50a80110b29",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:edd79a2435fe05da:2026-11-28T21:00:00-06:00",
+        "title": "Kris Fried",
+        "start": "2026-11-28T21:00:00-06:00",
+        "expiresAt": "2026-11-29T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=6b28744d-dd64-4533-be9e-7a3877e4115a&sid=f2d568f8-3e6e-423c-8b7d-cf20073c2225",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:da0d7e779094011a:2026-11-29T19:30:00-06:00",
+        "title": "Kris Fried",
+        "start": "2026-11-29T19:30:00-06:00",
+        "expiresAt": "2026-11-30T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=6b28744d-dd64-4533-be9e-7a3877e4115a&sid=53c28c47-fdcb-4648-bae2-0518a7697eff",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:5d4ec368d531a854:2026-12-03T19:30:00-06:00",
+        "title": "Graham Kay",
+        "start": "2026-12-03T19:30:00-06:00",
+        "expiresAt": "2026-12-04T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=ab25072d-6fb2-474a-afa9-45d40c3e2970&sid=518a095c-eeeb-4e28-b5c6-e01ce0b06ca5",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:30d7a1b16cdf3707:2026-12-04T19:00:00-06:00",
+        "title": "Graham Kay",
+        "start": "2026-12-04T19:00:00-06:00",
+        "expiresAt": "2026-12-05T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=ab25072d-6fb2-474a-afa9-45d40c3e2970&sid=849062fa-c4fa-4e1d-9d26-d3dbce0be0fb",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:1b08e7da3038c0e1:2026-12-04T21:00:00-06:00",
+        "title": "Graham Kay",
+        "start": "2026-12-04T21:00:00-06:00",
+        "expiresAt": "2026-12-05T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=ab25072d-6fb2-474a-afa9-45d40c3e2970&sid=bc43d3c1-d8c3-4dfb-a0c1-9c5c8ccdb50d",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:3a33e422e1679f41:2026-12-05T18:30:00-06:00",
+        "title": "Graham Kay",
+        "start": "2026-12-05T18:30:00-06:00",
+        "expiresAt": "2026-12-06T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=ab25072d-6fb2-474a-afa9-45d40c3e2970&sid=394bd202-6a31-41c9-8e7a-dbf847e45c84",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:a7166b532d09cbf9:2026-12-05T21:00:00-06:00",
+        "title": "Graham Kay",
+        "start": "2026-12-05T21:00:00-06:00",
+        "expiresAt": "2026-12-06T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=ab25072d-6fb2-474a-afa9-45d40c3e2970&sid=0cad4b90-4506-4b24-8b2f-9a14285facab",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:b660c056846762dc:2026-12-10T19:30:00-06:00",
+        "title": "Eddie Gossling",
+        "start": "2026-12-10T19:30:00-06:00",
+        "expiresAt": "2026-12-11T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=8628bea0-f1f1-4459-a571-d38b5bcf387b&sid=6266588d-487f-48ce-9c3d-a3099d7c9dcd",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:23498c30e9e21de2:2026-12-11T19:00:00-06:00",
+        "title": "Eddie Gossling",
+        "start": "2026-12-11T19:00:00-06:00",
+        "expiresAt": "2026-12-12T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=8628bea0-f1f1-4459-a571-d38b5bcf387b&sid=69cd6414-a8f9-476c-b6c5-bad3958c998e",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:24ca06e658808fbd:2026-12-11T21:00:00-06:00",
+        "title": "Eddie Gossling",
+        "start": "2026-12-11T21:00:00-06:00",
+        "expiresAt": "2026-12-12T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=8628bea0-f1f1-4459-a571-d38b5bcf387b&sid=d5a299be-c182-4df9-b232-251a9e4a8470",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:ecf1a3b6b7512d65:2026-12-12T18:30:00-06:00",
+        "title": "Eddie Gossling",
+        "start": "2026-12-12T18:30:00-06:00",
+        "expiresAt": "2026-12-13T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=8628bea0-f1f1-4459-a571-d38b5bcf387b&sid=6f7d47e9-719c-4bf8-9446-2ece3f3bf7fe",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:a4f880d3a177d57c:2026-12-12T21:00:00-06:00",
+        "title": "Eddie Gossling",
+        "start": "2026-12-12T21:00:00-06:00",
+        "expiresAt": "2026-12-13T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=8628bea0-f1f1-4459-a571-d38b5bcf387b&sid=13ec95d0-e880-44d9-9e6c-3e618cedd146",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:388bd571e16cb45e:2026-12-13T19:30:00-06:00",
+        "title": "Eddie Gossling",
+        "start": "2026-12-13T19:30:00-06:00",
+        "expiresAt": "2026-12-14T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=8628bea0-f1f1-4459-a571-d38b5bcf387b&sid=48b6cfaa-6926-4dc5-964a-b2f59784c6cc",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:ddb45800ebfb7273:2026-12-17T19:30:00-06:00",
+        "title": "Auggie Smith",
+        "start": "2026-12-17T19:30:00-06:00",
+        "expiresAt": "2026-12-18T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=4d4b3bbf-fda1-4d22-9e43-fc78500ec9ee&sid=a11e3c35-1a3d-46f1-bf97-05b728eed4da",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:61a52f21ac9eee0e:2026-12-18T19:00:00-06:00",
+        "title": "Auggie Smith",
+        "start": "2026-12-18T19:00:00-06:00",
+        "expiresAt": "2026-12-19T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=4d4b3bbf-fda1-4d22-9e43-fc78500ec9ee&sid=e9c04204-9b1e-48f6-a542-893bf1899314",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:6d64a6957cfb0df6:2026-12-18T21:00:00-06:00",
+        "title": "Auggie Smith",
+        "start": "2026-12-18T21:00:00-06:00",
+        "expiresAt": "2026-12-19T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=4d4b3bbf-fda1-4d22-9e43-fc78500ec9ee&sid=ede1b2e0-b8e4-46df-abcf-a662da9699af",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:8d6791900e7d92b0:2026-12-19T18:30:00-06:00",
+        "title": "Auggie Smith",
+        "start": "2026-12-19T18:30:00-06:00",
+        "expiresAt": "2026-12-20T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=4d4b3bbf-fda1-4d22-9e43-fc78500ec9ee&sid=b7918759-ca39-4743-9419-5f1ae3f45489",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:43463cb347c00b05:2026-12-19T21:00:00-06:00",
+        "title": "Auggie Smith",
+        "start": "2026-12-19T21:00:00-06:00",
+        "expiresAt": "2026-12-20T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=4d4b3bbf-fda1-4d22-9e43-fc78500ec9ee&sid=15dd49e4-ada2-4b65-8187-561e469572c5",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:4e6b5fa638feba09:2026-12-20T19:30:00-06:00",
+        "title": "Auggie Smith",
+        "start": "2026-12-20T19:30:00-06:00",
+        "expiresAt": "2026-12-21T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=4d4b3bbf-fda1-4d22-9e43-fc78500ec9ee&sid=e69aeefa-3bd8-4782-b46b-a09b1c33e80e",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:4fad0194c11e7eeb:2026-12-26T18:30:00-06:00",
+        "title": "Eric Rueseler",
+        "start": "2026-12-26T18:30:00-06:00",
+        "expiresAt": "2026-12-27T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=e87de4ca-7a23-47b9-8c05-decafba41508&sid=95e4d1a2-b84d-4d03-94f7-6a562c5e0e3e",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:33988eac150eabb5:2026-12-26T21:00:00-06:00",
+        "title": "Eric Rueseler",
+        "start": "2026-12-26T21:00:00-06:00",
+        "expiresAt": "2026-12-27T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=e87de4ca-7a23-47b9-8c05-decafba41508&sid=01788826-c3a2-42af-85c3-d2d8e348325b",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:d560f14d5b9e938d:2026-12-27T19:30:00-06:00",
+        "title": "Eric Rueseler",
+        "start": "2026-12-27T19:30:00-06:00",
+        "expiresAt": "2026-12-28T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=e87de4ca-7a23-47b9-8c05-decafba41508&sid=afc07c9a-892f-4129-8c1e-7bc3f570ce84",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:074e695b7ca0cd02:2026-12-31T17:00:00-06:00",
+        "title": "NYE with John Morgan",
+        "start": "2026-12-31T17:00:00-06:00",
+        "expiresAt": "2027-01-01T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=bbe773e7-1f7a-4803-81b0-2b3a88b4407f&sid=02b7cdae-0054-45b3-9d83-0242bc6b65a7",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:3c350e48c4fb018c:2026-12-31T19:30:00-06:00",
+        "title": "NYE with John Morgan",
+        "start": "2026-12-31T19:30:00-06:00",
+        "expiresAt": "2027-01-01T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=bbe773e7-1f7a-4803-81b0-2b3a88b4407f&sid=76009ced-225d-e6fd-848c-80b2eeac5c8c",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:8afb68e319e01971:2026-12-31T22:00:00-06:00",
+        "title": "NYE with John Morgan",
+        "start": "2026-12-31T22:00:00-06:00",
+        "expiresAt": "2027-01-01T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=bbe773e7-1f7a-4803-81b0-2b3a88b4407f&sid=9819b254-1e3e-f7b6-b705-693ab9c46f05",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:d479a71d07c63840:2027-01-01T19:00:00-06:00",
+        "title": "John Morgan",
+        "start": "2027-01-01T19:00:00-06:00",
+        "expiresAt": "2027-01-02T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=30ea2d68-bdd0-4f6a-a305-27ae5b1a44e4&sid=703951e4-f6ed-42d9-a5aa-4bb762847198",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:298b2475c148fe53:2027-01-01T21:00:00-06:00",
+        "title": "John Morgan",
+        "start": "2027-01-01T21:00:00-06:00",
+        "expiresAt": "2027-01-02T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=30ea2d68-bdd0-4f6a-a305-27ae5b1a44e4&sid=e4754f22-56ce-427a-b2bb-88721c1ea26f",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:86b2814065d9c11a:2027-01-02T18:30:00-06:00",
+        "title": "John Morgan",
+        "start": "2027-01-02T18:30:00-06:00",
+        "expiresAt": "2027-01-03T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=30ea2d68-bdd0-4f6a-a305-27ae5b1a44e4&sid=ff8c0d70-67a2-4214-aa34-66c40a4acfe4",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:07319a1cccd18af7:2027-01-02T21:00:00-06:00",
+        "title": "John Morgan",
+        "start": "2027-01-02T21:00:00-06:00",
+        "expiresAt": "2027-01-03T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=30ea2d68-bdd0-4f6a-a305-27ae5b1a44e4&sid=3d4c5272-4704-4671-b30a-a6dd60089156",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:67b2dc9812a64f70:2027-01-03T19:30:00-06:00",
+        "title": "John Morgan",
+        "start": "2027-01-03T19:30:00-06:00",
+        "expiresAt": "2027-01-04T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=30ea2d68-bdd0-4f6a-a305-27ae5b1a44e4&sid=08a7d0d2-bd69-48cc-93a7-e9dbe4303ef7",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:5bbbf61a96207f33:2027-02-05T19:00:00-06:00",
+        "title": "Dave Smith",
+        "start": "2027-02-05T19:00:00-06:00",
+        "expiresAt": "2027-02-06T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=cbf43cbf-7a5f-47c4-8a30-21a42780f335&sid=cd2965e9-7503-43a3-8093-e14efd87996e",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:b758c8a419749595:2027-02-05T21:30:00-06:00",
+        "title": "Dave Smith",
+        "start": "2027-02-05T21:30:00-06:00",
+        "expiresAt": "2027-02-06T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=cbf43cbf-7a5f-47c4-8a30-21a42780f335&sid=7bee75c7-7d71-4ab3-95b5-41730a5c3443",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:990e5756f5aebeac:2027-02-06T18:00:00-06:00",
+        "title": "Dave Smith",
+        "start": "2027-02-06T18:00:00-06:00",
+        "expiresAt": "2027-02-07T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=cbf43cbf-7a5f-47c4-8a30-21a42780f335&sid=4f1ffd59-2b14-4148-b6ae-fc2c3a176229",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:a4247931c31fe68f:2027-02-06T20:30:00-06:00",
+        "title": "Dave Smith",
+        "start": "2027-02-06T20:30:00-06:00",
+        "expiresAt": "2027-02-07T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=cbf43cbf-7a5f-47c4-8a30-21a42780f335&sid=21edd28c-71db-0fd5-abdc-66a367ffc615",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:0323d6bc70524e7b:2027-03-04T19:30:00-06:00",
+        "title": "Kevin Farley",
+        "start": "2027-03-04T19:30:00-06:00",
+        "expiresAt": "2027-03-05T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=3207564b-e90d-414c-a447-0d7e0df3bbd0&sid=3f0c8def-5c9b-4fdf-91db-ac2bb0748927",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:3ff8f12a63fbba9d:2027-03-05T19:00:00-06:00",
+        "title": "Kevin Farley",
+        "start": "2027-03-05T19:00:00-06:00",
+        "expiresAt": "2027-03-06T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=3207564b-e90d-414c-a447-0d7e0df3bbd0&sid=a430fce4-8877-4b7f-8763-a311e5eaf14b",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4477,
+          38.701
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:funny:f695fda836c97375:2027-03-05T21:00:00-06:00",
+        "title": "Kevin Farley",
+        "start": "2027-03-05T21:00:00-06:00",
+        "expiresAt": "2027-03-06T00:00:00-06:00",
+        "description": "Westport Funny Bone · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Westport Funny Bone, 614 West Port Plaza, St. Louis, MO",
+        "source": "Official Westport Funny Bone calendar",
+        "sourceUrl": "https://stlouisfunnybone.com/events",
+        "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=3207564b-e90d-414c-a447-0d7e0df3bbd0&sid=fe613893-be87-48f1-b197-0051e4709f7b",
+        "sourceCheckedAt": "2026-11-15T18:30:21.341657+00:00",
+        "venueSource": "funny"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2316,
+          38.6389
+        ]
+      },
+      "properties": {
+        "id": "venue-event:cc4c6cd7bc937789e17279bc",
+        "title": "Puppers Presents LETTERKENNY LIVE",
+        "start": "2027-02-08",
+        "expiresAt": "2027-02-09T00:00:00-06:00",
+        "description": "The Fabulous Fox · Check official listing for showtime, tickets and changes.",
+        "address": "The Fabulous Fox, 527 N Grand Blvd, St Louis MO",
+        "source": "Official Fox ticketing calendar (MetroTix)",
+        "sourceUrl": "https://www.metrotix.com/venues/detail/fox-theatre",
+        "url": "https://www.metrotix.com/venues/detail/fox-theatre",
+        "sourceCheckedAt": "2026-11-15T18:30:52.063965+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2316,
+          38.6389
+        ]
+      },
+      "properties": {
+        "id": "venue-event:b7cd8d9e90ac02a51cd26f8d",
+        "title": "Ali Siddiq: The Custom Fit Tour",
+        "start": "2027-03-20",
+        "expiresAt": "2027-03-21T00:00:00-05:00",
+        "description": "The Fabulous Fox · Check official listing for showtime, tickets and changes.",
+        "address": "The Fabulous Fox, 527 N Grand Blvd, St Louis MO",
+        "source": "Official Fox ticketing calendar (MetroTix)",
+        "sourceUrl": "https://www.metrotix.com/venues/detail/fox-theatre",
+        "url": "https://www.metrotix.com/venues/detail/fox-theatre",
+        "sourceCheckedAt": "2026-11-15T18:30:52.063978+00:00"
+      }
+    }
+  ],
+  "note": "Official venue calendar snapshots. Partial regional coverage; verify changes with the venue. Separate performances are retained."
+}

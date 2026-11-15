@@ -1,6 +1,6 @@
 {
   "checkedAt": "2026-11-15T16:56:37.040763+00:00",
-  "note": "Reviewed official venue calendar snapshots plus separately loaded university listings. Partial regional coverage; source check dates are per event.",
+  "note": "Official venue calendar snapshots plus separately loaded community calendars. Partial regional coverage; check dates and changes at the source.",
   "features": [
     {
       "type": "Feature",
@@ -16,7 +16,7 @@
         "title": "Shaun Cassidy",
         "start": "2026-11-15",
         "expiresAt": "2026-11-16T06:00:00.000Z",
-        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "The Pageant · Check the official calendar for showtime, tickets and changes.",
         "address": "The Pageant, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/",
@@ -38,7 +38,7 @@
         "title": "The Afghan Whigs",
         "start": "2026-11-15",
         "expiresAt": "2026-11-16T06:00:00.000Z",
-        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "Delmar Hall · Check the official calendar for showtime, tickets and changes.",
         "address": "Delmar Hall, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/",
@@ -60,7 +60,7 @@
         "title": "Flying House",
         "start": "2026-11-15",
         "expiresAt": "2026-11-16T06:00:00.000Z",
-        "description": "Blueberry Hill Duck Room \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "Blueberry Hill Duck Room · Check the official calendar for showtime, tickets and changes.",
         "address": "Blueberry Hill Duck Room, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/",
@@ -82,7 +82,7 @@
         "title": "Skilla Baby",
         "start": "2026-11-16",
         "expiresAt": "2026-11-17T06:00:00.000Z",
-        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "The Pageant · Check the official calendar for showtime, tickets and changes.",
         "address": "The Pageant, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/",
@@ -104,7 +104,7 @@
         "title": "Scoochie Boochie",
         "start": "2026-11-16",
         "expiresAt": "2026-11-17T06:00:00.000Z",
-        "description": "Blueberry Hill Duck Room \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "Blueberry Hill Duck Room · Check the official calendar for showtime, tickets and changes.",
         "address": "Blueberry Hill Duck Room, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/",
@@ -126,7 +126,7 @@
         "title": "Alter Bridge",
         "start": "2026-11-17",
         "expiresAt": "2026-11-18T06:00:00.000Z",
-        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "The Pageant · Check the official calendar for showtime, tickets and changes.",
         "address": "The Pageant, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/",
@@ -148,7 +148,7 @@
         "title": "almost monday",
         "start": "2026-11-17",
         "expiresAt": "2026-11-18T06:00:00.000Z",
-        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "Delmar Hall · Check the official calendar for showtime, tickets and changes.",
         "address": "Delmar Hall, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/",
@@ -170,7 +170,7 @@
         "title": "Protomartyr",
         "start": "2026-11-18",
         "expiresAt": "2026-11-19T06:00:00.000Z",
-        "description": "Blueberry Hill Duck Room \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "Blueberry Hill Duck Room · Check the official calendar for showtime, tickets and changes.",
         "address": "Blueberry Hill Duck Room, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/",
@@ -192,7 +192,7 @@
         "title": "Foghat",
         "start": "2026-11-20",
         "expiresAt": "2026-11-21T06:00:00.000Z",
-        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "The Pageant · Check the official calendar for showtime, tickets and changes.",
         "address": "The Pageant, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/",
@@ -214,7 +214,7 @@
         "title": "Ax and The Hatchetmen",
         "start": "2026-11-20",
         "expiresAt": "2026-11-21T06:00:00.000Z",
-        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "Delmar Hall · Check the official calendar for showtime, tickets and changes.",
         "address": "Delmar Hall, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/",
@@ -236,7 +236,7 @@
         "title": "Jake's Leg",
         "start": "2026-11-21",
         "expiresAt": "2026-11-22T06:00:00.000Z",
-        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "The Pageant · Check the official calendar for showtime, tickets and changes.",
         "address": "The Pageant, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/",
@@ -258,7 +258,7 @@
         "title": "Chat Pile",
         "start": "2026-11-21",
         "expiresAt": "2026-11-22T06:00:00.000Z",
-        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "Delmar Hall · Check the official calendar for showtime, tickets and changes.",
         "address": "Delmar Hall, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/",
@@ -280,7 +280,7 @@
         "title": "Sam Shackleton",
         "start": "2026-11-21",
         "expiresAt": "2026-11-22T06:00:00.000Z",
-        "description": "Blueberry Hill Duck Room \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "Blueberry Hill Duck Room · Check the official calendar for showtime, tickets and changes.",
         "address": "Blueberry Hill Duck Room, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/",
@@ -302,7 +302,7 @@
         "title": "Dweezil Zappa",
         "start": "2026-11-22",
         "expiresAt": "2026-11-23T06:00:00.000Z",
-        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "The Pageant · Check the official calendar for showtime, tickets and changes.",
         "address": "The Pageant, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/",
@@ -324,7 +324,7 @@
         "title": "My Posse in Effect - A Live Tribute to the Beastie Boys",
         "start": "2026-11-25",
         "expiresAt": "2026-11-26T06:00:00.000Z",
-        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "The Pageant · Check the official calendar for showtime, tickets and changes.",
         "address": "The Pageant, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=2",
@@ -346,7 +346,7 @@
         "title": "Playadors",
         "start": "2026-11-25",
         "expiresAt": "2026-11-26T06:00:00.000Z",
-        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "Delmar Hall · Check the official calendar for showtime, tickets and changes.",
         "address": "Delmar Hall, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=2",
@@ -368,7 +368,7 @@
         "title": "The Urge",
         "start": "2026-11-27",
         "expiresAt": "2026-11-28T06:00:00.000Z",
-        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "The Pageant · Check the official calendar for showtime, tickets and changes.",
         "address": "The Pageant, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=2",
@@ -390,7 +390,7 @@
         "title": "DON BROCO",
         "start": "2026-11-27",
         "expiresAt": "2026-11-28T06:00:00.000Z",
-        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "Delmar Hall · Check the official calendar for showtime, tickets and changes.",
         "address": "Delmar Hall, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=2",
@@ -412,7 +412,7 @@
         "title": "The Hard Promises: A Tribute to Tom Petty",
         "start": "2026-11-28",
         "expiresAt": "2026-11-29T06:00:00.000Z",
-        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "The Pageant · Check the official calendar for showtime, tickets and changes.",
         "address": "The Pageant, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=2",
@@ -434,7 +434,7 @@
         "title": "Voodoo Last Waltz",
         "start": "2026-11-28",
         "expiresAt": "2026-11-29T06:00:00.000Z",
-        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "Delmar Hall · Check the official calendar for showtime, tickets and changes.",
         "address": "Delmar Hall, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=2",
@@ -456,7 +456,7 @@
         "title": "The Pineapple Thief",
         "start": "2026-11-29",
         "expiresAt": "2026-11-30T06:00:00.000Z",
-        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "Delmar Hall · Check the official calendar for showtime, tickets and changes.",
         "address": "Delmar Hall, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=2",
@@ -478,7 +478,7 @@
         "title": "The Reverend Peyton's Big Damn Band",
         "start": "2026-11-29",
         "expiresAt": "2026-11-30T06:00:00.000Z",
-        "description": "Blueberry Hill Duck Room \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "Blueberry Hill Duck Room · Check the official calendar for showtime, tickets and changes.",
         "address": "Blueberry Hill Duck Room, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=2",
@@ -500,7 +500,7 @@
         "title": "Tiny Habits",
         "start": "2026-12-01",
         "expiresAt": "2026-12-02T06:00:00.000Z",
-        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "Delmar Hall · Check the official calendar for showtime, tickets and changes.",
         "address": "Delmar Hall, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=2",
@@ -522,7 +522,7 @@
         "title": "Pouya",
         "start": "2026-12-02",
         "expiresAt": "2026-12-03T06:00:00.000Z",
-        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "The Pageant · Check the official calendar for showtime, tickets and changes.",
         "address": "The Pageant, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=2",
@@ -544,7 +544,7 @@
         "title": "twen",
         "start": "2026-12-02",
         "expiresAt": "2026-12-03T06:00:00.000Z",
-        "description": "Blueberry Hill Duck Room \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "Blueberry Hill Duck Room · Check the official calendar for showtime, tickets and changes.",
         "address": "Blueberry Hill Duck Room, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=2",
@@ -566,7 +566,7 @@
         "title": "Eddie 9V",
         "start": "2026-12-03",
         "expiresAt": "2026-12-04T06:00:00.000Z",
-        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "Delmar Hall · Check the official calendar for showtime, tickets and changes.",
         "address": "Delmar Hall, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=2",
@@ -588,7 +588,7 @@
         "title": "Anthony Gomes",
         "start": "2026-12-04",
         "expiresAt": "2026-12-05T06:00:00.000Z",
-        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "Delmar Hall · Check the official calendar for showtime, tickets and changes.",
         "address": "Delmar Hall, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=2",
@@ -610,7 +610,7 @@
         "title": "Shooting With Annie",
         "start": "2026-12-04",
         "expiresAt": "2026-12-05T06:00:00.000Z",
-        "description": "Blueberry Hill Duck Room \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "Blueberry Hill Duck Room · Check the official calendar for showtime, tickets and changes.",
         "address": "Blueberry Hill Duck Room, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=2",
@@ -632,7 +632,7 @@
         "title": "Matisyahu",
         "start": "2026-12-05",
         "expiresAt": "2026-12-06T06:00:00.000Z",
-        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "Delmar Hall · Check the official calendar for showtime, tickets and changes.",
         "address": "Delmar Hall, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=2",
@@ -654,7 +654,7 @@
         "title": "Love In The Club",
         "start": "2026-12-05",
         "expiresAt": "2026-12-06T06:00:00.000Z",
-        "description": "Blueberry Hill Duck Room \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "Blueberry Hill Duck Room · Check the official calendar for showtime, tickets and changes.",
         "address": "Blueberry Hill Duck Room, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=3",
@@ -676,7 +676,7 @@
         "title": "Aurorawave",
         "start": "2026-12-08",
         "expiresAt": "2026-12-09T06:00:00.000Z",
-        "description": "Blueberry Hill Duck Room \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "Blueberry Hill Duck Room · Check the official calendar for showtime, tickets and changes.",
         "address": "Blueberry Hill Duck Room, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=3",
@@ -698,7 +698,7 @@
         "title": "Mike Cooley (of Drive-By Truckers)",
         "start": "2026-12-09",
         "expiresAt": "2026-12-10T06:00:00.000Z",
-        "description": "Blueberry Hill Duck Room \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "Blueberry Hill Duck Room · Check the official calendar for showtime, tickets and changes.",
         "address": "Blueberry Hill Duck Room, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=3",
@@ -720,7 +720,7 @@
         "title": "Babe Haven",
         "start": "2026-12-10",
         "expiresAt": "2026-12-11T06:00:00.000Z",
-        "description": "Blueberry Hill Duck Room \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "Blueberry Hill Duck Room · Check the official calendar for showtime, tickets and changes.",
         "address": "Blueberry Hill Duck Room, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=3",
@@ -742,7 +742,7 @@
         "title": "Cemetery Gatez: A Tribute to Pantera",
         "start": "2026-12-11",
         "expiresAt": "2026-12-12T06:00:00.000Z",
-        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "The Pageant · Check the official calendar for showtime, tickets and changes.",
         "address": "The Pageant, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=3",
@@ -764,7 +764,7 @@
         "title": "Magic Man - The Music of Heart",
         "start": "2026-12-11",
         "expiresAt": "2026-12-12T06:00:00.000Z",
-        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "Delmar Hall · Check the official calendar for showtime, tickets and changes.",
         "address": "Delmar Hall, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=3",
@@ -786,7 +786,7 @@
         "title": "Punk Rock Christmas",
         "start": "2026-12-12",
         "expiresAt": "2026-12-13T06:00:00.000Z",
-        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "The Pageant · Check the official calendar for showtime, tickets and changes.",
         "address": "The Pageant, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=3",
@@ -808,7 +808,7 @@
         "title": "Dexter and The Moonrocks",
         "start": "2026-12-13",
         "expiresAt": "2026-12-14T06:00:00.000Z",
-        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "The Pageant · Check the official calendar for showtime, tickets and changes.",
         "address": "The Pageant, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=3",
@@ -830,7 +830,7 @@
         "title": "A Great Day: A Celebration of Life for David Surkamp",
         "start": "2026-12-13",
         "expiresAt": "2026-12-14T06:00:00.000Z",
-        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "Delmar Hall · Check the official calendar for showtime, tickets and changes.",
         "address": "Delmar Hall, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=3",
@@ -852,7 +852,7 @@
         "title": "Guilt Trip",
         "start": "2026-12-14",
         "expiresAt": "2026-12-15T06:00:00.000Z",
-        "description": "Blueberry Hill Duck Room \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "Blueberry Hill Duck Room · Check the official calendar for showtime, tickets and changes.",
         "address": "Blueberry Hill Duck Room, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=3",
@@ -874,7 +874,7 @@
         "title": "El Monstero",
         "start": "2026-12-17",
         "expiresAt": "2026-12-18T06:00:00.000Z",
-        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "The Pageant · Check the official calendar for showtime, tickets and changes.",
         "address": "The Pageant, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=3",
@@ -896,7 +896,7 @@
         "title": "El Monstero",
         "start": "2026-12-18",
         "expiresAt": "2026-12-19T06:00:00.000Z",
-        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "The Pageant · Check the official calendar for showtime, tickets and changes.",
         "address": "The Pageant, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=3",
@@ -918,7 +918,7 @@
         "title": "Funky Butt Brass Band",
         "start": "2026-12-18",
         "expiresAt": "2026-12-19T06:00:00.000Z",
-        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "Delmar Hall · Check the official calendar for showtime, tickets and changes.",
         "address": "Delmar Hall, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=3",
@@ -940,7 +940,7 @@
         "title": "Blackwater '64",
         "start": "2026-12-18",
         "expiresAt": "2026-12-19T06:00:00.000Z",
-        "description": "Blueberry Hill Duck Room \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "Blueberry Hill Duck Room · Check the official calendar for showtime, tickets and changes.",
         "address": "Blueberry Hill Duck Room, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=3",
@@ -962,7 +962,7 @@
         "title": "El Monstero",
         "start": "2026-12-19",
         "expiresAt": "2026-12-20T06:00:00.000Z",
-        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "The Pageant · Check the official calendar for showtime, tickets and changes.",
         "address": "The Pageant, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=4",
@@ -984,7 +984,7 @@
         "title": "Funky Butt Brass Band",
         "start": "2026-12-19",
         "expiresAt": "2026-12-20T06:00:00.000Z",
-        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "Delmar Hall · Check the official calendar for showtime, tickets and changes.",
         "address": "Delmar Hall, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=4",
@@ -1006,7 +1006,7 @@
         "title": "Funky Butt Brass Band (matinee)",
         "start": "2026-12-19",
         "expiresAt": "2026-12-20T06:00:00.000Z",
-        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "Delmar Hall · Check the official calendar for showtime, tickets and changes.",
         "address": "Delmar Hall, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=4",
@@ -1028,7 +1028,7 @@
         "title": "Funky Butt Brass Band (matinee)",
         "start": "2026-12-20",
         "expiresAt": "2026-12-21T06:00:00.000Z",
-        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "Delmar Hall · Check the official calendar for showtime, tickets and changes.",
         "address": "Delmar Hall, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=4",
@@ -1050,7 +1050,7 @@
         "title": "El Monstero",
         "start": "2026-12-21",
         "expiresAt": "2026-12-22T06:00:00.000Z",
-        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "The Pageant · Check the official calendar for showtime, tickets and changes.",
         "address": "The Pageant, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=4",
@@ -1072,7 +1072,7 @@
         "title": "El Monstero",
         "start": "2026-12-22",
         "expiresAt": "2026-12-23T06:00:00.000Z",
-        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "The Pageant · Check the official calendar for showtime, tickets and changes.",
         "address": "The Pageant, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=4",
@@ -1094,7 +1094,7 @@
         "title": "El Monstero",
         "start": "2026-12-23",
         "expiresAt": "2026-12-24T06:00:00.000Z",
-        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "The Pageant · Check the official calendar for showtime, tickets and changes.",
         "address": "The Pageant, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=4",
@@ -1116,7 +1116,7 @@
         "title": "Funky Butt Brass Band",
         "start": "2026-12-23",
         "expiresAt": "2026-12-24T06:00:00.000Z",
-        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "Delmar Hall · Check the official calendar for showtime, tickets and changes.",
         "address": "Delmar Hall, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=4",
@@ -1138,7 +1138,7 @@
         "title": "El Monstero",
         "start": "2026-12-26",
         "expiresAt": "2026-12-27T06:00:00.000Z",
-        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "The Pageant · Check the official calendar for showtime, tickets and changes.",
         "address": "The Pageant, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=4",
@@ -1160,7 +1160,7 @@
         "title": "Dr. Zhivegas X Prince & The Revolution Tribute",
         "start": "2026-12-26",
         "expiresAt": "2026-12-27T06:00:00.000Z",
-        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "Delmar Hall · Check the official calendar for showtime, tickets and changes.",
         "address": "Delmar Hall, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=4",
@@ -1182,7 +1182,7 @@
         "title": "G. Love & Special Sauce",
         "start": "2027-01-06",
         "expiresAt": "2027-01-07T06:00:00.000Z",
-        "description": "Blueberry Hill Duck Room \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "Blueberry Hill Duck Room · Check the official calendar for showtime, tickets and changes.",
         "address": "Blueberry Hill Duck Room, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=4",
@@ -1204,7 +1204,7 @@
         "title": "Voodoo Talking Heads",
         "start": "2027-01-08",
         "expiresAt": "2027-01-09T06:00:00.000Z",
-        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "The Pageant · Check the official calendar for showtime, tickets and changes.",
         "address": "The Pageant, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=4",
@@ -1226,7 +1226,7 @@
         "title": "Kawaii Rave",
         "start": "2027-01-08",
         "expiresAt": "2027-01-09T06:00:00.000Z",
-        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "Delmar Hall · Check the official calendar for showtime, tickets and changes.",
         "address": "Delmar Hall, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=4",
@@ -1248,7 +1248,7 @@
         "title": "Voodoo Talking Heads",
         "start": "2027-01-09",
         "expiresAt": "2027-01-10T06:00:00.000Z",
-        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "The Pageant · Check the official calendar for showtime, tickets and changes.",
         "address": "The Pageant, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=4",
@@ -1270,7 +1270,7 @@
         "title": "The Retrograde",
         "start": "2027-01-12",
         "expiresAt": "2027-01-13T06:00:00.000Z",
-        "description": "Blueberry Hill Duck Room \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "description": "Blueberry Hill Duck Room · Check the official calendar for showtime, tickets and changes.",
         "address": "Blueberry Hill Duck Room, St. Louis, MO",
         "source": "Official Pageant / Delmar Hall calendar",
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=4",
@@ -1293,9 +1293,9 @@
         "venue": "Off Broadway",
         "start": "2026-11-15T20:00:00-06:00",
         "expiresAt": "2026-11-16T00:00:00-06:00",
-        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "description": "Off Broadway · Check the official event page for tickets and changes.",
         "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
-        "source": "Off Broadway \u00b7 official calendar",
+        "source": "Off Broadway · official calendar",
         "sourceUrl": "https://www.offbroadwaystl.com/shows/improvement-movement-your-perfect-real-live-26-15-nov",
         "url": "https://www.offbroadwaystl.com/shows/improvement-movement-your-perfect-real-live-26-15-nov",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -1316,9 +1316,9 @@
         "venue": "Off Broadway",
         "start": "2026-11-16T20:00:00-06:00",
         "expiresAt": "2026-11-17T00:00:00-06:00",
-        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "description": "Off Broadway · Check the official event page for tickets and changes.",
         "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
-        "source": "Off Broadway \u00b7 official calendar",
+        "source": "Off Broadway · official calendar",
         "sourceUrl": "https://www.offbroadwaystl.com/shows/adult-a-place-to-bury-strangers-06-nov",
         "url": "https://www.offbroadwaystl.com/shows/adult-a-place-to-bury-strangers-06-nov",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -1339,9 +1339,9 @@
         "venue": "Off Broadway",
         "start": "2026-11-19T20:00:00-06:00",
         "expiresAt": "2026-11-20T00:00:00-06:00",
-        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "description": "Off Broadway · Check the official event page for tickets and changes.",
         "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
-        "source": "Off Broadway \u00b7 official calendar",
+        "source": "Off Broadway · official calendar",
         "sourceUrl": "https://www.offbroadwaystl.com/shows/ethan-regan-young-regan-tour-19-nov",
         "url": "https://www.offbroadwaystl.com/shows/ethan-regan-young-regan-tour-19-nov",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -1362,9 +1362,9 @@
         "venue": "Off Broadway",
         "start": "2026-11-21T20:00:00-06:00",
         "expiresAt": "2026-11-22T00:00:00-06:00",
-        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "description": "Off Broadway · Check the official event page for tickets and changes.",
         "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
-        "source": "Off Broadway \u00b7 official calendar",
+        "source": "Off Broadway · official calendar",
         "sourceUrl": "https://www.offbroadwaystl.com/shows/kingdom-of-giants-21-nov",
         "url": "https://www.offbroadwaystl.com/shows/kingdom-of-giants-21-nov",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -1385,9 +1385,9 @@
         "venue": "Off Broadway",
         "start": "2026-11-24",
         "expiresAt": "2026-11-25T00:00:00-06:00",
-        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "description": "Off Broadway · Check the official event page for tickets and changes.",
         "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
-        "source": "Off Broadway \u00b7 official calendar",
+        "source": "Off Broadway · official calendar",
         "sourceUrl": "https://www.offbroadwaystl.com/shows/oso-oso-24-nov",
         "url": "https://www.offbroadwaystl.com/shows/oso-oso-24-nov",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -1408,9 +1408,9 @@
         "venue": "Off Broadway",
         "start": "2026-11-27",
         "expiresAt": "2026-11-28T00:00:00-06:00",
-        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "description": "Off Broadway · Check the official event page for tickets and changes.",
         "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
-        "source": "Off Broadway \u00b7 official calendar",
+        "source": "Off Broadway · official calendar",
         "sourceUrl": "https://www.offbroadwaystl.com/shows/ha-ha-tonka-27-nov",
         "url": "https://www.offbroadwaystl.com/shows/ha-ha-tonka-27-nov",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -1431,9 +1431,9 @@
         "venue": "Off Broadway",
         "start": "2026-11-28",
         "expiresAt": "2026-11-29T00:00:00-06:00",
-        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "description": "Off Broadway · Check the official event page for tickets and changes.",
         "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
-        "source": "Off Broadway \u00b7 official calendar",
+        "source": "Off Broadway · official calendar",
         "sourceUrl": "https://www.offbroadwaystl.com/shows/harbour-28-nov",
         "url": "https://www.offbroadwaystl.com/shows/harbour-28-nov",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -1454,9 +1454,9 @@
         "venue": "Off Broadway",
         "start": "2026-12-02",
         "expiresAt": "2026-12-03T00:00:00-06:00",
-        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "description": "Off Broadway · Check the official event page for tickets and changes.",
         "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
-        "source": "Off Broadway \u00b7 official calendar",
+        "source": "Off Broadway · official calendar",
         "sourceUrl": "https://www.offbroadwaystl.com/shows/daisy-grenade-02-dec",
         "url": "https://www.offbroadwaystl.com/shows/daisy-grenade-02-dec",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -1477,9 +1477,9 @@
         "venue": "Off Broadway",
         "start": "2026-12-03",
         "expiresAt": "2026-12-04T00:00:00-06:00",
-        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "description": "Off Broadway · Check the official event page for tickets and changes.",
         "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
-        "source": "Off Broadway \u00b7 official calendar",
+        "source": "Off Broadway · official calendar",
         "sourceUrl": "https://www.offbroadwaystl.com/shows/beth-bombara-03-dec",
         "url": "https://www.offbroadwaystl.com/shows/beth-bombara-03-dec",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -1500,9 +1500,9 @@
         "venue": "Off Broadway",
         "start": "2026-12-04",
         "expiresAt": "2026-12-05T00:00:00-06:00",
-        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "description": "Off Broadway · Check the official event page for tickets and changes.",
         "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
-        "source": "Off Broadway \u00b7 official calendar",
+        "source": "Off Broadway · official calendar",
         "sourceUrl": "https://www.offbroadwaystl.com/shows/evereverever-middle-class-fashion-meatus-04-dec",
         "url": "https://www.offbroadwaystl.com/shows/evereverever-middle-class-fashion-meatus-04-dec",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -1523,9 +1523,9 @@
         "venue": "Off Broadway",
         "start": "2026-12-05",
         "expiresAt": "2026-12-06T00:00:00-06:00",
-        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "description": "Off Broadway · Check the official event page for tickets and changes.",
         "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
-        "source": "Off Broadway \u00b7 official calendar",
+        "source": "Off Broadway · official calendar",
         "sourceUrl": "https://www.offbroadwaystl.com/shows/120-minutes-presents-a-tribute-to-the-cure-05-dec",
         "url": "https://www.offbroadwaystl.com/shows/120-minutes-presents-a-tribute-to-the-cure-05-dec",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -1546,9 +1546,9 @@
         "venue": "Off Broadway",
         "start": "2026-12-11",
         "expiresAt": "2026-12-12T00:00:00-06:00",
-        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "description": "Off Broadway · Check the official event page for tickets and changes.",
         "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
-        "source": "Off Broadway \u00b7 official calendar",
+        "source": "Off Broadway · official calendar",
         "sourceUrl": "https://www.offbroadwaystl.com/shows/jigjam-11-dec",
         "url": "https://www.offbroadwaystl.com/shows/jigjam-11-dec",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -1569,9 +1569,9 @@
         "venue": "Off Broadway",
         "start": "2026-12-12",
         "expiresAt": "2026-12-13T00:00:00-06:00",
-        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "description": "Off Broadway · Check the official event page for tickets and changes.",
         "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
-        "source": "Off Broadway \u00b7 official calendar",
+        "source": "Off Broadway · official calendar",
         "sourceUrl": "https://www.offbroadwaystl.com/shows/pedestrian-deposit-12-dec",
         "url": "https://www.offbroadwaystl.com/shows/pedestrian-deposit-12-dec",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -1592,9 +1592,9 @@
         "venue": "Off Broadway",
         "start": "2026-12-13",
         "expiresAt": "2026-12-14T00:00:00-06:00",
-        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "description": "Off Broadway · Check the official event page for tickets and changes.",
         "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
-        "source": "Off Broadway \u00b7 official calendar",
+        "source": "Off Broadway · official calendar",
         "sourceUrl": "https://www.offbroadwaystl.com/shows/colour-revolt-13-dec",
         "url": "https://www.offbroadwaystl.com/shows/colour-revolt-13-dec",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -1615,9 +1615,9 @@
         "venue": "Off Broadway",
         "start": "2026-12-17",
         "expiresAt": "2026-12-18T00:00:00-06:00",
-        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "description": "Off Broadway · Check the official event page for tickets and changes.",
         "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
-        "source": "Off Broadway \u00b7 official calendar",
+        "source": "Off Broadway · official calendar",
         "sourceUrl": "https://www.offbroadwaystl.com/shows/friendship-charlotte-cornfield-17-dec",
         "url": "https://www.offbroadwaystl.com/shows/friendship-charlotte-cornfield-17-dec",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -1638,9 +1638,9 @@
         "venue": "Off Broadway",
         "start": "2026-12-18",
         "expiresAt": "2026-12-19T00:00:00-06:00",
-        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "description": "Off Broadway · Check the official event page for tickets and changes.",
         "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
-        "source": "Off Broadway \u00b7 official calendar",
+        "source": "Off Broadway · official calendar",
         "sourceUrl": "https://www.offbroadwaystl.com/shows/ww3-a-christmas-celebration-18-dec",
         "url": "https://www.offbroadwaystl.com/shows/ww3-a-christmas-celebration-18-dec",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -1661,9 +1661,9 @@
         "venue": "Off Broadway",
         "start": "2026-12-19",
         "expiresAt": "2026-12-20T00:00:00-06:00",
-        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "description": "Off Broadway · Check the official event page for tickets and changes.",
         "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
-        "source": "Off Broadway \u00b7 official calendar",
+        "source": "Off Broadway · official calendar",
         "sourceUrl": "https://www.offbroadwaystl.com/shows/kris-kringle-the-jolly-jingles-19-dec",
         "url": "https://www.offbroadwaystl.com/shows/kris-kringle-the-jolly-jingles-19-dec",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -1684,9 +1684,9 @@
         "venue": "Off Broadway",
         "start": "2027-01-15",
         "expiresAt": "2027-01-16T00:00:00-06:00",
-        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "description": "Off Broadway · Check the official event page for tickets and changes.",
         "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
-        "source": "Off Broadway \u00b7 official calendar",
+        "source": "Off Broadway · official calendar",
         "sourceUrl": "https://www.offbroadwaystl.com/shows/the-late-greats-15-jan",
         "url": "https://www.offbroadwaystl.com/shows/the-late-greats-15-jan",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -1707,9 +1707,9 @@
         "venue": "Off Broadway",
         "start": "2027-01-16",
         "expiresAt": "2027-01-17T00:00:00-06:00",
-        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "description": "Off Broadway · Check the official event page for tickets and changes.",
         "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
-        "source": "Off Broadway \u00b7 official calendar",
+        "source": "Off Broadway · official calendar",
         "sourceUrl": "https://www.offbroadwaystl.com/shows/1-productions-presents-emo-nite-16-jan",
         "url": "https://www.offbroadwaystl.com/shows/1-productions-presents-emo-nite-16-jan",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -1730,9 +1730,9 @@
         "venue": "Off Broadway",
         "start": "2027-01-24",
         "expiresAt": "2027-01-25T00:00:00-06:00",
-        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "description": "Off Broadway · Check the official event page for tickets and changes.",
         "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
-        "source": "Off Broadway \u00b7 official calendar",
+        "source": "Off Broadway · official calendar",
         "sourceUrl": "https://www.offbroadwaystl.com/shows/jon-spencer-24-jan",
         "url": "https://www.offbroadwaystl.com/shows/jon-spencer-24-jan",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -1753,9 +1753,9 @@
         "venue": "Off Broadway",
         "start": "2027-02-05",
         "expiresAt": "2027-02-06T00:00:00-06:00",
-        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "description": "Off Broadway · Check the official event page for tickets and changes.",
         "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
-        "source": "Off Broadway \u00b7 official calendar",
+        "source": "Off Broadway · official calendar",
         "sourceUrl": "https://www.offbroadwaystl.com/shows/youth-fountain-05-feb",
         "url": "https://www.offbroadwaystl.com/shows/youth-fountain-05-feb",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -1776,9 +1776,9 @@
         "venue": "Off Broadway",
         "start": "2027-02-13",
         "expiresAt": "2027-02-14T00:00:00-06:00",
-        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "description": "Off Broadway · Check the official event page for tickets and changes.",
         "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
-        "source": "Off Broadway \u00b7 official calendar",
+        "source": "Off Broadway · official calendar",
         "sourceUrl": "https://www.offbroadwaystl.com/shows/camp-bloom-tour-13-feb",
         "url": "https://www.offbroadwaystl.com/shows/camp-bloom-tour-13-feb",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -1799,9 +1799,9 @@
         "venue": "Off Broadway",
         "start": "2027-02-18",
         "expiresAt": "2027-02-19T00:00:00-06:00",
-        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "description": "Off Broadway · Check the official event page for tickets and changes.",
         "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
-        "source": "Off Broadway \u00b7 official calendar",
+        "source": "Off Broadway · official calendar",
         "sourceUrl": "https://www.offbroadwaystl.com/shows/hans-williams-18-feb",
         "url": "https://www.offbroadwaystl.com/shows/hans-williams-18-feb",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -1822,9 +1822,9 @@
         "venue": "Off Broadway",
         "start": "2027-02-25",
         "expiresAt": "2027-02-26T00:00:00-06:00",
-        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "description": "Off Broadway · Check the official event page for tickets and changes.",
         "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
-        "source": "Off Broadway \u00b7 official calendar",
+        "source": "Off Broadway · official calendar",
         "sourceUrl": "https://www.offbroadwaystl.com/shows/strongboi-25-feb",
         "url": "https://www.offbroadwaystl.com/shows/strongboi-25-feb",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -1845,9 +1845,9 @@
         "venue": "Off Broadway",
         "start": "2027-03-02",
         "expiresAt": "2027-03-03T00:00:00-06:00",
-        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "description": "Off Broadway · Check the official event page for tickets and changes.",
         "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
-        "source": "Off Broadway \u00b7 official calendar",
+        "source": "Off Broadway · official calendar",
         "sourceUrl": "https://www.offbroadwaystl.com/shows/carissa-s-wierd-02-mar",
         "url": "https://www.offbroadwaystl.com/shows/carissa-s-wierd-02-mar",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -1868,9 +1868,9 @@
         "venue": "Off Broadway",
         "start": "2027-03-12",
         "expiresAt": "2027-03-13T00:00:00-06:00",
-        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "description": "Off Broadway · Check the official event page for tickets and changes.",
         "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
-        "source": "Off Broadway \u00b7 official calendar",
+        "source": "Off Broadway · official calendar",
         "sourceUrl": "https://www.offbroadwaystl.com/shows/james-mcmurtry-12-mar",
         "url": "https://www.offbroadwaystl.com/shows/james-mcmurtry-12-mar",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -1891,9 +1891,9 @@
         "venue": "Off Broadway",
         "start": "2027-03-16",
         "expiresAt": "2027-03-17T00:00:00-05:00",
-        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "description": "Off Broadway · Check the official event page for tickets and changes.",
         "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
-        "source": "Off Broadway \u00b7 official calendar",
+        "source": "Off Broadway · official calendar",
         "sourceUrl": "https://www.offbroadwaystl.com/shows/dogpark-16-mar",
         "url": "https://www.offbroadwaystl.com/shows/dogpark-16-mar",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -1914,9 +1914,9 @@
         "venue": "Off Broadway",
         "start": "2027-03-24",
         "expiresAt": "2027-03-25T00:00:00-05:00",
-        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "description": "Off Broadway · Check the official event page for tickets and changes.",
         "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
-        "source": "Off Broadway \u00b7 official calendar",
+        "source": "Off Broadway · official calendar",
         "sourceUrl": "https://www.offbroadwaystl.com/shows/the-dollyrots-24-mar",
         "url": "https://www.offbroadwaystl.com/shows/the-dollyrots-24-mar",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -1937,9 +1937,9 @@
         "venue": "Off Broadway",
         "start": "2027-04-06",
         "expiresAt": "2027-04-07T00:00:00-05:00",
-        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "description": "Off Broadway · Check the official event page for tickets and changes.",
         "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
-        "source": "Off Broadway \u00b7 official calendar",
+        "source": "Off Broadway · official calendar",
         "sourceUrl": "https://www.offbroadwaystl.com/shows/worldpeace-dmt-06-apr",
         "url": "https://www.offbroadwaystl.com/shows/worldpeace-dmt-06-apr",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -1960,9 +1960,9 @@
         "venue": "Off Broadway",
         "start": "2027-04-09",
         "expiresAt": "2027-04-10T00:00:00-05:00",
-        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "description": "Off Broadway · Check the official event page for tickets and changes.",
         "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
-        "source": "Off Broadway \u00b7 official calendar",
+        "source": "Off Broadway · official calendar",
         "sourceUrl": "https://www.offbroadwaystl.com/shows/hotel-fiction-09-apr",
         "url": "https://www.offbroadwaystl.com/shows/hotel-fiction-09-apr",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -1978,14 +1978,14 @@
         ]
       },
       "properties": {
-        "id": "venue-concert:2027-04-24:Off Broadway:John Hollier  & The R\u00eaverie",
-        "title": "John Hollier  & The R\u00eaverie",
+        "id": "venue-concert:2027-04-24:Off Broadway:John Hollier  & The Rêverie",
+        "title": "John Hollier  & The Rêverie",
         "venue": "Off Broadway",
         "start": "2027-04-24",
         "expiresAt": "2027-04-25T00:00:00-05:00",
-        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "description": "Off Broadway · Check the official event page for tickets and changes.",
         "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
-        "source": "Off Broadway \u00b7 official calendar",
+        "source": "Off Broadway · official calendar",
         "sourceUrl": "https://www.offbroadwaystl.com/shows/john-hollier-the-reverie-24-apr",
         "url": "https://www.offbroadwaystl.com/shows/john-hollier-the-reverie-24-apr",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -2006,9 +2006,9 @@
         "venue": "Off Broadway",
         "start": "2027-05-05",
         "expiresAt": "2027-05-06T00:00:00-05:00",
-        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "description": "Off Broadway · Check the official event page for tickets and changes.",
         "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
-        "source": "Off Broadway \u00b7 official calendar",
+        "source": "Off Broadway · official calendar",
         "sourceUrl": "https://www.offbroadwaystl.com/shows/mei-semones-05-may",
         "url": "https://www.offbroadwaystl.com/shows/mei-semones-05-may",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -2029,9 +2029,9 @@
         "venue": "Old Rock House",
         "start": "2026-11-15T20:00:00-06:00",
         "expiresAt": "2026-11-16T00:00:00-06:00",
-        "description": "Old Rock House \u00b7 Check the official event page for tickets and changes.",
+        "description": "Old Rock House · Check the official event page for tickets and changes.",
         "address": "Old Rock House, 1410 S Tucker Blvd, St Louis MO",
-        "source": "Old Rock House \u00b7 official calendar",
+        "source": "Old Rock House · official calendar",
         "sourceUrl": "https://oldrockhouse.com/",
         "url": "https://oldrockhouse.com/",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -2052,9 +2052,9 @@
         "venue": "Old Rock House",
         "start": "2026-11-16T20:00:00-06:00",
         "expiresAt": "2026-11-17T00:00:00-06:00",
-        "description": "Old Rock House \u00b7 Check the official event page for tickets and changes.",
+        "description": "Old Rock House · Check the official event page for tickets and changes.",
         "address": "Old Rock House, 1410 S Tucker Blvd, St Louis MO",
-        "source": "Old Rock House \u00b7 official calendar",
+        "source": "Old Rock House · official calendar",
         "sourceUrl": "https://oldrockhouse.com/",
         "url": "https://oldrockhouse.com/",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -2075,9 +2075,9 @@
         "venue": "Old Rock House",
         "start": "2026-11-20T20:00:00-06:00",
         "expiresAt": "2026-11-21T00:00:00-06:00",
-        "description": "Old Rock House \u00b7 Check the official event page for tickets and changes.",
+        "description": "Old Rock House · Check the official event page for tickets and changes.",
         "address": "Old Rock House, 1410 S Tucker Blvd, St Louis MO",
-        "source": "Old Rock House \u00b7 official calendar",
+        "source": "Old Rock House · official calendar",
         "sourceUrl": "https://oldrockhouse.com/",
         "url": "https://oldrockhouse.com/",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -2098,9 +2098,9 @@
         "venue": "Old Rock House",
         "start": "2026-11-21T20:00:00-06:00",
         "expiresAt": "2026-11-22T00:00:00-06:00",
-        "description": "Old Rock House \u00b7 Check the official event page for tickets and changes.",
+        "description": "Old Rock House · Check the official event page for tickets and changes.",
         "address": "Old Rock House, 1410 S Tucker Blvd, St Louis MO",
-        "source": "Old Rock House \u00b7 official calendar",
+        "source": "Old Rock House · official calendar",
         "sourceUrl": "https://oldrockhouse.com/",
         "url": "https://oldrockhouse.com/",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -2121,9 +2121,9 @@
         "venue": "Old Rock House",
         "start": "2026-11-25T19:00:00-06:00",
         "expiresAt": "2026-11-26T00:00:00-06:00",
-        "description": "Old Rock House \u00b7 Check the official event page for tickets and changes.",
+        "description": "Old Rock House · Check the official event page for tickets and changes.",
         "address": "Old Rock House, 1410 S Tucker Blvd, St Louis MO",
-        "source": "Old Rock House \u00b7 official calendar",
+        "source": "Old Rock House · official calendar",
         "sourceUrl": "https://oldrockhouse.com/",
         "url": "https://oldrockhouse.com/",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -2144,9 +2144,9 @@
         "venue": "Old Rock House",
         "start": "2026-11-27T20:00:00-06:00",
         "expiresAt": "2026-11-28T00:00:00-06:00",
-        "description": "Old Rock House \u00b7 Check the official event page for tickets and changes.",
+        "description": "Old Rock House · Check the official event page for tickets and changes.",
         "address": "Old Rock House, 1410 S Tucker Blvd, St Louis MO",
-        "source": "Old Rock House \u00b7 official calendar",
+        "source": "Old Rock House · official calendar",
         "sourceUrl": "https://oldrockhouse.com/",
         "url": "https://oldrockhouse.com/",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -2167,9 +2167,9 @@
         "venue": "Old Rock House",
         "start": "2026-11-28T20:00:00-06:00",
         "expiresAt": "2026-11-29T00:00:00-06:00",
-        "description": "Old Rock House \u00b7 Check the official event page for tickets and changes.",
+        "description": "Old Rock House · Check the official event page for tickets and changes.",
         "address": "Old Rock House, 1410 S Tucker Blvd, St Louis MO",
-        "source": "Old Rock House \u00b7 official calendar",
+        "source": "Old Rock House · official calendar",
         "sourceUrl": "https://oldrockhouse.com/",
         "url": "https://oldrockhouse.com/",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -2190,9 +2190,9 @@
         "venue": "Old Rock House",
         "start": "2026-12-03T20:00:00-06:00",
         "expiresAt": "2026-12-04T00:00:00-06:00",
-        "description": "Old Rock House \u00b7 Check the official event page for tickets and changes.",
+        "description": "Old Rock House · Check the official event page for tickets and changes.",
         "address": "Old Rock House, 1410 S Tucker Blvd, St Louis MO",
-        "source": "Old Rock House \u00b7 official calendar",
+        "source": "Old Rock House · official calendar",
         "sourceUrl": "https://oldrockhouse.com/",
         "url": "https://oldrockhouse.com/",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -2208,14 +2208,14 @@
         ]
       },
       "properties": {
-        "id": "venue-concert:2026-11-16:Enterprise Center:Journey \u00b7 Final Frontier Tour:19:30",
-        "title": "Journey \u00b7 Final Frontier Tour",
+        "id": "venue-concert:2026-11-16:Enterprise Center:Journey · Final Frontier Tour:19:30",
+        "title": "Journey · Final Frontier Tour",
         "venue": "Enterprise Center",
         "start": "2026-11-16T19:30:00-06:00",
         "expiresAt": "2026-11-17T00:00:00-06:00",
-        "description": "Enterprise Center \u00b7 Check the official event page for tickets and changes.",
+        "description": "Enterprise Center · Check the official event page for tickets and changes.",
         "address": "Enterprise Center, 1401 Clark Ave, St Louis MO",
-        "source": "Enterprise Center \u00b7 official calendar",
+        "source": "Enterprise Center · official calendar",
         "sourceUrl": "https://www.livenation.com/venue/KovZpa2DJe/enterprise-center-events",
         "url": "https://www.livenation.com/venue/KovZpa2DJe/enterprise-center-events",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -2236,9 +2236,9 @@
         "venue": "Enterprise Center",
         "start": "2026-12-12T19:00:00-06:00",
         "expiresAt": "2026-12-13T00:00:00-06:00",
-        "description": "Enterprise Center \u00b7 Check the official event page for tickets and changes.",
+        "description": "Enterprise Center · Check the official event page for tickets and changes.",
         "address": "Enterprise Center, 1401 Clark Ave, St Louis MO",
-        "source": "Enterprise Center \u00b7 official calendar",
+        "source": "Enterprise Center · official calendar",
         "sourceUrl": "https://www.livenation.com/venue/KovZpa2DJe/enterprise-center-events",
         "url": "https://www.livenation.com/venue/KovZpa2DJe/enterprise-center-events",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -2254,14 +2254,14 @@
         ]
       },
       "properties": {
-        "id": "venue-concert:2026-12-30:Enterprise Center:Trans-Siberian Orchestra \u00b7 The Ghosts of Christmas Eve:15:00",
-        "title": "Trans-Siberian Orchestra \u00b7 The Ghosts of Christmas Eve",
+        "id": "venue-concert:2026-12-30:Enterprise Center:Trans-Siberian Orchestra · The Ghosts of Christmas Eve:15:00",
+        "title": "Trans-Siberian Orchestra · The Ghosts of Christmas Eve",
         "venue": "Enterprise Center",
         "start": "2026-12-30T15:00:00-06:00",
         "expiresAt": "2026-12-31T00:00:00-06:00",
-        "description": "Enterprise Center \u00b7 Check the official event page for tickets and changes.",
+        "description": "Enterprise Center · Check the official event page for tickets and changes.",
         "address": "Enterprise Center, 1401 Clark Ave, St Louis MO",
-        "source": "Enterprise Center \u00b7 official calendar",
+        "source": "Enterprise Center · official calendar",
         "sourceUrl": "https://www.livenation.com/venue/KovZpa2DJe/enterprise-center-events",
         "url": "https://www.livenation.com/venue/KovZpa2DJe/enterprise-center-events",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -2277,14 +2277,14 @@
         ]
       },
       "properties": {
-        "id": "venue-concert:2026-12-30:Enterprise Center:Trans-Siberian Orchestra \u00b7 The Ghosts of Christmas Eve:19:30",
-        "title": "Trans-Siberian Orchestra \u00b7 The Ghosts of Christmas Eve",
+        "id": "venue-concert:2026-12-30:Enterprise Center:Trans-Siberian Orchestra · The Ghosts of Christmas Eve:19:30",
+        "title": "Trans-Siberian Orchestra · The Ghosts of Christmas Eve",
         "venue": "Enterprise Center",
         "start": "2026-12-30T19:30:00-06:00",
         "expiresAt": "2026-12-31T00:00:00-06:00",
-        "description": "Enterprise Center \u00b7 Check the official event page for tickets and changes.",
+        "description": "Enterprise Center · Check the official event page for tickets and changes.",
         "address": "Enterprise Center, 1401 Clark Ave, St Louis MO",
-        "source": "Enterprise Center \u00b7 official calendar",
+        "source": "Enterprise Center · official calendar",
         "sourceUrl": "https://www.livenation.com/venue/KovZpa2DJe/enterprise-center-events",
         "url": "https://www.livenation.com/venue/KovZpa2DJe/enterprise-center-events",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -2305,9 +2305,9 @@
         "venue": "Stifel Theatre",
         "start": "2026-11-28T19:30:00-06:00",
         "expiresAt": "2026-11-29T00:00:00-06:00",
-        "description": "Stifel Theatre \u00b7 Check the official event page for tickets and changes.",
+        "description": "Stifel Theatre · Check the official event page for tickets and changes.",
         "address": "Stifel Theatre, 1400 Market St, St Louis MO",
-        "source": "Stifel Theatre \u00b7 official calendar",
+        "source": "Stifel Theatre · official calendar",
         "sourceUrl": "https://www.stifeltheatre.com/events/detail/allman-betts-family-revival-a-decade-of-revival",
         "url": "https://www.stifeltheatre.com/events/detail/allman-betts-family-revival-a-decade-of-revival",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -2323,14 +2323,14 @@
         ]
       },
       "properties": {
-        "id": "venue-concert:2026-12-02:Stifel Theatre:Leslie Odom, Jr. \u00b7 The Christmas Tour 2026:20:00",
-        "title": "Leslie Odom, Jr. \u00b7 The Christmas Tour 2026",
+        "id": "venue-concert:2026-12-02:Stifel Theatre:Leslie Odom, Jr. · The Christmas Tour 2026:20:00",
+        "title": "Leslie Odom, Jr. · The Christmas Tour 2026",
         "venue": "Stifel Theatre",
         "start": "2026-12-02T20:00:00-06:00",
         "expiresAt": "2026-12-03T00:00:00-06:00",
-        "description": "Stifel Theatre \u00b7 Check the official event page for tickets and changes.",
+        "description": "Stifel Theatre · Check the official event page for tickets and changes.",
         "address": "Stifel Theatre, 1400 Market St, St Louis MO",
-        "source": "Stifel Theatre \u00b7 official calendar",
+        "source": "Stifel Theatre · official calendar",
         "sourceUrl": "https://www.stifeltheatre.com/events",
         "url": "https://www.stifeltheatre.com/events",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -2351,9 +2351,9 @@
         "venue": "Stifel Theatre",
         "start": "2026-12-04T19:00:00-06:00",
         "expiresAt": "2026-12-05T00:00:00-06:00",
-        "description": "Stifel Theatre \u00b7 Check the official event page for tickets and changes.",
+        "description": "Stifel Theatre · Check the official event page for tickets and changes.",
         "address": "Stifel Theatre, 1400 Market St, St Louis MO",
-        "source": "Stifel Theatre \u00b7 official calendar",
+        "source": "Stifel Theatre · official calendar",
         "sourceUrl": "https://www.stifeltheatre.com/events",
         "url": "https://www.stifeltheatre.com/events",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -2369,14 +2369,14 @@
         ]
       },
       "properties": {
-        "id": "venue-concert:2027-01-31:Stifel Theatre:William Shakespeare\u2019s Romeo + Juliet \u00b7 Film in Concert:19:30",
-        "title": "William Shakespeare\u2019s Romeo + Juliet \u00b7 Film in Concert",
+        "id": "venue-concert:2027-01-31:Stifel Theatre:William Shakespeare’s Romeo + Juliet · Film in Concert:19:30",
+        "title": "William Shakespeare’s Romeo + Juliet · Film in Concert",
         "venue": "Stifel Theatre",
         "start": "2027-01-31T19:30:00-06:00",
         "expiresAt": "2027-02-01T00:00:00-06:00",
-        "description": "Stifel Theatre \u00b7 Check the official event page for tickets and changes.",
+        "description": "Stifel Theatre · Check the official event page for tickets and changes.",
         "address": "Stifel Theatre, 1400 Market St, St Louis MO",
-        "source": "Stifel Theatre \u00b7 official calendar",
+        "source": "Stifel Theatre · official calendar",
         "sourceUrl": "https://www.stifeltheatre.com/events",
         "url": "https://www.stifeltheatre.com/events",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -2397,9 +2397,9 @@
         "venue": "Stifel Theatre",
         "start": "2027-02-13T19:00:00-06:00",
         "expiresAt": "2027-02-14T00:00:00-06:00",
-        "description": "Stifel Theatre \u00b7 Check the official event page for tickets and changes.",
+        "description": "Stifel Theatre · Check the official event page for tickets and changes.",
         "address": "Stifel Theatre, 1400 Market St, St Louis MO",
-        "source": "Stifel Theatre \u00b7 official calendar",
+        "source": "Stifel Theatre · official calendar",
         "sourceUrl": "https://www.stifeltheatre.com/events",
         "url": "https://www.stifeltheatre.com/events",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -2415,14 +2415,14 @@
         ]
       },
       "properties": {
-        "id": "venue-concert:2026-11-16:The Factory:Jason Bonham\u2019s Led Zeppelin Evening",
-        "title": "Jason Bonham\u2019s Led Zeppelin Evening",
+        "id": "venue-concert:2026-11-16:The Factory:Jason Bonham’s Led Zeppelin Evening",
+        "title": "Jason Bonham’s Led Zeppelin Evening",
         "venue": "The Factory",
         "start": "2026-11-16",
         "expiresAt": "2026-11-17T00:00:00-06:00",
-        "description": "The Factory \u00b7 Check the official event page for tickets and changes.",
+        "description": "The Factory · Check the official event page for tickets and changes.",
         "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
-        "source": "The Factory \u00b7 official calendar",
+        "source": "The Factory · official calendar",
         "sourceUrl": "https://thefactorystl.com/",
         "url": "https://thefactorystl.com/",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -2443,9 +2443,9 @@
         "venue": "The Factory",
         "start": "2026-11-17",
         "expiresAt": "2026-11-18T00:00:00-06:00",
-        "description": "The Factory \u00b7 Check the official event page for tickets and changes.",
+        "description": "The Factory · Check the official event page for tickets and changes.",
         "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
-        "source": "The Factory \u00b7 official calendar",
+        "source": "The Factory · official calendar",
         "sourceUrl": "https://thefactorystl.com/",
         "url": "https://thefactorystl.com/",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -2466,9 +2466,9 @@
         "venue": "The Factory",
         "start": "2026-11-18",
         "expiresAt": "2026-11-19T00:00:00-06:00",
-        "description": "The Factory \u00b7 Check the official event page for tickets and changes.",
+        "description": "The Factory · Check the official event page for tickets and changes.",
         "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
-        "source": "The Factory \u00b7 official calendar",
+        "source": "The Factory · official calendar",
         "sourceUrl": "https://thefactorystl.com/",
         "url": "https://thefactorystl.com/",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -2489,9 +2489,9 @@
         "venue": "The Factory",
         "start": "2026-11-19",
         "expiresAt": "2026-11-20T00:00:00-06:00",
-        "description": "The Factory \u00b7 Check the official event page for tickets and changes.",
+        "description": "The Factory · Check the official event page for tickets and changes.",
         "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
-        "source": "The Factory \u00b7 official calendar",
+        "source": "The Factory · official calendar",
         "sourceUrl": "https://thefactorystl.com/",
         "url": "https://thefactorystl.com/",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -2512,9 +2512,9 @@
         "venue": "The Factory",
         "start": "2026-11-25",
         "expiresAt": "2026-11-26T00:00:00-06:00",
-        "description": "The Factory \u00b7 Check the official event page for tickets and changes.",
+        "description": "The Factory · Check the official event page for tickets and changes.",
         "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
-        "source": "The Factory \u00b7 official calendar",
+        "source": "The Factory · official calendar",
         "sourceUrl": "https://thefactorystl.com/",
         "url": "https://thefactorystl.com/",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -2535,9 +2535,9 @@
         "venue": "The Factory",
         "start": "2026-11-27",
         "expiresAt": "2026-11-28T00:00:00-06:00",
-        "description": "The Factory \u00b7 Check the official event page for tickets and changes.",
+        "description": "The Factory · Check the official event page for tickets and changes.",
         "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
-        "source": "The Factory \u00b7 official calendar",
+        "source": "The Factory · official calendar",
         "sourceUrl": "https://thefactorystl.com/",
         "url": "https://thefactorystl.com/",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -2558,9 +2558,9 @@
         "venue": "The Factory",
         "start": "2026-11-28",
         "expiresAt": "2026-11-29T00:00:00-06:00",
-        "description": "The Factory \u00b7 Check the official event page for tickets and changes.",
+        "description": "The Factory · Check the official event page for tickets and changes.",
         "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
-        "source": "The Factory \u00b7 official calendar",
+        "source": "The Factory · official calendar",
         "sourceUrl": "https://thefactorystl.com/",
         "url": "https://thefactorystl.com/",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -2581,9 +2581,9 @@
         "venue": "The Factory",
         "start": "2026-12-11",
         "expiresAt": "2026-12-12T00:00:00-06:00",
-        "description": "The Factory \u00b7 Check the official event page for tickets and changes.",
+        "description": "The Factory · Check the official event page for tickets and changes.",
         "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
-        "source": "The Factory \u00b7 official calendar",
+        "source": "The Factory · official calendar",
         "sourceUrl": "https://thefactorystl.com/",
         "url": "https://thefactorystl.com/",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -2604,9 +2604,9 @@
         "venue": "The Factory",
         "start": "2026-12-12",
         "expiresAt": "2026-12-13T00:00:00-06:00",
-        "description": "The Factory \u00b7 Check the official event page for tickets and changes.",
+        "description": "The Factory · Check the official event page for tickets and changes.",
         "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
-        "source": "The Factory \u00b7 official calendar",
+        "source": "The Factory · official calendar",
         "sourceUrl": "https://thefactorystl.com/",
         "url": "https://thefactorystl.com/",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -2627,9 +2627,9 @@
         "venue": "The Factory",
         "start": "2026-12-18",
         "expiresAt": "2026-12-19T00:00:00-06:00",
-        "description": "The Factory \u00b7 Check the official event page for tickets and changes.",
+        "description": "The Factory · Check the official event page for tickets and changes.",
         "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
-        "source": "The Factory \u00b7 official calendar",
+        "source": "The Factory · official calendar",
         "sourceUrl": "https://thefactorystl.com/",
         "url": "https://thefactorystl.com/",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -2650,9 +2650,9 @@
         "venue": "The Factory",
         "start": "2026-12-19",
         "expiresAt": "2026-12-20T00:00:00-06:00",
-        "description": "The Factory \u00b7 Check the official event page for tickets and changes.",
+        "description": "The Factory · Check the official event page for tickets and changes.",
         "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
-        "source": "The Factory \u00b7 official calendar",
+        "source": "The Factory · official calendar",
         "sourceUrl": "https://thefactorystl.com/",
         "url": "https://thefactorystl.com/",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -2673,9 +2673,9 @@
         "venue": "The Factory",
         "start": "2026-12-20",
         "expiresAt": "2026-12-21T00:00:00-06:00",
-        "description": "The Factory \u00b7 Check the official event page for tickets and changes.",
+        "description": "The Factory · Check the official event page for tickets and changes.",
         "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
-        "source": "The Factory \u00b7 official calendar",
+        "source": "The Factory · official calendar",
         "sourceUrl": "https://thefactorystl.com/",
         "url": "https://thefactorystl.com/",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -2696,9 +2696,9 @@
         "venue": "Red Flag",
         "start": "2027-02-27",
         "expiresAt": "2027-02-28T00:00:00-06:00",
-        "description": "Red Flag \u00b7 Check the official event page for tickets and changes.",
+        "description": "Red Flag · Check the official event page for tickets and changes.",
         "address": "Red Flag, 3040 Locust St, St Louis MO",
-        "source": "Red Flag \u00b7 official calendar",
+        "source": "Red Flag · official calendar",
         "sourceUrl": "https://www.redflagstl.com/shows/trapt-27-feb",
         "url": "https://www.redflagstl.com/shows/trapt-27-feb",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -2719,9 +2719,9 @@
         "venue": "Red Flag",
         "start": "2027-01-30",
         "expiresAt": "2027-01-31T00:00:00-06:00",
-        "description": "Red Flag \u00b7 Check the official event page for tickets and changes.",
+        "description": "Red Flag · Check the official event page for tickets and changes.",
         "address": "Red Flag, 3040 Locust St, St Louis MO",
-        "source": "Red Flag \u00b7 official calendar",
+        "source": "Red Flag · official calendar",
         "sourceUrl": "https://www.redflagstl.com/shows/jurassic-party-raze-the-dead-30-jan",
         "url": "https://www.redflagstl.com/shows/jurassic-party-raze-the-dead-30-jan",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -2742,9 +2742,9 @@
         "venue": "Red Flag",
         "start": "2026-11-22",
         "expiresAt": "2026-11-23T00:00:00-06:00",
-        "description": "Red Flag \u00b7 Check the official event page for tickets and changes.",
+        "description": "Red Flag · Check the official event page for tickets and changes.",
         "address": "Red Flag, 3040 Locust St, St Louis MO",
-        "source": "Red Flag \u00b7 official calendar",
+        "source": "Red Flag · official calendar",
         "sourceUrl": "https://www.redflagstl.com/shows/vonoff1700-tg4ltour-22-nov",
         "url": "https://www.redflagstl.com/shows/vonoff1700-tg4ltour-22-nov",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -2765,9 +2765,9 @@
         "venue": "Red Flag",
         "start": "2027-01-16",
         "expiresAt": "2027-01-17T00:00:00-06:00",
-        "description": "Red Flag \u00b7 Check the official event page for tickets and changes.",
+        "description": "Red Flag · Check the official event page for tickets and changes.",
         "address": "Red Flag, 3040 Locust St, St Louis MO",
-        "source": "Red Flag \u00b7 official calendar",
+        "source": "Red Flag · official calendar",
         "sourceUrl": "https://www.redflagstl.com/shows/metalfest-10-16-jan",
         "url": "https://www.redflagstl.com/shows/metalfest-10-16-jan",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -2788,9 +2788,9 @@
         "venue": "Red Flag",
         "start": "2026-12-13",
         "expiresAt": "2026-12-14T00:00:00-06:00",
-        "description": "Red Flag \u00b7 Check the official event page for tickets and changes.",
+        "description": "Red Flag · Check the official event page for tickets and changes.",
         "address": "Red Flag, 3040 Locust St, St Louis MO",
-        "source": "Red Flag \u00b7 official calendar",
+        "source": "Red Flag · official calendar",
         "sourceUrl": "https://www.redflagstl.com/shows/a-bobby-nsenga-experience-feat-bobby-nsenga-13-dec",
         "url": "https://www.redflagstl.com/shows/a-bobby-nsenga-experience-feat-bobby-nsenga-13-dec",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -2811,9 +2811,9 @@
         "venue": "Red Flag",
         "start": "2026-11-15",
         "expiresAt": "2026-11-16T00:00:00-06:00",
-        "description": "Red Flag \u00b7 Check the official event page for tickets and changes.",
+        "description": "Red Flag · Check the official event page for tickets and changes.",
         "address": "Red Flag, 3040 Locust St, St Louis MO",
-        "source": "Red Flag \u00b7 official calendar",
+        "source": "Red Flag · official calendar",
         "sourceUrl": "https://www.redflagstl.com/shows/gravehuffer-15-nov",
         "url": "https://www.redflagstl.com/shows/gravehuffer-15-nov",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -2834,9 +2834,9 @@
         "venue": "Red Flag",
         "start": "2026-12-12",
         "expiresAt": "2026-12-13T00:00:00-06:00",
-        "description": "Red Flag \u00b7 Check the official event page for tickets and changes.",
+        "description": "Red Flag · Check the official event page for tickets and changes.",
         "address": "Red Flag, 3040 Locust St, St Louis MO",
-        "source": "Red Flag \u00b7 official calendar",
+        "source": "Red Flag · official calendar",
         "sourceUrl": "https://www.redflagstl.com/shows/voodoo-glow-skulls-koffin-kats-12-dec",
         "url": "https://www.redflagstl.com/shows/voodoo-glow-skulls-koffin-kats-12-dec",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
@@ -2857,12 +2857,562 @@
         "venue": "Red Flag",
         "start": "2027-02-26",
         "expiresAt": "2027-02-27T00:00:00-06:00",
-        "description": "Red Flag \u00b7 Check the official event page for tickets and changes.",
+        "description": "Red Flag · Check the official event page for tickets and changes.",
         "address": "Red Flag, 3040 Locust St, St Louis MO",
-        "source": "Red Flag \u00b7 official calendar",
+        "source": "Red Flag · official calendar",
         "sourceUrl": "https://www.redflagstl.com/shows/the-queers-toxic-energy-27-feb",
         "url": "https://www.redflagstl.com/shows/the-queers-toxic-energy-27-feb",
         "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.588485,
+          38.670028
+        ]
+      },
+      "properties": {
+        "id": "venue-event:7d754c87a0dd4727ce467100",
+        "title": "Ninajirachi",
+        "start": "2026-12-31",
+        "expiresAt": "2027-01-01T00:00:00-06:00",
+        "description": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://thefactorystl.com/events/",
+        "url": "https://thefactorystl.com/events/ninajirachi/",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.588485,
+          38.670028
+        ]
+      },
+      "properties": {
+        "id": "venue-event:b1658f7c9fc8adb95ed42d45",
+        "title": "Hip Hop Orchestra",
+        "start": "2027-01-16",
+        "expiresAt": "2027-01-17T00:00:00-06:00",
+        "description": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://thefactorystl.com/events/",
+        "url": "https://thefactorystl.com/events/edm-orchestra/",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.588485,
+          38.670028
+        ]
+      },
+      "properties": {
+        "id": "venue-event:17e75efa36b98371eeee8589",
+        "title": "Kameron Marlowe",
+        "start": "2027-01-24",
+        "expiresAt": "2027-01-25T00:00:00-06:00",
+        "description": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://thefactorystl.com/events/",
+        "url": "https://thefactorystl.com/events/kameron-marlowe/",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.588485,
+          38.670028
+        ]
+      },
+      "properties": {
+        "id": "venue-event:ef7257239505e4f8d1c029ac",
+        "title": "Alan Walker",
+        "start": "2027-01-26",
+        "expiresAt": "2027-01-27T00:00:00-06:00",
+        "description": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://thefactorystl.com/events/",
+        "url": "https://thefactorystl.com/events/alan-walker/",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.588485,
+          38.670028
+        ]
+      },
+      "properties": {
+        "id": "venue-event:73f05b04da9ff3cb96880068",
+        "title": "Taylorville – A Tribute to Taylor Swift",
+        "start": "2027-02-06",
+        "expiresAt": "2027-02-07T00:00:00-06:00",
+        "description": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://thefactorystl.com/events/",
+        "url": "https://thefactorystl.com/events/taylorville-a-tribute-to-taylor-swift/",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.588485,
+          38.670028
+        ]
+      },
+      "properties": {
+        "id": "venue-event:f7366358c87c6a0b6808df52",
+        "title": "Vincent Mason: When Youre Not Around Tour 2027",
+        "start": "2027-02-11",
+        "expiresAt": "2027-02-12T00:00:00-06:00",
+        "description": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://thefactorystl.com/events/",
+        "url": "https://thefactorystl.com/events/vincent-mason-when-youre-not-around-tour-2027/",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.588485,
+          38.670028
+        ]
+      },
+      "properties": {
+        "id": "venue-event:d8048b1b17d4e46504f98e75",
+        "title": "Meshuggah: The Forty-Year Anomaly w/ Testament & Blood Incantation",
+        "start": "2027-02-23",
+        "expiresAt": "2027-02-24T00:00:00-06:00",
+        "description": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://thefactorystl.com/events/",
+        "url": "https://thefactorystl.com/events/meshuggah-the-forty-year-anomaly-w-testament-blood-incantation/",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.588485,
+          38.670028
+        ]
+      },
+      "properties": {
+        "id": "venue-event:deb327b11079887d8b41eac9",
+        "title": "Wheeler Walker Jr. – Pullin’ Out: The Farewell Tour",
+        "start": "2027-02-25",
+        "expiresAt": "2027-02-26T00:00:00-06:00",
+        "description": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://thefactorystl.com/events/",
+        "url": "https://thefactorystl.com/events/wheeler-walker-jr-pullin-out-the-farewell-tour/",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.588485,
+          38.670028
+        ]
+      },
+      "properties": {
+        "id": "venue-event:f90a27020782b55fae295c1b",
+        "title": "Welcome Back My Friends – An Evening with Emerson, Lake & Palmer",
+        "start": "2027-02-26",
+        "expiresAt": "2027-02-27T00:00:00-06:00",
+        "description": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://thefactorystl.com/events/",
+        "url": "https://thefactorystl.com/events/welcome-back-my-friends-an-evening-with-emerson-lake-palmer/",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.588485,
+          38.670028
+        ]
+      },
+      "properties": {
+        "id": "venue-event:9c56e447f82914707a209ff4",
+        "title": "Lake Street Dive – What About Flamingos? 2027 Tour",
+        "start": "2027-02-28",
+        "expiresAt": "2027-03-01T00:00:00-06:00",
+        "description": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://thefactorystl.com/events/",
+        "url": "https://thefactorystl.com/events/lake-street-dive-what-about-flamingos-2027-tour/",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.588485,
+          38.670028
+        ]
+      },
+      "properties": {
+        "id": "venue-event:f86215f4c2220704d9c90a8e",
+        "title": "Bethel Music 2027 Tour",
+        "start": "2027-03-01",
+        "expiresAt": "2027-03-02T00:00:00-06:00",
+        "description": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://thefactorystl.com/events/",
+        "url": "https://thefactorystl.com/events/bethel-music-2027-tour/",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.588485,
+          38.670028
+        ]
+      },
+      "properties": {
+        "id": "venue-event:9d48354b2a13ad03849fea3d",
+        "title": "Twilight In Concert",
+        "start": "2027-03-07",
+        "expiresAt": "2027-03-08T00:00:00-06:00",
+        "description": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://thefactorystl.com/events/",
+        "url": "https://thefactorystl.com/events/twilight-in-concert/",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.588485,
+          38.670028
+        ]
+      },
+      "properties": {
+        "id": "venue-event:8fd5e76b81a8e3769244a982",
+        "title": "The Plot In You: WORLD TOUR: PART 1",
+        "start": "2027-03-12",
+        "expiresAt": "2027-03-13T00:00:00-06:00",
+        "description": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://thefactorystl.com/events/",
+        "url": "https://thefactorystl.com/events/the-plot-in-you-world-tour-part-1/",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.588485,
+          38.670028
+        ]
+      },
+      "properties": {
+        "id": "venue-event:596fbaf73ce6aa72a708d9ea",
+        "title": "Blue October",
+        "start": "2027-03-13",
+        "expiresAt": "2027-03-14T00:00:00-06:00",
+        "description": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://thefactorystl.com/events/",
+        "url": "https://thefactorystl.com/events/blue-october/",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2316,
+          38.6389
+        ]
+      },
+      "properties": {
+        "id": "venue-event:fc10ce2c531a8869a03a3e7e",
+        "title": "Mannheim Steamroller Christmas",
+        "start": "2026-12-04",
+        "expiresAt": "2026-12-05T00:00:00-06:00",
+        "description": "The Fabulous Fox, 527 N Grand Blvd, St Louis MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Fabulous Fox, 527 N Grand Blvd, St Louis MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://www.fabulousfox.com/events",
+        "url": "https://www.fabulousfox.com/events/detail/mannheim-steamroller",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2316,
+          38.6389
+        ]
+      },
+      "properties": {
+        "id": "venue-event:6c0cdd7d93a58b2c81b18fc8",
+        "title": "Distant Worlds: music from FINAL FANTASY",
+        "start": "2026-12-05",
+        "expiresAt": "2026-12-06T00:00:00-06:00",
+        "description": "The Fabulous Fox, 527 N Grand Blvd, St Louis MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Fabulous Fox, 527 N Grand Blvd, St Louis MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://www.fabulousfox.com/events",
+        "url": "https://www.fabulousfox.com/events/detail/final-fantasy",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2316,
+          38.6389
+        ]
+      },
+      "properties": {
+        "id": "venue-event:482aaed3f0577e7de22de50e",
+        "title": "Lindsey Stirling",
+        "start": "2026-12-10",
+        "expiresAt": "2026-12-11T00:00:00-06:00",
+        "description": "The Fabulous Fox, 527 N Grand Blvd, St Louis MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Fabulous Fox, 527 N Grand Blvd, St Louis MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://www.fabulousfox.com/events",
+        "url": "https://www.fabulousfox.com/events/detail/lindsey-stirling",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2316,
+          38.6389
+        ]
+      },
+      "properties": {
+        "id": "venue-event:d7aabb9868ff0a7ac82dff99",
+        "title": "Brett Eldredge",
+        "start": "2026-12-12",
+        "expiresAt": "2026-12-13T00:00:00-06:00",
+        "description": "The Fabulous Fox, 527 N Grand Blvd, St Louis MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Fabulous Fox, 527 N Grand Blvd, St Louis MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://www.fabulousfox.com/events",
+        "url": "https://www.fabulousfox.com/events/detail/brett-eldredge",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2316,
+          38.6389
+        ]
+      },
+      "properties": {
+        "id": "venue-event:a459eeefcd547deca32ef3c3",
+        "title": "Love Actually In Concert",
+        "start": "2026-12-13",
+        "expiresAt": "2026-12-14T00:00:00-06:00",
+        "description": "The Fabulous Fox, 527 N Grand Blvd, St Louis MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Fabulous Fox, 527 N Grand Blvd, St Louis MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://www.fabulousfox.com/events",
+        "url": "https://www.fabulousfox.com/events/detail/love-actually",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2316,
+          38.6389
+        ]
+      },
+      "properties": {
+        "id": "venue-event:5111488a66251b1e8f6a2dd8",
+        "title": "Straight No Chaser",
+        "start": "2026-12-16",
+        "expiresAt": "2026-12-17T00:00:00-06:00",
+        "description": "The Fabulous Fox, 527 N Grand Blvd, St Louis MO · Check the official listing for showtime, tickets and changes.",
+        "address": "The Fabulous Fox, 527 N Grand Blvd, St Louis MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://www.fabulousfox.com/events",
+        "url": "https://www.fabulousfox.com/events/detail/straight-no-chaser",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4696,
+          38.7446
+        ]
+      },
+      "properties": {
+        "id": "venue-event:d822219e17147753d439819f",
+        "title": "Deftones - North American Tour 2027",
+        "start": "2027-06-03",
+        "expiresAt": "2027-06-04T00:00:00-05:00",
+        "description": "Hollywood Casino Amphitheater, 14141 Riverport Dr, Maryland Heights MO · Check the official listing for showtime, tickets and changes.",
+        "address": "Hollywood Casino Amphitheater, 14141 Riverport Dr, Maryland Heights MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://www.hollywoodcasinoampstlouis.com/",
+        "url": "https://www.hollywoodcasinoampstlouis.com/",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4696,
+          38.7446
+        ]
+      },
+      "properties": {
+        "id": "venue-event:c93fb915c24a7ddc3a5a899a",
+        "title": "Matchbox Twenty - 30",
+        "start": "2027-06-23",
+        "expiresAt": "2027-06-24T00:00:00-05:00",
+        "description": "Hollywood Casino Amphitheater, 14141 Riverport Dr, Maryland Heights MO · Check the official listing for showtime, tickets and changes.",
+        "address": "Hollywood Casino Amphitheater, 14141 Riverport Dr, Maryland Heights MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://www.hollywoodcasinoampstlouis.com/",
+        "url": "https://www.hollywoodcasinoampstlouis.com/",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4696,
+          38.7446
+        ]
+      },
+      "properties": {
+        "id": "venue-event:02ce4b7fc97f52723495eb16",
+        "title": "Riley Green: That's Just Me Tour",
+        "start": "2027-07-30",
+        "expiresAt": "2027-07-31T00:00:00-05:00",
+        "description": "Hollywood Casino Amphitheater, 14141 Riverport Dr, Maryland Heights MO · Check the official listing for showtime, tickets and changes.",
+        "address": "Hollywood Casino Amphitheater, 14141 Riverport Dr, Maryland Heights MO",
+        "source": "Official venue calendar",
+        "sourceUrl": "https://www.hollywoodcasinoampstlouis.com/",
+        "url": "https://www.hollywoodcasinoampstlouis.com/",
+        "sourceCheckedAt": "2026-11-15T18:29:26.036710+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2316,
+          38.6389
+        ]
+      },
+      "properties": {
+        "id": "venue-event:a6e9e975af50b5c086837601",
+        "title": "The Temptations Farewell Tour with The Spinners",
+        "start": "2027-01-09",
+        "expiresAt": "2027-01-10T00:00:00-06:00",
+        "description": "The Fabulous Fox · Check official listing for showtime, tickets and changes.",
+        "address": "The Fabulous Fox, 527 N Grand Blvd, St Louis MO",
+        "source": "Official Fox ticketing calendar (MetroTix)",
+        "sourceUrl": "https://www.metrotix.com/venues/detail/fox-theatre",
+        "url": "https://www.metrotix.com/venues/detail/fox-theatre",
+        "sourceCheckedAt": "2026-11-15T18:30:52.071081+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2316,
+          38.6389
+        ]
+      },
+      "properties": {
+        "id": "venue-event:7e5af39caf65971c8059f683",
+        "title": "A Valentine's Celebration featuring Jeffrey Osborne, Will Downing and Regina Belle",
+        "start": "2027-02-13",
+        "expiresAt": "2027-02-14T00:00:00-06:00",
+        "description": "The Fabulous Fox · Check official listing for showtime, tickets and changes.",
+        "address": "The Fabulous Fox, 527 N Grand Blvd, St Louis MO",
+        "source": "Official Fox ticketing calendar (MetroTix)",
+        "sourceUrl": "https://www.metrotix.com/venues/detail/fox-theatre",
+        "url": "https://www.metrotix.com/venues/detail/fox-theatre",
+        "sourceCheckedAt": "2026-11-15T18:30:52.071090+00:00"
       }
     }
   ]
