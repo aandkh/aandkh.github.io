@@ -6,6 +6,19 @@ def module(name):
  spec=importlib.util.spec_from_file_location(name,ROOT/('refresh-'+name+'.py'));m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);return m
 movies=module('movies');sports=module('sports')
 class EventParsers(unittest.TestCase):
+ def test_retired_theater_is_not_a_source_or_fallback(self):
+  self.assertNotIn('galleria-6-cinemas',movies.THEATERS)
+  self.assertTrue(movies.excluded_venue({'venue':'Galleria 6 Cinemas'}))
+  self.assertTrue(movies.excluded_venue({'sourceUrl':'https://feverup.com/movies/en/united-states/movie-theaters/galleria-6-cinemas?date=2026-11-16'}))
+  self.assertFalse(movies.excluded_venue({'venue':'Chase Park Plaza Cinemas'}))
+ def test_movie_date_only_remains_until_local_midnight(self):
+  prior=movies.NOW
+  try:
+   movies.NOW=movies.dt.datetime.fromisoformat('2026-03-09T04:59:59+00:00')
+   self.assertTrue(movies.future({'properties':{'start':'2026-03-08'}}))
+   movies.NOW=movies.dt.datetime.fromisoformat('2026-03-09T05:00:00+00:00')
+   self.assertFalse(movies.future({'properties':{'start':'2026-03-08'}}))
+  finally:movies.NOW=prior
  def test_fever_correct_date_and_optional_facts(self):
   d={'/countries/united-states/venues/local/':{'name':'Local','latitude':38.6,'longitude':-90.2,'address':'Local St'},'movie_sessions_for_date/2026-11-16/':[{'title':'Film','screenFormatSessions':[{'sessions':[{'sessionId':1,'time':'2026-11-16T19:00:00-06:00'}]}]}]}
   text='<script id="serverapp-state" type="application/json">'+json.dumps(d)+'</script>'

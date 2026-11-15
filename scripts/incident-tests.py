@@ -5,6 +5,15 @@ import importlib.util,pathlib,unittest,tempfile,datetime,json
 from unittest.mock import patch
 spec=importlib.util.spec_from_file_location('refresh',pathlib.Path(__file__).with_name('incident-refresh.py'));m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
 class IncidentTests(unittest.TestCase):
+ def test_coverage_never_silently_loses_county(self):
+  now=datetime.datetime(2026,11,15,18,tzinfo=datetime.timezone.utc)
+  sources=[{'id':i,'latestIncidentDate':'2026-11-08','status':'ok'} for i in ['city-crimemapping','county-nibrs','county-crashes','county-florissant']]
+  audit=m.coverage_audit([],sources,now);self.assertEqual(audit['byJurisdiction']['county']['pastWeek'],0)
+  self.assertIn('empty-region-week',[w['code'] for w in audit['warnings']]);self.assertIn('weekly-lag',[w['code'] for w in audit['warnings']])
+  self.assertIn('missing-source',[w['code'] for w in m.coverage_audit([],sources[:1],now)['warnings']])
+ def test_fatality_index_does_not_infer_victims_or_include_crashes(self):
+  rows=[{'properties':{'id':'h','incidentKind':'homicide','incidentAt':'2026-08-20'}},{'properties':{'id':'c','incidentKind':'crash','deaths':1,'incidentAt':'2026-11-10'}}]
+  result=m.fatality_records(rows);self.assertEqual(len(result),1);self.assertNotIn('deaths',result[0]['properties'])
  def crime(self,**extra):
   return dict(Report_Number='26-100',reportingJuris='TEST MUNICIPALITY',forJuris='TEST',address='449 TEST RD',longitude=-90.350456,latitude=38.650456,occurred='2026-11-08',OffenseName='Assault, Simple/Other',**extra)
  def test_highway_numbers_are_not_house_numbers(self):
@@ -42,6 +51,10 @@ class CityIncidentTests(unittest.TestCase):
   p=self.city.convert([row],'now')[0][0]['properties'];self.assertEqual(p['incidentAt'],'2026-11-01');self.assertEqual(p['incidentLocalTime'],'01:30')
  def test_city_source_category_exclusions(self):
   filters,_=self.city.filters_for(datetime.date(2026,11,1),datetime.date(2026,11,8));self.assertEqual(filters['AgencyFilter'],[726]);self.assertNotIn(11,filters['SelectedCategories']);self.assertNotIn(17,filters['SelectedCategories']);self.assertNotIn(18,filters['SelectedCategories'])
+ def test_florissant_is_county_and_not_same_id_as_city(self):
+  source=self.city.FLORISSANT;filters,_=self.city.filters_for(datetime.date(2026,11,1),datetime.date(2026,11,8),source);self.assertEqual(filters['AgencyFilter'],[639])
+  row={'report':'123','date':'20261110103000','offense':'THEFT','address':'100 TEST ST','type':'theft','longitude':-90.35,'latitude':38.8}
+  p=self.city.convert([row],'now',source)[0][0]['properties'];self.assertEqual(p['jurisdiction'],'county');self.assertEqual(p['id'],'incident:florissant-case:123');self.assertEqual(p['sourceId'],'county-florissant')
  def test_city_never_accepts_truncated_results(self):
   with patch.object(self.city,'post',return_value={'result':{'st':1}}):self.assertRaises(RuntimeError,self.city.fetch_window,datetime.date(2026,11,1),datetime.date(2026,11,1))
  def test_city_map_and_report_join_and_mercator(self):

@@ -43,14 +43,39 @@ export function weatherInsightRows(weather,{now=Date.now(),air=null}={}){
  }).sort((a,b)=>a.time-b.time);
 }
 export function rankOutdoorHours(rows,preference='mild'){
- const pref=OUTDOOR_PREFERENCES[preference]||OUTDOOR_PREFERENCES.mild;
+ const key=Object.hasOwn(OUTDOOR_PREFERENCES,preference)?preference:'mild',pref=OUTDOOR_PREFERENCES[key],target=(pref.min+pref.max)/2;
  // Equal air coverage: missing AQI never silently beats a known poor AQI.
  const candidates=rows.filter(r=>r.daylight&&[r.feelsLikeF,r.windMph,r.rainPct].every(finite));
  const useAir=candidates.length>0&&candidates.every(r=>finite(r.aqi));
- return candidates.map(row=>{const tempGap=Math.max(pref.min-row.feelsLikeF,0,row.feelsLikeF-pref.max),score=100-tempGap*2-row.rainPct*.45-Math.max(0,row.windMph-6)*1.5-Math.max(0,(row.gustMph??row.windMph)-15)- (useAir?Math.max(0,row.aqi-30)*.35:0)-(row.thunder?100:0);
-  return{...row,score:clamp(score,0,100),rankingScore:score,usesAir:useAir,favorable:tempGap===0&&row.rainPct<=20&&row.windMph<=15&&(row.gustMph===null||row.gustMph<25)&&!row.thunder&&useAir&&row.aqi<=50};
- }).sort((a,b)=>b.rankingScore-a.rankingScore||a.time-b.time);
+ return candidates.map(row=>{
+  const tempGap=Math.max(pref.min-row.feelsLikeF,0,row.feelsLikeF-pref.max);
+  // The range is acceptable, not a flat tie: gently favor its midpoint. A
+  // one-degree change inside the range is only 0.35 points; rain, strong wind,
+  // gusts, poor air and thunder still outweigh small comfort differences.
+  const temperaturePenalty=tempGap*2+Math.abs(row.feelsLikeF-target)*.35;
+  const weatherPenalty=row.rainPct*.45+Math.max(0,row.windMph-6)*1.5+Math.max(0,(row.gustMph??row.windMph)-15)+(useAir?Math.max(0,row.aqi-30)*.35:0)+(row.thunder?100:0);
+  const score=100-temperaturePenalty-weatherPenalty,temperatureFit=tempGap===0?'within':row.feelsLikeF<pref.min?'below':'above';
+  return{...row,score:clamp(score,0,100),rankingScore:score,usesAir:useAir,preference:key,temperatureFit,temperatureGapF:tempGap,temperatureTargetF:target,temperaturePenalty,weatherPenalty,favorable:tempGap===0&&row.rainPct<=20&&row.windMph<=15&&(row.gustMph===null||row.gustMph<25)&&!row.thunder&&useAir&&row.aqi<=50};
+ }).sort((a,b)=>Math.abs(b.rankingScore-a.rankingScore)>1e-9?b.rankingScore-a.rankingScore:a.time-b.time);
 }
+export function outdoorPreferenceExplanation(rows,preference='mild',ranked=rankOutdoorHours(rows,preference)){
+ const key=Object.hasOwn(OUTDOOR_PREFERENCES,preference)?preference:'mild',pref=OUTDOOR_PREFERENCES[key],best=ranked[0];
+ if(!best)return{summary:'No complete daylight hour is available in this forecast.',sameTopPreferences:[],tiedHours:0};
+ const low=Math.min(...ranked.map(r=>r.feelsLikeF)),high=Math.max(...ranked.map(r=>r.feelsLikeF)),range=pref.min+'–'+pref.max+'°F';
+ const temperature=high<pref.min?`Every available daylight hour is below your ${range} range.`:low>pref.max?`Every available daylight hour is above your ${range} range.`:best.temperatureFit==='within'?`This hour is within your ${range} range.`:`This hour feels ${best.temperatureFit} your ${range} range, but ranks highest after rain, wind and air quality are weighed.`;
+ const sameTopPreferences=Object.keys(OUTDOOR_PREFERENCES).filter(other=>other!==key&&rankOutdoorHours(rows,other)[0]?.time===best.time);
+ const names=sameTopPreferences.map(other=>other[0].toUpperCase()+other.slice(1));
+ const shared=names.length?`The same hour leads for ${names.join(' and ')}.`:'';
+ const spread=high-low<=2?`Forecast feels like ${Math.round(low)}–${Math.round(high)}°F.`:'';
+ const tiedHours=ranked.filter(r=>Math.abs(r.rankingScore-best.rankingScore)<1e-9).length;
+ const tied=tiedHours>1?`${tiedHours} hours tie; earliest first.`:'';
+ return{summary:[temperature,shared,spread,tied].filter(Boolean).join(' '),sameTopPreferences,tiedHours,lowF:low,highF:high};
+}
+export function outdoorTemperatureFit(row){
+ const pref=OUTDOOR_PREFERENCES[row.preference]||OUTDOOR_PREFERENCES.mild,name=(row.preference||'mild');
+ return (row.temperatureFit==='within'?'Within':row.temperatureFit==='below'?'Below':'Above')+' your '+name+' range · '+pref.min+'–'+pref.max+'°F';
+}
+
 export function weatherTurningPoints(rows){
  const pairs=rows.slice(1).map((to,i)=>({from:rows[i],to})).filter(({from,to})=>to.time-from.time>=.75*HOUR&&to.time-from.time<=1.25*HOUR),points=[];
  const pick=(kind,label,measure,threshold)=>{const found=pairs.map(pair=>({...pair,change:measure(pair.from,pair.to)})).filter(x=>finite(x.change)&&Math.abs(x.change)>=threshold).sort((a,b)=>Math.abs(b.change)-Math.abs(a.change)||a.to.time-b.to.time)[0];if(found)points.push({...found,kind,label});};
@@ -76,22 +101,32 @@ const directions=['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW'
 const compass=d=>finite(d)?directions[Math.round(d/22.5)%16]:'—';
 function sourceLink(text,href){const a=make('a',text);a.href=href;a.target='_blank';a.rel='noopener noreferrer';return a;}
 function section(title){const s=make('section',undefined,'weather-insight');s.append(make('h3',title));return s;}
-function rowButton(title,detail,time,onSelect){const b=make('button',undefined,'weather-insight-option');b.type='button';b.append(make('strong',title),make('span',detail));b.onclick=()=>onSelect?.(new Date(time).toISOString());return b;}
+function rowButton(title,detail,time,onSelect){const b=make('button',undefined,'weather-insight-option');b.type='button';b.append(make('strong',title),make('span',detail));b.dataset.forecastTime=new Date(time).toISOString();b.onclick=()=>onSelect?.(new Date(time).toISOString());return b;}
 export function appendWeatherInsights(host,weather,{onSelect,now=Date.now(),airLoader=loadAirForecast,preferences={}}={}){
  const wrapper=make('div',undefined,'weather-insights'),best=section('Best outdoor hour'),turning=section('Weather turning points'),vent=section('Ventilation windows');wrapper.append(best,turning,vent);host.append(wrapper);
- let air=null,airStatus='loading';const comfort=make('select');comfort.setAttribute('aria-label','Preferred outdoor temperature');comfort.dataset.inspectionKey='outdoor-preference';for(const[key,pref]of Object.entries(OUTDOOR_PREFERENCES)){const o=make('option',pref.label);o.value=key;comfort.append(o);}comfort.value=preferences.comfort||'mild';
- const prefLabel=make('label','I prefer ');prefLabel.append(comfort);best.append(prefLabel);const bestBody=make('div');best.append(bestBody);
+ let air=null,airStatus='loading';const comfort=make('select');comfort.setAttribute('aria-label','Preferred outdoor temperature');comfort.dataset.inspectionKey='outdoor-preference';for(const[key,pref]of Object.entries(OUTDOOR_PREFERENCES)){const o=make('option',pref.label);o.value=key;comfort.append(o);}comfort.value=Object.hasOwn(OUTDOOR_PREFERENCES,preferences.comfort)?preferences.comfort:'mild';
+ const prefLabel=make('label','I prefer ');prefLabel.append(comfort);best.append(prefLabel);const bestBody=make('div',undefined,'weather-best-hours');bestBody.setAttribute('aria-live','polite');bestBody.setAttribute('aria-atomic','true');best.append(bestBody);
  const ventPrefs=make('details',undefined,'weather-insight-settings');ventPrefs.append(make('summary','Adjust outdoor temperature range'));
  const min=make('input'),max=make('input');for(const[input,label,defaultValue]of [[min,'Minimum outdoor temperature',preferences.minF??55],[max,'Maximum outdoor temperature',preferences.maxF??78]]){input.type='number';input.min='32';input.max='90';input.step='1';input.value=String(defaultValue);input.setAttribute('aria-label',label);input.dataset.inspectionKey=label;const l=make('label',label+' · °F');l.append(input);ventPrefs.append(l);}
  const ventBody=make('div'),turningBody=make('div');vent.append(ventBody,ventPrefs);turning.append(turningBody);
- const provenance=make('details',undefined,'weather-insight-method');provenance.append(make('summary','Sources & how these suggestions work'),make('p','Best outdoor hour compares the next 24 hours of available daylight forecasts. Ranking favors your temperature range, lower rain chance, lighter winds and lower modeled AQI. It is a preference comparison, not an official health score. If AQI coverage is incomplete, every hour is ranked on weather alone.'),make('p','Ventilation windows require modeled U.S. AQI ≤50, rain chance ≤20%, wind ≤15 mph, reported gusts below 25 mph, dew point ≤60°F, your temperature range and no forecast thunder. Dew point measures outdoor moisture; relative humidity alone can mislead. Indoor air, indoor temperature, pollen and local smoke are not measured.'),make('p','Turning points show the largest adjacent-hour temperature change (at least 3°F), gust increase (5 mph), rain-chance rise (20 percentage points) and wind shift (45°, with wind ≥3 mph). Missing hours are not bridged.'),sourceLink('NWS weather data','https://www.weather.gov/documentation/services-web-api'),document.createTextNode(' · '),sourceLink('CAMS regional air forecast','https://ads.atmosphere.copernicus.eu/datasets/cams-global-atmospheric-composition-forecasts'),document.createTextNode(' via '),sourceLink('Open-Meteo','https://open-meteo.com/en/docs/air-quality-api'),document.createTextNode(' · '),sourceLink('EPA ventilation guidance','https://www.epa.gov/indoor-air-quality-iaq/biological-contaminants-and-indoor-air-quality'));
- const sourceStatus=make('p',undefined,'weather-insight-note');provenance.append(sourceStatus);wrapper.append(provenance);
+ const provenance=make('details',undefined,'weather-insight-method');provenance.append(make('summary','Sources & how these suggestions work'),make('p','Best outdoor hour compares the next 24 hours of available daylight forecasts. Ranking uses feels-like temperature. It gently favors the midpoint of your selected range, penalizes temperatures outside it more, and also weighs rain chance, wind, gusts, thunder and modeled AQI. Small temperature differences do not outweigh much worse weather. Equal scores keep the earliest hour first; changing a preference does not force a different winner. It is a preference comparison, not an official health score. If AQI coverage is incomplete, every hour is ranked on weather alone.'),make('p','Ventilation windows require modeled U.S. AQI ≤50, rain chance ≤20%, wind ≤15 mph, reported gusts below 25 mph, dew point ≤60°F, your temperature range and no forecast thunder. Dew point measures outdoor moisture; relative humidity alone can mislead. Indoor air, indoor temperature, pollen and local smoke are not measured.'),make('p','Turning points show the largest adjacent-hour temperature change (at least 3°F), gust increase (5 mph), rain-chance rise (20 percentage points) and wind shift (45°, with wind ≥3 mph). Missing hours are not bridged.'),sourceLink('NWS weather data','https://www.weather.gov/documentation/services-web-api'),document.createTextNode(' · '),sourceLink('CAMS regional air forecast','https://ads.atmosphere.copernicus.eu/datasets/cams-global-atmospheric-composition-forecasts'),document.createTextNode(' via '),sourceLink('Open-Meteo','https://open-meteo.com/en/docs/air-quality-api'),document.createTextNode(' · '),sourceLink('EPA ventilation guidance','https://www.epa.gov/indoor-air-quality-iaq/biological-contaminants-and-indoor-air-quality'));
+ const credit=make('p',undefined,'weather-provider-credit');credit.append(sourceLink('NWS weather','https://www.weather.gov/'));
+ const airCredit=make('span');airCredit.hidden=true;airCredit.append(document.createTextNode(' · Air forecast: '),sourceLink('Copernicus CAMS','https://atmosphere.copernicus.eu/'),document.createTextNode(' via '),sourceLink('Open-Meteo','https://open-meteo.com/'));credit.append(airCredit);
+ const sourceStatus=make('p',undefined,'weather-insight-note'),airLicence=make('p',undefined,'weather-insight-note');airLicence.hidden=true;
+ const licenceLink=sourceLink('CC BY 4.0','https://creativecommons.org/licenses/by/4.0/');provenance.append(sourceStatus,airLicence,licenceLink);wrapper.append(credit,provenance);
  function render(){
   const renderNow=Math.max(now,Date.now()),rows=weatherInsightRows(weather,{now:renderNow,air}),ranked=rankOutdoorHours(rows,comfort.value);bestBody.replaceChildren();turningBody.replaceChildren();ventBody.replaceChildren();
+  const hasAir=rows.some(r=>finite(r.aqi));airCredit.hidden=airLicence.hidden=licenceLink.hidden=!hasAir;
+  if(hasAir)airLicence.textContent='Contains modified Copernicus Atmosphere Monitoring Service information '+new Date(air.retrievedAt).getUTCFullYear()+'. The European Commission and ECMWF are not responsible for Andymap’s use of this information. Open-Meteo data: CC BY 4.0. Andymap rounds displayed AQI and combines forecasts into its own preference comparisons; these are not official advisories.';
   if(!rows.length){for(const h of [bestBody,turningBody,ventBody])h.append(make('p','A fresh hourly forecast is needed. Try Update for map center.','weather-insight-note'));return;}
   if(!ranked.length)bestBody.append(make('p','No complete daylight hour is available in this forecast.','weather-insight-note'));
-  ranked.slice(0,3).forEach((r,i)=>{const title=(i===0?'Best available · ':'')+(r.time<renderNow?'Now · until '+stamp(r.time+HOUR):stamp(r.time)),detail=rounded(r.temperatureF)+'°F · '+rounded(r.rainPct)+'% rain · '+rounded(r.windMph)+' mph'+(r.thunder?' · Forecast thunder':'')+(finite(r.aqi)?' · AQI '+rounded(r.aqi)+' '+aqiLabel(r.aqi):'');bestBody.append(rowButton(title,detail,r.time,onSelect));});
-  if(ranked.length)bestBody.append(make('p',ranked[0].favorable?'Matches your temperature preference with low rain chance, light wind and modeled Good air.':'Best among the supplied daylight hours; conditions may still fall outside your preferences.','weather-insight-note'));
+  ranked.slice(0,3).forEach((r,i)=>{const title=(i===0?'Best available · ':'')+(r.time<renderNow?'Now · until '+stamp(r.time+HOUR):stamp(r.time)),detail=rounded(r.temperatureF)+'°F'+(Math.abs(r.feelsLikeF-r.temperatureF)>=.5?' · feels '+rounded(r.feelsLikeF)+'°F':'')+' · '+rounded(r.rainPct)+'% rain · '+rounded(r.windMph)+' mph'+(r.thunder?' · Forecast thunder':'')+(finite(r.aqi)?' · AQI '+rounded(r.aqi)+' '+aqiLabel(r.aqi):'');
+   const button=rowButton(title,detail,r.time,onSelect),fit=make('small',outdoorTemperatureFit(r),'weather-temperature-fit');fit.dataset.fit=r.temperatureFit;button.append(fit);bestBody.append(button);
+  });
+  if(ranked.length){
+   bestBody.append(make('p',outdoorPreferenceExplanation(rows,comfort.value,ranked).summary,'weather-insight-note weather-preference-explanation'));
+   if(ranked[0].favorable)bestBody.append(make('p','Low rain chance, light wind and modeled Good air also match.','weather-insight-note'));
+  }
   bestBody.append(make('p',airStatus==='loading'?'Checking regional air forecast…':ranked[0]?.usesAir?'Includes regional modeled air quality (~45 km grid).': 'Weather-only ranking · complete regional air forecasts are unavailable.','weather-insight-note'));
   const points=weatherTurningPoints(rows);for(const p of points){let detail=p.kind==='temperature'?`${rounded(p.from.temperatureF)}° → ${rounded(p.to.temperatureF)}°F (${p.change>0?'+':''}${rounded(p.change)}°)`:p.kind==='gust'?`${rounded(p.from.gustMph)} → ${rounded(p.to.gustMph)} mph`:p.kind==='rain'?`${rounded(p.from.rainPct)}% → ${rounded(p.to.rainPct)}%`: `${compass(p.from.direction)} → ${compass(p.to.direction)} · ${rounded(p.change)}° shift`;turningBody.append(rowButton(p.label+' · '+stamp(p.to.time),detail,p.to.time,onSelect));}
   if(!points.length){const comparable=rows.some((r,i)=>i>0&&r.time-rows[i-1].time<=1.25*HOUR&&['temperatureF','gustMph','rainPct','direction'].some(key=>finite(r[key])&&finite(rows[i-1][key])));turningBody.append(make('p',comparable?'No pronounced hour-to-hour changes in the supplied forecast.':'Not enough adjacent-hour data to compare weather changes.','weather-insight-note'));}

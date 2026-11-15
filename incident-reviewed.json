@@ -1,13 +1,13 @@
 {
-  "reviewedAt": "2026-11-15T18:42:58.846142+00:00",
+  "reviewedAt": "2026-11-15T19:44:02.622984+00:00",
   "features": [
     {
       "type": "Feature",
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -90.24756,
-          38.64037
+          -90.248,
+          38.64
         ]
       },
       "properties": {
@@ -37,8 +37,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -90.25455,
-          38.58617
+          -90.255,
+          38.586
         ]
       },
       "properties": {
@@ -59,6 +59,15 @@
         "sourceId": "city-releases",
         "incidentTypes": [
           "shooting"
+        ],
+        "fatalityEvidence": [
+          {
+            "category": "police",
+            "deaths": 1,
+            "sourceUrl": "https://slmpd.org/force-detectives-investigating-officer-involved-shooting-in-dutchtown/",
+            "summary": "SLMPD states responding officers fired shots, struck the person, and the person died at a hospital.",
+            "checkedAt": "2026-11-15T19:44:02.622984+00:00"
+          }
         ]
       }
     },
@@ -67,8 +76,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -90.20732,
-          38.79678
+          -90.207,
+          38.797
         ]
       },
       "properties": {
@@ -89,6 +98,15 @@
         "sourceId": "county-releases",
         "incidentTypes": [
           "shooting"
+        ],
+        "fatalityEvidence": [
+          {
+            "category": "other-homicide",
+            "deaths": 1,
+            "sourceUrl": "https://www.stlouiscountypolice.com/department-news/press-releases/news-release-homicide-investigation-in-the-1400-block-of-criterion-avenue/",
+            "summary": "County Police reports a fatal shooting after an altercation between the victim and a suspect, with a person of interest in custody.",
+            "checkedAt": "2026-11-15T19:44:02.622984+00:00"
+          }
         ]
       }
     },
@@ -97,8 +115,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -90.26539,
-          38.66919
+          -90.265,
+          38.669
         ]
       },
       "properties": {
@@ -119,6 +137,15 @@
         "sourceId": "city-releases",
         "incidentTypes": [
           "shooting"
+        ],
+        "fatalityEvidence": [
+          {
+            "category": "police",
+            "deaths": 1,
+            "sourceUrl": "https://slmpd.org/force-detectives-investigating-officer-involved-shooting-in-wells-goodfellow/",
+            "summary": "SLMPD reports a fatal exchange of gunfire between the person and an officer; contemporary reporting describes the person as killed in the shootout with police.",
+            "checkedAt": "2026-11-15T19:44:02.622984+00:00"
+          }
         ]
       }
     },
@@ -127,8 +154,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -90.25298,
-          38.59064
+          -90.253,
+          38.591
         ]
       },
       "properties": {
@@ -157,8 +184,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -90.27426,
-          38.58993
+          -90.274,
+          38.59
         ]
       },
       "properties": {
@@ -188,8 +215,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -90.18484,
-          38.6293
+          -90.185,
+          38.629
         ]
       },
       "properties": {
@@ -214,7 +241,16 @@
         "alternateIds": [
           "incident:city-case:26041891"
         ],
-        "reportNumber": "26041891"
+        "reportNumber": "26041891",
+        "fatalityEvidence": [
+          {
+            "category": "other-homicide",
+            "deaths": 1,
+            "sourceUrl": "https://slmpd.org/man-shot-killed-in-downtown-two-suspects-arrested/",
+            "summary": "SLMPD reports one homicide victim and two civilian suspects apprehended after fleeing the shooting.",
+            "checkedAt": "2026-11-15T19:44:02.622984+00:00"
+          }
+        ]
       }
     },
     {
@@ -222,8 +258,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -90.23516,
-          38.71989
+          -90.235,
+          38.72
         ]
       },
       "properties": {
@@ -256,8 +292,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -90.30213,
-          38.66924
+          -90.302,
+          38.669
         ]
       },
       "properties": {
@@ -286,8 +322,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -90.29166,
-          38.71255
+          -90.292,
+          38.713
         ]
       },
       "properties": {
@@ -316,8 +352,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -90.28211,
-          38.81568
+          -90.282,
+          38.816
         ]
       },
       "properties": {
@@ -714,6 +750,151 @@
         "injuries": 1,
         "severity": "critical injury"
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.227,
+          38.753
+        ]
+      },
+      "properties": {
+        "id": "incident:county-bellefontaine-cabot-20261114",
+        "title": "Shooting injury \u00b7 Bellefontaine Neighbors",
+        "incidentAt": "2026-11-14",
+        "incidentDate": "2026-11-14",
+        "incidentTimeAccuracy": "date-only",
+        "incidentKind": "shooting",
+        "incidentTypes": [
+          "shooting"
+        ],
+        "jurisdiction": "county",
+        "address": "Cabot Drive near Kilgore Drive, Bellefontaine Neighbors, MO",
+        "sourceId": "county-reviewed-news",
+        "source": "First Alert 4 \u00b7 Bellefontaine Neighbors Police reporting",
+        "sourceUrl": "https://www.firstalert4.com/2026/11/15/19-year-old-seriously-injured-shooting-bellefontaine-neighbors/",
+        "url": "https://www.firstalert4.com/2026/11/15/19-year-old-seriously-injured-shooting-bellefontaine-neighbors/",
+        "sourceCheckedAt": "2026-11-15T19:44:02.622984+00:00",
+        "description": "Police reported one person was shot near Cabot and Kilgore on November 14. The person underwent surgery and was described as serious but stable. Circumstances remain under investigation; occurrence time was not reported.",
+        "locationAccuracy": "Approximate reported block / intersection (about 100 m); not an exact scene",
+        "color": "#c52f73",
+        "injuries": 1,
+        "severity": "serious injury"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.513,
+          38.568
+        ]
+      },
+      "properties": {
+        "id": "incident:county-manchester-stabbing-20261109",
+        "title": "Fatal stabbing \u00b7 Manchester",
+        "incidentAt": "2026-11-09T23:50:00-06:00",
+        "incidentDate": "2026-11-09",
+        "incidentTimeAccuracy": "approximate",
+        "incidentKind": "homicide",
+        "incidentTypes": [
+          "homicide"
+        ],
+        "jurisdiction": "county",
+        "address": "700 block Westbrooke Village Drive, Manchester, MO",
+        "sourceId": "county-reviewed-news",
+        "source": "First Alert 4 \u00b7 Manchester Police reporting",
+        "sourceUrl": "https://www.firstalert4.com/2026/11/10/woman-custody-after-man-stabbed-death-manchester-apartment/",
+        "url": "https://www.firstalert4.com/2026/11/10/woman-custody-after-man-stabbed-death-manchester-apartment/",
+        "sourceCheckedAt": "2026-11-15T19:44:02.622984+00:00",
+        "description": "Police responded late November 9 to a reported fight and stabbing at an apartment complex. One person died at a hospital; another was taken into custody. Approximate reported block and response time; no apartment location is shown.",
+        "locationAccuracy": "Approximate reported block / intersection (about 100 m); not an exact scene",
+        "color": "#c52f73",
+        "deaths": 1,
+        "fatalityEvidence": [
+          {
+            "category": "other-homicide",
+            "deaths": 1,
+            "sourceUrl": "https://www.firstalert4.com/2026/11/10/woman-custody-after-man-stabbed-death-manchester-apartment/",
+            "summary": "The report attributes the fatal stabbing to an apartment altercation; police took a civilian suspect into custody.",
+            "checkedAt": "2026-11-15T19:44:02.622984+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.298,
+          38.717
+        ]
+      },
+      "properties": {
+        "id": "incident:county-i70-bermuda-rollover-20261114",
+        "title": "Injury rollover \u00b7 I-70 near Bermuda Drive",
+        "incidentAt": "2026-11-14T11:16:00-06:00",
+        "incidentDate": "2026-11-14",
+        "incidentTimeAccuracy": "approximate",
+        "incidentKind": "crash",
+        "incidentTypes": [
+          "crash"
+        ],
+        "jurisdiction": "county",
+        "address": "Westbound I-70 east of Bermuda Drive, St. Louis County, MO",
+        "sourceId": "county-reviewed-news",
+        "source": "KTTN \u00b7 Missouri State Highway Patrol reporting",
+        "sourceUrl": "https://www.kttn.com/st-peters-man-injured-in-interstate-70-guardrail-rollover-crash/",
+        "url": "https://www.kttn.com/st-peters-man-injured-in-interstate-70-guardrail-rollover-crash/",
+        "sourceCheckedAt": "2026-11-15T19:44:02.622984+00:00",
+        "description": "Highway Patrol reported a westbound SUV struck a guardrail and overturned. One driver was hospitalized with moderate injuries. The marker identifies the nearby interchange, not the exact crash scene.",
+        "locationAccuracy": "Approximate vicinity of reported interchange; crash was east of Bermuda Drive",
+        "color": "#ed5900",
+        "injuries": 1,
+        "severity": "moderate injury"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.433,
+          38.758
+        ]
+      },
+      "properties": {
+        "id": "incident:county-bridgeton-pursuit-crash-20261107",
+        "title": "Fatal collision \u00b7 Bridgeton",
+        "incidentAt": "2026-11-07",
+        "incidentDate": "2026-11-07",
+        "incidentTimeAccuracy": "date-only",
+        "incidentKind": "crash",
+        "incidentTypes": [
+          "crash"
+        ],
+        "jurisdiction": "county",
+        "address": "St. Charles Rock Road near I-270, Bridgeton, MO",
+        "sourceId": "county-reviewed-news",
+        "source": "First Alert 4 \u00b7 Bridgeton Police reporting",
+        "sourceUrl": "https://www.firstalert4.com/2026/11/09/1-dead-crash-during-police-pursuit-st-louis-county/",
+        "url": "https://www.firstalert4.com/2026/11/09/1-dead-crash-during-police-pursuit-st-louis-county/",
+        "sourceCheckedAt": "2026-11-15T19:44:02.622984+00:00",
+        "description": "A collision during a police pursuit late November 7 killed one passenger and seriously injured two people in the pursued vehicle, according to police. The report describes shortly before midnight, without an exact occurrence time. A pursuit-related crash is not classified as a police shooting.",
+        "locationAccuracy": "Approximate reported block / intersection (about 100 m); not an exact scene",
+        "color": "#ed5900",
+        "deaths": 1,
+        "injuries": 2
+      }
     }
-  ]
+  ],
+  "sourceReviews": {
+    "county-reviewed-news": "2026-11-15T19:44:02.622984+00:00",
+    "county-releases": "2026-11-15T19:44:02.622984+00:00",
+    "city-releases": "2026-11-15T19:44:02.622984+00:00"
+  }
 }

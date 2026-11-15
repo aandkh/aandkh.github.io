@@ -37,7 +37,7 @@ Include these commands in the existing 6 a.m. America/Chicago refresh, followed 
 
 Sources:
 
-- Chase Park Plaza and Galleria 6: public Fever ticketing pages, eight date-specific days. Read the public page's embedded JSON only. Do not request private/internal service URLs present in the JSON keys. Date consistency is checked before importing sessions. Expired/sold-out sessions are excluded. These are local cinema venues; AMC, Marcus, B&B, Alamo, Regal and Cinemark are excluded.
+- Chase Park Plaza: public Fever ticketing pages, eight date-specific days. Read the public page's embedded JSON only. Do not request private/internal service URLs present in the JSON keys. Date consistency is checked before importing sessions. Expired/sold-out sessions are excluded. These are local cinema venues; AMC, Marcus, B&B, Alamo, Regal and Cinemark are excluded.
 - Saint Louis Science Center: official calendar's explicit occurrences and the attraction page's already-expanded upcoming screenings. Custom recurrence rules are deliberately not guessed, so this remains partial OMNIMAX coverage.
 - Hi-Pointe and Arkadin: reviewed official calendars. The daily AI check should examine their current calendars, add/change/cancel real screenings, and update `sourceCheckedAt` only for facts actually rechecked. Direct HTTP errors do not justify bypassing a site's access controls.
 - Webster/WashU dated screenings continue through the existing backend. The loader also works if that backend fails.
@@ -65,6 +65,18 @@ Use the shared event card/day grouping on both layers so date and next start tim
 
 ## Coverage and limitations
 
-Initial refresh on November 15, 2026: 415 future screenings across five local/independent cinemas, plus backend university screenings; 168 future home games across seven teams. Counts naturally fall as events begin and change when venues publish new dates. Both St. Louis City and County remain in the same result set. Lindenwood additionally covers nearby St. Charles. These feeds do not claim every independent theater or every amateur sports event.
+November 15, 2026 snapshot after the Galleria exclusion: 303 published screenings across four local/independent cinemas (before runtime expiry), plus backend university screenings; 168 future home games across seven teams. Counts naturally fall as events begin and change when venues publish new dates. Both St. Louis City and County remain in the same result set. Lindenwood additionally covers nearby St. Charles. These feeds do not claim every independent theater or every amateur sports event.
 
 Daily AI review should check coverage gaps including MX Movies, independent one-off/festival screenings, outdoor cinemas in season, and new schedules for CITY SC/college/arena sports. Add a source only when real dated facts can be retrieved and verified; do not expose an unavailable source as a working feature.
+
+## Discovery expiry and retired theaters
+
+Timed events disappear from map markers, results, Today, clusters and autocomplete at `now >= start`, even when the source has a later end time or `expiresAt`. The shared `event-lifecycle.js` policy applies to concerts, festivals, sports, stage performances, community events, exhibitions, movies and scheduled food-truck stops. It does not change historical crime feeds or ordinary undated places.
+
+A date-only event has no known start time. Keep it through the entire listed day in America/Chicago, then remove it at the following local midnight, including DST transition days. Label it “Start time not listed”; never invent midnight/noon as its start. Invalid dates are excluded from actionable event discovery. Legacy timestamps with no offset resolve only when the Chicago wall time is unambiguous; require source clarification for DST gaps or repeated wall times.
+
+The frontend schedules the nearest event deadline and refreshes on clock changes and visibility return. Refresh active clusters and search suggestions too; cached cluster buttons must not reopen a just-started event as upcoming. Opened details and short-link lookups may show retained historical source records with an explicit already-started notice. They must not inject those records back into discovery. A source snapshot cannot promise historical retention after its next refresh removes that record.
+
+**Permanent owner exclusion: Galleria 6 Cinemas.** Do not fetch its showtimes or restore them from old snapshots. The refresh target, old cached records/source entries and frontend normalization are all excluded. Other independent/local cinema coverage remains supported.
+
+Run `node scripts/test-event-lifecycle.mjs` alongside the existing event tests. It checks exact start boundaries, future end-times, timezone/DST/date-only behavior, unknown and malformed dates, clock/visibility refresh, historical lookup separation and the Galleria exclusion.

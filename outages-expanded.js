@@ -2,6 +2,22 @@ const WATER_SERVICE='https://utility.arcgis.com/usrsvcs/servers/482bbe2135c54d17
 const WATER_FIELDS='EventID,EventNotificationType,EventType,EventState,EventStatus,EventNotificationDate,EventStartDate,EventCompletionDate,EventExpirationDate,EventExpirationDateEstimated,EventLastUpdatedDate,EventHeader,EventHyperlink';
 const iso=value=>Number.isFinite(value)&&value>0?new Date(value).toISOString():null;
 const clock=value=>value?new Date(value).toLocaleString('en-US',{timeZone:'America/Chicago',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}):'';
+const creditUrl=value=>{try{const u=new URL(value);return /^https?:$/.test(u.protocol)?u.href:null;}catch{return null;}};
+export function electricityAttribution(p={}){
+ const url=creditUrl(p.sourceUrl)||creditUrl(p.url)||(/^\d{5}$/.test(String(p.geoid||''))?'https://massoutage.com/api/v1/live/counties/'+p.geoid:'https://massoutage.com/');
+ const raw=p.upstreamSources||p.meta?.sources||p.sources||p.utilities||[],list=Array.isArray(raw)?raw:typeof raw==='object'?Object.values(raw):[raw],seen=new Set();
+ const sources=list.flatMap(source=>{const name=typeof source==='string'?source:source?.name||source?.label||source?.title||source?.publisher,link=typeof source==='string'?creditUrl(source):creditUrl(source?.url||source?.sourceUrl||source?.href);if(!name||seen.has(name))return[];seen.add(name);return[{name:String(name),url:link}];});
+ const value=p.as_of||p.observedAt||p.updated_at,asOf=Number.isFinite(Date.parse(value))?value:null;
+ return{publisher:'MassOutage',url,asOf,sources,licenseUrl:'https://creativecommons.org/licenses/by/4.0/'};
+}
+function attributionLink(doc,label,url){const link=doc.createElement('a');link.textContent=label;link.href=url;link.target='_blank';link.rel='noopener noreferrer';return link;}
+export function appendOutageCredit(host,p={}){
+ if(p.utility!=='electricity'&&!/massoutage/i.test(p.source||''))return;
+ const credit=electricityAttribution(p),doc=host.ownerDocument,row=doc.createElement('p');row.className='small provider-credit';
+ row.append(attributionLink(doc,'MassOutage',credit.url),doc.createTextNode(credit.asOf?' · as of '+clock(credit.asOf):' · source time not supplied'));
+ if(credit.sources.length){row.append(doc.createTextNode(' · '));credit.sources.forEach((s,i)=>{if(i)row.append(doc.createTextNode(', '));row.append(s.url?attributionLink(doc,s.name,s.url):doc.createTextNode(s.name));});}
+ row.append(doc.createTextNode(' · '),attributionLink(doc,'CC BY 4.0',credit.licenseUrl));host.append(row);
+}
 export function americanWaterQuery(layer){return WATER_SERVICE+'/'+layer+'/query?'+new URLSearchParams({f:'geojson',where:'1=1',geometry:'-90.8,38.35,-90.05,38.95',geometryType:'esriGeometryEnvelope',inSR:'4326',outSR:'4326',spatialRel:'esriSpatialRelIntersects',outFields:WATER_FIELDS,returnGeometry:'true'});}
 export function normalizeWaterFeatures(features,checkedAt=Date.now()){
  const now=typeof checkedAt==='number'?checkedAt:Date.parse(checkedAt),seen=new Set();
@@ -61,6 +77,14 @@ export function appendUtilityStatus(host,result){
  const rows=result?.features||[],active=rows.filter(f=>f.properties?.utility==='water'&&!f.properties.planned),planned=rows.filter(f=>f.properties?.utility==='water'&&f.properties.planned),power=rows.filter(f=>f.properties?.utility==='electricity'),box=document.createElement('section');box.className='insight-card';
  const title=document.createElement('strong');title.textContent='Electricity & water';box.append(title);
  const summary=document.createElement('p');summary.className='small';summary.textContent=[power.length?power.reduce((s,f)=>s+(Number(f.properties.customersOut)||0),0).toLocaleString()+' reported electric customers out':'',active.length+' water service notices',planned.length?planned.length+' planned water works':''].filter(Boolean).join(' · ');box.append(summary);
+ if(power.length){
+  const dated=power.map(f=>electricityAttribution(f.properties)).map(c=>c.asOf).filter(Boolean).sort((a,b)=>Date.parse(a)-Date.parse(b)),credit=document.createElement('p');credit.className='small provider-credit';
+  credit.append(attributionLink(document,'MassOutage','https://massoutage.com/'),document.createTextNode(dated.length?' · reported '+clock(dated[0])+(dated.at(-1)!==dated[0]?' – '+clock(dated.at(-1)):''):' · source times not supplied'));box.append(credit);
+  const sources=document.createElement('details'),heading=document.createElement('summary');heading.textContent='Electricity sources';sources.append(heading);
+  const method=document.createElement('p');method.className='small';method.textContent='The combined total sums the displayed county records. County boundaries are Census reference areas, not exact outage footprints.';sources.append(method);
+  for(const f of power){const p=f.properties,line=document.createElement('p');line.className='small';line.textContent=p.title||p.name||'County record';sources.append(line);appendOutageCredit(sources,p);}
+  box.append(sources);
+ }
  for(const p of (result?.utilityProviders||[]).filter(p=>Date.parse(p.expiresAt)>Date.now())){const row=document.createElement('p');row.className='small';row.textContent=p.name+' · '+p.summary+' · checked '+clock(p.checkedAt);const link=document.createElement('a');link.href=p.url;link.target='_blank';link.rel='noopener noreferrer';link.textContent=' Source ↗';row.append(link);box.append(row);}
  const note=document.createElement('p');note.className='small';note.textContent='Tap an outlined area or notice for details. A blank area does not confirm service. Water work notices are not all outages.';box.append(note);host.append(box);
 }

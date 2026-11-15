@@ -39,15 +39,17 @@ when unknown and distinguish date-only events from exact showtimes.
 - `SKY-RIVERS-MAINTENANCE.md`: USGS baselines and night-light/cloud viewing map.
 - `OUTAGES-STREAMS-MAINTENANCE.md`: utility notices and cached hydrography tiles.
 - `GYMS-MAINTENANCE.md`: gym ownership ordering and Memento Fitness Club.
+- `ATTRIBUTION-MAINTENANCE.md`: discreet provider credits, software licenses and AdSense verification-only setup.
 - `RAIN-BUDGET-MAINTENANCE.md`: measured precipitation, seasonal normals and dry spells.
 - `WEATHER-INSIGHTS-MAINTENANCE.md`: outdoor-hour, turning-point and ventilation calculations.
+- `AIR-QUALITY-MAINTENANCE.md`: 17 custom grades, category precision and source-backed exposure explanations.
 - `QUIETER-SURROUNDINGS-MAINTENANCE.md`: major-road comparisons for parks and trails.
 
 Always combine City and County in one user-facing feed. Check each side's
 sources independently so different reporting boundaries do not create a silent
-gap. Keep national theater chains excluded, including AMC and Marcus. Local
+gap. Keep national theater chains excluded, including AMC and Marcus, and exclude Galleria 6. Local
 gym chains remain allowed after independent gyms. Do not restore the removed
-sex-offender registry, advertising, unsupported cameras/restrooms or ISP map
+sex-offender registry, visible ads, unsupported cameras/restrooms or ISP map
 placeholders.
 
 ## Validate before publishing
@@ -57,6 +59,7 @@ node --experimental-vm-modules scripts/check-modules.mjs
 node scripts/test-progressive-layer.mjs
 node scripts/test-venue-events.mjs
 node scripts/test-events.mjs
+node scripts/test-event-lifecycle.mjs
 python scripts/test-event-parsers.py
 node scripts/cycling-test.mjs
 node scripts/joyrides-test.mjs

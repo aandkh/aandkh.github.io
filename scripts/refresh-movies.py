@@ -9,7 +9,10 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 ROOT=Path(__file__).resolve().parents[1]; TZ=ZoneInfo('America/Chicago')
 NOW=dt.datetime.now(dt.timezone.utc); CHECKED=NOW.isoformat(); TODAY=NOW.astimezone(TZ).date()
-THEATERS=['chase-park-plaza-cinemas','galleria-6-cinemas']
+# Owner exclusion: never fetch or re-import Galleria 6, including old snapshots.
+THEATERS=['chase-park-plaza-cinemas']
+def excluded_venue(p):
+ return bool(re.search(r'galleria[\s-]*6',' '.join(str(p.get(k,'')) for k in ['venue','address','url','sourceUrl','refreshGroup']),re.I))
 FEVER='https://feverup.com/movies/en/united-states/movie-theaters/'
 SLSC='https://www.slsc.org/calendar-of-events/?tribe_events_cat=omnimax-theater&upcoming=1'
 def get(url):
@@ -18,7 +21,10 @@ def read(name):
  try:return json.loads((ROOT/name).read_text())
  except (FileNotFoundError,json.JSONDecodeError):return {'features':[]}
 def future(f):
- try:return dt.datetime.fromisoformat(f['properties']['start'].replace('Z','+00:00'))>NOW
+ try:
+  value=f['properties']['start'];start=dt.datetime.fromisoformat(value.replace('Z','+00:00'))
+  if len(value)==10:start=start.replace(tzinfo=TZ)+dt.timedelta(days=1)
+  return start>NOW
  except (KeyError,TypeError,ValueError):return False
 def feature(title,start,venue,coords,url,group,source,**extra):
  ident=hashlib.sha256((group+'|'+title+'|'+start).encode()).hexdigest()[:18]
@@ -93,7 +99,7 @@ def main():
   if group and not group.startswith('reviewed:') and group not in successful:features.append(f)
  features+=updates;unique={}
  for f in features:
-  if not future(f):continue
+  if not future(f) or excluded_venue(f.get('properties',{})):continue
   p=f['properties'];key=(p.get('movieTitle',p['title']).casefold(),p.get('venue','').casefold(),p['start'])
   if key not in unique or len(p)>len(unique[key]['properties']):unique[key]=f
  features=sorted(unique.values(),key=lambda f:f['properties']['start'])

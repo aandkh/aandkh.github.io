@@ -1,6 +1,6 @@
 import {enrichCultureFeature,cultureFeatureDisplayable} from './place-enrichment.js?v=20261115-road-insights';
 import {cleanVehicle} from './vehicles.js?v=20261115-road-insights';
-import {BY_ID} from './catalog.js?v=20261115-road-insights';
+import {BY_ID} from './catalog.js?v=20261115-core-polish';
 import {isExcludedChainPlace} from './chain-places.js?v=20261115-road-insights';
 import {cleanLayerModes,cleanOverlayOpacity} from './expansion-options.js?v=20261115-road-insights';
 export const REGION = {south:38.1,north:39.2,west:-91.2,east:-89.4};

@@ -47,7 +47,29 @@ export function incidentStats(features) {
  },{reports:0,deaths:0,injuries:0,unknownDeaths:0,unknownInjuries:0,crashes:0,fatalReports:0,city:0,county:0,days:{},types:{}});
 }
 export function mergeIncidentRecords(...groups) {
- const map=new Map();for(const group of groups)for(const f of group||[])if(f?.properties?.id)map.set(f.properties.id,f);return [...map.values()];
+ const all=groups.flat(),aliases=new Map();for(const f of all)for(const id of f?.properties?.alternateIds||[])aliases.set(id,f.properties.id);
+ const map=new Map();for(const f of all)if(f?.properties?.id){const id=aliases.get(f.properties.id)||f.properties.id,old=map.get(id);map.set(id,old?.properties?.alternateIds?.length&&!f.properties.alternateIds?.length?old:f);}return [...map.values()];
+}
+export function incidentFatalityStats(records, now=Date.now(), period='week') {
+ const today=localDay(now), lower=period==='year'?today.slice(0,4)+'-01-01':localDay(now-7*86400000), cutoff=now-7*86400000;
+ const out={police:0,other:0,unknownDeathReports:0,unclassifiedDeaths:0,uncertainDateReports:0,reports:[],year:Number(today.slice(0,4)),from:lower,through:today};
+ for(const f of mergeIncidentRecords(records||[])){
+  const p=f.properties,day=incidentDay(f);if(!day||day<lower||day>today||p.incidentKind==='crash')continue;
+  const dateOnly=p.incidentTimeAccuracy==='date-only'||/^\d{4}-\d{2}-\d{2}$/.test(p.incidentAt||'');
+  if(!dateOnly&&(Date.parse(p.incidentAt)>now||period==='week'&&Date.parse(p.incidentAt)<cutoff))continue;
+  if(period==='week'&&dateOnly&&day===lower){out.uncertainDateReports++;continue;}
+  const homicide=(p.incidentTypes||[p.incidentKind]).includes('homicide'),known=count(p.deaths)&&Number.isInteger(p.deaths);
+  if(!known&&!homicide&&!p.fatalityEvidence?.length)continue;
+  let attributed=0;const categories=new Set();
+  for(const e of p.fatalityEvidence||[]){
+   if(!known||categories.has(e.category)||!['police','other-homicide'].includes(e.category)||!Number.isInteger(e.deaths)||e.deaths<1||!e.sourceUrl||!e.summary||attributed+e.deaths>p.deaths)continue;
+   categories.add(e.category);
+   out[e.category==='police'?'police':'other']+=e.deaths;attributed+=e.deaths;out.reports.push({id:p.id,title:p.title,date:day,category:e.category,deaths:e.deaths,url:e.sourceUrl,summary:e.summary});
+  }
+  if(!known&&homicide)out.unknownDeathReports++;
+  if(known)out.unclassifiedDeaths+=Math.max(0,p.deaths-attributed);
+ }
+ return out;
 }
 function hydrate(f,sources) {
  const p=f.properties, s=sources.find(s=>s.id===p.sourceId); if(!s)return f;
@@ -70,7 +92,7 @@ export async function recentIncidents(now = Date.now(), filters = incidentFilter
  }));
  const groups=[cache.features||[]];for(const m of months)if(archiveCache.has(m.url))groups.push(await archiveCache.get(m.url));
  const archiveFeatures=mergeIncidentRecords(...groups).map(f=>hydrate(f,sources)),features=filterIncidents(archiveFeatures,requested,now);
- return {features,archiveFeatures,archiveCount:cache.archiveCount||archiveFeatures.length,archiveMonths:cache.archiveMonths||[],sources,status:features.length?'reference':'empty',mode:'recent',checkedAt:cache.checkedAt,source:'Official metro police reports and reviewed releases',archiveErrors,
+ return {features,archiveFeatures,archiveCount:cache.archiveCount||archiveFeatures.length,archiveMonths:cache.archiveMonths||[],sources,status:features.length?'reference':'empty',mode:'recent',checkedAt:cache.checkedAt,source:'Official metro police reports and reviewed releases',archiveErrors,coverageAudit:cache.coverageAudit,archiveCoverageFrom:cache.archiveCoverageFrom,fatalityRecords:Array.isArray(cache.fatalityRecords)?cache.fatalityRecords:null,fatalityCoverage:cache.fatalityCoverage,
  note:cache.coverageNote||'City and County are always combined. Selected reports are not a complete regional census. Approximate locations are not exact scenes. Missing reports do not mean no incidents.',
  legend:{title:'Crimes & Crashes · selected period',items:[{color:'#c52f73',label:'Reported crime'},{color:'#ed5900',label:'Injury / fatal crashes'}],note:'Approximate reported areas. Empty areas do not establish safety.'}};
 }
@@ -85,11 +107,30 @@ export function incidentCSV(features) {
 export function incidentExplorer(d,onChange) {
  const root=document.createElement('div');root.className='incident-explorer';let target=root;
  const add=(tag,text,cls='')=>{const e=document.createElement(tag);e.textContent=text;if(cls)e.className=cls;target.append(e);return e;};
- const all=d?.archiveFeatures||[], available=incidentStats(all), features=filterIncidents(all),stats=incidentStats(features);
+ if(!d||d.mode!=='recent'||!Array.isArray(d.archiveFeatures)||d.status==='loading'){
+  const message=add('p',d?.status==='error'?'Combined City + County reports are unavailable. Try again.':'Loading combined City + County reports…','incident-loading');message.setAttribute('role','status');return root;
+ }
+ const all=d.archiveFeatures, available=incidentStats(all), features=filterIncidents(all),stats=incidentStats(features);
  const freshness=add('div','','incident-freshness');
- const county=(d?.sources||[]).filter(s=>s.id?.startsWith('county-')&&s.latestIncidentDate), city=(d?.sources||[]).find(s=>s.id==='city-crimemapping')||(d?.sources||[]).find(s=>s.id==='city-releases');
- const newestCounty=county.map(s=>s.latestIncidentDate).sort().pop();
- freshness.textContent='City + County together'+(city?.latestIncidentDate?' · City feed through '+dayLabel(city.latestIncidentDate):'')+(newestCounty?' · County feeds through '+dayLabel(newestCounty)+' (weekly reporting lag)':'');
+ freshness.textContent=`City + County together · ${stats.city.toLocaleString()} City + ${stats.county.toLocaleString()} County reports in this selection`;
+ const weekly=(d?.sources||[]).filter(s=>['county-nibrs','county-crashes'].includes(s.id)&&s.latestIncidentDate),countyThrough=weekly.map(s=>s.latestIncidentDate).sort()[0];
+ if(countyThrough&&localDay(Date.now()-6*86400000)>=countyThrough){
+  add('small','County Police and participating municipal feeds currently reach '+dayLabel(countyThrough)+'. Newer County reports are incomplete; Florissant and reviewed local reports supplement them.','incident-warning');
+  if(incidentFilters.range==='7'){const more=add('button','See 30 days of City + County reports');more.type='button';more.onclick=()=>{incidentFilters.range='30';onChange();};}
+ }
+ if(Array.isArray(d.fatalityRecords)){
+ const fatal=incidentFatalityStats(d.fatalityRecords),annual=incidentFatalityStats(d?.fatalityRecords,Date.now(),'year');
+ const summaryBox=add('details','','incident-fatality-summary'),summaryTitle=document.createElement('summary');summaryTitle.textContent='Reported deaths · past 7 days';summaryBox.append(summaryTitle);summaryBox.open=true;target=summaryBox;
+ add('strong','Killed by police · '+(fatal.police?fatal.police+' reported':'None confirmed in available reports'));
+ add('strong','Other reported homicides · '+(fatal.other?fatal.other+' reported':'None confirmed in available reports'));
+ add('small','City + County combined. Confirmed victim counts in reviewed reports during the rolling past 7 days; excludes crashes and unclassified deaths. These are minimum reported counts, not complete regional totals.');
+ if(fatal.unclassifiedDeaths||fatal.unknownDeathReports||fatal.uncertainDateReports)add('small',`${fatal.unclassifiedDeaths} known deaths unclassified · ${fatal.unknownDeathReports} homicide reports without victim counts · ${fatal.uncertainDateReports} boundary-day reports with unknown time.`);
+ add('small',`${annual.year} tracked reports: ${annual.police?annual.police+' deaths attributed to police':'no police-caused deaths confirmed in reviewed reports'} · ${annual.other?annual.other+' other homicides':'no other homicide deaths confirmed in reviewed reports'}. Year-to-date comparison unavailable — ${d?.archiveCoverageFrom?'archive begins '+dayLabel(d.archiveCoverageFrom):'full-year coverage has not been verified'}.`);
+ if(annual.unclassifiedDeaths||annual.unknownDeathReports)add('small',`Annual archive also has ${annual.unclassifiedDeaths} known deaths without reviewed attribution and ${annual.unknownDeathReports} homicide reports without victim counts.`);
+ const evidence=add('details',''),evidenceTitle=document.createElement('summary');evidenceTitle.textContent='Sources and counting method';evidence.append(evidenceTitle);target=evidence;
+ for(const r of fatal.reports){const a=add('a',dayLabel(r.date)+' · '+r.title+' · '+r.deaths);a.href=r.url;a.target='_blank';a.rel='noopener noreferrer';add('small',r.summary);}
+ add('small','An officer-involved incident alone does not establish a death caused by police. Category labels are based on sourced attribution, not a determination of lawfulness. One event is counted once; unknowns are not zero. Annual counts come from the full retained archive, including older months.');target=root;
+ }else add('small','Reported-death summary is unavailable until the verified fatality index loads. No count is inferred from missing data.','incident-warning');
  if(d?.archiveErrors?.length)add('p','Some older archive files could not load. Showing available reports; try that period again.','incident-warning');
  const failed=(d?.sources||[]).filter(s=>s.status==='error');if(failed.length)add('small','A source could not refresh. Its previously verified reports remain available.');
  function select(label,key,options){const wrap=add('label',label+' '),s=document.createElement('select');s.setAttribute('aria-label',label);for(const[v,t]of options){const o=document.createElement('option');o.value=v;o.textContent=t;s.append(o);}s.value=incidentFilters[key];s.onchange=()=>{incidentFilters[key]=s.value;onChange();};wrap.append(s);}

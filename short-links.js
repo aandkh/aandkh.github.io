@@ -1,5 +1,5 @@
-import {BY_ID} from './catalog.js?v=20261115-road-insights';
-import {coordinate,cleanState} from './core.js?v=20261115-road-insights';
+import {BY_ID} from './catalog.js?v=20261115-core-polish';
+import {coordinate,cleanState} from './core.js?v=20261115-core-polish';
 
 // Stable 64-bit reference, independent of feed ordering and changing event details.
 export function placeToken(id){

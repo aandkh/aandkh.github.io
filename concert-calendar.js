@@ -1,5 +1,6 @@
+import {eventDiscoverable} from './event-lifecycle.js?v=20261115-core-polish';
 const snapshots=new Map();
-export async function venueEvents(layer='concerts',now=Date.now()){
+export async function venueEvents(layer='concerts',now=Date.now(),{includePast=false}={}){
  const path=layer==='arts'?'comedy-calendar.json':'concert-calendar.json';
  let entry=snapshots.get(path);
  try{
@@ -9,12 +10,12 @@ export async function venueEvents(layer='concerts',now=Date.now()){
    const value=await response.json();entry={value,loadedAt:now};snapshots.set(path,entry);
   }
  }catch{/* Preserve the last successful snapshot; still filter expired shows. */}
- return (entry?.value.features||[]).filter(f=>Date.parse(f.properties?.expiresAt)>now);
+ return (entry?.value.features||[]).filter(f=>includePast||eventDiscoverable(f,now));
 }
 export const venueConcerts=(now)=>venueEvents('concerts',now);
-export function mergeVenueEvents(result,extra){
+export function mergeVenueEvents(result,extra,now=Date.now(),{includePast=false}={}){
  const seen=new Set();const features=[...(result.features||[]),...extra].filter(f=>{
-  const p=f.properties||{},key=p.id||f.id||[p.url,p.start,p.title].join('|');
+  if(!includePast&&!eventDiscoverable(f,now))return false;const p=f.properties||{},key=p.id||f.id||[p.url,p.start,p.title].join('|');
   if(seen.has(key))return false;seen.add(key);return true;
  });
  return {...result,features,status:features.length&&['empty','unavailable',undefined].includes(result.status)?'partial':result.status,

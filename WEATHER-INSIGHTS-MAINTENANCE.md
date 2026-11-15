@@ -14,6 +14,22 @@ time; missing numeric values stay missing, while real zero remains zero.
 `weather-insights.js` calculates daytime preferences, changes between adjacent
 hours, and contiguous ventilation windows. It uses up to 24 forecast rows from
 the current hour. Temperature preferences remain in memory for the session.
+
+Outdoor ranking uses feels-like temperature. Cool, Mild and Warm have explicit
+acceptable ranges. Temperature cost is 2 points per degree outside the range
+plus a gentle 0.35 points per degree away from its midpoint, so hours inside a
+range are not an artificial tie. Rain, wind, gust, thunder and complete-coverage
+AQI penalties remain independent. These are Andymap preference weights, not an
+official health score. A tiny temperature advantage must not win over pronounced
+weather disadvantages. True score ties use the earliest hour.
+
+Changing preferences need not change the winning hour. If all available daylight
+hours are near 52–53°F, the same hour can legitimately win for both Cool and Warm.
+Show the fit on each row (within/below/above the selected range), explain when no
+hour reaches the range, and say when other presets also choose that hour. Do not
+manufacture different picks. Midpoint mechanics stay in the method disclosure;
+keep the visible explanation short. Explicit surface/ink token pairs style the
+select, native options and number inputs in light and dark modes.
 Air quality uses the CAMS global modeled U.S. AQI via Open-Meteo, a regional
 approximately 45 km grid rather than a local monitor. The request uses rounded
 map-center coordinates (0.1 degree), not a raw device position. Results are
@@ -42,3 +58,5 @@ Validation: `node scripts/weather-insights-test.mjs`, module linking, desktop
 and phone-width Forecast UI. Test a known qualifying ventilation period in
 fixtures as well as the live no-window case, temperature preference controls,
 hour selections, expired data, null fields, failed requests and retries.
+
+Additional validation: `node scripts/weather-insights-ui-test.mjs` executes the actual renderer and selector/click handlers with a lightweight DOM. It verifies immediate reranking, session preference retention, correct chart-hour selection, honest shared winners, preserved credits, and contrast from the application theme tokens. Complete a visual native-select check in both map themes as well; the lightweight DOM is not a browser renderer.

@@ -1,0 +1,25 @@
+/* Required map credits are readable and never covered by the map toolbar. */
+:root{--map-credit-height:28px}
+.map-attribution{position:absolute;right:4px;bottom:0;z-index:850;display:flex;align-items:center;gap:4px;max-width:calc(100% - 8px);padding:2px 5px;background:#172820f5;color:#e0e9e2;border-radius:7px 7px 0 0;font:11px/16px system-ui,sans-serif}
+.map-attribution-line{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:0 7px}
+.map-attribution a{color:#d4e8c6;text-decoration:underline;text-underline-offset:2px;white-space:nowrap}
+.map-attribution a:focus-visible,.map-attribution summary:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.map-attribution-info>summary{cursor:pointer;list-style:none;display:grid;place-items:center;width:28px;min-height:28px;color:#e0e9e2;font-size:18px}
+.map-attribution-info>summary::-webkit-details-marker{display:none}
+.map-attribution-panel{position:absolute;right:0;bottom:calc(100% + 6px);width:min(345px,calc(100vw - 24px));max-height:32dvh;overflow:auto;overscroll-behavior:contain;border:1px solid #66776b;border-radius:12px;background:#172820;padding:14px;box-shadow:0 4px 18px #0005;font-size:12px;line-height:1.5}
+.map-attribution-panel a{white-space:normal}.map-attribution-panel ul{padding-left:16px;margin:10px 0}.map-attribution-panel li{margin:6px 0}
+.map-toolbar{bottom:calc(14px + var(--map-credit-height))}
+.map-shell .leaflet-bottom{bottom:var(--map-credit-height)}
+#legend,#environment-key{bottom:calc(80px + var(--map-credit-height))}
+.traffic-note{bottom:calc(68px + var(--map-credit-height))}
+.radar-launch{bottom:calc(146px + var(--map-credit-height))}
+.future-radar,.sky-cloud-controls{bottom:calc(86px + var(--map-credit-height))}
+#map-resume,#shared-return{bottom:calc(86px + var(--map-credit-height))}
+@media(min-width:801px){#detail,#results,.floating.weather-panel{max-height:calc(100% - 220px - var(--map-credit-height))}#results{bottom:calc(80px + var(--map-credit-height))}}
+@media(max-width:800px){
+ .map-toolbar{bottom:calc(max(8px,env(safe-area-inset-bottom)) + var(--map-credit-height))}
+ #detail:not(.sky-panel),.floating.sky-panel,body.detail-expanded #detail,#results{bottom:calc(79px + var(--map-credit-height))}
+ #sidebar,#layers-backdrop{bottom:calc(79px + var(--map-credit-height))}
+ body.shared-view #detail:not(.sky-panel){bottom:var(--map-credit-height);max-height:52%}
+ .map-attribution{font-size:10px;line-height:15px}
+}

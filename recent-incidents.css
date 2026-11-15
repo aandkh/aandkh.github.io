@@ -1,0 +1,9 @@
+.incident-freshness{font-weight:650;line-height:1.5}
+.incident-explorer small{display:block;line-height:1.5}
+.incident-fatality-summary{border:1px solid var(--border);border-radius:12px;padding:12px;background:var(--surface)}
+.incident-fatality-summary>summary{font-weight:650;cursor:pointer}
+.incident-fatality-summary>strong{display:block;margin-top:12px;font-size:14px;line-height:1.5}
+.incident-fatality-summary>small{margin-top:9px}
+.incident-fatality-summary>details{margin-top:12px}
+.incident-fatality-summary>details>summary{cursor:pointer}
+.incident-fatality-summary a{overflow-wrap:anywhere}

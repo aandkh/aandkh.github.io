@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import {airForecastRows,aqiLabel,loadAirForecast,weatherInsightRows,rankOutdoorHours,weatherTurningPoints,ventilationWindows} from '../weather-insights.js';
+import {airForecastRows,aqiLabel,loadAirForecast,weatherInsightRows,rankOutdoorHours,outdoorPreferenceExplanation,outdoorTemperatureFit,weatherTurningPoints,ventilationWindows} from '../weather-insights.js';
 import {nwsHourlyFallback,loadNwsForecast} from '../forecast-fallback.js';
 
 const HOUR=3600000,NOW=Date.parse('2026-11-15T18:00:00Z'),iso=t=>new Date(t).toISOString();
@@ -67,6 +67,34 @@ await test('outdoor ranking responds to temperature preference and retains real 
  assert.equal(ranked[0].time,NOW+HOUR,'a clearly less bad later hour should win even when display scores clamp to zero');
  assert.equal(ranked[0].score,0);assert.equal(ranked[1].score,0);
  assert.equal(rankOutdoorHours([row(0,{daylight:false}),row(1,{windMph:null}),row(2,{rainPct:null}),row(3)])[0].time,NOW+3*HOUR);
+});
+
+await test('temperature preferences gently distinguish hours inside their acceptable range',()=>{
+ const within=[row(0,{temperatureF:67,feelsLikeF:67}),row(1,{temperatureF:59,feelsLikeF:59})];
+ assert.equal(rankOutdoorHours(within,'cool')[0].time,NOW+HOUR,'Cool favors its 59°F midpoint over an earlier 67°F hour');
+ assert.equal(rankOutdoorHours(within,'mild')[0].time,NOW,'Mild favors the hour closer to 69°F');
+ assert.equal(rankOutdoorHours(within,'warm')[0].time,NOW);
+ assert.equal(rankOutdoorHours(within,'cool')[0].temperatureFit,'within');
+ assert.equal(rankOutdoorHours(within,'warm')[0].temperatureFit,'below');
+ assert.match(outdoorTemperatureFit(rankOutdoorHours(within,'warm')[0]),/Below your warm range/);
+});
+
+await test('53/53/52 degree forecast keeps a legitimate shared winner and explains its poor warm fit',()=>{
+ const narrow=[row(0,{temperatureF:53,feelsLikeF:53,aqi:65}),row(1,{temperatureF:53,feelsLikeF:53,aqi:65}),row(2,{temperatureF:52,feelsLikeF:52,aqi:65})];
+ for(const preference of ['cool','mild','warm'])assert.equal(rankOutdoorHours(narrow,preference)[0].time,NOW,'Do not manufacture a different hour');
+ const warm=rankOutdoorHours(narrow,'warm'),explanation=outdoorPreferenceExplanation(narrow,'warm',warm);
+ assert.equal(warm[0].temperatureGapF,17);assert.equal(warm[0].favorable,false,'Moderate AQI is not called Good');
+ assert.equal(explanation.tiedHours,2);assert.deepEqual(explanation.sameTopPreferences,['cool','mild']);
+ assert.match(explanation.summary,/Every available daylight hour is below your 70–85°F range/);
+ assert.match(explanation.summary,/same hour leads for Cool and Mild/);assert.match(explanation.summary,/52–53°F/);assert.match(explanation.summary,/earliest/);
+ assert.match(outdoorTemperatureFit(rankOutdoorHours(narrow,'cool')[0]),/Within your cool range/);
+});
+
+await test('gentle midpoint preferences do not outweigh pronounced weather disadvantages',()=>{
+ const preferred=row(0,{temperatureF:59,feelsLikeF:59}),alternative=row(1,{temperatureF:67,feelsLikeF:67});
+ for(const bad of [{rainPct:20},{windMph:20},{gustMph:35},{thunder:true},{aqi:200}])assert.equal(rankOutdoorHours([{...preferred,...bad},alternative],'cool')[0].time,NOW+HOUR,JSON.stringify(bad));
+ const hot=rankOutdoorHours([row(0,{feelsLikeF:95}),row(1,{feelsLikeF:90})],'cool');assert.equal(hot[0].time,NOW+HOUR);assert.equal(hot[0].temperatureFit,'above');
+ assert.match(outdoorPreferenceExplanation([row(0,{feelsLikeF:95}),row(1,{feelsLikeF:90})],'cool').summary,/above your 50–68°F range/);
 });
 
 await test('incomplete AQI uses weather-only ranking equally and never advertises confirmed good air',()=>{

@@ -27,7 +27,9 @@ def run_job(item):
   p=subprocess.run([sys.executable,str(ROOT/'scripts'/args[0]),*args[1:]],cwd=ROOT,text=True,capture_output=True,timeout=900)
   if name=='incidents':
    city=subprocess.run([sys.executable,str(ROOT/'scripts'/'incident-city-refresh.py'),'--days','30'],cwd=ROOT,text=True,capture_output=True,timeout=900)
-   p.stdout+='\nCity refresh:\n'+city.stdout;p.stderr+='\n'+city.stderr;p.returncode=p.returncode or city.returncode
+   p.stdout+='\nCity and municipal refresh:\n'+city.stdout;p.stderr+='\n'+city.stderr;p.returncode=p.returncode or city.returncode
+   coverage=subprocess.run([sys.executable,str(ROOT/'scripts'/'incident-coverage-check.py')],cwd=ROOT,text=True,capture_output=True,timeout=120)
+   p.stdout+='\nCombined coverage check:\n'+coverage.stdout;p.stderr+='\n'+coverage.stderr;p.returncode=p.returncode or coverage.returncode
   if name=='quieter':
    parks=subprocess.run(['node',str(ROOT/'scripts'/'quieter-parks-refresh.mjs')],cwd=ROOT,text=True,capture_output=True,timeout=120)
    p.stdout+='\nPark comparisons:\n'+parks.stdout;p.stderr+='\n'+parks.stderr;p.returncode=p.returncode or parks.returncode
