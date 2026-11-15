@@ -213,7 +213,8 @@ function showMixedCluster(cluster){
 }
 function appendClusterEntries(box,features,fallbackId){
  const host=el('div','cluster-agenda'),agenda=[],undated=[];
- for(const f of [...features].sort(eventOrder)){const id=f._layer||fallbackId,p=f.properties||{},card=btn('',()=>showFeature(id,f),'result-card');card.append(el('strong','',p.title||p.name||BY_ID[id].name));if(eventDay(p.start))card.append(el('small','event-entry-when',eventStamp(p.start)));card.append(el('small','',[BY_ID[id].name,p.venue||p.address||''].filter(Boolean).join(' · ')));if(id==='movies'&&movieFacts(p))card.append(el('small','movie-facts',movieFacts(p)));if(eventDay(p.start))agenda.push({feature:f,card});else undated.push(card);}
+ const gymOnly=features.every(f=>(f._layer||fallbackId)==='gyms'),ordered=gymOnly?sortGyms(features,[map.getCenter().lng,map.getCenter().lat],f=>featureOpening('gyms',f).state):[...features].sort(eventOrder);let lastGymGroup='';
+ for(const f of ordered){const id=f._layer||fallbackId,p=f.properties||{},card=btn('',()=>showFeature(id,f),'result-card');card.append(el('strong','',p.title||p.name||BY_ID[id].name));if(eventDay(p.start))card.append(el('small','event-entry-when',eventStamp(p.start)));card.append(el('small','',[BY_ID[id].name,p.venue||p.address||''].filter(Boolean).join(' · ')));if(id==='movies'&&movieFacts(p))card.append(el('small','movie-facts',movieFacts(p)));if(eventDay(p.start))agenda.push({feature:f,card});else{if(gymOnly&&gymGroup(f)!==lastGymGroup){lastGymGroup=gymGroup(f);undated.push(el('h3','gym-group-heading',GYM_GROUPS[lastGymGroup]));}undated.push(card);}}
  groupEventCards(host,agenda,Date.now());if(agenda.length&&undated.length)host.append(el('h3','undated-heading','Places · no showtime listed'));host.append(...undated);box.append(host);
 }
 let placeRenderFrame=0;
@@ -537,6 +538,7 @@ function showMapKeepingPlace(){
  const target=panel==='layers'?$('#sidebar'):$('#'+panel),title=panel==='layers'?'Layers':panel==='results'?$('#results-title').textContent:$('#detail h2')?.textContent||'Details';
  suspendedPanel={panel,scroll:target.scrollTop,title};
  if(panel==='layers')setControls(false);else target.hidden=true;
+ if(panel==='detail'){skyPanelOpen=false;weatherPanelOpen=false;}
  if(panel==='results')$('#results-toggle').setAttribute('aria-expanded','false');
  resumeButton.textContent='↑ '+title;resumeButton.setAttribute('aria-label','Return to '+title);resumeBox.hidden=false;
  document.activeElement?.blur();$('#map').focus({preventScroll:true});navigationState();
@@ -548,7 +550,7 @@ resumeButton.onclick=()=>{
  const saved=suspendedPanel;if(!saved)return;suspendedPanel=null;resumeBox.hidden=true;
  if(saved.panel==='layers')setControls(true);
  else if(saved.panel==='results'){setResults(true);$('#results').scrollTop=saved.scroll;}
- else{$('#detail').hidden=false;$('#detail').scrollTop=saved.scroll;focusDetailHeading();}
+ else{if($('#detail').classList.contains('weather-panel'))renderWeather();else if($('#detail').classList.contains('sky-panel'))renderSky();else $('#detail').hidden=false;$('#detail').scrollTop=saved.scroll;focusDetailHeading();}
  navigationState();
 };
 $('#dismiss-resume').onclick=()=>{const detail=suspendedPanel?.panel==='detail';suspendedPanel=null;resumeBox.hidden=true;if(detail)closeDetail();navigationState();};
