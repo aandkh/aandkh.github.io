@@ -66,6 +66,7 @@ export const LAYERS = [
 const order=['radar','traffic','concerts','movies','sports','communityevents','arts','foodtrucks','localfood','bars','nightlife','restaurants','festivals','parks','recreation','markets','culture','free','family','exhibitions','transit','parking','roadworks','ev','restrooms','cycling','cameras','aircraft','weather','air','alerts','outages','sky','rivers','crime','businesses','foliage','development','neighborhoods','civic','terrain','demographics','floodplains','history','light','birding'];
 for(const layer of LAYERS)if(['parks','recreation','localfood','culture'].includes(layer.id))layer.group='To Do';
 LAYERS.sort((a,b)=>order.indexOf(a.id)-order.indexOf(b.id));
+const concerts=LAYERS.find(l=>l.id==='concerts');concerts.source='Official venue calendars / university calendars';concerts.note='University listings plus a reviewed official calendar snapshot for The Pageant, Delmar Hall and Blueberry Hill Duck Room. Partial regional coverage; source check dates shown. Check official pages for showtimes and changes.';
 export const BY_ID = Object.fromEntries(LAYERS.map(x => [x.id, x]));
 export const EXAMPLES = [
   { id:'weekend', name:'A day outside', layers:['parks','cycling','radar'], center:[38.635,-90.29], zoom:13 },

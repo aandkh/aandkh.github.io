@@ -1,0 +1,1282 @@
+{
+  "checkedAt": "2026-11-15T16:38:28.387Z",
+  "note": "Official venue calendar snapshot; times not supplied. Refresh through the daily Andymap maintenance task.",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2980861,
+          38.6555139
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-15:The Pageant:Shaun Cassidy",
+        "title": "Shaun Cassidy",
+        "start": "2026-11-15",
+        "expiresAt": "2026-11-16T06:00:00.000Z",
+        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "The Pageant, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/",
+        "url": "https://www.thepageant.com/calendar/",
+        "sourceCheckedAt": "2026-11-15T16:38:26.654Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2971751,
+          38.6554969
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-15:Delmar Hall:The Afghan Whigs",
+        "title": "The Afghan Whigs",
+        "start": "2026-11-15",
+        "expiresAt": "2026-11-16T06:00:00.000Z",
+        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "Delmar Hall, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/",
+        "url": "https://www.thepageant.com/calendar/",
+        "sourceCheckedAt": "2026-11-15T16:38:26.654Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3049591,
+          38.6557666
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-15:Blueberry Hill Duck Room:Flying House",
+        "title": "Flying House",
+        "start": "2026-11-15",
+        "expiresAt": "2026-11-16T06:00:00.000Z",
+        "description": "Blueberry Hill Duck Room \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "Blueberry Hill Duck Room, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/",
+        "url": "https://www.thepageant.com/calendar/",
+        "sourceCheckedAt": "2026-11-15T16:38:26.655Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2980861,
+          38.6555139
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-16:The Pageant:Skilla Baby",
+        "title": "Skilla Baby",
+        "start": "2026-11-16",
+        "expiresAt": "2026-11-17T06:00:00.000Z",
+        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "The Pageant, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/",
+        "url": "https://www.thepageant.com/calendar/",
+        "sourceCheckedAt": "2026-11-15T16:38:26.655Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3049591,
+          38.6557666
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-16:Blueberry Hill Duck Room:Scoochie Boochie",
+        "title": "Scoochie Boochie",
+        "start": "2026-11-16",
+        "expiresAt": "2026-11-17T06:00:00.000Z",
+        "description": "Blueberry Hill Duck Room \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "Blueberry Hill Duck Room, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/",
+        "url": "https://www.thepageant.com/calendar/",
+        "sourceCheckedAt": "2026-11-15T16:38:26.655Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2980861,
+          38.6555139
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-17:The Pageant:Alter Bridge",
+        "title": "Alter Bridge",
+        "start": "2026-11-17",
+        "expiresAt": "2026-11-18T06:00:00.000Z",
+        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "The Pageant, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/",
+        "url": "https://www.thepageant.com/calendar/",
+        "sourceCheckedAt": "2026-11-15T16:38:26.655Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2971751,
+          38.6554969
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-17:Delmar Hall:almost monday",
+        "title": "almost monday",
+        "start": "2026-11-17",
+        "expiresAt": "2026-11-18T06:00:00.000Z",
+        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "Delmar Hall, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/",
+        "url": "https://www.thepageant.com/calendar/",
+        "sourceCheckedAt": "2026-11-15T16:38:26.655Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3049591,
+          38.6557666
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-18:Blueberry Hill Duck Room:Protomartyr",
+        "title": "Protomartyr",
+        "start": "2026-11-18",
+        "expiresAt": "2026-11-19T06:00:00.000Z",
+        "description": "Blueberry Hill Duck Room \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "Blueberry Hill Duck Room, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/",
+        "url": "https://www.thepageant.com/calendar/",
+        "sourceCheckedAt": "2026-11-15T16:38:26.655Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2980861,
+          38.6555139
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-20:The Pageant:Foghat",
+        "title": "Foghat",
+        "start": "2026-11-20",
+        "expiresAt": "2026-11-21T06:00:00.000Z",
+        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "The Pageant, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/",
+        "url": "https://www.thepageant.com/calendar/",
+        "sourceCheckedAt": "2026-11-15T16:38:26.655Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2971751,
+          38.6554969
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-20:Delmar Hall:Ax and The Hatchetmen",
+        "title": "Ax and The Hatchetmen",
+        "start": "2026-11-20",
+        "expiresAt": "2026-11-21T06:00:00.000Z",
+        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "Delmar Hall, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/",
+        "url": "https://www.thepageant.com/calendar/",
+        "sourceCheckedAt": "2026-11-15T16:38:26.655Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2980861,
+          38.6555139
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-21:The Pageant:Jake's Leg",
+        "title": "Jake's Leg",
+        "start": "2026-11-21",
+        "expiresAt": "2026-11-22T06:00:00.000Z",
+        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "The Pageant, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/",
+        "url": "https://www.thepageant.com/calendar/",
+        "sourceCheckedAt": "2026-11-15T16:38:26.655Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2971751,
+          38.6554969
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-21:Delmar Hall:Chat Pile",
+        "title": "Chat Pile",
+        "start": "2026-11-21",
+        "expiresAt": "2026-11-22T06:00:00.000Z",
+        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "Delmar Hall, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/",
+        "url": "https://www.thepageant.com/calendar/",
+        "sourceCheckedAt": "2026-11-15T16:38:26.655Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3049591,
+          38.6557666
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-21:Blueberry Hill Duck Room:Sam Shackleton",
+        "title": "Sam Shackleton",
+        "start": "2026-11-21",
+        "expiresAt": "2026-11-22T06:00:00.000Z",
+        "description": "Blueberry Hill Duck Room \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "Blueberry Hill Duck Room, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/",
+        "url": "https://www.thepageant.com/calendar/",
+        "sourceCheckedAt": "2026-11-15T16:38:26.655Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2980861,
+          38.6555139
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-22:The Pageant:Dweezil Zappa",
+        "title": "Dweezil Zappa",
+        "start": "2026-11-22",
+        "expiresAt": "2026-11-23T06:00:00.000Z",
+        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "The Pageant, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/",
+        "url": "https://www.thepageant.com/calendar/",
+        "sourceCheckedAt": "2026-11-15T16:38:26.655Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2980861,
+          38.6555139
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-25:The Pageant:My Posse in Effect - A Live Tribute to the Beastie Boys",
+        "title": "My Posse in Effect - A Live Tribute to the Beastie Boys",
+        "start": "2026-11-25",
+        "expiresAt": "2026-11-26T06:00:00.000Z",
+        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "The Pageant, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=2",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=2",
+        "sourceCheckedAt": "2026-11-15T16:38:27.142Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2971751,
+          38.6554969
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-25:Delmar Hall:Playadors",
+        "title": "Playadors",
+        "start": "2026-11-25",
+        "expiresAt": "2026-11-26T06:00:00.000Z",
+        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "Delmar Hall, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=2",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=2",
+        "sourceCheckedAt": "2026-11-15T16:38:27.143Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2980861,
+          38.6555139
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-27:The Pageant:The Urge",
+        "title": "The Urge",
+        "start": "2026-11-27",
+        "expiresAt": "2026-11-28T06:00:00.000Z",
+        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "The Pageant, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=2",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=2",
+        "sourceCheckedAt": "2026-11-15T16:38:27.143Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2971751,
+          38.6554969
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-27:Delmar Hall:DON BROCO",
+        "title": "DON BROCO",
+        "start": "2026-11-27",
+        "expiresAt": "2026-11-28T06:00:00.000Z",
+        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "Delmar Hall, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=2",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=2",
+        "sourceCheckedAt": "2026-11-15T16:38:27.143Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2980861,
+          38.6555139
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-28:The Pageant:The Hard Promises: A Tribute to Tom Petty",
+        "title": "The Hard Promises: A Tribute to Tom Petty",
+        "start": "2026-11-28",
+        "expiresAt": "2026-11-29T06:00:00.000Z",
+        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "The Pageant, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=2",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=2",
+        "sourceCheckedAt": "2026-11-15T16:38:27.143Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2971751,
+          38.6554969
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-28:Delmar Hall:Voodoo Last Waltz",
+        "title": "Voodoo Last Waltz",
+        "start": "2026-11-28",
+        "expiresAt": "2026-11-29T06:00:00.000Z",
+        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "Delmar Hall, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=2",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=2",
+        "sourceCheckedAt": "2026-11-15T16:38:27.143Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2971751,
+          38.6554969
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-29:Delmar Hall:The Pineapple Thief",
+        "title": "The Pineapple Thief",
+        "start": "2026-11-29",
+        "expiresAt": "2026-11-30T06:00:00.000Z",
+        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "Delmar Hall, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=2",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=2",
+        "sourceCheckedAt": "2026-11-15T16:38:27.143Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3049591,
+          38.6557666
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-29:Blueberry Hill Duck Room:The Reverend Peyton's Big Damn Band",
+        "title": "The Reverend Peyton's Big Damn Band",
+        "start": "2026-11-29",
+        "expiresAt": "2026-11-30T06:00:00.000Z",
+        "description": "Blueberry Hill Duck Room \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "Blueberry Hill Duck Room, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=2",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=2",
+        "sourceCheckedAt": "2026-11-15T16:38:27.143Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2971751,
+          38.6554969
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-01:Delmar Hall:Tiny Habits",
+        "title": "Tiny Habits",
+        "start": "2026-12-01",
+        "expiresAt": "2026-12-02T06:00:00.000Z",
+        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "Delmar Hall, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=2",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=2",
+        "sourceCheckedAt": "2026-11-15T16:38:27.143Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2980861,
+          38.6555139
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-02:The Pageant:Pouya",
+        "title": "Pouya",
+        "start": "2026-12-02",
+        "expiresAt": "2026-12-03T06:00:00.000Z",
+        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "The Pageant, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=2",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=2",
+        "sourceCheckedAt": "2026-11-15T16:38:27.143Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3049591,
+          38.6557666
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-02:Blueberry Hill Duck Room:twen",
+        "title": "twen",
+        "start": "2026-12-02",
+        "expiresAt": "2026-12-03T06:00:00.000Z",
+        "description": "Blueberry Hill Duck Room \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "Blueberry Hill Duck Room, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=2",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=2",
+        "sourceCheckedAt": "2026-11-15T16:38:27.143Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2971751,
+          38.6554969
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-03:Delmar Hall:Eddie 9V",
+        "title": "Eddie 9V",
+        "start": "2026-12-03",
+        "expiresAt": "2026-12-04T06:00:00.000Z",
+        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "Delmar Hall, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=2",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=2",
+        "sourceCheckedAt": "2026-11-15T16:38:27.143Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2971751,
+          38.6554969
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-04:Delmar Hall:Anthony Gomes",
+        "title": "Anthony Gomes",
+        "start": "2026-12-04",
+        "expiresAt": "2026-12-05T06:00:00.000Z",
+        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "Delmar Hall, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=2",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=2",
+        "sourceCheckedAt": "2026-11-15T16:38:27.143Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3049591,
+          38.6557666
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-04:Blueberry Hill Duck Room:Shooting With Annie",
+        "title": "Shooting With Annie",
+        "start": "2026-12-04",
+        "expiresAt": "2026-12-05T06:00:00.000Z",
+        "description": "Blueberry Hill Duck Room \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "Blueberry Hill Duck Room, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=2",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=2",
+        "sourceCheckedAt": "2026-11-15T16:38:27.143Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2971751,
+          38.6554969
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-05:Delmar Hall:Matisyahu",
+        "title": "Matisyahu",
+        "start": "2026-12-05",
+        "expiresAt": "2026-12-06T06:00:00.000Z",
+        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "Delmar Hall, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=2",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=2",
+        "sourceCheckedAt": "2026-11-15T16:38:27.143Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3049591,
+          38.6557666
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-05:Blueberry Hill Duck Room:Love In The Club",
+        "title": "Love In The Club",
+        "start": "2026-12-05",
+        "expiresAt": "2026-12-06T06:00:00.000Z",
+        "description": "Blueberry Hill Duck Room \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "Blueberry Hill Duck Room, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=3",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=3",
+        "sourceCheckedAt": "2026-11-15T16:38:27.629Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3049591,
+          38.6557666
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-08:Blueberry Hill Duck Room:Aurorawave",
+        "title": "Aurorawave",
+        "start": "2026-12-08",
+        "expiresAt": "2026-12-09T06:00:00.000Z",
+        "description": "Blueberry Hill Duck Room \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "Blueberry Hill Duck Room, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=3",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=3",
+        "sourceCheckedAt": "2026-11-15T16:38:27.629Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3049591,
+          38.6557666
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-09:Blueberry Hill Duck Room:Mike Cooley (of Drive-By Truckers)",
+        "title": "Mike Cooley (of Drive-By Truckers)",
+        "start": "2026-12-09",
+        "expiresAt": "2026-12-10T06:00:00.000Z",
+        "description": "Blueberry Hill Duck Room \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "Blueberry Hill Duck Room, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=3",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=3",
+        "sourceCheckedAt": "2026-11-15T16:38:27.629Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3049591,
+          38.6557666
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-10:Blueberry Hill Duck Room:Babe Haven",
+        "title": "Babe Haven",
+        "start": "2026-12-10",
+        "expiresAt": "2026-12-11T06:00:00.000Z",
+        "description": "Blueberry Hill Duck Room \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "Blueberry Hill Duck Room, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=3",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=3",
+        "sourceCheckedAt": "2026-11-15T16:38:27.629Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2980861,
+          38.6555139
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-11:The Pageant:Cemetery Gatez: A Tribute to Pantera",
+        "title": "Cemetery Gatez: A Tribute to Pantera",
+        "start": "2026-12-11",
+        "expiresAt": "2026-12-12T06:00:00.000Z",
+        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "The Pageant, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=3",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=3",
+        "sourceCheckedAt": "2026-11-15T16:38:27.629Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2971751,
+          38.6554969
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-11:Delmar Hall:Magic Man - The Music of Heart",
+        "title": "Magic Man - The Music of Heart",
+        "start": "2026-12-11",
+        "expiresAt": "2026-12-12T06:00:00.000Z",
+        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "Delmar Hall, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=3",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=3",
+        "sourceCheckedAt": "2026-11-15T16:38:27.629Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2980861,
+          38.6555139
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-12:The Pageant:Punk Rock Christmas",
+        "title": "Punk Rock Christmas",
+        "start": "2026-12-12",
+        "expiresAt": "2026-12-13T06:00:00.000Z",
+        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "The Pageant, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=3",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=3",
+        "sourceCheckedAt": "2026-11-15T16:38:27.629Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2980861,
+          38.6555139
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-13:The Pageant:Dexter and The Moonrocks",
+        "title": "Dexter and The Moonrocks",
+        "start": "2026-12-13",
+        "expiresAt": "2026-12-14T06:00:00.000Z",
+        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "The Pageant, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=3",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=3",
+        "sourceCheckedAt": "2026-11-15T16:38:27.629Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2971751,
+          38.6554969
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-13:Delmar Hall:A Great Day: A Celebration of Life for David Surkamp",
+        "title": "A Great Day: A Celebration of Life for David Surkamp",
+        "start": "2026-12-13",
+        "expiresAt": "2026-12-14T06:00:00.000Z",
+        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "Delmar Hall, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=3",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=3",
+        "sourceCheckedAt": "2026-11-15T16:38:27.629Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3049591,
+          38.6557666
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-14:Blueberry Hill Duck Room:Guilt Trip",
+        "title": "Guilt Trip",
+        "start": "2026-12-14",
+        "expiresAt": "2026-12-15T06:00:00.000Z",
+        "description": "Blueberry Hill Duck Room \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "Blueberry Hill Duck Room, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=3",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=3",
+        "sourceCheckedAt": "2026-11-15T16:38:27.629Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2980861,
+          38.6555139
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-17:The Pageant:El Monstero",
+        "title": "El Monstero",
+        "start": "2026-12-17",
+        "expiresAt": "2026-12-18T06:00:00.000Z",
+        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "The Pageant, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=3",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=3",
+        "sourceCheckedAt": "2026-11-15T16:38:27.629Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2980861,
+          38.6555139
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-18:The Pageant:El Monstero",
+        "title": "El Monstero",
+        "start": "2026-12-18",
+        "expiresAt": "2026-12-19T06:00:00.000Z",
+        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "The Pageant, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=3",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=3",
+        "sourceCheckedAt": "2026-11-15T16:38:27.629Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2971751,
+          38.6554969
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-18:Delmar Hall:Funky Butt Brass Band",
+        "title": "Funky Butt Brass Band",
+        "start": "2026-12-18",
+        "expiresAt": "2026-12-19T06:00:00.000Z",
+        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "Delmar Hall, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=3",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=3",
+        "sourceCheckedAt": "2026-11-15T16:38:27.630Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3049591,
+          38.6557666
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-18:Blueberry Hill Duck Room:Blackwater '64",
+        "title": "Blackwater '64",
+        "start": "2026-12-18",
+        "expiresAt": "2026-12-19T06:00:00.000Z",
+        "description": "Blueberry Hill Duck Room \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "Blueberry Hill Duck Room, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=3",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=3",
+        "sourceCheckedAt": "2026-11-15T16:38:27.630Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2980861,
+          38.6555139
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-19:The Pageant:El Monstero",
+        "title": "El Monstero",
+        "start": "2026-12-19",
+        "expiresAt": "2026-12-20T06:00:00.000Z",
+        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "The Pageant, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=4",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=4",
+        "sourceCheckedAt": "2026-11-15T16:38:28.387Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2971751,
+          38.6554969
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-19:Delmar Hall:Funky Butt Brass Band",
+        "title": "Funky Butt Brass Band",
+        "start": "2026-12-19",
+        "expiresAt": "2026-12-20T06:00:00.000Z",
+        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "Delmar Hall, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=4",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=4",
+        "sourceCheckedAt": "2026-11-15T16:38:28.387Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2971751,
+          38.6554969
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-19:Delmar Hall:Funky Butt Brass Band (matinee)",
+        "title": "Funky Butt Brass Band (matinee)",
+        "start": "2026-12-19",
+        "expiresAt": "2026-12-20T06:00:00.000Z",
+        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "Delmar Hall, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=4",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=4",
+        "sourceCheckedAt": "2026-11-15T16:38:28.387Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2971751,
+          38.6554969
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-20:Delmar Hall:Funky Butt Brass Band (matinee)",
+        "title": "Funky Butt Brass Band (matinee)",
+        "start": "2026-12-20",
+        "expiresAt": "2026-12-21T06:00:00.000Z",
+        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "Delmar Hall, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=4",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=4",
+        "sourceCheckedAt": "2026-11-15T16:38:28.387Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2980861,
+          38.6555139
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-21:The Pageant:El Monstero",
+        "title": "El Monstero",
+        "start": "2026-12-21",
+        "expiresAt": "2026-12-22T06:00:00.000Z",
+        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "The Pageant, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=4",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=4",
+        "sourceCheckedAt": "2026-11-15T16:38:28.387Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2980861,
+          38.6555139
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-22:The Pageant:El Monstero",
+        "title": "El Monstero",
+        "start": "2026-12-22",
+        "expiresAt": "2026-12-23T06:00:00.000Z",
+        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "The Pageant, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=4",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=4",
+        "sourceCheckedAt": "2026-11-15T16:38:28.387Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2980861,
+          38.6555139
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-23:The Pageant:El Monstero",
+        "title": "El Monstero",
+        "start": "2026-12-23",
+        "expiresAt": "2026-12-24T06:00:00.000Z",
+        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "The Pageant, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=4",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=4",
+        "sourceCheckedAt": "2026-11-15T16:38:28.387Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2971751,
+          38.6554969
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-23:Delmar Hall:Funky Butt Brass Band",
+        "title": "Funky Butt Brass Band",
+        "start": "2026-12-23",
+        "expiresAt": "2026-12-24T06:00:00.000Z",
+        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "Delmar Hall, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=4",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=4",
+        "sourceCheckedAt": "2026-11-15T16:38:28.387Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2980861,
+          38.6555139
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-26:The Pageant:El Monstero",
+        "title": "El Monstero",
+        "start": "2026-12-26",
+        "expiresAt": "2026-12-27T06:00:00.000Z",
+        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "The Pageant, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=4",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=4",
+        "sourceCheckedAt": "2026-11-15T16:38:28.387Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2971751,
+          38.6554969
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-26:Delmar Hall:Dr. Zhivegas X Prince & The Revolution Tribute",
+        "title": "Dr. Zhivegas X Prince & The Revolution Tribute",
+        "start": "2026-12-26",
+        "expiresAt": "2026-12-27T06:00:00.000Z",
+        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "Delmar Hall, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=4",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=4",
+        "sourceCheckedAt": "2026-11-15T16:38:28.387Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3049591,
+          38.6557666
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2027-01-06:Blueberry Hill Duck Room:G. Love & Special Sauce",
+        "title": "G. Love & Special Sauce",
+        "start": "2027-01-06",
+        "expiresAt": "2027-01-07T06:00:00.000Z",
+        "description": "Blueberry Hill Duck Room \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "Blueberry Hill Duck Room, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=4",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=4",
+        "sourceCheckedAt": "2026-11-15T16:38:28.387Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2980861,
+          38.6555139
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2027-01-08:The Pageant:Voodoo Talking Heads",
+        "title": "Voodoo Talking Heads",
+        "start": "2027-01-08",
+        "expiresAt": "2027-01-09T06:00:00.000Z",
+        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "The Pageant, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=4",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=4",
+        "sourceCheckedAt": "2026-11-15T16:38:28.387Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2971751,
+          38.6554969
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2027-01-08:Delmar Hall:Kawaii Rave",
+        "title": "Kawaii Rave",
+        "start": "2027-01-08",
+        "expiresAt": "2027-01-09T06:00:00.000Z",
+        "description": "Delmar Hall \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "Delmar Hall, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=4",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=4",
+        "sourceCheckedAt": "2026-11-15T16:38:28.387Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2980861,
+          38.6555139
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2027-01-09:The Pageant:Voodoo Talking Heads",
+        "title": "Voodoo Talking Heads",
+        "start": "2027-01-09",
+        "expiresAt": "2027-01-10T06:00:00.000Z",
+        "description": "The Pageant \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "The Pageant, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=4",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=4",
+        "sourceCheckedAt": "2026-11-15T16:38:28.387Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3049591,
+          38.6557666
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2027-01-12:Blueberry Hill Duck Room:The Retrograde",
+        "title": "The Retrograde",
+        "start": "2027-01-12",
+        "expiresAt": "2027-01-13T06:00:00.000Z",
+        "description": "Blueberry Hill Duck Room \u00b7 Check the official calendar for showtime, tickets and changes.",
+        "address": "Blueberry Hill Duck Room, St. Louis, MO",
+        "source": "Official Pageant / Delmar Hall calendar",
+        "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=4",
+        "url": "https://www.thepageant.com/calendar/?sf_paged=4",
+        "sourceCheckedAt": "2026-11-15T16:38:28.387Z"
+      }
+    }
+  ]
+}
