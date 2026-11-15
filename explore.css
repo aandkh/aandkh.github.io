@@ -168,7 +168,7 @@ body.forecast-playing .weather-card-grid{visibility:visible!important}
 
 @media(max-width:800px){#place-search-help{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}#all-results{margin:0 0 3px;min-height:36px;padding:6px 10px;font-size:11px}#results-count{margin:3px 0 6px}#results .insight-card{margin-top:6px}}
 
-/* Layers is the primary destination at the far right of the map toolbar. */
+/* Layers is the primary destination at the far left of the map toolbar. */
 .map-toolbar #mobile-controls,body.controls-open .map-toolbar #mobile-controls{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-width:108px;min-height:46px;margin-left:0;padding:10px 16px;border:1px solid #b6c98d!important;border-radius:13px;background:#c7dba2!important;color:#20371e!important;font-weight:750;box-shadow:0 2px 8px #10261a25;pointer-events:auto}
 .map-toolbar #mobile-controls .control-label{font-size:14px;font-weight:750}
 .map-toolbar #mobile-controls:hover{background:#d5e7b4!important}
