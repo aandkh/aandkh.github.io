@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-15T16:52:19.598212+00:00",
+  "checkedAt": "2026-11-15T17:10:51.543138+00:00",
   "features": [
     {
       "type": "Feature",
@@ -22,7 +22,9 @@
         "sourceUrl": "https://slmpd.org/force-detectives-investigate-moline-acres-officer-shooting-in-city/",
         "sourceCheckedAt": "2026-11-15T16:52:19.598212+00:00",
         "locationAccuracy": "Approximate block / intersection",
-        "color": "#c52f73"
+        "color": "#c52f73",
+        "jurisdiction": "city",
+        "deaths": 0
       }
     },
     {
@@ -46,7 +48,9 @@
         "sourceUrl": "https://slmpd.org/force-detectives-investigating-officer-involved-shooting-in-dutchtown/",
         "sourceCheckedAt": "2026-11-15T16:52:19.598212+00:00",
         "locationAccuracy": "Approximate block / intersection",
-        "color": "#c52f73"
+        "color": "#c52f73",
+        "jurisdiction": "city",
+        "deaths": 1
       }
     },
     {
@@ -70,7 +74,9 @@
         "sourceUrl": "https://slmpd.org/man-dies-in-single-vehicle-crash-in-tower-grove-south/",
         "sourceCheckedAt": "2026-11-15T16:52:19.598212+00:00",
         "locationAccuracy": "Approximate block / intersection",
-        "color": "#ed5900"
+        "color": "#ed5900",
+        "jurisdiction": "city",
+        "deaths": 1
       }
     },
     {
@@ -94,7 +100,8 @@
         "sourceUrl": "https://slmpd.org/man-critically-injured-in-motorcycle-crash-in-bevo/",
         "sourceCheckedAt": "2026-11-15T16:52:19.598212+00:00",
         "locationAccuracy": "Approximate block / intersection",
-        "color": "#ed5900"
+        "color": "#ed5900",
+        "jurisdiction": "city"
       }
     },
     {
@@ -118,7 +125,9 @@
         "sourceUrl": "https://slmpd.org/force-detectives-investigating-officer-involved-shooting-in-wells-goodfellow/",
         "sourceCheckedAt": "2026-11-15T16:52:19.598212+00:00",
         "locationAccuracy": "Approximate block / intersection",
-        "color": "#c52f73"
+        "color": "#c52f73",
+        "jurisdiction": "city",
+        "deaths": 1
       }
     },
     {
@@ -142,7 +151,9 @@
         "sourceUrl": "https://slmpd.org/man-shot-killed-in-downtown-two-suspects-arrested/",
         "sourceCheckedAt": "2026-11-15T16:52:19.598212+00:00",
         "locationAccuracy": "Approximate block / intersection",
-        "color": "#c52f73"
+        "color": "#c52f73",
+        "jurisdiction": "city",
+        "deaths": 1
       }
     },
     {
@@ -166,8 +177,115 @@
         "sourceUrl": "https://slmpd.org/man-shot-killed-in-baden-2/",
         "sourceCheckedAt": "2026-11-15T16:52:19.598212+00:00",
         "locationAccuracy": "Approximate block / intersection",
+        "color": "#c52f73",
+        "jurisdiction": "city",
+        "deaths": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.20732,
+          38.79678
+        ]
+      },
+      "properties": {
+        "id": "incident:county-criterion",
+        "title": "Fatal shooting investigation \u00b7 Criterion Avenue",
+        "incidentAt": "2026-11-10T17:05:00-06:00",
+        "incidentKind": "shooting",
+        "jurisdiction": "county",
+        "deaths": 1,
+        "description": "Police reported a man was found with gunshot injuries after an altercation and later died at hospital. A person of interest was interviewed. The investigation remains preliminary. Location marks the approximate reported block, not an exact scene.",
+        "address": "1400 block of Criterion Avenue, St. Louis County",
+        "locationAccuracy": "Approximate reported block",
+        "source": "St. Louis County Police \u00b7 official investigation summary",
+        "sourceUrl": "https://www.stlouiscountypolice.com/department-news/press-releases/news-release-homicide-investigation-in-the-1400-block-of-criterion-avenue/",
+        "url": "https://www.stlouiscountypolice.com/department-news/press-releases/news-release-homicide-investigation-in-the-1400-block-of-criterion-avenue/",
+        "sourceCheckedAt": "2026-11-15T17:10:51.543138+00:00",
+        "color": "#c52f73"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.29166,
+          38.71255
+        ]
+      },
+      "properties": {
+        "id": "incident:county-wallington",
+        "title": "Fatal shooting investigation \u00b7 Wallington Walk",
+        "incidentAt": "2026-11-05T23:05:00-06:00",
+        "incidentKind": "shooting",
+        "jurisdiction": "county",
+        "deaths": 1,
+        "description": "County police reported a man with gunshot injuries was pronounced dead at the scene. The release reported no suspect in custody. The investigation remains preliminary. Location marks the approximate reported block, not an exact scene.",
+        "address": "7300 block of Wallington Walk, St. Louis County",
+        "locationAccuracy": "Approximate reported block",
+        "source": "St. Louis County Police \u00b7 official investigation summary",
+        "sourceUrl": "https://www.stlouiscountypolice.com/department-news/press-releases/news-release-homicide-investigation-in-the-7300-block-of-wallington-walk/",
+        "url": "https://www.stlouiscountypolice.com/department-news/press-releases/news-release-homicide-investigation-in-the-7300-block-of-wallington-walk/",
+        "sourceCheckedAt": "2026-11-15T17:10:51.543138+00:00",
+        "color": "#c52f73"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.30213,
+          38.66924
+        ]
+      },
+      "properties": {
+        "id": "incident:county-wellston-sutter",
+        "title": "Fatal officer shooting investigation \u00b7 Wellston",
+        "incidentAt": "2026-11-05T13:05:00-06:00",
+        "incidentKind": "shooting",
+        "jurisdiction": "county",
+        "deaths": 1,
+        "description": "Police reported a warrant encounter escalated into a barricade and later an officer shooting. One man died at hospital. The time shown is the start of the encounter, not the later shooting. County detectives are investigating. Location marks the approximate reported block, not an exact scene.",
+        "address": "1200 block of Sutter Avenue, Wellston, St. Louis County",
+        "locationAccuracy": "Approximate reported block",
+        "source": "St. Louis County Police \u00b7 official investigation summary",
+        "sourceUrl": "https://www.stlouiscountypolice.com/department-news/press-releases/news-release-officer-involved-shooting-investigation-in-the-1200-block-of-sutter-avenue-wellston-mo/",
+        "url": "https://www.stlouiscountypolice.com/department-news/press-releases/news-release-officer-involved-shooting-investigation-in-the-1200-block-of-sutter-avenue-wellston-mo/",
+        "sourceCheckedAt": "2026-11-15T17:10:51.543138+00:00",
+        "color": "#c52f73"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.28211,
+          38.81568
+        ]
+      },
+      "properties": {
+        "id": "incident:county-north67",
+        "title": "Triple shooting investigation \u00b7 North Highway 67",
+        "incidentAt": "2026-11-01T00:14:00-05:00",
+        "incidentKind": "shooting",
+        "jurisdiction": "county",
+        "deaths": 1,
+        "description": "County police reported one man died and two others received treatment for non-life-threatening gunshot injuries following a shooting at a business. The investigation remains preliminary. Location marks the approximate reported block, not an exact scene.",
+        "address": "4000 block of North Highway 67, St. Louis County",
+        "locationAccuracy": "Approximate reported block",
+        "source": "St. Louis County Police \u00b7 official investigation summary",
+        "sourceUrl": "https://www.stlouiscountypolice.com/department-news/press-releases/news-release-triple-shooting-homicide-investigation-in-the-4000-block-of-north-highway-67/",
+        "url": "https://www.stlouiscountypolice.com/department-news/press-releases/news-release-triple-shooting-homicide-investigation-in-the-4000-block-of-north-highway-67/",
+        "sourceCheckedAt": "2026-11-15T17:10:51.543138+00:00",
         "color": "#c52f73"
       }
     }
-  ]
+  ],
+  "archiveStartedAt": "2026-11-15"
 }
