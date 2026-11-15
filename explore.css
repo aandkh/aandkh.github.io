@@ -179,7 +179,7 @@ body.forecast-playing .weather-card-grid{visibility:visible!important}
 
 .featured-options>summary{cursor:pointer;font-size:12px;color:var(--muted);padding:10px 4px;min-height:40px}
 @media(max-width:800px){
- #sidebar{top:60px;bottom:83px;left:0;right:auto;width:min(380px,78vw);height:auto;max-height:none;padding-top:10px;border-radius:0 20px 20px 0;box-shadow:5px 0 22px #0003}
+ #sidebar{top:60px;bottom:83px;left:0;right:auto;width:min(300px,70vw);height:auto;max-height:none;padding-top:10px;border-radius:0 20px 20px 0;box-shadow:5px 0 22px #0003}
  #sidebar .tabs{margin:0 52px 0 10px;min-height:42px;height:42px}
  #sidebar .panel{padding:12px 14px 20px}
  #sidebar .layers-head{top:-12px;margin:-12px -14px 0;padding:12px 14px 8px}
@@ -191,7 +191,7 @@ body.forecast-playing .weather-card-grid{visibility:visible!important}
  #sidebar .layer-row .layer-browse{width:36px;height:44px;grid-column:3;grid-row:1}
  #sidebar .group-toggle{min-height:38px}
  #sidebar .layer-group{margin-top:10px}
- #layers-backdrop{top:60px;bottom:83px;left:min(380px,78vw);right:0;background:transparent}
+ #layers-backdrop{top:60px;bottom:83px;left:min(300px,70vw);right:0;background:transparent}
 }
 
 
@@ -225,4 +225,21 @@ body.forecast-playing .weather-card-grid{visibility:visible!important}
  body.controls-open .map-shell .leaflet-top.leaflet-left{top:12px!important;left:auto;right:8px}
  body:not(.controls-open) .map-shell:has(#detail:not([hidden])) .leaflet-top.leaflet-left{top:12px!important}
  body:not(.controls-open) .map-shell:has(#results:not([hidden])) .leaflet-top.leaflet-left{top:126px!important}
+}
+
+/* Compact mobile drawer: preserve labels and touch targets, reveal more map. */
+@media(max-width:800px){
+ #sidebar .panel{padding-left:10px;padding-right:10px}
+ #sidebar .layers-head{margin-left:-10px;margin-right:-10px;padding-left:10px;padding-right:10px}
+ #sidebar .tabs{margin-right:54px;margin-left:8px}
+ #sidebar .tabs button{min-width:0;padding-left:4px;padding-right:4px;font-size:12px}
+ #sidebar .search{gap:8px;padding-left:10px;padding-right:10px}
+ #sidebar .search input{width:100%;min-width:0}
+ #sidebar .layer-row label{min-width:0;overflow-wrap:anywhere}
+ #sidebar .group-toggle{gap:6px}
+ #sidebar .group-toggle>*{min-width:0}
+ #sidebar .layer-filter-bar{gap:4px}
+ #sidebar .layer-filter-bar button{padding-left:5px;padding-right:5px;font-size:11px}
+ #sidebar .input-row{flex-wrap:wrap}
+ #sidebar .input-row input{min-width:0;flex:1 1 120px}
 }

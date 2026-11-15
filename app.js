@@ -543,6 +543,13 @@ function showMapKeepingPlace(){
  resumeButton.textContent='↑ '+title;resumeButton.setAttribute('aria-label','Return to '+title);resumeBox.hidden=false;
  document.activeElement?.blur();$('#map').focus({preventScroll:true});navigationState();
 }
+// Dismiss before marker handlers run, so tapping a pin can still open its details.
+// Keep drag/pinch gestures and map controls independent of panel navigation.
+$('#map').addEventListener('click',event=>{
+ if(event.target.closest('.leaflet-control,.leaflet-popup'))return;
+ if(map.dragging?.moved()||map.boxZoom?.moved())return;
+ showMapKeepingPlace();
+},true);
 mapReturn.onclick=showMapKeepingPlace;
 $('#results-close').onclick=showMapKeepingPlace;
 $('#close-layers').onclick=showMapKeepingPlace;
