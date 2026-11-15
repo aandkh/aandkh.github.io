@@ -1,4 +1,4 @@
-let cache,loaded=0;
+let cache,loaded=0,filtersOpen=false;
 export const incidentFilters={range:'7',jurisdiction:'all',types:[],fatal:'all',sort:'newest',from:'',to:''};
 export function incidentInWeek(f,now=Date.now()){const t=Date.parse(f.properties?.incidentAt);return Number.isFinite(t)&&t<=now&&t>=now-7*86400000;}
 export function filterIncidents(features,filters=incidentFilters,now=Date.now()){
@@ -17,7 +17,7 @@ export function incidentExplorer(d,onChange){
  function select(label,key,options){const wrap=add('label',label+' '),s=document.createElement('select');s.setAttribute('aria-label',label);for(const[v,t]of options){const o=document.createElement('option');o.value=v;o.textContent=t;s.append(o);}s.value=incidentFilters[key];s.onchange=()=>{incidentFilters[key]=s.value;onChange();};wrap.append(s);}
  select('Time period','range',[['7','Past week'],['30','Past 30 days'],['90','Past 90 days'],['all','All archived reports'],['custom','Choose dates']]);
  if(incidentFilters.range==='custom')for(const key of ['from','to']){const l=add('label',key==='from'?'From ':'Through '),i=document.createElement('input');i.type='date';i.value=incidentFilters[key];i.setAttribute('aria-label',key==='from'?'Incident start date':'Incident end date');i.onchange=()=>{incidentFilters[key]=i.value;onChange();};l.append(i);}
- const filterBox=add('details',''),filterTitle=document.createElement('summary');filterTitle.textContent='Filter & sort reports';filterBox.append(filterTitle);target=filterBox;
+ const filterBox=add('details',''),filterTitle=document.createElement('summary');filterTitle.textContent='Filter & sort reports';filterBox.append(filterTitle);filterBox.open=filtersOpen;filterBox.ontoggle=()=>{if(filterBox.isConnected)filtersOpen=filterBox.open;};target=filterBox;
  select('Reported deaths','fatal',[['all','All reports'],['fatal','Fatal incidents'],['unknown','Death count not reported']]);
  select('Order','sort',[['newest','Newest first'],['oldest','Oldest first'],['deaths','Most reported deaths']]);
  add('strong','Incident types · combine any');
