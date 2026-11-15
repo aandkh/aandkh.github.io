@@ -1,6 +1,6 @@
 {
-  "checkedAt": "2026-11-15T16:38:28.387Z",
-  "note": "Official venue calendar snapshot; times not supplied. Refresh through the daily Andymap maintenance task.",
+  "checkedAt": "2026-11-15T16:56:37.040763+00:00",
+  "note": "Reviewed official venue calendar snapshots plus separately loaded university listings. Partial regional coverage; source check dates are per event.",
   "features": [
     {
       "type": "Feature",
@@ -1276,6 +1276,1593 @@
         "sourceUrl": "https://www.thepageant.com/calendar/?sf_paged=4",
         "url": "https://www.thepageant.com/calendar/?sf_paged=4",
         "sourceCheckedAt": "2026-11-15T16:38:28.387Z"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.219126,
+          38.590313
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-15:Off Broadway:Improvement Movement : Your Perfect Real LIVE '26:20:00",
+        "title": "Improvement Movement : Your Perfect Real LIVE '26",
+        "venue": "Off Broadway",
+        "start": "2026-11-15T20:00:00-06:00",
+        "expiresAt": "2026-11-16T00:00:00-06:00",
+        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
+        "source": "Off Broadway \u00b7 official calendar",
+        "sourceUrl": "https://www.offbroadwaystl.com/shows/improvement-movement-your-perfect-real-live-26-15-nov",
+        "url": "https://www.offbroadwaystl.com/shows/improvement-movement-your-perfect-real-live-26-15-nov",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.219126,
+          38.590313
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-16:Off Broadway:ADULT. / A Place To Bury Strangers:20:00",
+        "title": "ADULT. / A Place To Bury Strangers",
+        "venue": "Off Broadway",
+        "start": "2026-11-16T20:00:00-06:00",
+        "expiresAt": "2026-11-17T00:00:00-06:00",
+        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
+        "source": "Off Broadway \u00b7 official calendar",
+        "sourceUrl": "https://www.offbroadwaystl.com/shows/adult-a-place-to-bury-strangers-06-nov",
+        "url": "https://www.offbroadwaystl.com/shows/adult-a-place-to-bury-strangers-06-nov",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.219126,
+          38.590313
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-19:Off Broadway:Ethan Regan - Young Regan Tour:20:00",
+        "title": "Ethan Regan - Young Regan Tour",
+        "venue": "Off Broadway",
+        "start": "2026-11-19T20:00:00-06:00",
+        "expiresAt": "2026-11-20T00:00:00-06:00",
+        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
+        "source": "Off Broadway \u00b7 official calendar",
+        "sourceUrl": "https://www.offbroadwaystl.com/shows/ethan-regan-young-regan-tour-19-nov",
+        "url": "https://www.offbroadwaystl.com/shows/ethan-regan-young-regan-tour-19-nov",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.219126,
+          38.590313
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-21:Off Broadway:Kingdom of Giants:20:00",
+        "title": "Kingdom of Giants",
+        "venue": "Off Broadway",
+        "start": "2026-11-21T20:00:00-06:00",
+        "expiresAt": "2026-11-22T00:00:00-06:00",
+        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
+        "source": "Off Broadway \u00b7 official calendar",
+        "sourceUrl": "https://www.offbroadwaystl.com/shows/kingdom-of-giants-21-nov",
+        "url": "https://www.offbroadwaystl.com/shows/kingdom-of-giants-21-nov",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.219126,
+          38.590313
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-24:Off Broadway:Oso Oso",
+        "title": "Oso Oso",
+        "venue": "Off Broadway",
+        "start": "2026-11-24",
+        "expiresAt": "2026-11-25T00:00:00-06:00",
+        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
+        "source": "Off Broadway \u00b7 official calendar",
+        "sourceUrl": "https://www.offbroadwaystl.com/shows/oso-oso-24-nov",
+        "url": "https://www.offbroadwaystl.com/shows/oso-oso-24-nov",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.219126,
+          38.590313
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-27:Off Broadway:Ha Ha Tonka",
+        "title": "Ha Ha Tonka",
+        "venue": "Off Broadway",
+        "start": "2026-11-27",
+        "expiresAt": "2026-11-28T00:00:00-06:00",
+        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
+        "source": "Off Broadway \u00b7 official calendar",
+        "sourceUrl": "https://www.offbroadwaystl.com/shows/ha-ha-tonka-27-nov",
+        "url": "https://www.offbroadwaystl.com/shows/ha-ha-tonka-27-nov",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.219126,
+          38.590313
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-28:Off Broadway:Harbour",
+        "title": "Harbour",
+        "venue": "Off Broadway",
+        "start": "2026-11-28",
+        "expiresAt": "2026-11-29T00:00:00-06:00",
+        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
+        "source": "Off Broadway \u00b7 official calendar",
+        "sourceUrl": "https://www.offbroadwaystl.com/shows/harbour-28-nov",
+        "url": "https://www.offbroadwaystl.com/shows/harbour-28-nov",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.219126,
+          38.590313
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-02:Off Broadway:Daisy Grenade",
+        "title": "Daisy Grenade",
+        "venue": "Off Broadway",
+        "start": "2026-12-02",
+        "expiresAt": "2026-12-03T00:00:00-06:00",
+        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
+        "source": "Off Broadway \u00b7 official calendar",
+        "sourceUrl": "https://www.offbroadwaystl.com/shows/daisy-grenade-02-dec",
+        "url": "https://www.offbroadwaystl.com/shows/daisy-grenade-02-dec",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.219126,
+          38.590313
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-03:Off Broadway:Beth Bombara",
+        "title": "Beth Bombara",
+        "venue": "Off Broadway",
+        "start": "2026-12-03",
+        "expiresAt": "2026-12-04T00:00:00-06:00",
+        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
+        "source": "Off Broadway \u00b7 official calendar",
+        "sourceUrl": "https://www.offbroadwaystl.com/shows/beth-bombara-03-dec",
+        "url": "https://www.offbroadwaystl.com/shows/beth-bombara-03-dec",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.219126,
+          38.590313
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-04:Off Broadway:evereverever, Middle Class Fashion & Meatus",
+        "title": "evereverever, Middle Class Fashion & Meatus",
+        "venue": "Off Broadway",
+        "start": "2026-12-04",
+        "expiresAt": "2026-12-05T00:00:00-06:00",
+        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
+        "source": "Off Broadway \u00b7 official calendar",
+        "sourceUrl": "https://www.offbroadwaystl.com/shows/evereverever-middle-class-fashion-meatus-04-dec",
+        "url": "https://www.offbroadwaystl.com/shows/evereverever-middle-class-fashion-meatus-04-dec",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.219126,
+          38.590313
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-05:Off Broadway:120 Minutes Presents : A Tribute To The Cure",
+        "title": "120 Minutes Presents : A Tribute To The Cure",
+        "venue": "Off Broadway",
+        "start": "2026-12-05",
+        "expiresAt": "2026-12-06T00:00:00-06:00",
+        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
+        "source": "Off Broadway \u00b7 official calendar",
+        "sourceUrl": "https://www.offbroadwaystl.com/shows/120-minutes-presents-a-tribute-to-the-cure-05-dec",
+        "url": "https://www.offbroadwaystl.com/shows/120-minutes-presents-a-tribute-to-the-cure-05-dec",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.219126,
+          38.590313
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-11:Off Broadway:JigJam",
+        "title": "JigJam",
+        "venue": "Off Broadway",
+        "start": "2026-12-11",
+        "expiresAt": "2026-12-12T00:00:00-06:00",
+        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
+        "source": "Off Broadway \u00b7 official calendar",
+        "sourceUrl": "https://www.offbroadwaystl.com/shows/jigjam-11-dec",
+        "url": "https://www.offbroadwaystl.com/shows/jigjam-11-dec",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.219126,
+          38.590313
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-12:Off Broadway:Pedestrian Deposit",
+        "title": "Pedestrian Deposit",
+        "venue": "Off Broadway",
+        "start": "2026-12-12",
+        "expiresAt": "2026-12-13T00:00:00-06:00",
+        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
+        "source": "Off Broadway \u00b7 official calendar",
+        "sourceUrl": "https://www.offbroadwaystl.com/shows/pedestrian-deposit-12-dec",
+        "url": "https://www.offbroadwaystl.com/shows/pedestrian-deposit-12-dec",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.219126,
+          38.590313
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-13:Off Broadway:Colour Revolt",
+        "title": "Colour Revolt",
+        "venue": "Off Broadway",
+        "start": "2026-12-13",
+        "expiresAt": "2026-12-14T00:00:00-06:00",
+        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
+        "source": "Off Broadway \u00b7 official calendar",
+        "sourceUrl": "https://www.offbroadwaystl.com/shows/colour-revolt-13-dec",
+        "url": "https://www.offbroadwaystl.com/shows/colour-revolt-13-dec",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.219126,
+          38.590313
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-17:Off Broadway:Friendship & Charlotte Cornfield",
+        "title": "Friendship & Charlotte Cornfield",
+        "venue": "Off Broadway",
+        "start": "2026-12-17",
+        "expiresAt": "2026-12-18T00:00:00-06:00",
+        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
+        "source": "Off Broadway \u00b7 official calendar",
+        "sourceUrl": "https://www.offbroadwaystl.com/shows/friendship-charlotte-cornfield-17-dec",
+        "url": "https://www.offbroadwaystl.com/shows/friendship-charlotte-cornfield-17-dec",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.219126,
+          38.590313
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-18:Off Broadway:WW3: A Christmas Celebration",
+        "title": "WW3: A Christmas Celebration",
+        "venue": "Off Broadway",
+        "start": "2026-12-18",
+        "expiresAt": "2026-12-19T00:00:00-06:00",
+        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
+        "source": "Off Broadway \u00b7 official calendar",
+        "sourceUrl": "https://www.offbroadwaystl.com/shows/ww3-a-christmas-celebration-18-dec",
+        "url": "https://www.offbroadwaystl.com/shows/ww3-a-christmas-celebration-18-dec",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.219126,
+          38.590313
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-19:Off Broadway:Kris Kringle & The Jolly Jingles",
+        "title": "Kris Kringle & The Jolly Jingles",
+        "venue": "Off Broadway",
+        "start": "2026-12-19",
+        "expiresAt": "2026-12-20T00:00:00-06:00",
+        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
+        "source": "Off Broadway \u00b7 official calendar",
+        "sourceUrl": "https://www.offbroadwaystl.com/shows/kris-kringle-the-jolly-jingles-19-dec",
+        "url": "https://www.offbroadwaystl.com/shows/kris-kringle-the-jolly-jingles-19-dec",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.219126,
+          38.590313
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2027-01-15:Off Broadway:The Late Greats",
+        "title": "The Late Greats",
+        "venue": "Off Broadway",
+        "start": "2027-01-15",
+        "expiresAt": "2027-01-16T00:00:00-06:00",
+        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
+        "source": "Off Broadway \u00b7 official calendar",
+        "sourceUrl": "https://www.offbroadwaystl.com/shows/the-late-greats-15-jan",
+        "url": "https://www.offbroadwaystl.com/shows/the-late-greats-15-jan",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.219126,
+          38.590313
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2027-01-16:Off Broadway:1% Productions Presents : Emo Nite",
+        "title": "1% Productions Presents : Emo Nite",
+        "venue": "Off Broadway",
+        "start": "2027-01-16",
+        "expiresAt": "2027-01-17T00:00:00-06:00",
+        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
+        "source": "Off Broadway \u00b7 official calendar",
+        "sourceUrl": "https://www.offbroadwaystl.com/shows/1-productions-presents-emo-nite-16-jan",
+        "url": "https://www.offbroadwaystl.com/shows/1-productions-presents-emo-nite-16-jan",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.219126,
+          38.590313
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2027-01-24:Off Broadway:Jon Spencer",
+        "title": "Jon Spencer",
+        "venue": "Off Broadway",
+        "start": "2027-01-24",
+        "expiresAt": "2027-01-25T00:00:00-06:00",
+        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
+        "source": "Off Broadway \u00b7 official calendar",
+        "sourceUrl": "https://www.offbroadwaystl.com/shows/jon-spencer-24-jan",
+        "url": "https://www.offbroadwaystl.com/shows/jon-spencer-24-jan",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.219126,
+          38.590313
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2027-02-05:Off Broadway:Youth Fountain",
+        "title": "Youth Fountain",
+        "venue": "Off Broadway",
+        "start": "2027-02-05",
+        "expiresAt": "2027-02-06T00:00:00-06:00",
+        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
+        "source": "Off Broadway \u00b7 official calendar",
+        "sourceUrl": "https://www.offbroadwaystl.com/shows/youth-fountain-05-feb",
+        "url": "https://www.offbroadwaystl.com/shows/youth-fountain-05-feb",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.219126,
+          38.590313
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2027-02-13:Off Broadway:Camp Bloom Tour",
+        "title": "Camp Bloom Tour",
+        "venue": "Off Broadway",
+        "start": "2027-02-13",
+        "expiresAt": "2027-02-14T00:00:00-06:00",
+        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
+        "source": "Off Broadway \u00b7 official calendar",
+        "sourceUrl": "https://www.offbroadwaystl.com/shows/camp-bloom-tour-13-feb",
+        "url": "https://www.offbroadwaystl.com/shows/camp-bloom-tour-13-feb",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.219126,
+          38.590313
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2027-02-18:Off Broadway:Hans Williams",
+        "title": "Hans Williams",
+        "venue": "Off Broadway",
+        "start": "2027-02-18",
+        "expiresAt": "2027-02-19T00:00:00-06:00",
+        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
+        "source": "Off Broadway \u00b7 official calendar",
+        "sourceUrl": "https://www.offbroadwaystl.com/shows/hans-williams-18-feb",
+        "url": "https://www.offbroadwaystl.com/shows/hans-williams-18-feb",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.219126,
+          38.590313
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2027-02-25:Off Broadway:strongboi headline tour 2027",
+        "title": "strongboi headline tour 2027",
+        "venue": "Off Broadway",
+        "start": "2027-02-25",
+        "expiresAt": "2027-02-26T00:00:00-06:00",
+        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
+        "source": "Off Broadway \u00b7 official calendar",
+        "sourceUrl": "https://www.offbroadwaystl.com/shows/strongboi-25-feb",
+        "url": "https://www.offbroadwaystl.com/shows/strongboi-25-feb",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.219126,
+          38.590313
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2027-03-02:Off Broadway:Carissa's Wierd",
+        "title": "Carissa's Wierd",
+        "venue": "Off Broadway",
+        "start": "2027-03-02",
+        "expiresAt": "2027-03-03T00:00:00-06:00",
+        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
+        "source": "Off Broadway \u00b7 official calendar",
+        "sourceUrl": "https://www.offbroadwaystl.com/shows/carissa-s-wierd-02-mar",
+        "url": "https://www.offbroadwaystl.com/shows/carissa-s-wierd-02-mar",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.219126,
+          38.590313
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2027-03-12:Off Broadway:James McMurtry",
+        "title": "James McMurtry",
+        "venue": "Off Broadway",
+        "start": "2027-03-12",
+        "expiresAt": "2027-03-13T00:00:00-06:00",
+        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
+        "source": "Off Broadway \u00b7 official calendar",
+        "sourceUrl": "https://www.offbroadwaystl.com/shows/james-mcmurtry-12-mar",
+        "url": "https://www.offbroadwaystl.com/shows/james-mcmurtry-12-mar",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.219126,
+          38.590313
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2027-03-16:Off Broadway:Dogpark",
+        "title": "Dogpark",
+        "venue": "Off Broadway",
+        "start": "2027-03-16",
+        "expiresAt": "2027-03-17T00:00:00-05:00",
+        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
+        "source": "Off Broadway \u00b7 official calendar",
+        "sourceUrl": "https://www.offbroadwaystl.com/shows/dogpark-16-mar",
+        "url": "https://www.offbroadwaystl.com/shows/dogpark-16-mar",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.219126,
+          38.590313
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2027-03-24:Off Broadway:The Dollyrots",
+        "title": "The Dollyrots",
+        "venue": "Off Broadway",
+        "start": "2027-03-24",
+        "expiresAt": "2027-03-25T00:00:00-05:00",
+        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
+        "source": "Off Broadway \u00b7 official calendar",
+        "sourceUrl": "https://www.offbroadwaystl.com/shows/the-dollyrots-24-mar",
+        "url": "https://www.offbroadwaystl.com/shows/the-dollyrots-24-mar",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.219126,
+          38.590313
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2027-04-06:Off Broadway:Worldpeace DMT",
+        "title": "Worldpeace DMT",
+        "venue": "Off Broadway",
+        "start": "2027-04-06",
+        "expiresAt": "2027-04-07T00:00:00-05:00",
+        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
+        "source": "Off Broadway \u00b7 official calendar",
+        "sourceUrl": "https://www.offbroadwaystl.com/shows/worldpeace-dmt-06-apr",
+        "url": "https://www.offbroadwaystl.com/shows/worldpeace-dmt-06-apr",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.219126,
+          38.590313
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2027-04-09:Off Broadway:Hotel Fiction",
+        "title": "Hotel Fiction",
+        "venue": "Off Broadway",
+        "start": "2027-04-09",
+        "expiresAt": "2027-04-10T00:00:00-05:00",
+        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
+        "source": "Off Broadway \u00b7 official calendar",
+        "sourceUrl": "https://www.offbroadwaystl.com/shows/hotel-fiction-09-apr",
+        "url": "https://www.offbroadwaystl.com/shows/hotel-fiction-09-apr",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.219126,
+          38.590313
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2027-04-24:Off Broadway:John Hollier  & The R\u00eaverie",
+        "title": "John Hollier  & The R\u00eaverie",
+        "venue": "Off Broadway",
+        "start": "2027-04-24",
+        "expiresAt": "2027-04-25T00:00:00-05:00",
+        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
+        "source": "Off Broadway \u00b7 official calendar",
+        "sourceUrl": "https://www.offbroadwaystl.com/shows/john-hollier-the-reverie-24-apr",
+        "url": "https://www.offbroadwaystl.com/shows/john-hollier-the-reverie-24-apr",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.219126,
+          38.590313
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2027-05-05:Off Broadway:Mei Semones",
+        "title": "Mei Semones",
+        "venue": "Off Broadway",
+        "start": "2027-05-05",
+        "expiresAt": "2027-05-06T00:00:00-05:00",
+        "description": "Off Broadway \u00b7 Check the official event page for tickets and changes.",
+        "address": "Off Broadway, 3509 Lemp Ave, St Louis MO",
+        "source": "Off Broadway \u00b7 official calendar",
+        "sourceUrl": "https://www.offbroadwaystl.com/shows/mei-semones-05-may",
+        "url": "https://www.offbroadwaystl.com/shows/mei-semones-05-may",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.204295,
+          38.614635
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-15:Old Rock House:Steve Poltz:20:00",
+        "title": "Steve Poltz",
+        "venue": "Old Rock House",
+        "start": "2026-11-15T20:00:00-06:00",
+        "expiresAt": "2026-11-16T00:00:00-06:00",
+        "description": "Old Rock House \u00b7 Check the official event page for tickets and changes.",
+        "address": "Old Rock House, 1410 S Tucker Blvd, St Louis MO",
+        "source": "Old Rock House \u00b7 official calendar",
+        "sourceUrl": "https://oldrockhouse.com/",
+        "url": "https://oldrockhouse.com/",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.204295,
+          38.614635
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-16:Old Rock House:Welshly Arms:20:00",
+        "title": "Welshly Arms",
+        "venue": "Old Rock House",
+        "start": "2026-11-16T20:00:00-06:00",
+        "expiresAt": "2026-11-17T00:00:00-06:00",
+        "description": "Old Rock House \u00b7 Check the official event page for tickets and changes.",
+        "address": "Old Rock House, 1410 S Tucker Blvd, St Louis MO",
+        "source": "Old Rock House \u00b7 official calendar",
+        "sourceUrl": "https://oldrockhouse.com/",
+        "url": "https://oldrockhouse.com/",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.204295,
+          38.614635
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-20:Old Rock House:Victor Wooten & The Wooten Brothers:20:00",
+        "title": "Victor Wooten & The Wooten Brothers",
+        "venue": "Old Rock House",
+        "start": "2026-11-20T20:00:00-06:00",
+        "expiresAt": "2026-11-21T00:00:00-06:00",
+        "description": "Old Rock House \u00b7 Check the official event page for tickets and changes.",
+        "address": "Old Rock House, 1410 S Tucker Blvd, St Louis MO",
+        "source": "Old Rock House \u00b7 official calendar",
+        "sourceUrl": "https://oldrockhouse.com/",
+        "url": "https://oldrockhouse.com/",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.204295,
+          38.614635
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-21:Old Rock House:Matt Jordan with Austin Grimm & Them Gold Souls:20:00",
+        "title": "Matt Jordan with Austin Grimm & Them Gold Souls",
+        "venue": "Old Rock House",
+        "start": "2026-11-21T20:00:00-06:00",
+        "expiresAt": "2026-11-22T00:00:00-06:00",
+        "description": "Old Rock House \u00b7 Check the official event page for tickets and changes.",
+        "address": "Old Rock House, 1410 S Tucker Blvd, St Louis MO",
+        "source": "Old Rock House \u00b7 official calendar",
+        "sourceUrl": "https://oldrockhouse.com/",
+        "url": "https://oldrockhouse.com/",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.204295,
+          38.614635
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-25:Old Rock House:All Together Now: Beatles Tribute:19:00",
+        "title": "All Together Now: Beatles Tribute",
+        "venue": "Old Rock House",
+        "start": "2026-11-25T19:00:00-06:00",
+        "expiresAt": "2026-11-26T00:00:00-06:00",
+        "description": "Old Rock House \u00b7 Check the official event page for tickets and changes.",
+        "address": "Old Rock House, 1410 S Tucker Blvd, St Louis MO",
+        "source": "Old Rock House \u00b7 official calendar",
+        "sourceUrl": "https://oldrockhouse.com/",
+        "url": "https://oldrockhouse.com/",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.204295,
+          38.614635
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-27:Old Rock House:One Way Traffic: Fourth Annual Second Helping:20:00",
+        "title": "One Way Traffic: Fourth Annual Second Helping",
+        "venue": "Old Rock House",
+        "start": "2026-11-27T20:00:00-06:00",
+        "expiresAt": "2026-11-28T00:00:00-06:00",
+        "description": "Old Rock House \u00b7 Check the official event page for tickets and changes.",
+        "address": "Old Rock House, 1410 S Tucker Blvd, St Louis MO",
+        "source": "Old Rock House \u00b7 official calendar",
+        "sourceUrl": "https://oldrockhouse.com/",
+        "url": "https://oldrockhouse.com/",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.204295,
+          38.614635
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-28:Old Rock House:Somebody to Love: A Queen Tribute with Bat Out Of Hell: A Meatloaf Tribute:20:00",
+        "title": "Somebody to Love: A Queen Tribute with Bat Out Of Hell: A Meatloaf Tribute",
+        "venue": "Old Rock House",
+        "start": "2026-11-28T20:00:00-06:00",
+        "expiresAt": "2026-11-29T00:00:00-06:00",
+        "description": "Old Rock House \u00b7 Check the official event page for tickets and changes.",
+        "address": "Old Rock House, 1410 S Tucker Blvd, St Louis MO",
+        "source": "Old Rock House \u00b7 official calendar",
+        "sourceUrl": "https://oldrockhouse.com/",
+        "url": "https://oldrockhouse.com/",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.204295,
+          38.614635
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-03:Old Rock House:The Gringos:20:00",
+        "title": "The Gringos",
+        "venue": "Old Rock House",
+        "start": "2026-12-03T20:00:00-06:00",
+        "expiresAt": "2026-12-04T00:00:00-06:00",
+        "description": "Old Rock House \u00b7 Check the official event page for tickets and changes.",
+        "address": "Old Rock House, 1410 S Tucker Blvd, St Louis MO",
+        "source": "Old Rock House \u00b7 official calendar",
+        "sourceUrl": "https://oldrockhouse.com/",
+        "url": "https://oldrockhouse.com/",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201951,
+          38.625988
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-16:Enterprise Center:Journey \u00b7 Final Frontier Tour:19:30",
+        "title": "Journey \u00b7 Final Frontier Tour",
+        "venue": "Enterprise Center",
+        "start": "2026-11-16T19:30:00-06:00",
+        "expiresAt": "2026-11-17T00:00:00-06:00",
+        "description": "Enterprise Center \u00b7 Check the official event page for tickets and changes.",
+        "address": "Enterprise Center, 1401 Clark Ave, St Louis MO",
+        "source": "Enterprise Center \u00b7 official calendar",
+        "sourceUrl": "https://www.livenation.com/venue/KovZpa2DJe/enterprise-center-events",
+        "url": "https://www.livenation.com/venue/KovZpa2DJe/enterprise-center-events",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201951,
+          38.625988
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-12:Enterprise Center:for KING + COUNTRY: A Drummer Boy Christmas:19:00",
+        "title": "for KING + COUNTRY: A Drummer Boy Christmas",
+        "venue": "Enterprise Center",
+        "start": "2026-12-12T19:00:00-06:00",
+        "expiresAt": "2026-12-13T00:00:00-06:00",
+        "description": "Enterprise Center \u00b7 Check the official event page for tickets and changes.",
+        "address": "Enterprise Center, 1401 Clark Ave, St Louis MO",
+        "source": "Enterprise Center \u00b7 official calendar",
+        "sourceUrl": "https://www.livenation.com/venue/KovZpa2DJe/enterprise-center-events",
+        "url": "https://www.livenation.com/venue/KovZpa2DJe/enterprise-center-events",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201951,
+          38.625988
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-30:Enterprise Center:Trans-Siberian Orchestra \u00b7 The Ghosts of Christmas Eve:15:00",
+        "title": "Trans-Siberian Orchestra \u00b7 The Ghosts of Christmas Eve",
+        "venue": "Enterprise Center",
+        "start": "2026-12-30T15:00:00-06:00",
+        "expiresAt": "2026-12-31T00:00:00-06:00",
+        "description": "Enterprise Center \u00b7 Check the official event page for tickets and changes.",
+        "address": "Enterprise Center, 1401 Clark Ave, St Louis MO",
+        "source": "Enterprise Center \u00b7 official calendar",
+        "sourceUrl": "https://www.livenation.com/venue/KovZpa2DJe/enterprise-center-events",
+        "url": "https://www.livenation.com/venue/KovZpa2DJe/enterprise-center-events",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201951,
+          38.625988
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-30:Enterprise Center:Trans-Siberian Orchestra \u00b7 The Ghosts of Christmas Eve:19:30",
+        "title": "Trans-Siberian Orchestra \u00b7 The Ghosts of Christmas Eve",
+        "venue": "Enterprise Center",
+        "start": "2026-12-30T19:30:00-06:00",
+        "expiresAt": "2026-12-31T00:00:00-06:00",
+        "description": "Enterprise Center \u00b7 Check the official event page for tickets and changes.",
+        "address": "Enterprise Center, 1401 Clark Ave, St Louis MO",
+        "source": "Enterprise Center \u00b7 official calendar",
+        "sourceUrl": "https://www.livenation.com/venue/KovZpa2DJe/enterprise-center-events",
+        "url": "https://www.livenation.com/venue/KovZpa2DJe/enterprise-center-events",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201165,
+          38.628051
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-28:Stifel Theatre:Allman Betts Family Revival: A Decade of Revival:19:30",
+        "title": "Allman Betts Family Revival: A Decade of Revival",
+        "venue": "Stifel Theatre",
+        "start": "2026-11-28T19:30:00-06:00",
+        "expiresAt": "2026-11-29T00:00:00-06:00",
+        "description": "Stifel Theatre \u00b7 Check the official event page for tickets and changes.",
+        "address": "Stifel Theatre, 1400 Market St, St Louis MO",
+        "source": "Stifel Theatre \u00b7 official calendar",
+        "sourceUrl": "https://www.stifeltheatre.com/events/detail/allman-betts-family-revival-a-decade-of-revival",
+        "url": "https://www.stifeltheatre.com/events/detail/allman-betts-family-revival-a-decade-of-revival",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201165,
+          38.628051
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-02:Stifel Theatre:Leslie Odom, Jr. \u00b7 The Christmas Tour 2026:20:00",
+        "title": "Leslie Odom, Jr. \u00b7 The Christmas Tour 2026",
+        "venue": "Stifel Theatre",
+        "start": "2026-12-02T20:00:00-06:00",
+        "expiresAt": "2026-12-03T00:00:00-06:00",
+        "description": "Stifel Theatre \u00b7 Check the official event page for tickets and changes.",
+        "address": "Stifel Theatre, 1400 Market St, St Louis MO",
+        "source": "Stifel Theatre \u00b7 official calendar",
+        "sourceUrl": "https://www.stifeltheatre.com/events",
+        "url": "https://www.stifeltheatre.com/events",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201165,
+          38.628051
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-04:Stifel Theatre:93.7 The Bull's Santa Jam:19:00",
+        "title": "93.7 The Bull's Santa Jam",
+        "venue": "Stifel Theatre",
+        "start": "2026-12-04T19:00:00-06:00",
+        "expiresAt": "2026-12-05T00:00:00-06:00",
+        "description": "Stifel Theatre \u00b7 Check the official event page for tickets and changes.",
+        "address": "Stifel Theatre, 1400 Market St, St Louis MO",
+        "source": "Stifel Theatre \u00b7 official calendar",
+        "sourceUrl": "https://www.stifeltheatre.com/events",
+        "url": "https://www.stifeltheatre.com/events",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201165,
+          38.628051
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2027-01-31:Stifel Theatre:William Shakespeare\u2019s Romeo + Juliet \u00b7 Film in Concert:19:30",
+        "title": "William Shakespeare\u2019s Romeo + Juliet \u00b7 Film in Concert",
+        "venue": "Stifel Theatre",
+        "start": "2027-01-31T19:30:00-06:00",
+        "expiresAt": "2027-02-01T00:00:00-06:00",
+        "description": "Stifel Theatre \u00b7 Check the official event page for tickets and changes.",
+        "address": "Stifel Theatre, 1400 Market St, St Louis MO",
+        "source": "Stifel Theatre \u00b7 official calendar",
+        "sourceUrl": "https://www.stifeltheatre.com/events",
+        "url": "https://www.stifeltheatre.com/events",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201165,
+          38.628051
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2027-02-13:Stifel Theatre:The 19th Annual Gateway Blues Festival:19:00",
+        "title": "The 19th Annual Gateway Blues Festival",
+        "venue": "Stifel Theatre",
+        "start": "2027-02-13T19:00:00-06:00",
+        "expiresAt": "2027-02-14T00:00:00-06:00",
+        "description": "Stifel Theatre \u00b7 Check the official event page for tickets and changes.",
+        "address": "Stifel Theatre, 1400 Market St, St Louis MO",
+        "source": "Stifel Theatre \u00b7 official calendar",
+        "sourceUrl": "https://www.stifeltheatre.com/events",
+        "url": "https://www.stifeltheatre.com/events",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.588485,
+          38.670028
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-16:The Factory:Jason Bonham\u2019s Led Zeppelin Evening",
+        "title": "Jason Bonham\u2019s Led Zeppelin Evening",
+        "venue": "The Factory",
+        "start": "2026-11-16",
+        "expiresAt": "2026-11-17T00:00:00-06:00",
+        "description": "The Factory \u00b7 Check the official event page for tickets and changes.",
+        "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
+        "source": "The Factory \u00b7 official calendar",
+        "sourceUrl": "https://thefactorystl.com/",
+        "url": "https://thefactorystl.com/",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.588485,
+          38.670028
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-17:The Factory:Little Feat: The Last Farewell Tour",
+        "title": "Little Feat: The Last Farewell Tour",
+        "venue": "The Factory",
+        "start": "2026-11-17",
+        "expiresAt": "2026-11-18T00:00:00-06:00",
+        "description": "The Factory \u00b7 Check the official event page for tickets and changes.",
+        "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
+        "source": "The Factory \u00b7 official calendar",
+        "sourceUrl": "https://thefactorystl.com/",
+        "url": "https://thefactorystl.com/",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.588485,
+          38.670028
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-18:The Factory:Bitch Cabal feat. Wednesday & Mannequin Pussy",
+        "title": "Bitch Cabal feat. Wednesday & Mannequin Pussy",
+        "venue": "The Factory",
+        "start": "2026-11-18",
+        "expiresAt": "2026-11-19T00:00:00-06:00",
+        "description": "The Factory \u00b7 Check the official event page for tickets and changes.",
+        "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
+        "source": "The Factory \u00b7 official calendar",
+        "sourceUrl": "https://thefactorystl.com/",
+        "url": "https://thefactorystl.com/",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.588485,
+          38.670028
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-19:The Factory:The Orchestra Starring ELO Former Members",
+        "title": "The Orchestra Starring ELO Former Members",
+        "venue": "The Factory",
+        "start": "2026-11-19",
+        "expiresAt": "2026-11-20T00:00:00-06:00",
+        "description": "The Factory \u00b7 Check the official event page for tickets and changes.",
+        "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
+        "source": "The Factory \u00b7 official calendar",
+        "sourceUrl": "https://thefactorystl.com/",
+        "url": "https://thefactorystl.com/",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.588485,
+          38.670028
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-25:The Factory:Trivium: Crown in the Grave World Tour",
+        "title": "Trivium: Crown in the Grave World Tour",
+        "venue": "The Factory",
+        "start": "2026-11-25",
+        "expiresAt": "2026-11-26T00:00:00-06:00",
+        "description": "The Factory \u00b7 Check the official event page for tickets and changes.",
+        "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
+        "source": "The Factory \u00b7 official calendar",
+        "sourceUrl": "https://thefactorystl.com/",
+        "url": "https://thefactorystl.com/",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.588485,
+          38.670028
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-27:The Factory:Sabaton: Legends on Tour",
+        "title": "Sabaton: Legends on Tour",
+        "venue": "The Factory",
+        "start": "2026-11-27",
+        "expiresAt": "2026-11-28T00:00:00-06:00",
+        "description": "The Factory \u00b7 Check the official event page for tickets and changes.",
+        "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
+        "source": "The Factory \u00b7 official calendar",
+        "sourceUrl": "https://thefactorystl.com/",
+        "url": "https://thefactorystl.com/",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.588485,
+          38.670028
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-28:The Factory:Bill Murray & His Blood Brothers",
+        "title": "Bill Murray & His Blood Brothers",
+        "venue": "The Factory",
+        "start": "2026-11-28",
+        "expiresAt": "2026-11-29T00:00:00-06:00",
+        "description": "The Factory \u00b7 Check the official event page for tickets and changes.",
+        "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
+        "source": "The Factory \u00b7 official calendar",
+        "sourceUrl": "https://thefactorystl.com/",
+        "url": "https://thefactorystl.com/",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.588485,
+          38.670028
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-11:The Factory:Mitchell Tenpenny",
+        "title": "Mitchell Tenpenny",
+        "venue": "The Factory",
+        "start": "2026-12-11",
+        "expiresAt": "2026-12-12T00:00:00-06:00",
+        "description": "The Factory \u00b7 Check the official event page for tickets and changes.",
+        "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
+        "source": "The Factory \u00b7 official calendar",
+        "sourceUrl": "https://thefactorystl.com/",
+        "url": "https://thefactorystl.com/",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.588485,
+          38.670028
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-12:The Factory:Corey Kent",
+        "title": "Corey Kent",
+        "venue": "The Factory",
+        "start": "2026-12-12",
+        "expiresAt": "2026-12-13T00:00:00-06:00",
+        "description": "The Factory \u00b7 Check the official event page for tickets and changes.",
+        "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
+        "source": "The Factory \u00b7 official calendar",
+        "sourceUrl": "https://thefactorystl.com/",
+        "url": "https://thefactorystl.com/",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.588485,
+          38.670028
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-18:The Factory:Stella Lefty",
+        "title": "Stella Lefty",
+        "venue": "The Factory",
+        "start": "2026-12-18",
+        "expiresAt": "2026-12-19T00:00:00-06:00",
+        "description": "The Factory \u00b7 Check the official event page for tickets and changes.",
+        "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
+        "source": "The Factory \u00b7 official calendar",
+        "sourceUrl": "https://thefactorystl.com/",
+        "url": "https://thefactorystl.com/",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.588485,
+          38.670028
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-19:The Factory:An Intimate Evening With Jon Pardi",
+        "title": "An Intimate Evening With Jon Pardi",
+        "venue": "The Factory",
+        "start": "2026-12-19",
+        "expiresAt": "2026-12-20T00:00:00-06:00",
+        "description": "The Factory \u00b7 Check the official event page for tickets and changes.",
+        "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
+        "source": "The Factory \u00b7 official calendar",
+        "sourceUrl": "https://thefactorystl.com/",
+        "url": "https://thefactorystl.com/",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.588485,
+          38.670028
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-20:The Factory:Grupo Duelo",
+        "title": "Grupo Duelo",
+        "venue": "The Factory",
+        "start": "2026-12-20",
+        "expiresAt": "2026-12-21T00:00:00-06:00",
+        "description": "The Factory \u00b7 Check the official event page for tickets and changes.",
+        "address": "The Factory, 17105 N Outer 40 Rd, Chesterfield MO",
+        "source": "The Factory \u00b7 official calendar",
+        "sourceUrl": "https://thefactorystl.com/",
+        "url": "https://thefactorystl.com/",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.222441,
+          38.635855
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2027-02-27:Red Flag:TRAPT",
+        "title": "TRAPT",
+        "venue": "Red Flag",
+        "start": "2027-02-27",
+        "expiresAt": "2027-02-28T00:00:00-06:00",
+        "description": "Red Flag \u00b7 Check the official event page for tickets and changes.",
+        "address": "Red Flag, 3040 Locust St, St Louis MO",
+        "source": "Red Flag \u00b7 official calendar",
+        "sourceUrl": "https://www.redflagstl.com/shows/trapt-27-feb",
+        "url": "https://www.redflagstl.com/shows/trapt-27-feb",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.222441,
+          38.635855
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2027-01-30:Red Flag:Jurassic Party- Raze The Dead",
+        "title": "Jurassic Party- Raze The Dead",
+        "venue": "Red Flag",
+        "start": "2027-01-30",
+        "expiresAt": "2027-01-31T00:00:00-06:00",
+        "description": "Red Flag \u00b7 Check the official event page for tickets and changes.",
+        "address": "Red Flag, 3040 Locust St, St Louis MO",
+        "source": "Red Flag \u00b7 official calendar",
+        "sourceUrl": "https://www.redflagstl.com/shows/jurassic-party-raze-the-dead-30-jan",
+        "url": "https://www.redflagstl.com/shows/jurassic-party-raze-the-dead-30-jan",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.222441,
+          38.635855
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-22:Red Flag:VonOff1700 - TG4LTOUR",
+        "title": "VonOff1700 - TG4LTOUR",
+        "venue": "Red Flag",
+        "start": "2026-11-22",
+        "expiresAt": "2026-11-23T00:00:00-06:00",
+        "description": "Red Flag \u00b7 Check the official event page for tickets and changes.",
+        "address": "Red Flag, 3040 Locust St, St Louis MO",
+        "source": "Red Flag \u00b7 official calendar",
+        "sourceUrl": "https://www.redflagstl.com/shows/vonoff1700-tg4ltour-22-nov",
+        "url": "https://www.redflagstl.com/shows/vonoff1700-tg4ltour-22-nov",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.222441,
+          38.635855
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2027-01-16:Red Flag:METALFEST 10",
+        "title": "METALFEST 10",
+        "venue": "Red Flag",
+        "start": "2027-01-16",
+        "expiresAt": "2027-01-17T00:00:00-06:00",
+        "description": "Red Flag \u00b7 Check the official event page for tickets and changes.",
+        "address": "Red Flag, 3040 Locust St, St Louis MO",
+        "source": "Red Flag \u00b7 official calendar",
+        "sourceUrl": "https://www.redflagstl.com/shows/metalfest-10-16-jan",
+        "url": "https://www.redflagstl.com/shows/metalfest-10-16-jan",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.222441,
+          38.635855
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-13:Red Flag:A Bobby Nsenga Experience Feat. Bobby Nsenga",
+        "title": "A Bobby Nsenga Experience Feat. Bobby Nsenga",
+        "venue": "Red Flag",
+        "start": "2026-12-13",
+        "expiresAt": "2026-12-14T00:00:00-06:00",
+        "description": "Red Flag \u00b7 Check the official event page for tickets and changes.",
+        "address": "Red Flag, 3040 Locust St, St Louis MO",
+        "source": "Red Flag \u00b7 official calendar",
+        "sourceUrl": "https://www.redflagstl.com/shows/a-bobby-nsenga-experience-feat-bobby-nsenga-13-dec",
+        "url": "https://www.redflagstl.com/shows/a-bobby-nsenga-experience-feat-bobby-nsenga-13-dec",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.222441,
+          38.635855
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-11-15:Red Flag:Gravehuffer",
+        "title": "Gravehuffer",
+        "venue": "Red Flag",
+        "start": "2026-11-15",
+        "expiresAt": "2026-11-16T00:00:00-06:00",
+        "description": "Red Flag \u00b7 Check the official event page for tickets and changes.",
+        "address": "Red Flag, 3040 Locust St, St Louis MO",
+        "source": "Red Flag \u00b7 official calendar",
+        "sourceUrl": "https://www.redflagstl.com/shows/gravehuffer-15-nov",
+        "url": "https://www.redflagstl.com/shows/gravehuffer-15-nov",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.222441,
+          38.635855
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2026-12-12:Red Flag:Voodoo Glow Skulls, Koffin Kats",
+        "title": "Voodoo Glow Skulls, Koffin Kats",
+        "venue": "Red Flag",
+        "start": "2026-12-12",
+        "expiresAt": "2026-12-13T00:00:00-06:00",
+        "description": "Red Flag \u00b7 Check the official event page for tickets and changes.",
+        "address": "Red Flag, 3040 Locust St, St Louis MO",
+        "source": "Red Flag \u00b7 official calendar",
+        "sourceUrl": "https://www.redflagstl.com/shows/voodoo-glow-skulls-koffin-kats-12-dec",
+        "url": "https://www.redflagstl.com/shows/voodoo-glow-skulls-koffin-kats-12-dec",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.222441,
+          38.635855
+        ]
+      },
+      "properties": {
+        "id": "venue-concert:2027-02-26:Red Flag:The Queers & Toxic Energy",
+        "title": "The Queers & Toxic Energy",
+        "venue": "Red Flag",
+        "start": "2027-02-26",
+        "expiresAt": "2027-02-27T00:00:00-06:00",
+        "description": "Red Flag \u00b7 Check the official event page for tickets and changes.",
+        "address": "Red Flag, 3040 Locust St, St Louis MO",
+        "source": "Red Flag \u00b7 official calendar",
+        "sourceUrl": "https://www.redflagstl.com/shows/the-queers-toxic-energy-27-feb",
+        "url": "https://www.redflagstl.com/shows/the-queers-toxic-energy-27-feb",
+        "sourceCheckedAt": "2026-11-15T16:56:37.040763+00:00"
       }
     }
   ]

@@ -373,3 +373,5 @@ body[data-map-style=dark] .weather-reading-place,body[data-map-style=dark] .weat
 .copy-address{flex:none;padding:8px 10px;min-height:40px;font-size:12px;border-radius:9px}
 .navigation-apps{display:flex;flex-wrap:wrap;gap:4px 15px;margin-top:8px}
 .navigation-apps a{display:inline-flex;align-items:center;min-height:40px;font-size:12px;font-weight:600;color:var(--ink,#173c43);text-underline-offset:3px}
+
+.event-day{margin:0 0 22px}.event-day-heading{position:sticky;top:0;z-index:2;margin:0 0 8px!important;padding:12px 10px;background:var(--surface,#28382f);color:var(--ink,#f2f4ec);border-top:2px solid var(--accent,#c7dca6);font-size:15px!important;line-height:1.4}.event-day .result-card{margin-bottom:7px}.result-event-time{font-weight:700}

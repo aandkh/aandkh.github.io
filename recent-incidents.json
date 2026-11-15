@@ -1,0 +1,173 @@
+{
+  "checkedAt": "2026-11-15T16:52:19.598212+00:00",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.24756,
+          38.64037
+        ]
+      },
+      "properties": {
+        "id": "incident:moline-acres-officer-shooting-in-city",
+        "title": "Officer shooting investigation \u00b7 Lindell Marketplace",
+        "incidentAt": "2026-11-14T17:00:00-06:00",
+        "incidentKind": "shooting",
+        "description": "Police reported a security officer fired a shot following reported threats and a pursuit. A suspect was detained; no injuries were reported. Preliminary official report; not a finding of guilt. Incident time is approximate. Location is an approximate area, not an exact scene.",
+        "address": "Lindell Marketplace area, St. Louis, MO",
+        "source": "SLMPD \u00b7 official investigation summary",
+        "url": "https://slmpd.org/force-detectives-investigate-moline-acres-officer-shooting-in-city/",
+        "sourceUrl": "https://slmpd.org/force-detectives-investigate-moline-acres-officer-shooting-in-city/",
+        "sourceCheckedAt": "2026-11-15T16:52:19.598212+00:00",
+        "locationAccuracy": "Approximate block / intersection",
+        "color": "#c52f73"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.25455,
+          38.58617
+        ]
+      },
+      "properties": {
+        "id": "incident:dutchtown-officer-shooting",
+        "title": "Fatal officer shooting investigation \u00b7 Dutchtown",
+        "incidentAt": "2026-11-14T17:45:00-06:00",
+        "incidentKind": "shooting",
+        "description": "Police reported an attempted carjacking and threats with what investigators later identified as a BB pistol. Officers shot the suspect, who died at hospital. No officers or other citizens were reported injured. Preliminary official report; not a finding of guilt. Incident time is approximate. Location is an approximate area, not an exact scene.",
+        "address": "4000 block of Meramec at Gustine Avenue, St. Louis, MO",
+        "source": "SLMPD \u00b7 official investigation summary",
+        "url": "https://slmpd.org/force-detectives-investigating-officer-involved-shooting-in-dutchtown/",
+        "sourceUrl": "https://slmpd.org/force-detectives-investigating-officer-involved-shooting-in-dutchtown/",
+        "sourceCheckedAt": "2026-11-15T16:52:19.598212+00:00",
+        "locationAccuracy": "Approximate block / intersection",
+        "color": "#c52f73"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.25298,
+          38.59064
+        ]
+      },
+      "properties": {
+        "id": "incident:tower-grove-crash",
+        "title": "Fatal moped crash \u00b7 Tower Grove South",
+        "incidentAt": "2026-11-09T21:00:00-06:00",
+        "incidentKind": "crash",
+        "description": "Police reported a moped left Gravois Avenue and struck a light pole. The driver died at the scene. The cause remained under investigation. Preliminary official report; not a finding of guilt. Incident time is approximate. Location is an approximate area, not an exact scene.",
+        "address": "Gravois Avenue at Gustine Street \u00b7 approximate intersection area, St. Louis, MO",
+        "source": "SLMPD \u00b7 official investigation summary",
+        "url": "https://slmpd.org/man-dies-in-single-vehicle-crash-in-tower-grove-south/",
+        "sourceUrl": "https://slmpd.org/man-dies-in-single-vehicle-crash-in-tower-grove-south/",
+        "sourceCheckedAt": "2026-11-15T16:52:19.598212+00:00",
+        "locationAccuracy": "Approximate block / intersection",
+        "color": "#ed5900"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.27426,
+          38.58993
+        ]
+      },
+      "properties": {
+        "id": "incident:bevo-motorcycle-crash",
+        "title": "Critical-injury motorcycle crash \u00b7 Bevo",
+        "incidentAt": "2026-11-09T20:00:00-06:00",
+        "incidentKind": "crash",
+        "description": "Police reported a collision between a motorcycle and a left-turning car. The motorcyclist was hospitalized in critical condition; Accident Reconstruction was investigating. Preliminary official report; not a finding of guilt. Incident time is approximate. Location is an approximate area, not an exact scene.",
+        "address": "4300 block of South Kingshighway at Winona Avenue, St. Louis, MO",
+        "source": "SLMPD \u00b7 official investigation summary",
+        "url": "https://slmpd.org/man-critically-injured-in-motorcycle-crash-in-bevo/",
+        "sourceUrl": "https://slmpd.org/man-critically-injured-in-motorcycle-crash-in-bevo/",
+        "sourceCheckedAt": "2026-11-15T16:52:19.598212+00:00",
+        "locationAccuracy": "Approximate block / intersection",
+        "color": "#ed5900"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.26539,
+          38.66919
+        ]
+      },
+      "properties": {
+        "id": "incident:wells-goodfellow-officer-shooting",
+        "title": "Fatal officer shooting investigation \u00b7 Wells/Goodfellow",
+        "incidentAt": "2026-11-09T10:50:00-06:00",
+        "incidentKind": "shooting",
+        "description": "Police reported an exchange of gunfire during an assault investigation. The suspect died at the scene; no officers were reported injured. The Force Investigation Unit was investigating. Preliminary official report; not a finding of guilt. Incident time is approximate. Location is an approximate area, not an exact scene.",
+        "address": "5300 block of Lotus Avenue, St. Louis, MO",
+        "source": "SLMPD \u00b7 official investigation summary",
+        "url": "https://slmpd.org/force-detectives-investigating-officer-involved-shooting-in-wells-goodfellow/",
+        "sourceUrl": "https://slmpd.org/force-detectives-investigating-officer-involved-shooting-in-wells-goodfellow/",
+        "sourceCheckedAt": "2026-11-15T16:52:19.598212+00:00",
+        "locationAccuracy": "Approximate block / intersection",
+        "color": "#c52f73"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.18484,
+          38.6293
+        ]
+      },
+      "properties": {
+        "id": "incident:downtown-shooting",
+        "title": "Fatal shooting \u00b7 Downtown",
+        "incidentAt": "2026-11-08T18:30:00-06:00",
+        "incidentKind": "shooting",
+        "description": "Police reported a man was shot near Washington Avenue and later died at hospital. Two suspects were apprehended in Illinois. Investigation continued. Preliminary official report; not a finding of guilt. Incident time is approximate. Location is an approximate area, not an exact scene.",
+        "address": "200 block of Washington Avenue \u00b7 reported overpass area, St. Louis, MO",
+        "source": "SLMPD \u00b7 official investigation summary",
+        "url": "https://slmpd.org/man-shot-killed-in-downtown-two-suspects-arrested/",
+        "sourceUrl": "https://slmpd.org/man-shot-killed-in-downtown-two-suspects-arrested/",
+        "sourceCheckedAt": "2026-11-15T16:52:19.598212+00:00",
+        "locationAccuracy": "Approximate block / intersection",
+        "color": "#c52f73"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.23516,
+          38.71989
+        ]
+      },
+      "properties": {
+        "id": "incident:baden-shooting",
+        "title": "Fatal shooting \u00b7 Baden",
+        "incidentAt": "2026-11-08T13:00:00-06:00",
+        "incidentKind": "shooting",
+        "description": "Police reported a man was found with gunshot wounds and died at the scene. Homicide detectives were investigating the circumstances. Preliminary official report; not a finding of guilt. Incident time is approximate. Location is an approximate area, not an exact scene.",
+        "address": "8900 block of Newby Street, St. Louis, MO",
+        "source": "SLMPD \u00b7 official investigation summary",
+        "url": "https://slmpd.org/man-shot-killed-in-baden-2/",
+        "sourceUrl": "https://slmpd.org/man-shot-killed-in-baden-2/",
+        "sourceCheckedAt": "2026-11-15T16:52:19.598212+00:00",
+        "locationAccuracy": "Approximate block / intersection",
+        "color": "#c52f73"
+      }
+    }
+  ]
+}

@@ -9,7 +9,7 @@ export function windPresentation(reading){
  return{text:Math.round(speed)+' mph · '+direction,rotation:(degrees+180)%360,label:'Wind from '+direction};
 }
 export function weatherMarkerReadings(readings,now=Date.now()){
- return (Array.isArray(readings)?readings:[]).filter(r=>r&&typeof r.id==='string'&&Number.isFinite(r.lat)&&Number.isFinite(r.lng)&&r.lat>=38.1&&r.lat<=39.2&&r.lng>=-91.2&&r.lng<=-89.4&&Number.isFinite(r.temperatureF)&&Number.isFinite(Date.parse(r.expiresAt))&&Date.parse(r.expiresAt)>now);
+ return (Array.isArray(readings)?readings:[]).filter(r=>r&&typeof r.id==='string'&&Number.isFinite(r.lat)&&Number.isFinite(r.lng)&&r.lat>=38.1&&r.lat<=39.2&&r.lng>=-91.2&&r.lng<=-89.4&&Number.isFinite(Date.parse(r.expiresAt))&&Date.parse(r.expiresAt)>now);
 }
 export function weatherCardPositions(points,{width,height,top,bottom},w=100,h=90){
  const clamp=(v,min,max)=>Math.max(min,Math.min(Math.max(min,max),v)),placed=[];
@@ -24,14 +24,14 @@ export function createWeatherReadings(map,{formatTime,leaflet=globalThis.L,fitOn
  function stopOverview(){overview=false;}
  container.addEventListener('pointerdown',stopOverview,{passive:true});container.addEventListener('wheel',stopOverview,{passive:true});
  function safeArea(){const rect=container.getBoundingClientRect();let top=120,bottom=110;for(const selector of ['#map-search','#quick-categories']){const n=container.parentElement.querySelector(selector);if(n?.getClientRects().length&&getComputedStyle(n).visibility!=='hidden')top=Math.max(top,n.getBoundingClientRect().bottom-rect.top+14);}const player=container.parentElement.querySelector('.future-radar');if(player&&!player.hidden)bottom=Math.max(bottom,rect.bottom-player.getBoundingClientRect().top+12);return{top,bottom,width:rect.width,height:rect.height};}
- function fitOverview(){overview=true;fit();}
- function fit(){if(!overview||saved.length<2)return;const a=safeArea();map.fitBounds(saved.map(r=>[r.lat,r.lng]),{paddingTopLeft:[65,a.top+15],paddingBottomRight:[65,a.bottom+15],maxZoom:10,animate:false});}
+ function fitOverview(){scheduleLayout();}
+ function fit(){}
  function layout(){
  const a=safeArea(),cards=[...host.querySelectorAll('.weather-reading')],points=shown.map(r=>map.latLngToContainerPoint([r.lat,r.lng])),positions=weatherCardPositions(points,a,100,cards[0]?.offsetHeight||90);svg.replaceChildren();svg.setAttribute('viewBox',`0 0 ${a.width} ${a.height}`);
- for(const [i,r] of shown.entries()){const card=cards[i];if(!card)continue;const point=map.latLngToContainerPoint([r.lat,r.lng]);card.hidden=point.x<0||point.y<0||point.x>a.width||point.y>a.height;if(card.hidden)continue;const w=100,h=card.offsetHeight||90,{x,y}=positions[i];
+ for(const [i,r] of shown.entries()){const card=cards[i];if(!card)continue;const point=map.latLngToContainerPoint([r.lat,r.lng]);card.hidden=false;const w=100,h=card.offsetHeight||90,{x,y}=positions[i];
  card.style.left=x+'px';card.style.top=y+'px';
- const line=document.createElementNS(svg.namespaceURI,'line');line.setAttribute('x1',x+w/2);line.setAttribute('y1',y+h/2);line.setAttribute('x2',point.x);line.setAttribute('y2',point.y);svg.append(line);
- const dot=document.createElementNS(svg.namespaceURI,'circle');dot.setAttribute('cx',point.x);dot.setAttribute('cy',point.y);dot.setAttribute('r','4');svg.append(dot);
+ const line=document.createElementNS(svg.namespaceURI,'line');line.setAttribute('x1',x+w/2);line.setAttribute('y1',y+h/2);const outside=point.x<0||point.y<0||point.x>a.width||point.y>a.height;line.setAttribute('x2',Math.max(5,Math.min(a.width-5,point.x)));line.setAttribute('y2',Math.max(5,Math.min(a.height-5,point.y)));if(outside){line.setAttribute('stroke-dasharray','3 4');card.title=r.label+' station is outside the current view';}else card.title='Reading at the connected station location';svg.append(line);
+ const dot=document.createElementNS(svg.namespaceURI,'circle');dot.setAttribute('cx',Math.max(5,Math.min(a.width-5,point.x)));dot.setAttribute('cy',Math.max(5,Math.min(a.height-5,point.y)));if(outside)dot.setAttribute('opacity','0');dot.setAttribute('r','4');svg.append(dot);
  }}
  function scheduleLayout(){cancelAnimationFrame(layoutFrame);layoutFrame=requestAnimationFrame(layout);}
  map.on('move zoom resize',scheduleLayout);

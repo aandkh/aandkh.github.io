@@ -1,0 +1,34 @@
+{
+  "https://events.webster.edu/event/magnolia": {
+    "movieTitle": "Magnolia",
+    "sourceCheckedAt": "2026-11-15T16:58:21.482186+00:00",
+    "runtimeMinutes": 188
+  },
+  "https://happenings.washu.edu/event/washu-cinema-presents-st-louis-premiere-of-jessie-eisenbergs-the-debut": {
+    "movieTitle": "The Debut",
+    "sourceCheckedAt": "2026-11-15T16:58:21.482204+00:00",
+    "runtimeMinutes": 105,
+    "contentRating": "R"
+  },
+  "https://events.webster.edu/event/there-will-be-blood": {
+    "movieTitle": "There Will Be Blood",
+    "sourceCheckedAt": "2026-11-15T16:58:21.482223+00:00",
+    "runtimeMinutes": 158
+  },
+  "https://events.webster.edu/event/licorice-pizza": {
+    "movieTitle": "Licorice Pizza",
+    "sourceCheckedAt": "2026-11-15T16:58:21.482236+00:00",
+    "runtimeMinutes": 133
+  },
+  "https://happenings.washu.edu/event/washu-cinema-presents-the-shining": {
+    "movieTitle": "The Shining",
+    "sourceCheckedAt": "2026-11-15T16:58:21.482244+00:00",
+    "runtimeMinutes": 143,
+    "contentRating": "R"
+  },
+  "https://events.webster.edu/event/one-battle-after-another": {
+    "movieTitle": "One Battle After Another",
+    "sourceCheckedAt": "2026-11-15T16:58:21.482259+00:00",
+    "runtimeMinutes": 162
+  }
+}

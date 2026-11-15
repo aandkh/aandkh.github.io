@@ -1,0 +1,230 @@
+{
+  "checkedAt": "2026-11-15T17:00:16.810970+00:00",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.305033,
+          38.6326416
+        ]
+      },
+      "properties": {
+        "id": "screening:hipointe:2026-11-16:19:00",
+        "title": "A Tale of Autumn",
+        "movieTitle": "A Tale of Autumn",
+        "venue": "Hi-Pointe Theatre",
+        "start": "2026-11-16T19:00:00-06:00",
+        "expiresAt": "2026-11-16T19:00:00-06:00",
+        "runtimeMinutes": 112,
+        "address": "Hi-Pointe Theatre, 1005 McCausland Ave, St. Louis, MO 63117",
+        "description": "Hi-Pointe Theatre \u00b7 Official screening. Confirm availability on the theater page.",
+        "url": "https://hipointetheatre.org/movies/a-tale-of-autumn/",
+        "sourceUrl": "https://hipointetheatre.org/movies/a-tale-of-autumn/",
+        "source": "Hi-Pointe Theatre \u00b7 official calendar",
+        "sourceCheckedAt": "2026-11-15T17:00:16.810970+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.305033,
+          38.6326416
+        ]
+      },
+      "properties": {
+        "id": "screening:hipointe:2026-11-17:19:00",
+        "title": "A Streetcar Named Desire (35MM)",
+        "movieTitle": "A Streetcar Named Desire (35MM)",
+        "venue": "Hi-Pointe Theatre",
+        "start": "2026-11-17T19:00:00-06:00",
+        "expiresAt": "2026-11-17T19:00:00-06:00",
+        "runtimeMinutes": 125,
+        "address": "Hi-Pointe Theatre, 1005 McCausland Ave, St. Louis, MO 63117",
+        "description": "Hi-Pointe Theatre \u00b7 Official screening. Confirm availability on the theater page.",
+        "url": "https://hipointetheatre.org/movies/a-streetcar-named-desire-35mm/",
+        "sourceUrl": "https://hipointetheatre.org/movies/a-streetcar-named-desire-35mm/",
+        "source": "Hi-Pointe Theatre \u00b7 official calendar",
+        "sourceCheckedAt": "2026-11-15T17:00:16.810970+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.305033,
+          38.6326416
+        ]
+      },
+      "properties": {
+        "id": "screening:hipointe:2026-11-19:13:00",
+        "title": "The Apartment (35MM)",
+        "movieTitle": "The Apartment (35MM)",
+        "venue": "Hi-Pointe Theatre",
+        "start": "2026-11-19T13:00:00-06:00",
+        "expiresAt": "2026-11-19T13:00:00-06:00",
+        "runtimeMinutes": 125,
+        "address": "Hi-Pointe Theatre, 1005 McCausland Ave, St. Louis, MO 63117",
+        "description": "Hi-Pointe Theatre \u00b7 Official screening. Confirm availability on the theater page.",
+        "url": "https://hipointetheatre.org/movies/the-apartment/",
+        "sourceUrl": "https://hipointetheatre.org/movies/the-apartment/",
+        "source": "Hi-Pointe Theatre \u00b7 official calendar",
+        "sourceCheckedAt": "2026-11-15T17:00:16.810970+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.305033,
+          38.6326416
+        ]
+      },
+      "properties": {
+        "id": "screening:hipointe:2026-11-19:19:00",
+        "title": "The Apartment (35MM)",
+        "movieTitle": "The Apartment (35MM)",
+        "venue": "Hi-Pointe Theatre",
+        "start": "2026-11-19T19:00:00-06:00",
+        "expiresAt": "2026-11-19T19:00:00-06:00",
+        "runtimeMinutes": 125,
+        "address": "Hi-Pointe Theatre, 1005 McCausland Ave, St. Louis, MO 63117",
+        "description": "Hi-Pointe Theatre \u00b7 Official screening. Confirm availability on the theater page.",
+        "url": "https://hipointetheatre.org/movies/the-apartment/",
+        "sourceUrl": "https://hipointetheatre.org/movies/the-apartment/",
+        "source": "Hi-Pointe Theatre \u00b7 official calendar",
+        "sourceCheckedAt": "2026-11-15T17:00:16.810970+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.305033,
+          38.6326416
+        ]
+      },
+      "properties": {
+        "id": "screening:hipointe:2026-11-22:12:30",
+        "title": "East of Eden",
+        "movieTitle": "East of Eden",
+        "venue": "Hi-Pointe Theatre",
+        "start": "2026-11-22T12:30:00-06:00",
+        "expiresAt": "2026-11-22T12:30:00-06:00",
+        "runtimeMinutes": 115,
+        "address": "Hi-Pointe Theatre, 1005 McCausland Ave, St. Louis, MO 63117",
+        "description": "Hi-Pointe Theatre \u00b7 Official screening. Confirm availability on the theater page.",
+        "url": "https://hipointetheatre.org/coming-soon/",
+        "sourceUrl": "https://hipointetheatre.org/coming-soon/",
+        "source": "Hi-Pointe Theatre \u00b7 official calendar",
+        "sourceCheckedAt": "2026-11-15T17:00:16.810970+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.305033,
+          38.6326416
+        ]
+      },
+      "properties": {
+        "id": "screening:hipointe:2026-11-24:19:00",
+        "title": "The Band Wagon (35MM)",
+        "movieTitle": "The Band Wagon (35MM)",
+        "venue": "Hi-Pointe Theatre",
+        "start": "2026-11-24T19:00:00-06:00",
+        "expiresAt": "2026-11-24T19:00:00-06:00",
+        "runtimeMinutes": 112,
+        "address": "Hi-Pointe Theatre, 1005 McCausland Ave, St. Louis, MO 63117",
+        "description": "Hi-Pointe Theatre \u00b7 Official screening. Confirm availability on the theater page.",
+        "url": "https://hipointetheatre.org/coming-soon/",
+        "sourceUrl": "https://hipointetheatre.org/coming-soon/",
+        "source": "Hi-Pointe Theatre \u00b7 official calendar",
+        "sourceCheckedAt": "2026-11-15T17:00:16.810970+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.305033,
+          38.6326416
+        ]
+      },
+      "properties": {
+        "id": "screening:hipointe:2026-11-25:17:00",
+        "title": "Planes, Trains and Automobiles",
+        "movieTitle": "Planes, Trains and Automobiles",
+        "venue": "Hi-Pointe Theatre",
+        "start": "2026-11-25T17:00:00-06:00",
+        "expiresAt": "2026-11-25T17:00:00-06:00",
+        "runtimeMinutes": 93,
+        "address": "Hi-Pointe Theatre, 1005 McCausland Ave, St. Louis, MO 63117",
+        "description": "Hi-Pointe Theatre \u00b7 Official screening. Confirm availability on the theater page.",
+        "url": "https://hipointetheatre.org/movies/planes-trains-and-automobiles/",
+        "sourceUrl": "https://hipointetheatre.org/movies/planes-trains-and-automobiles/",
+        "source": "Hi-Pointe Theatre \u00b7 official calendar",
+        "sourceCheckedAt": "2026-11-15T17:00:16.810970+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.305033,
+          38.6326416
+        ]
+      },
+      "properties": {
+        "id": "screening:hipointe:2026-11-25:19:00",
+        "title": "Planes, Trains and Automobiles",
+        "movieTitle": "Planes, Trains and Automobiles",
+        "venue": "Hi-Pointe Theatre",
+        "start": "2026-11-25T19:00:00-06:00",
+        "expiresAt": "2026-11-25T19:00:00-06:00",
+        "runtimeMinutes": 93,
+        "address": "Hi-Pointe Theatre, 1005 McCausland Ave, St. Louis, MO 63117",
+        "description": "Hi-Pointe Theatre \u00b7 Official screening. Confirm availability on the theater page.",
+        "url": "https://hipointetheatre.org/movies/planes-trains-and-automobiles/",
+        "sourceUrl": "https://hipointetheatre.org/movies/planes-trains-and-automobiles/",
+        "source": "Hi-Pointe Theatre \u00b7 official calendar",
+        "sourceCheckedAt": "2026-11-15T17:00:16.810970+00:00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.305033,
+          38.6326416
+        ]
+      },
+      "properties": {
+        "id": "screening:hipointe:2026-11-29:12:30",
+        "title": "The Sound of Music",
+        "movieTitle": "The Sound of Music",
+        "venue": "Hi-Pointe Theatre",
+        "start": "2026-11-29T12:30:00-06:00",
+        "expiresAt": "2026-11-29T12:30:00-06:00",
+        "runtimeMinutes": 174,
+        "address": "Hi-Pointe Theatre, 1005 McCausland Ave, St. Louis, MO 63117",
+        "description": "Hi-Pointe Theatre \u00b7 Official screening. Confirm availability on the theater page.",
+        "url": "https://hipointetheatre.org/coming-soon/",
+        "sourceUrl": "https://hipointetheatre.org/coming-soon/",
+        "source": "Hi-Pointe Theatre \u00b7 official calendar",
+        "sourceCheckedAt": "2026-11-15T17:00:16.810970+00:00"
+      }
+    }
+  ]
+}

@@ -23,9 +23,9 @@ function casing(foreground,mapStyle){
 // Source-coded fills keep their exact colors. These styles change display
 // contrast and stroke width, never the source classification or geometry.
 export function overlayStyles(id,feature,{zoom=13,fillOpacity,mapStyle='light'}={}){
- if(RASTER_LAYERS.has(id))return{foreground:null,casing:null};
+ if(RASTER_LAYERS.has(id)&&!(id==='terrain'&&feature?.geometry))return{foreground:null,casing:null};
  const z=zoomLevel(zoom),type=feature?.geometry?.type||'',polygon=/Polygon$/.test(type),line=/LineString$/.test(type),color=layerColor(id);
- if(['air','demographics','outages','foliage','crime'].includes(id)){
+ if(['air','demographics','outages','foliage','crime','terrain'].includes(id)){
   const sourceColor=hex(feature?.properties?.color,'#b8bdbd');
   const foreground={color:id==='air'?sourceColor:'#344b60',weight:id==='air'?1.8:1.15,opacity:1,fillColor:sourceColor,fillOpacity:opacity(fillOpacity,id==='air'?.25:.58),lineJoin:'round'};
   const outline=id==='air'?{...casing(foreground,mapStyle),color:contrast(sourceColor,'#ffffff')>=3?'#ffffff':'#14253a',weight:3.4}:null;
