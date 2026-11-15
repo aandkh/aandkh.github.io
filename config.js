@@ -3,11 +3,11 @@ export const CONFIG = {
   "tileUrl": "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
   "contactUrl": "https://www.andrewhanes.com",
   "center": [
-    38.72,
-    -90.43
+    38.63,
+    -90.40
   ],
   "zoom": 10,
   "mapStyle": "dark",
-  "mobileZoom": 9.5,
+  "mobileZoom": 10,
   "apiOrigin": "https://andymap-hanes-api.fly.dev"
 };
