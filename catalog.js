@@ -1,13 +1,24 @@
 const osm = 'https://www.openstreetmap.org/copyright';
-const row = (id, name, group, kind, source, url, license, note, color) => ({ id, name, group, kind, source, url, license, note, color });
+const DISPLAY_COLORS = Object.freeze({
+  radar:'#1876ef',traffic:'#ed5900',concerts:'#d525d9',festivals:'#e64b00',
+  aircraft:'#8b2cff',transit:'#245dff',rivers:'#008fdd',air:'#d98d00',alerts:'#ee244b',
+  sports:'#ed4f19',arts:'#a933e8',nightlife:'#b72ee7',markets:'#09a861',family:'#0b8fd9',
+  restaurants:'#f05223',parks:'#00a85a',development:'#dc6900',neighborhoods:'#c62edc',
+  cycling:'#ef087c',parking:'#1675f8',ev:'#049a88',floodplains:'#008ed9',
+  history:'#8266f7',light:'#8546ec',movies:'#df394c',bars:'#c75c00',roadworks:'#f05b00',
+  restrooms:'#008db1',birding:'#3a9f00',sky:'#6e46eb',weather:'#008fd1',recreation:'#00a68f',
+  localfood:'#e74b12',culture:'#b72bdd',communityevents:'#ed3c43',civic:'#a12bd8',
+  demographics:'#087fbc',terrain:'#b68400'
+});
+const row = (id, name, group, kind, source, url, license, note, color) => ({ id, name, group, kind, source, url, license, note, color:DISPLAY_COLORS[id]||color });
 const place = (id,name,group,note,color='#317d68') => row(id,name,group,'osm','OpenStreetMap',osm,'ODbL 1.0; attribution required',note,color);
 const gap = (id,name,group,source,url,note) => row(id,name,group,'gap',source,url,'Permission or an approved feed required',note,'#947867');
-const event = (id,name,note) => row(id,name,'Go out','events','Ticketmaster / approved local feeds','https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/','Free API key; proprietary terms, not open data',note,'#a45c39');
+const event = (id,name,note) => row(id,name,'Go out','publicevents','Webster University / UMSL / WashU public calendars','https://developer.localist.com/doc/api','Published public-calendar API; factual titles, dates, venues and links only; no copied descriptions or photographs',note,'#d525d9');
 export const LAYERS = [
   row('radar','Weather radar','Conditions','radar','NOAA MRMS / IEM HRRR','https://www.weather.gov/radarfaq/','US Government data; credit NOAA and IEM','Quality-controlled radar, estimated precipitation type, or explicitly labeled winter-precipitation forecast. Source timestamps shown.','#426fb2'),
   row('traffic','Traffic','Get around','traffic','TomTom','https://docs.tomtom.com/pricing','Free-tier key and TomTom terms required','Live flow tiles need a free TomTom key. No traffic is inferred from road geometry.','#bd6841'),
-  event('concerts','Concerts','Upcoming music events; optional free API key. Coverage is limited to participating ticket sellers.'),
-  event('festivals','Festivals','Festival keyword results are partial. Community festivals need an approved local feed.'),
+  event('concerts','Concerts','Upcoming music from published university calendars. Partial regional coverage; no key or API charge.'),
+  event('festivals','Festivals','Published calendar events explicitly identified as festivals. Empty results are not a claim that no festivals exist.'),
   row('aircraft','Aircraft','Get around','aircraft','adsb.lol','https://www.adsb.lol/docs/open-data/api','ODbL 1.0; attribution required','Reported positions within 50 nautical miles. Shared updates every 3 minutes; incomplete receiver coverage. Positions are never extrapolated.','#6855a2'),
   gap('cameras','Traffic cameras','Get around','MoDOT / Gateway Guide','https://www.gatewayguide.com/','Camera display and redistribution rights need confirmation. Use the official viewer until a permitted feed is configured.'),
   row('transit','Metro Transit','Get around','transit','Metro Transit','https://www.metrostlouis.org/developer-resources/','Metro data terms; attribution; revocable/as-is','Live vehicle positions when reported, not arrival predictions. Select a vehicle for its exact published route shape and ordered stops, when the trip matches the current schedule. Updates every 30 seconds.','#7751a8'),
@@ -15,12 +26,12 @@ export const LAYERS = [
   row('air','Air quality','Conditions','air','EPA AirNow / reporting agencies','https://docs.airnowapi.org/faq','AirNow Data Use Guidelines; preliminary data; credit agencies','Official EPA interpolated AQI area polygons for PM2.5 or ozone. Updated hourly when available; not a measurement at every address.','#b07a2c'),
   gap('outages','Power outages','Conditions','Ameren','https://www.ameren.com/outage-center','No verified openly reusable live outage feed. Ameren covers only part of the region; official outage maps remain authoritative.'),
   row('alerts','Emergency alerts','Conditions','alerts','National Weather Service','https://www.weather.gov/documentation/services-web-api','US Government public domain','Active NWS weather alerts for the LSX forecast office; not all police, fire, utility, or civil emergencies. Some alerts lack polygons.','#bd5248'),
-  event('sports','Sports','Upcoming sporting events from the configured provider, not a complete sports schedule.'),
-  event('arts','Comedy and theater','Upcoming arts and theater events. Comedy coverage varies by classification.'),
-  gap('free','Free events','Go out','Organizer-approved calendars','https://www.slpl.org/events/','A missing ticket price never means free. Requires an approved feed explicitly identifying free admission.'),
+  event('sports','Sports','Published local university games with a verified venue position. Away games and unknown venues are excluded.'),
+  event('arts','Comedy and theater','Published theater, comedy and dance events. Partial coverage; event availability can change.'),
+  event('free','Free events','Only events whose published admission price explicitly says free for the general public. Discounts and absent prices do not qualify.'),
   place('nightlife','Nightlife','Go out','Mapped bars, pubs and nightclubs. Places only; opening hours and tonight’s events are not guaranteed.'),
   row('markets','Markets','Go out','snapshot','USDA Local Food Directories','https://www.ams.usda.gov/local-food-directories/farmersmarkets','Public factual directory; credit USDA and listing owners','Self-reported market locations and schedules. Check the organizer before visiting.','#317d68'),
-  gap('exhibitions','Exhibitions','Go out','Museum / gallery calendars','https://www.slam.org/events/','Exhibition dates and descriptions require an approved calendar feed; no scraping is enabled.'),
+  event('exhibitions','Exhibitions','Upcoming exhibitions from published public university calendars. The next scheduled occurrence is shown.'),
   place('family','Family activities','Go out','Mapped playgrounds and zoos. Places only; no claim of scheduled activities or suitability for every age.'),
   gap('foodtrucks','Food trucks','Go out','Operator-approved locations','https://www.stlouis-mo.gov/','Mobile truck positions change; no reusable regional live feed has been verified. Operators can supply dated locations.'),
   place('restaurants','Restaurants','Go out','Mapped restaurants and cafés. No live opening, reservation, price, or review feed.','#9c5835'),

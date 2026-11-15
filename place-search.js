@@ -1,4 +1,5 @@
 import {BY_ID} from './catalog.js';
+import {isExcludedChainPlace} from './chain-places.js';
 
 const normalize=value=>typeof value==='string'||typeof value==='number'?String(value).normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase().replace(/[^\p{L}\p{N}]+/gu,' ').trim():'';
 const values=value=>Array.isArray(value)?value.filter(v=>typeof v==='string').slice(0,40):typeof value==='string'||typeof value==='number'?[value]:[];
@@ -39,6 +40,7 @@ function descriptionFacts(value){
  * or literal title/name words, never blanket layer descriptions.
  */
 export function placeMatchesSearch(feature,layerId,query){
+ if(isExcludedChainPlace(layerId,feature))return false;
  const q=normalize(query);if(!q)return true;
  const p=feature?.properties;if(!p||typeof p!=='object')return false;
  const names=normalize([p.title,p.name].flatMap(values).join(' '));

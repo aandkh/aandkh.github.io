@@ -1,5 +1,7 @@
+import {enrichCultureFeature,cultureFeatureDisplayable} from './place-enrichment.js';
 import {cleanVehicle} from './vehicles.js';
 import {BY_ID} from './catalog.js';
+import {isExcludedChainPlace} from './chain-places.js';
 import {cleanLayerModes,cleanOverlayOpacity} from './expansion-options.js';
 export const REGION = {south:38.1,north:39.2,west:-91.2,east:-89.4};
 export function coordinate(lat,lng) { return typeof lat==='number'&&typeof lng==='number'&&Number.isFinite(lat)&&Number.isFinite(lng)&&lat>=REGION.south&&lat<=REGION.north&&lng>=REGION.west&&lng<=REGION.east; }
@@ -23,8 +25,9 @@ function cleanOwnershipEvidence(value){
  return evidence;
 }
 export function cleanStop(s){
- if(!s||!coordinate(s.lat,s.lng))return null;
+ if(!s||!coordinate(s.lat,s.lng)||isExcludedChainPlace('',s))return null;
  const layer=Object.hasOwn(BY_ID,s.layer)?s.layer:'';
+ if(layer==='culture'){const f=enrichCultureFeature({type:'Feature',geometry:{type:'Point',coordinates:[s.lng,s.lat]},properties:s});if(!cultureFeatureDisplayable(f))return null;s={...s,...f.properties};}
  return {id:textLimit(s.id,180)||`${layer||'pin'}:${s.lat.toFixed(6)},${s.lng.toFixed(6)}`,layer,vehicle:cleanVehicle(s.vehicle),title:textLimit(s.title,140).trim()||'Pinned place',lat:s.lat,lng:s.lng,description:textLimit(s.description,800),address:textLimit(s.address,300),ownershipEvidence:cleanOwnershipEvidence(s.ownershipEvidence),url:placeUrl(s.url),socialLinks:placeLinks({socialLinks:s.socialLinks}),start:textLimit(s.start,40),end:textLimit(s.end,40),source:textLimit(s.source,120),observedAt:textLimit(s.observedAt,40),sourceId:textLimit(s.sourceId,180),sourceCheckedAt:textLimit(s.sourceCheckedAt,40),sourceUrl:placeUrl(s.sourceUrl),accessNote:textLimit(s.accessNote,500),openingHours:textLimit(s.openingHours,500),hoursSourceUrl:placeUrl(s.hoursSourceUrl),hoursCheckedAt:textLimit(s.hoursCheckedAt,40),hoursExpiresAt:textLimit(s.hoursExpiresAt,40)};
 }
 export function validCommentTarget(target){return typeof target==='string'&&target.length<=240&&!/[\u0000-\u001f\u007f]/.test(target)&&(target.startsWith('osm:')?/^osm:(node|way|relation)\/[1-9]\d{0,16}$/.test(target):target.startsWith('pin:')?/^pin:-?\d{1,2}\.\d{5},-?\d{1,3}\.\d{5}$/.test(target):Object.hasOwn(BY_ID,target.split(':')[0])&&target.includes(':')&&target.slice(target.indexOf(':')+1).trim().length>0);}
@@ -57,7 +60,7 @@ export function browserStorage(accessor){try{return accessor();}catch{return nul
 export function layerSelectable(id,capabilities={}){
  const layer=Object.hasOwn(BY_ID,id)?BY_ID[id]:null;if(!layer)return false;
  if(Object.hasOwn(capabilities,id)&&typeof capabilities[id]==='boolean')return capabilities[id];
- return !['gap','events','traffic'].includes(layer.kind)&&!['roadworks','restrooms','birding','sky','weather','recreation','localfood','culture','communityevents','civic','demographics','terrain'].includes(id);
+ return !['gap','events','publicevents','traffic'].includes(layer.kind)&&!['roadworks','restrooms','birding','sky','weather','recreation','localfood','culture','communityevents','civic','demographics','terrain'].includes(id);
 }
 export function skyCloudRows(sky,now=Date.now()){
  return (Array.isArray(sky?.clouds)?sky.clouds:[]).filter(row=>row&&typeof row.time==='string'&&Number.isFinite(Date.parse(row.time))&&Date.parse(row.time)>=now&&Number.isFinite(row.percent)&&row.percent>=0&&row.percent<=100).slice(0,24);
