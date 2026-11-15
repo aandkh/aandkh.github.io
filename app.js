@@ -5,7 +5,7 @@ import {searchLayers} from './explore.js';
 import {placeHash,readPlaceHash,placeState,findSharedFeature} from './short-links.js';
 import {appendPlaceNavigation} from './place-navigation.js';
 import {TODAY_LAYERS,happeningToday} from './today-filter.js';
-import {createWeatherReadings} from './weather-readings.js?v=20261115-fast2';
+import {createWeatherReadings} from './weather-readings.js?v=20261115-fast3';
 import {enrichCultureFeature,cultureFeatureDisplayable} from './place-enrichment.js';
 import {apiFetch,apiUrl} from './api-client.js';
 import {regionalViewportBounds} from './viewport-bounds.js';
