@@ -12,3 +12,5 @@ Iowa Environmental Mesonet permits CORS. last_ob.utc_valid is observation time; 
 Forecast playback derives NWS forecasts from each reading's actual latitude/longitude, so the garden card also uses the garden forecast point. Keep the station label truthful.
 
 Daily maintenance: verify each station's actual observation timestamp, temperature and wind availability. Check MBGM7 alongside KSTL, KSET and KSUS; investigate or replace stale sources without broadening the map or falsely moving measurements.
+
+Deployment: when station modules change, increment the app entry URL in index.html AND its local module import versions. Otherwise mobile browsers may retain old station definitions. Verify with an ordinary page reload, not only a cache-bypassing developer reload.
