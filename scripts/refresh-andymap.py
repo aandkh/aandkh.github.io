@@ -18,6 +18,8 @@ JOBS={
  'rivers':['river-refresh.py'],
  'sky':['sky-lights-refresh.py'],
  'outages':['outages-refresh.py'],
+ 'rain':['rain-budget-refresh.py'],
+ 'quieter':['quieter-roads-refresh.py'],
 }
 def run_job(item):
  name,args=item;start=time.monotonic()
@@ -26,6 +28,9 @@ def run_job(item):
   if name=='incidents':
    city=subprocess.run([sys.executable,str(ROOT/'scripts'/'incident-city-refresh.py'),'--days','30'],cwd=ROOT,text=True,capture_output=True,timeout=900)
    p.stdout+='\nCity refresh:\n'+city.stdout;p.stderr+='\n'+city.stderr;p.returncode=p.returncode or city.returncode
+  if name=='quieter':
+   parks=subprocess.run(['node',str(ROOT/'scripts'/'quieter-parks-refresh.mjs')],cwd=ROOT,text=True,capture_output=True,timeout=120)
+   p.stdout+='\nPark comparisons:\n'+parks.stdout;p.stderr+='\n'+parks.stderr;p.returncode=p.returncode or parks.returncode
   return {'name':name,'ok':p.returncode==0,'exitCode':p.returncode,'seconds':round(time.monotonic()-start,1),'stdout':p.stdout[-16000:],'stderr':p.stderr[-8000:]}
  except Exception as e:return {'name':name,'ok':False,'error':str(e),'seconds':round(time.monotonic()-start,1)}
 def main():

@@ -39,6 +39,9 @@ when unknown and distinguish date-only events from exact showtimes.
 - `SKY-RIVERS-MAINTENANCE.md`: USGS baselines and night-light/cloud viewing map.
 - `OUTAGES-STREAMS-MAINTENANCE.md`: utility notices and cached hydrography tiles.
 - `GYMS-MAINTENANCE.md`: gym ownership ordering and Memento Fitness Club.
+- `RAIN-BUDGET-MAINTENANCE.md`: measured precipitation, seasonal normals and dry spells.
+- `WEATHER-INSIGHTS-MAINTENANCE.md`: outdoor-hour, turning-point and ventilation calculations.
+- `QUIETER-SURROUNDINGS-MAINTENANCE.md`: major-road comparisons for parks and trails.
 
 Always combine City and County in one user-facing feed. Check each side's
 sources independently so different reporting boundaries do not create a silent
@@ -60,6 +63,10 @@ node scripts/joyrides-test.mjs
 python scripts/joyrides-metrics-test.py
 node scripts/sky-river-test.mjs
 node scripts/forecast-sunmoon-test.mjs
+node scripts/weather-insights-test.mjs
+node scripts/rain-budget-test.mjs
+python scripts/rain-budget-refresh-test.py
+node scripts/quieter-surroundings-test.mjs
 node scripts/outages-check.mjs
 node scripts/incident-tests.mjs
 python scripts/incident-tests.py
