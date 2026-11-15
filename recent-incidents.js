@@ -23,7 +23,7 @@ export function incidentExplorer(d,onChange){
  add('strong','Incident types · combine any');
  const types=[...new Set(['shooting','crash','assault','robbery','burglary','theft',...(d?.archiveFeatures||[]).map(f=>f.properties.incidentKind)])];
  const group=add('div','');group.className='incident-types';
- for(const type of types){const l=document.createElement('label'),i=document.createElement('input');i.type='checkbox';i.checked=incidentFilters.types.includes(type);i.onchange=()=>{incidentFilters.types=i.checked?[...incidentFilters.types,type]:incidentFilters.types.filter(x=>x!==type);onChange();};l.append(i,document.createTextNode(type==='crash'?'Crashes':type[0].toUpperCase()+type.slice(1)));group.append(l);}
+ for(const type of types){const l=document.createElement('label'),i=document.createElement('input');i.type='checkbox';i.setAttribute('aria-label',type==='crash'?'Crashes':type[0].toUpperCase()+type.slice(1));i.style.width='auto';i.style.flex='0 0 auto';i.checked=incidentFilters.types.includes(type);i.onchange=()=>{incidentFilters.types=i.checked?[...incidentFilters.types,type]:incidentFilters.types.filter(x=>x!==type);onChange();};l.append(i,document.createTextNode(type==='crash'?'Crashes':type[0].toUpperCase()+type.slice(1)));group.append(l);}
  add('small','No types checked = all types. Filters update both pins and list.');
  target=root;
  const features=filterIncidents(d?.archiveFeatures||[]),s=incidentStats(features);
