@@ -2,7 +2,7 @@ let cache,loaded=0;
 export const incidentFilters={range:'7',jurisdiction:'all',types:[],fatal:'all',sort:'newest',from:'',to:''};
 export function incidentInWeek(f,now=Date.now()){const t=Date.parse(f.properties?.incidentAt);return Number.isFinite(t)&&t<=now&&t>=now-7*86400000;}
 export function filterIncidents(features,filters=incidentFilters,now=Date.now()){
- const selected=features.filter(f=>{const p=f.properties||{},t=Date.parse(p.incidentAt),day=new Date(t).toLocaleDateString('en-CA',{timeZone:'America/Chicago'});return Number.isFinite(t)&&t<=now&&(filters.range==='all'||filters.range==='custom'||t>=now-Number(filters.range)*86400000)&&(filters.range!=='custom'||(!filters.from||day>=filters.from)&&(!filters.to||day<=filters.to))&&(filters.jurisdiction==='all'||p.jurisdiction===filters.jurisdiction)&&(!filters.types.length||filters.types.includes(p.incidentKind))&&(filters.fatal==='all'||filters.fatal==='fatal'&&p.deaths>0||filters.fatal==='unknown'&&!Number.isFinite(p.deaths));});
+ const selected=features.filter(f=>{const p=f.properties||{},t=Date.parse(p.incidentAt),day=new Date(t).toLocaleDateString('en-CA',{timeZone:'America/Chicago'});return Number.isFinite(t)&&t<=now&&(filters.range==='all'||filters.range==='custom'||t>=now-Number(filters.range)*86400000)&&(filters.range!=='custom'||(!filters.from||day>=filters.from)&&(!filters.to||day<=filters.to))&&(!filters.types.length||filters.types.includes(p.incidentKind))&&(filters.fatal==='all'||filters.fatal==='fatal'&&p.deaths>0||filters.fatal==='unknown'&&!Number.isFinite(p.deaths));});
  return selected.sort((a,b)=>filters.sort==='deaths'?(b.properties.deaths??-1)-(a.properties.deaths??-1)||Date.parse(b.properties.incidentAt)-Date.parse(a.properties.incidentAt):filters.sort==='oldest'?Date.parse(a.properties.incidentAt)-Date.parse(b.properties.incidentAt):Date.parse(b.properties.incidentAt)-Date.parse(a.properties.incidentAt));
 }
 export function incidentStats(features){return features.reduce((s,f)=>{const p=f.properties;s.reports++;s.deaths+=p.deaths||0;s.unknownDeaths+=!Number.isFinite(p.deaths);s.crashes+=p.incidentKind==='crash';s.city+=p.jurisdiction==='city';s.county+=p.jurisdiction==='county';return s;},{reports:0,deaths:0,unknownDeaths:0,crashes:0,city:0,county:0});}
@@ -18,7 +18,6 @@ export function incidentExplorer(d,onChange){
  select('Time period','range',[['7','Past week'],['30','Past 30 days'],['90','Past 90 days'],['all','All archived reports'],['custom','Choose dates']]);
  if(incidentFilters.range==='custom')for(const key of ['from','to']){const l=add('label',key==='from'?'From ':'Through '),i=document.createElement('input');i.type='date';i.value=incidentFilters[key];i.setAttribute('aria-label',key==='from'?'Incident start date':'Incident end date');i.onchange=()=>{incidentFilters[key]=i.value;onChange();};l.append(i);}
  const filterBox=add('details',''),filterTitle=document.createElement('summary');filterTitle.textContent='Filter & sort reports';filterBox.append(filterTitle);target=filterBox;
- select('Area','jurisdiction',[['all','City + County'],['city','St. Louis City'],['county','St. Louis County']]);
  select('Reported deaths','fatal',[['all','All reports'],['fatal','Fatal incidents'],['unknown','Death count not reported']]);
  select('Order','sort',[['newest','Newest first'],['oldest','Oldest first'],['deaths','Most reported deaths']]);
  add('strong','Incident types · combine any');
@@ -29,7 +28,7 @@ export function incidentExplorer(d,onChange){
  target=root;
  const features=filterIncidents(d?.archiveFeatures||[]),s=incidentStats(features);
  add('strong',`${s.reports} reports · ${s.crashes} crashes · ${s.deaths} reported deaths`);
- add('small',`${s.city} City · ${s.county} County · ${s.unknownDeaths} reports without a death count. Counts cover the selected archive records, not all regional incidents. No population-adjusted safety ranking is implied.`);
+ add('small',`${s.unknownDeaths} reports without a death count. Counts cover the selected archive records, not all regional incidents. No population-adjusted safety ranking is implied.`);
  const days=new Map();for(const f of features){const day=new Date(f.properties.incidentAt).toLocaleDateString('en-US',{timeZone:'America/Chicago',month:'short',day:'numeric',year:'numeric'});days.set(day,(days.get(day)||0)+1);}if(days.size){const details=add('details',''),summary=document.createElement('summary');summary.textContent='Reports by day';details.append(summary);for(const[day,n]of days){const row=document.createElement('p');row.className='small';row.textContent=`${day}: ${n}`;details.append(row);}}
  add('small','Selected archive reports across the chosen area; pins may be outside the current map view.');
  const links=[['City crime map','https://slmpd.org/mapping/'],['County + participating municipal map','https://stlouiscountypolice.com/st-louis-county-crime-map/'],['County police releases','https://stlouiscountypolice.com/department-news/press-releases/'],['Highway Patrol crash reports','https://www.mshp.dps.missouri.gov/HP68/search.jsp']];

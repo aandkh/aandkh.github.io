@@ -18,4 +18,6 @@ Required separate source checks:
 
 As of November 15, County primary releases were accessible through indexed official text; the main pages expose limited content to text retrieval. The MSHP search presents a validation screen. The linked CrimeMapping services have not been bulk imported. Do not describe those as complete integrated feeds. Review alternate lawful official access; no bypass of access controls.
 
-UI statistics describe only selected archived reports, with unknown death counts explicitly counted. No "safest neighborhood" ranking, regional total or risk comparison can be inferred from this selected sample. Filters must affect both map pins and list; archive list covers selected jurisdictions even when pins are outside the viewport. Do not auto-zoom the default map to fit incidents or weather cards.
+UI statistics describe only selected archived reports, with unknown death counts explicitly counted. No "safest neighborhood" ranking, regional total or risk comparison can be inferred from this selected sample. Filters must affect both map pins and list; archive list always combines City and County even when pins are outside the viewport. Do not auto-zoom the default map to fit incidents or weather cards.
+
+Never offer a City/County switch: the user explicitly wants one combined regional view. Jurisdiction metadata exists only for coverage checks; no UI jurisdiction filtering.
