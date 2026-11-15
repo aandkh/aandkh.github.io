@@ -1,0 +1,6 @@
+.forecast-sunmoon{margin:12px 0;padding:12px;border:1px solid var(--line,#4c5a51);border-radius:14px;background:var(--surface-soft,#22342d)}
+.forecast-sunmoon-heading{display:flex;align-items:baseline;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:13px}.forecast-sunmoon-heading>span{font-size:10px;color:var(--muted,#b8c5bc)}
+.forecast-sunmoon-summary{display:flex;align-items:center;gap:10px;margin:9px 0}.forecast-sunmoon-summary>div{display:grid;gap:2px}.forecast-sunmoon-summary strong{font-size:13px}.forecast-sunmoon-summary span{font-size:11px;color:var(--muted,#b8c5bc)}
+.forecast-moon-disc{width:48px;height:48px;flex:0 0 48px}.moon-disc-dark{fill:#15201e;stroke:#7a897e;stroke-width:1}.moon-disc-lit{fill:#f3edc9}
+.forecast-sunmoon-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 12px;margin:0}.forecast-sunmoon-grid>div{min-width:0}.forecast-sunmoon-grid dt{font-size:10px;color:var(--muted,#b8c5bc)}.forecast-sunmoon-grid dd{font-size:13px;font-weight:600;margin:2px 0 0;overflow-wrap:anywhere}
+.forecast-sunmoon-note,.forecast-sunmoon-more{font-size:10px;line-height:1.45}.forecast-sunmoon-more{margin-top:10px;color:var(--muted,#b8c5bc)}.forecast-sunmoon-more summary{cursor:pointer}.forecast-sunmoon-more p{font-size:10px;margin:6px 0 0}

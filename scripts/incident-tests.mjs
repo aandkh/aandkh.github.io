@@ -1,0 +1,27 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+const source=await fs.readFile(new URL('../recent-incidents.js',import.meta.url),'utf8');
+const m=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
+const now=Date.parse('2026-11-15T12:00:00Z');
+const f=(id,date,other={})=>({type:'Feature',properties:{id,incidentAt:date,incidentKind:'assault',jurisdiction:'city',...other}});
+const records=[f('old','2026-10-31T23:30:00-05:00'),f('day','2026-11-08',{incidentTimeAccuracy:'date-only',incidentTypes:['assault','weapons']}),f('new','2026-11-14T10:00:00-06:00',{incidentKind:'crash',deaths:0,injuries:2,jurisdiction:'county'}),f('bad','no-date'),f('future','2026-11-16'),f('fatal','2026-11-10',{deaths:1})];
+assert.equal(m.incidentDay(records[0]),'2026-10-31');
+assert.equal(m.incidentDay(f('invalid','2026-02-30')),'');
+assert.equal(m.incidentDay(records[3]),'');
+assert.match(m.incidentStamp(records[1].properties),/Nov 8, 2026 · time not reported/);
+assert.deepEqual(m.filterIncidents(records,{range:'7'},now).map(f=>f.properties.id),['new','fatal','day']);
+assert.deepEqual(m.filterIncidents(records,{range:'custom',from:'2026-10-31',to:'2026-10-31'},now).map(f=>f.properties.id),['old']);
+assert.equal(m.filterIncidents(records,{range:'all'},now).length,4);
+assert.equal(m.filterIncidents(records,{range:'all',types:['weapons']},now)[0].properties.id,'day');
+assert.equal(m.filterIncidents(records,{range:'all',types:['weapons','crash']},now).length,2);
+assert.equal(m.filterIncidents(records,{range:'all',fatal:'injury'},now)[0].properties.id,'new');
+assert.equal(m.filterIncidents(records,{range:'all',sort:'deaths'},now)[0].properties.id,'fatal');
+const stats=m.incidentStats(m.filterIncidents(records,{range:'all'},now));assert.equal(stats.deaths,1);assert.equal(stats.injuries,2);assert.equal(stats.unknownDeaths,2);assert.equal(stats.unknownInjuries,3);assert.equal(stats.city,3);assert.equal(stats.county,1);
+assert.equal(m.mergeIncidentRecords([records[0]],[records[0],records[1]]).length,2);
+assert.match(m.incidentCSV([f('a','2026-11-10',{address:'=malicious',deaths:0})]),/"'=malicious"/);
+assert.equal(m.incidentCoverage([{name:'county',latestIncidentDate:'2026-11-08'}],now)[0].lag,7);
+// The browser fetches only recent data for the default view, and adds month files lazily.
+const requests=[];globalThis.fetch=async url=>{requests.push(url);return {ok:true,json:async()=>url.includes('recent-incidents')?{features:[records[2]],recentFrom:'2026-11-01',archiveMonths:[{month:'2026-10',url:'./incident-archive/2026-10.json'}],sources:[]}:{features:[records[0]]}};};
+let d=await m.recentIncidents(now,{range:'7'});assert.equal(requests.length,1);assert.equal(d.features.length,1);
+d=await m.recentIncidents(now,{range:'all'});assert.equal(requests.length,2);assert.equal(d.features.length,2);
+console.log('Incident filters, local dates/DST, unknown outcomes, dedup, CSV safety, coverage and lazy archive checks passed.');

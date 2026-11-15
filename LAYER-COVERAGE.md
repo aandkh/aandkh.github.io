@@ -1,5 +1,21 @@
 # Layer coverage audit — November 15, 2026
 
+## Completion pass
+
+The endpoint-only table below records the earlier audit, not the current frontend inventory. The browser now supplements those endpoints with directly verified public data:
+
+- 415 dated local/independent movie screenings, 168 home sports events, 152 concert performances and 209 comedy/theater performances. National cinema chains and undated theater pins are excluded.
+- 28 named completed greenways with precomputed terrain profiles; Joyrides adds real routed public-road comparisons. Geometry and expensive terrain work are maintained offline, not downloaded repeatedly on phones.
+- 23 local food venues (14 City, 9 County), 12 dated openings (6 each), 34 upcoming public food-truck stops and 70 operator schedule links.
+- Combined City and County reported crime/crash ingestion with lazy monthly archives, actual source dates, masked locations and explicit reporting-lag information. See INCIDENT-MAINTENANCE.md for source coverage.
+- 71 of 75 river gauges have valid recent 30-day comparisons; insufficient histories remain unknown.
+- Sky viewing combines forecast cloud cover, calculated Moon/twilight and 792 sampled NASA night-light values. Its comparison index is not a detection probability.
+- Official water notices join electricity outage totals. Cached USGS Streams tiles replace the failing dynamic image. Unsupported camera/restroom controls and ISP-map placeholders are removed.
+
+All inventories remain partial. Historical audit failures below do not describe the present status of working sources; each record retains its own actual observation/verification time. Daily instructions are in MAINTENANCE.md.
+
+## Original endpoint-only audit
+
 Checked all 46 catalog layer endpoints with a metro-wide bounding box (-90.8,38.35,-90.1,38.95). Counts below are current returned records, NOT completeness claims. Point locations were classified against Census City (29510) and County (29189) polygons returned by the civic feed. The metro query includes neighboring jurisdictions, so counts need not sum to totals. Frontend concert/movie/crime supplements are additional.
 
 ## Findings

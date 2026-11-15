@@ -1,0 +1,719 @@
+{
+  "reviewedAt": "2026-11-15T18:42:58.846142+00:00",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.24756,
+          38.64037
+        ]
+      },
+      "properties": {
+        "id": "incident:moline-acres-officer-shooting-in-city",
+        "title": "Officer shooting investigation \u00b7 Lindell Marketplace",
+        "incidentAt": "2026-11-14T17:00:00-06:00",
+        "incidentKind": "shooting",
+        "description": "Police reported a security officer fired a shot following reported threats and a pursuit. A suspect was detained; no injuries were reported. Preliminary official report; not a finding of guilt. Incident time is approximate. Location is an approximate area, not an exact scene.",
+        "address": "Lindell Marketplace area, St. Louis, MO",
+        "source": "SLMPD \u00b7 official investigation summary",
+        "url": "https://slmpd.org/force-detectives-investigate-moline-acres-officer-shooting-in-city/",
+        "sourceUrl": "https://slmpd.org/force-detectives-investigate-moline-acres-officer-shooting-in-city/",
+        "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
+        "locationAccuracy": "Approximate block / intersection",
+        "color": "#c52f73",
+        "jurisdiction": "city",
+        "deaths": 0,
+        "sourceId": "city-releases",
+        "incidentTypes": [
+          "shooting"
+        ],
+        "injuries": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.25455,
+          38.58617
+        ]
+      },
+      "properties": {
+        "id": "incident:dutchtown-officer-shooting",
+        "title": "Fatal officer shooting investigation \u00b7 Dutchtown",
+        "incidentAt": "2026-11-14T17:45:00-06:00",
+        "incidentKind": "shooting",
+        "description": "Police reported an attempted carjacking and threats with what investigators later identified as a BB pistol. Officers shot the suspect, who died at hospital. No officers or other citizens were reported injured. Preliminary official report; not a finding of guilt. Incident time is approximate. Location is an approximate area, not an exact scene.",
+        "address": "4000 block of Meramec at Gustine Avenue, St. Louis, MO",
+        "source": "SLMPD \u00b7 official investigation summary",
+        "url": "https://slmpd.org/force-detectives-investigating-officer-involved-shooting-in-dutchtown/",
+        "sourceUrl": "https://slmpd.org/force-detectives-investigating-officer-involved-shooting-in-dutchtown/",
+        "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
+        "locationAccuracy": "Approximate block / intersection",
+        "color": "#c52f73",
+        "jurisdiction": "city",
+        "deaths": 1,
+        "sourceId": "city-releases",
+        "incidentTypes": [
+          "shooting"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.20732,
+          38.79678
+        ]
+      },
+      "properties": {
+        "id": "incident:county-criterion",
+        "title": "Fatal shooting investigation \u00b7 Criterion Avenue",
+        "incidentAt": "2026-11-10T17:05:00-06:00",
+        "incidentKind": "shooting",
+        "jurisdiction": "county",
+        "deaths": 1,
+        "description": "Police reported a man was found with gunshot injuries after an altercation and later died at hospital. A person of interest was interviewed. The investigation remains preliminary. Location marks the approximate reported block, not an exact scene.",
+        "address": "1400 block of Criterion Avenue, St. Louis County",
+        "locationAccuracy": "Approximate reported block",
+        "source": "St. Louis County Police \u00b7 official investigation summary",
+        "sourceUrl": "https://www.stlouiscountypolice.com/department-news/press-releases/news-release-homicide-investigation-in-the-1400-block-of-criterion-avenue/",
+        "url": "https://www.stlouiscountypolice.com/department-news/press-releases/news-release-homicide-investigation-in-the-1400-block-of-criterion-avenue/",
+        "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
+        "color": "#c52f73",
+        "sourceId": "county-releases",
+        "incidentTypes": [
+          "shooting"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.26539,
+          38.66919
+        ]
+      },
+      "properties": {
+        "id": "incident:wells-goodfellow-officer-shooting",
+        "title": "Fatal officer shooting investigation \u00b7 Wells/Goodfellow",
+        "incidentAt": "2026-11-09T10:50:00-06:00",
+        "incidentKind": "shooting",
+        "description": "Police reported an exchange of gunfire during an assault investigation. The suspect died at the scene; no officers were reported injured. The Force Investigation Unit was investigating. Preliminary official report; not a finding of guilt. Incident time is approximate. Location is an approximate area, not an exact scene.",
+        "address": "5300 block of Lotus Avenue, St. Louis, MO",
+        "source": "SLMPD \u00b7 official investigation summary",
+        "url": "https://slmpd.org/force-detectives-investigating-officer-involved-shooting-in-wells-goodfellow/",
+        "sourceUrl": "https://slmpd.org/force-detectives-investigating-officer-involved-shooting-in-wells-goodfellow/",
+        "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
+        "locationAccuracy": "Approximate block / intersection",
+        "color": "#c52f73",
+        "jurisdiction": "city",
+        "deaths": 1,
+        "sourceId": "city-releases",
+        "incidentTypes": [
+          "shooting"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.25298,
+          38.59064
+        ]
+      },
+      "properties": {
+        "id": "incident:tower-grove-crash",
+        "title": "Fatal moped crash \u00b7 Tower Grove South",
+        "incidentAt": "2026-11-09T21:00:00-06:00",
+        "incidentKind": "crash",
+        "description": "Police reported a moped left Gravois Avenue and struck a light pole. The driver died at the scene. The cause remained under investigation. Preliminary official report; not a finding of guilt. Incident time is approximate. Location is an approximate area, not an exact scene.",
+        "address": "Gravois Avenue at Gustine Street \u00b7 approximate intersection area, St. Louis, MO",
+        "source": "SLMPD \u00b7 official investigation summary",
+        "url": "https://slmpd.org/man-dies-in-single-vehicle-crash-in-tower-grove-south/",
+        "sourceUrl": "https://slmpd.org/man-dies-in-single-vehicle-crash-in-tower-grove-south/",
+        "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
+        "locationAccuracy": "Approximate block / intersection",
+        "color": "#ed5900",
+        "jurisdiction": "city",
+        "deaths": 1,
+        "sourceId": "city-releases",
+        "incidentTypes": [
+          "crash"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.27426,
+          38.58993
+        ]
+      },
+      "properties": {
+        "id": "incident:bevo-motorcycle-crash",
+        "title": "Critical-injury motorcycle crash \u00b7 Bevo",
+        "incidentAt": "2026-11-09T20:00:00-06:00",
+        "incidentKind": "crash",
+        "description": "Police reported a collision between a motorcycle and a left-turning car. The motorcyclist was hospitalized in critical condition; Accident Reconstruction was investigating. Preliminary official report; not a finding of guilt. Incident time is approximate. Location is an approximate area, not an exact scene.",
+        "address": "4300 block of South Kingshighway at Winona Avenue, St. Louis, MO",
+        "source": "SLMPD \u00b7 official investigation summary",
+        "url": "https://slmpd.org/man-critically-injured-in-motorcycle-crash-in-bevo/",
+        "sourceUrl": "https://slmpd.org/man-critically-injured-in-motorcycle-crash-in-bevo/",
+        "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
+        "locationAccuracy": "Approximate block / intersection",
+        "color": "#ed5900",
+        "jurisdiction": "city",
+        "sourceId": "city-releases",
+        "incidentTypes": [
+          "crash"
+        ],
+        "injuries": 1,
+        "severity": "critical injury"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.18484,
+          38.6293
+        ]
+      },
+      "properties": {
+        "id": "incident:downtown-shooting",
+        "title": "Fatal shooting \u00b7 Downtown",
+        "incidentAt": "2026-11-08T18:30:00-06:00",
+        "incidentKind": "shooting",
+        "description": "Police reported a man was shot near Washington Avenue and later died at hospital. Two suspects were apprehended in Illinois. Investigation continued. Preliminary official report; not a finding of guilt. Incident time is approximate. Location is an approximate area, not an exact scene.",
+        "address": "200 block of Washington Avenue \u00b7 reported overpass area, St. Louis, MO",
+        "source": "SLMPD \u00b7 official investigation summary",
+        "url": "https://slmpd.org/man-shot-killed-in-downtown-two-suspects-arrested/",
+        "sourceUrl": "https://slmpd.org/man-shot-killed-in-downtown-two-suspects-arrested/",
+        "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
+        "locationAccuracy": "Approximate block / intersection",
+        "color": "#c52f73",
+        "jurisdiction": "city",
+        "deaths": 1,
+        "sourceId": "city-releases",
+        "incidentTypes": [
+          "shooting"
+        ],
+        "alternateIds": [
+          "incident:city-case:26041891"
+        ],
+        "reportNumber": "26041891"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.23516,
+          38.71989
+        ]
+      },
+      "properties": {
+        "id": "incident:baden-shooting",
+        "title": "Fatal shooting \u00b7 Baden",
+        "incidentAt": "2026-11-08T13:00:00-06:00",
+        "incidentKind": "shooting",
+        "description": "Police reported a man was found with gunshot wounds and died at the scene. Homicide detectives were investigating the circumstances. Preliminary official report; not a finding of guilt. Incident time is approximate. Location is an approximate area, not an exact scene.",
+        "address": "8900 block of Newby Street, St. Louis, MO",
+        "source": "SLMPD \u00b7 official investigation summary",
+        "url": "https://slmpd.org/man-shot-killed-in-baden-2/",
+        "sourceUrl": "https://slmpd.org/man-shot-killed-in-baden-2/",
+        "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
+        "locationAccuracy": "Approximate block / intersection",
+        "color": "#c52f73",
+        "jurisdiction": "city",
+        "deaths": 1,
+        "sourceId": "city-releases",
+        "incidentTypes": [
+          "shooting"
+        ],
+        "alternateIds": [
+          "incident:city-case:26041866"
+        ],
+        "reportNumber": "26041866"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.30213,
+          38.66924
+        ]
+      },
+      "properties": {
+        "id": "incident:county-wellston-sutter",
+        "title": "Fatal officer shooting investigation \u00b7 Wellston",
+        "incidentAt": "2026-11-05T13:05:00-06:00",
+        "incidentKind": "shooting",
+        "jurisdiction": "county",
+        "deaths": 1,
+        "description": "Police reported a warrant encounter escalated into a barricade and later an officer shooting. One man died at hospital. The time shown is the start of the encounter, not the later shooting. County detectives are investigating. Location marks the approximate reported block, not an exact scene.",
+        "address": "1200 block of Sutter Avenue, Wellston, St. Louis County",
+        "locationAccuracy": "Approximate reported block",
+        "source": "St. Louis County Police \u00b7 official investigation summary",
+        "sourceUrl": "https://www.stlouiscountypolice.com/department-news/press-releases/news-release-officer-involved-shooting-investigation-in-the-1200-block-of-sutter-avenue-wellston-mo/",
+        "url": "https://www.stlouiscountypolice.com/department-news/press-releases/news-release-officer-involved-shooting-investigation-in-the-1200-block-of-sutter-avenue-wellston-mo/",
+        "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
+        "color": "#c52f73",
+        "sourceId": "county-releases",
+        "incidentTypes": [
+          "shooting"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.29166,
+          38.71255
+        ]
+      },
+      "properties": {
+        "id": "incident:county-wallington",
+        "title": "Fatal shooting investigation \u00b7 Wallington Walk",
+        "incidentAt": "2026-11-05T23:05:00-06:00",
+        "incidentKind": "shooting",
+        "jurisdiction": "county",
+        "deaths": 1,
+        "description": "County police reported a man with gunshot injuries was pronounced dead at the scene. The release reported no suspect in custody. The investigation remains preliminary. Location marks the approximate reported block, not an exact scene.",
+        "address": "7300 block of Wallington Walk, St. Louis County",
+        "locationAccuracy": "Approximate reported block",
+        "source": "St. Louis County Police \u00b7 official investigation summary",
+        "sourceUrl": "https://www.stlouiscountypolice.com/department-news/press-releases/news-release-homicide-investigation-in-the-7300-block-of-wallington-walk/",
+        "url": "https://www.stlouiscountypolice.com/department-news/press-releases/news-release-homicide-investigation-in-the-7300-block-of-wallington-walk/",
+        "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
+        "color": "#c52f73",
+        "sourceId": "county-releases",
+        "incidentTypes": [
+          "shooting"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.28211,
+          38.81568
+        ]
+      },
+      "properties": {
+        "id": "incident:county-north67",
+        "title": "Triple shooting investigation \u00b7 North Highway 67",
+        "incidentAt": "2026-11-01T00:14:00-05:00",
+        "incidentKind": "shooting",
+        "jurisdiction": "county",
+        "deaths": 1,
+        "description": "County police reported one man died and two others received treatment for non-life-threatening gunshot injuries following a shooting at a business. The investigation remains preliminary. Location marks the approximate reported block, not an exact scene.",
+        "address": "4000 block of North Highway 67, St. Louis County",
+        "locationAccuracy": "Approximate reported block",
+        "source": "St. Louis County Police \u00b7 official investigation summary",
+        "sourceUrl": "https://www.stlouiscountypolice.com/department-news/press-releases/news-release-triple-shooting-homicide-investigation-in-the-4000-block-of-north-highway-67/",
+        "url": "https://www.stlouiscountypolice.com/department-news/press-releases/news-release-triple-shooting-homicide-investigation-in-the-4000-block-of-north-highway-67/",
+        "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
+        "color": "#c52f73",
+        "sourceId": "county-releases",
+        "incidentTypes": [
+          "shooting"
+        ],
+        "injuries": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.221,
+          38.643
+        ]
+      },
+      "properties": {
+        "id": "incident:jeff-vander-lou-accidental-shooting",
+        "title": "Child injured in reported accidental shooting \u00b7 Jeff-Vander-Lou",
+        "incidentAt": "2026-11-09",
+        "incidentDate": "2026-11-09",
+        "incidentTimeAccuracy": "date-only",
+        "incidentKind": "shooting",
+        "incidentTypes": [
+          "shooting"
+        ],
+        "description": "Police said a child was injured in a reported accidental shooting. Hospital notification was around 8:20 p.m.; the exact shooting time was not reported. The child was described as critical but stable. Approximate reported block, not an exact scene.",
+        "address": "3000 block James Cool Papa Bell Avenue, St. Louis, MO",
+        "sourceId": "city-releases",
+        "source": "SLMPD \u00b7 official investigation summary",
+        "sourceUrl": "https://slmpd.org/3-year-old-shot-in-apparent-accidental-shooting/",
+        "url": "https://slmpd.org/3-year-old-shot-in-apparent-accidental-shooting/",
+        "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
+        "locationAccuracy": "Approximate reported block (about 100 m; Census street geocoder)",
+        "jurisdiction": "city",
+        "color": "#c52f73",
+        "injuries": 1,
+        "severity": "critical injury"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.243,
+          38.572
+        ]
+      },
+      "properties": {
+        "id": "incident:mt-pleasant-pulaski-shooting",
+        "title": "Shooting injury \u00b7 Mt. Pleasant",
+        "incidentAt": "2026-11-06T20:00:00-06:00",
+        "incidentDate": "2026-11-06",
+        "incidentTimeAccuracy": "approximate",
+        "incidentKind": "shooting",
+        "incidentTypes": [
+          "shooting"
+        ],
+        "description": "Police reported one person was shot and hospitalized in critical but stable condition. Officers located evidence of gunfire on the reported block. Time is approximate. Approximate reported block, not an exact scene.",
+        "address": "3200 block Pulaski Street, St. Louis, MO",
+        "sourceId": "city-releases",
+        "source": "SLMPD \u00b7 official investigation summary",
+        "sourceUrl": "https://slmpd.org/19-year-old-hospitalized-following-mt-pleasant-shooting/",
+        "url": "https://slmpd.org/19-year-old-hospitalized-following-mt-pleasant-shooting/",
+        "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
+        "locationAccuracy": "Approximate reported block (about 100 m; Census street geocoder)",
+        "jurisdiction": "city",
+        "color": "#c52f73",
+        "injuries": 1,
+        "severity": "critical injury",
+        "alternateIds": [
+          "incident:city-case:26041705"
+        ],
+        "reportNumber": "26041705"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.253,
+          38.553
+        ]
+      },
+      "properties": {
+        "id": "incident:pennsylvania-deputies-shots",
+        "title": "Exchange of gunfire investigated \u00b7 Pennsylvania Avenue",
+        "incidentAt": "2026-11-06",
+        "incidentDate": "2026-11-06",
+        "incidentTimeAccuracy": "date-only",
+        "incidentKind": "shooting",
+        "incidentTypes": [
+          "shooting"
+        ],
+        "description": "Police reported an exchange of gunfire during a pursuit that entered the City. The reported pursuit began around 9:20 p.m.; the exact shooting time was not supplied. Police reported no injuries during the exchange. Approximate reported block, not an exact scene.",
+        "address": "6900 block Pennsylvania Avenue, St. Louis, MO",
+        "sourceId": "city-releases",
+        "source": "SLMPD \u00b7 official investigation summary",
+        "sourceUrl": "https://slmpd.org/fiu-investigating-after-shots-fired-at-deputies/",
+        "url": "https://slmpd.org/fiu-investigating-after-shots-fired-at-deputies/",
+        "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
+        "locationAccuracy": "Approximate reported block (about 100 m; Census street geocoder)",
+        "jurisdiction": "city",
+        "color": "#c52f73",
+        "injuries": 0,
+        "deaths": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.225,
+          38.611
+        ]
+      },
+      "properties": {
+        "id": "incident:fox-park-party-shooting",
+        "title": "Fatal shooting \u00b7 Fox Park",
+        "incidentAt": "2026-11-01T06:15:00-06:00",
+        "incidentDate": "2026-11-01",
+        "incidentTimeAccuracy": "approximate",
+        "incidentKind": "shooting",
+        "incidentTypes": [
+          "shooting"
+        ],
+        "description": "Police reported one person died after a shooting at a short-term rental party. Time is approximate; the investigation was preliminary. Approximate reported block, not an exact scene.",
+        "address": "2700 block Ann Avenue, St. Louis, MO",
+        "sourceId": "city-releases",
+        "source": "SLMPD \u00b7 official investigation summary",
+        "sourceUrl": "https://slmpd.org/18-year-old-shot-killed-at-short-term-rental-party-in-fox-park/",
+        "url": "https://slmpd.org/18-year-old-shot-killed-at-short-term-rental-party-in-fox-park/",
+        "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
+        "locationAccuracy": "Approximate reported block (about 100 m; Census street geocoder)",
+        "jurisdiction": "city",
+        "color": "#c52f73",
+        "deaths": 1,
+        "alternateIds": [
+          "incident:city-case:26040951"
+        ],
+        "reportNumber": "26040951"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.23,
+          38.712
+        ]
+      },
+      "properties": {
+        "id": "incident:baden-single-vehicle-fatal",
+        "title": "Fatal rolling-vehicle incident \u00b7 Baden",
+        "incidentAt": "2026-11-01T12:45:00-06:00",
+        "incidentDate": "2026-11-01",
+        "incidentTimeAccuracy": "approximate",
+        "incidentKind": "crash",
+        "incidentTypes": [
+          "crash"
+        ],
+        "description": "Police reported a woman was trapped after a parked vehicle rolled on an incline. She later died at a hospital. Time is approximate. Approximate reported block, not an exact scene.",
+        "address": "8200 block North Broadway, St. Louis, MO",
+        "sourceId": "city-releases",
+        "source": "SLMPD \u00b7 official investigation summary",
+        "sourceUrl": "https://slmpd.org/woman-dies-in-fatal-single-vehicle-accident-in-baden/",
+        "url": "https://slmpd.org/woman-dies-in-fatal-single-vehicle-accident-in-baden/",
+        "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
+        "locationAccuracy": "Approximate reported block (about 100 m; Census street geocoder)",
+        "jurisdiction": "city",
+        "color": "#ed5900",
+        "deaths": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201,
+          38.616
+        ]
+      },
+      "properties": {
+        "id": "incident:lasalle-park-hickory-shooting",
+        "title": "Shooting injury \u00b7 LaSalle Park",
+        "incidentAt": "2026-10-31T22:00:00-05:00",
+        "incidentDate": "2026-10-31",
+        "incidentTimeAccuracy": "approximate",
+        "incidentKind": "shooting",
+        "incidentTypes": [
+          "shooting"
+        ],
+        "description": "Police reported a teenager was shot near a bus stop and hospitalized in stable condition. The report was published November 1; the incident occurred October 31. Time is approximate. Approximate reported block, not an exact scene.",
+        "address": "1000 block Hickory Street, St. Louis, MO",
+        "sourceId": "city-releases",
+        "source": "SLMPD \u00b7 official investigation summary",
+        "sourceUrl": "https://slmpd.org/16-year-old-injured-in-lasalle-park-shooting/",
+        "url": "https://slmpd.org/16-year-old-injured-in-lasalle-park-shooting/",
+        "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
+        "locationAccuracy": "Approximate reported block (about 100 m; Census street geocoder)",
+        "jurisdiction": "city",
+        "color": "#c52f73",
+        "injuries": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.271,
+          38.689
+        ]
+      },
+      "properties": {
+        "id": "incident:mark-twain-fatal-stabbing",
+        "title": "Fatal stabbing investigation \u00b7 Mark Twain",
+        "incidentAt": "2026-10-30T02:00:00-05:00",
+        "incidentDate": "2026-10-30",
+        "incidentTimeAccuracy": "approximate",
+        "incidentKind": "assault",
+        "incidentTypes": [
+          "assault"
+        ],
+        "description": "Police reported a man died with multiple puncture wounds after officers responded to a cutting call. A person was detained pending investigation. Time is approximate. Approximate reported block, not an exact scene.",
+        "address": "5900 block Dressell Avenue, St. Louis, MO",
+        "sourceId": "city-releases",
+        "source": "SLMPD \u00b7 official investigation summary",
+        "sourceUrl": "https://slmpd.org/call-for-cutting-prompts-homicide-investigation-in-mark-twain-neighborhood/",
+        "url": "https://slmpd.org/call-for-cutting-prompts-homicide-investigation-in-mark-twain-neighborhood/",
+        "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
+        "locationAccuracy": "Approximate reported block (about 100 m; Census street geocoder)",
+        "jurisdiction": "city",
+        "color": "#c52f73",
+        "deaths": 1,
+        "alternateIds": [
+          "incident:city-case:26040682"
+        ],
+        "reportNumber": "26040682"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.272,
+          38.651
+        ]
+      },
+      "properties": {
+        "id": "incident:washington-party-shooting",
+        "title": "Two shooting injuries \u00b7 Washington Avenue",
+        "incidentAt": "2026-11-01",
+        "incidentDate": "2026-11-01",
+        "incidentTimeAccuracy": "date-only",
+        "incidentKind": "shooting",
+        "incidentTypes": [
+          "shooting"
+        ],
+        "description": "Police reported two people arrived at a hospital with non-life-threatening gunshot wounds after a short-term rental party. The report described the incident as shortly after midnight. Approximate reported block, not an exact scene.",
+        "address": "5200 block Washington Avenue, St. Louis, MO",
+        "sourceId": "city-releases",
+        "source": "SLMPD \u00b7 official investigation summary",
+        "sourceUrl": "https://slmpd.org/short-term-rental-party-ends-in-shots-fired/",
+        "url": "https://slmpd.org/short-term-rental-party-ends-in-shots-fired/",
+        "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
+        "locationAccuracy": "Approximate reported block (about 100 m; Census street geocoder)",
+        "jurisdiction": "city",
+        "color": "#c52f73",
+        "injuries": 2
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.234,
+          38.721
+        ]
+      },
+      "properties": {
+        "id": "incident:baden-canaan-fatal-shooting",
+        "title": "Fatal shooting investigation \u00b7 Baden",
+        "incidentAt": "2026-11-06T13:00:00-06:00",
+        "incidentDate": "2026-11-06",
+        "incidentTimeAccuracy": "approximate",
+        "incidentKind": "shooting",
+        "incidentTypes": [
+          "shooting"
+        ],
+        "description": "Police reported one man died at the scene. Another man said he had been attacked before firing; investigators said the circumstances remained under investigation. Time is approximate. Approximate reported block, not an exact scene.",
+        "address": "900 block Canaan Avenue, St. Louis, MO",
+        "sourceId": "city-releases",
+        "source": "SLMPD \u00b7 official investigation summary",
+        "sourceUrl": "https://slmpd.org/homicide-detectives-investigating-after-baden-shooting-leaves-one-dead/",
+        "url": "https://slmpd.org/homicide-detectives-investigating-after-baden-shooting-leaves-one-dead/",
+        "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
+        "locationAccuracy": "Approximate reported block (about 100 m; Census street geocoder)",
+        "jurisdiction": "city",
+        "color": "#c52f73",
+        "deaths": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.234,
+          38.657
+        ]
+      },
+      "properties": {
+        "id": "incident:ville-sarah-shooting",
+        "title": "Shooting injury \u00b7 The Ville",
+        "incidentAt": "2026-11-06T03:00:00-06:00",
+        "incidentDate": "2026-11-06",
+        "incidentTimeAccuracy": "approximate",
+        "incidentKind": "shooting",
+        "incidentTypes": [
+          "shooting"
+        ],
+        "description": "Police reported a man was shot while entering a residence and taken to a hospital in critical condition. Time is approximate. Approximate reported block, not an exact scene.",
+        "address": "2500 block North Sarah Street, St. Louis, MO",
+        "sourceId": "city-releases",
+        "source": "SLMPD \u00b7 official investigation summary",
+        "sourceUrl": "https://slmpd.org/man-shot-in-the-ville-3/",
+        "url": "https://slmpd.org/man-shot-in-the-ville-3/",
+        "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
+        "locationAccuracy": "Approximate reported block (about 100 m; Census street geocoder)",
+        "jurisdiction": "city",
+        "color": "#c52f73",
+        "injuries": 1,
+        "severity": "critical injury",
+        "alternateIds": [
+          "incident:city-case:26041597"
+        ],
+        "reportNumber": "26041597"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.281,
+          38.648
+        ]
+      },
+      "properties": {
+        "id": "incident:debaliviere-pershing-shooting",
+        "title": "Shooting injury \u00b7 DeBaliviere Place",
+        "incidentAt": "2026-11-04T19:30:00-06:00",
+        "incidentDate": "2026-11-04",
+        "incidentTimeAccuracy": "approximate",
+        "incidentKind": "shooting",
+        "incidentTypes": [
+          "shooting"
+        ],
+        "description": "Police reported a teenager was shot and hospitalized in critical condition. The report was published November 6; the incident occurred November 4. Time is approximate. Approximate reported block, not an exact scene.",
+        "address": "5500 block Pershing Avenue, St. Louis, MO",
+        "sourceId": "city-releases",
+        "source": "SLMPD \u00b7 official investigation summary",
+        "sourceUrl": "https://slmpd.org/teen-shot-in-debaliviere-place-2/",
+        "url": "https://slmpd.org/teen-shot-in-debaliviere-place-2/",
+        "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
+        "locationAccuracy": "Approximate reported block (about 100 m; Census street geocoder)",
+        "jurisdiction": "city",
+        "color": "#c52f73",
+        "injuries": 1,
+        "severity": "critical injury"
+      }
+    }
+  ]
+}

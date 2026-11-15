@@ -1,0 +1,959 @@
+{
+  "type": "FeatureCollection",
+  "checkedAt": "2026-11-15T18:41:22.875951+00:00",
+  "note": "Reviewed primary-source schedule facts. Keep original verification times unless sources are rechecked. Conditional CITY playoff Game 3 omitted until confirmed.",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201951,
+          38.625988
+        ]
+      },
+      "properties": {
+        "id": "sports:4a5a68d5e5a5409c1a",
+        "layer": "sports",
+        "title": "Blues vs. Anaheim Ducks",
+        "start": "2026-11-17T19:00:00-06:00",
+        "expiresAt": "2026-11-17T19:00:00-06:00",
+        "venue": "Enterprise Center",
+        "address": "1401 Clark Ave, St. Louis, MO 63103",
+        "sport": "Hockey",
+        "description": "Hockey \u00b7 Enterprise Center",
+        "url": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "sourceUrl": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "source": "Official team schedule",
+        "sourceCheckedAt": "2026-11-15T18:41:22.875951+00:00",
+        "refreshGroup": "nhl:blues",
+        "team": "St. Louis Blues",
+        "verificationMethod": "Reviewed official published season schedule"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201951,
+          38.625988
+        ]
+      },
+      "properties": {
+        "id": "sports:316359e02d9d7dbef0",
+        "layer": "sports",
+        "title": "Blues vs. New Jersey Devils",
+        "start": "2026-11-21T18:00:00-06:00",
+        "expiresAt": "2026-11-21T18:00:00-06:00",
+        "venue": "Enterprise Center",
+        "address": "1401 Clark Ave, St. Louis, MO 63103",
+        "sport": "Hockey",
+        "description": "Hockey \u00b7 Enterprise Center",
+        "url": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "sourceUrl": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "source": "Official team schedule",
+        "sourceCheckedAt": "2026-11-15T18:41:22.875951+00:00",
+        "refreshGroup": "nhl:blues",
+        "team": "St. Louis Blues",
+        "verificationMethod": "Reviewed official published season schedule"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201951,
+          38.625988
+        ]
+      },
+      "properties": {
+        "id": "sports:18e3fea00a11269e63",
+        "layer": "sports",
+        "title": "Blues vs. Edmonton Oilers",
+        "start": "2026-11-22T18:00:00-06:00",
+        "expiresAt": "2026-11-22T18:00:00-06:00",
+        "venue": "Enterprise Center",
+        "address": "1401 Clark Ave, St. Louis, MO 63103",
+        "sport": "Hockey",
+        "description": "Hockey \u00b7 Enterprise Center",
+        "url": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "sourceUrl": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "source": "Official team schedule",
+        "sourceCheckedAt": "2026-11-15T18:41:22.875951+00:00",
+        "refreshGroup": "nhl:blues",
+        "team": "St. Louis Blues",
+        "verificationMethod": "Reviewed official published season schedule"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201951,
+          38.625988
+        ]
+      },
+      "properties": {
+        "id": "sports:064f268faa3e205398",
+        "layer": "sports",
+        "title": "Blues vs. Dallas Stars",
+        "start": "2026-11-27T13:00:00-06:00",
+        "expiresAt": "2026-11-27T13:00:00-06:00",
+        "venue": "Enterprise Center",
+        "address": "1401 Clark Ave, St. Louis, MO 63103",
+        "sport": "Hockey",
+        "description": "Hockey \u00b7 Enterprise Center",
+        "url": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "sourceUrl": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "source": "Official team schedule",
+        "sourceCheckedAt": "2026-11-15T18:41:22.875951+00:00",
+        "refreshGroup": "nhl:blues",
+        "team": "St. Louis Blues",
+        "verificationMethod": "Reviewed official published season schedule"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201951,
+          38.625988
+        ]
+      },
+      "properties": {
+        "id": "sports:057e30f7d6a42f4753",
+        "layer": "sports",
+        "title": "Blues vs. Washington Capitals",
+        "start": "2026-11-28T18:00:00-06:00",
+        "expiresAt": "2026-11-28T18:00:00-06:00",
+        "venue": "Enterprise Center",
+        "address": "1401 Clark Ave, St. Louis, MO 63103",
+        "sport": "Hockey",
+        "description": "Hockey \u00b7 Enterprise Center",
+        "url": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "sourceUrl": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "source": "Official team schedule",
+        "sourceCheckedAt": "2026-11-15T18:41:22.875951+00:00",
+        "refreshGroup": "nhl:blues",
+        "team": "St. Louis Blues",
+        "verificationMethod": "Reviewed official published season schedule"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201951,
+          38.625988
+        ]
+      },
+      "properties": {
+        "id": "sports:2b81a183f6b1b82ef3",
+        "layer": "sports",
+        "title": "Blues vs. Pittsburgh Penguins",
+        "start": "2026-12-02T19:00:00-06:00",
+        "expiresAt": "2026-12-02T19:00:00-06:00",
+        "venue": "Enterprise Center",
+        "address": "1401 Clark Ave, St. Louis, MO 63103",
+        "sport": "Hockey",
+        "description": "Hockey \u00b7 Enterprise Center",
+        "url": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "sourceUrl": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "source": "Official team schedule",
+        "sourceCheckedAt": "2026-11-15T18:41:22.875951+00:00",
+        "refreshGroup": "nhl:blues",
+        "team": "St. Louis Blues",
+        "verificationMethod": "Reviewed official published season schedule"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201951,
+          38.625988
+        ]
+      },
+      "properties": {
+        "id": "sports:a253eca70eb864a30d",
+        "layer": "sports",
+        "title": "Blues vs. Chicago Blackhawks",
+        "start": "2026-12-04T19:00:00-06:00",
+        "expiresAt": "2026-12-04T19:00:00-06:00",
+        "venue": "Enterprise Center",
+        "address": "1401 Clark Ave, St. Louis, MO 63103",
+        "sport": "Hockey",
+        "description": "Hockey \u00b7 Enterprise Center",
+        "url": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "sourceUrl": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "source": "Official team schedule",
+        "sourceCheckedAt": "2026-11-15T18:41:22.875951+00:00",
+        "refreshGroup": "nhl:blues",
+        "team": "St. Louis Blues",
+        "verificationMethod": "Reviewed official published season schedule"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201951,
+          38.625988
+        ]
+      },
+      "properties": {
+        "id": "sports:6db30fbce3085fa83a",
+        "layer": "sports",
+        "title": "Blues vs. Nashville Predators",
+        "start": "2026-12-06T16:00:00-06:00",
+        "expiresAt": "2026-12-06T16:00:00-06:00",
+        "venue": "Enterprise Center",
+        "address": "1401 Clark Ave, St. Louis, MO 63103",
+        "sport": "Hockey",
+        "description": "Hockey \u00b7 Enterprise Center",
+        "url": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "sourceUrl": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "source": "Official team schedule",
+        "sourceCheckedAt": "2026-11-15T18:41:22.875951+00:00",
+        "refreshGroup": "nhl:blues",
+        "team": "St. Louis Blues",
+        "verificationMethod": "Reviewed official published season schedule"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201951,
+          38.625988
+        ]
+      },
+      "properties": {
+        "id": "sports:e6ccf1a4348caddf32",
+        "layer": "sports",
+        "title": "Blues vs. Colorado Avalanche",
+        "start": "2026-12-08T19:00:00-06:00",
+        "expiresAt": "2026-12-08T19:00:00-06:00",
+        "venue": "Enterprise Center",
+        "address": "1401 Clark Ave, St. Louis, MO 63103",
+        "sport": "Hockey",
+        "description": "Hockey \u00b7 Enterprise Center",
+        "url": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "sourceUrl": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "source": "Official team schedule",
+        "sourceCheckedAt": "2026-11-15T18:41:22.875951+00:00",
+        "refreshGroup": "nhl:blues",
+        "team": "St. Louis Blues",
+        "verificationMethod": "Reviewed official published season schedule"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201951,
+          38.625988
+        ]
+      },
+      "properties": {
+        "id": "sports:394c6265c64c1394e5",
+        "layer": "sports",
+        "title": "Blues vs. Tampa Bay Lightning",
+        "start": "2026-12-13T19:00:00-06:00",
+        "expiresAt": "2026-12-13T19:00:00-06:00",
+        "venue": "Enterprise Center",
+        "address": "1401 Clark Ave, St. Louis, MO 63103",
+        "sport": "Hockey",
+        "description": "Hockey \u00b7 Enterprise Center",
+        "url": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "sourceUrl": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "source": "Official team schedule",
+        "sourceCheckedAt": "2026-11-15T18:41:22.875951+00:00",
+        "refreshGroup": "nhl:blues",
+        "team": "St. Louis Blues",
+        "verificationMethod": "Reviewed official published season schedule"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201951,
+          38.625988
+        ]
+      },
+      "properties": {
+        "id": "sports:66c9d836aa86bd4d4b",
+        "layer": "sports",
+        "title": "Blues vs. Winnipeg Jets",
+        "start": "2026-12-15T19:00:00-06:00",
+        "expiresAt": "2026-12-15T19:00:00-06:00",
+        "venue": "Enterprise Center",
+        "address": "1401 Clark Ave, St. Louis, MO 63103",
+        "sport": "Hockey",
+        "description": "Hockey \u00b7 Enterprise Center",
+        "url": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "sourceUrl": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "source": "Official team schedule",
+        "sourceCheckedAt": "2026-11-15T18:41:22.875951+00:00",
+        "refreshGroup": "nhl:blues",
+        "team": "St. Louis Blues",
+        "verificationMethod": "Reviewed official published season schedule"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201951,
+          38.625988
+        ]
+      },
+      "properties": {
+        "id": "sports:b9209b65819e5524f4",
+        "layer": "sports",
+        "title": "Blues vs. New York Rangers",
+        "start": "2026-12-27T16:00:00-06:00",
+        "expiresAt": "2026-12-27T16:00:00-06:00",
+        "venue": "Enterprise Center",
+        "address": "1401 Clark Ave, St. Louis, MO 63103",
+        "sport": "Hockey",
+        "description": "Hockey \u00b7 Enterprise Center",
+        "url": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "sourceUrl": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "source": "Official team schedule",
+        "sourceCheckedAt": "2026-11-15T18:41:22.875951+00:00",
+        "refreshGroup": "nhl:blues",
+        "team": "St. Louis Blues",
+        "verificationMethod": "Reviewed official published season schedule"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201951,
+          38.625988
+        ]
+      },
+      "properties": {
+        "id": "sports:a616c87c59a983ae8e",
+        "layer": "sports",
+        "title": "Blues vs. Calgary Flames",
+        "start": "2027-01-03T18:00:00-06:00",
+        "expiresAt": "2027-01-03T18:00:00-06:00",
+        "venue": "Enterprise Center",
+        "address": "1401 Clark Ave, St. Louis, MO 63103",
+        "sport": "Hockey",
+        "description": "Hockey \u00b7 Enterprise Center",
+        "url": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "sourceUrl": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "source": "Official team schedule",
+        "sourceCheckedAt": "2026-11-15T18:41:22.875951+00:00",
+        "refreshGroup": "nhl:blues",
+        "team": "St. Louis Blues",
+        "verificationMethod": "Reviewed official published season schedule"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201951,
+          38.625988
+        ]
+      },
+      "properties": {
+        "id": "sports:a73c0551bbf340e4dc",
+        "layer": "sports",
+        "title": "Blues vs. Ottawa Senators",
+        "start": "2027-01-08T19:00:00-06:00",
+        "expiresAt": "2027-01-08T19:00:00-06:00",
+        "venue": "Enterprise Center",
+        "address": "1401 Clark Ave, St. Louis, MO 63103",
+        "sport": "Hockey",
+        "description": "Hockey \u00b7 Enterprise Center",
+        "url": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "sourceUrl": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "source": "Official team schedule",
+        "sourceCheckedAt": "2026-11-15T18:41:22.875951+00:00",
+        "refreshGroup": "nhl:blues",
+        "team": "St. Louis Blues",
+        "verificationMethod": "Reviewed official published season schedule"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201951,
+          38.625988
+        ]
+      },
+      "properties": {
+        "id": "sports:eef9d8ea15b630f517",
+        "layer": "sports",
+        "title": "Blues vs. Minnesota Wild",
+        "start": "2027-01-16T18:00:00-06:00",
+        "expiresAt": "2027-01-16T18:00:00-06:00",
+        "venue": "Enterprise Center",
+        "address": "1401 Clark Ave, St. Louis, MO 63103",
+        "sport": "Hockey",
+        "description": "Hockey \u00b7 Enterprise Center",
+        "url": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "sourceUrl": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "source": "Official team schedule",
+        "sourceCheckedAt": "2026-11-15T18:41:22.875951+00:00",
+        "refreshGroup": "nhl:blues",
+        "team": "St. Louis Blues",
+        "verificationMethod": "Reviewed official published season schedule"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201951,
+          38.625988
+        ]
+      },
+      "properties": {
+        "id": "sports:0385182102087c33a0",
+        "layer": "sports",
+        "title": "Blues vs. Toronto Maple Leafs",
+        "start": "2027-01-23T18:00:00-06:00",
+        "expiresAt": "2027-01-23T18:00:00-06:00",
+        "venue": "Enterprise Center",
+        "address": "1401 Clark Ave, St. Louis, MO 63103",
+        "sport": "Hockey",
+        "description": "Hockey \u00b7 Enterprise Center",
+        "url": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "sourceUrl": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "source": "Official team schedule",
+        "sourceCheckedAt": "2026-11-15T18:41:22.875951+00:00",
+        "refreshGroup": "nhl:blues",
+        "team": "St. Louis Blues",
+        "verificationMethod": "Reviewed official published season schedule"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201951,
+          38.625988
+        ]
+      },
+      "properties": {
+        "id": "sports:068bcc78b0cff0089d",
+        "layer": "sports",
+        "title": "Blues vs. Chicago Blackhawks",
+        "start": "2027-01-26T19:00:00-06:00",
+        "expiresAt": "2027-01-26T19:00:00-06:00",
+        "venue": "Enterprise Center",
+        "address": "1401 Clark Ave, St. Louis, MO 63103",
+        "sport": "Hockey",
+        "description": "Hockey \u00b7 Enterprise Center",
+        "url": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "sourceUrl": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "source": "Official team schedule",
+        "sourceCheckedAt": "2026-11-15T18:41:22.875951+00:00",
+        "refreshGroup": "nhl:blues",
+        "team": "St. Louis Blues",
+        "verificationMethod": "Reviewed official published season schedule"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201951,
+          38.625988
+        ]
+      },
+      "properties": {
+        "id": "sports:3cb29a30837844b6ff",
+        "layer": "sports",
+        "title": "Blues vs. Colorado Avalanche",
+        "start": "2027-01-28T19:00:00-06:00",
+        "expiresAt": "2027-01-28T19:00:00-06:00",
+        "venue": "Enterprise Center",
+        "address": "1401 Clark Ave, St. Louis, MO 63103",
+        "sport": "Hockey",
+        "description": "Hockey \u00b7 Enterprise Center",
+        "url": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "sourceUrl": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "source": "Official team schedule",
+        "sourceCheckedAt": "2026-11-15T18:41:22.875951+00:00",
+        "refreshGroup": "nhl:blues",
+        "team": "St. Louis Blues",
+        "verificationMethod": "Reviewed official published season schedule"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201951,
+          38.625988
+        ]
+      },
+      "properties": {
+        "id": "sports:a2a4f2151012ed82d2",
+        "layer": "sports",
+        "title": "Blues vs. Vancouver Canucks",
+        "start": "2027-01-30T14:30:00-06:00",
+        "expiresAt": "2027-01-30T14:30:00-06:00",
+        "venue": "Enterprise Center",
+        "address": "1401 Clark Ave, St. Louis, MO 63103",
+        "sport": "Hockey",
+        "description": "Hockey \u00b7 Enterprise Center",
+        "url": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "sourceUrl": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "source": "Official team schedule",
+        "sourceCheckedAt": "2026-11-15T18:41:22.875951+00:00",
+        "refreshGroup": "nhl:blues",
+        "team": "St. Louis Blues",
+        "verificationMethod": "Reviewed official published season schedule"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201951,
+          38.625988
+        ]
+      },
+      "properties": {
+        "id": "sports:0fc539f805e7dd51b3",
+        "layer": "sports",
+        "title": "Blues vs. Los Angeles Kings",
+        "start": "2027-02-09T19:00:00-06:00",
+        "expiresAt": "2027-02-09T19:00:00-06:00",
+        "venue": "Enterprise Center",
+        "address": "1401 Clark Ave, St. Louis, MO 63103",
+        "sport": "Hockey",
+        "description": "Hockey \u00b7 Enterprise Center",
+        "url": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "sourceUrl": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "source": "Official team schedule",
+        "sourceCheckedAt": "2026-11-15T18:41:22.875951+00:00",
+        "refreshGroup": "nhl:blues",
+        "team": "St. Louis Blues",
+        "verificationMethod": "Reviewed official published season schedule"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201951,
+          38.625988
+        ]
+      },
+      "properties": {
+        "id": "sports:b779ada5a5928b3a41",
+        "layer": "sports",
+        "title": "Blues vs. Philadelphia Flyers",
+        "start": "2027-02-15T19:00:00-06:00",
+        "expiresAt": "2027-02-15T19:00:00-06:00",
+        "venue": "Enterprise Center",
+        "address": "1401 Clark Ave, St. Louis, MO 63103",
+        "sport": "Hockey",
+        "description": "Hockey \u00b7 Enterprise Center",
+        "url": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "sourceUrl": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "source": "Official team schedule",
+        "sourceCheckedAt": "2026-11-15T18:41:22.875951+00:00",
+        "refreshGroup": "nhl:blues",
+        "team": "St. Louis Blues",
+        "verificationMethod": "Reviewed official published season schedule"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201951,
+          38.625988
+        ]
+      },
+      "properties": {
+        "id": "sports:e38e37156be1f5fb5f",
+        "layer": "sports",
+        "title": "Blues vs. Utah Mammoth",
+        "start": "2027-02-21T17:00:00-06:00",
+        "expiresAt": "2027-02-21T17:00:00-06:00",
+        "venue": "Enterprise Center",
+        "address": "1401 Clark Ave, St. Louis, MO 63103",
+        "sport": "Hockey",
+        "description": "Hockey \u00b7 Enterprise Center",
+        "url": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "sourceUrl": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "source": "Official team schedule",
+        "sourceCheckedAt": "2026-11-15T18:41:22.875951+00:00",
+        "refreshGroup": "nhl:blues",
+        "team": "St. Louis Blues",
+        "verificationMethod": "Reviewed official published season schedule"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201951,
+          38.625988
+        ]
+      },
+      "properties": {
+        "id": "sports:b38b47b06e4686af40",
+        "layer": "sports",
+        "title": "Blues vs. Vancouver Canucks",
+        "start": "2027-02-25T19:00:00-06:00",
+        "expiresAt": "2027-02-25T19:00:00-06:00",
+        "venue": "Enterprise Center",
+        "address": "1401 Clark Ave, St. Louis, MO 63103",
+        "sport": "Hockey",
+        "description": "Hockey \u00b7 Enterprise Center",
+        "url": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "sourceUrl": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "source": "Official team schedule",
+        "sourceCheckedAt": "2026-11-15T18:41:22.875951+00:00",
+        "refreshGroup": "nhl:blues",
+        "team": "St. Louis Blues",
+        "verificationMethod": "Reviewed official published season schedule"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201951,
+          38.625988
+        ]
+      },
+      "properties": {
+        "id": "sports:a51b1bd4e63287bece",
+        "layer": "sports",
+        "title": "Blues vs. Minnesota Wild",
+        "start": "2027-02-27T15:00:00-06:00",
+        "expiresAt": "2027-02-27T15:00:00-06:00",
+        "venue": "Enterprise Center",
+        "address": "1401 Clark Ave, St. Louis, MO 63103",
+        "sport": "Hockey",
+        "description": "Hockey \u00b7 Enterprise Center",
+        "url": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "sourceUrl": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "source": "Official team schedule",
+        "sourceCheckedAt": "2026-11-15T18:41:22.875951+00:00",
+        "refreshGroup": "nhl:blues",
+        "team": "St. Louis Blues",
+        "verificationMethod": "Reviewed official published season schedule"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201951,
+          38.625988
+        ]
+      },
+      "properties": {
+        "id": "sports:f7e8c55ae2878cd3e4",
+        "layer": "sports",
+        "title": "Blues vs. Dallas Stars",
+        "start": "2027-02-28T20:00:00-06:00",
+        "expiresAt": "2027-02-28T20:00:00-06:00",
+        "venue": "Enterprise Center",
+        "address": "1401 Clark Ave, St. Louis, MO 63103",
+        "sport": "Hockey",
+        "description": "Hockey \u00b7 Enterprise Center",
+        "url": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "sourceUrl": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "source": "Official team schedule",
+        "sourceCheckedAt": "2026-11-15T18:41:22.875951+00:00",
+        "refreshGroup": "nhl:blues",
+        "team": "St. Louis Blues",
+        "verificationMethod": "Reviewed official published season schedule"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201951,
+          38.625988
+        ]
+      },
+      "properties": {
+        "id": "sports:b48235ef85dce367b7",
+        "layer": "sports",
+        "title": "Blues vs. Nashville Predators",
+        "start": "2027-03-09T19:00:00-06:00",
+        "expiresAt": "2027-03-09T19:00:00-06:00",
+        "venue": "Enterprise Center",
+        "address": "1401 Clark Ave, St. Louis, MO 63103",
+        "sport": "Hockey",
+        "description": "Hockey \u00b7 Enterprise Center",
+        "url": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "sourceUrl": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "source": "Official team schedule",
+        "sourceCheckedAt": "2026-11-15T18:41:22.875951+00:00",
+        "refreshGroup": "nhl:blues",
+        "team": "St. Louis Blues",
+        "verificationMethod": "Reviewed official published season schedule"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201951,
+          38.625988
+        ]
+      },
+      "properties": {
+        "id": "sports:4fe89baecc60fe2061",
+        "layer": "sports",
+        "title": "Blues vs. San Jose Sharks",
+        "start": "2027-03-11T19:00:00-06:00",
+        "expiresAt": "2027-03-11T19:00:00-06:00",
+        "venue": "Enterprise Center",
+        "address": "1401 Clark Ave, St. Louis, MO 63103",
+        "sport": "Hockey",
+        "description": "Hockey \u00b7 Enterprise Center",
+        "url": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "sourceUrl": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "source": "Official team schedule",
+        "sourceCheckedAt": "2026-11-15T18:41:22.875951+00:00",
+        "refreshGroup": "nhl:blues",
+        "team": "St. Louis Blues",
+        "verificationMethod": "Reviewed official published season schedule"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201951,
+          38.625988
+        ]
+      },
+      "properties": {
+        "id": "sports:e59fd94f9e86375542",
+        "layer": "sports",
+        "title": "Blues vs. Anaheim Ducks",
+        "start": "2027-03-13T17:30:00-06:00",
+        "expiresAt": "2027-03-13T17:30:00-06:00",
+        "venue": "Enterprise Center",
+        "address": "1401 Clark Ave, St. Louis, MO 63103",
+        "sport": "Hockey",
+        "description": "Hockey \u00b7 Enterprise Center",
+        "url": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "sourceUrl": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "source": "Official team schedule",
+        "sourceCheckedAt": "2026-11-15T18:41:22.875951+00:00",
+        "refreshGroup": "nhl:blues",
+        "team": "St. Louis Blues",
+        "verificationMethod": "Reviewed official published season schedule"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201951,
+          38.625988
+        ]
+      },
+      "properties": {
+        "id": "sports:ea670f4c21bfe72bf2",
+        "layer": "sports",
+        "title": "Blues vs. New York Islanders",
+        "start": "2027-03-25T19:00:00-05:00",
+        "expiresAt": "2027-03-25T19:00:00-05:00",
+        "venue": "Enterprise Center",
+        "address": "1401 Clark Ave, St. Louis, MO 63103",
+        "sport": "Hockey",
+        "description": "Hockey \u00b7 Enterprise Center",
+        "url": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "sourceUrl": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "source": "Official team schedule",
+        "sourceCheckedAt": "2026-11-15T18:41:22.875951+00:00",
+        "refreshGroup": "nhl:blues",
+        "team": "St. Louis Blues",
+        "verificationMethod": "Reviewed official published season schedule"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201951,
+          38.625988
+        ]
+      },
+      "properties": {
+        "id": "sports:b8250290bff5c10b11",
+        "layer": "sports",
+        "title": "Blues vs. Buffalo Sabres",
+        "start": "2027-03-28T20:00:00-05:00",
+        "expiresAt": "2027-03-28T20:00:00-05:00",
+        "venue": "Enterprise Center",
+        "address": "1401 Clark Ave, St. Louis, MO 63103",
+        "sport": "Hockey",
+        "description": "Hockey \u00b7 Enterprise Center",
+        "url": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "sourceUrl": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "source": "Official team schedule",
+        "sourceCheckedAt": "2026-11-15T18:41:22.875951+00:00",
+        "refreshGroup": "nhl:blues",
+        "team": "St. Louis Blues",
+        "verificationMethod": "Reviewed official published season schedule"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201951,
+          38.625988
+        ]
+      },
+      "properties": {
+        "id": "sports:c47b96d542ca3d29a3",
+        "layer": "sports",
+        "title": "Blues vs. Calgary Flames",
+        "start": "2027-04-01T19:00:00-05:00",
+        "expiresAt": "2027-04-01T19:00:00-05:00",
+        "venue": "Enterprise Center",
+        "address": "1401 Clark Ave, St. Louis, MO 63103",
+        "sport": "Hockey",
+        "description": "Hockey \u00b7 Enterprise Center",
+        "url": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "sourceUrl": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "source": "Official team schedule",
+        "sourceCheckedAt": "2026-11-15T18:41:22.875951+00:00",
+        "refreshGroup": "nhl:blues",
+        "team": "St. Louis Blues",
+        "verificationMethod": "Reviewed official published season schedule"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201951,
+          38.625988
+        ]
+      },
+      "properties": {
+        "id": "sports:2eee1eda65f8076610",
+        "layer": "sports",
+        "title": "Blues vs. Seattle Kraken",
+        "start": "2027-04-08T19:00:00-05:00",
+        "expiresAt": "2027-04-08T19:00:00-05:00",
+        "venue": "Enterprise Center",
+        "address": "1401 Clark Ave, St. Louis, MO 63103",
+        "sport": "Hockey",
+        "description": "Hockey \u00b7 Enterprise Center",
+        "url": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "sourceUrl": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "source": "Official team schedule",
+        "sourceCheckedAt": "2026-11-15T18:41:22.875951+00:00",
+        "refreshGroup": "nhl:blues",
+        "team": "St. Louis Blues",
+        "verificationMethod": "Reviewed official published season schedule"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.201951,
+          38.625988
+        ]
+      },
+      "properties": {
+        "id": "sports:594d8e15cfab36dd20",
+        "layer": "sports",
+        "title": "Blues vs. Utah Mammoth",
+        "start": "2027-04-10T18:00:00-05:00",
+        "expiresAt": "2027-04-10T18:00:00-05:00",
+        "venue": "Enterprise Center",
+        "address": "1401 Clark Ave, St. Louis, MO 63103",
+        "sport": "Hockey",
+        "description": "Hockey \u00b7 Enterprise Center",
+        "url": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "sourceUrl": "https://www.nhl.com/blues/news/blues-release-2026-27-season-schedule",
+        "source": "Official team schedule",
+        "sourceCheckedAt": "2026-11-15T18:41:22.875951+00:00",
+        "refreshGroup": "nhl:blues",
+        "team": "St. Louis Blues",
+        "verificationMethod": "Reviewed official published season schedule"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2104,
+          38.6319
+        ]
+      },
+      "properties": {
+        "id": "sports:3c4290c78d05c7d354",
+        "layer": "sports",
+        "title": "CITY SC vs. LAFC \u00b7 Playoffs, Game 1",
+        "start": "2026-11-23T19:00:00-06:00",
+        "expiresAt": "2026-11-23T19:00:00-06:00",
+        "venue": "Energizer Park",
+        "address": "2100 Market St, St. Louis, MO 63103",
+        "sport": "Soccer",
+        "description": "Soccer \u00b7 Energizer Park",
+        "url": "https://www.stlcitysc.com/news/st-louis-city-sc-begins-quest-for-audi-2026-mls-cup-against-lafc-round-one-playoff-tickets-to-go-on-sale-starting-monday-nov-9",
+        "sourceUrl": "https://www.stlcitysc.com/news/st-louis-city-sc-begins-quest-for-audi-2026-mls-cup-against-lafc-round-one-playoff-tickets-to-go-on-sale-starting-monday-nov-9",
+        "source": "Official team schedule",
+        "sourceCheckedAt": "2026-11-15T18:41:22.875951+00:00",
+        "refreshGroup": "reviewed:city",
+        "team": "St. Louis CITY SC",
+        "verificationMethod": "Reviewed official club playoff announcement"
+      }
+    }
+  ]
+}

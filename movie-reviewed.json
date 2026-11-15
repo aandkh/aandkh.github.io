@@ -1,0 +1,645 @@
+{
+  "checkedAt": "2026-11-15T18:40:28.463206+00:00",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.305033,
+          38.6326416
+        ]
+      },
+      "properties": {
+        "id": "screening:hipointe:2026-11-16:19:00",
+        "title": "A Tale of Autumn",
+        "movieTitle": "A Tale of Autumn",
+        "venue": "Hi-Pointe Theatre",
+        "start": "2026-11-16T19:00:00-06:00",
+        "expiresAt": "2026-11-16T19:00:00-06:00",
+        "runtimeMinutes": 112,
+        "address": "Hi-Pointe Theatre, 1005 McCausland Ave, St. Louis, MO 63117",
+        "description": "Hi-Pointe Theatre · Official screening. Confirm availability on the theater page.",
+        "url": "https://hipointetheatre.org/movies/a-tale-of-autumn/",
+        "sourceUrl": "https://hipointetheatre.org/movies/a-tale-of-autumn/",
+        "source": "Hi-Pointe Theatre · official calendar",
+        "sourceCheckedAt": "2026-11-15T17:00:16.810970+00:00",
+        "refreshGroup": "reviewed:hipointe"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.305033,
+          38.6326416
+        ]
+      },
+      "properties": {
+        "id": "screening:hipointe:2026-11-17:19:00",
+        "title": "A Streetcar Named Desire (35MM)",
+        "movieTitle": "A Streetcar Named Desire (35MM)",
+        "venue": "Hi-Pointe Theatre",
+        "start": "2026-11-17T19:00:00-06:00",
+        "expiresAt": "2026-11-17T19:00:00-06:00",
+        "runtimeMinutes": 125,
+        "address": "Hi-Pointe Theatre, 1005 McCausland Ave, St. Louis, MO 63117",
+        "description": "Hi-Pointe Theatre · Official screening. Confirm availability on the theater page.",
+        "url": "https://hipointetheatre.org/movies/a-streetcar-named-desire-35mm/",
+        "sourceUrl": "https://hipointetheatre.org/movies/a-streetcar-named-desire-35mm/",
+        "source": "Hi-Pointe Theatre · official calendar",
+        "sourceCheckedAt": "2026-11-15T17:00:16.810970+00:00",
+        "refreshGroup": "reviewed:hipointe"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.305033,
+          38.6326416
+        ]
+      },
+      "properties": {
+        "id": "screening:hipointe:2026-11-19:13:00",
+        "title": "The Apartment (35MM)",
+        "movieTitle": "The Apartment (35MM)",
+        "venue": "Hi-Pointe Theatre",
+        "start": "2026-11-19T13:00:00-06:00",
+        "expiresAt": "2026-11-19T13:00:00-06:00",
+        "runtimeMinutes": 125,
+        "address": "Hi-Pointe Theatre, 1005 McCausland Ave, St. Louis, MO 63117",
+        "description": "Hi-Pointe Theatre · Official screening. Confirm availability on the theater page.",
+        "url": "https://hipointetheatre.org/movies/the-apartment/",
+        "sourceUrl": "https://hipointetheatre.org/movies/the-apartment/",
+        "source": "Hi-Pointe Theatre · official calendar",
+        "sourceCheckedAt": "2026-11-15T17:00:16.810970+00:00",
+        "refreshGroup": "reviewed:hipointe"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.305033,
+          38.6326416
+        ]
+      },
+      "properties": {
+        "id": "screening:hipointe:2026-11-19:19:00",
+        "title": "The Apartment (35MM)",
+        "movieTitle": "The Apartment (35MM)",
+        "venue": "Hi-Pointe Theatre",
+        "start": "2026-11-19T19:00:00-06:00",
+        "expiresAt": "2026-11-19T19:00:00-06:00",
+        "runtimeMinutes": 125,
+        "address": "Hi-Pointe Theatre, 1005 McCausland Ave, St. Louis, MO 63117",
+        "description": "Hi-Pointe Theatre · Official screening. Confirm availability on the theater page.",
+        "url": "https://hipointetheatre.org/movies/the-apartment/",
+        "sourceUrl": "https://hipointetheatre.org/movies/the-apartment/",
+        "source": "Hi-Pointe Theatre · official calendar",
+        "sourceCheckedAt": "2026-11-15T17:00:16.810970+00:00",
+        "refreshGroup": "reviewed:hipointe"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.305033,
+          38.6326416
+        ]
+      },
+      "properties": {
+        "id": "screening:hipointe:2026-11-22:12:30",
+        "title": "East of Eden",
+        "movieTitle": "East of Eden",
+        "venue": "Hi-Pointe Theatre",
+        "start": "2026-11-22T12:30:00-06:00",
+        "expiresAt": "2026-11-22T12:30:00-06:00",
+        "runtimeMinutes": 115,
+        "address": "Hi-Pointe Theatre, 1005 McCausland Ave, St. Louis, MO 63117",
+        "description": "Hi-Pointe Theatre · Official screening. Confirm availability on the theater page.",
+        "url": "https://hipointetheatre.org/coming-soon/",
+        "sourceUrl": "https://hipointetheatre.org/coming-soon/",
+        "source": "Hi-Pointe Theatre · official calendar",
+        "sourceCheckedAt": "2026-11-15T17:00:16.810970+00:00",
+        "refreshGroup": "reviewed:hipointe"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.305033,
+          38.6326416
+        ]
+      },
+      "properties": {
+        "id": "screening:hipointe:2026-11-24:19:00",
+        "title": "The Band Wagon (35MM)",
+        "movieTitle": "The Band Wagon (35MM)",
+        "venue": "Hi-Pointe Theatre",
+        "start": "2026-11-24T19:00:00-06:00",
+        "expiresAt": "2026-11-24T19:00:00-06:00",
+        "runtimeMinutes": 112,
+        "address": "Hi-Pointe Theatre, 1005 McCausland Ave, St. Louis, MO 63117",
+        "description": "Hi-Pointe Theatre · Official screening. Confirm availability on the theater page.",
+        "url": "https://hipointetheatre.org/coming-soon/",
+        "sourceUrl": "https://hipointetheatre.org/coming-soon/",
+        "source": "Hi-Pointe Theatre · official calendar",
+        "sourceCheckedAt": "2026-11-15T17:00:16.810970+00:00",
+        "refreshGroup": "reviewed:hipointe"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.305033,
+          38.6326416
+        ]
+      },
+      "properties": {
+        "id": "screening:hipointe:2026-11-25:17:00",
+        "title": "Planes, Trains and Automobiles",
+        "movieTitle": "Planes, Trains and Automobiles",
+        "venue": "Hi-Pointe Theatre",
+        "start": "2026-11-25T17:00:00-06:00",
+        "expiresAt": "2026-11-25T17:00:00-06:00",
+        "runtimeMinutes": 93,
+        "address": "Hi-Pointe Theatre, 1005 McCausland Ave, St. Louis, MO 63117",
+        "description": "Hi-Pointe Theatre · Official screening. Confirm availability on the theater page.",
+        "url": "https://hipointetheatre.org/movies/planes-trains-and-automobiles/",
+        "sourceUrl": "https://hipointetheatre.org/movies/planes-trains-and-automobiles/",
+        "source": "Hi-Pointe Theatre · official calendar",
+        "sourceCheckedAt": "2026-11-15T17:00:16.810970+00:00",
+        "refreshGroup": "reviewed:hipointe"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.305033,
+          38.6326416
+        ]
+      },
+      "properties": {
+        "id": "screening:hipointe:2026-11-25:19:00",
+        "title": "Planes, Trains and Automobiles",
+        "movieTitle": "Planes, Trains and Automobiles",
+        "venue": "Hi-Pointe Theatre",
+        "start": "2026-11-25T19:00:00-06:00",
+        "expiresAt": "2026-11-25T19:00:00-06:00",
+        "runtimeMinutes": 93,
+        "address": "Hi-Pointe Theatre, 1005 McCausland Ave, St. Louis, MO 63117",
+        "description": "Hi-Pointe Theatre · Official screening. Confirm availability on the theater page.",
+        "url": "https://hipointetheatre.org/movies/planes-trains-and-automobiles/",
+        "sourceUrl": "https://hipointetheatre.org/movies/planes-trains-and-automobiles/",
+        "source": "Hi-Pointe Theatre · official calendar",
+        "sourceCheckedAt": "2026-11-15T17:00:16.810970+00:00",
+        "refreshGroup": "reviewed:hipointe"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.305033,
+          38.6326416
+        ]
+      },
+      "properties": {
+        "id": "screening:hipointe:2026-11-29:12:30",
+        "title": "The Sound of Music",
+        "movieTitle": "The Sound of Music",
+        "venue": "Hi-Pointe Theatre",
+        "start": "2026-11-29T12:30:00-06:00",
+        "expiresAt": "2026-11-29T12:30:00-06:00",
+        "runtimeMinutes": 174,
+        "address": "Hi-Pointe Theatre, 1005 McCausland Ave, St. Louis, MO 63117",
+        "description": "Hi-Pointe Theatre · Official screening. Confirm availability on the theater page.",
+        "url": "https://hipointetheatre.org/coming-soon/",
+        "sourceUrl": "https://hipointetheatre.org/coming-soon/",
+        "source": "Hi-Pointe Theatre · official calendar",
+        "sourceCheckedAt": "2026-11-15T17:00:16.810970+00:00",
+        "refreshGroup": "reviewed:hipointe"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.26891256316,
+          38.579829477721
+        ]
+      },
+      "properties": {
+        "id": "screening:arkadin:2026-11-15:19:00",
+        "layer": "movies",
+        "title": "Lemonade Blessing",
+        "movieTitle": "Lemonade Blessing",
+        "venue": "Arkadin Cinema & Bar",
+        "address": "5228 Gravois Ave, St. Louis, MO 63116",
+        "start": "2026-11-15T19:00:00-06:00",
+        "expiresAt": "2026-11-15T19:00:00-06:00",
+        "url": "https://arkadincinema.com/event/ingenious-twisted-hilarious-lemonade-blessing-2025-w-writer-director-chris-merola-in-person/",
+        "sourceUrl": "https://arkadincinema.com/event/ingenious-twisted-hilarious-lemonade-blessing-2025-w-writer-director-chris-merola-in-person/",
+        "source": "Arkadin Cinema official calendar",
+        "sourceCheckedAt": "2026-11-15T18:40:28.463206+00:00",
+        "description": "Arkadin Cinema & Bar · Scheduled film screening",
+        "refreshGroup": "reviewed:arkadin",
+        "coordinateSource": "US Census address geocoder"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.26891256316,
+          38.579829477721
+        ]
+      },
+      "properties": {
+        "id": "screening:arkadin:2026-11-16:19:00",
+        "layer": "movies",
+        "title": "La Haine",
+        "movieTitle": "La Haine",
+        "venue": "Arkadin Cinema & Bar",
+        "address": "5228 Gravois Ave, St. Louis, MO 63116",
+        "start": "2026-11-16T19:00:00-06:00",
+        "expiresAt": "2026-11-16T19:00:00-06:00",
+        "url": "https://arkadincinema.com/event/la-haine-1995-free-screening-presented-by-mica-project/",
+        "sourceUrl": "https://arkadincinema.com/event/la-haine-1995-free-screening-presented-by-mica-project/",
+        "source": "Arkadin Cinema official calendar",
+        "sourceCheckedAt": "2026-11-15T18:40:28.463206+00:00",
+        "description": "Arkadin Cinema & Bar · Scheduled film screening",
+        "refreshGroup": "reviewed:arkadin",
+        "coordinateSource": "US Census address geocoder"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.26891256316,
+          38.579829477721
+        ]
+      },
+      "properties": {
+        "id": "screening:arkadin:2026-11-18:19:00",
+        "layer": "movies",
+        "title": "Hellboy",
+        "movieTitle": "Hellboy",
+        "venue": "Arkadin Cinema & Bar",
+        "address": "5228 Gravois Ave, St. Louis, MO 63116",
+        "start": "2026-11-18T19:00:00-06:00",
+        "expiresAt": "2026-11-18T19:00:00-06:00",
+        "url": "https://arkadincinema.com/event/hellboy-2004-presented-by-the-fantasy-shop/",
+        "sourceUrl": "https://arkadincinema.com/event/hellboy-2004-presented-by-the-fantasy-shop/",
+        "source": "Arkadin Cinema official calendar",
+        "sourceCheckedAt": "2026-11-15T18:40:28.463206+00:00",
+        "description": "Arkadin Cinema & Bar · Scheduled film screening",
+        "refreshGroup": "reviewed:arkadin",
+        "coordinateSource": "US Census address geocoder"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.26891256316,
+          38.579829477721
+        ]
+      },
+      "properties": {
+        "id": "screening:arkadin:2026-11-20:19:00",
+        "layer": "movies",
+        "title": "Hen",
+        "movieTitle": "Hen",
+        "venue": "Arkadin Cinema & Bar",
+        "address": "5228 Gravois Ave, St. Louis, MO 63116",
+        "start": "2026-11-20T19:00:00-06:00",
+        "expiresAt": "2026-11-20T19:00:00-06:00",
+        "url": "https://arkadincinema.com/events/list/",
+        "sourceUrl": "https://arkadincinema.com/events/list/",
+        "source": "Arkadin Cinema official calendar",
+        "sourceCheckedAt": "2026-11-15T18:40:28.463206+00:00",
+        "description": "Arkadin Cinema & Bar · Scheduled film screening",
+        "refreshGroup": "reviewed:arkadin",
+        "coordinateSource": "US Census address geocoder"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.26891256316,
+          38.579829477721
+        ]
+      },
+      "properties": {
+        "id": "screening:arkadin:2026-11-20:21:00",
+        "layer": "movies",
+        "title": "Blood Freak",
+        "movieTitle": "Blood Freak",
+        "venue": "Arkadin Cinema & Bar",
+        "address": "5228 Gravois Ave, St. Louis, MO 63116",
+        "start": "2026-11-20T21:00:00-06:00",
+        "expiresAt": "2026-11-20T21:00:00-06:00",
+        "url": "https://arkadincinema.com/events/list/",
+        "sourceUrl": "https://arkadincinema.com/events/list/",
+        "source": "Arkadin Cinema official calendar",
+        "sourceCheckedAt": "2026-11-15T18:40:28.463206+00:00",
+        "description": "Arkadin Cinema & Bar · Scheduled film screening",
+        "refreshGroup": "reviewed:arkadin",
+        "coordinateSource": "US Census address geocoder"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.26891256316,
+          38.579829477721
+        ]
+      },
+      "properties": {
+        "id": "screening:arkadin:2026-11-21:16:15",
+        "layer": "movies",
+        "title": "The Host",
+        "movieTitle": "The Host",
+        "venue": "Arkadin Cinema & Bar",
+        "address": "5228 Gravois Ave, St. Louis, MO 63116",
+        "start": "2026-11-21T16:15:00-06:00",
+        "expiresAt": "2026-11-21T16:15:00-06:00",
+        "url": "https://arkadincinema.com/events/list/",
+        "sourceUrl": "https://arkadincinema.com/events/list/",
+        "source": "Arkadin Cinema official calendar",
+        "sourceCheckedAt": "2026-11-15T18:40:28.463206+00:00",
+        "description": "Arkadin Cinema & Bar · Scheduled film screening",
+        "refreshGroup": "reviewed:arkadin",
+        "coordinateSource": "US Census address geocoder"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.26891256316,
+          38.579829477721
+        ]
+      },
+      "properties": {
+        "id": "screening:arkadin:2026-11-22:15:00",
+        "layer": "movies",
+        "title": "Beat the Devil",
+        "movieTitle": "Beat the Devil",
+        "venue": "Arkadin Cinema & Bar",
+        "address": "5228 Gravois Ave, St. Louis, MO 63116",
+        "start": "2026-11-22T15:00:00-06:00",
+        "expiresAt": "2026-11-22T15:00:00-06:00",
+        "url": "https://arkadincinema.com/events/list/",
+        "sourceUrl": "https://arkadincinema.com/events/list/",
+        "source": "Arkadin Cinema official calendar",
+        "sourceCheckedAt": "2026-11-15T18:40:28.463206+00:00",
+        "description": "Arkadin Cinema & Bar · Scheduled film screening",
+        "refreshGroup": "reviewed:arkadin",
+        "coordinateSource": "US Census address geocoder"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.26891256316,
+          38.579829477721
+        ]
+      },
+      "properties": {
+        "id": "screening:arkadin:2026-11-22:17:00",
+        "layer": "movies",
+        "title": "Cure",
+        "movieTitle": "Cure",
+        "venue": "Arkadin Cinema & Bar",
+        "address": "5228 Gravois Ave, St. Louis, MO 63116",
+        "start": "2026-11-22T17:00:00-06:00",
+        "expiresAt": "2026-11-22T17:00:00-06:00",
+        "url": "https://arkadincinema.com/events/list/",
+        "sourceUrl": "https://arkadincinema.com/events/list/",
+        "source": "Arkadin Cinema official calendar",
+        "sourceCheckedAt": "2026-11-15T18:40:28.463206+00:00",
+        "description": "Arkadin Cinema & Bar · Scheduled film screening",
+        "refreshGroup": "reviewed:arkadin",
+        "coordinateSource": "US Census address geocoder"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.26891256316,
+          38.579829477721
+        ]
+      },
+      "properties": {
+        "id": "screening:arkadin:2026-11-27:19:00",
+        "layer": "movies",
+        "title": "The X-Files",
+        "movieTitle": "The X-Files",
+        "venue": "Arkadin Cinema & Bar",
+        "address": "5228 Gravois Ave, St. Louis, MO 63116",
+        "start": "2026-11-27T19:00:00-06:00",
+        "expiresAt": "2026-11-27T19:00:00-06:00",
+        "url": "https://arkadincinema.com/events/list/page/2/",
+        "sourceUrl": "https://arkadincinema.com/events/list/page/2/",
+        "source": "Arkadin Cinema official calendar",
+        "sourceCheckedAt": "2026-11-15T18:40:28.463206+00:00",
+        "description": "Arkadin Cinema & Bar · Scheduled film screening",
+        "refreshGroup": "reviewed:arkadin",
+        "coordinateSource": "US Census address geocoder"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.26891256316,
+          38.579829477721
+        ]
+      },
+      "properties": {
+        "id": "screening:arkadin:2026-11-28:16:00",
+        "layer": "movies",
+        "title": "Brick",
+        "movieTitle": "Brick",
+        "venue": "Arkadin Cinema & Bar",
+        "address": "5228 Gravois Ave, St. Louis, MO 63116",
+        "start": "2026-11-28T16:00:00-06:00",
+        "expiresAt": "2026-11-28T16:00:00-06:00",
+        "url": "https://arkadincinema.com/events/list/page/2/",
+        "sourceUrl": "https://arkadincinema.com/events/list/page/2/",
+        "source": "Arkadin Cinema official calendar",
+        "sourceCheckedAt": "2026-11-15T18:40:28.463206+00:00",
+        "description": "Arkadin Cinema & Bar · Scheduled film screening",
+        "refreshGroup": "reviewed:arkadin",
+        "coordinateSource": "US Census address geocoder"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.26891256316,
+          38.579829477721
+        ]
+      },
+      "properties": {
+        "id": "screening:arkadin:2026-11-28:19:00",
+        "layer": "movies",
+        "title": "The Silence of the Lambs",
+        "movieTitle": "The Silence of the Lambs",
+        "venue": "Arkadin Cinema & Bar",
+        "address": "5228 Gravois Ave, St. Louis, MO 63116",
+        "start": "2026-11-28T19:00:00-06:00",
+        "expiresAt": "2026-11-28T19:00:00-06:00",
+        "url": "https://arkadincinema.com/events/list/page/2/",
+        "sourceUrl": "https://arkadincinema.com/events/list/page/2/",
+        "source": "Arkadin Cinema official calendar",
+        "sourceCheckedAt": "2026-11-15T18:40:28.463206+00:00",
+        "description": "Arkadin Cinema & Bar · Scheduled film screening",
+        "refreshGroup": "reviewed:arkadin",
+        "coordinateSource": "US Census address geocoder"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.26891256316,
+          38.579829477721
+        ]
+      },
+      "properties": {
+        "id": "screening:arkadin:2026-11-29:15:00",
+        "layer": "movies",
+        "title": "Woman on the Run",
+        "movieTitle": "Woman on the Run",
+        "venue": "Arkadin Cinema & Bar",
+        "address": "5228 Gravois Ave, St. Louis, MO 63116",
+        "start": "2026-11-29T15:00:00-06:00",
+        "expiresAt": "2026-11-29T15:00:00-06:00",
+        "url": "https://arkadincinema.com/events/list/page/2/",
+        "sourceUrl": "https://arkadincinema.com/events/list/page/2/",
+        "source": "Arkadin Cinema official calendar",
+        "sourceCheckedAt": "2026-11-15T18:40:28.463206+00:00",
+        "description": "Arkadin Cinema & Bar · Scheduled film screening",
+        "refreshGroup": "reviewed:arkadin",
+        "coordinateSource": "US Census address geocoder"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.26891256316,
+          38.579829477721
+        ]
+      },
+      "properties": {
+        "id": "screening:arkadin:2026-11-29:17:00",
+        "layer": "movies",
+        "title": "The Long Goodbye",
+        "movieTitle": "The Long Goodbye",
+        "venue": "Arkadin Cinema & Bar",
+        "address": "5228 Gravois Ave, St. Louis, MO 63116",
+        "start": "2026-11-29T17:00:00-06:00",
+        "expiresAt": "2026-11-29T17:00:00-06:00",
+        "url": "https://arkadincinema.com/events/list/page/2/",
+        "sourceUrl": "https://arkadincinema.com/events/list/page/2/",
+        "source": "Arkadin Cinema official calendar",
+        "sourceCheckedAt": "2026-11-15T18:40:28.463206+00:00",
+        "description": "Arkadin Cinema & Bar · Scheduled film screening",
+        "refreshGroup": "reviewed:arkadin",
+        "coordinateSource": "US Census address geocoder"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.26891256316,
+          38.579829477721
+        ]
+      },
+      "properties": {
+        "id": "screening:arkadin:2026-12-02:19:00",
+        "layer": "movies",
+        "title": "Fantasia",
+        "movieTitle": "Fantasia",
+        "venue": "Arkadin Cinema & Bar",
+        "address": "5228 Gravois Ave, St. Louis, MO 63116",
+        "start": "2026-12-02T19:00:00-06:00",
+        "expiresAt": "2026-12-02T19:00:00-06:00",
+        "url": "https://arkadincinema.com/events/list/page/2/",
+        "sourceUrl": "https://arkadincinema.com/events/list/page/2/",
+        "source": "Arkadin Cinema official calendar",
+        "sourceCheckedAt": "2026-11-15T18:40:28.463206+00:00",
+        "description": "Arkadin Cinema & Bar · Scheduled film screening",
+        "refreshGroup": "reviewed:arkadin",
+        "coordinateSource": "US Census address geocoder"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.26891256316,
+          38.579829477721
+        ]
+      },
+      "properties": {
+        "id": "screening:arkadin:2026-12-03:19:00",
+        "layer": "movies",
+        "title": "The Lovely Bones",
+        "movieTitle": "The Lovely Bones",
+        "venue": "Arkadin Cinema & Bar",
+        "address": "5228 Gravois Ave, St. Louis, MO 63116",
+        "start": "2026-12-03T19:00:00-06:00",
+        "expiresAt": "2026-12-03T19:00:00-06:00",
+        "url": "https://arkadincinema.com/events/list/page/2/",
+        "sourceUrl": "https://arkadincinema.com/events/list/page/2/",
+        "source": "Arkadin Cinema official calendar",
+        "sourceCheckedAt": "2026-11-15T18:40:28.463206+00:00",
+        "description": "Arkadin Cinema & Bar · Scheduled film screening",
+        "refreshGroup": "reviewed:arkadin",
+        "coordinateSource": "US Census address geocoder"
+      }
+    }
+  ],
+  "note": "Manually reviewed official calendar facts. Automated refresh must not advance these verification timestamps without checking their source."
+}

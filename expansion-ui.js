@@ -1,7 +1,7 @@
-import {apiFetch,apiUrl} from './api-client.js?v=20261115-gyms-nav2';
-import {appendForecastChart} from './forecast-visuals.js?v=20261115-gyms-nav2';
-import {safeUrl} from './core.js?v=20261115-gyms-nav2';
-import {activeNotices} from './expansion-options.js?v=20261115-gyms-nav2';
+import {apiFetch,apiUrl} from './api-client.js?v=20261115-road-insights';
+import {appendForecastChart} from './forecast-visuals.js?v=20261115-road-insights';
+import {safeUrl} from './core.js?v=20261115-road-insights';
+import {activeNotices} from './expansion-options.js?v=20261115-road-insights';
 const node=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;};
 const finite=Number.isFinite;
 const number=(v,digits=0)=>finite(v)?new Intl.NumberFormat('en-US',{maximumFractionDigits:digits}).format(v):'—';

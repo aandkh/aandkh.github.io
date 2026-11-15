@@ -1,0 +1,80 @@
+# Andymap source maintenance
+
+The existing daily task runs at **6 a.m. America/Chicago**. Keep one schedule.
+Fetch the current `aandkh/aandkh.github.io` main branch before editing. Read the
+specialist guides below; preserve newer work and use an expected-head lease when
+publishing. This frontend repository cannot redeploy the separate Fly API.
+
+## Daily refresh
+
+Python 3.10+, `beautifulsoup4` (venue parser) and `Pillow` (NASA image decoder)
+are required. Other source scripts use the standard library.
+
+```sh
+python scripts/refresh-andymap.py
+```
+
+The runner limits simultaneous jobs to three. County and City incident writes
+run sequentially. Route geometry/terrain reuse the checked-in cache; expensive
+terrain work runs only for changed geometry or an explicit monthly resample.
+Read `/tmp/andymap-refresh-report.json`, including individual source warnings.
+A successful script can still contain a failed or incomplete upstream source.
+Only successful source updates replace records; failures retain original
+verification dates and the frontend expires old time-sensitive records.
+
+The scripts supplement, not replace, actual source review. Check official
+calendar pages, pagination, schedule changes, cancellations, independent cinema
+programming, new openings and source coverage. Never renew a timestamp merely
+because an HTTP request returned successfully. Changed local venue evidence
+requires review using the local-discovery guide. Keep runtime/rating absent
+when unknown and distinguish date-only events from exact showtimes.
+
+## Specialist guides
+
+- `EVENTS-MAINTENANCE.md`: concerts, comedy, local independent movies and sports.
+- `INCIDENT-MAINTENANCE.md`: City + County crime/crash archive and public locations.
+- `LOCAL-DISCOVERY-MAINTENANCE.md`: food trucks, local food and new businesses.
+- `CYCLING-MAINTENANCE.md`: greenway geometry, terrain and regional AQI.
+- `JOYRIDES-MAINTENANCE.md`: road route geometry and explainable comparisons.
+- `SKY-RIVERS-MAINTENANCE.md`: USGS baselines and night-light/cloud viewing map.
+- `OUTAGES-STREAMS-MAINTENANCE.md`: utility notices and cached hydrography tiles.
+- `GYMS-MAINTENANCE.md`: gym ownership ordering and Memento Fitness Club.
+
+Always combine City and County in one user-facing feed. Check each side's
+sources independently so different reporting boundaries do not create a silent
+gap. Keep national theater chains excluded, including AMC and Marcus. Local
+gym chains remain allowed after independent gyms. Do not restore the removed
+sex-offender registry, advertising, unsupported cameras/restrooms or ISP map
+placeholders.
+
+## Validate before publishing
+
+```sh
+node --experimental-vm-modules scripts/check-modules.mjs
+node scripts/test-progressive-layer.mjs
+node scripts/test-venue-events.mjs
+node scripts/test-events.mjs
+python scripts/test-event-parsers.py
+node scripts/cycling-test.mjs
+node scripts/joyrides-test.mjs
+python scripts/joyrides-metrics-test.py
+node scripts/sky-river-test.mjs
+node scripts/forecast-sunmoon-test.mjs
+node scripts/outages-check.mjs
+node scripts/incident-tests.mjs
+python scripts/incident-tests.py
+python scripts/foodtrucks_test.py
+node scripts/local-discovery.test.mjs
+git diff --check
+```
+
+Inspect desktop and narrow-screen flows, at least one short place link, event
+day grouping, route details, source dates and error fallbacks. Preserve default
+center `[38.63,-90.40]`, zoom 10; weather cards must adapt to that view.
+Precomputed snapshots display before slower live enrichment. Historical crime
+shards load only when a visitor selects an older date range. No ads or analytics
+tracking scripts are needed for these product analytics.
+
+Publish only intended source/data files, never `.preview`, `.openai`, temporary
+reports, Python bytecode or private download caches. Check GitHub Pages deployment
+and verify the live entry version and changed flow before reporting completion.

@@ -1,4 +1,4 @@
-import {CONFIG} from './config.js?v=20261115-gyms-nav2';
+import {CONFIG} from './config.js?v=20261115-road-insights';
 
 // Local previews use the same origin. Static deployments may configure a
 // separate HTTPS API origin without redirecting map tiles or venue links.

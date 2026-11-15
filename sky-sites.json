@@ -1,0 +1,52 @@
+{
+  "checkedAt": "2026-11-15T18:42:45.169245+00:00",
+  "sourceNote": "Official park/operator access information, with source point or park-center coordinates. Check the linked page for temporary closures and event cancellations.",
+  "sites": [
+    {
+      "id": "broemmelsiek-astronomy",
+      "name": "Broemmelsiek Astronomy Viewing Area",
+      "lat": 38.7230345,
+      "lng": -90.8147971,
+      "address": "1615 Schwede Road, Wentzville, MO 63385",
+      "access": "Dedicated astronomy area open around the clock; the rest of the park has separate hours. Friday public telescope sessions are weather-dependent.",
+      "nightAccess": true,
+      "url": "https://www.sccmo.org/2051/Educational-Sites-and-Outreach",
+      "coordinateSource": "https://www.asemonline.org/beginners-pages/places-to-observe"
+    },
+    {
+      "id": "stacy-park",
+      "name": "Stacy Park stargazing field",
+      "lat": 38.67045,
+      "lng": -90.39245,
+      "address": "9750 Old Bonhomme Road, Olivette, MO 63132",
+      "access": "Open field only, dusk to dawn, year-round. Bring a star app or other astronomy aid; use red lights. Quiet hours 10 PM\u20137 AM. No sleeping.",
+      "nightAccess": true,
+      "url": "https://www.olivetteparksandrec.com/sky-viewing.html",
+      "coordinateSource": "https://www.openstreetmap.org/way/120131854",
+      "coordinatePrecision": "Park center; use the designated open field."
+    },
+    {
+      "id": "mcdonnell-planetarium",
+      "name": "McDonnell Planetarium telescope nights",
+      "lat": 38.6312578,
+      "lng": -90.2708809,
+      "address": "5100 Clayton Avenue, St. Louis, MO 63110",
+      "access": "Nighttime telescope viewing is offered on scheduled Star Party dates. Check the official calendar; no walk-in nighttime session is implied.",
+      "nightAccess": false,
+      "url": "https://www.slsc.org/event-overview/public-telescope-viewing/",
+      "coordinateSource": "https://www.openstreetmap.org/way/40701313"
+    },
+    {
+      "id": "babler-park",
+      "name": "Babler State Park astronomy programs",
+      "lat": 38.61743,
+      "lng": -90.69027,
+      "address": "800 Guy Park Drive, Wildwood, MO 63005",
+      "access": "Use a scheduled astronomy program or confirmed camping permission for nighttime access. Day-use admission does not authorize staying after closing.",
+      "nightAccess": false,
+      "url": "https://mostateparks.com/park/dr-edmund-babler-memorial-state-park",
+      "coordinateSource": "https://darkskymissouri.org/resources/missouri-darkest-skies",
+      "coordinatePrecision": "Park reference point; follow program directions."
+    }
+  ]
+}

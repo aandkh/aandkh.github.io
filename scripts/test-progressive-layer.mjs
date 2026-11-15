@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import {loadProgressiveLayer} from '../progressive-layer.js';
+let release,progress;
+const local={id:'snapshot'};
+const snapshot=async result=>({...result,features:[...result.features,local],status:'partial'});
+const pending=loadProgressiveLayer(snapshot,()=>new Promise(resolve=>{release=resolve;}),value=>{progress=value;});
+await new Promise(resolve=>setImmediate(resolve));
+assert.deepEqual(progress.features,[local],'published entries appear before the remote source finishes');
+release({features:[{id:'live'}],status:'live'});
+assert.deepEqual((await pending).features,[{id:'live'},local]);
+assert.deepEqual((await loadProgressiveLayer(snapshot,async()=>{throw Error('offline');})).features,[local]);
+const controller=new AbortController();controller.abort();
+await assert.rejects(loadProgressiveLayer(snapshot,async()=>({features:[]}),()=>assert.fail('cancelled progress'),controller.signal),{name:'AbortError'});
+console.log('PASS: immediate snapshot, live merge, offline fallback, cancellation');
