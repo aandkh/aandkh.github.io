@@ -1,6 +1,6 @@
 # Historical events
 
-`historical-events.json` is a curated collection of 214 reviewed regional records, spanning circa 700 CE through 2025. It is not a complete historical-events database. The History layer includes six eras, 13 topics, a two-handle year range, full regional browsing, source-backed details and dated cluster lists. Existing NASA historical satellite imagery remains a separate view within History. The original 12 record identifiers remain unchanged; shared links still resolve. See `HISTORY-RESEARCH-2026-11.md` for era research and precision decisions.
+`historical-events.json` is a curated collection of 4,091 reviewed regional records, including deep-time fossil/archaeological evidence and history through 2025. It is not a complete historical-events database. The History layer includes seven eras, 13 topics, a two-handle range, full regional browsing, source-backed details and dated cluster lists. Wildlife links directly to ancient-life records. Existing NASA historical satellite imagery remains a separate view within History. All original 214 identifiers remain unchanged; shared links still resolve. See `HISTORY-ARCHIVE-EXPANSION-2026-11.md` for current coverage, source families and review decisions; `HISTORY-RESEARCH-2026-11.md` documents the initial collection.
 
 ## Evidence and dates
 
@@ -28,3 +28,9 @@ After changing this module/data, run `node scripts/historical-events-test.mjs`. 
 ## Performance and interface
 
 The static catalog is fetched only when History is opened, and the request is shared/cached for the page session. Search metadata is compiled once per immutable record. Results initially render 80 rows with explicit load-more; map points use the existing clustering system. Timeline dragging updates the two handles and labels locally, committing map/list filtering on release. Canceled rail drags roll back. Keyboard changes retain focus; era/category/year/sort settings survive saved/shared map state. Mobile controls retain the compact panel and leave the map visible. No new background fetch or refresh timer is introduced.
+
+## Prehistoric dates and multi-topic records
+
+Deep-time records use numeric `historicalYear` / `historicalEndYear` and an honest `historicalDateLabel`; they need not contain ISO `historicalDate` or `dateSort`. Negative values are an approximate BCE projection for filtering, never a substitute for geological intervals, radiocarbon uncertainty or the original source age wording. Year zero is not accepted. Use the exported `historicalYears()` helper for dates and sorting; do not assume every record has an ISO date. `historicalPeriods` preserves noncontiguous documented spans. `eventCategories` permits one genuine record to appear under multiple subjects without creating duplicate rows.
+
+`ancientWildlife: true` enables direct Wildlife browsing. Preserve collection IDs, accepted and originally identified taxon names, uncertainty qualifiers, published references and geographic precision. Fossil occurrence counts are evidence counts, not animal population/abundance estimates. Do not convert collection-reference points into precise fossil-hunting directions or claim access to private/protected sites.

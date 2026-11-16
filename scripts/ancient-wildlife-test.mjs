@@ -1,0 +1,21 @@
+import fs from 'node:fs';
+import vm from 'node:vm';
+import assert from 'node:assert/strict';
+const src=fs.readFileSync(new URL('../app.js',import.meta.url),'utf8');
+const functions=src.slice(src.indexOf('function browseAncientWildlife(){'),src.indexOf('function historyControls(){'));
+const context=vm.createContext({assert});
+vm.runInContext(`let historyView='imagery',historyCategory='battle',historyEra='1900-1939',historyYears=[1920,1930],historySort='newest',historyAncientWildlife=false,historyFossilGroup='Mammals';const enabled=new Set(['wildlife','traffic']),resultLimits=new Map([['history',800]]),calls=[];function removeDrawing(){}function loadLayer(){}function renderLayers(){}function renderPlaceMarkers(){}function toggle(id,on){on?enabled.add(id):enabled.delete(id);calls.push(['toggle',id,on]);}function browseLayer(id,options={}){if(id==='history')historyAncientWildlife=options.ancientWildlife===true;enabled.add(id);calls.push(['browse',id,options]);}`+functions+`
+ browseAncientWildlife();assert.equal(historyView,'events');assert.equal(historyCategory,'all');assert.equal(historyEra,'all');assert.equal(historyYears,null);assert.equal(historySort,'oldest');assert.equal(historyFossilGroup,'all');assert(historyAncientWildlife);assert(!enabled.has('wildlife'));assert(enabled.has('history'));assert(enabled.has('traffic'));assert(!resultLimits.has('history'));
+ browseLivingWildlife();assert(!historyAncientWildlife);assert(enabled.has('wildlife'));assert(!enabled.has('history'));assert(enabled.has('traffic'));
+ historyAncientWildlife=true;historyFossilGroup='Mammals';historyCategory='science';historyEra='prehistory';historyYears=[-500000000,-10000];browseAllHistory();assert(!historyAncientWildlife);assert.equal(historyCategory,'all');assert.equal(historyEra,'all');assert.equal(historyYears,null);assert.equal(historyFossilGroup,'all');`,context);
+const local=['fossilGroupName','ancientWildlifeFeatures','localPlaceFeatures'].map(name=>src.match(new RegExp('function '+name+'[^\\n]+'))[0]).join('\n');
+vm.runInContext(`const filterHistoricalEvents=(items)=>items,filterPlaceFeatures=(id,items)=>items,excludedPlaceSources=new Set();`+local+`
+ const fossils={id:'fossil',properties:{ancientWildlife:true,title:'Mastodon'}},current={id:'current',properties:{title:'Modern bird'}},excavation={id:'discovery',properties:{ancientWildlife:true,title:'1980 excavation',historicalDate:'1980'}};
+ historyAncientWildlife=true;let filtered=localPlaceFeatures('history',[fossils,current,excavation]);assert.equal(filtered.length,2);assert(filtered.includes(excavation));assert(!filtered.includes(current));historyAncientWildlife=false;assert.equal(localPlaceFeatures('history',[fossils,current,excavation]).length,3);`,context);
+console.log('PASS: ancient-life navigation switches context without changing unrelated layers, preserves CE discovery records, and resets cleanly to full history/living wildlife.');
+
+const {cleanState,encodeState,decodeState}=await import('../core.js');
+const state={v:1,center:[38.63,-90.4],zoom:10,layers:['history'],historyAncientWildlife:true,historyFossilGroup:'Mammals',historyEra:'prehistory',historyYears:[-50000000,-10000]};
+assert.equal(decodeState(encodeState(state)).historyFossilGroup,'Mammals');assert.equal(cleanState({...state,historyFossilGroup:'  Brachiopods  '}).historyFossilGroup,'Brachiopods');for(const invalid of [null,{},'x'.repeat(81),'Mammals\nInjected'])assert.equal(cleanState({...state,historyFossilGroup:invalid}).historyFossilGroup,'all');
+vm.runInContext(`historyAncientWildlife=true;historyFossilGroup='Mammals';const mammal={id:'mammal',properties:{ancientWildlife:true,fossilGroup:'Mammals'}},snail={id:'snail',properties:{ancientWildlife:true,fossilGroup:'Snails'}};assert.equal(localPlaceFeatures('history',[mammal,snail,excavation]).length,1);assert.equal(localPlaceFeatures('history',[mammal,snail,excavation])[0].id,'mammal');historyFossilGroup='Other finds';assert.equal(localPlaceFeatures('history',[mammal,snail,excavation])[0].id,'discovery');historyFossilGroup='all';assert.equal(localPlaceFeatures('history',[mammal,snail,excavation]).length,3);`,context);
+console.log('PASS: life-group filter affects the shared map/list predicate, includes unsorted finds, resets, and roundtrips with safe shared state.');

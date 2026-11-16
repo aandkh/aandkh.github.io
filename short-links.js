@@ -1,5 +1,5 @@
 import {BY_ID} from './catalog.js?v=20261116-wildlife-heat';
-import {coordinate,cleanState} from './core.js?v=20261116-history-atlas';
+import {coordinate,cleanState} from './core.js?v=20261116-history-deep-time';
 
 // Stable 64-bit reference, independent of feed ordering and changing event details.
 export function placeToken(id){
