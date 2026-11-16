@@ -37,14 +37,14 @@ export function createWeatherReadings(map,{formatTime,leaflet=globalThis.L,fitOn
  map.on('move zoom resize',scheduleLayout);
 
  function paint(valid){shown=valid;host.replaceChildren(svg);for(const r of valid){
- const card=document.createElement('div');card.className='weather-reading';card.dataset.station=r.id;
+ const card=document.createElement('div');card.className='weather-reading';card.dataset.station=r.id;if(r.replacementFor)card.dataset.replacementFor=r.replacementFor;
  const name=document.createElement('span');name.className='weather-reading-place';name.textContent=r.label;
  const temperature=document.createElement('strong');temperature.className='weather-reading-temperature';temperature.textContent=Number.isFinite(r.temperatureF)?Math.round(r.temperatureF)+'°F':'—';
  const wind=windPresentation(r),line=document.createElement('span');line.className='weather-reading-wind';
  if(wind.rotation!==null){const arrow=document.createElement('i');arrow.className='weather-wind-arrow';arrow.style.transform='rotate('+wind.rotation+'deg)';line.append(arrow);}
  line.append(document.createTextNode(wind.text));line.title=wind.label;
- const time=document.createElement('small');time.className='weather-reading-time';time.textContent=(forecast?'Forecast ':'')+(r.observedAt?new Date(r.observedAt).toLocaleTimeString('en-US',{timeZone:'America/Chicago',hour:'numeric',minute:'2-digit'}):'Unavailable');
- card.append(name,temperature,line,time);host.append(card);
+ const time=document.createElement('small');time.className='weather-reading-time';time.textContent=(forecast?'Forecast ':r.replacementFor?'Nearby · ':'')+(r.observedAt?new Date(r.observedAt).toLocaleTimeString('en-US',{timeZone:'America/Chicago',hour:'numeric',minute:'2-digit'}):'Unavailable');
+ time.title=(r.observedAt?'Observed '+new Date(r.observedAt).toLocaleString('en-US',{timeZone:'America/Chicago',timeZoneName:'short'}):'No usable recent observation')+(r.source?' · '+r.source:'')+(r.replacementFor?' · Nearby replacement for '+r.replacementFor:'');card.append(name,temperature,line,time);host.append(card);
  }scheduleLayout();}
  function render(readings=saved,visible=true,now=Date.now()){saved=Array.isArray(readings)?readings:[];if(forecast)return;host.hidden=!visible;const valid=weatherMarkerReadings(saved,now),next=JSON.stringify(valid);if(next!==signature){signature=next;paint(valid);}else scheduleLayout();if(overview&&valid.length){fit();overview=false;}}
  return{render,fitOverview,stopOverview,getReadings:()=>saved,forecast(readings){forecast=true;host.hidden=false;paint(readings);},endForecast(visible){forecast=false;signature='';render(saved,visible);},hide(){host.hidden=true;},expire(visible,now=Date.now()){render(saved,visible,now);}};

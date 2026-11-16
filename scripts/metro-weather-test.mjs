@@ -1,0 +1,25 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+const m=await import('data:text/javascript;base64,'+readFileSync(new URL('../metro-weather.js',import.meta.url)).toString('base64'));
+const now=Date.parse('2026-11-16T14:45:00Z'),at='2026-11-16T13:51:00Z',lambert=m.METRO_STATIONS.find(s=>s.id==='KSTL');
+const nws=m.stationObservation(lambert,{properties:{timestamp:at,temperature:{value:null,unitCode:'wmoUnit:degC'},windSpeed:{value:0,unitCode:'wmoUnit:km_h-1'},windDirection:{value:0}}},now);
+const iem=m.mesonetObservation(lambert,{id:'STL',network:'MO_ASOS',last_ob:{utc_valid:at,'airtemp[F]':36,'windspeed[kt]':0,'winddirection[deg]':0}},now);
+assert.equal(nws.temperatureF,null);assert.equal(iem.temperatureF,36);assert.equal(iem.windMph,0);
+assert.equal(m.bestStationObservation([nws,iem],now).source,iem.source,'same-station complete mirror rescues missing NWS temperature');
+const missing=m.mesonetObservation(lambert,{id:'STL',last_ob:{utc_valid:at,'airtemp[F]':36,'windspeed[kt]':null}},now);assert.equal(missing.windMph,null,'missing wind is never calm');
+assert.equal(m.mesonetObservation(lambert,{id:'SUS',last_ob:{utc_valid:at,'airtemp[F]':80,'windspeed[kt]':5}},now).observedAt,null,'wrong station rejected');
+assert.equal(m.bestStationObservation([iem],now+7200000),null,'old readings expire by observation time');
+assert.equal(m.stationObservation(lambert,{properties:{timestamp:'2026-11-16T15:00:00Z',temperature:{value:5,unitCode:'wmoUnit:degC'}}},now).temperatureF,null,'future timestamps rejected');
+const primaries=m.METRO_STATIONS.map(s=>({...s,temperatureF:40,windMph:3,observedAt:at}));
+const backup={id:'KALN',label:'Alton',lat:38.8897,lng:-90.0316,temperatureF:39,windMph:2,observedAt:at};
+const chosen=m.selectMetroReadings([...primaries.filter(s=>s.id!=='KSTL'),backup],now);
+assert.equal(chosen.length,4);assert.equal(chosen[1].id,'KALN');assert.equal(chosen[1].label,'Alton');assert.equal(chosen[1].replacementFor,'Lambert');assert.equal(chosen[1].slot,'ne');assert.equal(chosen[1].lat,backup.lat);assert.equal(new Set(chosen.map(r=>r.id)).size,4,'fallback never duplicates another primary card');
+const unavailable=m.selectMetroReadings([],now);assert.equal(unavailable.length,4);assert.ok(unavailable.every(r=>r.temperatureF===null&&r.windMph===null));
+// A backend outage still gets all four cards from independent observation mirrors.
+let requests=0;
+const fetcher=async url=>{requests++;const id=new URL(url).searchParams.get('station');if(!id)throw Error('NWS source outage');return{ok:true,json:async()=>({id,network:id==='MBGM7'?'MO_DCP':'MO_ASOS',last_ob:{utc_valid:at,'airtemp[F]':id==='STL'?36:38,'windspeed[kt]':2}})}};
+const options={now,fetcher,responseCache:new Map(),observationCache:new Map()};
+const result=await m.metroWeatherReadings([],options);assert.equal(result.length,4);assert.ok(result.every(r=>Number.isFinite(r.temperatureF)&&r.windMph>0));assert.equal(result.find(r=>r.id==='KSTL').temperatureF,36);assert.equal(requests,7,'reserve stations not fetched when primaries are complete');
+const retained=await m.metroWeatherReadings([],{...options,now:now+180000,fetcher:async()=>{throw Error('All sources down')}});assert.equal(retained.find(r=>r.id==='KSTL').observedAt,at,'failure keeps actual observation time');
+const expired=await m.metroWeatherReadings([],{...options,now:now+3*3600000,fetcher:async()=>{throw Error('All sources down')}});assert.ok(expired.every(r=>r.temperatureF===null&&r.windMph===null),'failure cannot make stale values current');
+console.log('PASS: Lambert null-temperature rescue, station identity, actual timestamps, missing wind, regional fallback, backend outage and stale-cache expiry');
