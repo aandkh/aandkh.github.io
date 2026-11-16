@@ -3,3 +3,11 @@
 #sidebar #layer-list .layer-direct .layer-open:hover{background:var(--surface-raised)}
 #sidebar #layer-list .layer-direct .layer-open:disabled{color:var(--muted);cursor:not-allowed}
 #sidebar #layer-list .layer-direct .layer-open:focus-visible{outline:2px solid var(--ink);outline-offset:-2px}
+
+/* Share the active layer view from its sticky panel header. */
+#results-title{flex:1;min-width:0;overflow-wrap:anywhere}
+#results .panel-head-actions{display:flex;align-items:center;gap:6px;flex:none;margin-left:8px}
+#results-share{width:auto;height:36px;min-height:36px;padding:0 10px;border:1px solid var(--green);border-radius:9px;background:var(--green);color:#fff;font-size:12px;font-weight:650;line-height:1.2}
+body[data-map-style=dark] #results-share{color:#203323;background:var(--green)}
+#results-share:hover{filter:brightness(1.07)}
+body:has(#results:not([hidden])) #share{display:none}
