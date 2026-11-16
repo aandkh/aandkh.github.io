@@ -8,15 +8,21 @@ export function createSkyDrawScheduler({requestFrame=requestAnimationFrame,cance
  let frame=null,latest;
  return{schedule(draw){latest=draw;if(frame===null)frame=requestFrame(()=>{frame=null;const work=latest;latest=null;work?.();});},cancel(){if(frame!==null)cancelFrame(frame);frame=null;latest=null;}};
 }
+export function skyTimeSelection(times,time){
+ if(!times?.length)return{time:null,adjusted:false};
+ const requested=typeof time==='string'&&/T.*(?:Z|[+-]\d{2}:\d{2})$/.test(time)?Date.parse(time):NaN;
+ let target=times[0];if(Number.isFinite(requested))for(const candidate of times)if(Math.abs(candidate-requested)<Math.abs(target-requested))target=candidate;
+ return{time:target,adjusted:time!=null&&(!Number.isFinite(requested)||target!==requested)};
+}
 export function createSkyCloudMap(map,{beforeOpen,format}){
- let group=null,controller=null,session=0;const drawing=createSkyDrawScheduler();const panel=document.createElement('section');panel.className='sky-cloud-controls';panel.hidden=true;panel.setAttribute('aria-label','Tonight’s viewing map');map.getContainer().parentElement.append(panel);L.DomEvent.disableClickPropagation(panel);L.DomEvent.disableScrollPropagation(panel);
- function close(){session++;drawing.cancel();controller?.abort();group?.remove();group=null;panel.hidden=true;}
- async function open(sky){
-  close();beforeOpen();const run=++session;controller=new AbortController();const signal=controller.signal;group=L.layerGroup().addTo(map);panel.hidden=false;panel.replaceChildren();
+ let group=null,controller=null,session=0,selectedTime=null,lastSky=null,pendingRestore=null;const drawing=createSkyDrawScheduler();const panel=document.createElement('section');panel.className='sky-cloud-controls';panel.hidden=true;panel.setAttribute('aria-label','Tonight’s viewing map');map.getContainer().parentElement.append(panel);L.DomEvent.disableClickPropagation(panel);L.DomEvent.disableScrollPropagation(panel);
+ function close(){session++;drawing.cancel();controller?.abort();group?.remove();group=null;panel.hidden=true;selectedTime=null;pendingRestore=null;}
+ async function open(sky,restored=pendingRestore){
+  close();lastSky=sky;beforeOpen();const run=++session;controller=new AbortController();const signal=controller.signal;group=L.layerGroup().addTo(map);panel.hidden=false;panel.replaceChildren();
   const head=node('div','','radar-heading'),title=node('strong','Tonight’s viewing map'),exit=node('button','×');exit.setAttribute('aria-label','Close viewing map');exit.onclick=close;head.append(title,exit);
   const status=node('p','Loading sky conditions…','small'),controls=node('div','','sky-view-controls'),select=node('select',''),refresh=node('button','Update this area');select.setAttribute('aria-label','Stargazing time');refresh.onclick=()=>open(sky);controls.append(select,refresh);panel.append(head,controls,status);
-  const times=tonightTimes(sky);if(!times.length){status.textContent='No upcoming nighttime forecast window is available. Refresh Sky Tonight for this location.';return;}
-  for(const time of times){const option=node('option',format(new Date(time).toISOString()));option.value=String(time);select.append(option);}let target=times[0];
+  const times=tonightTimes(sky);if(!times.length){status.textContent=(restored?'Shared viewing time is unavailable. ':'')+'No upcoming nighttime forecast window is available. Refresh Sky Tonight for this location.';return;}
+  for(const time of times){const option=node('option',format(new Date(time).toISOString()));option.value=String(time);select.append(option);}const choice=skyTimeSelection(times,restored?.time);let target=choice.time;selectedTime=target;select.value=String(target);const restoreNotice=node('small',restored&&choice.adjusted?'Shared viewing time is unavailable; showing '+format(new Date(target).toISOString())+' from the current forecast.':'','sky-restore-notice');restoreNotice.hidden=!restoreNotice.textContent;restoreNotice.setAttribute('role','status');panel.append(restoreNotice);refresh.onclick=()=>open(sky,{active:true,time:new Date(target).toISOString()});
   const details=node('details',''),summary=node('summary','How the viewing index works');details.append(summary,node('p','0–100 compares conditions for faint stars: cloud-free fraction raised to 1.5, a satellite night-light factor, a Moon illumination/height factor, and twilight. It is an Andymap comparison index—not a detection probability, Bortle rating or measured sky brightness.','small'));panel.append(details);
   const [lights,siteData]=await refs();if(run!==session)return;
   details.append(node('p',lights?'Night-light reference: NASA VIIRS '+lights.sourceDate+'. Quantized radiance proxy from gap-filled satellite pixels, capped at 38.2 nW/(cm² sr) per saturated pixel. Earlier clear observations may be reused. This measures light leaving the ground, not an observer’s exact sky brightness.':'No usable night-light reference. Only forecast cloud information is shown.','small'));
@@ -34,9 +40,11 @@ export function createSkyCloudMap(map,{beforeOpen,format}){
    for(const site of ranked){const card=node('details','','sky-view-site'),h=node('summary',site.name+(site.value?.score!==null&&site.value?.score!==undefined?' · '+site.value.score+'/100':'')+(site.nightAccess?'':' · scheduled programs'));card.dataset.site=site.id;card.open=openSites.has(site.id);card.append(h,node('p',site.access,'small'));if(site.value)card.append(node('p',description(site.value),'small'));card.append(node('p',site.address,'small'));const view=node('button','Show on map');view.onclick=()=>map.panTo([site.lat,site.lng]);const link=node('a','Official information ↗');link.href=site.url;link.target='_blank';link.rel='noopener noreferrer';card.append(view,document.createTextNode(' '),link);list.append(card);
     const marker=L.circleMarker([site.lat,site.lng],{radius:7,weight:2,color:'#fff',fillColor:site.nightAccess?'#164b47':'#6b657c',fillOpacity:1}).addTo(group);const popup=node('div','');popup.append(node('strong',site.name),node('p',site.access,'small'));if(site.value)popup.append(node('p',description(site.value),'small'));const more=node('a','Access & directions ↗');more.href=site.url;more.target='_blank';more.rel='noopener noreferrer';popup.append(more);marker.bindPopup(popup,{maxWidth:290});}
   }
-  select.onchange=()=>{target=Number(select.value);draw();};draw();
+  select.onchange=()=>{target=Number(select.value);selectedTime=target;restoreNotice.hidden=true;draw();};draw();
   async function worker(){while(jobs.length&&!signal.aborted){const job=jobs.shift();try{const d=await weather(job.lat,job.lng,signal);job.rows=d.weather?.hourly||[];}catch{}finally{done++;drawing.schedule(draw);}}}
   await Promise.all([worker(),worker(),worker()]);if(run===session){drawing.cancel();draw();}if(run===session&&!samples.some(s=>s.rows?.length))status.textContent='The forecast source did not respond. Select Update this area to retry.';
  }
- return{open,close};
+ function getState(){return{active:!panel.hidden,time:Number.isFinite(selectedTime)?new Date(selectedTime).toISOString():null};}
+ function restoreState(state,sky=lastSky){if(!state||state.active!==true){close();return Promise.resolve();}if(sky)return open(sky,{active:true,time:state.time});pendingRestore={active:true,time:state.time};return Promise.resolve();}
+ return{open,close,getState,restoreState,get active(){return !panel.hidden;}};
 }
