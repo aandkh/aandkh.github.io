@@ -2,12 +2,12 @@
 // original station, timestamp and coordinates; a fetch never renews an observation.
 export const OBSERVATION_MAX_AGE=2*60*60*1000;
 export const METRO_STATIONS=[
- {id:'KSET',iemId:'SET',network:'MO_ASOS',label:'St. Charles',lat:38.9304,lng:-90.4329,slot:'nw'},
- {id:'KSTL',iemId:'STL',network:'MO_ASOS',label:'Lambert',lat:38.75,lng:-90.37,slot:'ne'},
- {id:'KSUS',iemId:'SUS',network:'MO_ASOS',label:'Chesterfield',lat:38.6575,lng:-90.6557,slot:'sw'},
- {id:'MBGM7',iemId:'MBGM7',network:'MO_DCP',label:'Botanical Garden',lat:38.6127,lng:-90.2608,slot:'se'}
+ {id:'C7014',network:'CWOP',label:'Arnold',lat:38.445,lng:-90.414,slot:'s'},
+ {id:'KSTL',iemId:'STL',network:'MO_ASOS',label:'Lambert',lat:38.7524,lng:-90.3734,slot:'n'},
+ {id:'KSUS',iemId:'SUS',network:'MO_ASOS',label:'Chesterfield',lat:38.6572,lng:-90.6558,slot:'w'},
+ {id:'MBGM7',iemId:'MBGM7',network:'MO_DCP',label:'Botanical Garden',lat:38.6127,lng:-90.2608,slot:'e'}
 ];
-const RESERVES=[{id:'KALN',iemId:'ALN',network:'IL_ASOS',label:'Alton',lat:38.8897,lng:-90.0316},{id:'KBLV',iemId:'BLV',network:'IL_ASOS',label:'Belleville',lat:38.54,lng:-89.845}];
+const RESERVES=[{id:'E1948',network:'CWOP',label:'Mehlville',lat:38.47667,lng:-90.3555},{id:'KSET',iemId:'SET',network:'MO_ASOS',label:'St. Charles',lat:38.9304,lng:-90.4329},{id:'KALN',iemId:'ALN',network:'IL_ASOS',label:'Alton',lat:38.8897,lng:-90.0316},{id:'KBLV',iemId:'BLV',network:'IL_ASOS',label:'Belleville',lat:38.54,lng:-89.845}];
 const cache=new Map(),lastGood=new Map();
 const number=(v,min=-Infinity,max=Infinity)=>typeof v==='number'&&Number.isFinite(v)&&v>=min&&v<=max;
 const fresh=(at,now)=>Number.isFinite(at)&&at<=now&&now-at<OBSERVATION_MAX_AGE;
@@ -45,7 +45,7 @@ export async function metroWeatherReadings(readings=[],{now=Date.now(),fetcher=f
  async function read(url){const hit=responseCache.get(url);if(hit&&now-hit.at<120000)return hit.data;
   try{const timeout=AbortSignal.timeout(6000),r=await fetcher(url,{credentials:'omit',signal:signal?AbortSignal.any([signal,timeout]):timeout});if(!r.ok)throw Error('Observation source unavailable');const data=await r.json();responseCache.set(url,{at:now,data});return data;}catch(e){if(signal?.aborted)throw e;return hit?.data;}
  }
- async function load(station){const urls=[['iem','https://mesonet.agron.iastate.edu/json/current.py?network='+station.network+'&station='+station.iemId]];if(station.network!=='MO_DCP')urls.push(['nws','https://api.weather.gov/stations/'+station.id+'/observations/latest']);const values=await Promise.all(urls.map(async([kind,url])=>(kind==='iem'?mesonetObservation:stationObservation)(station,await read(url),now)));candidates.push(...values);}
+ async function load(station){const urls=station.iemId?[['iem','https://mesonet.agron.iastate.edu/json/current.py?network='+station.network+'&station='+station.iemId]]:[];if(station.network!=='MO_DCP')urls.push(['nws','https://api.weather.gov/stations/'+station.id+'/observations/latest']);const values=await Promise.all(urls.map(async([kind,url])=>(kind==='iem'?mesonetObservation:stationObservation)(station,await read(url),now)));candidates.push(...values);}
  await Promise.all(METRO_STATIONS.map(load));
  // Reserve stations are queried only when a primary cannot provide both values.
  if(METRO_STATIONS.some(s=>!complete(bestStationObservation(candidates.filter(r=>r.id===s.id),now))))await Promise.all(RESERVES.map(s=>complete(bestStationObservation(candidates.filter(r=>r.id===s.id),now))?Promise.resolve():load(s)));
