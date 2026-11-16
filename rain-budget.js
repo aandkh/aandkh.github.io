@@ -1,10 +1,11 @@
-import {dateRangeControl} from './date-range.js?v=20261116-date-range';
+import {dateRangeControl} from './date-range.js?v=20261116-full-speed';
 const DAY=86400000,STANDARD_OFFSET=6*3600000;
 const finite=value=>typeof value==='number'&&Number.isFinite(value)&&value>=0;
 const timestamp=value=>value instanceof Date?value.valueOf():typeof value==='string'?Date.parse(value):value;
 const shiftDay=(day,count)=>new Date(Date.parse(day+'T12:00:00Z')+count*DAY).toISOString().slice(0,10);
 const validDay=day=>typeof day==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(day)&&Number.isFinite(Date.parse(day+'T12:00:00Z'))&&new Date(day+'T12:00:00Z').toISOString().startsWith(day);
-const dayText=day=>new Intl.DateTimeFormat('en-US',{timeZone:'UTC',month:'short',day:'numeric'}).format(new Date(day+'T12:00:00Z'));
+const dayFormatter=new Intl.DateTimeFormat('en-US',{timeZone:'UTC',month:'short',day:'numeric'});
+const dayText=day=>dayFormatter.format(new Date(day+'T12:00:00Z'));
 const inches=value=>value.toFixed(2)+' in';
 export function rainClimateDay(now=Date.now()){
  const at=timestamp(now);return Number.isFinite(at)?new Date(at-STANDARD_OFFSET).toISOString().slice(0,10):null;
@@ -78,7 +79,7 @@ function render(card,snapshot,options){
   const ticks=node('div','','rain-budget-axis');ticks.append(node('span',dayText(period.start)),node('span',dayText(period.end)));rangeBody.append(ticks,node('p','Blue bars: measured rain · yellow: trace · stripes: missing.'));
   const table=node('table','','rain-budget-table'),caption=node('caption','Daily precipitation · inches'),head=node('thead'),headRow=node('tr');for(const label of ['Day','Measured','Normal']){const th=node('th',label);th.scope='col';headRow.append(th);}head.append(headRow);table.append(caption,head);const body=node('tbody');for(const row of [...period.rows].reverse()){const tr=node('tr');tr.append(node('td',dayText(row.day)),node('td',row.precipIn===null?'Missing':row.trace?'Trace':row.precipIn.toFixed(2)),node('td',row.normalIn===null?'Unavailable':row.normalIn.toFixed(2)));body.append(tr);}table.append(body);const scroll=node('div','','rain-budget-table-scroll');scroll.tabIndex=0;scroll.setAttribute('aria-label','Daily precipitation values, newest first');scroll.append(table);rangeBody.append(scroll);
  };
- if(dates.length){details.append(dateRangeControl({label:'Rain dates',min:dates[0],max:dates.at(-1),from:selectedFrom,to:selectedTo,onChange:({from,to})=>{selectedFrom=from;selectedTo=to;drawRange();}}));drawRange();details.append(rangeBody);}
+ if(dates.length){details.append(dateRangeControl({label:'Rain dates',min:dates[0],max:dates.at(-1),from:selectedFrom,to:selectedTo,onChange:({from,to})=>{selectedFrom=from;selectedTo=to;drawRange();}}));let built=false;details.addEventListener('toggle',()=>{if(details.open&&!built){built=true;drawRange();}});details.append(rangeBody);}
  details.append(node('p',`Measured liquid-equivalent precipitation, including melted snow. This is one airport gauge, not a modeled average of St. Louis City and County; a storm can bring different amounts elsewhere. Preliminary NWS reports can be revised.`),node('p',`Normal means the ${model.normalPeriod||'source-reported'} average for the same calendar dates at this station. A departure is shown only when every measured day and daily normal is present. It is not a drought or soil-moisture rating.`),node('p','Dry spell = consecutive completed days with less than 0.01 in of measurable precipitation. Traces count as dry for this threshold, but are identified separately. A gap stops the count; ≥ means the earlier endpoint is unknown.'),node('p','Climate days run midnight to midnight CST (UTC−06), or 1 AM to 1 AM CDT. Today’s unfinished day is excluded. Missing values are never treated as zero.'));card.append(details);appendSources();
  function appendSources(){const footer=node('p','','rain-budget-source');const anchor=node('a','NWS daily climate report ↗');anchor.href=typeof model.source?.latestReportUrl==='string'&&model.source.latestReportUrl.startsWith('https://mesonet.agron.iastate.edu/')?model.source.latestReportUrl:'https://www.weather.gov/wrh/climate?tab=cliplot&wfo=lsx';anchor.target='_blank';anchor.rel='noopener noreferrer';footer.append(anchor);const checked=Date.parse(model.checkedAt);if(Number.isFinite(checked))footer.append(node('span',' · checked '+new Intl.DateTimeFormat('en-US',{timeZone:'America/Chicago',month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'}).format(new Date(checked))));card.append(footer);}
 }
@@ -87,5 +88,5 @@ export function appendRainBudget(host,{lat,lng,now=Date.now(),snapshot}={}){
  if(!host?.ownerDocument)return null;
  const card=host.ownerDocument.createElement('section');card.className='rain-budget';card.setAttribute('aria-label','Recent rain and seasonal normal');card.textContent='Loading rain history…';host.append(card);
  const options={lat,lng,now};if(snapshot){render(card,snapshot,options);return card;}
- loadSnapshot().then(data=>render(card,data,options)).catch(()=>{card.textContent='Rain history is temporarily unavailable.';});return card;
+ loadSnapshot().then(data=>{if(card.isConnected)render(card,data,options);}).catch(()=>{if(card.isConnected)card.textContent='Rain history is temporarily unavailable.';});return card;
 }

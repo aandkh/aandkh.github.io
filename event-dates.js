@@ -1,4 +1,4 @@
-import {eventInstant,isEventDate} from './event-lifecycle.js?v=20261115-core-polish';
+import {eventInstant,isEventDate} from './event-lifecycle.js?v=20261116-full-speed';
 const zone='America/Chicago';
 const dayFormat=new Intl.DateTimeFormat('en-CA',{timeZone:zone,year:'numeric',month:'2-digit',day:'2-digit'});
 // Constructing Intl formatters per result blocks the main thread on large agendas.

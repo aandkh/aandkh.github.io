@@ -1,13 +1,14 @@
-import {eventDiscoverable} from './event-lifecycle.js?v=20261115-core-polish';
-const snapshots=new Map();
+import {eventDiscoverable} from './event-lifecycle.js?v=20261116-full-speed';
+const snapshots=new Map(), pending=new Map();
 export async function venueEvents(layer='concerts',now=Date.now(),{includePast=false}={}){
  const path=layer==='arts'?'comedy-calendar.json':'concert-calendar.json';
  let entry=snapshots.get(path);
  try{
   if(!entry||now-entry.loadedAt>300000){
-   const response=await fetch('./'+path,{cache:'no-cache',signal:AbortSignal.timeout(8000)});
-   if(!response.ok)throw Error('Calendar unavailable');
-   const value=await response.json();entry={value,loadedAt:now};snapshots.set(path,entry);
+   if(!pending.has(path))pending.set(path,fetch('./'+path,{cache:'no-cache',signal:AbortSignal.timeout(8000)}).then(response=>{
+    if(!response.ok)throw Error('Calendar unavailable');return response.json();
+   }).then(value=>{const next={value,loadedAt:now};snapshots.set(path,next);return next;}).finally(()=>pending.delete(path)));
+   entry=await pending.get(path);
   }
  }catch{/* Preserve the last successful snapshot; still filter expired shows. */}
  return (entry?.value.features||[]).filter(f=>includePast||eventDiscoverable(f,now));

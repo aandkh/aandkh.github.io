@@ -1,4 +1,4 @@
-import {eventDiscoveryCutoff,eventDiscoverable,isEventDate} from './event-lifecycle.js?v=20261115-core-polish';
+import {eventDiscoveryCutoff,eventDiscoverable,isEventDate} from './event-lifecycle.js?v=20261116-full-speed';
 let cache, at = 0, pending;
 const note = 'Published local home games: Cardinals, Blues, CITY SC and college basketball, alongside regional listings. Partial coverage. Times marked TBA have no confirmed start time; check the official schedule for changes.';
 export async function sportsData() {

@@ -4,7 +4,7 @@ const cache=new Map(),pending=new Map();
 const normalized=value=>String(value||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
 async function snapshot(file){
  const hit=cache.get(file);if(hit&&Date.now()-hit.at<300000)return hit.data;
- if(!pending.has(file))pending.set(file,fetch(new URL('./'+file,import.meta.url),{cache:'no-cache',signal:AbortSignal.timeout(8000)}).then(r=>{if(!r.ok)throw Error('Local directory unavailable');return r.json();}).then(data=>{cache.set(file,{at:Date.now(),data});return data;}).finally(()=>pending.delete(file)));
+ if(!pending.has(file))pending.set(file,fetch(new URL('./'+file,import.meta.url),{cache:'no-cache',signal:AbortSignal.timeout(8000)}).then(r=>{if(!r.ok)throw Error('Local directory unavailable');return r.json();}).then(data=>{cache.set(file,{at:Date.now(),data});return data;}).catch(error=>{const saved=cache.get(file);if(saved)return saved.data;throw error;}).finally(()=>pending.delete(file)));
  return pending.get(file);
 }
 export function discoveryFeatures(id,data,now=Date.now()){

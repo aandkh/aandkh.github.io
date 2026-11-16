@@ -1,4 +1,4 @@
-import {eventDiscoveryCutoff,eventDiscoverable,isEventDate} from './event-lifecycle.js?v=20261115-core-polish';
+import {eventDiscoveryCutoff,eventDiscoverable,isEventDate} from './event-lifecycle.js?v=20261116-full-speed';
 let cache, at = 0, pending;
 const note = 'Published screenings at independent and local cinemas across St. Louis City and County. Partial coverage; confirm availability with the theater. Runtime and rating appear only when supplied.';
 const chains = /\b(?:AMC|Marcus|B&B|Alamo Drafthouse|Regal|Cinemark|Landmark Theatres)\b/i;

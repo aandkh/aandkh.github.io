@@ -35,6 +35,10 @@ export function layoutPlaceBadges(badges,{selected=null,obstacles=[],avoidOverla
  const records=badges.map((badge,index)=>({...badge,index,anchor:[...badge.anchor],position:[...badge.anchor]}));
  const epsilon=1e-7;
  const intersects=(a,b)=>Math.abs(a.position[0]-b.position[0])+epsilon<(a.width+b.width)/2+gap&&Math.abs(a.position[1]-b.position[1])+epsilon<(a.height+b.height)/2+gap;
+ // Candidate searches can inspect thousands of positions. Reuse the record's
+ // dimensions instead of allocating a trial object for every collision check.
+ const intersectsAt=(record,point,box)=>Math.abs(point[0]-box.position[0])+epsilon<(record.width+box.width)/2+gap&&Math.abs(point[1]-box.position[1])+epsilon<(record.height+box.height)/2+gap;
+ const anyAt=(record,point,boxes)=>{for(const box of boxes)if(intersectsAt(record,point,box))return true;return false;};
  const selection=selected?{...selected,position:[...selected.anchor]}:null;
  const immovable=[...(selection?[selection]:[]),...obstacles.map(b=>({...b,position:[...b.anchor]}))];
  const distance=(a,b)=>(a[0]-b[0])**2+(a[1]-b[1])**2;
@@ -55,14 +59,14 @@ export function layoutPlaceBadges(badges,{selected=null,obstacles=[],avoidOverla
   pending.sort(byAnchor);const record=pending.shift(),reserved=[...fixed.values()],protectedBoxes=[...immovable,...locked],options=candidates(record,[...protectedBoxes,...reserved]);
   let chosen=null,evicted=[];
   // Prefer a complete opening, even if a nearer position would move a neighbor.
-  for(const option of options){const trial={...record,position:option.point};if(protectedBoxes.every(b=>!intersects(trial,b))&&reserved.every(b=>!intersects(trial,b))){chosen=option;break;}}
+  for(const option of options){if(!anyAt(record,option.point,protectedBoxes)&&!anyAt(record,option.point,reserved)){chosen=option;break;}}
   if(!chosen){
    let fewest=Infinity;
-   for(const option of options){const trial={...record,position:option.point};if(protectedBoxes.some(b=>intersects(trial,b)))continue;const conflicts=reserved.filter(b=>intersects(trial,b));if(conflicts.length<fewest){chosen=option;evicted=conflicts;fewest=conflicts.length;}}
+   for(const option of options){if(anyAt(record,option.point,protectedBoxes))continue;let count=0;for(const box of reserved){if(intersectsAt(record,option.point,box)&&++count>=fewest)break;}if(count<fewest){chosen=option;evicted=reserved.filter(b=>intersectsAt(record,option.point,b));fewest=count;}}
   }
   // This last branch can only occur when the bounded viewport is overfull.
   // Preserve the selected point's clearance if possible and report the rest.
-  if(!chosen){let fewest=Infinity;for(const option of options){const trial={...record,position:option.point};if(immovable.some(b=>intersects(trial,b)))continue;const conflicts=[...locked,...reserved].filter(b=>intersects(trial,b)).length;if(conflicts<fewest){chosen=option;fewest=conflicts;}}}
+  if(!chosen){let fewest=Infinity;const remaining=[...locked,...reserved];for(const option of options){if(anyAt(record,option.point,immovable))continue;let conflicts=0;for(const box of remaining){if(intersectsAt(record,option.point,box)&&++conflicts>=fewest)break;}if(conflicts<fewest){chosen=option;fewest=conflicts;}}}
   if(chosen)record.position=chosen.point;
   for(const neighbor of evicted){fixed.delete(neighbor.key);pending.push(neighbor);}
   locked.push(record);

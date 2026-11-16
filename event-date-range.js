@@ -1,6 +1,6 @@
-import {dateRangeControl} from './date-range.js?v=20261116-date-range';
-import {eventDay} from './event-dates.js?v=20261116-speed';
-import {eventDiscoverable,isEventDate} from './event-lifecycle.js?v=20261115-core-polish';
+import {dateRangeControl} from './date-range.js?v=20261116-full-speed';
+import {eventDay} from './event-dates.js?v=20261116-full-speed';
+import {eventDiscoverable,isEventDate} from './event-lifecycle.js?v=20261116-full-speed';
 
 // Bounds describe the supplied upcoming listings, not a complete venue calendar.
 export function eventDateBounds(features,now=Date.now()){

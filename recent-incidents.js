@@ -1,6 +1,11 @@
-import {dateRangeControl} from './date-range.js?v=20261116-date-range';
-let cache, loaded = 0, pending, filtersOpen = false;
+import {dateRangeControl} from './date-range.js?v=20261116-full-speed';
+let cache, loaded = 0, pending, assembled, filtersOpen = false;
 const archiveCache = new Map(), TZ = 'America/Chicago';
+const incidentDayFormatter=new Intl.DateTimeFormat('en-CA',{timeZone:TZ,year:'numeric',month:'2-digit',day:'2-digit'});
+const incidentDateFormatter=new Intl.DateTimeFormat('en-US',{timeZone:'UTC',month:'short',day:'numeric',year:'numeric'});
+const incidentTimeFormatter=new Intl.DateTimeFormat('en-US',{timeZone:'UTC',hour:'numeric',minute:'2-digit'});
+const incidentStampFormatter=new Intl.DateTimeFormat('en-US',{timeZone:TZ,month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'});
+const formatIncidentDate=(formatter,value)=>{const date=new Date(value);return Number.isFinite(date.getTime())?formatter.format(date):date.toString();};
 export const incidentFilters = { range: '7', jurisdiction: 'all', types: [], fatal: 'all', sort: 'newest', from: '', to: '' };
 const count = n => Number.isFinite(n) && n >= 0;
 const titleCase = s => String(s).replace(/\b\w/g, c => c.toUpperCase());
@@ -8,33 +13,34 @@ export function incidentDay(feature) {
  const p = feature?.properties || feature || {}, raw = p.incidentDate || p.incidentAt || '';
  if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) return Number.isFinite(Date.parse(raw)) && new Date(raw).toISOString().slice(0,10) === raw ? raw : '';
  const t = Date.parse(raw); if (!Number.isFinite(t)) return '';
- return new Intl.DateTimeFormat('en-CA', { timeZone: TZ, year:'numeric', month:'2-digit', day:'2-digit' }).format(new Date(t));
+ return incidentDayFormatter.format(t);
 }
 const localDay = now => incidentDay({ incidentAt: new Date(now).toISOString() });
-const dayLabel = day => day ? new Date(day+'T12:00:00Z').toLocaleDateString('en-US',{timeZone:'UTC',month:'short',day:'numeric',year:'numeric'}) : 'Date not reported';
+const dayLabel = day => day ? incidentDateFormatter.format(new Date(day+'T12:00:00Z')) : 'Date not reported';
 export function incidentStamp(p) {
  const day = incidentDay(p); if (!day) return 'Date not reported';
- if(p.incidentLocalTime && /^\d{2}:\d{2}$/.test(p.incidentLocalTime))return dayLabel(day)+' · '+new Date(day+'T'+p.incidentLocalTime+':00Z').toLocaleTimeString('en-US',{timeZone:'UTC',hour:'numeric',minute:'2-digit'})+' local';
+ if(p.incidentLocalTime && /^\d{2}:\d{2}$/.test(p.incidentLocalTime))return dayLabel(day)+' · '+formatIncidentDate(incidentTimeFormatter,day+'T'+p.incidentLocalTime+':00Z')+' local';
  if (p.incidentTimeAccuracy === 'date-only' || /^\d{4}-\d{2}-\d{2}$/.test(p.incidentAt || '')) return dayLabel(day)+' · time not reported';
- return new Date(p.incidentAt).toLocaleString('en-US',{timeZone:TZ,month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'});
+ return formatIncidentDate(incidentStampFormatter,p.incidentAt);
 }
 export function filterIncidents(features, filters = incidentFilters, now = Date.now()) {
  const today = localDay(now), range = filters.range || '7', lower = ['all','custom'].includes(range) ? '' : localDay(now - (Number(range) || 7) * 86400000);
  const types = filters.types || [];
- return features.filter(f => {
-  const p = f.properties || {}, day = incidentDay(f), time = Date.parse(p.incidentAt);
+ // Compute source dates once per row, rather than for every sort comparison.
+ return features.map(f=>({f,day:incidentDay(f),time:Date.parse(f.properties?.incidentAt)})).filter(({f,day,time}) => {
+  const p = f.properties || {};
   if (!day || day > today || (p.incidentTimeAccuracy !== 'date-only' && !/^\d{4}-\d{2}-\d{2}$/.test(p.incidentAt || '') && time > now)) return false;
   if (!['all','custom'].includes(range) && day < lower) return false;
   if (range === 'custom' && ((filters.from && day < filters.from) || (filters.to && day > filters.to))) return false;
   if (types.length && !types.some(t => (p.incidentTypes || [p.incidentKind]).includes(t))) return false;
   return !filters.fatal || filters.fatal === 'all' || filters.fatal === 'fatal' && p.deaths > 0 || filters.fatal === 'injury' && p.injuries > 0 || filters.fatal === 'unknown' && !count(p.deaths);
  }).sort((a,b) => {
-  const p = a.properties, q = b.properties;
-  const chronological = incidentDay(b).localeCompare(incidentDay(a)) || (Date.parse(q.incidentAt) || 0) - (Date.parse(p.incidentAt) || 0);
+  const p = a.f.properties, q = b.f.properties;
+  const chronological = b.day.localeCompare(a.day) || (b.time || 0) - (a.time || 0);
   if (filters.sort === 'oldest') return -chronological;
   if (['deaths','injuries'].includes(filters.sort)) return (count(q[filters.sort]) ? q[filters.sort] : -1) - (count(p[filters.sort]) ? p[filters.sort] : -1) || chronological;
   return chronological;
- });
+ }).map(row=>row.f);
 }
 export function incidentInWeek(f, now = Date.now()) { return filterIncidents([f],{range:'7'},now).length > 0; }
 export function incidentStats(features) {
@@ -73,7 +79,7 @@ export function incidentFatalityStats(records, now=Date.now(), period='week') {
  return out;
 }
 function hydrate(f,sources) {
- const p=f.properties, s=sources.find(s=>s.id===p.sourceId); if(!s)return f;
+ const p=f.properties, s=sources.get(p.sourceId); if(!s)return f;
  const outcomes=[count(p.deaths)?`${p.deaths} reported deaths`:null,count(p.injuries)?`${p.injuries} reported injuries`:null].filter(Boolean).join(' · ');
  return {...f,properties:{...p,source:p.source||s.name,sourceUrl:p.sourceUrl||s.url,url:p.url||s.url,description:p.description||((p.offenses?.length?'Reported offenses: '+p.offenses.join('; ')+'. ':'')+(outcomes?outcomes+'. ':'Outcome counts are not supplied by this source. ')+(p.reportNumber?'Case '+p.reportNumber+(p.reportingAgency?' · '+titleCase(p.reportingAgency):'')+'. ':'')+'Preliminary public report; not a finding of guilt. Location is an approximate reported area.')}};
 }
@@ -82,19 +88,24 @@ export async function recentIncidents(now = Date.now(), filters = incidentFilter
  const requested={...filters,types:[...(filters.types||[])]};
  if(force||!cache||Date.now()-loaded>300000){
   if(!pending)pending=json('./recent-incidents.json').then(d=>{cache=d;loaded=Date.now();archiveCache.clear();}).finally(()=>{pending=null;});
-  await pending;
+  try{await pending;}catch(error){if(!cache)throw error;} // Keep last verified records and their timestamps on a failed refresh.
  }
- const sources=cache.sources||[], today=localDay(now), earliest=requested.range==='all'?'0000-01-01':requested.range==='custom'?(requested.from||'0000-01-01'):localDay(now-Number(requested.range||7)*86400000);
+ const snapshot=cache, sources=snapshot.sources||[], today=localDay(now), earliest=requested.range==='all'?'0000-01-01':requested.range==='custom'?(requested.from||'0000-01-01'):localDay(now-Number(requested.range||7)*86400000);
  const end=requested.range==='custom'&&requested.to?requested.to:today;
- const months=earliest<(cache.recentFrom||'9999')?(cache.archiveMonths||[]).filter(m=>m.month>=earliest.slice(0,7)&&m.month<=end.slice(0,7)):[];
+ const months=earliest<(snapshot.recentFrom||'9999')?(snapshot.archiveMonths||[]).filter(m=>m.month>=earliest.slice(0,7)&&m.month<=end.slice(0,7)):[];
  const archiveErrors=[];
  for(let i=0;i<months.length;i+=3)await Promise.all(months.slice(i,i+3).map(async m=>{
   try{if(!archiveCache.has(m.url))archiveCache.set(m.url,json(m.url).then(d=>d.features||[]));await archiveCache.get(m.url);}catch{archiveCache.delete(m.url);archiveErrors.push(m.month);}
  }));
- const groups=[cache.features||[]];for(const m of months)if(archiveCache.has(m.url))groups.push(await archiveCache.get(m.url));
- const archiveFeatures=mergeIncidentRecords(...groups).map(f=>hydrate(f,sources)),features=filterIncidents(archiveFeatures,requested,now);
- return {features,archiveFeatures,archiveCount:cache.archiveCount||archiveFeatures.length,archiveMonths:cache.archiveMonths||[],sources,status:features.length?'reference':'empty',mode:'recent',checkedAt:cache.checkedAt,source:'Official metro police reports and reviewed releases',archiveErrors,coverageAudit:cache.coverageAudit,archiveCoverageFrom:cache.archiveCoverageFrom,fatalityRecords:Array.isArray(cache.fatalityRecords)?cache.fatalityRecords:null,fatalityCoverage:cache.fatalityCoverage,
- note:cache.coverageNote||'City and County are always combined. Selected reports are not a complete regional census. Approximate locations are not exact scenes. Missing reports do not mean no incidents.',
+ const groups=[snapshot.features||[]];for(const m of months)if(archiveCache.has(m.url))groups.push(await archiveCache.get(m.url));
+ // One assembled selection is retained, not a cache of every filter combination.
+ if(!assembled||assembled.base!==snapshot||groups.length!==assembled.groups.length||groups.some((group,i)=>group!==assembled.groups[i])){
+  const sourceIndex=new Map(sources.map(source=>[source.id,source]));
+  assembled={base:snapshot,groups,features:mergeIncidentRecords(...groups).map(f=>hydrate(f,sourceIndex))};
+ }
+ const archiveFeatures=assembled.features,features=filterIncidents(archiveFeatures,requested,now);
+ return {features,archiveFeatures,archiveCount:snapshot.archiveCount||archiveFeatures.length,archiveMonths:snapshot.archiveMonths||[],sources,status:features.length?'reference':'empty',mode:'recent',checkedAt:snapshot.checkedAt,source:'Official metro police reports and reviewed releases',archiveErrors,coverageAudit:snapshot.coverageAudit,archiveCoverageFrom:snapshot.archiveCoverageFrom,fatalityRecords:Array.isArray(snapshot.fatalityRecords)?snapshot.fatalityRecords:null,fatalityCoverage:snapshot.fatalityCoverage,
+ note:snapshot.coverageNote||'City and County are always combined. Selected reports are not a complete regional census. Approximate locations are not exact scenes. Missing reports do not mean no incidents.',
  legend:{title:'Crimes & Crashes · selected period',items:[{color:'#c52f73',label:'Reported crime'},{color:'#ed5900',label:'Injury / fatal crashes'}],note:'Approximate reported areas. Empty areas do not establish safety.'}};
 }
 export function incidentFreshness(sources, now=Date.now()) {

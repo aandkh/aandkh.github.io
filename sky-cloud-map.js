@@ -3,10 +3,14 @@ import {skyConditions,nightLightAt,forecastAt,viewingColor,viewingLabel,tonightT
 const cache=new Map();let references;
 const node=(tag,text,cls='')=>{const n=document.createElement(tag);n.textContent=text;n.className=cls;return n;};
 function refs(){return references||=Promise.all(['sky-lights.json','sky-sites.json'].map(async file=>{try{const r=await fetch('./'+file,{cache:'no-cache',signal:AbortSignal.timeout(8000)});if(!r.ok)throw Error();return r.json();}catch{return null;}})).then(data=>{if(data.some(x=>x===null))references=null;return data;});}
-async function weather(lat,lng,signal){const key=lat.toFixed(3)+','+lng.toFixed(3),hit=cache.get(key);if(hit&&Date.now()-hit.at<600000)return hit.data;const r=await apiFetch('/api/layers/weather?lat='+lat.toFixed(4)+'&lng='+lng.toFixed(4),{signal:AbortSignal.any([signal,AbortSignal.timeout(15000)])});if(!r.ok)throw Error();const d=await r.json();cache.set(key,{at:Date.now(),data:d});return d;}
+async function weather(lat,lng,signal){const key=lat.toFixed(3)+','+lng.toFixed(3),hit=cache.get(key);if(hit&&Date.now()-hit.at<600000)return hit.data;const r=await apiFetch('/api/layers/weather?lat='+lat.toFixed(4)+'&lng='+lng.toFixed(4),{signal:AbortSignal.any([signal,AbortSignal.timeout(15000)])});if(!r.ok)throw Error();const d=await r.json();cache.set(key,{at:Date.now(),data:d});while(cache.size>80)cache.delete(cache.keys().next().value);return d;}
+export function createSkyDrawScheduler({requestFrame=requestAnimationFrame,cancelFrame=cancelAnimationFrame}={}){
+ let frame=null,latest;
+ return{schedule(draw){latest=draw;if(frame===null)frame=requestFrame(()=>{frame=null;const work=latest;latest=null;work?.();});},cancel(){if(frame!==null)cancelFrame(frame);frame=null;latest=null;}};
+}
 export function createSkyCloudMap(map,{beforeOpen,format}){
- let group=null,controller=null,session=0;const panel=document.createElement('section');panel.className='sky-cloud-controls';panel.hidden=true;panel.setAttribute('aria-label','Tonight’s viewing map');map.getContainer().parentElement.append(panel);L.DomEvent.disableClickPropagation(panel);L.DomEvent.disableScrollPropagation(panel);
- function close(){session++;controller?.abort();group?.remove();group=null;panel.hidden=true;}
+ let group=null,controller=null,session=0;const drawing=createSkyDrawScheduler();const panel=document.createElement('section');panel.className='sky-cloud-controls';panel.hidden=true;panel.setAttribute('aria-label','Tonight’s viewing map');map.getContainer().parentElement.append(panel);L.DomEvent.disableClickPropagation(panel);L.DomEvent.disableScrollPropagation(panel);
+ function close(){session++;drawing.cancel();controller?.abort();group?.remove();group=null;panel.hidden=true;}
  async function open(sky){
   close();beforeOpen();const run=++session;controller=new AbortController();const signal=controller.signal;group=L.layerGroup().addTo(map);panel.hidden=false;panel.replaceChildren();
   const head=node('div','','radar-heading'),title=node('strong','Tonight’s viewing map'),exit=node('button','×');exit.setAttribute('aria-label','Close viewing map');exit.onclick=close;head.append(title,exit);
@@ -31,8 +35,8 @@ export function createSkyCloudMap(map,{beforeOpen,format}){
     const marker=L.circleMarker([site.lat,site.lng],{radius:7,weight:2,color:'#fff',fillColor:site.nightAccess?'#164b47':'#6b657c',fillOpacity:1}).addTo(group);const popup=node('div','');popup.append(node('strong',site.name),node('p',site.access,'small'));if(site.value)popup.append(node('p',description(site.value),'small'));const more=node('a','Access & directions ↗');more.href=site.url;more.target='_blank';more.rel='noopener noreferrer';popup.append(more);marker.bindPopup(popup,{maxWidth:290});}
   }
   select.onchange=()=>{target=Number(select.value);draw();};draw();
-  async function worker(){while(jobs.length&&!signal.aborted){const job=jobs.shift();try{const d=await weather(job.lat,job.lng,signal);job.rows=d.weather?.hourly||[];}catch{}finally{done++;draw();}}}
-  await Promise.all([worker(),worker(),worker()]);if(run===session&&!samples.some(s=>s.rows?.length))status.textContent='The forecast source did not respond. Select Update this area to retry.';
+  async function worker(){while(jobs.length&&!signal.aborted){const job=jobs.shift();try{const d=await weather(job.lat,job.lng,signal);job.rows=d.weather?.hourly||[];}catch{}finally{done++;drawing.schedule(draw);}}}
+  await Promise.all([worker(),worker(),worker()]);if(run===session){drawing.cancel();draw();}if(run===session&&!samples.some(s=>s.rows?.length))status.textContent='The forecast source did not respond. Select Update this area to retry.';
  }
  return{open,close};
 }

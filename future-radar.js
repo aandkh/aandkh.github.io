@@ -11,7 +11,7 @@ export function forecastReading(station,rows,time){
 const forecastCache=new Map();
 export function cachedForecast(key,load,ttl=600000){
  const hit=forecastCache.get(key);if(hit&&Date.now()-hit.at<ttl)return hit.promise;
- const promise=Promise.resolve().then(load).catch(error=>{forecastCache.delete(key);throw error;});forecastCache.set(key,{at:Date.now(),promise});return promise;
+ const promise=Promise.resolve().then(load).catch(error=>{if(forecastCache.get(key)?.promise===promise)forecastCache.delete(key);throw error;});forecastCache.set(key,{at:Date.now(),promise});while(forecastCache.size>32)forecastCache.delete(forecastCache.keys().next().value);return promise;
 }
 const metadata=()=>cachedForecast('hrrr',async()=>{const r=await fetch('https://mesonet.agron.iastate.edu/data/gis/images/4326/hrrr/refd_1080.json',{signal:AbortSignal.timeout(15000)});if(!r.ok)throw Error('Forecast radar unavailable.');return (await r.json()).model_init_utc;},300000);
 const stationForecast=station=>cachedForecast(station.id,async()=>{const r=await apiFetch('/api/layers/weather?lat='+station.lat+'&lng='+station.lng,{signal:AbortSignal.timeout(20000)});if(!r.ok)throw Error('Station forecast unavailable');const d=await r.json();if(!d.weather?.hourly?.length)throw Error('Station forecast unavailable');return d.weather.hourly;});
@@ -29,7 +29,7 @@ export function createFutureRadar(map,{weatherReadings,onStart,onClose}){
  panel.innerHTML='<div class="radar-heading"><strong>Forecast radar</strong><button type="button" aria-label="Close forecast radar">×</button></div><div class="radar-controls"><button type="button" aria-label="Play forecast">▶</button><input type="range" min="0" max="24" value="0" aria-label="Forecast time"><output></output></div><small class="radar-status" role="status"></small><small>HRRR precipitation · NWS hourly wind & temperature</small>';
  shell.append(panel);const [close,play]=panel.querySelectorAll('button'),slider=panel.querySelector('input'),output=panel.querySelector('output'),status=panel.querySelector('.radar-status');
  let active=false,playing=false,timer,frames=[],init='',series=[],index=0,displayed=-1,generation=0,session=0,warmed=false,viewKey='',cache=new Map();
- const clock=t=>new Date(t).toLocaleTimeString('en-US',{timeZone:'America/Chicago',hour:'numeric',minute:'2-digit',timeZoneName:'short'});
+ const clockFormat=new Intl.DateTimeFormat('en-US',{timeZone:'America/Chicago',hour:'numeric',minute:'2-digit',timeZoneName:'short'}),clock=t=>clockFormat.format(new Date(t));
  const viewportKey=()=>[map.getZoom(),map.getBounds().toBBoxString(),map.getSize().x,map.getSize().y].join('/');
  const scrubber=createRadarScrubber({request:i=>{if(active)show(i);},onSeek:i=>{generation++;const time=clock(frames[i].time);status.textContent='Seeking '+time+'…';slider.setAttribute('aria-valuetext','Selected '+time+(displayed>=0?'; showing '+clock(frames[displayed].time):''));}});
  function pause(){scrubber.cancel();playing=false;clearTimeout(timer);play.textContent='▶';play.setAttribute('aria-label','Play forecast');}

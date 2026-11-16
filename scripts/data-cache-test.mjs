@@ -1,0 +1,34 @@
+import assert from 'node:assert/strict';
+import {loadProgressiveLayer} from '../progressive-layer.js';
+import {eventDiscoverable,eventDiscoveryCutoff} from '../event-lifecycle.js';
+const now=Date.parse('2026-11-16T18:00:00Z');
+const event={properties:{start:'2026-11-16T19:00:00Z'}};
+assert.equal(eventDiscoverable(event,now),true);
+assert.equal(eventDiscoverable(event,Date.parse(event.properties.start)),false);
+event.properties.start='2026-11-16T17:00:00Z';assert.equal(eventDiscoverable(event,now),false);
+for(let i=0;i<5000;i++)eventDiscoveryCutoff(new Date(now+i*1000).toISOString());
+assert.equal(eventDiscoveryCutoff('2026-11-16T19:00:00Z'),Date.parse('2026-11-16T19:00:00Z'));
+assert.ok(Number.isNaN(eventDiscoveryCutoff('2026-11-01T01:30:00')),'DST fold stays unknown');
+const controller=new AbortController();let begin,finish;
+const task=loadProgressiveLayer(()=>new Promise(r=>{finish=r;}),()=>new Promise(r=>{begin=r;}),()=>assert.fail('cancelled progress'),controller.signal);
+await new Promise(r=>setImmediate(r));controller.abort();await assert.rejects(task,{name:'AbortError'});finish({features:[event]});begin({features:[]});
+let called=0;await assert.rejects(loadProgressiveLayer(()=>{called++;},()=>{called++;},null,controller.signal),{name:'AbortError'});assert.equal(called,0);
+const venues=await import('../concert-calendar.js?cache-test');let calls=0,release;
+globalThis.fetch=async()=>{calls++;await new Promise(resolve=>{release=resolve;});return{ok:true,json:async()=>({features:[{properties:{start:'2026-11-17T01:00:00Z'}}]})};};
+const a=venues.venueEvents('concerts',now),b=venues.venueEvents('concerts',now);await new Promise(r=>setImmediate(r));assert.equal(calls,1);release();assert.deepEqual(await a,await b);
+globalThis.fetch=async()=>{throw Error('offline');};assert.equal((await venues.venueEvents('concerts',now+360000)).length,1,'last verified calendar survives failed refresh');assert.equal((await venues.venueEvents('concerts',now+86400000)).length,0,'old calendar still expires');
+const incidents=await import('../recent-incidents.js?cache-test');let revision=1;calls=0;
+const manifest=()=>({checkedAt:'2026-11-16T16:00:00Z',sources:[{id:'county',name:'County',url:'https://official.example'}],features:[{type:'Feature',properties:{id:'record',incidentDate:'2026-11-16',incidentAt:'2026-11-16T10:00:00-06:00',sourceId:'county',title:'Revision '+revision}}],archiveMonths:[]});
+globalThis.fetch=async()=>{calls++;return{ok:true,json:async()=>manifest()};};
+const first=await incidents.recentIncidents(now,{range:'7'}),again=await incidents.recentIncidents(now,{range:'30'});assert.equal(calls,1);assert.equal(first.archiveFeatures,again.archiveFeatures,'unchanged selected data are not rehydrated for another filter');assert.equal(first.features[0].properties.source,'County');
+revision++;const corrected=await incidents.recentIncidents(now,{range:'7'},{force:true});assert.notEqual(first.archiveFeatures,corrected.archiveFeatures);assert.equal(corrected.features[0].properties.title,'Revision 2');
+globalThis.fetch=async()=>{throw Error('offline');};const retained=await incidents.recentIncidents(now,{range:'7'},{force:true});assert.equal(retained.checkedAt,'2026-11-16T16:00:00Z');assert.equal(retained.features[0].properties.title,'Revision 2');
+assert.equal(incidents.incidentStamp({incidentDate:'2026-11-16',incidentAt:'bad'}),'Invalid Date');
+const discovery=await import('../local-discovery.js?cache-test'),realNow=Date.now;let clock=now;Date.now=()=>clock;
+try{
+ globalThis.fetch=async()=>({ok:true,json:async()=>({checkedAt:'2026-11-16T16:00:00Z',features:[{type:'Feature',properties:{title:'Reviewed stop',url:'https://official.example/stop',expiresAt:new Date(now+3600000).toISOString()}}]})});
+ assert.equal((await discovery.discoverySnapshot('foodtrucks')).features.length,1);
+ clock+=360000;globalThis.fetch=async()=>{throw Error('offline');};const saved=await discovery.discoverySnapshot('foodtrucks');assert.equal(saved.features.length,1);assert.equal(saved.checkedAt,'2026-11-16T16:00:00Z');
+ clock+=7200000;assert.equal((await discovery.discoverySnapshot('foodtrucks')).features.length,0,'fallback local stops still expire');
+}finally{Date.now=realNow;}
+console.log('PASS bounded event cutoff cache, expiry and changed dates; cancelled loads settle without starting work; concurrent venue fetch sharing; incident assembly reuse/corrections; failed refresh retains verified records and timestamps');

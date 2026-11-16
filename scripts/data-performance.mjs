@@ -1,0 +1,20 @@
+// CPU-only before/after measurements on checked-in records; no network or DOM.
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+import {execFileSync} from 'node:child_process';
+import {performance} from 'node:perf_hooks';
+import * as current from '../recent-incidents.js';
+import * as events from '../event-lifecycle.js';
+const legacy=execFileSync('git',['show','762c298:recent-incidents.js'],{encoding:'utf8'}).replace(/^import .*\n/,'').split('export function incidentInWeek')[0];
+const before=await import('data:text/javascript;base64,'+Buffer.from(legacy).toString('base64'));
+const legacyEvents=execFileSync('git',['show','762c298:event-lifecycle.js'],{encoding:'utf8'});
+const beforeEvents=await import('data:text/javascript;base64,'+Buffer.from(legacyEvents).toString('base64'));
+const data=JSON.parse(await fs.readFile(new URL('../recent-incidents.json',import.meta.url))),groups=await Promise.all(data.archiveMonths.map(m=>fs.readFile(new URL('../'+m.url,import.meta.url)).then(JSON.parse)));
+const rows=current.mergeIncidentRecords(data.features,...groups.map(g=>g.features)),now=Date.parse('2026-11-17T00:00:00Z');
+for(const filters of [{range:'all'},{range:'90',sort:'oldest'},{range:'all',types:['crash'],sort:'deaths'},{range:'custom',from:'2026-09-01',to:'2026-09-30',fatal:'injury'}])assert.deepEqual(current.filterIncidents(rows,filters,now),before.filterIncidents(rows,filters,now));
+const samples=fn=>{fn();const times=[];for(let i=0;i<7;i++){const start=performance.now();fn();times.push(performance.now()-start);}times.sort((a,b)=>a-b);return +times[3].toFixed(2);};
+const featureFiles=['concert-calendar.json','comedy-calendar.json','movie-screenings.json','sports-events.json'];
+const eventRows=(await Promise.all(featureFiles.map(f=>fs.readFile(new URL('../'+f,import.meta.url)).then(JSON.parse)))).flatMap(d=>d.features||[]);
+assert.deepEqual(eventRows.filter(f=>events.eventDiscoverable(f,now)),eventRows.filter(f=>beforeEvents.eventDiscoverable(f,now)));
+const query=module=>{for(let i=0;i<20;i++)for(const f of eventRows)module.eventDiscoverable(f,now);};
+console.log(JSON.stringify({scope:'CPU only; median of seven local Node samples, exact record identity/order preserved',incidentRecords:rows.length,oldFilterMs:samples(()=>before.filterIncidents(rows,{range:'all'},now)),newFilterMs:samples(()=>current.filterIncidents(rows,{range:'all'},now)),eventRecords:eventRows.length,eventPasses:20,oldExpiryMs:samples(()=>query(beforeEvents)),newExpiryMs:samples(()=>query(events))}));

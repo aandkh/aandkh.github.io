@@ -14,6 +14,13 @@
       "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/instrumentsans/OFL.txt",
       "bytes": 4403,
       "sha256": "9e27a72ed30eb49a08678f6a5d6ed98ec7ba5368f541637ee0683ec9134ef966"
+    },
+    {
+      "name": "InstrumentSans.woff2",
+      "derivedFrom": "InstrumentSans.ttf",
+      "transformation": "WOFF2 compression; complete original variable font, glyphs and tables retained",
+      "bytes": 88672,
+      "sha256": "3dcc537faddd446f2c9fad72ea6aa8ba1ae6b944c496a3810684c22da166cb63"
     }
   ]
 }

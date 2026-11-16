@@ -12,9 +12,13 @@ export function nwsHourlyFallback(payload,{lat,lng,now=Date.now()}={}){
  if(!hourly.length||!Number.isFinite(Date.parse(updated)))throw Error('No dated hourly forecast');
  return{id:'weather',status:'partial',features:[],source:'National Weather Service',checkedAt:new Date(now).toISOString(),note:'Direct NWS hourly forecast. Wind uses the upper end of any supplied range; station readings and gusts are unavailable.',weather:{location:{lat,lng},hourly,forecastUpdatedAt:updated,observation:null,precipitation:[],fallbackNote:'Direct NWS forecast · wind ranges use their upper end; gusts and nearby station observations were not supplied.'}};
 }
+const pointCaches=new WeakMap();
 export async function loadNwsForecast(lat,lng,{signal,fetcher=fetch}={}){
  const read=async url=>{const r=await fetcher(url,{credentials:'omit',signal:signal?AbortSignal.any([signal,AbortSignal.timeout(10000)]):AbortSignal.timeout(10000)});if(!r.ok)throw Error('NWS forecast unavailable');return r.json();};
- const point=await read('https://api.weather.gov/points/'+lat.toFixed(4)+','+lng.toFixed(4)),url=point?.properties?.forecastHourly;
+ let cache=pointCaches.get(fetcher);if(!cache){cache=new Map();pointCaches.set(fetcher,cache);}
+ const key=lat.toFixed(4)+','+lng.toFixed(4),hit=cache.get(key),fresh=hit&&Date.now()-hit.at<86400000;let url=fresh?hit.url:null;
+ if(!url){const point=await read('https://api.weather.gov/points/'+key);url=point?.properties?.forecastHourly;}
  if(typeof url!=='string'||!/^https:\/\/api\.weather\.gov\/gridpoints\/[A-Z]{3}\/\d+,\d+\/forecast\/hourly$/.test(url))throw Error('NWS forecast location unavailable');
+ cache.set(key,{url,at:fresh?hit.at:Date.now()});while(cache.size>64)cache.delete(cache.keys().next().value);
  return nwsHourlyFallback(await read(url),{lat,lng});
 }

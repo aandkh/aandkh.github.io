@@ -95,7 +95,8 @@ export function ventilationWindows(rows,{minF=55,maxF=78,maxDewpointF=60}={}){
 }
 
 const make=(tag,text,cls='')=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;n.className=cls;return n;};
-const stamp=time=>new Intl.DateTimeFormat('en-US',{timeZone:'America/Chicago',weekday:'short',hour:'numeric',minute:'2-digit'}).format(time);
+const stampFormat=new Intl.DateTimeFormat('en-US',{timeZone:'America/Chicago',weekday:'short',hour:'numeric',minute:'2-digit'});
+const stamp=time=>stampFormat.format(time);
 const rounded=n=>finite(n)?String(Math.round(n)):'—';
 const directions=['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
 const compass=d=>finite(d)?directions[Math.round(d/22.5)%16]:'—';

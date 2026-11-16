@@ -6,12 +6,13 @@ export async function joyrideRoutes(){
  return routesPromise;
 }
 function miles(a,b){const r=Math.PI/180,v=Math.sin((b[1]-a[1])*r/2)**2+Math.cos(a[1]*r)*Math.cos(b[1]*r)*Math.sin((b[0]-a[0])*r/2)**2;return 3958.7613*2*Math.asin(Math.min(1,Math.sqrt(v)));}
-function distance(f,center){const c=f.geometry?.coordinates||[];return c.length?Math.min(...c.map(p=>miles(p,center))):Infinity;}
+function distance(f,center){const c=f.geometry?.coordinates||[];let nearest=Infinity;for(const p of c)nearest=Math.min(nearest,miles(p,center));return nearest;}
 const SORT_FIELDS={short:'routeMiles',long:'routeMiles',hills:'terrainRangeFt',climbing:'climbFt',grade:'steepestSustainedPct',winding:'directionChangeDegPerMile',straight:'longestStraightMiles',time:'routeMinutes'};
 export function availableJoyrideSorts(features=[]){return JOYRIDES_SORTS.filter(([key])=>key==='distance'||features.some(f=>finite(f.properties?.[SORT_FIELDS[key]])));}
 export function sortJoyrides(features=[],sort='distance',center=[-90.4,38.63]){
- const values=new Map(features.map(f=>[f,sort==='distance'?distance(f,center):f.properties?.[SORT_FIELDS[sort]]])),reverse=['long','hills','climbing','grade','winding','straight'].includes(sort)?-1:1;
- return [...features].sort((a,b)=>{const av=values.get(a),bv=values.get(b);if(!finite(av)||!finite(bv))return finite(av)?-1:finite(bv)?1:String(a.properties?.title||'').localeCompare(String(b.properties?.title||''));return (av-bv)*reverse||distance(a,center)-distance(b,center)||String(a.properties?.title||'').localeCompare(String(b.properties?.title||''));});
+ const distances=new Map(),near=f=>{if(!distances.has(f))distances.set(f,distance(f,center));return distances.get(f);};
+ const values=new Map(features.map(f=>[f,sort==='distance'?near(f):f.properties?.[SORT_FIELDS[sort]]])),reverse=['long','hills','climbing','grade','winding','straight'].includes(sort)?-1:1;
+ return [...features].sort((a,b)=>{const av=values.get(a),bv=values.get(b);if(!finite(av)||!finite(bv))return finite(av)?-1:finite(bv)?1:String(a.properties?.title||'').localeCompare(String(b.properties?.title||''));return (av-bv)*reverse||near(a)-near(b)||String(a.properties?.title||'').localeCompare(String(b.properties?.title||''));});
 }
 function duration(minutes){return minutes>=60?`${Math.floor(minutes/60)} hr${minutes%60?' '+minutes%60+' min':''}`:`${minutes} min`;}
 export function joyrideSummary(p={}){return [finite(p.routeMiles)?p.routeMiles.toFixed(1)+' mi':'',finite(p.routeMinutes)?'~'+duration(p.routeMinutes):'',p.routeKind||'',finite(p.terrainRangeFt)?p.terrainRangeFt+' ft terrain range':''].filter(Boolean).join(' · ');}

@@ -17,8 +17,8 @@
   .map-toolbar #mobile-controls>.ui-icon { width:18px; height:18px; }
   .map-toolbar #results-toggle { min-height:42px; height:42px; padding:6px; font-size:12px; }
   .map-toolbar select { min-width:64px; width:64px; flex-basis:64px; padding-left:5px; }
-  #sidebar { top:52px; width:min(280px,72vw); padding-top:6px; border-radius:0 14px 14px 0; }
-  #layers-backdrop { top:52px; left:min(280px,72vw); }
+  #sidebar { top:52px; width:min(224px,72vw); padding-top:6px; border-radius:0 14px 14px 0; }
+  #layers-backdrop { top:52px; left:min(224px,72vw); }
   #sidebar,#layers-backdrop { bottom:calc(65px + var(--map-credit-height)); }
   #sidebar .tabs { margin:0 54px 0 6px; height:38px; min-height:38px; }
   #sidebar .tabs button { min-height:32px; font-size:11px; padding:4px; }

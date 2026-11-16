@@ -10,9 +10,12 @@ const layerColor=id=>hex(BY_ID[id]?.color,MIXED_CLUSTER_COLOR);
 function luminance(color){const rgb=[1,3,5].map(i=>parseInt(color.slice(i,i+2),16)/255).map(c=>c<=.04045?c/12.92:((c+.055)/1.055)**2.4);return .2126*rgb[0]+.7152*rgb[1]+.0722*rgb[2];}
 function contrast(a,b){const l=[luminance(a),luminance(b)].sort((x,y)=>y-x);return(l[0]+.05)/(l[1]+.05);}
 
+const markerInk=new Map();
 export function markerPaint(id,{mixed=false}={}){
  const color=mixed?MIXED_CLUSTER_COLOR:layerColor(id),dark='#07111f';
- const ink=contrast(color,'#ffffff')>=4.5?'#ffffff':contrast(color,dark)>=4.5?dark:'#000000';
+ let ink=markerInk.get(color);
+ if(!ink){ink=contrast(color,'#ffffff')>=4.5?'#ffffff':contrast(color,dark)>=4.5?dark:'#000000';if(markerInk.size>=128)markerInk.clear();markerInk.set(color,ink);}
+ // Return an independent object: callers may adjust their own marker options.
  return{color,ink};
 }
 

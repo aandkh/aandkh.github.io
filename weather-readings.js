@@ -43,6 +43,20 @@ export function weatherCardPositions(points,{width,height,top=0,bottom=0,obstacl
  }
  return (beam[0]?.positions||[]).map(({x,y,w,h})=>({x,y,w,h}));
 }
+// A moving map only needs new leader endpoints. Keep card rectangles stable
+// until the gesture ends, then solve once against the final incident positions.
+export function createWeatherLayout(solve=weatherCardPositions){
+ let signature='',positions=[],dimensions='';
+ return(points,view,{moving=false}={})=>{
+  const sizeKey=JSON.stringify([view.width,view.height,view.top,view.bottom,view.sizes,points.length]);
+  if(moving&&positions.length===points.length&&sizeKey===dimensions)return positions;
+  const next=JSON.stringify([sizeKey,points,view.obstacles]);
+  if(next!==signature){positions=solve(points,view);signature=next;dimensions=sizeKey;}
+  return positions;
+ };
+}
+const shortTime=new Intl.DateTimeFormat('en-US',{timeZone:'America/Chicago',hour:'numeric',minute:'2-digit'});
+const detailedTime=new Intl.DateTimeFormat('en-US',{timeZone:'America/Chicago',year:'numeric',month:'numeric',day:'numeric',hour:'numeric',minute:'2-digit',second:'2-digit',timeZoneName:'short'});
 // Cut leader strokes around labels so they never draw across incident text.
 export function weatherLeaderSegments(start,end,obstacles=[]){
  const dx=end.x-start.x,dy=end.y-start.y,cuts=[];
@@ -55,7 +69,7 @@ export function weatherLeaderSegments(start,end,obstacles=[]){
 }
 export function createWeatherReadings(map,{formatTime,leaflet=globalThis.L,fitOnLoad=false,onSelect}={}){
  const container=map.getContainer(),host=document.createElement('div');host.className='weather-card-grid';host.setAttribute('aria-label','Regional weather stations');container.parentElement.append(host);
- let saved=[],forecast=false,shown=[],overview=fitOnLoad,layoutFrame,signature='';const lastPositions=new Map();
+ let saved=[],forecast=false,shown=[],overview=fitOnLoad,layoutFrame,signature='',forecastSignature='',moving=false;const lastPositions=new Map(),solveLayout=createWeatherLayout();
  const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.classList.add('weather-station-links');host.prepend(svg);
  function stopOverview(){overview=false;}
  container.addEventListener('pointerdown',stopOverview,{passive:true});container.addEventListener('wheel',stopOverview,{passive:true});
@@ -72,7 +86,7 @@ export function createWeatherReadings(map,{formatTime,leaflet=globalThis.L,fitOn
  }
  function layout(){
  if(host.hidden||!host.getClientRects().length||getComputedStyle(host).visibility==='hidden')return;
- const a=safeArea(),cards=[...host.querySelectorAll('.weather-reading')],points=shown.map(r=>map.latLngToContainerPoint([r.lat,r.lng])),blocks=obstacles(),sizes=cards.map(c=>({w:c.offsetWidth||100,h:c.offsetHeight||90})),positions=weatherCardPositions(points,{...a,obstacles:blocks,sizes,previous:shown.map(r=>lastPositions.get(r.id))});svg.replaceChildren();svg.setAttribute('viewBox',`0 0 ${a.width} ${a.height}`);
+ const a=safeArea(),cards=[...host.querySelectorAll('.weather-reading')],points=shown.map(r=>map.latLngToContainerPoint([r.lat,r.lng])),blocks=obstacles(),sizes=cards.map(c=>({w:c.offsetWidth||100,h:c.offsetHeight||90})),positions=solveLayout(points,{...a,obstacles:blocks,sizes,previous:shown.map(r=>lastPositions.get(r.id))},{moving});svg.replaceChildren();svg.setAttribute('viewBox',`0 0 ${a.width} ${a.height}`);
  for(const [i,r] of shown.entries()){const card=cards[i];if(!card)continue;const point=map.latLngToContainerPoint([r.lat,r.lng]);card.hidden=false;const {x,y,w,h}=positions[i];lastPositions.set(r.id,positions[i]);
  card.style.left=x+'px';card.style.top=y+'px';
  const outside=point.x<0||point.y<0||point.x>a.width||point.y>a.height,end={x:Math.max(5,Math.min(a.width-5,point.x)),y:Math.max(5,Math.min(a.height-5,point.y))};
@@ -81,6 +95,8 @@ export function createWeatherReadings(map,{formatTime,leaflet=globalThis.L,fitOn
  const dot=document.createElementNS(svg.namespaceURI,'circle');dot.setAttribute('cx',Math.max(5,Math.min(a.width-5,point.x)));dot.setAttribute('cy',Math.max(5,Math.min(a.height-5,point.y)));if(outside)dot.setAttribute('opacity','0');dot.setAttribute('r','4');svg.append(dot);
  }}
  function scheduleLayout(){cancelAnimationFrame(layoutFrame);layoutFrame=requestAnimationFrame(layout);}
+ map.on('movestart zoomstart',()=>{moving=true;});
+ map.on('moveend zoomend',()=>{moving=false;scheduleLayout();});
  map.on('move zoom resize layeradd layerremove',scheduleLayout);
  // Observe only map marker/control mutations; the card host is outside this
  // subtree, so our own positioning and SVG redraw cannot trigger a loop.
@@ -97,9 +113,9 @@ export function createWeatherReadings(map,{formatTime,leaflet=globalThis.L,fitOn
  const wind=windPresentation(r),line=document.createElement('span');line.className='weather-reading-wind';
  if(wind.rotation!==null){const arrow=document.createElement('i');arrow.className='weather-wind-arrow';arrow.style.transform='rotate('+wind.rotation+'deg)';line.append(arrow);}
  line.append(document.createTextNode(wind.text));line.title=wind.label;
- const time=document.createElement('small');time.className='weather-reading-time';time.textContent=(forecast?'Forecast ':r.replacementFor?'Nearby · ':'')+(r.observedAt?new Date(r.observedAt).toLocaleTimeString('en-US',{timeZone:'America/Chicago',hour:'numeric',minute:'2-digit'}):'Unavailable');
- time.title=(r.observedAt?'Observed '+new Date(r.observedAt).toLocaleString('en-US',{timeZone:'America/Chicago',timeZoneName:'short'}):'No usable recent observation')+(r.source?' · '+r.source:'')+(r.replacementFor?' · Nearby replacement for '+r.replacementFor:'');card.append(name,temperature,line,time);host.append(card);
+ const time=document.createElement('small');time.className='weather-reading-time';time.textContent=(forecast?'Forecast ':r.replacementFor?'Nearby · ':'')+(r.observedAt?shortTime.format(new Date(r.observedAt)):'Unavailable');
+ time.title=(r.observedAt?'Observed '+detailedTime.format(new Date(r.observedAt)):'No usable recent observation')+(r.source?' · '+r.source:'')+(r.replacementFor?' · Nearby replacement for '+r.replacementFor:'');card.append(name,temperature,line,time);host.append(card);
  }scheduleLayout();}
  function render(readings=saved,visible=true,now=Date.now()){saved=Array.isArray(readings)?readings:[];if(forecast)return;host.hidden=!visible;const valid=weatherMarkerReadings(saved,now),next=JSON.stringify(valid);if(next!==signature){signature=next;paint(valid);}else scheduleLayout();if(overview&&valid.length){fit();overview=false;}}
- return{render,fitOverview,stopOverview,getReadings:()=>saved,forecast(readings){forecast=true;host.hidden=false;paint(readings);},endForecast(visible){forecast=false;signature='';render(saved,visible);},hide(){host.hidden=true;},expire(visible,now=Date.now()){render(saved,visible,now);}};
+ return{render,fitOverview,stopOverview,getReadings:()=>saved,forecast(readings){const next=JSON.stringify(readings);const changed=!forecast||next!==forecastSignature;forecast=true;forecastSignature=next;host.hidden=false;if(changed)paint(readings);},endForecast(visible){forecast=false;signature='';render(saved,visible);},hide(){host.hidden=true;},expire(visible,now=Date.now()){render(saved,visible,now);}};
 }

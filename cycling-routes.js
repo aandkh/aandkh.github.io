@@ -21,20 +21,32 @@ export function availableCyclingSorts(features=[],now=Date.now()){
  return CYCLING_SORTS.filter(([key])=>key.startsWith('terrain-')?found('terrainRangeFt'):['easy','hard'].includes(key)?found('effortScore'):key==='air'?features.some(f=>hasAir(f.properties||{},now)):true);
 }
 export function sortCycling(features,sort='distance',center=[-90.4,38.63],now=Date.now()){
- const values=new Map(features.map(f=>{const p=f.properties||{};return [f,sort==='short'||sort==='long'?p.routeMiles??p.mappedMiles:sort.startsWith('terrain-')?p.terrainRangeFt:['easy','hard'].includes(sort)?p.effortScore:sort==='air'?hasAir(p,now)?p.airCategory:null:cyclingDistance(f,center)];}));
+ const distances=new Map(),distance=f=>{if(!distances.has(f))distances.set(f,cyclingDistance(f,center));return distances.get(f);};
+ const values=new Map(features.map(f=>{const p=f.properties||{};return [f,sort==='short'||sort==='long'?p.routeMiles??p.mappedMiles:sort.startsWith('terrain-')?p.terrainRangeFt:['easy','hard'].includes(sort)?p.effortScore:sort==='air'?hasAir(p,now)?p.airCategory:null:distance(f)];}));
  const reverse=['long','terrain-high','hard'].includes(sort)?-1:1;
- return [...features].sort((a,b)=>{const av=values.get(a),bv=values.get(b);if(!finite(av)||!finite(bv))return finite(av)?-1:finite(bv)?1:String(a.properties?.title||'').localeCompare(String(b.properties?.title||''));return (av-bv)*reverse||cyclingDistance(a,center)-cyclingDistance(b,center)||String(a.properties?.title||'').localeCompare(String(b.properties?.title||''));});
+ return [...features].sort((a,b)=>{const av=values.get(a),bv=values.get(b);if(!finite(av)||!finite(bv))return finite(av)?-1:finite(bv)?1:String(a.properties?.title||'').localeCompare(String(b.properties?.title||''));return (av-bv)*reverse||distance(a)-distance(b)||String(a.properties?.title||'').localeCompare(String(b.properties?.title||''));});
 }
-function pointIn(point,geometry){
- const ringContains=ring=>{let inside=false;for(let i=0,j=ring.length-1;i<ring.length;j=i++){const a=ring[i],b=ring[j];if((a[1]>point[1])!==(b[1]>point[1])&&point[0]<(b[0]-a[0])*(point[1]-a[1])/(b[1]-a[1])+a[0])inside=!inside;}return inside;};
+function airPolygons(geometry){
  const polygons=geometry?.type==='Polygon'?[geometry.coordinates]:geometry?.type==='MultiPolygon'?geometry.coordinates:[];
- return polygons.some(p=>ringContains(p[0])&&!p.slice(1).some(ringContains));
+ return polygons.map(rings=>{let west=Infinity,south=Infinity,east=-Infinity,north=-Infinity;for(const c of rings[0]||[]){west=Math.min(west,c[0]);east=Math.max(east,c[0]);south=Math.min(south,c[1]);north=Math.max(north,c[1]);}return{rings,west,south,east,north};});
+}
+function pointIn(point,polygons){
+ const ringContains=ring=>{let inside=false;for(let i=0,j=ring.length-1;i<ring.length;j=i++){const a=ring[i],b=ring[j];if((a[1]>point[1])!==(b[1]>point[1])&&point[0]<(b[0]-a[0])*(point[1]-a[1])/(b[1]-a[1])+a[0])inside=!inside;}return inside;};
+ for(const {rings,west,south,east,north} of polygons){
+  if(point[0]<west||point[0]>east||point[1]<south||point[1]>north||!ringContains(rings[0]))continue;
+  let hole=false;for(let i=1;i<rings.length;i++)if(ringContains(rings[i])){hole=true;break;}
+  if(!hole)return true;
+ }
+ return false;
 }
 function routeSamples(feature){const out=[];for(const line of lines(feature)){if(!line.length)continue;out.push(line[0]);let since=0;for(let i=1;i<line.length;i++){since+=miles(line[i-1],line[i]);if(since>=.25){out.push(line[i]);since=0;}}out.push(line.at(-1));}return out;}
 export function addCyclingAirQuality(result,air,now=Date.now()){
  const observed=Date.parse(air?.observedAt),fresh=['live','reference'].includes(air?.status)&&Number.isFinite(observed)&&observed<=now&&now-observed<10800000;
+ // Bounds are built once per fresh response, not once per sample. No result
+ // cache: corrected polygons/categories and observation expiry apply immediately.
+ const regions=fresh?(air.features||[]).map(f=>({polygons:airPolygons(f.geometry),category:Number(f.properties?.category)||0})):[];
  const features=(result.features||[]).map(feature=>{const p={...feature.properties};for(const key of ['airCategory','airCoverage','airObservedAt','airPollutant','airSamples'])delete p[key];
-  if(fresh){const samples=routeSamples(feature),categories=samples.map(c=>Math.max(0,...(air.features||[]).filter(f=>pointIn(c,f.geometry)).map(f=>Number(f.properties?.category)||0))),known=categories.filter(v=>v>=1&&v<=6);if(known.length){p.airCategory=Math.max(...known);p.airCoverage=known.length/samples.length;p.airSamples=samples.length;p.airObservedAt=air.observedAt;p.airPollutant=air.mode==='ozone'?'ozone':'PM2.5';}}
+  if(fresh){const samples=routeSamples(feature),categories=samples.map(c=>{let category=0;for(const region of regions)if(region.category>category&&pointIn(c,region.polygons))category=region.category;return category;}),known=categories.filter(v=>v>=1&&v<=6);if(known.length){p.airCategory=Math.max(...known);p.airCoverage=known.length/samples.length;p.airSamples=samples.length;p.airObservedAt=air.observedAt;p.airPollutant=air.mode==='ozone'?'ozone':'PM2.5';}}
   return {...feature,properties:p};});
  return {...result,features};
 }

@@ -1,4 +1,4 @@
-import {eventDiscoverable,localEventDay,isEventDate,eventInstant} from './event-lifecycle.js?v=20261115-core-polish';
+import {eventDiscoverable,localEventDay,isEventDate,eventInstant} from './event-lifecycle.js?v=20261116-full-speed';
 export const TODAY_LAYERS=['concerts','festivals','sports','arts','movies','communityevents','foodtrucks'];
 export function happeningToday(feature,now=Date.now()){
  const start=feature?.properties?.start;if(!eventDiscoverable(feature,now))return false;

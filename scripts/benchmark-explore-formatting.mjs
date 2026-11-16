@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {execFileSync} from 'node:child_process';
+import {performance} from 'node:perf_hooks';
+import * as current from '../park-analytics.js';
+const legacy=execFileSync('git',['show','762c29840b5be4854a06be19f53057bbc561322c:park-analytics.js'],{encoding:'utf8'});
+const before=await import('data:text/javascript;base64,'+Buffer.from(legacy).toString('base64'));
+const parks=JSON.parse(fs.readFileSync(new URL('../park-analytics.json',import.meta.url))).parks.map(parkAnalytics=>({parkAnalytics}));
+assert.deepEqual(parks.map(p=>current.parkSummary(p)),parks.map(p=>before.parkSummary(p)));
+const measure=module=>{const samples=[];for(let pass=0;pass<5;pass++){const start=performance.now();parks.forEach(p=>module.parkSummary(p));samples.push(performance.now()-start);}return Number(samples.sort((a,b)=>a-b)[2].toFixed(2));};
+console.log(JSON.stringify({scope:'Park summary formatting CPU only, real published measurements, five passes, identical output',parks:parks.length,beforeMedianMs:measure(before),afterMedianMs:measure(current)}));

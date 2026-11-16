@@ -4,6 +4,8 @@ export const EVENT_LAYERS=new Set(['concerts','festivals','sports','arts','free'
 const zone='America/Chicago',dayFormatter=new Intl.DateTimeFormat('en-CA',{timeZone:zone,year:'numeric',month:'2-digit',day:'2-digit'});
 const wallFormatter=new Intl.DateTimeFormat('sv-SE',{timeZone:zone,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'});
 const cutoffs=new Map();
+const CUTOFF_CACHE_LIMIT=4096;
+function rememberCutoff(value,cutoff){if(typeof value==='string'&&value.length<=64){if(cutoffs.size>=CUTOFF_CACHE_LIMIT)cutoffs.delete(cutoffs.keys().next().value);cutoffs.set(value,cutoff);}return cutoff;}
 export const localEventDay=now=>dayFormatter.format(now);
 export function isEventDate(value){return typeof value==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(value)&&Number.isFinite(Date.parse(value+'T12:00:00Z'))&&new Date(value+'T12:00:00Z').toISOString().slice(0,10)===value;}
 export function eventInstant(value){
@@ -18,20 +20,20 @@ export function eventInstant(value){
  return matches.length===1?matches[0]+Number(m[5]||0)*1000:NaN;
 }
 export function eventDiscoveryCutoff(value){
+ if(cutoffs.has(value))return cutoffs.get(value);
  if(isEventDate(value)){
-  if(cutoffs.has(value))return cutoffs.get(value);
   // Find the next Chicago midnight. This handles 23/25-hour DST days without
   // assuming a fixed UTC offset or using the browser's timezone.
   let low=Date.parse(value+'T00:00:00Z'),high=low+48*3600000;
   while(high-low>1){const mid=Math.floor((low+high)/2);if(localEventDay(mid)>value)high=mid;else low=mid;}
-  if(cutoffs.size>500)cutoffs.clear();cutoffs.set(value,high);return high;
+  return rememberCutoff(value,high);
  }
- return eventInstant(value);
+ return rememberCutoff(value,eventInstant(value));
 }
 export function eventHasStarted(value,now=Date.now()){const cutoff=eventDiscoveryCutoff(value);return Number.isFinite(cutoff)&&cutoff<=now;}
 export function eventDiscoverable(feature,now=Date.now()){
  const p=feature?.properties||feature||{};
- if(p.start!==undefined&&p.start!==null&&p.start!=='')return Number.isFinite(eventDiscoveryCutoff(p.start))&&!eventHasStarted(p.start,now);
+ if(p.start!==undefined&&p.start!==null&&p.start!==''){const cutoff=eventDiscoveryCutoff(p.start);return Number.isFinite(cutoff)&&cutoff>now;}
  // Undated place/operator records remain ordinary places, not dated events.
  return true;
 }

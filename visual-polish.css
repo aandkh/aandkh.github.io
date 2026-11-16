@@ -1,7 +1,7 @@
 /* Andymap — an understated frame for a richly detailed map. */
 @font-face {
   font-family:"Instrument Sans";
-  src:url("/vendor/fonts/InstrumentSans.ttf") format("truetype");
+  src:url("/vendor/fonts/InstrumentSans.woff2") format("woff2");
   font-style:normal;
   font-weight:400 700;
   font-display:swap;

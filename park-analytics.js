@@ -21,7 +21,8 @@ export function sortParkAnalytics(features,sort,fallback=()=>0){
  const key=sort==='flat'?'elevationRangeFt':sort,ascending=sort==='flat';
  return [...features].sort((a,b)=>{const x=value(a.properties?.parkAnalytics,key),y=value(b.properties?.parkAnalytics,key),hasX=finite(x),hasY=finite(y);if(hasX!==hasY)return hasX?-1:1;if(hasX&&x!==y)return ascending?x-y:y-x;return fallback(a,b)||String(a.properties?.title||'').localeCompare(String(b.properties?.title||''));});
 }
-const number=(v,d=1)=>new Intl.NumberFormat('en-US',{maximumFractionDigits:d}).format(v);
+const numberFormatters=[0,1].map(maximumFractionDigits=>new Intl.NumberFormat('en-US',{maximumFractionDigits}));
+const number=(v,d=1)=>numberFormatters[d].format(v);
 const area=v=>v>0&&v<.1?'<0.1 acres':number(v)+' acres';
 function metricText(a,key){const v=value(a,key==='flat'?'elevationRangeFt':key);if(!finite(v))return '';const mapped=key.startsWith('amenities.');if(mapped)return number(v,0)+' mapped '+({benches:'benches',playgrounds:'playgrounds',picnicSites:'picnic spots',sportsPitches:'sports fields'}[key.slice(10)]||key.slice(10));return ({acres:()=>area(v),elevationMaxFt:()=>number(v,0)+' ft high',elevationRangeFt:()=>number(v,0)+' ft terrain range',flat:()=>number(v,0)+' ft terrain range',pathMiles:()=>number(v)+' mi mapped paths',pathDensityMiPer100Acres:()=>number(v)+' path mi / 100 acres',pavedPathMiles:()=>number(v)+' mi paved paths',pavedPathPct:()=>number(v,0)+'% paved paths',wheelchairTaggedPathMiles:()=>number(v)+' mi wheelchair-tagged paths',woodlandAcres:()=>v?area(v)+' mapped woodland':'Woodland not mapped',woodlandPct:()=>v?number(v,0)+'% mapped woodland':'Woodland not mapped',largestPondAcres:()=>area(v)+' largest pond / lake',waterAcres:()=>area(v)+' mapped water',pondCount:()=>number(v,0)+' mapped ponds / lakes',treeTaxaCount:()=>number(v,0)+' recorded tree varieties'}[key]?.())||'';}
 export function parkSummary(properties,sort='distance'){
@@ -29,7 +30,7 @@ export function parkSummary(properties,sort='distance'){
  const keys=[...new Set([sort,'acres','pathMiles','elevationRangeFt'])];return keys.map(k=>metricText(a,k)).filter(Boolean).slice(0,3).join(' · ');
 }
 export function filterParkAnalytics(features,filters=new Set()){
- return features.filter(f=>{const a=f.properties?.parkAnalytics;return [...filters].every(key=>finite(value(a,key))&&value(a,key)>0);});
+ const keys=[...filters];return features.filter(f=>{const a=f.properties?.parkAnalytics;return keys.every(key=>finite(value(a,key))&&value(a,key)>0);});
 }
 const el=(tag,text,cls='')=>{const n=document.createElement(tag);n.textContent=text;n.className=cls;return n;};
 export function appendParkAnalytics(host,properties={}){
