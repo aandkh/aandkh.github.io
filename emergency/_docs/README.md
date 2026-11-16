@@ -35,8 +35,9 @@ Icons: `python emergency/_tools/icons.py` redraws `icons/`.
 | `js/ui-*.js` | Screens: home, mapview (Map tab and emergencies), alert, sheets, settings, peace, pin, demo, start, disguise. |
 | `css/app.css`, `css/disguise.css` | The dark theme; the two messaging look-alikes. |
 
-`_docs`, `_tests` and `_tools` start with an underscore so GitHub Pages
-(Jekyll) does not publish them. They are still visible in the public repo.
+The repository uses `.nojekyll`, so `_docs`, `_tests` and `_tools` are
+publicly served along with the app and are also visible in the public repo.
+Do not put real credentials, private data, or operational secrets in them.
 
 ## Things that are true and easy to forget
 

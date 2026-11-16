@@ -1,3 +1,4 @@
+import {safeWebUrl,setSafeLink} from './security.js?v=20261116-security';
 let routesPromise,loadedAt=0;
 const finite=v=>typeof v==='number'&&Number.isFinite(v);
 export const JOYRIDES_SORTS=[['distance','Closest'],['short','Shortest drive'],['long','Longest drive'],['hills','Biggest hills'],['climbing','Most climbing'],['grade','Steepest sustained terrain'],['winding','Most winding'],['straight','Longest straight section'],['time','Quickest estimated drive']];
@@ -31,14 +32,14 @@ export function appendJoyrideDetails(host,p={},options={}){
  section.append(node('p','Terrain estimates describe the ground below the road. Drive time excludes live traffic and stops.','joyride-note'));
  if(p.communityMentions?.length){
   const community=node('details','','extra-disclosure');community.append(node('summary','Community recommendations'));
-  for(const mention of p.communityMentions){if(mention.note)community.append(node('p',mention.note,'small'));if(typeof mention.url==='string'&&/^https:\/\//.test(mention.url)){const a=node('a',mention.label+(mention.postedAt?' · '+mention.postedAt.slice(0,4):'')+' ↗');a.href=mention.url;a.target='_blank';a.rel='noopener noreferrer';community.append(a);}}
+  for(const mention of p.communityMentions){if(mention.note)community.append(node('p',mention.note,'small'));if(safeWebUrl(mention.url)){const a=node('a',mention.label+(mention.postedAt?' · '+mention.postedAt.slice(0,4):'')+' ↗');setSafeLink(a,mention.url);a.target='_blank';a.rel='noopener noreferrer';community.append(a);}}
   community.append(node('p',p.communityBasis||'Personal recommendations, not a measured popularity rating. Road geometry and terrain are checked separately.','small'));section.append(community);
  }
- if(p.accessSourceUrl&&/^https:\/\//.test(p.accessSourceUrl)){const a=node('a','Road / park access updates ↗');a.href=p.accessSourceUrl;a.target='_blank';a.rel='noopener noreferrer';section.append(a);}
+ if(safeWebUrl(p.accessSourceUrl)){const a=node('a','Road / park access updates ↗');setSafeLink(a,p.accessSourceUrl);a.target='_blank';a.rel='noopener noreferrer';section.append(a);}
  const route=node('details','','extra-disclosure');route.append(node('summary','Route & roads'));
  if(Array.isArray(p.waypoints)){const list=node('ol','','joyride-waypoints');for(const w of p.waypoints){const li=node('li',w.name);if(w.road&&w.road!==w.name)li.append(node('small',w.road));list.append(li);}route.append(list);}
  if(p.roadNames?.length)route.append(node('p',p.roadNames.join(' · '),'small'));
- if(p.guideUrl){const a=node('a','Area guide');a.href=p.guideUrl;a.target='_blank';a.rel='noopener noreferrer';route.append(a);}section.append(route);
+ if(safeWebUrl(p.guideUrl)){const a=node('a','Area guide');setSafeLink(a,p.guideUrl);a.target='_blank';a.rel='noopener noreferrer';route.append(a);}section.append(route);
  const methods=node('details','','extra-disclosure');methods.append(node('summary','How the numbers are calculated'));for(const text of [p.routingNote,p.terrainMethod,p.shapeMethod,p.accessNote])if(text)methods.append(node('p',text,'small'));
  const source=node('p','','small');for(const [title,url] of [['OpenStreetMap','https://www.openstreetmap.org/copyright'],['OSRM routing','https://project-osrm.org/'],['USGS 3DEP','https://www.usgs.gov/3d-elevation-program'],['Improve the road map','https://www.openstreetmap.org/fixthemap']]){if(source.childNodes.length)source.append(doc.createTextNode(' · '));const a=node('a',title);a.href=url;a.target='_blank';a.rel='noopener noreferrer';source.append(a);}methods.append(source);
  if(p.routeCheckedAt)methods.append(node('p','Road geometry checked '+new Intl.DateTimeFormat('en-US',{month:'short',day:'numeric',year:'numeric',timeZone:'America/Chicago'}).format(new Date(p.routeCheckedAt)),'small'));

@@ -1,3 +1,4 @@
+import {safeWebUrl,setSafeLink} from './security.js?v=20261116-security';
 import {dateRangeControl} from './date-range.js?v=20261116-full-speed';
 // Public iNaturalist observations are evidence of reports, never animal abundance.
 export const WILDLIFE_BOUNDS={swlat:38.3,swlng:-90.85,nelat:38.99,nelng:-89.95};
@@ -107,7 +108,7 @@ const longMonths=Array.from({length:12},(_,i)=>new Date(2020,i,1).toLocaleString
 const shortMonths=Array.from({length:12},(_,i)=>new Date(2020,i,1).toLocaleString('en-US',{month:'short'}));
 let wildlifeSearchId=0;
 const node=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;};
-const link=(text,url)=>{const a=node('a',text);a.href=url;a.target='_blank';a.rel='noopener noreferrer';return a;};
+const link=(text,url)=>{const a=node('a',text);setSafeLink(a,url);a.target='_blank';a.rel='noopener noreferrer';return a;};
 
 // Taxon profiles are fetched only when opened; no invented identification facts.
 export async function loadWildlifeSpecies(id,{signal,fetcher=fetch}={}){
@@ -120,10 +121,10 @@ export async function loadWildlifeSpecies(id,{signal,fetcher=fetch}={}){
   taxonomy:(t.ancestors||[]).filter(a=>['kingdom','phylum','class','order','family','genus'].includes(a.rank)).map(a=>({rank:a.rank,name:a.preferred_common_name||a.name,scientificName:a.name})),
   photo:usableWildlifePhoto(t.default_photo)};
 }
-function safeWildlifeUrl(value,host){try{const u=new URL(value);if(['http:','https:'].includes(u.protocol)&&u.hostname===host){u.protocol='https:';return u.href;}}catch{}return '';}
+function safeWildlifeUrl(value,host){try{const u=new URL(safeWebUrl(value));if(u.hostname===host){u.protocol='https:';return u.href;}}catch{}return '';}
 export function usableWildlifePhoto(photo){
  if(!photo||!['cc0','cc-by','cc-by-sa'].includes(photo.license_code)||!photo.attribution)return null;
- try{const u=new URL(photo.medium_url);if(u.protocol!=='https:'||!['inaturalist-open-data.s3.amazonaws.com','static.inaturalist.org'].includes(u.hostname))return null;return{url:u.href,credit:photo.attribution,license:photo.license_code};}catch{return null;}
+ try{const u=new URL(safeWebUrl(photo.medium_url));if(u.protocol!=='https:'||!['inaturalist-open-data.s3.amazonaws.com','static.inaturalist.org'].includes(u.hostname))return null;return{url:u.href,credit:photo.attribution,license:photo.license_code};}catch{return null;}
 }
 export function wildlifeSpeciesProfile(taxon,{onMap,localCount,signal}={}){
  const host=node('section',undefined,'wildlife-species-profile'),title=node('h4',taxon.name||taxon.scientificName||'Species'),status=node('p','Loading species information…','small');host.append(title);

@@ -20,7 +20,7 @@ export function el(markup) {
 
 /* Every [data-ref] under root, keyed by its value. */
 export function refs(root) {
-  const out = {};
+  const out = Object.create(null);
   root.querySelectorAll("[data-ref]").forEach((node) => { out[node.dataset.ref] = node; });
   if (root.dataset && root.dataset.ref) out[root.dataset.ref] = root;
   return out;
@@ -45,8 +45,9 @@ export function onAct(root, handlers) {
   root.addEventListener("click", (e) => {
     const btn = e.target.closest("[data-act]");
     if (!btn || !root.contains(btn)) return;
-    const fn = handlers[btn.dataset.act];
-    if (fn) fn(btn, e);
+    const action = btn.dataset.act;
+    const fn = Object.prototype.hasOwnProperty.call(handlers, action) ? handlers[action] : null;
+    if (typeof fn === "function") fn(btn, e);
   });
 }
 

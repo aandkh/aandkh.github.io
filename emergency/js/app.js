@@ -1,21 +1,21 @@
 /* Chill: start-up, the shell, and the glue between screens. */
 
-import { el, refs } from "./dom.js";
+import { el, refs } from "./dom.js?v=20261116-security";
 import { icon } from "./icons.js";
 import * as L from "./logic.js";
 import * as store from "./store.js";
 import * as sim from "./sim.js";
 import * as gate from "./gate.js";
-import { askPin } from "./ui-pin.js";
-import { setToastHost, setOverlayHost, setToastsMuted, toast, clearToasts, unlockAudio, alarm, chime, openSheet } from "./ui-common.js";
-import { mountHome } from "./ui-home.js";
-import { mountMapView } from "./ui-mapview.js";
-import { showTakeover, showLastCall } from "./ui-alert.js";
-import { openSettings } from "./ui-settings.js";
-import { openPeace } from "./ui-peace.js";
-import { openDemo } from "./ui-demo.js";
-import { renderGate, chooseViewer } from "./ui-start.js";
-import { mountDisguise, codedAlert, CODED } from "./ui-disguise.js";
+import { askPin } from "./ui-pin.js?v=20261116-security";
+import { setToastHost, setOverlayHost, setToastsMuted, toast, clearToasts, unlockAudio, alarm, chime, openSheet } from "./ui-common.js?v=20261116-security";
+import { mountHome } from "./ui-home.js?v=20261116-security";
+import { mountMapView } from "./ui-mapview.js?v=20261116-security";
+import { showTakeover, showLastCall } from "./ui-alert.js?v=20261116-security";
+import { openSettings } from "./ui-settings.js?v=20261116-security";
+import { openPeace } from "./ui-peace.js?v=20261116-security";
+import { openDemo } from "./ui-demo.js?v=20261116-security";
+import { renderGate, chooseViewer } from "./ui-start.js?v=20261116-security";
+import { mountDisguise, codedAlert, CODED } from "./ui-disguise.js?v=20261116-security";
 
 const root = document.getElementById("root");
 document.addEventListener("pointerdown", unlockAudio, { passive: true });

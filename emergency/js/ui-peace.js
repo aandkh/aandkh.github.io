@@ -5,11 +5,11 @@
  * and in this mock every result is labeled as simulated.
  */
 
-import { el, refs, text, open } from "./dom.js";
+import { esc, el, refs, text, open } from "./dom.js?v=20261116-security";
 import { icon } from "./icons.js";
 import * as L from "./logic.js";
 import * as sim from "./sim.js";
-import { avatar } from "./ui-common.js";
+import { avatar } from "./ui-common.js?v=20261116-security";
 
 const SPIN = '<span class="spin" aria-hidden="true"></span>';
 
@@ -80,7 +80,7 @@ export function openPeace(host, ctx) {
       let card = cards.get(row.id);
       if (!card) {
         card = el(`<div class="pm-row">
-          <div class="pm-row__who">${avatar(m, 36)}<span class="pm-row__name">${m.name}</span><span class="pm-row__time" data-ref="time"></span></div>
+          <div class="pm-row__who">${avatar(m, 36)}<span class="pm-row__name">${esc(m.name)}</span><span class="pm-row__time" data-ref="time"></span></div>
           <div class="pm-row__lines" data-ref="lines"></div>
           <p class="pm-row__note" data-ref="note" hidden></p>
         </div>`);

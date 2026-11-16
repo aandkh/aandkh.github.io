@@ -1,10 +1,10 @@
 /* The two screens before Chill: the sign-in gate, and picking who you are. */
 
-import { el, refs } from "./dom.js";
+import { esc, el, refs } from "./dom.js?v=20261116-security";
 import { icon } from "./icons.js";
 import * as L from "./logic.js";
 import * as gate from "./gate.js";
-import { avatar } from "./ui-common.js";
+import { avatar } from "./ui-common.js?v=20261116-security";
 
 const AGES = { ava: "16", leo: "13" };
 
@@ -61,7 +61,7 @@ export function chooseViewer(host, s) {
             const m = s.members[id];
             return `<button type="button" class="first__card" data-id="${id}">
               ${avatar(m, 64)}
-              <span class="first__name">${m.name}</span>
+              <span class="first__name">${esc(m.name)}</span>
               <span class="first__age">${AGES[id] ? `${AGES[id]} years old` : "Parent"}</span>
             </button>`;
           }).join("")}

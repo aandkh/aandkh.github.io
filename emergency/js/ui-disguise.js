@@ -8,7 +8,7 @@
  * nowhere, and delete themselves after 24 hours.
  */
 
-import { el, esc, open } from "./dom.js";
+import { el, esc, open } from "./dom.js?v=20261116-security";
 import * as L from "./logic.js";
 import { attachHold, HOLD_MS, ANDROID_HOLD_MS } from "./hold.js";
 import { PRESETS, customMessages, CODED } from "./presets.js";

@@ -6,12 +6,12 @@
  * one of the people alerted.
  */
 
-import { el, refs, text, show, onAct } from "./dom.js";
+import { esc, el, refs, text, show, onAct } from "./dom.js?v=20261116-security";
 import { icon } from "./icons.js";
 import * as L from "./logic.js";
 import { createMap } from "./map.js";
-import { avatar, shareUntil, hasFix, toast, confirmSheet, joinNames } from "./ui-common.js";
-import { shareSheet } from "./ui-sheets.js";
+import { avatar, shareUntil, hasFix, toast, confirmSheet, joinNames } from "./ui-common.js?v=20261116-security";
+import { shareSheet } from "./ui-sheets.js?v=20261116-security";
 
 export function etaLeft(s, id, now) {
   const m = s.members[id];
@@ -135,7 +135,7 @@ export function mountMapView(container, ctx) {
         ? `<div class="btn btn--good-quiet" aria-live="polite">${icon("nav", 17, 2.4)} <span data-ref="myEta">You're on the way</span></div>`
         : `<button type="button" class="btn btn--good" data-act="onway">${icon("nav", 18, 2.4)} I'm on my way</button>`}
       <div class="em-actions__row">
-        <button type="button" class="btn btn--dark" data-act="call-person" data-name="${first.name}">${icon("phone", 17, 2.2)} Call ${first.name}</button>
+        <button type="button" class="btn btn--dark" data-act="call-person" data-name="${esc(first.name)}">${icon("phone", 17, 2.2)} Call ${esc(first.name)}</button>
         <button type="button" class="btn btn--dark" data-act="call911">${icon("phone", 17, 2.2)} Call 911</button>
       </div>
       ${myShare === "emergency"
@@ -154,7 +154,7 @@ export function mountMapView(container, ctx) {
       const dist = see && hasFix(m) && hasFix(me) ? `${L.distanceMi(me.pos, m.pos).toFixed(1)} mi` : "";
       return `<div class="em-row">
         ${avatar(m, 36)}
-        <span class="em-row__name">${m.name}</span>
+        <span class="em-row__name">${esc(m.name)}</span>
         ${chip(s, id, inc.responses[id], now)}
         ${dist ? `<span class="em-row__dist">${dist}</span>` : ""}
       </div>`;

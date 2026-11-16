@@ -1,10 +1,10 @@
 /* Full-screen interruptions: someone else's emergency arriving, and the
  * last call when your own check-in is due. */
 
-import { el, text, open } from "./dom.js";
+import { el, text, open } from "./dom.js?v=20261116-security";
 import { icon } from "./icons.js";
 import * as L from "./logic.js";
-import { joinNames } from "./ui-common.js";
+import { avatar, joinNames } from "./ui-common.js?v=20261116-security";
 
 /* Someone in the family needs help. onOpen fires from the one button. */
 export function showTakeover(host, s, inc, viewer, now, onOpen) {
@@ -32,7 +32,7 @@ export function showTakeover(host, s, inc, viewer, now, onOpen) {
       <div class="takeover__glow" aria-hidden="true"></div>
       <div class="takeover__inner">
         <span class="takeover__eyebrow">${icon("alert", 16, 2.4)} <span data-t="eyebrow"></span></span>
-        <div class="takeover__av">${`<span class="av" style="--av:${lm.color};--sz:88px" aria-hidden="true">${lm.initial}</span>`}</div>
+        <div class="takeover__av">${avatar(lm, 88)}</div>
         <h2 class="takeover__title" id="takeover-title" data-t="title"></h2>
         <p class="takeover__time" data-t="time"></p>
         <p class="takeover__note" data-t="note"></p>

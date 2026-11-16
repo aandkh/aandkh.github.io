@@ -1,3 +1,4 @@
+import {setSafeLink} from './security.js?v=20261116-security';
 import {dateRangeControl} from './date-range.js?v=20261116-full-speed';
 let cache, loaded = 0, pending, assembled, filtersOpen = false;
 const archiveCache = new Map(), TZ = 'America/Chicago';
@@ -118,7 +119,7 @@ export function incidentCoverage(sources, now=Date.now()) {
 }
 export function incidentCSV(features) {
  const fields=['Date and time','Type','Reported offenses','Area','Reported deaths','Reported injuries','Location precision','Source','Source URL','Case number'];
- const safe=value=>{let text=String(value??'');if(/^[=+@\-]/.test(text))text="'"+text;return '"'+text.replaceAll('"','""')+'"';};
+ const safe=value=>{let text=String(value??'');if(/^[\s\u0000-\u001f]*[=+@\-]/.test(text)||/^[\t\r\n]/.test(text))text="'"+text;return '"'+text.replaceAll('"','""')+'"';};
  return [fields,...features.map(f=>{const p=f.properties;return [p.incidentAt,p.incidentKind,(p.offenses||[]).join('; '),p.address,count(p.deaths)?p.deaths:'Not reported',count(p.injuries)?p.injuries:'Not reported',p.locationAccuracy,p.source,p.sourceUrl||p.url,p.reportNumber];})].map(row=>row.map(safe).join(',')).join('\r\n');
 }
 export function incidentExplorer(d,onChange) {
@@ -146,7 +147,7 @@ export function incidentExplorer(d,onChange) {
  add('small',`${annual.year} tracked reports: ${annual.police?annual.police+' deaths attributed to police':'no police-caused deaths confirmed in reviewed reports'} · ${annual.other?annual.other+' other homicides':'no other homicide deaths confirmed in reviewed reports'}. Year-to-date comparison unavailable — ${d?.archiveCoverageFrom?'archive begins '+dayLabel(d.archiveCoverageFrom):'full-year coverage has not been verified'}.`);
  if(annual.unclassifiedDeaths||annual.unknownDeathReports)add('small',`Annual archive also has ${annual.unclassifiedDeaths} known deaths without reviewed attribution and ${annual.unknownDeathReports} homicide reports without victim counts.`);
  const evidence=add('details',''),evidenceTitle=document.createElement('summary');evidenceTitle.textContent='Sources and counting method';evidence.append(evidenceTitle);target=evidence;
- for(const r of fatal.reports){const a=add('a',dayLabel(r.date)+' · '+r.title+' · '+r.deaths);a.href=r.url;a.target='_blank';a.rel='noopener noreferrer';add('small',r.summary);}
+ for(const r of fatal.reports){const a=add('a',dayLabel(r.date)+' · '+r.title+' · '+r.deaths);setSafeLink(a,r.url);a.target='_blank';a.rel='noopener noreferrer';add('small',r.summary);}
  add('small','An officer-involved incident alone does not establish a death caused by police. Category labels are based on sourced attribution, not a determination of lawfulness. One event is counted once; unknowns are not zero. Annual counts come from the full retained archive, including older months.');target=root;
  }else add('small','Reported-death summary is unavailable until the verified fatality index loads. No count is inferred from missing data.','incident-warning');
  if(d?.archiveErrors?.length)add('p','Some older archive files could not load. Showing available reports; try that period again.','incident-warning');
@@ -177,7 +178,7 @@ export function incidentExplorer(d,onChange) {
  }
  const details=add('details',''),summary=document.createElement('summary');summary.textContent='Sources & coverage';details.append(summary);target=details;
  add('p',d?.note||'Loading verified reports…');
- for(const source of d?.sources||[]){const link=add('a',source.name);link.href=source.url;link.target='_blank';link.rel='noopener noreferrer';add('small',(source.latestIncidentDate?'Latest incident: '+dayLabel(source.latestIncidentDate)+'. ':'')+(source.checkedAt?'Checked '+dayLabel(incidentDay({incidentAt:source.checkedAt}))+'. ':'')+(source.coverage||''));}
+ for(const source of d?.sources||[]){const link=add('a',source.name);setSafeLink(link,source.url);link.target='_blank';link.rel='noopener noreferrer';add('small',(source.latestIncidentDate?'Latest incident: '+dayLabel(source.latestIncidentDate)+'. ':'')+(source.checkedAt?'Checked '+dayLabel(incidentDay({incidentAt:source.checkedAt}))+'. ':'')+(source.coverage||''));}
  const links=[['City daily approved crash reports','https://slmpd.org/daily-accident-report/'],['City public crime map','https://slmpd.org/mapping/'],['Highway Patrol crash reports','https://www.mshp.dps.missouri.gov/HP68/search.jsp']];for(const[name,url]of links){const a=add('a',name);a.href=url;a.target='_blank';a.rel='noopener noreferrer';}
  add('small','City excludes some sensitive and unapproved reports. County feeds include participating agencies; Highway Patrol reports omit crashes investigated by local agencies. Locations are approximate. No activity on this map does not establish that an area is safe.');
  return root;

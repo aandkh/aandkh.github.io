@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {readFileSync,existsSync} from 'node:fs';
-const m=await import('data:text/javascript;base64,'+readFileSync(new URL('../park-analytics.js',import.meta.url)).toString('base64'));
+const m=await import('../park-analytics.js');
 const f=(id,metrics,title=id)=>({type:'Feature',id,properties:{id,title,parkAnalytics:metrics}});
 const zero=f('zero',{acres:0,elevationRangeFt:0,pathMiles:0}),unknown=f('unknown',{acres:null,elevationRangeFt:null,pathMiles:null}),large=f('large',{acres:100,elevationRangeFt:80,pathMiles:4,amenities:{playgrounds:2}}),small=f('small',{acres:2,elevationRangeFt:4,pathMiles:1,waterAcres:2,amenities:{playgrounds:1}});
 const input=[unknown,zero,small,large];

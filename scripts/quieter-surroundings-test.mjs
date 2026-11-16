@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {performance} from 'node:perf_hooks';
-const q=await import('data:text/javascript;base64,'+readFileSync(new URL('../quieter-surroundings.js',import.meta.url)).toString('base64'));
+const q=await import('../quieter-surroundings.js');
 const data=JSON.parse(readFileSync(new URL('../quiet-roads.json',import.meta.url))),now=Date.parse(data.checkedAt);
 // 1 degree of latitude is ~111.2 km; finite segment endpoints must be respected.
 assert.ok(Math.abs(q.pointToRoadSegmentMeters([0,1],[-1,0],[1,0])-111195)<5);

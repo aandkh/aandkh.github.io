@@ -1,11 +1,11 @@
 /* Settings, plus its two sub-pages: Private Mode and the activity log. */
 
-import { el, refs, text, onAct, open } from "./dom.js";
+import { el, refs, text, onAct, open } from "./dom.js?v=20261116-security";
 import { icon } from "./icons.js";
 import * as L from "./logic.js";
-import { avatar, toast, confirmSheet } from "./ui-common.js";
+import { avatar, toast, confirmSheet } from "./ui-common.js?v=20261116-security";
 import { PRESETS } from "./presets.js";
-import { checkInSheet, nightlySheet } from "./ui-sheets.js";
+import { checkInSheet, nightlySheet } from "./ui-sheets.js?v=20261116-security";
 
 function page(title, bodyHtml) {
   return el(`

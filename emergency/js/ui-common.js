@@ -1,11 +1,13 @@
 /* Pieces every screen uses: avatars, toasts, bottom sheets, sounds. */
 
-import { el, esc, open } from "./dom.js";
+import { el, esc, open } from "./dom.js?v=20261116-security";
 import { icon } from "./icons.js";
 import * as L from "./logic.js";
 
 export function avatar(m, size = 36, cls = "") {
-  return `<span class="av ${cls}" style="--av:${m.color};--sz:${size}px" aria-hidden="true">${esc(m.initial)}</span>`;
+  const color = /^#[0-9a-f]{3}(?:[0-9a-f]{3})?$/i.test(String(m.color)) ? m.color : "#687A73";
+  const pixels = Number.isFinite(size) ? Math.max(12, Math.min(128, size)) : 36;
+  return `<span class="av ${esc(cls)}" style="--av:${color};--sz:${pixels}px" aria-hidden="true">${esc(m.initial)}</span>`;
 }
 
 /* "Mom", "Mom and Dad", "Mom, Dad and Leo". */
@@ -48,9 +50,9 @@ const MAX_TOASTS = 3;
 /* key: a toast with the same key replaces the one before it. */
 export function toast(message, { action = null, ms = 3600, tone = "", key = "" } = {}) {
   if (!toastHost || toastsMuted) return;
-  if (key) toastHost.querySelectorAll(`[data-key="${key}"]`).forEach((n) => n.remove());
+  if (key) Array.from(toastHost.children).filter((n) => n.dataset.key === key).forEach((n) => n.remove());
   while (toastHost.children.length >= MAX_TOASTS) toastHost.firstElementChild.remove();
-  const node = el(`<div class="toast ${tone ? `toast--${tone}` : ""}" role="status"><span class="toast__msg"></span></div>`);
+  const node = el(`<div class="toast ${tone ? `toast--${esc(tone)}` : ""}" role="status"><span class="toast__msg"></span></div>`);
   if (key) node.dataset.key = key;
   node.firstElementChild.textContent = message;
   if (action) {
@@ -86,7 +88,7 @@ export function setOverlayHost(node) {
 /* A modal bottom sheet. body is an element; returns { close, node }. */
 export function openSheet({ title = "", body, onClose = null, cls = "" }) {
   const wrap = el(`
-    <div class="sheet-wrap ${cls}">
+    <div class="sheet-wrap ${esc(cls)}">
       <div class="sheet-scrim" data-close></div>
       <section class="sheet" role="dialog" aria-modal="true">
         <div class="sheet__grab"></div>

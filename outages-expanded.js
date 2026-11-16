@@ -1,8 +1,9 @@
+import {safeWebUrl,setSafeLink} from './security.js?v=20261116-security';
 const WATER_SERVICE='https://utility.arcgis.com/usrsvcs/servers/482bbe2135c54d178ec406189303faf4/rest/services/CustomerAdvisoryMap/DisplayData_SDE/MapServer';
 const WATER_FIELDS='EventID,EventNotificationType,EventType,EventState,EventStatus,EventNotificationDate,EventStartDate,EventCompletionDate,EventExpirationDate,EventExpirationDateEstimated,EventLastUpdatedDate,EventHeader,EventHyperlink';
 const iso=value=>Number.isFinite(value)&&value>0?new Date(value).toISOString():null;
 const clock=value=>value?new Date(value).toLocaleString('en-US',{timeZone:'America/Chicago',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}):'';
-const creditUrl=value=>{try{const u=new URL(value);return /^https?:$/.test(u.protocol)?u.href:null;}catch{return null;}};
+const creditUrl=value=>safeWebUrl(value)||null;
 export function electricityAttribution(p={}){
  const url=creditUrl(p.sourceUrl)||creditUrl(p.url)||(/^\d{5}$/.test(String(p.geoid||''))?'https://massoutage.com/api/v1/live/counties/'+p.geoid:'https://massoutage.com/');
  const raw=p.upstreamSources||p.meta?.sources||p.sources||p.utilities||[],list=Array.isArray(raw)?raw:typeof raw==='object'?Object.values(raw):[raw],seen=new Set();
@@ -10,7 +11,7 @@ export function electricityAttribution(p={}){
  const value=p.as_of||p.observedAt||p.updated_at,asOf=Number.isFinite(Date.parse(value))?value:null;
  return{publisher:'MassOutage',url,asOf,sources,licenseUrl:'https://creativecommons.org/licenses/by/4.0/'};
 }
-function attributionLink(doc,label,url){const link=doc.createElement('a');link.textContent=label;link.href=url;link.target='_blank';link.rel='noopener noreferrer';return link;}
+function attributionLink(doc,label,url){const link=doc.createElement('a');link.textContent=label;setSafeLink(link,url);link.target='_blank';link.rel='noopener noreferrer';return link;}
 export function appendOutageCredit(host,p={}){
  if(p.utility!=='electricity'&&!/massoutage/i.test(p.source||''))return;
  const credit=electricityAttribution(p),doc=host.ownerDocument,row=doc.createElement('p');row.className='small provider-credit';
@@ -85,6 +86,6 @@ export function appendUtilityStatus(host,result){
   for(const f of power){const p=f.properties,line=document.createElement('p');line.className='small';line.textContent=p.title||p.name||'County record';sources.append(line);appendOutageCredit(sources,p);}
   box.append(sources);
  }
- for(const p of (result?.utilityProviders||[]).filter(p=>Date.parse(p.expiresAt)>Date.now())){const row=document.createElement('p');row.className='small';row.textContent=p.name+' · '+p.summary+' · checked '+clock(p.checkedAt);const link=document.createElement('a');link.href=p.url;link.target='_blank';link.rel='noopener noreferrer';link.textContent=' Source ↗';row.append(link);box.append(row);}
+ for(const p of (result?.utilityProviders||[]).filter(p=>Date.parse(p.expiresAt)>Date.now())){const row=document.createElement('p');row.className='small';row.textContent=p.name+' · '+p.summary+' · checked '+clock(p.checkedAt);const link=document.createElement('a');setSafeLink(link,p.url);link.target='_blank';link.rel='noopener noreferrer';link.textContent=' Source ↗';row.append(link);box.append(row);}
  const note=document.createElement('p');note.className='small';note.textContent='Tap an outlined area or notice for details. A blank area does not confirm service. Water work notices are not all outages.';box.append(note);host.append(box);
 }

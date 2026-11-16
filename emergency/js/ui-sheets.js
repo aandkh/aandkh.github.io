@@ -1,9 +1,9 @@
 /* The bottom sheets Home opens: sharing, check-ins, nightly, family. */
 
-import { el } from "./dom.js";
+import { esc, el } from "./dom.js?v=20261116-security";
 import { icon } from "./icons.js";
 import * as L from "./logic.js";
-import { openSheet, toast, avatar, shareUntil, hasFix } from "./ui-common.js";
+import { openSheet, toast, avatar, shareUntil, hasFix } from "./ui-common.js?v=20261116-security";
 
 function option(label, sub, act, ic) {
   return `<button type="button" class="opt" data-opt="${act}">
@@ -144,7 +144,7 @@ export function familySheet(ctx) {
     return `<div class="fam-row">
       ${avatar(m, 40)}
       <span class="fam-row__text">
-        <span class="fam-row__name">${m.name}</span>
+        <span class="fam-row__name">${esc(m.name)}</span>
         <span class="fam-row__status ${tone ? `is-${tone}` : ""}">${status}${extras.length ? ` · ${extras.join(" · ")}` : ""}</span>
       </span>
     </div>`;

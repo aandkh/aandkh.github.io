@@ -1,3 +1,4 @@
+import {setSafeLink} from './security.js?v=20261116-security';
 // Published park measurements are computed once, not on each visitor's device.
 let snapshotPromise;
 const finite=v=>typeof v==='number'&&Number.isFinite(v)&&v>=0;
@@ -50,7 +51,7 @@ export function appendParkAnalytics(host,properties={}){
  if(finite(a.pondCount)&&a.pondCount>0)stat('Mapped ponds / lakes',number(a.pondCount,0));
  if(finite(a.treeTaxaCount)&&a.treeTaxaCount>0)stat('Recorded tree varieties',number(a.treeTaxaCount,0));
  for(const[key,label]of [['playgrounds','Playgrounds'],['picnicSites','Picnic spots'],['benches','Benches'],['sportsPitches','Sports fields'],['drinkingWater','Drinking-water points'],['dogAreas','Dog areas']])if(finite(a.amenities?.[key])&&a.amenities[key]>0)stat('Mapped '+label.toLowerCase(),number(a.amenities[key],0));
- if(a.officialTreeCollection){const t=a.officialTreeCollection;if(finite(t.typeCount))stat('Park-reported tree types',(t.approximate?'About ':'')+number(t.typeCount,0));if(finite(t.treeCount))stat('Park-reported trees',(t.approximate?'About ':'')+number(t.treeCount,0));const source=el('a',t.source||'Park tree inventory');source.href=t.sourceUrl;source.target='_blank';source.rel='noopener noreferrer';const p=el('p','','park-stat-source');p.append(source);section.append(p);}
+ if(a.officialTreeCollection){const t=a.officialTreeCollection;if(finite(t.typeCount))stat('Park-reported tree types',(t.approximate?'About ':'')+number(t.typeCount,0));if(finite(t.treeCount))stat('Park-reported trees',(t.approximate?'About ':'')+number(t.treeCount,0));const source=el('a',t.source||'Park tree inventory');setSafeLink(source,t.sourceUrl);source.target='_blank';source.rel='noopener noreferrer';const p=el('p','','park-stat-source');p.append(source);section.append(p);}
  if(a.treeTaxa?.length)section.append(el('p','Recorded trees: '+a.treeTaxa.join(', '),'park-tree-list'));
  section.append(el('p','Map-based estimates; unmapped paths, trees and facilities may be missing. Woodland is not a canopy measurement. Terrain range is not route climbing.','park-stat-note'));
  const credit=el('p','','park-stat-source'),osm=el('a','OpenStreetMap');osm.href='https://www.openstreetmap.org/copyright';osm.target='_blank';osm.rel='noopener noreferrer';credit.append(osm);if(finite(a.elevationRangeFt)){credit.append(document.createTextNode(' · '));const usgs=el('a','USGS elevation');usgs.href='https://www.usgs.gov/3d-elevation-program';usgs.target='_blank';usgs.rel='noopener noreferrer';credit.append(usgs);}section.append(credit);host.append(section);return true;

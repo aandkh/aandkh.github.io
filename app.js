@@ -1,22 +1,22 @@
 import {shouldRefreshLayer} from './refresh-policy.js?v=20261116-full-speed';
 import {eventDateMatches,eventDateRangeControl} from './event-date-range.js?v=20261116-full-speed';
 import {createWildlifeHeatLayer} from './wildlife-heat.js?v=20261116-wildlife-heat';
-import {appendBirdingAnalytics} from './birding-analytics.js?v=20261116-share-view';
-import {loadWildlife,wildlifeControls,disposeWildlifeControls,getWildlifeControlState,appendWildlifeDetails,WILDLIFE_BOUNDS,wildlifeQuery,defaultWildlifeOptions,readWildlifeJson,wildlifeObservation} from './wildlife.js?v=20261116-share-view';
+import {appendBirdingAnalytics} from './birding-analytics.js?v=20261116-security';
+import {loadWildlife,wildlifeControls,disposeWildlifeControls,getWildlifeControlState,appendWildlifeDetails,WILDLIFE_BOUNDS,wildlifeQuery,defaultWildlifeOptions,readWildlifeJson,wildlifeObservation} from './wildlife.js?v=20261116-security';
 import {loadHistoricalEvents,filterHistoricalEvents,historicalEventStamp,appendHistoricalEvidence,historicalFilterControls,historicalEra,HISTORY_CATEGORIES} from './historical-events.js?v=20261116-history-deep-time';
 import {loadFloodplains,floodLabel,floodStyle,appendFloodKey} from './floodplains.js?v=20261116-floodplains';
 import {EVENT_LAYERS,eventDiscoverable,eventHasStarted,isEventDate,createEventExpiryClock} from './event-lifecycle.js?v=20261116-full-speed';
 import {installMapCredits} from './map-attribution.js?v=20261116-floodplains';
 import {loadNwsForecast} from './forecast-fallback.js?v=20261116-full-speed';
-import {PARK_SORTS,enrichParkAnalytics,availableParkSorts,sortParkAnalytics,parkSummary,filterParkAnalytics,appendParkAnalytics} from './park-analytics.js?v=20261116-full-speed';
-import {quietParksSnapshot,enrichQuieterSurroundings,sortQuieterSurroundings,quieterSummary,appendQuieterDetails} from './quieter-surroundings.js?v=20261115-outdoor-insights';
-import {joyrideRoutes,availableJoyrideSorts,sortJoyrides,joyrideSummary,appendJoyrideDetails} from './joyrides.js?v=20261116-full-speed';
+import {PARK_SORTS,enrichParkAnalytics,availableParkSorts,sortParkAnalytics,parkSummary,filterParkAnalytics,appendParkAnalytics} from './park-analytics.js?v=20261116-security';
+import {quietParksSnapshot,enrichQuieterSurroundings,sortQuieterSurroundings,quieterSummary,appendQuieterDetails} from './quieter-surroundings.js?v=20261116-security';
+import {joyrideRoutes,availableJoyrideSorts,sortJoyrides,joyrideSummary,appendJoyrideDetails} from './joyrides.js?v=20261116-security';
 import {loadProgressiveLayer} from './progressive-layer.js?v=20261116-full-speed';
 import {enrichSports} from './sports-events.js?v=20261116-full-speed';
 import {enrichDiscovery} from './local-discovery.js?v=20261116-full-speed';
-import {enrichCycling,sortCycling,cyclingSummary,appendCyclingDetails,availableCyclingSorts,refreshCyclingAir} from './cycling-routes.js?v=20261116-full-speed';
+import {enrichCycling,sortCycling,cyclingSummary,appendCyclingDetails,availableCyclingSorts,refreshCyclingAir} from './cycling-routes.js?v=20261116-security';
 import {terrainStreams} from './terrain-streams.js?v=20261115-road-insights';
-import {enrichOutages,appendUtilityStatus,refreshOutageWater,appendOutageCredit} from './outages-expanded.js?v=20261115-core-polish';
+import {enrichOutages,appendUtilityStatus,refreshOutageWater,appendOutageCredit} from './outages-expanded.js?v=20261116-security';
 import {sortRivers,enrichRivers,riverAverages} from './river-insights.js?v=20261115-road-insights';
 import {appendSkySummary} from './sky-quality.js?v=20261115-road-insights';
 import {gymPlaces,gymGroup,GYM_GROUPS,sortGyms} from './gyms.js?v=20261115-road-insights';
@@ -24,22 +24,22 @@ import {enrichMovies,movieFacts} from './movie-screenings.js?v=20261116-full-spe
 import {metroWeatherReadings} from './metro-weather.js?v=20261116-weather-layout';
 import {enrichBirding,appendBirdingEvidence} from './birding-community.js?v=20261116-birding';
 import {TERRAIN_OPTIONS,GEOLOGY_MODES,terrainGeology} from './terrain-geology.js?v=20261116-full-speed';
-import {recentIncidents,incidentExplorer,incidentFilters,filterIncidents,incidentStamp} from './recent-incidents.js?v=20261116-full-speed';
+import {recentIncidents,incidentExplorer,incidentFilters,filterIncidents,incidentStamp} from './recent-incidents.js?v=20261116-security';
 import {eventDay,eventOrder,eventTime,eventStamp,groupEventCards} from './event-dates.js?v=20261116-full-speed';
 import {venueEvents,mergeVenueEvents} from './concert-calendar.js?v=20261116-full-speed';
-import {createSkyCloudMap} from './sky-cloud-map.js?v=20261116-share-view';
+import {createSkyCloudMap} from './sky-cloud-map.js?v=20261116-security';
 import {COMMUNITY_SOURCES,HIDDEN_LAYERS,CRIME_TYPES,combineCrime,appendAirAdvice,distance,routeMiles,pointInGeometry} from './layer-insights.js?v=20261115-air-clarity';
-import {createTrafficIncidents} from './traffic-incidents.js?v=20261115-road-insights';
+import {createTrafficIncidents} from './traffic-incidents.js?v=20261116-security';
 import {attachSuggestions} from './search-suggestions.js?v=20261115-road-insights';
-import {createFutureRadar} from './future-radar.js?v=20261116-share-view';
+import {createFutureRadar} from './future-radar.js?v=20261116-security';
 import {searchLayers} from './explore.js?v=20261116-wildlife-heat';
-import {placeHash,readPlaceHash,placeState,findSharedFeature,encodeViewState,decodeViewState,isViewHash} from './short-links.js?v=20261116-share-view';
+import {placeHash,readPlaceHash,placeState,findSharedFeature,encodeViewState,decodeViewState,isViewHash} from './short-links.js?v=20261116-security';
 import {appendPlaceNavigation} from './place-navigation.js?v=20261115-road-insights';
 import {TODAY_LAYERS,happeningToday} from './today-filter.js?v=20261116-full-speed';
 import {createWeatherReadings} from './weather-readings.js?v=20261116-full-speed';
 import {enrichCultureFeature,cultureFeatureDisplayable} from './place-enrichment.js?v=20261115-road-insights';
-import {apiFetch,apiUrl} from './api-client.js?v=20261115-road-insights';
-import {regionalViewportBounds} from './viewport-bounds.js?v=20261116-history-deep-time';
+import {apiFetch,apiUrl} from './api-client.js?v=20261116-security';
+import {regionalViewportBounds} from './viewport-bounds.js?v=20261116-security';
 import {placeMatchesSearch} from './place-search.js?v=20261116-speed';
 import {filterPlaceFeatures,isExcludedChainPlace} from './chain-places.js?v=20261116-speed';
 import {openingState,isHoursPlaceLayer} from './opening-hours.js?v=20261115-road-insights';
@@ -54,15 +54,15 @@ import {symbol} from './symbols.js?v=20261116-wildlife-heat';
 import {overlayStyles,routeOverlayStyles,aircraftDirectionStyles,markerPaint} from './overlay-style.js?v=20261116-full-speed';
 import {uiIcon} from './ui-icons.js?v=20261115-road-insights';
 import {MODE_DEFAULTS,OPACITY_DEFAULTS,cleanOverlayOpacity,cleanLayerModes,unexpiredFeatures} from './expansion-options.js?v=20261115-road-insights';
-import {appendWeather,appendSkyExtras,createOpeningNotices} from './expansion-ui.js?v=20261116-history-deep-time';
+import {appendWeather,appendSkyExtras,createOpeningNotices} from './expansion-ui.js?v=20261116-security';
 import {LAYERS,BY_ID,EXAMPLES} from './catalog.js?v=20261116-wildlife-heat';
 import {RADAR_MODES,RADAR_TYPE_KEY,AQI,AIR_MODES} from './environment.js?v=20261115-road-insights';
 import {CONFIG} from './config.js?v=20261115-road-insights';
-import {REGION,coordinate,safeUrl,placeUrl,placeLinks,encodeState,decodeState,cleanState,cleanStop,loadPresets,savePresets,cleanPreset,browserStorage,layerSelectable,skyCloudRows,currentRoadworks,centroid,directionEnd,clusterPoints} from './core.js?v=20261116-share-view';
+import {REGION,coordinate,safeUrl,placeUrl,placeLinks,encodeState,decodeState,cleanState,cleanStop,loadPresets,savePresets,cleanPreset,browserStorage,layerSelectable,skyCloudRows,currentRoadworks,centroid,directionEnd,clusterPoints} from './core.js?v=20261116-security';
 const $=s=>document.querySelector(s),el=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;};
 const mapKey=createMapKey($('#environment-key'));if(mapKey.toggle.getAttribute('aria-expanded')==='true')mapKey.toggle.click();
 const btn=(text,fn,cls='')=>{const b=el('button',cls,text);b.type='button';b.addEventListener('click',fn);return b;};
-const link=(label,url)=>{const a=el('a','',label);a.href=safeUrl(url);a.target='_blank';a.rel='noopener noreferrer';return a;};
+const link=(label,url)=>{const a=el('a','',label);const href=safeUrl(url);if(href)a.href=href;a.target='_blank';a.rel='noopener noreferrer';return a;};
 const sourceTimeFormat=new Intl.DateTimeFormat('en-US',{timeZone:'America/Chicago',month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'});
 const format=t=>{if(/^\d{4}-\d{2}-\d{2}$/.test(t||''))return t+' (time not supplied)';const n=Date.parse(t);return Number.isFinite(n)?sourceTimeFormat.format(n):'Time not supplied';};
 const enabled=new Set(),data=new Map(),drawn=new Map(),geometryRestylers=new Map(),requests=new Map(),layerRefreshAt=new Map(),tileHealth=new Map();
@@ -388,7 +388,7 @@ function drawFeatures(id,result){
   drawn.set(id,layer);layer.addTo(map);renderPlaceMarkers();return;
  }
 
- if(id==='floodplains'){const layer=L.geoJSON(result.features,{style:f=>floodStyle(f,overlayOpacity.floodplains),onEachFeature:(f,l)=>l.bindTooltip(f.properties.title)});drawn.set(id,layer);layer.addTo(map);return;}
+ if(id==='floodplains'){const layer=L.geoJSON(result.features,{style:f=>floodStyle(f,overlayOpacity.floodplains),onEachFeature:(f,l)=>l.bindTooltip(el('span','',f.properties?.title||'Flood zone'))});drawn.set(id,layer);layer.addTo(map);return;}
  const color=BY_ID[id].color,group=L.featureGroup(),features=visibleFeatures(id,id==='roadworks'?currentRoadworks(result.features):Array.isArray(result.features)?result.features:[]);
  if(id==='aircraft')for(const f of features){const p=f.properties||{},c=f.geometry?.coordinates;if(c&&coordinate(c[1],c[0])&&Number.isFinite(p.track)&&p.groundSpeed>2){const km=Math.min(8,40075.016686*Math.cos(c[1]*Math.PI/180)*64/(256*2**map.getZoom()));const points=[[c[1],c[0]],directionEnd(c[1],c[0],p.track,km)],paint=aircraftDirectionStyles(map.getZoom(),mapStyle);group.addLayer(L.polyline(points,paint.casing));group.addLayer(L.polyline(points,paint.foreground));}}
  const bind=(f,layer)=>{layer.on('click',event=>{L.DomEvent.stopPropagation(event);showFeature(id,f,event.latlng);});layer.bindTooltip(el('span','',f.properties?.title||f.properties?.name||BY_ID[id].name));};
@@ -757,7 +757,7 @@ const newPresetId=()=>globalThis.crypto?.randomUUID?.()||'map-'+Date.now().toStr
 $('#save-form').onsubmit=e=>{e.preventDefault();const name=$('#preset-name').value.trim();if(!name){toast('Give this map a name.');$('#preset-name').focus();return;}if(presets.length>=40){toast('Export or delete a saved map before adding more.');return;}presets.push({id:newPresetId(),name:name.slice(0,60),state:currentState()});const saved=storePresets();$('#preset-name').value='';renderPresets();if(saved)toast('Map saved.');};
 $('#export-presets').onclick=()=>{const url=URL.createObjectURL(new Blob([JSON.stringify(presets,null,2)],{type:'application/json'}));const a=el('a');a.href=url;a.download='andymap-saved-maps.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
 $('#import-presets-button').onclick=()=>$('#import-presets').click();
-$('#import-presets').onchange=async e=>{try{const file=e.target.files[0];if(!file)return;if(file.size>1000000)throw Error('Choose a saved-maps JSON file smaller than 1 MB.');const a=JSON.parse(await file.text());if(!Array.isArray(a))throw Error('Invalid saved-maps file.');const imported=a.map(cleanPreset).filter(Boolean);if(!imported.length)throw Error('This file contains no valid saved maps.');const space=40-presets.length;if(!space)throw Error('Export or delete a saved map before importing more.');const accepted=imported.slice(0,space).map(p=>({...p,id:newPresetId()}));presets.push(...accepted);const saved=storePresets();renderPresets();if(saved)toast(`${accepted.length} map${accepted.length===1?'':'s'} imported.`+(accepted.length<imported.length?' The 40-map limit was reached.':''));}catch(error){toast(error.message);}finally{e.target.value='';}};
+$('#import-presets').onchange=async e=>{try{const file=e.target.files[0];if(!file)return;if(file.size>1000000)throw Error('Choose a saved-maps JSON file smaller than 1 MB.');const a=JSON.parse(await file.text());if(!Array.isArray(a))throw Error('Invalid saved-maps file.');const imported=a.slice(0,40).map(cleanPreset).filter(Boolean);if(!imported.length)throw Error('This file contains no valid saved maps.');const space=40-presets.length;if(!space)throw Error('Export or delete a saved map before importing more.');const accepted=imported.slice(0,space).map(p=>({...p,id:newPresetId()}));presets.push(...accepted);const saved=storePresets();renderPresets();if(saved)toast(`${accepted.length} map${accepted.length===1?'':'s'} imported.`+(accepted.length<imported.length?' The 40-map limit was reached.':''));}catch(error){toast(error.message);}finally{e.target.value='';}};
 $('#locate').onclick=()=>{if(!navigator.geolocation){toast('Location is unavailable in this browser.');return;}navigator.geolocation.getCurrentPosition(p=>{if(coordinate(p.coords.latitude,p.coords.longitude))map.setView([p.coords.latitude,p.coords.longitude],15);else toast('Your location is outside this Greater St. Louis map.');},()=>toast('Location could not be accessed. You can move the map manually.'),{enableHighAccuracy:false,timeout:10000});};
 map.on('zoomend',()=>measureUI('interaction:map-zoom',()=>{
  for(const id of enabled){

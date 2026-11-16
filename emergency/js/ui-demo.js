@@ -1,10 +1,10 @@
 /* The demo panel: pretend controls that are not part of Chill itself. */
 
-import { el, refs, text } from "./dom.js";
+import { esc, el, refs, text } from "./dom.js?v=20261116-security";
 import { icon } from "./icons.js";
 import * as L from "./logic.js";
 import * as sim from "./sim.js";
-import { openSheet, toast, avatar } from "./ui-common.js";
+import { openSheet, toast, avatar } from "./ui-common.js?v=20261116-security";
 
 const DEVICES = [
   ["ok", "OK"],
@@ -49,16 +49,16 @@ export function openDemo(ctx) {
     r.who.innerHTML = L.MEMBERS.map((id) => {
       const m = s.members[id];
       return `<button type="button" class="demo-person ${id === viewer ? "is-on" : ""}" data-be="${id}" aria-pressed="${id === viewer}">
-        ${avatar(m, 44)}<span>${m.name}</span></button>`;
+        ${avatar(m, 44)}<span>${esc(m.name)}</span></button>`;
     }).join("");
     const others = L.MEMBERS.filter((id) => id !== viewer);
     if (!others.includes(target)) target = others[0];
-    r.pick.innerHTML = others.map((id) => `<button type="button" role="radio" class="demo-chip" aria-checked="${id === target}" data-target="${id}">${s.members[id].name}</button>`).join("");
+    r.pick.innerHTML = others.map((id) => `<button type="button" role="radio" class="demo-chip" aria-checked="${id === target}" data-target="${id}">${esc(s.members[id].name)}</button>`).join("");
     r.phones.innerHTML = others.map((id) => {
       const m = s.members[id];
       return `<div class="demo-phone">
-        <span class="demo-phone__who">${avatar(m, 28)}${m.name}</span>
-        <span class="seg seg--small" role="radiogroup" aria-label="${m.name}'s phone">
+        <span class="demo-phone__who">${avatar(m, 28)}${esc(m.name)}</span>
+        <span class="seg seg--small" role="radiogroup" aria-label="${esc(m.name)}'s phone">
           ${DEVICES.map(([v, label]) => `<button type="button" role="radio" aria-checked="${m.device === v}" data-dev="${id}:${v}">${label}</button>`).join("")}
         </span>
       </div>`;

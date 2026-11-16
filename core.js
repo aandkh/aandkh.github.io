@@ -1,12 +1,13 @@
 import {enrichCultureFeature,cultureFeatureDisplayable} from './place-enrichment.js?v=20261115-road-insights';
 import {cleanVehicle} from './vehicles.js?v=20261115-road-insights';
 import {BY_ID} from './catalog.js?v=20261116-wildlife-heat';
-import {cleanExploreViewState} from './share-view-state.js?v=20261116-share-view';
+import {cleanExploreViewState} from './share-view-state.js?v=20261116-security';
+import {safeUrl} from './security.js?v=20261116-security';
+export {safeUrl};
 import {isExcludedChainPlace} from './chain-places.js?v=20261116-speed';
 import {cleanLayerModes,cleanOverlayOpacity} from './expansion-options.js?v=20261115-road-insights';
 export const REGION = {south:38.1,north:39.2,west:-91.2,east:-89.4};
 export function coordinate(lat,lng) { return typeof lat==='number'&&typeof lng==='number'&&Number.isFinite(lat)&&Number.isFinite(lng)&&lat>=REGION.south&&lat<=REGION.north&&lng>=REGION.west&&lng<=REGION.east; }
-export function safeUrl(value) { try {const u=new URL(value);return ['https:','http:'].includes(u.protocol)&&!u.username&&!u.password?u.href:'';}catch{return '';} }
 export function placeUrl(...values){for(const value of values){const url=safeUrl(value);if(!url)continue;const host=new URL(url).hostname.toLowerCase();if(host==='openstreetmap.org'||host.endsWith('.openstreetmap.org')||host==='osm.org'||host.endsWith('.osm.org'))continue;return url;}return '';}
 export function placeLinks(properties={},fallback=''){
  const links=[],seen=new Set(),primary=placeUrl(properties.canonicalWebsite,properties.website,fallback,properties.url);

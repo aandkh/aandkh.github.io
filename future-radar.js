@@ -1,4 +1,4 @@
-import {apiFetch} from './api-client.js?v=20261115-road-insights';
+import {apiFetch} from './api-client.js?v=20261116-security';
 export function forecastFrames(init,now=Date.now()){
  const base=Date.parse(init),start=Math.ceil(now/3600000)*3600000;
  if(!Number.isFinite(base)||base>now||now-base>6*3600000)throw Error('The forecast radar source is out of date.');

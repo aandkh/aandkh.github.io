@@ -1,0 +1,9 @@
+{
+  "component": "MapLibre GL JS",
+  "upstreamVersion": "5.6.1",
+  "securityBackport": "GHSA-jrc7-96c5-q579",
+  "upstreamPatch": "https://github.com/maplibre/maplibre-gl-js/commit/1da69f3cd913a39fa948708e01478663bf48bc27",
+  "originalSHA256": "b5a34e6930ff937dbbb9eec8892cffb80ba473cce88ae5ca8c4654432f5f0ebc",
+  "patchedSHA256": "04e0bea7463965542e9bb1f8c24654bba0ff2922b0fbabcb24443093ca83e287",
+  "change": "Snapshot elem.attributes with Array.from before removing dangerous attributes; no version relabeling."
+}

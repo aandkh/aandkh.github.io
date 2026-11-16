@@ -4,13 +4,13 @@
  * the SOS tile is never interrupted by the clock.
  */
 
-import { el, refs, text, show, onAct } from "./dom.js";
+import { el, refs, text, show, onAct } from "./dom.js?v=20261116-security";
 import { icon } from "./icons.js";
 import * as L from "./logic.js";
 import { attachHold } from "./hold.js";
 import { createMap } from "./map.js";
-import { avatar, shareUntil, hasFix, toast } from "./ui-common.js";
-import { shareSheet, checkInSheet, nightlySheet, familySheet } from "./ui-sheets.js";
+import { avatar, shareUntil, hasFix, toast } from "./ui-common.js?v=20261116-security";
+import { shareSheet, checkInSheet, nightlySheet, familySheet } from "./ui-sheets.js?v=20261116-security";
 
 export function mountHome(container, ctx) {
   const root = el(`

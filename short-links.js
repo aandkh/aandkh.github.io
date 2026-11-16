@@ -1,5 +1,5 @@
 import {BY_ID} from './catalog.js?v=20261116-wildlife-heat';
-import {coordinate,cleanState,decodeState} from './core.js?v=20261116-share-view';
+import {coordinate,cleanState,decodeState} from './core.js?v=20261116-security';
 
 // Stable 64-bit reference, independent of feed ordering and changing event details.
 export function placeToken(id){

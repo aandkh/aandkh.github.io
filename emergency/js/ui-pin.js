@@ -4,9 +4,9 @@
  * Resolves the PIN, or null when cancelled.
  */
 
-import { el, open } from "./dom.js";
+import { el, open } from "./dom.js?v=20261116-security";
 import { icon } from "./icons.js";
-import { buzz } from "./ui-common.js";
+import { buzz } from "./ui-common.js?v=20261116-security";
 
 export function askPin(host, { title, sub = "", mode = "verify", check = () => true, canCancel = true }) {
   return new Promise((resolve) => {

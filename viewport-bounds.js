@@ -1,4 +1,4 @@
-import {REGION} from './core.js?v=20261116-share-view';
+import {REGION} from './core.js?v=20261116-security';
 
 function validBounds(value){
  const bounds=typeof value==='string'?value.split(',').map(part=>part.trim()===''?NaN:Number(part)):value;
