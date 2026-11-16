@@ -116,6 +116,8 @@ def merge_features(old,new):
  aliases={alias:f['properties']['id'] for f in old+new for alias in f['properties'].get('alternateIds',[])}
  merged={}
  for f in old+new:
+  # Never mutate caller snapshots or reset a case's original discovery date.
+  f={**f,'properties':dict(f['properties'])}
   key=aliases.get(f['properties']['id'],f['properties']['id']);previous=merged.get(key)
   if key!=f['properties']['id']:f={**f,'properties':{**f['properties'],'id':key}}
   if previous:
@@ -127,7 +129,7 @@ def merge_features(old,new):
     f['properties']['incidentTypes']=sorted(set(before.get('incidentTypes',[before['incidentKind']])+after.get('incidentTypes',[after['incidentKind']])))
     f['properties']['offenses']=sorted(set(before.get('offenses',[])+after.get('offenses',[])))
    f['properties']['firstSeenAt']=first
-  else:f['properties']['firstSeenAt']=f['properties'].get('sourceCheckedAt')
+  else:f['properties'].setdefault('firstSeenAt',f['properties'].get('sourceCheckedAt'))
   merged[key]=f
  return sorted(merged.values(),key=lambda f:(f['properties'].get('incidentDate') or f['properties']['incidentAt'][:10],f['properties']['id']),reverse=True)
 

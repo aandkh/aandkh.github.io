@@ -30,6 +30,13 @@ class IncidentTests(unittest.TestCase):
   self.assertEqual(m.crash_features([{**row,'Number_Injured':0}],'now')[0],[])
  def test_update_preserves_id_and_first_seen(self):
   a=m.crime_features([self.crime()],'first')[0];b=m.crime_features([self.crime()],'second')[0];r=m.merge_features(a,b);self.assertEqual(len(r),1);self.assertEqual(r[0]['properties']['firstSeenAt'],'first')
+ def test_repeated_refresh_preserves_original_discovery_and_inputs(self):
+  a=m.crime_features([self.crime()],'2026-11-15')[0];a[0]['properties']['firstSeenAt']='2026-11-10'
+  b=m.crime_features([self.crime()],'2026-11-16')[0]
+  for rows in [a,a+a]:
+   r=m.merge_features(rows,b);self.assertEqual(r[0]['properties']['firstSeenAt'],'2026-11-10');self.assertEqual(r[0]['properties']['sourceCheckedAt'],'2026-11-16')
+  self.assertNotIn('firstSeenAt',b[0]['properties']);self.assertEqual(a[0]['properties']['firstSeenAt'],'2026-11-10')
+  self.assertEqual(m.merge_features(a,[])[0]['properties']['firstSeenAt'],'2026-11-10')
  def test_archive_does_not_expire_and_snapshot_is_small(self):
   old=m.crime_features([{**self.crime(),'occurred':'2026-08-20'}],'now')[0];new=m.crime_features([{**self.crime(),'Report_Number':'26-200','occurred':'2026-11-10'}],'now')[0]
   with tempfile.TemporaryDirectory() as folder:
@@ -49,6 +56,12 @@ class CityIncidentTests(unittest.TestCase):
  def test_repeated_dst_hour_preserves_clock_without_invented_offset(self):
   row={'report':'x','date':'20261101013000','offense':'THEFT','address':'100 TEST ST','type':'theft','longitude':-90.2,'latitude':38.6}
   p=self.city.convert([row],'now')[0][0]['properties'];self.assertEqual(p['incidentAt'],'2026-11-01');self.assertEqual(p['incidentLocalTime'],'01:30')
+ def test_multi_offense_primary_is_independent_of_feed_order(self):
+  row={'report':'123','date':'20261026212101','offense':'ASSAULT','address':'8200 BLOCK N LINDBERGH BLVD','type':'assault','longitude':-90.35,'latitude':38.8}
+  other={**row,'offense':'BURGLARY','type':'burglary'}
+  a=self.city.convert([row,other],'now',self.city.FLORISSANT)[0]
+  b=self.city.convert([other,row],'now',self.city.FLORISSANT)[0]
+  self.assertEqual(a,b);self.assertEqual(a[0]['properties']['incidentKind'],'assault')
  def test_city_source_category_exclusions(self):
   filters,_=self.city.filters_for(datetime.date(2026,11,1),datetime.date(2026,11,8));self.assertEqual(filters['AgencyFilter'],[726]);self.assertNotIn(11,filters['SelectedCategories']);self.assertNotIn(17,filters['SelectedCategories']);self.assertNotIn(18,filters['SelectedCategories'])
  def test_florissant_is_county_and_not_same_id_as_city(self):

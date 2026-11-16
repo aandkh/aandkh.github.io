@@ -66,7 +66,11 @@ def convert(rows,checked,source=SOURCE):
   if not geometry or not report:omitted+=1;continue
   key=('incident:florissant-case:' if source['id']=='county-florissant' else 'incident:city-case:')+report;f=groups.get(key)
   if f:
-   p=f['properties'];p['offenses']=sorted(set(p['offenses']+[row['offense']]));p['incidentTypes']=sorted(set(p['incidentTypes']+[row['type']]));continue
+   p=f['properties'];p['offenses']=sorted(set(p['offenses']+[row['offense']]));p['incidentTypes']=sorted(set(p['incidentTypes']+[row['type']]))
+   # Feed row order can change; use the same offense priority as County cases.
+   primary=min(p['incidentTypes'],key=lambda t:(common.PRIORITY.index(t) if t in common.PRIORITY else len(common.PRIORITY),t))
+   p['incidentKind']=primary;p['title']=primary.title()+' report · '+p['title'].split(' · ',1)[1]
+   continue
   address=common.masked_address(row['address']);primary=row['type']
   groups[key]={'type':'Feature','geometry':geometry,'properties':{'id':key,'title':primary.title()+' report · '+address,'incidentAt':stamp,'incidentDate':stamp[:10],'incidentTimeAccuracy':'reported local time','incidentKind':primary,'incidentTypes':[primary],'offenses':[row['offense']],'address':address+', '+source.get('area','St. Louis')+', MO','sourceId':source['id'],'sourceCheckedAt':checked,'jurisdiction':source.get('jurisdiction','city'),'reportNumber':report,'reportingAgency':source.get('agencyName','SLMPD'),'locationAccuracy':'Source-masked block / intersection, rounded to about 100 m','color':'#c52f73'}}
   if ambiguous:groups[key]['properties'].update({'incidentLocalTime':local.strftime('%H:%M'),'incidentTimeAccuracy':'date-only','timeNote':'Reported local clock time; repeated fall-back hour has no UTC offset in source.'})
