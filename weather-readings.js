@@ -53,7 +53,7 @@ export function weatherLeaderSegments(start,end,obstacles=[]){
  cuts.sort((a,b)=>a[0]-b[0]);const intervals=[];let cursor=0;for(const[lo,hi]of cuts){if(lo>cursor)intervals.push([cursor,lo]);cursor=Math.max(cursor,hi);}if(cursor<1)intervals.push([cursor,1]);
  return intervals.map(([a,b])=>[{x:start.x+dx*a,y:start.y+dy*a},{x:start.x+dx*b,y:start.y+dy*b}]);
 }
-export function createWeatherReadings(map,{formatTime,leaflet=globalThis.L,fitOnLoad=false}={}){
+export function createWeatherReadings(map,{formatTime,leaflet=globalThis.L,fitOnLoad=false,onSelect}={}){
  const container=map.getContainer(),host=document.createElement('div');host.className='weather-card-grid';host.setAttribute('aria-label','Regional weather stations');container.parentElement.append(host);
  let saved=[],forecast=false,shown=[],overview=fitOnLoad,layoutFrame,signature='';const lastPositions=new Map();
  const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.classList.add('weather-station-links');host.prepend(svg);
@@ -91,7 +91,7 @@ export function createWeatherReadings(map,{formatTime,leaflet=globalThis.L,fitOn
  map.on('unload',()=>{markerObserver.disconnect();shellObserver.disconnect();resizeObserver?.disconnect();cancelAnimationFrame(layoutFrame);});
 
  function paint(valid){shown=valid;host.replaceChildren(svg);for(const r of valid){
- const card=document.createElement('div');card.className='weather-reading';card.dataset.station=r.id;if(r.replacementFor)card.dataset.replacementFor=r.replacementFor;
+ const card=document.createElement('button');card.type='button';card.className='weather-reading';card.setAttribute('aria-label','Forecast for '+r.label);card.addEventListener('click',()=>onSelect?.(r));card.dataset.station=r.id;if(r.replacementFor)card.dataset.replacementFor=r.replacementFor;
  const name=document.createElement('span');name.className='weather-reading-place';name.textContent=r.label;
  const temperature=document.createElement('strong');temperature.className='weather-reading-temperature';temperature.textContent=Number.isFinite(r.temperatureF)?Math.round(r.temperatureF)+'°F':'—';
  const wind=windPresentation(r),line=document.createElement('span');line.className='weather-reading-wind';

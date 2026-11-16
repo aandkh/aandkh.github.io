@@ -243,3 +243,5 @@ body.forecast-playing .weather-card-grid{visibility:visible!important}
  #sidebar .input-row{flex-wrap:wrap}
  #sidebar .input-row input{min-width:0;flex:1 1 120px}
 }
+
+.weather-card-grid button.weather-reading{pointer-events:auto;cursor:pointer;touch-action:manipulation;font-weight:inherit}.weather-card-grid button.weather-reading:focus-visible{outline:3px solid #c18b34;outline-offset:2px}

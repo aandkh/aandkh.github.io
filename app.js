@@ -33,7 +33,7 @@ import {searchLayers} from './explore.js?v=20261115-road-insights';
 import {placeHash,readPlaceHash,placeState,findSharedFeature} from './short-links.js?v=20261115-core-polish';
 import {appendPlaceNavigation} from './place-navigation.js?v=20261115-road-insights';
 import {TODAY_LAYERS,happeningToday} from './today-filter.js?v=20261115-core-polish';
-import {createWeatherReadings} from './weather-readings.js?v=20261116-weather-layout';
+import {createWeatherReadings} from './weather-readings.js?v=20261116-weather-tap';
 import {enrichCultureFeature,cultureFeatureDisplayable} from './place-enrichment.js?v=20261115-road-insights';
 import {apiFetch,apiUrl} from './api-client.js?v=20261115-road-insights';
 import {regionalViewportBounds} from './viewport-bounds.js?v=20261115-core-polish';
@@ -73,6 +73,7 @@ function setOpenNow(value){openNow=value===true;$('#open-now').checked=openNow;r
 let featuredOptionsOpen=false;let layerFilter='all';const openLayerGroups=new Map([['To Do',true]]),selectedLayerGroups=new Map();
 let routeHighlight=null;
 let detailExpanded=false,detailReturnTarget=null,clusterBack=null,placeSuggestions=null;
+let weatherTarget=null;
 let forecastSelectedTime=null,skySelectedBody=null,transitRouteRequest=null,transitRouteLayer=null,transitRouteRescale=null;
 const weatherInsightPreferences={comfort:'mild',minF:55,maxF:78};
 let parkSort='distance',parkEnrichmentRevision=0;const parkFilters=new Set();const parkBoundsCache=new WeakMap();
@@ -92,7 +93,7 @@ const mapCredits=installMapCredits(map,{layers:LAYERS});
 map.createPane('weather-overlay');map.getPane('weather-overlay').style.zIndex='350';
 map.createPane('traffic-overlay');map.getPane('traffic-overlay').style.zIndex='450';
 const placeMarkers=L.layerGroup().addTo(map);
-const weatherReadings=createWeatherReadings(map,{formatTime:format,fitOnLoad:false});let weatherReadingsAt=0,weatherReadingsRequest=null;
+const weatherReadings=createWeatherReadings(map,{formatTime:format,fitOnLoad:false,onSelect:openStationForecast});let weatherReadingsAt=0,weatherReadingsRequest=null;
 const futureRadar=createFutureRadar(map,{weatherReadings,onStart(){skyCloudMap.close();closeDetail();setResults(false);setControls(false);drawn.get('radar')?.setOpacity(0);},onClose(){drawn.get('radar')?.setOpacity(overlayOpacity.radar);weatherReadings.endForecast(enabled.has('radar'));}});
 const trafficNote=el('div','traffic-note');trafficNote.hidden=true;$('#map').parentElement.append(trafficNote);
 const trafficIncidents=createTrafficIncidents(map,{onStatus(text){trafficNote.textContent=text;trafficNote.hidden=!text;},onSelect(r){
@@ -342,7 +343,7 @@ async function loadLayer(id){
   renderLayers();renderResults();if(id==='parks')enrichParkBackground(result);return true;
  };
  try{
-  const mode=id==='radar'?radarMode:id==='air'?airMode:layerModes[id]||'',center=map.getCenter();
+  const mode=id==='radar'?radarMode:id==='air'?airMode:layerModes[id]||'',center=id==='weather'&&weatherTarget?{...weatherTarget}:map.getCenter();
   const location=['sky','weather'].includes(id)?'&lat='+center.lat.toFixed(5)+'&lng='+center.lng.toFixed(5):'';
   const query='?bbox='+boundsParam()+'&mode='+mode+location;
   const remote=async(source=id,timeout=20000)=>{
@@ -386,18 +387,25 @@ async function loadLayer(id){
 }
 function captureInspection(active){const box=$('#detail'),element=document.activeElement;return active?{scroll:box.scrollTop,key:box.contains(element)?element.dataset.inspectionKey||element.getAttribute('aria-label')||'':'',open:[...box.querySelectorAll('details[open]')].map(d=>d.querySelector('summary')?.textContent)}:null;}
 function restoreInspection(saved){if(!saved)return;const box=$('#detail');for(const disclosure of box.querySelectorAll('details'))if(saved.open.includes(disclosure.querySelector('summary')?.textContent))disclosure.open=true;const target=[...box.querySelectorAll('[data-inspection-key],[aria-label]')].find(n=>(n.dataset.inspectionKey||n.getAttribute('aria-label'))===saved.key);target?.focus({preventScroll:true});box.scrollTop=saved.scroll;}
+function openStationForecast(reading){
+ if(!coordinate(reading.lat,reading.lng))return;
+ if(futureRadar.active)futureRadar.stop();
+ weatherTarget={lat:reading.lat,lng:reading.lng,label:reading.label};forecastSelectedTime=null;
+ closeDetail();setControls(false);setResults(false);enabled.add('weather');requestedLayers.add('weather');
+ data.delete('weather');loadLayer('weather');renderWeather();renderLegend();
+}
 function renderWeather(){
  skyCloudMap.close();if(futureRadar.active)futureRadar.stop();
  const result=data.get('weather'),inspection=captureInspection(weatherPanelOpen);if(!inspection)rememberDetailOrigin();closeDetail();weatherPanelOpen=true;
  const box=$('#detail');box.classList.add('sky-panel','weather-panel');box.replaceChildren();box.hidden=false;$('#results').hidden=true;
- const head=el('div','floating-head'),close=btn('×',()=>closeDetail({restoreFocus:true}));close.setAttribute('aria-label','Close weather');head.append(el('h2','','Forecast'),close);detailExpansion(head);box.append(head,btn('▶ Future radar · next 6 hours',()=>futureRadar.start(),'sky-refresh'));
- const sunMoon=el('div'),sunLocation=result?.weather?.location||map.getCenter(),drawSunMoon=()=>{sunMoon.replaceChildren();appendForecastSunMoon(sunMoon,{lat:sunLocation.lat,lng:sunLocation.lng,time:forecastSelectedTime||Date.now()});};
+ const head=el('div','floating-head'),close=btn('×',()=>closeDetail({restoreFocus:true}));close.setAttribute('aria-label','Close weather');head.append(el('h2','',weatherTarget?'Forecast · '+weatherTarget.label:'Forecast'),close);detailExpansion(head);box.append(head,btn('▶ Future radar · next 6 hours',()=>futureRadar.start(),'sky-refresh'));
+ const sunMoon=el('div'),sunLocation=weatherTarget||result?.weather?.location||map.getCenter(),drawSunMoon=()=>{sunMoon.replaceChildren();appendForecastSunMoon(sunMoon,{lat:sunLocation.lat,lng:sunLocation.lng,time:forecastSelectedTime||Date.now()});};
  const chart=appendWeather(box,result,{format,selectedTime:forecastSelectedTime,onSelection:time=>{forecastSelectedTime=time;drawSunMoon();}});
  const insights=el('div');if(result?.weather)appendWeatherInsights(insights,result.weather,{preferences:weatherInsightPreferences,onSelect:time=>{const index=chart?.model.rows.findIndex(row=>row.timestamp===Date.parse(time));if(index>=0){chart.selectHour(index);chart.element.scrollIntoView({behavior:'smooth',block:'nearest'});}}});
  box.insertBefore(insights,box.querySelector('.forecast-visual')||box.querySelector('.extra-disclosure'));
  drawSunMoon();box.insertBefore(sunMoon,box.querySelector('.extra-disclosure'));
  const rain=el('div');appendRainBudget(rain,{lat:sunLocation.lat,lng:sunLocation.lng});box.insertBefore(rain,box.querySelector('.extra-disclosure'));
- const refresh=btn('Update for map center',()=>{refresh.disabled=true;refresh.textContent='Updating forecast…';loadLayer('weather');},'sky-refresh');refresh.dataset.inspectionKey='weather-refresh';box.append(refresh);if(inspection)restoreInspection(inspection);else focusDetailHeading();
+ const refresh=btn('Update for map center',()=>{refresh.disabled=true;refresh.textContent='Updating forecast…';weatherTarget=null;forecastSelectedTime=null;data.delete('weather');loadLayer('weather');renderWeather();},'sky-refresh');refresh.dataset.inspectionKey='weather-refresh';box.append(refresh);if(inspection)restoreInspection(inspection);else focusDetailHeading();
 }
 function renderSky(){
  skyCloudMap.close(); const result=data.get('sky'),sky=result?.sky,inspection=captureInspection(skyPanelOpen);if(!inspection)rememberDetailOrigin();closeDetail();skyPanelOpen=true;const box=$('#detail');box.classList.add('sky-panel');box.replaceChildren();box.hidden=false;$('#results').hidden=true;
