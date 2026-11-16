@@ -77,9 +77,9 @@ function hydrate(f,sources) {
  return {...f,properties:{...p,source:p.source||s.name,sourceUrl:p.sourceUrl||s.url,url:p.url||s.url,description:p.description||((p.offenses?.length?'Reported offenses: '+p.offenses.join('; ')+'. ':'')+(outcomes?outcomes+'. ':'Outcome counts are not supplied by this source. ')+(p.reportNumber?'Case '+p.reportNumber+(p.reportingAgency?' · '+titleCase(p.reportingAgency):'')+'. ':'')+'Preliminary public report; not a finding of guilt. Location is an approximate reported area.')}};
 }
 async function json(url) { const r=await fetch(url,{cache:'no-cache',signal:AbortSignal.timeout(12000)});if(!r.ok)throw Error('Incident archive unavailable ('+r.status+')');return r.json(); }
-export async function recentIncidents(now = Date.now(), filters = incidentFilters) {
+export async function recentIncidents(now = Date.now(), filters = incidentFilters, {force=false} = {}) {
  const requested={...filters,types:[...(filters.types||[])]};
- if(!cache||Date.now()-loaded>300000){
+ if(force||!cache||Date.now()-loaded>300000){
   if(!pending)pending=json('./recent-incidents.json').then(d=>{cache=d;loaded=Date.now();archiveCache.clear();}).finally(()=>{pending=null;});
   await pending;
  }
@@ -95,6 +95,11 @@ export async function recentIncidents(now = Date.now(), filters = incidentFilter
  return {features,archiveFeatures,archiveCount:cache.archiveCount||archiveFeatures.length,archiveMonths:cache.archiveMonths||[],sources,status:features.length?'reference':'empty',mode:'recent',checkedAt:cache.checkedAt,source:'Official metro police reports and reviewed releases',archiveErrors,coverageAudit:cache.coverageAudit,archiveCoverageFrom:cache.archiveCoverageFrom,fatalityRecords:Array.isArray(cache.fatalityRecords)?cache.fatalityRecords:null,fatalityCoverage:cache.fatalityCoverage,
  note:cache.coverageNote||'City and County are always combined. Selected reports are not a complete regional census. Approximate locations are not exact scenes. Missing reports do not mean no incidents.',
  legend:{title:'Crimes & Crashes · selected period',items:[{color:'#c52f73',label:'Reported crime'},{color:'#ed5900',label:'Injury / fatal crashes'}],note:'Approximate reported areas. Empty areas do not establish safety.'}};
+}
+export function incidentFreshness(sources, now=Date.now()) {
+ const today=localDay(now),valid=sources.filter(s=>/^\d{4}-\d{2}-\d{2}$/.test(s.latestIncidentDate||'')&&s.latestIncidentDate<=today);
+ const latest=list=>list.map(s=>s.latestIncidentDate).sort().at(-1)||null;
+ return {latest:latest(valid),countyLatest:latest(valid.filter(s=>s.id?.startsWith('county-'))),countyBulk:valid.filter(s=>['county-nibrs','county-crashes'].includes(s.id)).map(s=>s.latestIncidentDate).sort()[0]||null};
 }
 export function incidentCoverage(sources, now=Date.now()) {
  return sources.filter(s=>s.latestIncidentDate).map(s=>({name:s.name,date:s.latestIncidentDate,lag:Math.max(0,Math.round((Date.parse(localDay(now))-Date.parse(s.latestIncidentDate))/86400000)),failed:s.status==='error',checkedAt:s.checkedAt}));
@@ -113,9 +118,10 @@ export function incidentExplorer(d,onChange) {
  const all=d.archiveFeatures, available=incidentStats(all), features=filterIncidents(all),stats=incidentStats(features);
  const freshness=add('div','','incident-freshness');
  freshness.textContent=`City + County together · ${stats.city.toLocaleString()} City + ${stats.county.toLocaleString()} County reports in this selection`;
- const weekly=(d?.sources||[]).filter(s=>['county-nibrs','county-crashes'].includes(s.id)&&s.latestIncidentDate),countyThrough=weekly.map(s=>s.latestIncidentDate).sort()[0];
+ const dates=incidentFreshness(d.sources||[]),countyThrough=dates.countyBulk;
+ if(dates.latest)add('small','Newest available report: '+dayLabel(dates.latest)+(dates.countyLatest?' · County reports through '+dayLabel(dates.countyLatest):''),'incident-current-dates');
  if(countyThrough&&localDay(Date.now()-6*86400000)>=countyThrough){
-  add('small','County Police and participating municipal feeds currently reach '+dayLabel(countyThrough)+'. Newer County reports are incomplete; Florissant and reviewed local reports supplement them.','incident-warning');
+  add('small','The weekly County bulk feeds still stop at '+dayLabel(countyThrough)+'. Newer municipal and reviewed reports are included below; coverage remains incomplete.','incident-warning');
   if(incidentFilters.range==='7'){const more=add('button','See 30 days of City + County reports');more.type='button';more.onclick=()=>{incidentFilters.range='30';onChange();};}
  }
  if(Array.isArray(d.fatalityRecords)){

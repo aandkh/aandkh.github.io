@@ -1,6 +1,6 @@
 # Wildlife variety
 
-`wildlife.js` queries the public iNaturalist v1 API without authentication. It uses research-grade, wild (`captive=false`), georeferenced observations at species rank or below. The regional bounding box covers St. Louis City and County together and neighboring regional land: southwest 38.3,-90.85; northeast 38.99,-89.95. A report is not proof of continued presence, animal abundance, native status, access permission, or a complete inventory.
+`wildlife.js` queries the public iNaturalist v1 API without authentication. It uses research-grade, wild (`captive=false`), georeferenced observations at species rank or below, with `geoprivacy=open`, `taxon_geoprivacy=open`, `obscuration=none`, and `threatened=false`. The regional bounding box covers St. Louis City and County together and neighboring regional land: southwest 38.3,-90.85; northeast 38.99,-89.95. A report is not proof of continued presence, animal abundance, native status, access permission, or a complete inventory.
 
 ## Source and queries
 
@@ -19,8 +19,14 @@ Never map private, obscured, taxon-obscured, captive, non-research-grade, or exp
 
 ## Verified snapshot
 
-`wildlife-snapshot.json` was generated November 16, 2026 from the same adapter and official live API, query November 16, 2025–November 16, 2026. The API returned 59,167 matching reports and 3,825 recorded taxa. The first three pages supplied 600 records; privacy/validity filtering left 534 map points. Full-query histogram and species-count aggregates are included; the 200-taxon picker is a subset.
+`wildlife-snapshot.json` was generated November 16, 2026 from the same adapter and official live API, query November 16, 2025–November 16, 2026. The API returned 51,100 matching reports and 3,330 recorded taxa. The first three pages supplied 600 records; privacy/validity filtering left 600 map points. Full-query histogram and species-count aggregates are included; the 200-taxon picker is a subset.
 
 Fallback preserves its real query range and checkedAt. It is used only for an identical selection or the initial unfiltered default; its actual older date range is shown. A failed custom filter never receives unrelated cached records. Source failures in secondary aggregates retain useful observation pins and label the missing aggregate. If the observation query fails and no faithful fallback applies, show unavailable.
 
 The snapshot is a failure fallback, not a promise of always-current sightings. On-demand successful requests supply current records. Refresh this small default snapshot when there is a relevant dynamic-data change or adapter repair; do not add a static full-site audit. Tests: `node scripts/wildlife-test.mjs` after adapter changes.
+
+## Heatmap default
+
+Wildlife opens with the official iNaturalist `/v1/heatmap/{z}/{x}/{y}.png` tiles at `tiles.inaturalist.org`, verified against the official v1 Swagger contract. Tiles use the entire matching public query, not the capped newest-record list. Group, species, date and month filters affect both. The qualitative purple-to-red scale is observation concentration, not population density, habitat extent, or species richness. Observer effort affects it. Individual reports remain available as a view switch and list. The 512px provider images display on ordinary 256px XYZ tiles; native zoom is capped at 13 and stretched above it rather than adding false precision. Partial/failed tile loads have local status text. No zoom-to-fit changes.
+
+The default fallback snapshot carries `queryPolicy=public-unthreatened-v2`; older aggregate snapshots without those source-side privacy constraints must not be substituted for the new filtered query. Test with `node scripts/wildlife-heat-test.mjs` and `node scripts/wildlife-test.mjs`.

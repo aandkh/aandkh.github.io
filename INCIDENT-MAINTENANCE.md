@@ -63,3 +63,43 @@ Each reviewed fatality attribution uses `fatalityEvidence: [{category, deaths, s
 The browser’s past-seven-days summary uses a **rolling 168-hour** interval, independent of the map’s date/type filters. It excludes future events and old timestamps. An occurrence with only a date on the boundary day cannot be located inside that interval reliably, so it is excluded from the two counts and disclosed separately. Unknown victim counts and unattributed known deaths are reported separately. Zero classified cases is displayed as “None confirmed in available reports”, never a claim that no one was killed.
 
 `fatalityRecords` is a compact projection built from **all** permanent month shards on every publication, not merely the recent snapshot. It supplies annual statistics without downloading thousands of unrelated map points on mobile. It carries case IDs, dates, outcome fields and source attribution; it does not infer victims from homicide rows. Canonical case aliases deduplicate sources. Annual statistics are explicitly an incomplete tracked-report subset. `archiveCoverageFrom` records the oldest occurrence; this archive starts in August 2026. No complete year-to-date winner or comparison is claimed. Full-year completeness requires independent verification of both categories over January 1 through the same cutoff across City and County.
+
+
+## November 16 source-lag repair
+
+The County NIBRS and injury-crash service publishers themselves still stopped at
+November 8 when checked November 16. ArcGIS `editingInfo.dataLastEditDate` was
+November 9 for both, and a descending-date query confirmed November 8 as the
+latest occurrence. A successful refresh does not remove this upstream delay.
+The City public map supplies newer reports (November 16 during this check).
+The combined UI distinguishes newest available reports from the older County
+bulk-feed cutoff. Explicit Refresh feeds now bypasses the browser's five-minute
+incident cache; filter changes continue to reuse the cache.
+
+### Chesterfield daily police bulletins
+
+Add the official [Chesterfield Crime Statistics and Reports](https://www.chesterfield.mo.us/crime-statistics-and-reports)
+to the existing daily **changing incident** review. Its linked daily PDFs were
+newer than the shared County bulk feed: the November 13 posting documents
+November 12 occurrences. The posting date is NOT the incident date. Follow each
+new or changed PDF, preserve the printed case number and beginning occurrence
+clock, and check for corrections. Do not reread unchanged PDFs every morning.
+
+The municipal page loads its PDF links dynamically. Browser access worked during
+this repair; simple HTTP requests to the page/assets returned 403. This is an
+AI-reviewed source, not a working unattended PDF download adapter. If access
+fails, retain previous records and actual review dates and report the failure.
+Do not assert a successful check from search snippets alone.
+
+Use source ID `county-chesterfield-bulletins`, `jurisdiction: county`, agency
+`CHESTERFIELD`, and the official PDF URL on each reviewed case. Exact agency +
+printed case number creates the same stable County case hash, so a later County
+bulk release merges with the reviewed case instead of creating a duplicate.
+Keep summaries attributed, omit names/demographics and juvenile/sexual-offense
+records. Use printed masked streets or named public intersections/areas with
+verified approximate geometry; never geocode to a household address. No injury
+or death count is inferred from an assault label. Update its `sourceReviews`
+entry only after actually reading the new/changed official bulletins. The
+coverage check warns if this source's newest occurrence becomes over seven days
+old, prompting review of the publisher's latest bulletin rather than assuming
+that no reports occurred.

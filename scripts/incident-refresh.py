@@ -144,7 +144,7 @@ def coverage_audit(features,sources,now):
   if j not in by or day>today.isoformat():continue
   b=by[j];b['archive']+=1;b['pastWeek']+=day>=week;b['past30Days']+=day>=month;b['latestIncidentDate']=max(day,b['latestIncidentDate'] or '')
  source_map={s['id']:s for s in sources}
- for ident,maxlag in [('city-crimemapping',3),('county-nibrs',9),('county-crashes',9),('county-florissant',9)]:
+ for ident,maxlag in [('city-crimemapping',3),('county-nibrs',9),('county-crashes',9),('county-florissant',9),('county-chesterfield-bulletins',7)]:
   s=source_map.get(ident)
   if not s:warnings.append({'code':'missing-source','sourceId':ident,'message':ident+' has no source status; check the combined feed.'});continue
   if s.get('status')=='error':warnings.append({'code':'source-failed','sourceId':ident,'message':ident+' failed its last refresh; prior verified reports are retained.'})
@@ -227,10 +227,10 @@ def main():
      if e.get('category') not in ['police','other-homicide'] or outcome(e.get('deaths')) is None or e['deaths']<1 or not e.get('sourceUrl') or not e.get('summary'):raise ValueError('Fatality attribution requires sourced, explicit count: '+p['id'])
     if sum(e['deaths'] for e in evidence)>p.get('deaths',0):raise ValueError('Attributed deaths exceed reported total: '+p['id'])
    new.append(f)
-  for source in ['city-releases','county-releases','county-reviewed-news']:
+  for source in ['city-releases','county-releases','county-reviewed-news','county-chesterfield-bulletins']:
    items=[f for f in reviewed.get('features',[]) if f['properties'].get('sourceId')==source]
    if items and source in source_meta:source_meta[source].update({'checkedAt':reviewed.get('sourceReviews',{}).get(source,reviewed.get('reviewedAt')),'latestIncidentDate':max(f['properties']['incidentAt'][:10] for f in items)})
- metadata['sources']=list(source_meta.values());metadata['coverageNote']='City and County are always shown together. City and Florissant public maps supplement County and participating municipal feeds, which update weekly. Reviewed municipal investigations and Highway Patrol reporting add newer County cases. Agency exclusions and approval delays remain. These are reported incidents, not a complete regional census or safety ranking. Locations are approximate; unknown outcomes are not zero.'
+ metadata['sources']=list(source_meta.values());metadata['coverageNote']='City and County are always shown together. City and Florissant public maps supplement County and participating municipal feeds, which update weekly. Chesterfield daily bulletins, reviewed municipal investigations and Highway Patrol reporting add newer County cases. Agency exclusions and approval delays remain. These are reported incidents, not a complete regional census or safety ranking. Locations are approximate; unknown outcomes are not zero.'
  features=merge_features(old,new);publish_archive(features,metadata,now)
  print(str(len(features))+' total archived incidents; '+str(len(metadata['features']))+' in fast recent snapshot')
  if failures:raise SystemExit(1)

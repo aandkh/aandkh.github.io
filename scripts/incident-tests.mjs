@@ -59,3 +59,7 @@ const missingIndex=m.incidentExplorer({mode:'recent',status:'reference',archiveF
 assert.match(missingIndex,/Reported-death summary is unavailable/);assert.doesNotMatch(missingIndex,/None confirmed|no police-caused|Year-to-date comparison/);
 assert.equal(d.fatalityRecords,null,'Missing index must remain unavailable, not be normalized to an empty valid index');
 console.log('Explorer loading and missing fatality index never render false zero-count summaries.');
+
+const beforeForce=requests.length;await m.recentIncidents(now,{range:'7'});assert.equal(requests.length,beforeForce);await m.recentIncidents(now,{range:'7'},{force:true});assert.equal(requests.length,beforeForce+1,'Explicit refresh must revalidate the published snapshot immediately');
+assert.deepEqual(m.incidentFreshness([{id:'county-nibrs',latestIncidentDate:'2026-11-08'},{id:'county-reviewed-news',latestIncidentDate:'2026-11-14'},{id:'city-crimemapping',latestIncidentDate:'2026-11-15'}],now),{latest:'2026-11-15',countyLatest:'2026-11-14',countyBulk:'2026-11-08'});
+console.log('Explicit refresh bypasses cache; overall and County supplement dates remain distinct from bulk-feed lag.');

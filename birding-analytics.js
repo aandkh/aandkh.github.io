@@ -1,5 +1,5 @@
 // Observational analytics, not a model of abundance or detection probability.
-import {readWildlifeJson} from './wildlife.js?v=20261116-nature-history';
+import {readWildlifeJson} from './wildlife.js?v=20261116-wildlife-heat';
 const API='https://api.inaturalist.org/v1/observations';
 const MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const SEASONS=[['Winter','12,1,2'],['Spring','3,4,5'],['Summer','6,7,8'],['Fall','9,10,11']];

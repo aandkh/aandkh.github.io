@@ -1,6 +1,6 @@
 import {enrichCultureFeature,cultureFeatureDisplayable} from './place-enrichment.js?v=20261115-road-insights';
 import {cleanVehicle} from './vehicles.js?v=20261115-road-insights';
-import {BY_ID} from './catalog.js?v=20261116-nature-history';
+import {BY_ID} from './catalog.js?v=20261116-wildlife-heat';
 import {isExcludedChainPlace} from './chain-places.js?v=20261115-road-insights';
 import {cleanLayerModes,cleanOverlayOpacity} from './expansion-options.js?v=20261115-road-insights';
 export const REGION = {south:38.1,north:39.2,west:-91.2,east:-89.4};
@@ -49,7 +49,7 @@ export function cleanOuting(value){
  return {stops,notes:textLimit(s.notes,600),when:validLocalDate(s.when,true)?s.when:''};
 }
 export function cleanNatureState(s={}){
- const raw=s.wildlifeOptions||{},wildlifeOptions={};
+ const raw=s.wildlifeOptions||{},wildlifeOptions={mapView:raw.mapView==='reports'?'reports':'heat'};
  for(const key of ['d1','d2'])if(validLocalDate(raw[key]))wildlifeOptions[key]=raw[key];
  if(/^[A-Za-z]{1,30}$/.test(raw.iconicTaxa||''))wildlifeOptions.iconicTaxa=raw.iconicTaxa;
  if(Number.isSafeInteger(Number(raw.taxonId))&&Number(raw.taxonId)>0)wildlifeOptions.taxonId=Number(raw.taxonId);

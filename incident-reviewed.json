@@ -890,11 +890,250 @@
         "deaths": 1,
         "injuries": 2
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.54,
+          38.615
+        ]
+      },
+      "properties": {
+        "id": "incident:county-nibrs:1f6b4c17ba68668f",
+        "title": "Assault report \u00b7 Baxter Center",
+        "incidentAt": "2026-11-12T00:09:00-06:00",
+        "incidentDate": "2026-11-12",
+        "incidentTimeAccuracy": "reported local time",
+        "incidentKind": "assault",
+        "incidentTypes": [
+          "assault"
+        ],
+        "description": "Police reported that an intoxicated person struck two people. Preliminary police report; not a finding of guilt. Injury and death counts were not supplied.",
+        "address": "Baxter Center / Clayton and Baxter roads area, Chesterfield, MO",
+        "reportNumber": "26-4944",
+        "reportingAgency": "CHESTERFIELD",
+        "sourceId": "county-chesterfield-bulletins",
+        "source": "Chesterfield Police Department \u00b7 daily crime bulletin",
+        "url": "https://content.civicplus.com/api/assets/mo-chesterfield/9b8fd313-b0e9-41ac-8539-6aa2b6490893?cache=1800",
+        "sourceUrl": "https://content.civicplus.com/api/assets/mo-chesterfield/9b8fd313-b0e9-41ac-8539-6aa2b6490893?cache=1800",
+        "sourceCheckedAt": "2026-11-16T18:17:53.095226+00:00",
+        "jurisdiction": "county",
+        "locationAccuracy": "Reported shopping-center area; marker at the nearby public road intersection, not an exact scene.",
+        "locationSourceUrl": "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?SingleLine=Clayton+Rd+%26+Baxter+Rd%2C+Chesterfield%2C+Missouri&f=json&outFields=Addr_type%2CMatch_addr%2CLongLabel%2CScore&maxLocations=3",
+        "color": "#c52f73"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.522,
+          38.671
+        ]
+      },
+      "properties": {
+        "id": "incident:county-nibrs:4f7560b705b09716",
+        "title": "Credit-card fraud report \u00b7 Greenfield Village",
+        "incidentAt": "2026-11-11T11:45:00-06:00",
+        "incidentDate": "2026-11-11",
+        "incidentTimeAccuracy": "reported local time",
+        "incidentKind": "fraud",
+        "incidentTypes": [
+          "fraud"
+        ],
+        "description": "Police reported unauthorized purchases using another person\u2019s credit-card information. Preliminary police report; not a finding of guilt. Injury and death counts were not supplied.",
+        "address": "Stablestone Court area, Greenfield Village, Chesterfield, MO",
+        "reportNumber": "26-4959",
+        "reportingAgency": "CHESTERFIELD",
+        "sourceId": "county-chesterfield-bulletins",
+        "source": "Chesterfield Police Department \u00b7 daily crime bulletin",
+        "url": "https://content.civicplus.com/api/assets/mo-chesterfield/9b8fd313-b0e9-41ac-8539-6aa2b6490893?cache=1800",
+        "sourceUrl": "https://content.civicplus.com/api/assets/mo-chesterfield/9b8fd313-b0e9-41ac-8539-6aa2b6490893?cache=1800",
+        "sourceCheckedAt": "2026-11-16T18:17:53.095226+00:00",
+        "jurisdiction": "county",
+        "locationAccuracy": "Approximate reported street area; public street center, not a household location.",
+        "locationSourceUrl": "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?SingleLine=Stablestone+Ct%2C+Chesterfield%2C+Missouri&f=json&outFields=Addr_type%2CMatch_addr%2CLongLabel%2CScore&maxLocations=3",
+        "color": "#c52f73"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.569,
+          38.621
+        ]
+      },
+      "properties": {
+        "id": "incident:county-nibrs:74fa737a9418d3f0",
+        "title": "Identity-fraud report \u00b7 Sycamore Drive",
+        "incidentAt": "2026-11-12T09:41:00-06:00",
+        "incidentDate": "2026-11-12",
+        "incidentTimeAccuracy": "reported local time",
+        "incidentKind": "fraud",
+        "incidentTypes": [
+          "fraud"
+        ],
+        "description": "Police reported misuse of another person\u2019s identity to access benefits. Preliminary police report; not a finding of guilt. Injury and death counts were not supplied.",
+        "address": "Sycamore Drive area, Chesterfield, MO",
+        "reportNumber": "26-4952",
+        "reportingAgency": "CHESTERFIELD",
+        "sourceId": "county-chesterfield-bulletins",
+        "source": "Chesterfield Police Department \u00b7 daily crime bulletin",
+        "url": "https://content.civicplus.com/api/assets/mo-chesterfield/9b8fd313-b0e9-41ac-8539-6aa2b6490893?cache=1800",
+        "sourceUrl": "https://content.civicplus.com/api/assets/mo-chesterfield/9b8fd313-b0e9-41ac-8539-6aa2b6490893?cache=1800",
+        "sourceCheckedAt": "2026-11-16T18:17:53.095226+00:00",
+        "jurisdiction": "county",
+        "locationAccuracy": "Approximate reported street area; public street center, not a household location.",
+        "locationSourceUrl": "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?SingleLine=Sycamore+Dr%2C+Chesterfield%2C+Missouri&f=json&outFields=Addr_type%2CMatch_addr%2CLongLabel%2CScore&maxLocations=3",
+        "color": "#c52f73"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.573,
+          38.661
+        ]
+      },
+      "properties": {
+        "id": "incident:county-nibrs:cf11d9e486d3d3ad",
+        "title": "Impaired-driving report \u00b7 Wild Horse Creek Road",
+        "incidentAt": "2026-11-11T18:33:00-06:00",
+        "incidentDate": "2026-11-11",
+        "incidentTimeAccuracy": "reported local time",
+        "incidentKind": "impaired driving",
+        "incidentTypes": [
+          "impaired driving"
+        ],
+        "description": "Police reported an intoxicated driver following a traffic stop for failure to maintain a lane. Preliminary police report; not a finding of guilt. Injury and death counts were not supplied.",
+        "address": "Wild Horse Creek Road at Old Chesterfield Road, MO",
+        "reportNumber": "26-4939",
+        "reportingAgency": "CHESTERFIELD",
+        "sourceId": "county-chesterfield-bulletins",
+        "source": "Chesterfield Police Department \u00b7 daily crime bulletin",
+        "url": "https://content.civicplus.com/api/assets/mo-chesterfield/e8c9d3c0-bebd-4869-8a2d-45007355e462?cache=1800",
+        "sourceUrl": "https://content.civicplus.com/api/assets/mo-chesterfield/e8c9d3c0-bebd-4869-8a2d-45007355e462?cache=1800",
+        "sourceCheckedAt": "2026-11-16T18:17:53.095226+00:00",
+        "jurisdiction": "county",
+        "locationAccuracy": "Reported public intersection, rounded to about 100 m; not an exact vehicle position.",
+        "locationSourceUrl": "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?SingleLine=Wild+Horse+Creek+Rd+%26+Old+Chesterfield+Rd%2C+Chesterfield%2C+Missouri&f=json&outFields=Addr_type%2CMatch_addr%2CLongLabel%2CScore&maxLocations=3",
+        "color": "#c52f73"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.54,
+          38.615
+        ]
+      },
+      "properties": {
+        "id": "incident:county-nibrs:06e338753f476a8f",
+        "title": "Impaired-driving report \u00b7 Clayton and Baxter roads",
+        "incidentAt": "2026-11-11T07:38:00-06:00",
+        "incidentDate": "2026-11-11",
+        "incidentTimeAccuracy": "reported local time",
+        "incidentKind": "impaired driving",
+        "incidentTypes": [
+          "impaired driving"
+        ],
+        "description": "Police reported an intoxicated driver after checking on a person slumped behind the wheel. Preliminary police report; not a finding of guilt. Injury and death counts were not supplied.",
+        "address": "Clayton Road at Baxter Road, Chesterfield, MO",
+        "reportNumber": "26-4930",
+        "reportingAgency": "CHESTERFIELD",
+        "sourceId": "county-chesterfield-bulletins",
+        "source": "Chesterfield Police Department \u00b7 daily crime bulletin",
+        "url": "https://content.civicplus.com/api/assets/mo-chesterfield/e8c9d3c0-bebd-4869-8a2d-45007355e462?cache=1800",
+        "sourceUrl": "https://content.civicplus.com/api/assets/mo-chesterfield/e8c9d3c0-bebd-4869-8a2d-45007355e462?cache=1800",
+        "sourceCheckedAt": "2026-11-16T18:17:53.095226+00:00",
+        "jurisdiction": "county",
+        "locationAccuracy": "Approximate reported business/intersection area, rounded to about 100 m.",
+        "locationSourceUrl": "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?SingleLine=Clayton+Rd+%26+Baxter+Rd%2C+Chesterfield%2C+Missouri&f=json&outFields=Addr_type%2CMatch_addr%2CLongLabel%2CScore&maxLocations=3",
+        "color": "#c52f73"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.572,
+          38.651
+        ]
+      },
+      "properties": {
+        "id": "incident:county-nibrs:1664fbb48d944c9f",
+        "title": "Stabbing report \u00b7 Lydia Hill Drive area",
+        "incidentAt": "2026-11-09T05:50:00-06:00",
+        "incidentDate": "2026-11-09",
+        "incidentTimeAccuracy": "reported local time",
+        "incidentKind": "assault",
+        "incidentTypes": [
+          "assault"
+        ],
+        "description": "Police reported responding to a stabbing in the 16XXX Lydia Hill Drive area. Preliminary police report; not a finding of guilt. Injury and death counts were not supplied.",
+        "address": "Lydia Hill Drive area, Chesterfield, MO",
+        "reportNumber": "26-4897",
+        "reportingAgency": "CHESTERFIELD",
+        "sourceId": "county-chesterfield-bulletins",
+        "source": "Chesterfield Police Department \u00b7 daily crime bulletin",
+        "url": "https://content.civicplus.com/api/assets/mo-chesterfield/aa537cc2-46e6-4f6b-9dfe-a53ed8046daf?cache=1800",
+        "sourceUrl": "https://content.civicplus.com/api/assets/mo-chesterfield/aa537cc2-46e6-4f6b-9dfe-a53ed8046daf?cache=1800",
+        "sourceCheckedAt": "2026-11-16T18:17:53.095226+00:00",
+        "jurisdiction": "county",
+        "locationAccuracy": "Approximate Lydia Hill Drive area; marker at a verified public road intersection, not the exact premises or scene.",
+        "locationSourceUrl": "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?SingleLine=Lydia+Hill+Dr+%26+Veterans+Place+Dr%2C+Chesterfield%2C+Missouri&f=json&outFields=Addr_type%2CMatch_addr%2CLongLabel%2CScore&maxLocations=3",
+        "color": "#c52f73"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.558,
+          38.653
+        ]
+      },
+      "properties": {
+        "id": "incident:county-nibrs:52767951da836879",
+        "title": "Impaired-driving report \u00b7 I-64 at Clarkson",
+        "incidentAt": "2026-11-09T23:48:00-06:00",
+        "incidentDate": "2026-11-09",
+        "incidentTimeAccuracy": "reported local time",
+        "incidentKind": "impaired driving",
+        "incidentTypes": [
+          "impaired driving"
+        ],
+        "description": "Police reported an intoxicated driver following a speeding stop. Preliminary police report; not a finding of guilt. Injury and death counts were not supplied.",
+        "address": "Eastbound I-64 at Clarkson Road, Chesterfield, MO",
+        "reportNumber": "26-4914",
+        "reportingAgency": "CHESTERFIELD",
+        "sourceId": "county-chesterfield-bulletins",
+        "source": "Chesterfield Police Department \u00b7 daily crime bulletin",
+        "url": "https://content.civicplus.com/api/assets/mo-chesterfield/aa537cc2-46e6-4f6b-9dfe-a53ed8046daf?cache=1800",
+        "sourceUrl": "https://content.civicplus.com/api/assets/mo-chesterfield/aa537cc2-46e6-4f6b-9dfe-a53ed8046daf?cache=1800",
+        "sourceCheckedAt": "2026-11-16T18:17:53.095226+00:00",
+        "jurisdiction": "county",
+        "locationAccuracy": "Reported public interchange area, rounded to about 100 m; not an exact vehicle position.",
+        "locationSourceUrl": "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?SingleLine=I-64+%26+Clarkson+Rd%2C+Chesterfield%2C+Missouri&f=json&outFields=Addr_type%2CMatch_addr%2CLongLabel%2CScore&maxLocations=3",
+        "color": "#c52f73"
+      }
     }
   ],
   "sourceReviews": {
     "county-reviewed-news": "2026-11-15T19:44:02.622984+00:00",
     "county-releases": "2026-11-15T19:44:02.622984+00:00",
-    "city-releases": "2026-11-15T19:44:02.622984+00:00"
+    "city-releases": "2026-11-15T19:44:02.622984+00:00",
+    "county-chesterfield-bulletins": "2026-11-16T18:17:53.095226+00:00"
   }
 }

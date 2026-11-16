@@ -4,7 +4,7 @@ export const WILDLIFE_GROUPS=[['','All wildlife & plants'],['Plantae','Plants'],
 const API='https://api.inaturalist.org/v1/',cache=new Map();let queue=Promise.resolve(),lastRequest=0;
 const safeDate=v=>/^\d{4}-\d{2}-\d{2}$/.test(v||'')&&Number.isFinite(Date.parse(v));
 export function wildlifeQuery(options={}){
- const q=new URLSearchParams({quality_grade:'research',captive:'false',geo:'true',hrank:'species'});
+ const q=new URLSearchParams({quality_grade:'research',captive:'false',geo:'true',hrank:'species',geoprivacy:'open',taxon_geoprivacy:'open',obscuration:'none',threatened:'false'});
  if(Number.isFinite(options.lat)&&Number.isFinite(options.lng)){q.set('lat',options.lat);q.set('lng',options.lng);q.set('radius',Math.max(.5,Math.min(25,Number(options.radius)||5)));}
  else for(const[k,v]of Object.entries(options.bounds||WILDLIFE_BOUNDS))if(Object.hasOwn(WILDLIFE_BOUNDS,k)&&Number.isFinite(v))q.set(k,v);
  if(WILDLIFE_GROUPS.some(([k])=>k&&k===options.iconicTaxa))q.set('iconic_taxa',options.iconicTaxa);
@@ -30,9 +30,9 @@ export function wildlifeSnapshot(observations,species,histogram,options={},check
  const seen=new Set(),features=[];for(const row of observations.results||[]){const f=wildlifeObservation(row);if(f&&!seen.has(f.id)){seen.add(f.id);features.push(f);}}
  const taxa=(species?.results||[]).filter(r=>Number.isInteger(r.taxon?.id)&&r.taxon?.name&&Number.isFinite(r.count)).map(r=>({id:r.taxon.id,name:r.taxon.preferred_common_name||r.taxon.name,scientificName:r.taxon.name,rank:r.taxon.rank,count:r.count,threatened:r.taxon.threatened===true}));
  const counts=histogram?.results?.month_of_year||{},months=Array.from({length:12},(_,i)=>({month:i+1,count:Number.isFinite(Number(counts[i+1]))?Number(counts[i+1]):0}));
- return{id:'wildlife',type:'FeatureCollection',features,status:features.length?'partial':'empty',checkedAt,source:'iNaturalist',query:{...options},totalInView:features.length,analytics:{matchingObservations:Number(observations.total_results)||0,mappedObservations:features.length,loadedObservations:(observations.results||[]).length,distinctTaxa:Number.isFinite(species?.total_results)?species.total_results:null,taxa,months,seasonalityAvailable:!!histogram?.results?.month_of_year},note:'Research-grade wild observations; reports are not population counts or complete species inventories. Map points show approximate areas, not guaranteed current presence. Private, obscured and threatened-species records are not mapped.'};
+ return{id:'wildlife',type:'FeatureCollection',features,status:features.length?'partial':'empty',checkedAt,source:'iNaturalist',queryPolicy:'public-unthreatened-v2',query:{...options},totalInView:features.length,analytics:{matchingObservations:Number(observations.total_results)||0,mappedObservations:features.length,loadedObservations:(observations.results||[]).length,distinctTaxa:Number.isFinite(species?.total_results)?species.total_results:null,taxa,months,seasonalityAvailable:!!histogram?.results?.month_of_year},note:'Research-grade wild observations; reports are not population counts or complete species inventories. Map points show approximate areas, not guaranteed current presence. Private, obscured and threatened-species records are not mapped.'};
 }
-export function defaultWildlifeOptions(now=new Date()){const parts=Object.fromEntries(new Intl.DateTimeFormat('en-US',{timeZone:'America/Chicago',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(now).map(p=>[p.type,p.value])),end=parts.year+'-'+parts.month+'-'+parts.day,start=new Date(end+'T12:00:00Z');start.setUTCFullYear(start.getUTCFullYear()-1);return{d1:start.toISOString().slice(0,10),d2:end,iconicTaxa:'',taxonId:'',month:'',pageLimit:1};}
+export function defaultWildlifeOptions(now=new Date()){const parts=Object.fromEntries(new Intl.DateTimeFormat('en-US',{timeZone:'America/Chicago',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(now).map(p=>[p.type,p.value])),end=parts.year+'-'+parts.month+'-'+parts.day,start=new Date(end+'T12:00:00Z');start.setUTCFullYear(start.getUTCFullYear()-1);return{d1:start.toISOString().slice(0,10),d2:end,iconicTaxa:'',taxonId:'',month:'',pageLimit:1,mapView:'heat'};}
 export async function loadWildlife(options={}){
  const {signal,fetcher=fetch,...input}=options,query={...defaultWildlifeOptions(),...input},q=wildlifeQuery(query),limit=Math.max(1,Math.min(5,Math.floor(query.pageLimit)||1));
  const read=path=>readWildlifeJson(API+path,{signal,fetcher});
@@ -44,11 +44,11 @@ export async function loadWildlife(options={}){
   const histogram=await optional('observations/histogram?'+q+'&date_field=observed&interval=month_of_year','Monthly totals');
   const snapshot=wildlifeSnapshot(observations,species,histogram,query);if(warnings.length)snapshot.note=warnings.join(' ')+' '+snapshot.note;return snapshot;
  }catch(error){if(signal?.aborted)throw error;
-  try{const r=await fetcher(new URL('./wildlife-snapshot.json?v=20261116-wildlife',import.meta.url),{signal:AbortSignal.timeout(8000)});if(!r.ok)throw error;const saved=await r.json();
+  try{const r=await fetcher(new URL('./wildlife-snapshot.json?v=20261116-wildlife-heat',import.meta.url),{signal:AbortSignal.timeout(8000)});if(!r.ok)throw error;const saved=await r.json();
    // Never describe a different cached query as the requested one.
    const exact=wildlifeQuery(query).toString()===wildlifeQuery(saved.query||{}).toString();
    const defaultSelection=!Number.isFinite(input.lat)&&!input.bounds&&!input.d1&&!input.d2&&!query.iconicTaxa&&!query.taxonId&&!query.month;
-   if(exact||defaultSelection)return{...saved,status:'partial',cached:true,note:'Live source unavailable. Showing saved observations checked '+saved.checkedAt+'. '+saved.note};
+   if(saved.queryPolicy==='public-unthreatened-v2'&&(exact||defaultSelection))return{...saved,status:'partial',cached:true,note:'Live source unavailable. Showing saved observations checked '+saved.checkedAt+'. '+saved.note};
   }catch{}
   return{id:'wildlife',features:[],status:'unavailable',query,note:'iNaturalist could not supply this selection. Try again shortly.'};
  }
@@ -62,9 +62,11 @@ export async function searchWildlifeTaxa(term,{signal,fetcher=fetch}={}){
 let wildlifeSearchId=0;
 const node=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;};
 const link=(text,url)=>{const a=node('a',text);a.href=url;a.target='_blank';a.rel='noopener noreferrer';return a;};
-export function wildlifeControls(snapshot={},onChange=()=>{}){
+export function wildlifeControls(snapshot={},onChange=()=>{},onViewChange=()=>{}){
  const host=node('section',undefined,'insight-card wildlife-controls'),query={...defaultWildlifeOptions(),...snapshot.query},change=patch=>onChange({...query,...patch,pageLimit:patch.pageLimit||1});
  host.append(node('h3','Wildlife variety'));
+ const views=node('div',undefined,'wildlife-view');views.setAttribute('role','group');views.setAttribute('aria-label','Wildlife map view');for(const[value,label]of [['heat','Heatmap'],['reports','Individual reports']]){const button=node('button',label);button.type='button';button.setAttribute('aria-pressed',String((query.mapView||'heat')===value));button.onclick=()=>onViewChange(value);views.append(button);}host.append(views);
+ if(query.mapView!=='reports'){const legend=node('div',undefined,'wildlife-heat-key');legend.append(node('strong','Reported observations'),node('div',undefined,'wildlife-heat-scale'),node('small','Fewer reports → More reports'));host.append(legend,node('p','All matching public observations in the selected dates. More reports can reflect more observers, not more wildlife.','small'));const status=node('p',undefined,'small wildlife-heat-status');status.setAttribute('role','status');host.append(status);}
  const select=(label,values,value,callback)=>{const wrap=node('label',label),input=node('select');input.setAttribute('aria-label',label);for(const[v,t]of values){const option=node('option',t);option.value=String(v);input.append(option);}input.value=String(value||'');input.onchange=()=>callback(input.value);wrap.append(input);host.append(wrap);return input;};
  select('Living things',WILDLIFE_GROUPS,query.iconicTaxa,value=>change({iconicTaxa:value,taxonId:'',taxonName:''}));
  const searchWrap=node('div'),searchLabel=node('label','Find any species'),searchInput=node('input'),suggestions=node('div',undefined,'wildlife-species-list'),searchStatus=node('p','Search species names worldwide; a match may have no reports in this region.','small');
@@ -84,7 +86,7 @@ export function wildlifeControls(snapshot={},onChange=()=>{}){
  const order=node('select');order.setAttribute('aria-label','Sort species');for(const[v,t]of [['count','Most reported'],['name','Name A–Z']]){const option=node('option',t);option.value=v;order.append(option);}const drawSpecies=()=>{speciesList.replaceChildren();const rows=[...a.taxa].sort((x,y)=>order.value==='name'?x.name.localeCompare(y.name):y.count-x.count||x.name.localeCompare(y.name));for(const t of rows){const button=node('button',t.name+' · '+t.count.toLocaleString()+' reports');button.type='button';button.title=t.scientificName;button.onclick=()=>change({taxonId:t.id,taxonName:t.name});speciesList.append(button);}};order.onchange=drawSpecies;drawSpecies();speciesSection.append(order,speciesList);host.append(speciesSection);
 
  if(a.seasonalityAvailable){host.append(node('h4','Reports by observation month'));const chart=node('div',undefined,'wildlife-months'),max=Math.max(1,...a.months.map(m=>m.count));for(const m of a.months){const button=node('button');button.type='button';button.setAttribute('aria-label',new Date(2020,m.month-1,1).toLocaleString('en-US',{month:'long'})+': '+m.count+' reports; filter this month');button.setAttribute('aria-pressed',String(Number(query.month)===m.month));const bar=node('i');bar.style.height=(m.count/max*48+2)+'px';button.append(bar,node('span',new Date(2020,m.month-1,1).toLocaleString('en-US',{month:'short'})),node('small',m.count.toLocaleString()));button.onclick=()=>change({month:Number(query.month)===m.month?'':m.month});chart.append(button);}host.append(chart);}
- host.append(node('p',a.mappedObservations+' public observation areas mapped from the '+a.loadedObservations+' newest downloaded reports. Monthly counts cover the full matching query, not just these pins.','small'));
+ host.append(node('p',a.mappedObservations+' individual observation areas available from the '+a.loadedObservations+' newest downloaded reports. The heatmap and monthly counts cover the full matching query; this list shows the newest downloaded reports.','small'));
  if(a.loadedObservations<a.matchingObservations&&Number(query.pageLimit||1)<5){const more=node('button','Load 200 more observation reports');more.type='button';more.onclick=()=>change({pageLimit:Number(query.pageLimit||1)+1});host.append(more);}
  }
  host.append(node('p',snapshot.note||'Choose a group or month to explore documented observations.','small'));const q=wildlifeQuery(query);host.append(link('View matching iNaturalist records ↗','https://www.inaturalist.org/observations?'+q));return host;

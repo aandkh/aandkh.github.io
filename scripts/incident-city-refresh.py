@@ -108,7 +108,7 @@ def main():
  meta['sources']=list(sources.values())
  reviewed=json.loads((ROOT/'incident-reviewed.json').read_text()).get('features',[]) if (ROOT/'incident-reviewed.json').exists() else []
  features=common.merge_features(old,features+reviewed)
- meta['coverageNote']='City and County are always shown together. City and Florissant public maps supplement County and participating municipal feeds, which update weekly. Agency exclusions and approval delays remain. These are reported incidents, not a complete regional census or safety ranking. Locations are approximate; unknown outcomes are not zero.'
+ meta['coverageNote']='City and County are always shown together. City and Florissant public maps supplement County and participating municipal feeds, which update weekly. Chesterfield daily bulletins and reviewed local reports add newer County cases. Agency exclusions and approval delays remain. These are reported incidents, not a complete regional census or safety ranking. Locations are approximate; unknown outcomes are not zero.'
  common.publish_archive(features,meta,now)
  print('Total metro archive: '+str(len(features)))
  if failures:raise SystemExit(1)

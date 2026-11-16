@@ -6,3 +6,5 @@
 .wildlife-controls label:has(input[type=date]){display:inline-block;width:calc(50% - 6px);vertical-align:top;margin-right:6px}.wildlife-controls input[type=date]{font-size:11px;padding:6px 3px}
 
 .wildlife-controls select,.birding-analytics select,.historical-evidence select{padding-right:34px;background-repeat:no-repeat;background-position:right 10px center;background-size:18px}
+
+.wildlife-view{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:8px 0 12px}.wildlife-view button{min-height:40px;padding:8px}.wildlife-view button[aria-pressed=true]{background:var(--green);color:#fff;border-color:var(--green)}body[data-map-style=dark] .wildlife-view button[aria-pressed=true]{background:#c4d7a2;color:#203d34}.wildlife-heat-key{display:grid;gap:6px;margin:10px 0;font-size:12px}.wildlife-heat-scale{height:9px;border-radius:6px;background:linear-gradient(90deg,#713ab7,#2453d1,#20b6bd,#66cb4d,#f3df42,#e94726)}.wildlife-heat-key small{font-size:11px;color:var(--muted)}.wildlife-heat-status:empty{display:none}
