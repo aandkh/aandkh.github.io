@@ -1,4 +1,4 @@
-import {REGION} from './core.js?v=20261115-core-polish';
+import {REGION} from './core.js?v=20261116-nature-history';
 
 function validBounds(value){
  const bounds=typeof value==='string'?value.split(',').map(part=>part.trim()===''?NaN:Number(part)):value;

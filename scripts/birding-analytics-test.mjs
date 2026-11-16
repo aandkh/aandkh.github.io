@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {birdQuery,monthlyBirdCounts,birdSeasonOverlap,loadBirdAnalytics,loadBirdFirstReports} from '../birding-analytics.js';
+const q=birdQuery({lat:38.63,lng:-90.4,radius:5,d1:'2022-01-01',d2:'2026-11-16'});
+assert.equal(q.get('taxon_id'),'3');assert.equal(q.get('quality_grade'),'research');assert.equal(q.get('captive'),'false');assert.equal(q.get('radius'),'5');
+assert.equal(birdQuery({bounds:{swlat:38.3,swlng:-90.85,nelat:38.99,nelng:-89.95}}).get('swlat'),'38.3');assert.throws(()=>birdQuery({bounds:{}}));
+const months=monthlyBirdCounts({results:{month_of_year:{1:3,4:7,12:2}}});assert.equal(months.length,12);assert.equal(months[1].count,0);assert.equal(months[3].count,7);assert.throws(()=>monthlyBirdCounts({results:{}}));
+assert.deepEqual(birdSeasonOverlap([1,2,3],[2,3,4]),{shared:2,onlyA:1,onlyB:1,overlapPct:50});assert.equal(birdSeasonOverlap([],[]).overlapPct,null);
+const fetcher=async url=>({ok:true,json:async()=>url.includes('species_counts')?{total_results:2,results:[{count:3,taxon:{id:1,name:'Bird A',rank:'species'}},{count:9,taxon:{id:2,name:'Bird B',rank:'species'}}]}:{results:{month_of_year:{1:3,4:7,12:2}}}});
+const summary=await loadBirdAnalytics({lat:38.64012,lng:-90.40123,radius:5,fetcher});assert.equal(summary.total,2);assert.equal(summary.records,12);assert.equal(summary.complete,true);
+const requested=[];const first=await loadBirdFirstReports({lat:38.65012,lng:-90.40123,taxonId:12727,now:new Date('2026-11-16T12:00:00Z'),fetcher:async url=>{requested.push(new URL(url));return{ok:true,json:async()=>({total_results:2,results:[{id:123,observed_on:new URL(url).searchParams.get('d1')}]})};}});
+assert.equal(first.length,5);assert.equal(first[0].year,2022);assert.equal(requested[4].searchParams.get('d2'),'2026-11-16');assert(requested.every(u=>u.searchParams.get('order_by')==='observed_on'&&u.searchParams.get('order')==='asc'));assert(first.every(r=>r.count===2));
+console.log('PASS: bounded sources, dated bird records, month totals, observed seasonal overlap, annual first reports and taxonomy coverage');

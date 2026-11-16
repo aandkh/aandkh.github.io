@@ -1,5 +1,5 @@
-import {BY_ID} from './catalog.js?v=20261115-core-polish';
-import {coordinate,cleanState} from './core.js?v=20261115-core-polish';
+import {BY_ID} from './catalog.js?v=20261116-nature-history';
+import {coordinate,cleanState} from './core.js?v=20261116-nature-history';
 
 // Stable 64-bit reference, independent of feed ordering and changing event details.
 export function placeToken(id){
@@ -9,7 +9,7 @@ export function placeToken(id){
 }
 export function placeHash(stop){
  if(!stop?.id||!Object.hasOwn(BY_ID,stop.layer)||!coordinate(stop.lat,stop.lng)||['aircraft','transit'].includes(stop.layer))return null;
- const token=stop.id.startsWith('shared:')?stop.id.slice(7):placeToken(stop.id);
+ const token=stop.layer==='wildlife'&&/^inat:\d{1,12}$/.test(stop.id)?'i'+stop.id.slice(5):stop.id.startsWith('shared:')?stop.id.slice(7):placeToken(stop.id);
  return `#p=${stop.layer}/${token}/${stop.lat.toFixed(5)},${stop.lng.toFixed(5)}`;
 }
 export function readPlaceHash(hash){

@@ -1,0 +1,379 @@
+{
+  "type": "FeatureCollection",
+  "id": "history",
+  "status": "partial",
+  "source": "National Park Service, public archives and local historical institutions",
+  "checkedAt": "2026-11-16",
+  "note": "Selected documented regional events. Pins identify surviving sites, commemorative markers or labeled reference areas; they are not complete event boundaries.",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "history-battle-st-louis",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.19053333333333,
+          38.62488333333334
+        ]
+      },
+      "properties": {
+        "id": "history-battle-st-louis",
+        "sourceId": "history:battle-st-louis",
+        "title": "Battle of St. Louis / Fort San Carlos",
+        "description": "Spanish soldiers and local militia defended St. Louis against a British-led attack during the American Revolution. Resistance centered on Fort San Carlos; fighting and raids extended outside the settlement.",
+        "historicalDate": "1780-05-26",
+        "historicalDateLabel": "May 26, 1780",
+        "dateSort": "1780-05-26",
+        "dateAccuracy": "day",
+        "eventCategory": "battle",
+        "locationAccuracy": "Nearby commemorative marker; not an exact battlefield boundary. The fort no longer survives.",
+        "locationBasis": "Nearby commemorative marker; not an exact battlefield boundary. The fort no longer survives.",
+        "source": "National Park Service",
+        "sourceUrl": "https://www.nps.gov/articles/000/battle-of-st-louis.htm",
+        "url": "https://www.nps.gov/articles/000/battle-of-st-louis.htm",
+        "coordinateSourceUrl": "https://www.hmdb.org/m.asp?m=139787",
+        "sourceCheckedAt": "2026-11-16",
+        "jurisdiction": "city"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "history-fort-belle-fontaine",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.219,
+          38.825
+        ]
+      },
+      "properties": {
+        "id": "history-fort-belle-fontaine",
+        "sourceId": "history:fort-belle-fontaine",
+        "title": "Fort Belle Fontaine established",
+        "description": "The U.S. Army established a military post on the Missouri River. The original riverside site was later lost to channel changes; a replacement fort was built on the bluff.",
+        "historicalDate": "1805",
+        "historicalDateLabel": "1805",
+        "dateSort": "1805-01-01",
+        "dateAccuracy": "year",
+        "eventCategory": "military",
+        "locationAccuracy": "Present-day park reference point. The original 1805 fort site was destroyed by changes in the river; this pin does not mark its exact footprint.",
+        "locationBasis": "Present-day park reference point. The original 1805 fort site was destroyed by changes in the river; this pin does not mark its exact footprint.",
+        "source": "National Park Service",
+        "sourceUrl": "https://www.nps.gov/places/fort-belle-fontaine.htm",
+        "url": "https://www.nps.gov/places/fort-belle-fontaine.htm",
+        "coordinateSourceUrl": "https://www.openstreetmap.org/way/733761148",
+        "sourceCheckedAt": "2026-11-16",
+        "jurisdiction": "county",
+        "coordinateEvidence": "Reference point inside the reviewed Fort Belle Fontaine Park boundary in quieter-parks.json; original riverside fort site is lost."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "history-first-capitol",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.48188333333333,
+          38.78006666666667
+        ]
+      },
+      "properties": {
+        "id": "history-first-capitol",
+        "sourceId": "history:first-capitol",
+        "title": "Missouri legislature meets in St. Charles",
+        "description": "Missouri legislators first met here on June 4, 1821. St. Charles served as the temporary seat of state government until the move to Jefferson City in 1826.",
+        "historicalDate": "1821-06-04",
+        "historicalDateLabel": "June 4, 1821",
+        "dateSort": "1821-06-04",
+        "dateAccuracy": "day",
+        "eventCategory": "government",
+        "locationAccuracy": "Historic capitol buildings / on-site marker; not the whole former government district.",
+        "locationBasis": "Historic capitol buildings / on-site marker; not the whole former government district.",
+        "source": "Missouri State Parks",
+        "sourceUrl": "https://mostateparks.com/page/first-missouri-state-capitol-state-historic-site/general-information-first-missouri-state",
+        "url": "https://mostateparks.com/page/first-missouri-state-capitol-state-historic-site/general-information-first-missouri-state",
+        "coordinateSourceUrl": "https://www.hmdb.org/m.asp?m=169211",
+        "sourceCheckedAt": "2026-11-16",
+        "jurisdiction": "st-charles"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "history-jefferson-barracks",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.27813836914743,
+          38.513266716987104
+        ]
+      },
+      "properties": {
+        "id": "history-jefferson-barracks",
+        "sourceId": "history:jefferson-barracks",
+        "title": "Jefferson Barracks established",
+        "description": "Established as an infantry training post in 1826, Jefferson Barracks later served military, hospital and cemetery functions. The historic complex extends well beyond this park reference point.",
+        "historicalDate": "1826",
+        "historicalDateLabel": "1826",
+        "dateSort": "1826-01-01",
+        "dateAccuracy": "year",
+        "eventCategory": "military",
+        "locationAccuracy": "Present-day Jefferson Barracks County Park reference point; the historic military reservation was much larger.",
+        "locationBasis": "Present-day Jefferson Barracks County Park reference point; the historic military reservation was much larger.",
+        "source": "Missouri Civil War Museum",
+        "sourceUrl": "https://mcwm.org/our-story/jefferson-barracks/",
+        "url": "https://mcwm.org/our-story/jefferson-barracks/",
+        "coordinateSourceUrl": "https://www.openstreetmap.org/way/200053837",
+        "sourceCheckedAt": "2026-11-16",
+        "jurisdiction": "county"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "history-scott-freedom-suits",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.189309,
+          38.625703
+        ]
+      },
+      "properties": {
+        "id": "history-scott-freedom-suits",
+        "sourceId": "history:scott-freedom-suits",
+        "title": "Dred and Harriet Scott file freedom suits",
+        "description": "Dred and Harriet Scott filed separate petitions seeking freedom from slavery in St. Louis. Their local trials took place at the Old Courthouse; the later U.S. Supreme Court decision was made in Washington, D.C.",
+        "historicalDate": "1846-04-06",
+        "historicalDateLabel": "April 6, 1846",
+        "dateSort": "1846-04-06",
+        "dateAccuracy": "day",
+        "eventCategory": "civil-rights",
+        "locationAccuracy": "Old Courthouse building location. The pin represents the St. Louis proceedings, not the U.S. Supreme Court decision.",
+        "locationBasis": "Old Courthouse building location. The pin represents the St. Louis proceedings, not the U.S. Supreme Court decision.",
+        "source": "National Park Service",
+        "sourceUrl": "https://home.nps.gov/jeff/learn/historyculture/dred-scott-chronology.htm",
+        "url": "https://home.nps.gov/jeff/learn/historyculture/dred-scott-chronology.htm",
+        "coordinateSourceUrl": "https://www.nps.gov/planyourvisit/event-details.htm?id=84E15F55-0839-1A00-6D45B0747B43A308",
+        "sourceCheckedAt": "2026-11-16",
+        "jurisdiction": "city"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "history-white-haven",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.35156666666667,
+          38.552083333333336
+        ]
+      },
+      "properties": {
+        "id": "history-white-haven",
+        "sourceId": "history:white-haven",
+        "title": "Grant family lives and farms at White Haven",
+        "description": "Ulysses and Julia Grant lived with their family at White Haven during these years. The estate also depended on enslaved African American labor; the National Park Service interprets the lives of both free and enslaved residents.",
+        "historicalDate": "1854",
+        "historicalDateLabel": "1854–1859",
+        "dateSort": "1854-01-01",
+        "dateAccuracy": "year range",
+        "eventCategory": "culture",
+        "locationAccuracy": "White Haven historic house / interpretive marker; the former farm covered a much larger area.",
+        "locationBasis": "White Haven historic house / interpretive marker; the former farm covered a much larger area.",
+        "source": "National Park Service",
+        "sourceUrl": "https://www.nps.gov/places/white-haven.htm",
+        "url": "https://www.nps.gov/places/white-haven.htm",
+        "coordinateSourceUrl": "https://www.hmdb.org/m.asp?m=124998",
+        "sourceCheckedAt": "2026-11-16",
+        "jurisdiction": "county",
+        "historicalEndDate": "1859"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "history-camp-jackson",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.22583333333333,
+          38.63471666666667
+        ]
+      },
+      "properties": {
+        "id": "history-camp-jackson",
+        "sourceId": "history:camp-jackson",
+        "title": "Camp Jackson Affair",
+        "description": "Union forces captured the pro-secessionist militia at Camp Jackson. Violence followed as prisoners were marched through St. Louis, and soldiers fired into a civilian crowd.",
+        "historicalDate": "1861-05-10",
+        "historicalDateLabel": "May 10, 1861",
+        "dateSort": "1861-05-10",
+        "dateAccuracy": "day",
+        "eventCategory": "battle",
+        "locationAccuracy": "Commemorative marker near Compton and Laclede; not an exact shooting location or the full encampment. Events extended into surrounding streets.",
+        "locationBasis": "Commemorative marker near Compton and Laclede; not an exact shooting location or the full encampment. Events extended into surrounding streets.",
+        "source": "National Park Service",
+        "sourceUrl": "https://www.nps.gov/articles/000/ulysses-s-grant-s-experiences-during-the-camp-jackson-affair.htm",
+        "url": "https://www.nps.gov/articles/000/ulysses-s-grant-s-experiences-during-the-camp-jackson-affair.htm",
+        "coordinateSourceUrl": "https://www.hmdb.org/m.asp?m=145064",
+        "sourceCheckedAt": "2026-11-16",
+        "jurisdiction": "city"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "history-eads-bridge",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.17869444444445,
+          38.62888888888889
+        ]
+      },
+      "properties": {
+        "id": "history-eads-bridge",
+        "sourceId": "history:eads-bridge",
+        "title": "Eads Bridge dedicated",
+        "description": "The road-and-rail bridge across the Mississippi was dedicated on July 4, 1874. Its construction used deep pneumatic caissons and cantilever erection methods.",
+        "historicalDate": "1874-07-04",
+        "historicalDateLabel": "July 4, 1874",
+        "dateSort": "1874-07-04",
+        "dateAccuracy": "day",
+        "eventCategory": "engineering",
+        "locationAccuracy": "Bridge reference point; not the exact position of the dedication ceremony.",
+        "locationBasis": "Bridge reference point; not the exact position of the dedication ceremony.",
+        "source": "City of St. Louis Cultural Resources Office",
+        "sourceUrl": "https://www.stlouis-mo.gov/government/departments/planning/cultural-resources/city-landmarks/Eads-Bridge.cfm",
+        "url": "https://www.stlouis-mo.gov/government/departments/planning/cultural-resources/city-landmarks/Eads-Bridge.cfm",
+        "coordinateSourceUrl": "https://www.asce.org/about-civil-engineering/history-and-heritage/historic-landmarks/eads-bridge",
+        "sourceCheckedAt": "2026-11-16",
+        "jurisdiction": "city"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "history-tornado-1896",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.21626666666667,
+          38.615916666666664
+        ]
+      },
+      "properties": {
+        "id": "history-tornado-1896",
+        "sourceId": "history:tornado-1896",
+        "title": "1896 tornado devastates Lafayette Park",
+        "description": "The tornado damaged Lafayette Park, toppling trees and wrecking structures including the music pavilion. Destruction extended across other parts of St. Louis and East St. Louis.",
+        "historicalDate": "1896-05-27",
+        "historicalDateLabel": "May 27, 1896",
+        "dateSort": "1896-05-27",
+        "dateAccuracy": "day",
+        "eventCategory": "disaster",
+        "locationAccuracy": "Documented damaged park / music-pavilion marker. This is one affected location, not the tornado origin or complete track.",
+        "locationBasis": "Documented damaged park / music-pavilion marker. This is one affected location, not the tornado origin or complete track.",
+        "source": "Lafayette Park Conservancy",
+        "sourceUrl": "https://www.lafayettepark.org/project/the-great-tornado-of-1896-2/",
+        "url": "https://www.lafayettepark.org/project/the-great-tornado-of-1896-2/",
+        "coordinateSourceUrl": "https://www.hmdb.org/m.asp?m=140055",
+        "sourceCheckedAt": "2026-11-16",
+        "jurisdiction": "city"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "history-worlds-fair",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.29228333333333,
+          38.63851666666667
+        ]
+      },
+      "properties": {
+        "id": "history-worlds-fair",
+        "sourceId": "history:worlds-fair",
+        "title": "1904 World’s Fair opens",
+        "description": "The Louisiana Purchase Exposition opened on April 30, 1904. Its extensive grounds occupied western Forest Park and adjacent land; the surviving Palace of Fine Arts is now the Saint Louis Art Museum.",
+        "historicalDate": "1904-04-30",
+        "historicalDateLabel": "April 30, 1904",
+        "dateSort": "1904-04-30",
+        "dateAccuracy": "day",
+        "eventCategory": "culture",
+        "locationAccuracy": "Art Museum commemorative marker within the former fair grounds; not an exact opening-ceremony location or the fair boundary.",
+        "locationBasis": "Art Museum commemorative marker within the former fair grounds; not an exact opening-ceremony location or the fair boundary.",
+        "source": "Missouri Historical Society",
+        "sourceUrl": "https://mohistory.org/legacy-exhibits/Fair/WF/HTML/Overview/",
+        "url": "https://mohistory.org/legacy-exhibits/Fair/WF/HTML/Overview/",
+        "coordinateSourceUrl": "https://www.hmdb.org/m.asp?m=141216",
+        "sourceCheckedAt": "2026-11-16",
+        "jurisdiction": "city",
+        "historicalSources": [
+          {
+            "publisher": "Saint Louis Art Museum",
+            "url": "https://www.slam.org/teachers-students/educator-resources/art-along-the-rivers/art-on-display/"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "history-olympics-1904",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.31388333333334,
+          38.64735
+        ]
+      },
+      "properties": {
+        "id": "history-olympics-1904",
+        "sourceId": "history:olympics-1904",
+        "title": "1904 Olympics at Francis Field",
+        "description": "Francis Field and the adjacent gymnasium hosted a major concentration of the 1904 Olympic competitions. Other Olympic events were held at additional venues and on other dates.",
+        "historicalDate": "1904-08-29",
+        "historicalDateLabel": "August 29–September 3, 1904",
+        "dateSort": "1904-08-29",
+        "dateAccuracy": "day range",
+        "eventCategory": "culture",
+        "locationAccuracy": "Francis Field and Gymnasium commemorative marker; not every 1904 Olympic venue.",
+        "locationBasis": "Francis Field and Gymnasium commemorative marker; not every 1904 Olympic venue.",
+        "source": "Washington University in St. Louis",
+        "sourceUrl": "https://source.washu.edu/2004/06/first-western-hemisphere-olympics-left-lasting-impressions-in-st-louis/",
+        "url": "https://source.washu.edu/2004/06/first-western-hemisphere-olympics-left-lasting-impressions-in-st-louis/",
+        "coordinateSourceUrl": "https://www.hmdb.org/m.asp?m=147320",
+        "sourceCheckedAt": "2026-11-16",
+        "jurisdiction": "county",
+        "historicalEndDate": "1904-09-03"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "history-arch-completed",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.187047,
+          38.62514
+        ]
+      },
+      "properties": {
+        "id": "history-arch-completed",
+        "sourceId": "history:arch-completed",
+        "title": "Gateway Arch construction completed",
+        "description": "Construction of Eero Saarinen’s Gateway Arch began in 1963 and was completed on October 28, 1965.",
+        "historicalDate": "1965-10-28",
+        "historicalDateLabel": "October 28, 1965",
+        "dateSort": "1965-10-28",
+        "dateAccuracy": "day",
+        "eventCategory": "engineering",
+        "locationAccuracy": "Gateway Arch grounds reference point; not the elevated final-piece installation position.",
+        "locationBasis": "Gateway Arch grounds reference point; not the elevated final-piece installation position.",
+        "source": "National Park Service",
+        "sourceUrl": "https://www.nps.gov/jeff/learn/historyculture/index.htm",
+        "url": "https://www.nps.gov/jeff/learn/historyculture/index.htm",
+        "coordinateSourceUrl": "https://www.nps.gov/planyourvisit/event-details.htm?id=FEE6FAAB-D0F2-037A-FB556667087E0282",
+        "sourceCheckedAt": "2026-11-16",
+        "jurisdiction": "city"
+      }
+    }
+  ]
+}

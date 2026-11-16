@@ -1,6 +1,7 @@
 // Exact, deliberate query aliases. These aid discovery; they do not imply
 // that a layer is configured or that its source supplies every named condition.
 const ALIASES=Object.freeze({
+ wildlife:['wildlife'],animals:['wildlife'],plants:['wildlife'],species:['wildlife'],fungi:['wildlife'],butterflies:['wildlife'],birds:['birding','wildlife'],birdwatching:['birding'],battles:['history'],historical:['history'],history:['history'],
  joyride:['joyrides'],joyrides:['joyrides'],driving:['joyrides','traffic'],drive:['joyrides'],scenic:['joyrides'],
  gym:['gyms'],gyms:['gyms'],fitness:['gyms'],workout:['gyms'],weightlifting:['gyms'],pilates:['gyms'],yoga:['gyms'],
  plane:['aircraft'],planes:['aircraft'],airplane:['aircraft'],airplanes:['aircraft'],flight:['aircraft'],flights:['aircraft'],

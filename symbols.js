@@ -1,5 +1,6 @@
 // Small source-independent category symbols. Vehicle positions still come only from feeds.
 const paths={
+ wildlife:'<path d="M12 21V10m0 5C4 15 3 10 3 5c6 0 9 3 9 7m0 5c7 0 9-5 9-10-6 0-9 4-9 8"/>',
  joyrides:'<path d="m4 10 2-6h12l2 6M3 10h18v9H3zM6 19v3m12-3v3M6 14h2m8 0h2"/>',
  gyms:'<path d="M7 12h10M4 7v10m3-12v14m10-14v14m3-12v10M2 10v4m20-4v4"/>',
  weather:'<circle cx="8" cy="8" r="4"/><path d="M8 1v2m0 10v2M1 8h2m10 0h2M3 3l2 2m6 6 2 2M3 13l2-2m6-6 2-2M8 21h11a4 4 0 0 0 0-8 6 6 0 0 0-11 2 3 3 0 0 0 0 6Z"/>',

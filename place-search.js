@@ -1,4 +1,4 @@
-import {BY_ID} from './catalog.js?v=20261115-core-polish';
+import {BY_ID} from './catalog.js?v=20261116-nature-history';
 import {isExcludedChainPlace} from './chain-places.js?v=20261115-road-insights';
 
 const normalize=value=>typeof value==='string'||typeof value==='number'?String(value).normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase().replace(/[^\p{L}\p{N}]+/gu,' ').trim():'';

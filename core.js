@@ -1,6 +1,6 @@
 import {enrichCultureFeature,cultureFeatureDisplayable} from './place-enrichment.js?v=20261115-road-insights';
 import {cleanVehicle} from './vehicles.js?v=20261115-road-insights';
-import {BY_ID} from './catalog.js?v=20261115-core-polish';
+import {BY_ID} from './catalog.js?v=20261116-nature-history';
 import {isExcludedChainPlace} from './chain-places.js?v=20261115-road-insights';
 import {cleanLayerModes,cleanOverlayOpacity} from './expansion-options.js?v=20261115-road-insights';
 export const REGION = {south:38.1,north:39.2,west:-91.2,east:-89.4};
@@ -48,10 +48,21 @@ export function cleanOuting(value){
  for(const raw of (Array.isArray(s.stops)?s.stops:[])){const stop=cleanStop(raw);if(stop&&!seen.has(stop.id)){seen.add(stop.id);stops.push(stop);}if(stops.length===12)break;}
  return {stops,notes:textLimit(s.notes,600),when:validLocalDate(s.when,true)?s.when:''};
 }
+export function cleanNatureState(s={}){
+ const raw=s.wildlifeOptions||{},wildlifeOptions={};
+ for(const key of ['d1','d2'])if(validLocalDate(raw[key]))wildlifeOptions[key]=raw[key];
+ if(/^[A-Za-z]{1,30}$/.test(raw.iconicTaxa||''))wildlifeOptions.iconicTaxa=raw.iconicTaxa;
+ if(Number.isSafeInteger(Number(raw.taxonId))&&Number(raw.taxonId)>0)wildlifeOptions.taxonId=Number(raw.taxonId);
+ if(typeof raw.taxonName==='string')wildlifeOptions.taxonName=raw.taxonName.slice(0,160);
+ if(Number(raw.month)>=1&&Number(raw.month)<=12)wildlifeOptions.month=Math.floor(Number(raw.month));
+ if(coordinate(raw.lat,raw.lng))Object.assign(wildlifeOptions,{lat:raw.lat,lng:raw.lng,radius:Math.max(.5,Math.min(25,Number(raw.radius)||5))});
+ const b=raw.bounds;if(b&&coordinate(b.swlat,b.swlng)&&coordinate(b.nelat,b.nelng)&&b.swlat<b.nelat&&b.swlng<b.nelng)wildlifeOptions.bounds={swlat:b.swlat,swlng:b.swlng,nelat:b.nelat,nelng:b.nelng};
+ return{wildlifeOptions,historyView:s.historyView==='imagery'?'imagery':'events',historyCategory:['battle','civil-rights','military','culture','engineering','disaster','government'].includes(s.historyCategory)?s.historyCategory:'all',historySort:s.historySort==='newest'?'newest':'oldest'};
+}
 export function cleanState(s){
  if(!s||s.v!==1||!Array.isArray(s.center)||!coordinate(...s.center))throw Error('This map link has invalid coordinates.');
  const layers=Array.isArray(s.layers)?[...new Set(s.layers.filter(id=>typeof id==='string'&&Object.hasOwn(BY_ID,id)))].slice(0,Object.keys(BY_ID).length):[];
- return {v:1,todayOnly:s.todayOnly===true,openNow:s.openNow===true,mapStyle:['positron','dark','liberty'].includes(s.mapStyle)?s.mapStyle:'positron',radarMode:['intensity','types','winter'].includes(s.radarMode)?s.radarMode:'intensity',airMode:s.airMode==='ozone'?'ozone':'pm25',layerModes:cleanLayerModes(s.layerModes),overlayOpacity:cleanOverlayOpacity(s.overlayOpacity),center:s.center.slice(0,2),zoom:Math.min(18,Math.max(8,Number(s.zoom)||12)),layers,focus:cleanStop(s.focus),...cleanOuting(s),imageryDate:validLocalDate(s.imageryDate)?s.imageryDate:'2025-10-15'};
+ return {v:1,todayOnly:s.todayOnly===true,openNow:s.openNow===true,mapStyle:['positron','dark','liberty'].includes(s.mapStyle)?s.mapStyle:'positron',radarMode:['intensity','types','winter'].includes(s.radarMode)?s.radarMode:'intensity',airMode:s.airMode==='ozone'?'ozone':'pm25',layerModes:cleanLayerModes(s.layerModes),overlayOpacity:cleanOverlayOpacity(s.overlayOpacity),center:s.center.slice(0,2),zoom:Math.min(18,Math.max(8,Number(s.zoom)||12)),layers,focus:cleanStop(s.focus),...cleanOuting(s),...cleanNatureState(s),imageryDate:validLocalDate(s.imageryDate)?s.imageryDate:'2025-10-15'};
 }
 export function encodeState(s){const state=cleanState(s);if(!state.stops.length)delete state.stops;if(!state.notes)delete state.notes;if(!state.when)delete state.when;const json=JSON.stringify(state);const bytes=new TextEncoder().encode(json);const encoded=btoa(Array.from(bytes,b=>String.fromCharCode(b)).join('')).replaceAll('+','-').replaceAll('/','_').replace(/=+$/,'');if(encoded.length>18000)throw Error('This map link is too long.');return '#map='+encoded;}
 export function decodeState(hash){if(!hash.startsWith('#map='))return null;if(hash.length>18005)throw Error('This map link is too long.');try{const raw=hash.slice(5).replaceAll('-','+').replaceAll('_','/');return cleanState(JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(Uint8Array.from(atob(raw),c=>c.charCodeAt(0)))));}catch{throw Error('This map link is invalid or uses an unsupported format.');}}

@@ -1,6 +1,6 @@
 import {apiFetch,apiUrl} from './api-client.js?v=20261115-road-insights';
 import {appendForecastChart} from './forecast-visuals.js?v=20261115-road-insights';
-import {safeUrl} from './core.js?v=20261115-core-polish';
+import {safeUrl} from './core.js?v=20261116-nature-history';
 import {activeNotices} from './expansion-options.js?v=20261115-road-insights';
 const node=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;};
 const finite=Number.isFinite;
