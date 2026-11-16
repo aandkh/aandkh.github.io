@@ -13,3 +13,11 @@ assert.equal(defaultWildlifeOptions(new Date('2026-11-16T12:00:00Z')).d1,'2025-1
 let searchedUrl="";const suggestions=await searchWildlifeTaxa("test species search",{fetcher:async url=>{searchedUrl=String(url);return{ok:true,json:async()=>({results:[{id:99,name:"Asimina triloba",preferred_common_name:"common pawpaw",rank:"species",is_active:true,iconic_taxon_name:"Plantae"},{id:100,name:"Asimina",rank:"genus"},{id:101,name:"Inactive species",rank:"species",is_active:false}]})};}});assert.equal(suggestions.length,1);assert.equal(suggestions[0].id,99);assert.equal(suggestions[0].iconicTaxa,"Plantae");assert(searchedUrl.includes("taxa/autocomplete?"));assert(searchedUrl.includes("rank=species"));assert.deepEqual(await searchWildlifeTaxa("x"),[]);console.log("PASS: official species autocomplete filtering and short-query suppression");
 
 for(const [key,value]of Object.entries({geoprivacy:'open',taxon_geoprivacy:'open',obscuration:'none',threatened:'false'}))assert.equal(q.get(key),value);assert.equal(saved.queryPolicy,'public-unthreatened-v2');
+
+const {loadWildlifeSpecies,usableWildlifePhoto}=await import('../wildlife.js');
+const profile=await loadWildlifeSpecies(123456789,{fetcher:async()=>({ok:true,json:async()=>({results:[{id:123456789,name:'Testus animalis',preferred_common_name:'Test animal',rank:'species',wikipedia_url:'javascript:alert(1)',wikipedia_summary:'Source description',ancestors:[{rank:'family',name:'Testidae'},{rank:'subtribe',name:'Hidden rank'}],default_photo:{license_code:'cc-by-nc',attribution:'Photographer',medium_url:'https://static.inaturalist.org/photo.jpg'}}]})})});
+assert.equal(profile.wikipediaUrl,'');assert.equal(profile.photo,null);assert.equal(profile.taxonomy.length,1);assert.equal(profile.summary,'Source description');
+assert.equal(usableWildlifePhoto({license_code:'cc-by',attribution:'A',medium_url:'https://untrusted.example/photo.jpg'}),null);
+assert.equal(usableWildlifePhoto({license_code:'cc-by',attribution:'A',medium_url:'https://static.inaturalist.org/photo.jpg'}).credit,'A');
+await assert.rejects(()=>loadWildlifeSpecies('bad'));
+console.log('PASS: species profiles preserve sourced facts, reject unsafe links and restrict reusable images');

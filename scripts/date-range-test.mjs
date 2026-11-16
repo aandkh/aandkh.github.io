@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {dateDay,dayDate,normalizeDateRange,localDate} from '../date-range.js';
+assert.equal(dateDay('2026-03-09')-dateDay('2026-03-08'),1,'spring DST still one calendar day');
+assert.equal(dateDay('2026-11-02')-dateDay('2026-11-01'),1,'autumn DST still one calendar day');
+assert.equal(dayDate(dateDay('2024-02-29')),'2024-02-29');
+for(const invalid of ['2026-02-29','2026-13-01','2026-02-30','2026-1-01','bad',''])assert.equal(dateDay(invalid),null);
+assert.equal(localDate(new Date('2026-11-17T02:00:00Z')),'2026-11-16','date is Chicago, not host UTC');
+const r=normalizeDateRange({min:'2026-08-17',max:'2026-11-16',from:'1900-01-01',to:'2027-01-01'});assert.equal(dayDate(r.from),'2026-08-17');assert.equal(dayDate(r.to),'2026-11-16');
+const crossed=normalizeDateRange({min:'2026-01-01',max:'2026-12-31',from:'2026-11-01',to:'2026-10-01'});assert.equal(crossed.to,crossed.from);
+assert.throws(()=>normalizeDateRange({min:'bad',max:'2026-01-01'}));
+assert.throws(()=>normalizeDateRange({min:'2026-11-01',max:'2026-10-01'}));
+console.log('PASS: date range day arithmetic, leap dates, Chicago date boundaries, archive bounds and crossed handles');

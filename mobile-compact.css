@@ -1,0 +1,103 @@
+/* Phone density: keep the map usable, with compact readable menus.
+   Text inputs stay 16px to prevent Safari focus zoom. Desktop is unchanged. */
+@media (max-width:800px) {
+  header { height:52px; padding:0 10px; }
+  .brand { font-size:22px; gap:5px; }
+  .brand .brand-mark { width:30px; height:30px; }
+  main { height:calc(100dvh - 52px); }
+  .header-actions button { padding:7px 10px; }
+  #map-search { top:8px; left:8px; right:8px; height:44px; padding:0 4px 0 10px; }
+  #map-search #place-search { min-height:42px; height:42px; padding:6px; font-size:16px; }
+  #search-submit { min-height:40px; padding:6px 10px; }
+  #quick-categories { top:58px; left:8px; right:8px; gap:4px; padding:0; }
+  #quick-categories button { min-height:38px; padding:5px 3px; font-size:11px; }
+  .map-toolbar { left:8px; right:8px; min-height:50px; padding:3px; border-radius:14px; }
+  .map-toolbar #mobile-controls,body.controls-open .map-toolbar #mobile-controls { min-width:86px; min-height:42px; height:42px; padding:6px 8px; border-radius:10px; }
+  .map-toolbar #mobile-controls .control-label { font-size:13px; }
+  .map-toolbar #mobile-controls>.ui-icon { width:18px; height:18px; }
+  .map-toolbar #results-toggle { min-height:42px; height:42px; padding:6px; font-size:12px; }
+  .map-toolbar select { min-width:64px; width:64px; flex-basis:64px; padding-left:5px; }
+  #sidebar { top:52px; width:min(280px,72vw); padding-top:6px; border-radius:0 14px 14px 0; }
+  #layers-backdrop { top:52px; left:min(280px,72vw); }
+  #sidebar,#layers-backdrop { bottom:calc(65px + var(--map-credit-height)); }
+  #sidebar .tabs { margin:0 54px 0 6px; height:38px; min-height:38px; }
+  #sidebar .tabs button { min-height:32px; font-size:11px; padding:4px; }
+  #close-layers { top:6px; right:6px; min-height:38px; height:38px; }
+  #sidebar .panel { padding:8px 10px 12px; }
+  #sidebar .layers-head { top:-8px; margin:-8px -10px 0; padding:8px 10px 5px; }
+  #sidebar .layers-head h1 { font-size:18px; margin:0 0 5px; }
+  #sidebar .search { height:40px; padding:0 8px; }
+  #sidebar .search input { padding:7px 0; }
+  #sidebar .layer-filter-bar { margin:5px 0 0; }
+  #sidebar .layer-filter-bar button { min-height:32px; padding:4px; }
+  #sidebar .layer-group { margin-top:6px; }
+  #sidebar .group-toggle { min-height:32px; padding-top:5px; padding-bottom:5px; }
+  #sidebar #layer-list .layer-row { min-height:40px; }
+  #sidebar #layer-list .layer-direct .layer-open { min-height:40px; padding:6px 2px; font-size:12px; line-height:1.3; }
+  #layers-panel { scroll-padding-top:155px; }
+
+  .floating,#results,#detail:not(.sky-panel),.floating.sky-panel,body.detail-expanded #detail {
+    top:auto; left:6px; right:6px; bottom:calc(65px + var(--map-credit-height));
+    width:auto; height:auto; max-height:42%; padding:10px 12px; border-radius:16px;
+    font-size:13px; line-height:1.4; scroll-padding-top:48px;
+  }
+  body.detail-expanded #detail { max-height:56%; }
+  .floating .floating-head,#detail .floating-head,#results.park-results>.floating-head {
+    top:-10px; margin:-10px -12px 4px; padding:4px 10px; min-height:44px;
+  }
+  .floating .floating-head h2,#results .floating-head h2 { font-size:18px; line-height:1.2; margin:0; }
+  .floating-head button,#detail .detail-actions>button { min-height:36px; height:36px; width:36px; }
+  .floating-head .detail-expand { min-height:36px; padding:0 8px; }
+  .floating h2,#detail>h2 { font-size:20px; line-height:1.25; margin:6px 0 8px; }
+  .floating h3 { font-size:14px; line-height:1.3; margin:5px 0 7px; }
+  .floating h4 { font-size:13px; margin:8px 0 5px; }
+  .floating p,.floating .small,#detail .place-description,#detail .place-address,#detail .place-hours,
+  #open-now-summary,.floating .source-date,.hours-provenance { font-size:12px; line-height:1.4; margin:5px 0; }
+  .floating label { font-size:12px; margin:6px 0 4px; }
+  .floating button { font-size:12px; }
+  .floating input:not([type=checkbox]):not([type=radio]):not([type=range]),.floating textarea { font-size:16px; }
+  .floating select { font-size:13px; min-height:36px; padding-top:6px; padding-bottom:6px; }
+  #all-results { min-height:30px; padding:4px 0; margin:0 0 2px; border:0; background:transparent; border-radius:0; text-decoration:underline; font-size:11px; }
+  #results-count { font-size:11px; margin:2px 0 5px; }
+  #results-list .result-card { padding:9px 4px; border-radius:8px; }
+  .result-card strong { font-size:13px; line-height:1.35; }
+  .result-card small { font-size:12px; line-height:1.35; margin-top:3px; }
+  .floating .result-group h2 { font-size:13px; margin:8px 0 3px; padding-bottom:4px; }
+  .floating .insight-card,.floating .weather-insight,.floating .park-analytics { padding:9px; margin:7px 0; border-radius:10px; }
+  #results .wildlife-controls { border:0; padding:0; background:transparent; }
+  #results .wildlife-controls>h3 { display:none; } /* Panel already says Wildlife. */
+  .wildlife-view { margin:5px 0 7px; gap:5px; }
+  .wildlife-view button { min-height:36px; padding:6px; }
+  .wildlife-heat-key { margin:6px 0; gap:4px; font-size:11px; }
+  .wildlife-heat-scale { height:7px; }
+  .wildlife-controls label { margin:6px 0; }
+  .wildlife-controls select,.wildlife-controls input { margin-top:3px; min-height:36px; }
+  .wildlife-controls summary { padding:7px 0; }
+  .weather-insights { gap:6px; margin:8px 0; }
+  .weather-insight-option { padding:8px; margin:5px 0; gap:3px; }
+  .weather-current { gap:10px; margin-top:6px; }
+  .weather-current-value { font-size:36px; }
+  .weather-current-copy>span { font-size:12px; }
+  .park-stat-grid { gap:8px 12px; }
+  #detail>.minor-actions { gap:6px; margin:7px 0; }
+  #detail>.minor-actions button,#detail>.place-links a { min-height:36px; padding:7px 10px; font-size:12px; }
+  #detail .listed-opening { margin:7px 0; font-size:12px!important; }
+  .place-navigation { padding:9px; margin:8px 0; }
+  .place-links a { font-size:12px; padding:7px 9px; }
+  .floating .sky-location,.floating .sky-diagram-time,.floating .forecast-updated,.floating .sky-note,.floating .forecast-visual-note { font-size:12px; line-height:1.4; }
+  #environment-key .map-key-content { padding:9px; }
+  #legend,#environment-key { bottom:calc(68px + var(--map-credit-height)); }
+  body:not(.controls-open) .map-shell:has(#results:not([hidden])) .leaflet-top.leaflet-left { top:106px!important; }
+  .leaflet-top.leaflet-left { top:106px; }
+  body.shared-view #detail:not(.sky-panel) { bottom:var(--map-credit-height); max-height:42%; height:auto; padding:10px 12px; }
+  body.shared-view #detail .floating-head { top:-10px; margin:-10px -12px 4px; padding:4px 10px; }
+  #results.park-results { padding:10px 12px; max-height:42%; }
+}
+/* Landscape phones need a side inspector to retain a usable map viewport. */
+@media (max-width:800px) and (max-height:500px) and (orientation:landscape) {
+  .floating,#results,#detail:not(.sky-panel),.floating.sky-panel,body.detail-expanded #detail {
+    left:auto; right:6px; top:6px; bottom:calc(65px + var(--map-credit-height)); width:46%; max-height:none;
+  }
+  .map-shell:has(.floating:not([hidden])) #map-search,.map-shell:has(.floating:not([hidden])) #quick-categories { right:49%; }
+  #quick-categories { grid-template-columns:1fr 1fr; }
+}

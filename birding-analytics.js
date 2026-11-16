@@ -1,5 +1,6 @@
+import {dateRangeControl,localDate} from './date-range.js?v=20261116-date-range';
 // Observational analytics, not a model of abundance or detection probability.
-import {readWildlifeJson} from './wildlife.js?v=20261116-wildlife-heat';
+import {readWildlifeJson} from './wildlife.js?v=20261116-mobile-species';
 const API='https://api.inaturalist.org/v1/observations';
 const MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const SEASONS=[['Winter','12,1,2'],['Spring','3,4,5'],['Summer','6,7,8'],['Fall','9,10,11']];
@@ -35,8 +36,8 @@ export async function loadBirdFirstReports(options={}){if(!Number.isInteger(opti
 }
 export function appendBirdingAnalytics(host,options={}){
  const section=node('section',null,'insight-card birding-analytics'),title=node('h3','Bird observations'),scope=node('p',options.bounds?'Regional reports · City and County together':`Reports within ${options.radius||5} km of this spot`,'small');section.append(title,scope);host.append(section);
- const now=new Date(),base={...options,d1:options.d1||`${now.getUTCFullYear()-4}-01-01`,d2:options.d2||now.toISOString().slice(0,10)};
- const dates=node('div',null,'birding-date-range'),from=node('input'),to=node('input');from.type=to.type='date';from.value=base.d1;to.value=base.d2;from.min=to.min='1900-01-01';from.max=to.max=now.toISOString().slice(0,10);const fromLabel=node('label','From'),toLabel=node('label','Through');fromLabel.append(from);toLabel.append(to);dates.append(fromLabel,toLabel);section.append(dates);
+ const now=new Date(),today=localDate(now),base={...options,d1:options.d1||`${Number(today.slice(0,4))-4}-01-01`,d2:options.d2||today};
+ const dates=dateRangeControl({label:'Bird observation dates',min:'1900-01-01',max:today,from:base.d1,to:base.d2,onChange:({from,to})=>{base.d1=from;base.d2=to;render();}});section.append(dates);
  const status=node('p','Loading documented bird reports…','small'),content=node('div');section.append(status,content);
  const controller=new AbortController();let revision=0;
  const render=async()=>{const rev=++revision;status.textContent='Loading documented bird reports…';content.replaceChildren();try{const data=await loadBirdAnalytics({...base,signal:controller.signal});if(!section.isConnected||rev!==revision)return;status.textContent=`${data.records.toLocaleString()} research-grade reports · ${data.total.toLocaleString()} identified bird taxa · ${base.d1}–${base.d2}`;content.replaceChildren();
@@ -50,5 +51,5 @@ export function appendBirdingAnalytics(host,options={}){
   const first=button('First reports by year',async()=>{first.disabled=true;extra.replaceChildren(node('p','Loading dated reports…','small'));try{const reports=await loadBirdFirstReports({...base,taxonId:Number(select.value),signal:controller.signal});if(!section.isConnected)return;extra.replaceChildren(node('h4','First documented reports'));for(const r of reports){const line=node('p',null,'small');line.append(document.createTextNode(r.year+': '));line.append(r.url?link(r.date,r.url):document.createTextNode('No matching reports'));line.append(document.createTextNode(` · ${r.count} reports in selected dates`));extra.append(line);}extra.append(node('p','Earliest observation date within each selected year (last five years of the range), not the species’ arrival date. Resident birds and changing observer effort can shift these dates.','small'));}catch{extra.replaceChildren(node('p','Annual reports could not load. Try again.','small'));}finally{first.disabled=false;}});first.hidden=true;content.append(first);
   select.onchange=async()=>{const taxonId=Number(select.value),request=++revision;first.hidden=taxonId===3;extra.replaceChildren();if(taxonId===3){monthTable(data.months);return;}seasonal.replaceChildren(node('p','Loading species seasonality…','small'));try{const q=birdQuery({...base,taxonId});const hist=await readWildlifeJson(API+'/histogram?'+q+'&interval=month_of_year&date_field=observed',{signal:controller.signal});if(request===revision&&section.isConnected)monthTable(monthlyBirdCounts(hist));}catch{if(request===revision)seasonal.replaceChildren(node('p','Species reports could not load. Select another bird or retry.','small'));}};
   content.append(link('iNaturalist contributors · view source reports','https://www.inaturalist.org/observations?'+data.query));
- }catch{if(!section.isConnected)return;status.textContent='Bird reports could not load.';content.replaceChildren(button('Retry',render));}};dates.append(button('Apply dates',()=>{if(!from.value||!to.value||!from.checkValidity()||!to.checkValidity()||from.value>to.value){status.textContent='Choose a valid start and end date, with the start first.';return;}base.d1=from.value;base.d2=to.value;render();}));render();return{element:section,destroy(){controller.abort();}};
+ }catch{if(!section.isConnected)return;status.textContent='Bird reports could not load.';content.replaceChildren(button('Retry',render));}};render();return{element:section,destroy(){controller.abort();}};
 }

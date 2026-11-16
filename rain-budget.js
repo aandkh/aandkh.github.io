@@ -1,3 +1,4 @@
+import {dateRangeControl} from './date-range.js?v=20261116-date-range';
 const DAY=86400000,STANDARD_OFFSET=6*3600000;
 const finite=value=>typeof value==='number'&&Number.isFinite(value)&&value>=0;
 const timestamp=value=>value instanceof Date?value.valueOf():typeof value==='string'?Date.parse(value):value;
@@ -27,6 +28,16 @@ export function rainBudgetData(snapshot,{now=Date.now()}={}){
  const seven=period(7),thirty=period(30),latestDay=[...byDay.values()].filter(r=>r.precipIn!==null).map(r=>r.day).sort().at(-1)||null;
  return{end,stale,seven,thirty,latestDay,drySpell:{days:dryDays,exact,endedBy,lastWetDay},station:snapshot.station,normalPeriod:snapshot.normalPeriod,source:snapshot.source,checkedAt:snapshot.checkedAt};
 }
+/** Completed climate-day range only. Missing measurements never become zero. */
+export function rainRangeData(snapshot,{from,to,now=Date.now()}={}){
+ const today=rainClimateDay(now);if(snapshot?.schema!==1||!today||!validDay(from)||!validDay(to)||from>to||to>=today)return null;
+ const days=Math.round((Date.parse(to+'T12:00:00Z')-Date.parse(from+'T12:00:00Z'))/DAY)+1;if(days>36600)return null;
+ const byDay=new Map();for(const row of snapshot.records||[]){if(!validDay(row?.day)||row.day<from||row.day>to)continue;const prior=byDay.get(row.day);if(!prior||String(row.product||'')>=String(prior.product||''))byDay.set(row.day,row);}
+ const rows=Array.from({length:days},(_,i)=>{const day=shiftDay(from,i),r=byDay.get(day);return{day,precipIn:finite(r?.precipIn)?r.precipIn:null,normalIn:finite(r?.normalIn)?r.normalIn:null,trace:r?.trace===true};});
+ const measured=rows.filter(r=>r.precipIn!==null),complete=measured.length===days,observedIn=measured.length?measured.reduce((sum,r)=>sum+r.precipIn,0):null,normalIn=rows.every(r=>r.normalIn!==null)?rows.reduce((sum,r)=>sum+r.normalIn,0):null;
+ const wet=measured.filter(r=>r.precipIn>=.01),peak=wet.reduce((best,r)=>!best||r.precipIn>best.precipIn?r:best,null);
+ return{start:from,end:to,days,rows,observedIn,normalIn,complete,missingDays:days-measured.length,traceDays:measured.filter(r=>r.trace).length,wetDays:wet.length,peak,departureIn:complete&&normalIn!==null?observedIn-normalIn:null};
+}
 let cached=null,pending=null,loadedAt=0;
 async function loadSnapshot(){
  if(cached&&Date.now()-loadedAt<15*60000)return cached;
@@ -52,11 +63,22 @@ function render(card,snapshot,options){
   metrics.append(metric);
  }
  const dry=model.drySpell,spell=node('div','','rain-budget-metric');spell.append(node('span','Dry spell','rain-budget-label'),node('strong',dry.days===null?'Unavailable':(dry.exact?'':'≥ ')+dry.days+' day'+(dry.days===1?'':'s'),dry.days===null?'rain-budget-empty':''),node('span',dry.days===null?'Latest day not reported':dry.lastWetDay?'Last measurable: '+dayText(dry.lastWetDay):'Earlier history incomplete','rain-budget-comparison'));metrics.append(spell);card.append(metrics);
- const details=node('details','','rain-budget-details');details.append(node('summary','Daily rain & how this is calculated'));
- const chart=node('div','','rain-budget-chart');chart.setAttribute('role','img');chart.setAttribute('aria-label','Measured daily precipitation for the last 30 completed climate days. Exact values follow in the daily list.');const max=Math.max(.1,...model.thirty.rows.map(r=>r.precipIn||0));
- for(const row of model.thirty.rows){const bar=node('span','','rain-budget-bar');bar.dataset.state=row.precipIn===null?'missing':row.trace?'trace':row.precipIn===0?'zero':'rain';bar.style.setProperty('--rain-height',((row.precipIn||0)/max*100)+'%');bar.title=dayText(row.day)+': '+(row.precipIn===null?'Missing':row.trace?'Trace':inches(row.precipIn));chart.append(bar);}details.append(chart);
- const ticks=node('div','','rain-budget-axis');ticks.append(node('span',dayText(model.thirty.start)),node('span',dayText(model.end)));details.append(ticks,node('p','Blue bars: measured rain · yellow: trace · stripes: missing.'));
- const table=node('table','','rain-budget-table'),caption=node('caption','Daily precipitation · inches'),head=node('thead'),headRow=node('tr');for(const label of ['Day','Measured','Normal']){const th=node('th',label);th.scope='col';headRow.append(th);}head.append(headRow);table.append(caption,head);const body=node('tbody');for(const row of [...model.thirty.rows].reverse()){const tr=node('tr');tr.append(node('td',dayText(row.day)),node('td',row.precipIn===null?'Missing':row.trace?'Trace':row.precipIn.toFixed(2)),node('td',row.normalIn===null?'Unavailable':row.normalIn.toFixed(2)));body.append(tr);}table.append(body);const scroll=node('div','','rain-budget-table-scroll');scroll.tabIndex=0;scroll.setAttribute('aria-label','Daily precipitation values, newest first');scroll.append(table);details.append(scroll);
+ const details=node('details','','rain-budget-details');details.append(node('summary','Explore rain by date'));
+ const dates=(snapshot.records||[]).filter(r=>validDay(r?.day)&&r.day<=model.end).map(r=>r.day).sort(),rangeBody=node('div','','rain-range-body');
+ let selectedTo=dates.at(-1),selectedFrom=model.thirty.start<dates[0]?dates[0]:model.thirty.start>selectedTo?selectedTo:model.thirty.start;
+ const drawRange=()=>{
+  rangeBody.replaceChildren();const period=rainRangeData(snapshot,{from:selectedFrom,to:selectedTo,now:options.now});if(!period)return;
+  const summary=node('div','','rain-range-summary');summary.setAttribute('aria-live','polite');
+  summary.append(node('strong',period.observedIn===null?'No measurements':inches(period.observedIn)+(period.complete?'':' · partial')));
+  const comparison=period.departureIn===null?'Normal comparison unavailable':Math.abs(period.departureIn)<.005?'Matches normal':inches(Math.abs(period.departureIn))+' '+(period.departureIn<0?'below':'above')+' normal';
+  summary.append(node('span',comparison),node('span',period.wetDays+' measurable-rain days'+(period.traceDays?' · '+period.traceDays+' trace days':'')+' · '+(period.days-period.missingDays)+'/'+period.days+' days reported'));
+  if(period.peak)summary.append(node('span','Wettest reported day: '+dayText(period.peak.day)+' · '+inches(period.peak.precipIn)));rangeBody.append(summary);
+  const chart=node('div','','rain-budget-chart');chart.setAttribute('role','img');chart.setAttribute('aria-label','Measured daily precipitation from '+period.start+' through '+period.end+'. Exact values follow in the daily list.');const max=Math.max(.1,...period.rows.map(r=>r.precipIn||0));
+  for(const row of period.rows){const bar=node('span','','rain-budget-bar');bar.dataset.state=row.precipIn===null?'missing':row.trace?'trace':row.precipIn===0?'zero':'rain';bar.style.setProperty('--rain-height',((row.precipIn||0)/max*100)+'%');bar.title=dayText(row.day)+': '+(row.precipIn===null?'Missing':row.trace?'Trace':inches(row.precipIn));chart.append(bar);}rangeBody.append(chart);
+  const ticks=node('div','','rain-budget-axis');ticks.append(node('span',dayText(period.start)),node('span',dayText(period.end)));rangeBody.append(ticks,node('p','Blue bars: measured rain · yellow: trace · stripes: missing.'));
+  const table=node('table','','rain-budget-table'),caption=node('caption','Daily precipitation · inches'),head=node('thead'),headRow=node('tr');for(const label of ['Day','Measured','Normal']){const th=node('th',label);th.scope='col';headRow.append(th);}head.append(headRow);table.append(caption,head);const body=node('tbody');for(const row of [...period.rows].reverse()){const tr=node('tr');tr.append(node('td',dayText(row.day)),node('td',row.precipIn===null?'Missing':row.trace?'Trace':row.precipIn.toFixed(2)),node('td',row.normalIn===null?'Unavailable':row.normalIn.toFixed(2)));body.append(tr);}table.append(body);const scroll=node('div','','rain-budget-table-scroll');scroll.tabIndex=0;scroll.setAttribute('aria-label','Daily precipitation values, newest first');scroll.append(table);rangeBody.append(scroll);
+ };
+ if(dates.length){details.append(dateRangeControl({label:'Rain dates',min:dates[0],max:dates.at(-1),from:selectedFrom,to:selectedTo,onChange:({from,to})=>{selectedFrom=from;selectedTo=to;drawRange();}}));drawRange();details.append(rangeBody);}
  details.append(node('p',`Measured liquid-equivalent precipitation, including melted snow. This is one airport gauge, not a modeled average of St. Louis City and County; a storm can bring different amounts elsewhere. Preliminary NWS reports can be revised.`),node('p',`Normal means the ${model.normalPeriod||'source-reported'} average for the same calendar dates at this station. A departure is shown only when every measured day and daily normal is present. It is not a drought or soil-moisture rating.`),node('p','Dry spell = consecutive completed days with less than 0.01 in of measurable precipitation. Traces count as dry for this threshold, but are identified separately. A gap stops the count; ≥ means the earlier endpoint is unknown.'),node('p','Climate days run midnight to midnight CST (UTC−06), or 1 AM to 1 AM CDT. Today’s unfinished day is excluded. Missing values are never treated as zero.'));card.append(details);appendSources();
  function appendSources(){const footer=node('p','','rain-budget-source');const anchor=node('a','NWS daily climate report ↗');anchor.href=typeof model.source?.latestReportUrl==='string'&&model.source.latestReportUrl.startsWith('https://mesonet.agron.iastate.edu/')?model.source.latestReportUrl:'https://www.weather.gov/wrh/climate?tab=cliplot&wfo=lsx';anchor.target='_blank';anchor.rel='noopener noreferrer';footer.append(anchor);const checked=Date.parse(model.checkedAt);if(Number.isFinite(checked))footer.append(node('span',' · checked '+new Intl.DateTimeFormat('en-US',{timeZone:'America/Chicago',month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'}).format(new Date(checked))));card.append(footer);}
 }

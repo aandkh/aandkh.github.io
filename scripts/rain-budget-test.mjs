@@ -33,3 +33,11 @@ const feb=fixture({count:30,start:'2028-02-01'});feb.checkedAt='2028-03-02T12:00
 // The published real snapshot must have all core provenance and complete windows.
 const live=JSON.parse(fs.readFileSync(new URL('../rain-budget.json',import.meta.url),'utf8'));model=rainBudgetData(live,{now:live.checkedAt});assert.equal(model.stale,false);assert.equal(model.seven.missingDays,0);assert.equal(model.thirty.missingDays,0);assert.ok(model.source.latestReportUrl.startsWith('https://mesonet.agron.iastate.edu/api/1/nwstext/'));assert.ok(model.normalPeriod.match(/^\d{4}–\d{4}$/));
 console.log('PASS rain budget: complete/missing/trace/zero data, dry spells, seasonal baselines, freshness, CST/DST, leap day and live snapshot');
+
+const {rainRangeData}=await import('../rain-budget.js');
+const ranged={schema:1,records:[{day:'2026-11-01',precipIn:.5,normalIn:.1},{day:'2026-11-02',precipIn:0,normalIn:.1,trace:true},{day:'2026-11-03',precipIn:null,normalIn:.1},{day:'2026-11-04',precipIn:1.2,normalIn:.1}]};
+let range=rainRangeData(ranged,{from:'2026-11-01',to:'2026-11-04',now});assert.equal(range.days,4);assert.equal(range.missingDays,1);assert.equal(range.observedIn,1.7);assert.equal(range.departureIn,null);assert.equal(range.traceDays,1);assert.equal(range.wetDays,2);assert.equal(range.peak.day,'2026-11-04');
+range=rainRangeData(ranged,{from:'2026-11-01',to:'2026-11-02',now});assert.equal(range.complete,true);assert.ok(Math.abs(range.departureIn-.3)<1e-8);assert.equal(range.days,2);
+assert.equal(rainRangeData(ranged,{from:'2026-11-15',to:'2026-11-15',now}),null);assert.equal(rainRangeData(ranged,{from:'2026-11-03',to:'2026-11-01',now}),null);assert.equal(rainRangeData(ranged,{from:'2026-02-30',to:'2026-03-01',now}),null);
+const duplicate={schema:1,records:[{day:'2026-11-01',precipIn:1,normalIn:.1,product:'001'},{day:'2026-11-01',precipIn:.3,normalIn:.1,product:'002'}]};assert.equal(rainRangeData(duplicate,{from:'2026-11-01',to:'2026-11-01',now}).observedIn,.3);
+console.log('PASS rain date range: inclusive endpoints, source corrections, trace/unknown preservation, complete-only normal comparison, wettest day and unfinished-day exclusion');

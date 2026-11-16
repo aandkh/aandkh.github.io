@@ -1,7 +1,5 @@
 import assert from 'node:assert/strict';
-import fs from 'node:fs/promises';
-const source=await fs.readFile(new URL('../recent-incidents.js',import.meta.url),'utf8');
-const m=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
+const m=await import('../recent-incidents.js');
 const now=Date.parse('2026-11-15T12:00:00Z');
 const f=(id,date,other={})=>({type:'Feature',properties:{id,incidentAt:date,incidentKind:'assault',jurisdiction:'city',...other}});
 const records=[f('old','2026-10-31T23:30:00-05:00'),f('day','2026-11-08',{incidentTimeAccuracy:'date-only',incidentTypes:['assault','weapons']}),f('new','2026-11-14T10:00:00-06:00',{incidentKind:'crash',deaths:0,injuries:2,jurisdiction:'county'}),f('bad','no-date'),f('future','2026-11-16'),f('fatal','2026-11-10',{deaths:1})];
@@ -45,11 +43,12 @@ assert.equal(m.incidentFatalityStats([alias,f('structured','2026-11-10',{deaths:
 console.log('Fatality counts: sourced attribution, unknowns, dedup, pursuit exclusion, rolling boundaries and calendar-year checks passed.');
 // Lightweight DOM fixture tests the actual loading / unavailable rendering paths.
 class TestNode {
- constructor(tag,text=''){this.tagName=tag;this.ownText=text;this.children=[];this.style={};this.attributes={};}
+ constructor(tag,text=''){this.tagName=tag;this.ownText=text;this.children=[];this.style={};this.attributes={};this.dataset={};}
  set textContent(text){this.ownText=String(text);this.children=[];}
  get textContent(){return this.ownText+this.children.map(n=>typeof n==='string'?n:n.textContent).join(' ');}
  append(...nodes){this.children.push(...nodes);}
  setAttribute(key,value){this.attributes[key]=value;}
+ addEventListener(){}
 }
 globalThis.document={createElement:tag=>new TestNode(tag),createTextNode:text=>new TestNode('#text',text)};
 for(const input of [undefined,{},{mode:'violent',archiveFeatures:[]},{mode:'recent',status:'loading',archiveFeatures:[]}]){

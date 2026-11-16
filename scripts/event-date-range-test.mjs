@@ -1,0 +1,23 @@
+import assert from 'node:assert/strict';
+import {eventDateBounds,eventDateMatches,eventDateControlBounds} from '../event-date-range.js';
+const now=Date.parse('2026-11-16T18:00:00Z');
+const feature=start=>({properties:{start}});
+const rows=[feature('2026-11-15'),feature('2026-11-16T17:59:00Z'),feature('2026-11-16T18:00:00Z'),feature('2026-11-16T18:01:00Z'),feature('2026-11-17T02:00:00Z'),feature('2027-01-02'),feature(undefined),feature('nonsense')];
+assert.deepEqual(eventDateBounds(rows,now),{min:'2026-11-16',max:'2027-01-02'});
+assert.deepEqual(eventDateBounds([feature('2026-11-16')],now),{min:'2026-11-16',max:'2026-11-16'});
+assert.equal(eventDateBounds([feature('2026-11-15'),feature('nonsense')],now),null);
+assert.equal(eventDateBounds([],now),null);
+const range={from:'2026-11-16',to:'2026-11-16'};
+assert.equal(eventDateMatches(feature('2026-11-17T02:00:00Z'),range),true,'UTC Nov17 is still Chicago Nov16');
+assert.equal(eventDateMatches(feature('2026-11-17T07:00:00Z'),range),false);
+assert.equal(eventDateMatches(feature('2026-11-16'),range),true,'date-only input is not shifted');
+assert.equal(eventDateMatches(feature(undefined),range),true,'unknown dates remain unknown, not excluded operators');
+assert.equal(eventDateMatches(feature('2027-01-02'),null),true);
+assert.equal(eventDateMatches(feature('2027-01-02'),range),false);
+console.log('PASS: upcoming-only date bounds, Chicago midnight, date-only events, exact start expiry, undated operators and reset');
+
+assert.deepEqual(eventDateControlBounds([feature('2026-12-01')],{from:'2026-11-20',to:'2026-11-25'},now),{min:'2026-11-20',max:'2026-12-01'});
+assert.deepEqual(eventDateControlBounds([],{from:'2026-11-20',to:'2026-11-25'},now),{min:'2026-11-20',max:'2026-11-25'});
+assert.equal(eventDateControlBounds([],null,now),null);
+assert.deepEqual(eventDateControlBounds([feature('2026-12-01')],{from:'invalid',to:'invalid'},now),{min:'2026-12-01',max:'2026-12-01'});
+console.log('PASS: selected empty intervals remain visible and resettable after source expiry; no silent endpoint clamp');

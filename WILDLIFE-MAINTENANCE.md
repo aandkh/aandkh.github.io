@@ -30,3 +30,13 @@ The snapshot is a failure fallback, not a promise of always-current sightings. O
 Wildlife opens with the official iNaturalist `/v1/heatmap/{z}/{x}/{y}.png` tiles at `tiles.inaturalist.org`, verified against the official v1 Swagger contract. Tiles use the entire matching public query, not the capped newest-record list. Group, species, date and month filters affect both. The qualitative purple-to-red scale is observation concentration, not population density, habitat extent, or species richness. Observer effort affects it. Individual reports remain available as a view switch and list. The 512px provider images display on ordinary 256px XYZ tiles; native zoom is capped at 13 and stretched above it rather than adding false precision. Partial/failed tile loads have local status text. No zoom-to-fit changes.
 
 The default fallback snapshot carries `queryPolicy=public-unthreatened-v2`; older aggregate snapshots without those source-side privacy constraints must not be substituted for the new filtered query. Test with `node scripts/wildlife-heat-test.mjs` and `node scripts/wildlife-test.mjs`.
+
+## Species drill-down and dates (November 16)
+Groups expose a paginated list of documented taxa, with per-query report counts.
+Opening a species fetches its iNaturalist taxon record on demand; sourced Wikipedia
+summaries and classification appear inside the inspector. Photos are included only
+for CC0/CC BY/CC BY-SA with supplied attribution; missing descriptions/images are
+not invented. The species action filters the map and keeps current dates/group.
+Observation details also open species profiles. Date filtering uses the shared
+two-handle date-range control. Species descriptions remain cached runtime reference
+material, not an added daily research task.

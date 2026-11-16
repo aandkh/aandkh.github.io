@@ -5,3 +5,4 @@
 @media(max-width:340px){.rain-budget-metric strong{font-size:17px}.rain-budget-metrics{gap:6px}}
 
 .rain-budget-metric strong.rain-budget-empty{font-size:12px;letter-spacing:0;overflow-wrap:anywhere}
+.rain-range-summary{display:grid;gap:4px;padding:8px 0;font-size:11px;line-height:1.4}.rain-range-summary>strong{font-size:18px;font-variant-numeric:tabular-nums}.rain-range-summary>span{color:var(--muted)}.rain-budget-details .date-range-control{margin:6px 0}.rain-range-body .rain-budget-chart{gap:1px}

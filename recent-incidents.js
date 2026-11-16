@@ -1,3 +1,4 @@
+import {dateRangeControl} from './date-range.js?v=20261116-date-range';
 let cache, loaded = 0, pending, filtersOpen = false;
 const archiveCache = new Map(), TZ = 'America/Chicago';
 export const incidentFilters = { range: '7', jurisdiction: 'all', types: [], fatal: 'all', sort: 'newest', from: '', to: '' };
@@ -140,8 +141,10 @@ export function incidentExplorer(d,onChange) {
  if(d?.archiveErrors?.length)add('p','Some older archive files could not load. Showing available reports; try that period again.','incident-warning');
  const failed=(d?.sources||[]).filter(s=>s.status==='error');if(failed.length)add('small','A source could not refresh. Its previously verified reports remain available.');
  function select(label,key,options){const wrap=add('label',label+' '),s=document.createElement('select');s.setAttribute('aria-label',label);for(const[v,t]of options){const o=document.createElement('option');o.value=v;o.textContent=t;s.append(o);}s.value=incidentFilters[key];s.onchange=()=>{incidentFilters[key]=s.value;onChange();};wrap.append(s);}
- select('Time period','range',[['7','Past week'],['30','Past 30 days'],['90','Past 90 days'],['all',`All archived reports${d?.archiveCount?' ('+d.archiveCount.toLocaleString()+')':''}`],['custom','Choose dates']]);
- if(incidentFilters.range==='custom')for(const key of ['from','to']){const l=add('label',key==='from'?'From ':'Through '),i=document.createElement('input');i.type='date';i.max=localDay(Date.now());i.value=incidentFilters[key];i.setAttribute('aria-label',key==='from'?'Incident start date':'Incident end date');i.onchange=()=>{incidentFilters[key]=i.value;onChange();};l.append(i);}
+ select('Time period','range',[['7','Past week'],['30','Past 30 days'],['90','Past 90 days'],['all',`All archived reports${d?.archiveCount?' ('+d.archiveCount.toLocaleString()+')':''}`],['custom','Custom range']]);
+ const archiveStart=d.archiveCoverageFrom||(d.archiveMonths||[]).map(m=>m.month+'-01').sort()[0]||all.map(incidentDay).filter(Boolean).sort()[0]||localDay(Date.now()),today=localDay(Date.now());
+ const rangeFrom=incidentFilters.range==='all'?archiveStart:incidentFilters.range==='custom'?(incidentFilters.from||archiveStart):localDay(Date.now()-Number(incidentFilters.range||7)*86400000),rangeTo=incidentFilters.range==='custom'?(incidentFilters.to||today):today;
+ root.append(dateRangeControl({label:'Incident dates',min:archiveStart,max:today,from:rangeFrom,to:rangeTo,onChange:({from,to})=>{Object.assign(incidentFilters,{range:'custom',from,to});onChange();}}));
  const box=add('details',''),heading=document.createElement('summary');heading.textContent='Filter & sort reports';box.append(heading);box.open=filtersOpen;box.ontoggle=()=>{if(box.isConnected)filtersOpen=box.open;};target=box;
  const outcomes=[['all','All reports']];if(available.fatalReports)outcomes.push(['fatal','Reported fatal incidents']);if(available.injuries)outcomes.push(['injury','Reported injuries']);if(available.unknownDeaths)outcomes.push(['unknown','Death count not reported']);
  if(outcomes.length>1)select('Reported outcome','fatal',outcomes);
