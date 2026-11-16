@@ -1,0 +1,266 @@
+{
+  "Sirius": {
+    "summary": "The brightest star in our night sky is about 8.6 light-years away and has a faint stellar companion, Sirius B.",
+    "findTip": "Look for the standout bright star in Canis Major.",
+    "sourceUrl": "https://science.nasa.gov/asset/hubble/the-dog-star-sirius-and-its-tiny-companion/",
+    "sourceName": "NASA"
+  },
+  "Polaris": {
+    "summary": "The North Star lies close to the north celestial pole, so it moves very little through the night.",
+    "findTip": "Follow the two outer stars of the Big Dipper’s bowl toward the end of the Little Dipper’s handle.",
+    "sourceUrl": "https://science.nasa.gov/solar-system/what-is-the-north-star-and-how-do-you-find-it/",
+    "sourceName": "NASA"
+  },
+  "Vega": {
+    "summary": "A hydrogen-fusing star about 25 light-years away; one corner of the Summer Triangle.",
+    "findTip": "Start with the bright star in Lyra, then compare its triangle with Deneb and Altair.",
+    "sourceUrl": "https://science.nasa.gov/image-article/apod-2015-june-27-stars-of-a-summer-triangle/",
+    "sourceName": "NASA"
+  },
+  "Altair": {
+    "summary": "A nearby hydrogen-fusing star, about 17 light-years away, in Aquila.",
+    "findTip": "It marks one corner of the Summer Triangle with Vega and Deneb.",
+    "sourceUrl": "https://science.nasa.gov/image-article/apod-2015-june-27-stars-of-a-summer-triangle/",
+    "sourceName": "NASA"
+  },
+  "Deneb": {
+    "summary": "A luminous supergiant marking the tail of Cygnus, the Swan.",
+    "findTip": "Follow the long axis of the Northern Cross from Deneb toward Albireo.",
+    "sourceUrl": "https://science.nasa.gov/solar-system/skywatching/night-sky-network/summer-triangle-corner-deneb/",
+    "sourceName": "NASA"
+  },
+  "Betelgeuse": {
+    "summary": "A red supergiant marking one shoulder of Orion.",
+    "findTip": "Compare its reddish color with blue-white Rigel across Orion’s belt.",
+    "sourceUrl": "https://science.nasa.gov/universe/stories/quick-reads/discovering-the-universe-through-the-constellation-orion/",
+    "sourceName": "NASA"
+  },
+  "Rigel": {
+    "summary": "A blue supergiant marking one of Orion’s feet.",
+    "findTip": "Look across Orion’s three-star belt from reddish Betelgeuse.",
+    "sourceUrl": "https://science.nasa.gov/universe/stories/quick-reads/discovering-the-universe-through-the-constellation-orion/",
+    "sourceName": "NASA"
+  },
+  "Capella": {
+    "summary": "Auriga’s brightest star. It does not have a nearby partner as conspicuous as Gemini’s Castor–Pollux pair.",
+    "findTip": "Use Orion and the Castor–Pollux pair to avoid confusing Auriga with Gemini.",
+    "sourceUrl": "https://science.nasa.gov/solar-system/skywatching/night-sky-network/gemini-constellation/",
+    "sourceName": "NASA"
+  },
+  "Pollux": {
+    "summary": "The brighter of Gemini’s two head stars, about 34 light-years away. It has a known giant planet.",
+    "findTip": "Find the bright paired stars Castor and Pollux at the heads of Gemini.",
+    "sourceUrl": "https://science.nasa.gov/solar-system/skywatching/night-sky-network/gemini-constellation/",
+    "sourceName": "NASA"
+  },
+  "Castor": {
+    "summary": "Gemini’s slightly fainter head star is actually a six-star system, about 51 light-years away.",
+    "findTip": "Find its bright partner Pollux; together they mark the Twins’ heads.",
+    "sourceUrl": "https://science.nasa.gov/solar-system/skywatching/night-sky-network/gemini-constellation/",
+    "sourceName": "NASA"
+  },
+  "Aldebaran": {
+    "summary": "This orange star appears among the V-shaped Hyades but is a foreground star, not a cluster member.",
+    "findTip": "Look for the conspicuous orange point in Taurus’s V-shaped face.",
+    "sourceUrl": "https://science.nasa.gov/solar-system/skywatching/night-sky-network/spot-the-young-stars-of-the-hyades-and-pleiades/",
+    "sourceName": "NASA"
+  },
+  "Procyon": {
+    "summary": "One of the three bright landmarks of the Winter Triangle.",
+    "findTip": "Connect it with Sirius and Betelgeuse to trace the triangle.",
+    "sourceUrl": "https://science.nasa.gov/solar-system/skywatching/night-sky-network/connecting-the-dots-with-asterisms/",
+    "sourceName": "NASA"
+  },
+  "Arcturus": {
+    "summary": "A bright landmark star in Boötes.",
+    "findTip": "Follow the curve of the Big Dipper’s handle outward toward Arcturus.",
+    "sourceUrl": "https://flandrau.org/learn/skywatchers-guide/june-and-july-2026",
+    "sourceName": "Flandrau Science Center & Planetarium"
+  },
+  "Spica": {
+    "summary": "Virgo’s bright anchor star and a corner of the Diamond of Virgo.",
+    "findTip": "Compare its position with Arcturus, Denebola and Cor Caroli to trace the diamond.",
+    "sourceUrl": "https://science.nasa.gov/solar-system/skywatching/night-sky-network/connecting-the-dots-with-asterisms/",
+    "sourceName": "NASA"
+  },
+  "Regulus": {
+    "summary": "Leo’s bright landmark sits at the base of its recognizable Sickle pattern.",
+    "findTip": "Find the curved Sickle, shaped like a backward question mark.",
+    "sourceUrl": "https://science.nasa.gov/solar-system/skywatching/night-sky-network/celestial-wonders-in-leo/",
+    "sourceName": "NASA"
+  },
+  "Antares": {
+    "summary": "A red supergiant in the heart of Scorpius. Its atmosphere is vastly larger than the Sun’s.",
+    "findTip": "Look for the red-tinted bright star within the Scorpion’s pattern.",
+    "sourceUrl": "https://eso.org/public/news/eso1726/",
+    "sourceName": "ESO"
+  },
+  "Fomalhaut": {
+    "summary": "A nearby star system about 25 light-years away. Hubble has studied dust around it.",
+    "findTip": "Use the chart’s bearing to locate it in the southern part of the sky.",
+    "sourceUrl": "https://science.nasa.gov/asset/hubble/model-of-fomalhaut-b-dust-cloud/",
+    "sourceName": "NASA"
+  },
+  "Alpheratz": {
+    "summary": "One of the four corners of the Great Square of Pegasus.",
+    "findTip": "Find the large square formed with Scheat, Markab and Algenib.",
+    "sourceUrl": "https://science.nasa.gov/solar-system/skywatching/night-sky-network/connecting-the-dots-with-asterisms/",
+    "sourceName": "NASA"
+  },
+  "Mirach": {
+    "summary": "The middle of Andromeda’s prominent chain of Alpheratz, Mirach and Almach.",
+    "findTip": "Trace Andromeda’s chain outward from the Great Square of Pegasus.",
+    "sourceUrl": "https://www.pagasa.dost.gov.ph/astronomy/astronomical-diary",
+    "sourceName": "PAGASA"
+  },
+  "Almach": {
+    "summary": "A bright anchor at the far end of Andromeda’s prominent three-star chain.",
+    "findTip": "Follow Alpheratz through Mirach to Almach.",
+    "sourceUrl": "https://www.pagasa.dost.gov.ph/astronomy/astronomical-diary",
+    "sourceName": "PAGASA"
+  },
+  "Orion": {
+    "summary": "The Hunter contains red Betelgeuse, blue Rigel and a distinctive three-star belt.",
+    "findTip": "Start with the belt; its bright surrounding stars outline the body.",
+    "sourceUrl": "https://science.nasa.gov/universe/stories/quick-reads/discovering-the-universe-through-the-constellation-orion/",
+    "sourceName": "NASA"
+  },
+  "Ursa Major": {
+    "summary": "The Great Bear contains the familiar Big Dipper pattern.",
+    "findTip": "The two stars at the outer end of the Dipper’s bowl point toward Polaris.",
+    "sourceUrl": "https://science.nasa.gov/solar-system/what-is-the-north-star-and-how-do-you-find-it/",
+    "sourceName": "NASA"
+  },
+  "Ursa Minor": {
+    "summary": "The Little Bear contains the Little Dipper and the North Star.",
+    "findTip": "Polaris marks the tip of the Little Dipper’s handle.",
+    "sourceUrl": "https://science.nasa.gov/solar-system/what-is-the-north-star-and-how-do-you-find-it/",
+    "sourceName": "NASA"
+  },
+  "Cassiopeia": {
+    "summary": "Five conspicuous stars make its recognizable W-shaped pattern.",
+    "findTip": "Search for the W in the northern sky; its tilt changes as the sky turns.",
+    "sourceUrl": "https://science.nasa.gov/asset/hubble/ic-63-ghost-nebula/",
+    "sourceName": "NASA"
+  },
+  "Cygnus": {
+    "summary": "The Swan’s brightest stars make the Northern Cross.",
+    "findTip": "Start at Deneb, its tail, and follow the body toward Albireo; the crossbar forms the wings.",
+    "sourceUrl": "https://science.nasa.gov/solar-system/skywatching/night-sky-network/summer-triangle-corner-deneb/",
+    "sourceName": "NASA"
+  },
+  "Lyra": {
+    "summary": "The Harp is a small constellation anchored by brilliant Vega.",
+    "findTip": "Find Vega first; it is a corner of the much larger Summer Triangle.",
+    "sourceUrl": "https://science.nasa.gov/solar-system/skywatching/night-sky-network/summer-triangle-corner-vega/",
+    "sourceName": "NASA"
+  },
+  "Aquila": {
+    "summary": "The Eagle is anchored by Altair, a Summer Triangle star.",
+    "findTip": "Locate Altair using Vega and Deneb as the other two triangle corners.",
+    "sourceUrl": "https://science.nasa.gov/solar-system/skywatching/night-sky-network/summer-triangle-corner-altair/",
+    "sourceName": "NASA"
+  },
+  "Taurus": {
+    "summary": "The Bull’s face includes the V-shaped Hyades, with orange Aldebaran appearing in front of that cluster.",
+    "findTip": "Find Aldebaran, trace the V, then look nearby for the compact Pleiades cluster.",
+    "sourceUrl": "https://science.nasa.gov/solar-system/skywatching/night-sky-network/spot-the-young-stars-of-the-hyades-and-pleiades/",
+    "sourceName": "NASA"
+  },
+  "Gemini": {
+    "summary": "The Twins have two conspicuous head stars: Castor and Pollux.",
+    "findTip": "Continue from Rigel through Orion’s belt and Betelgeuse toward the pair.",
+    "sourceUrl": "https://science.nasa.gov/solar-system/skywatching/night-sky-network/gemini-constellation/",
+    "sourceName": "NASA"
+  },
+  "Scorpius": {
+    "summary": "The Scorpion has red Antares at its heart.",
+    "findTip": "Begin with Antares and trace the connected stars of the Scorpion.",
+    "sourceUrl": "https://www.hq.eso.org/public/images/eso1726d/",
+    "sourceName": "ESO / IAU / Sky & Telescope"
+  },
+  "Leo": {
+    "summary": "The Lion’s Sickle is one of its easiest patterns to recognize.",
+    "findTip": "Find bright Regulus at the bottom of the backward-question-mark shape.",
+    "sourceUrl": "https://science.nasa.gov/solar-system/skywatching/night-sky-network/celestial-wonders-in-leo/",
+    "sourceName": "NASA"
+  },
+  "Pegasus": {
+    "summary": "Its Great Square is a large landmark made by Scheat, Alpheratz, Markab and Algenib.",
+    "findTip": "Find the four widely spaced corners before tracing the remaining figure.",
+    "sourceUrl": "https://science.nasa.gov/solar-system/skywatching/night-sky-network/connecting-the-dots-with-asterisms/",
+    "sourceName": "NASA"
+  },
+  "Andromeda": {
+    "summary": "This constellation contains the Andromeda Galaxy, our nearest large galactic neighbor.",
+    "findTip": "Use the Great Square or Cassiopeia to find the area. The galaxy needs a darker sky than the main stars.",
+    "sourceUrl": "https://science.nasa.gov/solar-system/skywatching/night-sky-network/catch-andromeda-rising/",
+    "sourceName": "NASA"
+  },
+  "Mercury": {
+    "summary": "The smallest planet and the closest to the Sun.",
+    "findTip": "Usually a twilight target close to the horizon. Never sweep near the Sun with binoculars or a telescope.",
+    "sourceUrl": "https://science.nasa.gov/mercury/facts/",
+    "sourceName": "NASA",
+    "findTipSourceUrl": "https://www.jpl.nasa.gov/edu/resources/project/find-planets-in-the-sky/",
+    "findTipSourceName": "NASA/JPL"
+  },
+  "Venus": {
+    "summary": "An Earth-sized rocky world with a dense atmosphere; it is the hottest planet.",
+    "findTip": "Look for a very bright point in the morning or evening sky. Never aim optics toward the Sun.",
+    "sourceUrl": "https://science.nasa.gov/venus/venus-facts/",
+    "sourceName": "NASA",
+    "findTipSourceUrl": "https://www.jpl.nasa.gov/edu/resources/project/find-planets-in-the-sky/",
+    "findTipSourceName": "NASA/JPL"
+  },
+  "Mars": {
+    "summary": "Iron minerals rusting in its rocks and dust give Mars its reddish appearance.",
+    "findTip": "Look for a warm-colored point and match its exact charted position.",
+    "sourceUrl": "https://science.nasa.gov/mars/facts/",
+    "sourceName": "NASA",
+    "findTipSourceUrl": "https://www.jpl.nasa.gov/edu/resources/project/find-planets-in-the-sky/",
+    "findTipSourceName": "NASA/JPL"
+  },
+  "Jupiter": {
+    "summary": "A gas giant with four large Galilean moons: Io, Europa, Ganymede and Callisto.",
+    "findTip": "Binoculars or a small telescope can reveal its large moons when conditions allow.",
+    "sourceUrl": "https://science.nasa.gov/jupiter/jupiter-facts/",
+    "sourceName": "NASA",
+    "findTipSourceUrl": "https://science.nasa.gov/skywatching/faq/",
+    "findTipSourceName": "NASA"
+  },
+  "Saturn": {
+    "summary": "A giant planet surrounded by a broad system of rings.",
+    "findTip": "A small telescope can reveal the rings; the unaided eye sees a point of light.",
+    "sourceUrl": "https://science.nasa.gov/saturn/facts/",
+    "sourceName": "NASA",
+    "findTipSourceUrl": "https://science.nasa.gov/skywatching/faq/",
+    "findTipSourceName": "NASA"
+  },
+  "Uranus": {
+    "summary": "A faint outer planet at the edge of unaided-eye visibility under very dark skies.",
+    "findTip": "Use binoculars or a telescope and compare carefully with nearby charted stars.",
+    "sourceUrl": "https://www.jpl.nasa.gov/edu/resources/project/find-planets-in-the-sky/",
+    "sourceName": "NASA/JPL"
+  },
+  "Neptune": {
+    "summary": "Too faint to see with the unaided eye.",
+    "findTip": "Use a telescope or high-powered binoculars and a detailed star chart; a plotted position is not a naked-eye sighting.",
+    "sourceUrl": "https://science.nasa.gov/solar-system/planets/neptune/eye-on-neptune/",
+    "sourceName": "NASA"
+  },
+  "Moon": {
+    "summary": "The Moon turns once per orbit, keeping roughly the same side facing Earth. Its changing sunlit portion produces the phases.",
+    "findTip": "The border between light and dark brings out crater shadows particularly well.",
+    "sourceUrl": "https://science.nasa.gov/moon/facts/",
+    "sourceName": "NASA",
+    "findTipSourceUrl": "https://science.nasa.gov/moon/viewing-tips/",
+    "findTipSourceName": "NASA"
+  },
+  "Sun": {
+    "summary": "Our solar system’s star is a hot ball of hydrogen and helium whose energy powers life on Earth.",
+    "findTip": "Never look directly at the Sun or point unfiltered binoculars or a telescope at it.",
+    "sourceUrl": "https://science.nasa.gov/sun/facts/",
+    "sourceName": "NASA"
+  }
+}

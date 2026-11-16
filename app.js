@@ -76,9 +76,10 @@ let detailExpanded=false,detailReturnTarget=null,clusterBack=null,placeSuggestio
 let forecastSelectedTime=null,skySelectedBody=null,transitRouteRequest=null,transitRouteLayer=null,transitRouteRescale=null;
 const weatherInsightPreferences={comfort:'mild',minF:55,maxF:78};
 let parkSort='distance',parkEnrichmentRevision=0;const parkFilters=new Set();const parkBoundsCache=new WeakMap();
-const selectable=id=>!['cameras','restrooms'].includes(id)&&(['weather','concerts','arts','movies','sports','gyms','cycling','joyrides','foodtrucks','businesses','localfood','outages','terrain','crime','floodplains','birding'].includes(id)||layerSelectable(id,capabilities));
+const selectable=id=>!['cameras','restrooms'].includes(id)&&(['weather','sky','concerts','arts','movies','sports','gyms','cycling','joyrides','foodtrucks','businesses','localfood','outages','terrain','crime','floodplains','birding'].includes(id)||layerSelectable(id,capabilities));
 const storage=browserStorage(()=>window.localStorage);
-let skyPanelOpen=false,weatherPanelOpen=false;
+let skyPanelOpen=false,weatherPanelOpen=false,skyNowController=null;
+const skyNowState={};
 let presets=loadPresets(storage),focus=null,selectedMarker=null,sharedFocus=false,imageryDate='2025-10-15',toastTimer,moveTimer;
 let radarMode='intensity',airMode='pm25',mapStyle=CONFIG.mapStyle||'dark',baseLayer,layerModes=cleanLayerModes({}),overlayOpacity=cleanOverlayOpacity({});
 let sharedPlace,placeLinkRequest=0;let initial;try{sharedPlace=readPlaceHash(location.hash);initial=sharedPlace?placeState(sharedPlace):decodeState(location.hash);}catch(e){setTimeout(()=>toast(e.message),500);}
@@ -228,6 +229,7 @@ function positionForDetails(latlng,zoom=map.getZoom()){
 }
 map.on('resize',()=>{if(focus&&coordinate(focus.lat,focus.lng)&&!$('#detail').hidden&&!detailExpanded)positionForDetails([focus.lat,focus.lng]);});
 function closeDetail({restoreFocus=false}={}){
+ skyNowController?.destroy();skyNowController=null;
  if(routeHighlight){map.removeLayer(routeHighlight);routeHighlight=null;}
  placeLinkRequest++;if(restoreFocus)clusterBack=null;delete $('#detail').dataset.view;if(restoreFocus)document.body.classList.remove('shared-view','shared-peek');
  const hadSelection=!!focus;
@@ -400,7 +402,9 @@ function renderWeather(){
 function renderSky(){
  skyCloudMap.close(); const result=data.get('sky'),sky=result?.sky,inspection=captureInspection(skyPanelOpen);if(!inspection)rememberDetailOrigin();closeDetail();skyPanelOpen=true;const box=$('#detail');box.classList.add('sky-panel');box.replaceChildren();box.hidden=false;$('#results').hidden=true;
  const head=el('div','floating-head'),close=btn('×',()=>closeDetail({restoreFocus:true}));close.setAttribute('aria-label','Close sky tonight');head.append(el('h2','','Sky tonight'),close);detailExpansion(head);box.append(head);
- if(!sky||!coordinate(sky.lat,sky.lng)){box.append(el('p','sky-note',result?.status==='loading'?'Looking up this location…':'Sky details are unavailable for this location.'),btn('Try again',()=>loadLayer('sky'),'sky-refresh'));return;}
+ const finder=el('section','sky-now-mount'),finderLocation=map.getCenter();finder.append(el('p','small','Loading sky finder…'));box.append(finder);
+ import('./sky-now.js?v=20261116-sky-now').then(({mountSkyNow})=>{if(!finder.isConnected||!skyPanelOpen)return;finder.replaceChildren();skyNowController=mountSkyNow(finder,{lat:finderLocation.lat,lng:finderLocation.lng,clouds:sky?.clouds,state:skyNowState});if(inspection)requestAnimationFrame(()=>restoreInspection(inspection));}).catch(()=>{if(!finder.isConnected)return;finder.replaceChildren(el('p','small','Sky finder could not load.'),btn('Try again',renderSky,'sky-refresh'));});
+ if(!sky||!coordinate(sky.lat,sky.lng)){box.append(el('p','sky-note',result?.status==='loading'?'Loading cloud and tonight conditions…':'Cloud and tonight conditions are unavailable for this location.'),btn('Try again',()=>loadLayer('sky'),'sky-refresh'));if(inspection)restoreInspection(inspection);else focusDetailHeading();return;}
  box.append(el('p','sky-location',`${sky.lat.toFixed(3)}, ${sky.lng.toFixed(3)} · St. Louis time`));
  appendSkySummary(box,sky,format);box.append(btn('Best places to stargaze tonight',()=>showSkyCloudMap(sky),'sky-refresh'));const skyDetails=el('details','extra-disclosure');skyDetails.append(el('summary','','Explore planet positions'));appendSkyDiagram(skyDetails,sky,{format,selectedBody:skySelectedBody,onSelection:name=>{skySelectedBody=name;}});
  const facts=el('div','sky-facts'),fact=(label,value)=>{const item=el('dl');item.append(el('dt','',label),el('dd','',value));facts.append(item);};
@@ -701,7 +705,7 @@ function showMapKeepingPlace(){
  const target=panel==='layers'?$('#sidebar'):$('#'+panel),title=panel==='layers'?'Layers':panel==='results'?$('#results-title').textContent:$('#detail h2')?.textContent||'Details';
  suspendedPanel={panel,scroll:target.scrollTop,title};
  if(panel==='layers')setControls(false);else target.hidden=true;
- if(panel==='detail'){skyPanelOpen=false;weatherPanelOpen=false;}
+ if(panel==='detail'){skyNowController?.destroy();skyNowController=null;skyPanelOpen=false;weatherPanelOpen=false;}
  if(panel==='results')$('#results-toggle').setAttribute('aria-expanded','false');
  resumeButton.textContent='↑ '+title;resumeButton.setAttribute('aria-label','Return to '+title);resumeBox.hidden=false;
  document.activeElement?.blur();$('#map').focus({preventScroll:true});navigationState();
