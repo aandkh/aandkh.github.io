@@ -57,7 +57,7 @@ export function cleanNatureState(s={}){
  if(Number(raw.month)>=1&&Number(raw.month)<=12)wildlifeOptions.month=Math.floor(Number(raw.month));
  if(coordinate(raw.lat,raw.lng))Object.assign(wildlifeOptions,{lat:raw.lat,lng:raw.lng,radius:Math.max(.5,Math.min(25,Number(raw.radius)||5))});
  const b=raw.bounds;if(b&&coordinate(b.swlat,b.swlng)&&coordinate(b.nelat,b.nelng)&&b.swlat<b.nelat&&b.swlng<b.nelng)wildlifeOptions.bounds={swlat:b.swlat,swlng:b.swlng,nelat:b.nelat,nelng:b.nelng};
- return{wildlifeOptions,historyView:s.historyView==='imagery'?'imagery':'events',historyCategory:['battle','civil-rights','military','culture','engineering','disaster','government'].includes(s.historyCategory)?s.historyCategory:'all',historySort:s.historySort==='newest'?'newest':'oldest'};
+ return{wildlifeOptions,historyView:s.historyView==='imagery'?'imagery':'events',historyCategory:['battle','civil-rights','military','culture','engineering','disaster','government','indigenous','settlement','education','industry','science','sports'].includes(s.historyCategory)?s.historyCategory:'all',historyEra:['before1800','1800-1859','1860-1899','1900-1939','1940-1979','1980-present'].includes(s.historyEra)?s.historyEra:'all',historyYears:Array.isArray(s.historyYears)&&s.historyYears.length===2&&s.historyYears.every(y=>Number.isInteger(y)&&y>=1&&y<=9999)&&s.historyYears[0]<=s.historyYears[1]?s.historyYears.slice():null,historySort:s.historySort==='newest'?'newest':'oldest'};
 }
 export function cleanState(s){
  if(!s||s.v!==1||!Array.isArray(s.center)||!coordinate(...s.center))throw Error('This map link has invalid coordinates.');

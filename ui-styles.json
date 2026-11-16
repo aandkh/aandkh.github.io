@@ -20,5 +20,6 @@
   "vendor/maplibre-gl.css",
   "wildlife.css",
   "date-range.css",
-  "mobile-compact.css"
+  "mobile-compact.css",
+  "historical-events.css"
 ]

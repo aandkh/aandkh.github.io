@@ -1,6 +1,6 @@
 # Historical events
 
-`historical-events.json` is a deliberately bounded set of 12 reviewed regional records. It is not a complete historical-events database. The History layer may show these pins separately from the existing NASA historical satellite imagery mode.
+`historical-events.json` is a curated collection of 214 reviewed regional records, spanning circa 700 CE through 2025. It is not a complete historical-events database. The History layer includes six eras, 13 topics, a two-handle year range, full regional browsing, source-backed details and dated cluster lists. Existing NASA historical satellite imagery remains a separate view within History. The original 12 record identifiers remain unchanged; shared links still resolve. See `HISTORY-RESEARCH-2026-11.md` for era research and precision decisions.
 
 ## Evidence and dates
 
@@ -17,10 +17,14 @@ Every record displays a pin-location explanation. Particularly important:
 - The 1896 tornado pin marks a documented damaged location in Lafayette Park, not the tornado origin or full track.
 - The 1904 Olympics record identifies the late-August/early-September concentration at Francis Field. It does not claim all 1904 Olympic competitions occurred on those dates or at that venue.
 
-Historical dates use `historicalDate`, `historicalEndDate`, `historicalDateLabel`, `dateAccuracy` and `dateSort`. Never populate upcoming-event `start`/`end` from these dates: historical entries must not be expired or included in today's upcoming events. Year-only dates remain year-only in the visible label; January 1 in internal sorting is not a claimed event date. Date labels are preformatted, so no UTC-to-Chicago day shifts occur.
+Dates may be `YYYY`, `YYYY-MM` or `YYYY-MM-DD`; source precision is preserved. The year slider includes records whose documented periods overlap the selected years. Historical dates use `historicalDate`, `historicalEndDate`, `historicalDateLabel`, `dateAccuracy` and `dateSort`. Never populate upcoming-event `start`/`end` from these dates: historical entries must not be expired or included in today's upcoming events. Year-only dates remain year-only in the visible label; January 1 in internal sorting is not a claimed event date. Date labels are preformatted, so no UTC-to-Chicago day shifts occur.
 
 ## Scope and refresh
 
 City, County and nearby St. Charles records appear together. Jurisdiction metadata supports coverage review only, not a regional switch. This is stable reference information: do not add a daily/weekly/monthly research or rebuild job. Revisit only for a concrete correction, credible source revision or broken reference. Do not refresh `sourceCheckedAt` merely by loading the JSON.
 
-After changing this module/data, run `node scripts/historical-events-test.mjs`. The module validates geographic bounds, source URLs, date presence and required location notes; supports category/search/century and oldest/newest sorting; caches the static JSON request. Normal UI uses source links and concise location notes, not large explanatory menus.
+After changing this module/data, run `node scripts/historical-events-test.mjs`. The module validates geographic bounds, source URLs, date presence and required location notes; supports topic/search/era/year-overlap and oldest/newest sorting; caches the static JSON request. Normal UI uses source links and concise location notes, not large explanatory menus.
+
+## Performance and interface
+
+The static catalog is fetched only when History is opened, and the request is shared/cached for the page session. Search metadata is compiled once per immutable record. Results initially render 80 rows with explicit load-more; map points use the existing clustering system. Timeline dragging updates the two handles and labels locally, committing map/list filtering on release. Canceled rail drags roll back. Keyboard changes retain focus; era/category/year/sort settings survive saved/shared map state. Mobile controls retain the compact panel and leave the map visible. No new background fetch or refresh timer is introduced.

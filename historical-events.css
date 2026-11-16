@@ -1,0 +1,13 @@
+.history-controls.insight-card{padding:10px;min-width:0}
+.history-collection-summary{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:5px 0;font-variant-numeric:tabular-nums}
+.history-filter-fields{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr) minmax(0,1fr);gap:6px}
+.history-filter-field{display:flex;flex-direction:column;gap:3px;font-size:11px;min-width:0}
+.history-filter-field{margin:0!important}.history-sort select{min-height:28px!important;height:28px;font-size:11px!important;padding:3px 23px 3px 6px!important}.history-sort{max-width:115px}
+.history-filter-field select{width:100%;min-width:0;max-width:100%;font-size:12px;min-height:34px;padding:5px 26px 5px 7px;margin:0;color:var(--ink);background-color:var(--surface-raised,var(--surface));border:1px solid var(--line);border-radius:9px}
+.history-year-control{margin:8px 0 0}
+.history-reset{padding:4px 7px!important;min-height:30px!important;font-size:11px!important;margin:0;background:transparent;color:var(--ink);border:1px solid var(--line);border-radius:8px}
+.history-era-heading{margin:14px 0 6px;font-size:13px;line-height:1.4;padding:7px 0;border-bottom:1px solid var(--line)}
+.historical-evidence p{overflow-wrap:anywhere}
+@media(max-width:800px){.history-controls.insight-card{padding:8px}.history-filter-field select{font-size:11px;min-height:34px}.history-era-heading{font-size:12px}}
+
+.history-filter-field select{background-repeat:no-repeat;background-position:right 8px center;background-size:12px 12px}.history-controls .layer-choices{padding:0;display:flex;gap:4px}.history-controls .layer-choice{flex:1;min-width:0;min-height:32px!important;padding:5px!important;font-size:11px!important}.history-controls .date-range-track{margin-top:0}
