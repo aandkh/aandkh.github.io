@@ -43,14 +43,24 @@ const ALIASES=new Set(NAMES.map(compact));
 const LOCATION_PREFIXES=['mcdonalds','starbucks','taco bell','panera bread','st louis bread','saint louis bread','qdoba','white castle','amc','regal cinemas','regal theatres','cinemark','marcus theatres','marcus cinema','marcus','b and b','alamo drafthouse','wehrenberg','wherenberg','wherenburg','planet fitness','anytime fitness','orangetheory fitness','topgolf','bowlero','sky zone','urban air'];
 const BRAND_IDS=new Set(['Q38076','Q177054','Q752941','Q111972226']);
 const DOMAINS=new Set(`mcdonalds.com burgerking.com bk.com wendys.com hardees.com carlsjr.com jackinthebox.com whitecastle.com sonicdrivein.com tacobell.com qdoba.com chipotle.com kfc.com popeyes.com churchs.com raisingcanes.com chick-fil-a.com wingstop.com buffalowildwings.com subway.com jimmyjohns.com jerseymikes.com firehousesubs.com penn-station.com potbelly.com mcalistersdeli.com dominos.com pizzahut.com papajohns.com littlecaesars.com papamurphys.com jetspizza.com modpizza.com imospizza.com panerabread.com starbucks.com dunkindonuts.com dunkin.com scooterscoffee.com dutchbros.com dairyqueen.com baskinrobbins.com coldstonecreamery.com crumblcookies.com insomniacookies.com nothingbundtcakes.com smoothieking.com tropicalsmoothiecafe.com applebees.com chilis.com redrobin.com redlobster.com olivegarden.com longhornsteakhouse.com outback.com texasroadhouse.com crackerbarrel.com bobevans.com dennys.com ihop.com wafflehouse.com firstwatch.com culvers.com freddys.com steaknshake.com fiveguys.com shakeshack.com rallys.com lionschoice.com pandaexpress.com noodles.com fazolis.com captainds.com ljsilvers.com hooters.com twinpeaksrestaurant.com daveandbusters.com cheesecakefactory.com amctheatres.com regmovies.com cinemark.com marcustheatres.com bbtheatres.com drafthouse.com topgolf.com golfgalaxy.com bowlero.com mainevent.com skyzone.com urbanair.com planetfitness.com anytimefitness.com lafitness.com orangetheory.com clubpilates.com purebarre.com walmart.com target.com costco.com samsclub.com lowes.com homedepot.com ikea.com basspro.com cabelas.com dickssportinggoods.com`.split(/\s+/));
-function matchesName(value){
+// Cache only primitive source strings, not mutable records. The bound limits
+// retained memory on long browsing sessions; source corrections use new keys.
+const NAME_CACHE=new Map(),DOMAIN_CACHE=new Map(),CACHE_LIMIT=8192;
+function memoized(cache,value,compute){
+ if(cache.has(value))return cache.get(value);
+ const result=compute(value);if(cache.size>=CACHE_LIMIT)cache.delete(cache.keys().next().value);
+ cache.set(value,result);return result;
+}
+function matchesName(value){return typeof value==='string'&&value.length?memoized(NAME_CACHE,value,computeName):false;}
+function matchesDomain(value){return typeof value==='string'&&value.length?memoized(DOMAIN_CACHE,value,computeDomain):false;}
+function computeName(value){
  if(typeof value!=='string'||!value.trim())return false;
  const normalized=normalize(value),withoutUnit=normalized.replace(/\s+(?:(?:store|location|unit|no)\s+)?\d{2,}.*$/,'').replace(/\s+(?:llc|inc|incorporated|corp|corporation)$/,'');
  if(ALIASES.has(normalized.replaceAll(' ',''))||ALIASES.has(withoutUnit.replaceAll(' ','')))return true;
  if(LOCATION_PREFIXES.some(prefix=>normalized.startsWith(prefix+' ')))return true;
  return value.split(/\s+[–—-]\s+|[;/|]|\s+at\s+|\s*&\s*/i).some(part=>ALIASES.has(compact(part.replace(/\s*#\s*\d.*$/,''))));
 }
-function matchesDomain(value){
+function computeDomain(value){
  if(typeof value!=='string'||!/^https?:\/\//i.test(value))return false;
  try{let host=new URL(value).hostname.toLowerCase();while(host){if(DOMAINS.has(host))return true;const dot=host.indexOf('.');if(dot<0)break;host=host.slice(dot+1);}return false;}catch{return false;}
 }

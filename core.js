@@ -1,7 +1,7 @@
 import {enrichCultureFeature,cultureFeatureDisplayable} from './place-enrichment.js?v=20261115-road-insights';
 import {cleanVehicle} from './vehicles.js?v=20261115-road-insights';
 import {BY_ID} from './catalog.js?v=20261116-wildlife-heat';
-import {isExcludedChainPlace} from './chain-places.js?v=20261115-road-insights';
+import {isExcludedChainPlace} from './chain-places.js?v=20261116-speed';
 import {cleanLayerModes,cleanOverlayOpacity} from './expansion-options.js?v=20261115-road-insights';
 export const REGION = {south:38.1,north:39.2,west:-91.2,east:-89.4};
 export function coordinate(lat,lng) { return typeof lat==='number'&&typeof lng==='number'&&Number.isFinite(lat)&&Number.isFinite(lng)&&lat>=REGION.south&&lat<=REGION.north&&lng>=REGION.west&&lng<=REGION.east; }

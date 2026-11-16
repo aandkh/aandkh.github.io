@@ -381,3 +381,11 @@ body[data-map-style=dark] .weather-reading-place,body[data-map-style=dark] .weat
 .result-card .event-entry-when,.detail-event-when{display:block;font-size:12px!important;font-weight:700;line-height:1.4;color:var(--ink);margin:4px 0 6px}.detail-event-when{padding:7px 10px;border-left:3px solid var(--accent,#c7dca6);background:var(--surface);border-radius:4px}.cluster-agenda .event-day-heading{font-size:13px!important;padding:9px 6px}.cluster-agenda .result-card{text-align:left;width:100%}
 
 .sky-view-controls{display:flex;gap:6px;flex-wrap:wrap}.sky-view-controls select{min-width:0;flex:1;font-size:12px}.sky-view-controls button,.sky-view-site button{font-size:11px;padding:8px}.sky-view-site{padding:8px 0;border-top:1px solid var(--line)}.sky-view-site summary{font-size:12px;cursor:pointer}
+
+/* Keep long agendas searchable/accessible while deferring offscreen card layout. */
+@supports (content-visibility: auto) {
+ #results-list .result-card, .cluster-agenda .result-card {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 110px;
+ }
+}

@@ -15,6 +15,14 @@ export function cachedForecast(key,load,ttl=600000){
 }
 const metadata=()=>cachedForecast('hrrr',async()=>{const r=await fetch('https://mesonet.agron.iastate.edu/data/gis/images/4326/hrrr/refd_1080.json',{signal:AbortSignal.timeout(15000)});if(!r.ok)throw Error('Forecast radar unavailable.');return (await r.json()).model_init_utc;},300000);
 const stationForecast=station=>cachedForecast(station.id,async()=>{const r=await apiFetch('/api/layers/weather?lat='+station.lat+'&lng='+station.lng,{signal:AbortSignal.timeout(20000)});if(!r.ok)throw Error('Station forecast unavailable');const d=await r.json();if(!d.weather?.hourly?.length)throw Error('Station forecast unavailable');return d.weather.hourly;});
+// Coalesce pointer scrubbing without starting a tile request for every pixel.
+// The displayed frame remains separately labeled until its replacement loads.
+export function createRadarScrubber({request,onSeek=()=>{},delay=100,setTimer=setTimeout,clearTimer=clearTimeout}){
+ let timer=null,pending=null;
+ const cancel=()=>{if(timer!==null)clearTimer(timer);timer=null;pending=null;};
+ const commit=value=>{const next=value??pending;cancel();if(next!==null&&next!==undefined)request(next);};
+ return{cancel,commit,seek(value){cancel();pending=value;onSeek(value);timer=setTimer(()=>commit(),delay);}};
+}
 export function createFutureRadar(map,{weatherReadings,onStart,onClose}){
  const shell=map.getContainer().parentElement,launch=document.createElement('button');launch.className='radar-launch';launch.textContent='▶';launch.title='Play forecast radar';launch.setAttribute('aria-label','Play forecast radar');shell.append(launch);
  const panel=document.createElement('section');panel.className='future-radar';panel.hidden=true;panel.setAttribute('aria-label','Forecast radar playback');
@@ -23,7 +31,8 @@ export function createFutureRadar(map,{weatherReadings,onStart,onClose}){
  let active=false,playing=false,timer,frames=[],init='',series=[],index=0,displayed=-1,generation=0,session=0,warmed=false,viewKey='',cache=new Map();
  const clock=t=>new Date(t).toLocaleTimeString('en-US',{timeZone:'America/Chicago',hour:'numeric',minute:'2-digit',timeZoneName:'short'});
  const viewportKey=()=>[map.getZoom(),map.getBounds().toBBoxString(),map.getSize().x,map.getSize().y].join('/');
- function pause(){playing=false;clearTimeout(timer);play.textContent='▶';play.setAttribute('aria-label','Play forecast');}
+ const scrubber=createRadarScrubber({request:i=>{if(active)show(i);},onSeek:i=>{generation++;const time=clock(frames[i].time);status.textContent='Seeking '+time+'…';slider.setAttribute('aria-valuetext','Selected '+time+(displayed>=0?'; showing '+clock(frames[displayed].time):''));}});
+ function pause(){scrubber.cancel();playing=false;clearTimeout(timer);play.textContent='▶';play.setAttribute('aria-label','Play forecast');}
  function clearFrames(){for(const entry of cache.values()){entry.cancel();entry.layer.remove();}cache.clear();viewKey=viewportKey();}
  function stop(){session++;generation++;pause();active=false;clearFrames();displayed=-1;panel.hidden=true;launch.hidden=false;document.body.classList.remove('forecast-playing');onClose();launch.focus({preventScroll:true});}
  function trim(keep){for(const [key,entry] of cache)if(!keep.includes(key)){entry.cancel();entry.layer.remove();cache.delete(key);}}
@@ -51,8 +60,8 @@ export function createFutureRadar(map,{weatherReadings,onStart,onClose}){
   try{await prepare();if(s!==session||!active)return;slider.max=String(frames.length-1);slider.disabled=play.disabled=false;playing=true;play.textContent='Ⅱ';play.setAttribute('aria-label','Pause forecast');await show(0);if(active&&displayed===0){panel.dataset.firstFrameMs=String(Math.round(performance.now()-started));performance.mark('andymap-radar-visible');performance.measure('andymap-radar-first-frame','andymap-radar-start','andymap-radar-visible');}}
   catch(e){if(s===session&&active){pause();status.textContent=e.message||'Forecast unavailable. Close and try again.';}}
  }
- launch.onclick=start;launch.addEventListener('pointerenter',warm,{once:true});launch.addEventListener('focus',warm,{once:true});close.onclick=stop;play.onclick=()=>{if(playing)pause();else{playing=true;play.textContent='Ⅱ';play.setAttribute('aria-label','Pause forecast');show(index===frames.length-1?0:index);}};
- slider.oninput=()=>{pause();show(Number(slider.value));};document.addEventListener('visibilitychange',()=>{if(document.hidden){pause();if(!active)clearFrames();}});
+ launch.onclick=start;launch.addEventListener('pointerenter',warm,{once:true});launch.addEventListener('focus',warm,{once:true});close.onclick=stop;play.onclick=()=>{scrubber.cancel();if(playing)pause();else{index=Number(slider.value);playing=true;play.textContent='Ⅱ';play.setAttribute('aria-label','Pause forecast');show(index===frames.length-1?0:index);}};
+ slider.oninput=()=>{pause();scrubber.seek(Number(slider.value));};slider.onchange=()=>{pause();scrubber.commit(Number(slider.value));};document.addEventListener('visibilitychange',()=>{if(document.hidden){pause();if(!active)clearFrames();}});
  map.on('movestart',()=>{if(active)pause();});map.on('moveend',()=>{if(active)show(index);else if(cache.size)clearFrames();});
  return{start,stop,warm,get active(){return active;}};
 }

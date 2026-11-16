@@ -1,5 +1,5 @@
 import {dateRangeControl} from './date-range.js?v=20261116-date-range';
-import {eventDay} from './event-dates.js?v=20261115-core-polish';
+import {eventDay} from './event-dates.js?v=20261116-speed';
 import {eventDiscoverable,isEventDate} from './event-lifecycle.js?v=20261115-core-polish';
 
 // Bounds describe the supplied upcoming listings, not a complete venue calendar.
@@ -27,7 +27,6 @@ export function eventDateRangeControl(features,range,onChange,now=Date.now()){
  host.append(control);
  if(range){const clear=document.createElement('button');clear.type='button';clear.className='text-button';clear.textContent='All upcoming dates';clear.onclick=()=>onChange(null);host.append(clear);}
  if(!supplied){const note=document.createElement('p');note.className='small';note.textContent='No upcoming dated listings are currently loaded.';host.append(note);}
- else if(range){const note=document.createElement('p');note.className='small';note.textContent='Filters available listings; empty dates may have no published listings.';host.append(note);}
  const undated=features.some(f=>eventDiscoverable(f,now)&&!eventDay((f.properties||f).start));
  if(undated){const note=document.createElement('p');note.className='small';note.textContent='Undated places and operator schedules stay listed separately.';host.append(note);}
  return host;

@@ -1,0 +1,21 @@
+import assert from 'node:assert/strict';
+import {eventDay,eventTime,eventStamp,dayHeading,eventOrder} from '../event-dates.js';
+const winter=Date.parse('2026-11-16T19:00:00Z');
+assert.equal(eventTime('2026-11-16T19:00:00Z'),'1:00 PM CST');
+assert.equal(eventTime('2026-07-16T19:00:00Z'),'2:00 PM CDT');
+assert.equal(eventStamp('2026-11-16T19:00:00Z',winter),'Today · Nov 16 · 1:00 PM CST');
+assert.equal(eventStamp('2026-11-17',winter),'Tomorrow · Nov 17 · Start time not listed');
+assert.equal(eventStamp('2027-01-01T19:00:00Z',winter),'Jan 1, 2027 · 1:00 PM CST');
+// Relative labels follow Chicago midnight, not the UTC date or a cached previous day.
+assert.equal(eventStamp('2026-11-17',Date.parse('2026-11-17T05:59:59Z')),'Tomorrow · Nov 17 · Start time not listed');
+assert.equal(eventStamp('2026-11-17',Date.parse('2026-11-17T06:00:00Z')),'Today · Nov 17 · Start time not listed');
+assert.equal(eventStamp('2027-01-01',Date.parse('2027-01-01T05:59:59Z')),'Tomorrow · Jan 1, 2027 · Start time not listed');
+assert.equal(eventStamp('2027-01-01',Date.parse('2027-01-01T06:00:00Z')),'Today · Jan 1 · Start time not listed');
+assert.equal(eventTime('2026-11-17'),'Start time not listed · check event page');
+assert.equal(eventTime('invalid'),'Time not supplied');
+assert.equal(eventStamp('invalid',winter),'Date not listed');
+assert.equal(eventDay('2026-11-17T01:00:00Z'),'2026-11-16');
+assert.match(dayHeading('2026-11-17',winter),/^Tomorrow · Tuesday, November 17, 2026$/);
+const timed={properties:{start:'2026-11-16T19:00:00Z'}},dateOnly={properties:{start:'2026-11-16'}};
+assert.ok(eventOrder(timed,dateOnly)<0);
+console.log('PASS reused date formatters: CST/CDT, Chicago midnight, year boundary, date-only and unknown values, ordering');

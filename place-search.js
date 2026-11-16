@@ -1,5 +1,5 @@
 import {BY_ID} from './catalog.js?v=20261116-wildlife-heat';
-import {isExcludedChainPlace} from './chain-places.js?v=20261115-road-insights';
+import {isExcludedChainPlace} from './chain-places.js?v=20261116-speed';
 
 const normalize=value=>typeof value==='string'||typeof value==='number'?String(value).normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase().replace(/[^\p{L}\p{N}]+/gu,' ').trim():'';
 const values=value=>Array.isArray(value)?value.filter(v=>typeof v==='string').slice(0,40):typeof value==='string'||typeof value==='number'?[value]:[];
