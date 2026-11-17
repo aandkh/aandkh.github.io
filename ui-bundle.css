@@ -1467,26 +1467,23 @@ body[data-map-style=dark] .date-range-handle::-moz-range-thumb{background:#c7dba
 
 
 /* session-palettes.css */
-/* Menu chrome only. Data colors (AQI, precipitation, traffic, wildlife heat,
-   transit routes and map markers) keep their established meanings. */
-html[data-palette] body {
- --surface:var(--palette-light-surface); --surface-raised:var(--palette-light-raised);
- --surface-soft:var(--palette-light-soft); --ink:var(--palette-light-ink);
- --muted:var(--palette-light-muted); --line:var(--palette-light-line);
- --green:var(--palette-light-accent); --accent:var(--green); --lime:var(--surface-soft);
- --on-accent:var(--palette-light-on-accent); --link:var(--palette-light-link);
- --focus:var(--palette-light-focus); --border:var(--line); --panel-soft:var(--surface-soft);
+/* Independent menu palette in every map style. Data colors keep their meaning. */
+html[data-palette] body,
+html[data-palette] body[data-map-style] {
+ --surface:var(--palette-surface); --surface-raised:var(--palette-raised);
+ --surface-soft:var(--palette-soft); --ink:var(--palette-ink);
+ --muted:var(--palette-muted); --line:var(--palette-line);
+ --green:var(--palette-accent); --accent:var(--green); --lime:var(--surface-soft);
+ --on-accent:var(--palette-on-accent); --link:var(--palette-link);
+ --focus:var(--palette-focus); --border:var(--line); --panel-soft:var(--surface-soft);
  --fine-line:color-mix(in srgb,var(--line) 64%,transparent); color-scheme:light;
  --ui-shadow:0 2px 5px #10182010,0 12px 28px #10182014;
  --panel-shadow:0 2px 5px #10182010,0 16px 50px #10182029;
  background:var(--surface); color:var(--ink);
 }
-html[data-palette] body[data-map-style=dark] {
- --surface:var(--palette-dark-surface); --surface-raised:var(--palette-dark-raised);
- --surface-soft:var(--palette-dark-soft); --ink:var(--palette-dark-ink);
- --muted:var(--palette-dark-muted); --line:var(--palette-dark-line);
- --green:var(--palette-dark-accent); --on-accent:var(--palette-dark-on-accent);
- --link:var(--palette-dark-link); --focus:var(--palette-dark-focus); color-scheme:dark;
+html[data-palette][data-palette-tone=dark] body,
+html[data-palette][data-palette-tone=dark] body[data-map-style] {
+ color-scheme:dark;
  --ui-shadow:0 2px 5px #0003,0 12px 26px #0002;
  --panel-shadow:0 2px 5px #0003,0 16px 50px #0006;
 }
@@ -1550,6 +1547,33 @@ html[data-palette] body .sky-now button[aria-pressed=true] { background:var(--gr
 html[data-palette] body .sky-now button[aria-pressed=true]:hover { background:color-mix(in srgb,var(--green) 90%,var(--ink)); }
 /* Keep the two transparent date inputs above their visible shared rail. */
 html[data-palette] body .date-range-control input.date-range-handle { background:none; border:0; }
+
+/* Menu tone follows the palette, never the basemap's brightness. */
+html[data-palette] body .brand-mark img { filter:none; }
+html[data-palette] body :is(select,.map-toolbar select) {
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%2363736b' stroke-width='1.5'%3E%3Cpath d='m6 8 4 4 4-4'/%3E%3C/svg%3E");
+}
+html[data-palette] body :is(input,textarea,select,option,.weather-insight select,.weather-insight-settings input) { color-scheme:light; }
+html[data-palette] body option { color:var(--ink); background:var(--surface-raised); }
+html[data-palette] body .layer-choice[aria-pressed=true] { background:var(--green); border-color:var(--green); color:var(--on-accent); }
+html[data-palette] body .layer-choice[aria-pressed=true]:hover { background:color-mix(in srgb,var(--green) 90%,var(--ink)); color:var(--on-accent); }
+html[data-palette] body .forecast-table th { background:var(--surface-soft); color:var(--ink); }
+html[data-palette] body :is(.forecast-visual,.sky-diagram) { --chart-temperature:#b85f18; --chart-precipitation:#4b82a9; --chart-selected:var(--green); }
+html[data-palette] body .sky-cloud-bar>i { background:#6e91ae; }
+html[data-palette] body .opacity-control input[type=range] { accent-color:var(--green); background:transparent; }
+html[data-palette] body .comment-feedback[role=alert] { color:#a43f24; }
+html[data-palette] body :is(.map-warning,.notices-trigger) { background:#fff0ce; color:#693e18; border-color:#b26848; }
+html[data-palette] body .notices-trigger:hover { background:#fbe4b3; color:#693e18; }
+html[data-palette][data-palette-tone=dark] body .brand-mark img { filter:brightness(0) invert(1); }
+html[data-palette][data-palette-tone=dark] body :is(select,.map-toolbar select) {
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23d4dae2' stroke-width='1.5'%3E%3Cpath d='m6 8 4 4 4-4'/%3E%3C/svg%3E");
+}
+html[data-palette][data-palette-tone=dark] body :is(input,textarea,select,option,.weather-insight select,.weather-insight-settings input) { color-scheme:dark; }
+html[data-palette][data-palette-tone=dark] body :is(.forecast-visual,.sky-diagram) { --chart-temperature:#e6a15e; --chart-precipitation:#7ab7df; }
+html[data-palette][data-palette-tone=dark] body .sky-cloud-bar>i { background:#a4c5dd; }
+html[data-palette][data-palette-tone=dark] body .comment-feedback[role=alert] { color:#ffc2a8; }
+html[data-palette][data-palette-tone=dark] body :is(.map-warning,.notices-trigger) { background:#4b342b; color:#ffe0bd; border-color:#a16e4d; }
+html[data-palette][data-palette-tone=dark] body .notices-trigger:hover { background:#5b3c2e; color:#ffe0bd; }
 
 
 /* panel-drag.css */
