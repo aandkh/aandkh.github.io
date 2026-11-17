@@ -1,5 +1,6 @@
 // Small source-independent category symbols. Vehicle positions still come only from feeds.
 const paths={
+ haunted:'<path d="M5 21V10a7 7 0 0 1 14 0v11l-3-2-4 2-4-2-3 2Z"/><circle cx="9" cy="10" r="1"/><circle cx="15" cy="10" r="1"/><path d="M10 15h4"/>',
  wildlife:'<path d="M12 21V10m0 5C4 15 3 10 3 5c6 0 9 3 9 7m0 5c7 0 9-5 9-10-6 0-9 4-9 8"/>',
  joyrides:'<path d="m4 10 2-6h12l2 6M3 10h18v9H3zM6 19v3m12-3v3M6 14h2m8 0h2"/>',
  gyms:'<path d="M7 12h10M4 7v10m3-12v14m10-14v14m3-12v10M2 10v4m20-4v4"/>',

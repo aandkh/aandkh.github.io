@@ -2,9 +2,9 @@
 
 The original dark forest/lime palette, the existing 20 light palettes, and 20
 additional dark palettes (41 total).
-Menu brightness no longer follows the basemap: Light, Dark and Streets change
-only the map. The chosen menu palette keeps its own light or dark tone and stays
-steady throughout the document.
+Menu brightness follows the basemap: Dark uses the 21 dark palettes; Light and
+Streets use the 20 light palettes. Each document remembers one random choice for
+each family, so returning to a family restores its earlier colors.
 The original surface, raised surface, soft surface, text, border and accent colors
 are explicitly retained and checked by the regression test.
 
@@ -12,17 +12,24 @@ are explicitly retained and checked by the regression test.
 
 Load `/session-palettes.js` as a normal synchronous, same-origin script in the
 head after the CSP meta and before the stylesheet. It is a small dependency-free script,
-has no dependencies or network calls, and selects once before the body paints.
+has no dependencies or network calls, and selects the initial matching family
+before the body paints using the saved map style (default Dark).
 Append `session-palettes.css` to `ui-styles.json` after existing menu styles and
 rebuild using `node scripts/build-ui-styles.mjs`.
 
-A new document selects uniformly from the curated choices, excluding the previous
-palette stored in that tab's sessionStorage. This guarantees a visible change on
-reload or the brand link's normal navigation to `/`. Storage-denied browsers still
-randomize. There are no timers, observers, or pageshow handlers: layer changes,
-feed refreshes, map movements, and returning from a backgrounded tab do not
-reselect the palette. Re-executing the bootstrap is idempotent. Choosing Light or
-Dark never recolors the menus.
+A new document selects uniformly from the matching family, excluding that family's
+previous palette stored in the tab's sessionStorage. This guarantees a fresh color
+on reload or the brand link's normal navigation to `/`. Storage-denied browsers
+still randomize. The session history keys are `andymap:last-palette:v2:dark` and
+`andymap:last-palette:v2:light`; the old single history key is read as a fallback.
+
+A narrow MutationObserver watches only `body[data-map-style]` after the body is
+available. It does not observe children, classes, feeds, layers, or map movements.
+There are no timers or visibility/re-entry listeners. Re-executing the bootstrap
+is idempotent. Explicitly selecting the other map-tone family chooses its random
+palette once; switching back restores the earlier document choice rather than
+randomizing again. Light and Streets share the same light choice. A shared link
+or saved view that restores a map style also receives the matching menu family.
 
 ## Palette families
 
@@ -78,8 +85,10 @@ Primary family references:
 `node scripts/session-palettes-test.mjs` exercises all 41 selections, repeat
 execution, new-document selection, unavailable crypto and blocked storage. It
 checks that the 20 previous light palettes retain their tone, all 20 new palettes
-are dark, the original green values remain unchanged, and no basemap selector
-can change the menu palette.
+are dark, and the original green values remain unchanged. It also checks matching
+family selection, stable repeated use, returning to either family, Light/Streets
+continuity, initial saved-style selection before the body exists, and later shared
+view synchronization. The observer is restricted to the map-style attribute.
 Foreground, secondary text, links, primary buttons and hover states pass **451
 text contrast checks, minimum 4.60:1**. Focus colors pass 3:1. Browser QA also
 checks the applied theme with light and dark map choices. Semantic map colors

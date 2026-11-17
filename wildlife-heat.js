@@ -13,7 +13,8 @@ export function wildlifeHeatQuery(query=new URLSearchParams()){
  for(const[key,value]of Object.entries({quality_grade:'research',captive:'false',geo:'true',hrank:'species',geoprivacy:'open',taxon_geoprivacy:'open',obscuration:'none',threatened:'false'}))q.set(key,value);
  return q;
 }
-export function wildlifeHeatUrl(query){return'https://tiles.inaturalist.org/v1/heatmap/{z}/{x}/{y}.png?'+wildlifeHeatQuery(query);}
+export function wildlifeHeatKey(query){const value=wildlifeHeatQuery(query);value.sort();return value.toString();}
+export function wildlifeHeatUrl(query){return'https://tiles.inaturalist.org/v1/heatmap/{z}/{x}/{y}.png?'+wildlifeHeatKey(query);}
 export function wildlifeHeatBounds(query){
  const q=wildlifeHeatQuery(query),number=key=>q.has(key)&&q.get(key)!==''?Number(q.get(key)):NaN;
  let area={...REGION};const south=number('swlat'),west=number('swlng'),north=number('nelat'),east=number('nelng');
@@ -26,6 +27,7 @@ export function createWildlifeHeatLayer(L,query,{onStatus=()=>{},opacity=.38}={}
  // PNGs are 512px high-DPI images of standard XYZ tiles; Leaflet displays each
  // at 256 CSS pixels. No zoomOffset: geographic tile coordinates are unchanged.
  const layer=L.tileLayer(wildlifeHeatUrl(query),{tileSize:256,detectRetina:false,bounds:wildlifeHeatBounds(query),noWrap:true,maxNativeZoom:13,maxZoom:18,minZoom:8,opacity:Math.max(.1,Math.min(.7,Number(opacity)||.38)),updateWhenIdle:true,updateWhenZooming:false,keepBuffer:1,zIndex:310,className:'wildlife-heat-tile'});
+ layer.wildlifeHeatKey=wildlifeHeatKey(query);
  let loaded=0,failed=0,active=false;
  const report=status=>{layer.wildlifeHeatStatus={status,loaded,failed};onStatus(layer.wildlifeHeatStatus);};
  layer.wildlifeHeatStatus={status:'loading',loaded:0,failed:0};

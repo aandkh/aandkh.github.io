@@ -1,3 +1,4 @@
+import {packMapBadges} from './map-badge-layout.js?v=20261117-explore-layout';
 // Cross-category place clustering. Cluster positions are weighted geographic
 // summaries of their members, never substitute coordinates for an actual place.
 const MAX_LAT=85.0511287798066;
@@ -6,9 +7,12 @@ const MAX_LAT=85.0511287798066;
 // Raw single-provider feeds may supply their provider without copying records.
 export function separateSelectedPlace(entries,selection,provider){
  if(!selection)return{selected:null,remaining:entries};
- const index=entries.findIndex(f=>(f._layer??provider)===selection.layer&&String(f.properties?.id||f.id||'')===selection.id);
- return index<0?{selected:null,remaining:entries}:{selected:entries[index],remaining:[...entries.slice(0,index),...entries.slice(index+1)]};
+ const community=new Set(['communityevents','exhibitions','family','free']),canonical=layer=>community.has(layer)?'communityevents':layer;
+ const matches=feature=>{const layer=feature._layer??provider??feature.properties?._sourceLayer,identity=String(feature.properties?.id||feature.id||'');return canonical(layer)===canonical(selection.layer)&&(identity===selection.id||feature.properties?.alternateIds?.includes(selection.id));};
+ const selected=entries.find(matches)||null;
+ return selected?{selected,remaining:entries.filter(feature=>!matches(feature))}:{selected:null,remaining:entries};
 }
+
 const compareText=(a,b)=>a<b?-1:a>b?1:0;
 
 /**
@@ -169,4 +173,32 @@ export function clusterPlaceFeatures(entries,zoom,{width=1280,height=800,bounds}
  }
  groups.sort((a,b)=>a.x-b.x||a.y-b.y||a.id-b.id);
  return groups.map(group=>{group.points.sort((a,b)=>a.order-b.order);let south=Infinity,west=Infinity,north=-Infinity,east=-Infinity;const layers=new Set();for(const p of group.points){south=Math.min(south,p.lat);north=Math.max(north,p.lat);west=Math.min(west,p.lng);east=Math.max(east,p.lng);if(typeof p.feature._layer==='string'&&p.feature._layer)layers.add(p.feature._layer);}return{features:group.points.map(p=>p.feature),center:group.points.length===1?[group.points[0].lat,group.points[0].lng]:unproject(group.x,group.y,scale),bounds:[[south,west],[north,east]],layerIds:[...layers].sort(compareText)};});
+}
+
+// If visual room is scarce, shrink then merge nearby groups of the same
+// provider. Every member stays clickable in the resulting group's list.
+export function layoutOverviewBadges(groups,{width,height,obstacles=[],gap=5,maxDisplacement=180,measure}={}){
+ const merge=(a,b)=>{const ac=a.cluster,bc=b.cluster,an=ac.features.length,bn=bc.features.length,n=an+bn;return{...a,anchor:[(a.anchor[0]*an+b.anchor[0]*bn)/n,(a.anchor[1]*an+b.anchor[1]*bn)/n],cluster:{...ac,features:[...ac.features,...bc.features],center:[(ac.center[0]*an+bc.center[0]*bn)/n,(ac.center[1]*an+bc.center[1]*bn)/n],bounds:[[Math.min(ac.bounds[0][0],bc.bounds[0][0]),Math.min(ac.bounds[0][1],bc.bounds[0][1])],[Math.max(ac.bounds[1][0],bc.bounds[1][0]),Math.max(ac.bounds[1][1],bc.bounds[1][1])]],layerIds:[...new Set([...(ac.layerIds||[]),...(bc.layerIds||[])])].sort(compareText)}};};
+ let current=groups.map(group=>({...group,anchor:[...group.anchor]})),compact=false,attempt=0;
+ // Coarsen an exceptionally dense feed before placement. This caps the work
+ // independently of hundreds of nearby buses/POIs; all members are retained.
+ const clipped=obstacles.map(b=>({x:Math.max(0,b.x),y:Math.max(0,b.y),right:Math.min(width,b.x+b.w),bottom:Math.min(height,b.y+b.h)})).filter(b=>b.right>b.x&&b.bottom>b.y),edges=[...new Set([0,width,...clipped.flatMap(b=>[b.x,b.right])])].sort((a,b)=>a-b);let covered=0;
+ for(let i=1;i<edges.length;i++){const left=edges[i-1],right=edges[i],spans=clipped.filter(b=>b.x<right&&b.right>left).map(b=>[b.y,b.bottom]).sort((a,b)=>a[0]-b[0]);let top=0,length=0;for(const[a,b]of spans){if(b>top){length+=b-Math.max(top,a);top=b;}}covered+=(right-left)*length;}
+ const budget=Math.max(2,Math.min(width<600?28:60,Math.floor((width*height-covered)/3600))),cell=Math.max(56,Math.sqrt(width*height/budget));
+ if(current.length>budget){const bins=new Map();for(const group of current){const key=group.provider+':'+Math.floor(group.anchor[0]/cell)+':'+Math.floor(group.anchor[1]/cell);bins.set(key,bins.has(key)?merge(bins.get(key),group):group);}current=[...bins.values()];}
+ const dimensions=group=>{if(measure)return measure(group,compact);const count=group.cluster.features.length;return compact?{width:count===1?24:Math.max(30,24+6*String(count).length),height:24}:{width:count===1?30:Math.max(44,36+8*String(count).length),height:count===1?30:34};};
+ let result=[];
+ while(current.length){
+  result=packMapBadges(current.map(group=>({...group,...dimensions(group),compact})),{width,height,obstacles,gap,maxDisplacement:current.length<=2?Math.hypot(width,height):maxDisplacement});
+  const blocked=new Set(result.filter(group=>!group.clearance).map(group=>group.key));if(!blocked.size)break;
+  if(!compact){compact=true;continue;}
+  let pair=null,best=Infinity;
+  for(let i=0;i<current.length;i++)for(let j=i+1;j<current.length;j++){
+   const a=current[i],b=current[j];if(a.provider!==b.provider||!blocked.has(a.key)&&!blocked.has(b.key))continue;
+   const distance=(a.anchor[0]-b.anchor[0])**2+(a.anchor[1]-b.anchor[1])**2;if(distance<best){best=distance;pair=[i,j];}
+  }
+  if(!pair||++attempt>groups.length){result=packMapBadges(current.map(group=>({...group,...dimensions(group),compact})),{width,height,obstacles,gap,maxDisplacement:Math.hypot(width,height)});break;}
+  const[i,j]=pair;current[i]=merge(current[i],current[j]);current.splice(j,1);
+ }
+ return result;
 }

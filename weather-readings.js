@@ -1,3 +1,6 @@
+import {getMapBadgeLayout} from './map-badge-layout.js?v=20261117-explore-layout';
+
+export const COMPACT_WEATHER_SIZE=Object.freeze({w:72,h:44});
 export function windPresentation(reading){
  const speed=reading?.windMph;
  if(!Number.isFinite(speed)||speed<0)return{text:'— mph',rotation:null,label:'Wind unavailable'};
@@ -14,7 +17,7 @@ export function weatherMarkerReadings(readings,now=Date.now()){
 const overlapArea=(a,b,gap=0)=>Math.max(0,Math.min(a.x+a.w+gap,b.x+b.w+gap)-Math.max(a.x,b.x))*Math.max(0,Math.min(a.y+a.h+gap,b.y+b.h+gap)-Math.max(a.y,b.y));
 // Four cards are solved together: obstacle clearance wins over distance to a
 // station. Keep the preceding positions as candidates to avoid refresh jitter.
-export function weatherCardPositions(points,{width,height,top=0,bottom=0,obstacles=[],previous=[],sizes=[]},w=100,h=90){
+export function weatherCardPositions(points,{width,height,top=0,bottom=0,obstacles=[],previous=[],sizes=[]},w=COMPACT_WEATHER_SIZE.w,h=COMPACT_WEATHER_SIZE.h){
  const clamp=(v,min,max)=>Math.max(min,Math.min(Math.max(min,max),v));
  const blocks=obstacles.filter(b=>[b.x,b.y,b.w,b.h].every(Number.isFinite)&&b.w>0&&b.h>0);
  const candidates=points.map((point,i)=>{
@@ -57,6 +60,15 @@ export function createWeatherLayout(solve=weatherCardPositions){
 }
 const shortTime=new Intl.DateTimeFormat('en-US',{timeZone:'America/Chicago',hour:'numeric',minute:'2-digit'});
 const detailedTime=new Intl.DateTimeFormat('en-US',{timeZone:'America/Chicago',year:'numeric',month:'numeric',day:'numeric',hour:'numeric',minute:'2-digit',second:'2-digit',timeZoneName:'short'});
+export function weatherCardText(reading,{forecast=false}={}){
+ const r=reading||{},wind=windPresentation(r),when=Date.parse(r.observedAt),validTime=Number.isFinite(when),temperature=Number.isFinite(r.temperatureF)?Math.round(r.temperatureF)+'°F':'—';
+ const fullTime=validTime?detailedTime.format(when):'Time unavailable';
+ const time=validTime?shortTime.format(when).replace(/\s+/g,'').replace(/AM$/,'a').replace(/PM$/,'p').replace(':00',''):'—';
+ const windText=Number.isFinite(r.windMph)&&r.windMph>=0?Math.round(r.windMph)+' mph':'— mph';
+ const timeTitle=(forecast?'Forecast: ':'Observed: ')+fullTime+(r.source?' · '+r.source:'')+(r.replacementFor?' · Nearby replacement for '+r.replacementFor:'');
+ return{temperature,windText,rotation:wind.rotation,windLabel:wind.label,time,timeTitle,wideWind:Number.isFinite(r.windMph)&&Math.round(r.windMph)>=100,
+  accessible:'Forecast for '+r.label+'. '+(temperature==='—'?'Temperature unavailable':temperature)+'. '+wind.text+'. '+wind.label+'. '+timeTitle};
+}
 // Cut leader strokes around labels so they never draw across incident text.
 export function weatherLeaderSegments(start,end,obstacles=[]){
  const dx=end.x-start.x,dy=end.y-start.y,cuts=[];
@@ -69,53 +81,43 @@ export function weatherLeaderSegments(start,end,obstacles=[]){
 }
 export function createWeatherReadings(map,{formatTime,leaflet=globalThis.L,fitOnLoad=false,onSelect}={}){
  const container=map.getContainer(),host=document.createElement('div');host.className='weather-card-grid';host.setAttribute('aria-label','Regional weather stations');container.parentElement.append(host);
- let saved=[],forecast=false,shown=[],overview=fitOnLoad,layoutFrame,signature='',forecastSignature='',moving=false;const lastPositions=new Map(),solveLayout=createWeatherLayout();
+ const badgeLayout=getMapBadgeLayout(map);
+ let saved=[],forecast=false,shown=[],overview=fitOnLoad,signature='',forecastSignature='',moving=false;const lastPositions=new Map(),solveLayout=createWeatherLayout();
  const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.classList.add('weather-station-links');host.prepend(svg);
  function stopOverview(){overview=false;}
  container.addEventListener('pointerdown',stopOverview,{passive:true});container.addEventListener('wheel',stopOverview,{passive:true});
  function safeArea(){const rect=container.getBoundingClientRect();let top=120,bottom=110;for(const selector of ['#map-search','#quick-categories']){const n=container.parentElement.querySelector(selector);if(n?.getClientRects().length&&getComputedStyle(n).visibility!=='hidden')top=Math.max(top,n.getBoundingClientRect().bottom-rect.top+14);}const player=container.parentElement.querySelector('.future-radar');if(player&&!player.hidden)bottom=Math.max(bottom,rect.bottom-player.getBoundingClientRect().top+12);return{top,bottom,width:rect.width,height:rect.height};}
  function fitOverview(){scheduleLayout();}
  function fit(){}
- function obstacles(){
-  const rect=container.getBoundingClientRect(),found=[];
-  for(const n of container.parentElement.querySelectorAll('.traffic-delay-label,.cluster-badge,.place-symbol>span,.leaflet-control-zoom,.radar-launch,.map-toolbar,#legend,#map-resume,#environment-key,.traffic-note,.future-radar,.map-attribution')){
-   if(n.closest('[hidden]')||!n.getClientRects().length||getComputedStyle(n).visibility==='hidden'||getComputedStyle(n).display==='none')continue;
-   const b=n.getBoundingClientRect();if(b.width<=0||b.height<=0||b.right<=rect.left||b.left>=rect.right||b.bottom<=rect.top||b.top>=rect.bottom)continue;
-   found.push({x:b.left-rect.left,y:b.top-rect.top,w:b.width,h:b.height,weight:n.matches('.traffic-delay-label,.leaflet-control-zoom,.map-toolbar')?4:2});
-  }return found;
- }
  function layout(){
- if(host.hidden||!host.getClientRects().length||getComputedStyle(host).visibility==='hidden')return;
- const a=safeArea(),cards=[...host.querySelectorAll('.weather-reading')],points=shown.map(r=>map.latLngToContainerPoint([r.lat,r.lng])),blocks=obstacles(),sizes=cards.map(c=>({w:c.offsetWidth||100,h:c.offsetHeight||90})),positions=solveLayout(points,{...a,obstacles:blocks,sizes,previous:shown.map(r=>lastPositions.get(r.id))},{moving});svg.replaceChildren();svg.setAttribute('viewBox',`0 0 ${a.width} ${a.height}`);
+ if(host.hidden||!host.getClientRects().length||getComputedStyle(host).visibility==='hidden'){badgeLayout.publish('weather',[]);return;}
+ const a=safeArea(),cards=[...host.querySelectorAll('.weather-reading')],points=shown.map(r=>map.latLngToContainerPoint([r.lat,r.lng])),blocks=badgeLayout.obstacles('weather'),sizes=cards.map(c=>({w:c.offsetWidth||COMPACT_WEATHER_SIZE.w,h:c.offsetHeight||COMPACT_WEATHER_SIZE.h})),positions=solveLayout(points,{...a,obstacles:blocks,sizes,previous:shown.map(r=>lastPositions.get(r.id))},{moving});svg.replaceChildren();svg.setAttribute('viewBox',`0 0 ${a.width} ${a.height}`);badgeLayout.publish('weather',positions);
  for(const [i,r] of shown.entries()){const card=cards[i];if(!card)continue;const point=map.latLngToContainerPoint([r.lat,r.lng]);card.hidden=false;const {x,y,w,h}=positions[i];lastPositions.set(r.id,positions[i]);
  card.style.left=x+'px';card.style.top=y+'px';
  const outside=point.x<0||point.y<0||point.x>a.width||point.y>a.height,end={x:Math.max(5,Math.min(a.width-5,point.x)),y:Math.max(5,Math.min(a.height-5,point.y))};
- if(outside)card.title=r.label+' station is outside the current view';else card.title='Reading at the connected station location'+(r.source?' · '+r.source:'');
+ card.title=(outside?r.label+' station is outside the current view':'Reading at the connected station location')+' · '+card.getAttribute('aria-description');
  for(const [from,to]of weatherLeaderSegments({x:x+w/2,y:y+h/2},end,[...blocks,...positions.filter((_,j)=>j!==i)])){const line=document.createElementNS(svg.namespaceURI,'line');line.setAttribute('x1',from.x);line.setAttribute('y1',from.y);line.setAttribute('x2',to.x);line.setAttribute('y2',to.y);if(outside)line.setAttribute('stroke-dasharray','3 4');svg.append(line);}
  const dot=document.createElementNS(svg.namespaceURI,'circle');dot.setAttribute('cx',Math.max(5,Math.min(a.width-5,point.x)));dot.setAttribute('cy',Math.max(5,Math.min(a.height-5,point.y)));if(outside)dot.setAttribute('opacity','0');dot.setAttribute('r','4');svg.append(dot);
  }}
- function scheduleLayout(){cancelAnimationFrame(layoutFrame);layoutFrame=requestAnimationFrame(layout);}
+ const unregisterLayout=badgeLayout.register('weather',layout);
+ function scheduleLayout(){badgeLayout.request('weather');}
  map.on('movestart zoomstart',()=>{moving=true;});
  map.on('moveend zoomend',()=>{moving=false;scheduleLayout();});
  map.on('move zoom resize layeradd layerremove',scheduleLayout);
- // Observe only map marker/control mutations; the card host is outside this
- // subtree, so our own positioning and SVG redraw cannot trigger a loop.
- const markerObserver=new MutationObserver(scheduleLayout);markerObserver.observe(container,{childList:true,subtree:true,characterData:true});
- const shellObserver=new MutationObserver(records=>{if(records.some(r=>!host.contains(r.target)))scheduleLayout();});
- for(const selector of['#legend','#environment-key','#map-resume','.map-toolbar']){const n=container.parentElement.querySelector(selector);if(n)shellObserver.observe(n,{attributes:true,attributeFilter:['hidden','class','data-expanded'],childList:true,subtree:true});}
+ // The shared registry handles control changes and badge arrivals in priority
+ // order. Do not observe marker mutations and start a second redraw cycle.
  const resizeObserver=typeof ResizeObserver==='function'?new ResizeObserver(scheduleLayout):null;resizeObserver?.observe(container);resizeObserver?.observe(host);
- map.on('unload',()=>{markerObserver.disconnect();shellObserver.disconnect();resizeObserver?.disconnect();cancelAnimationFrame(layoutFrame);});
+ map.on('unload',()=>{resizeObserver?.disconnect();unregisterLayout();});
 
  function paint(valid){shown=valid;host.replaceChildren(svg);for(const r of valid){
- const card=document.createElement('button');card.type='button';card.className='weather-reading';card.setAttribute('aria-label','Forecast for '+r.label);card.addEventListener('click',()=>onSelect?.(r));card.dataset.station=r.id;if(r.replacementFor)card.dataset.replacementFor=r.replacementFor;
+ const text=weatherCardText(r,{forecast}),card=document.createElement('button');card.type='button';card.className='weather-reading';if(text.wideWind)card.classList.add('weather-reading-wide-wind');card.setAttribute('aria-label','Forecast for '+r.label);card.setAttribute('aria-description',text.accessible);card.addEventListener('click',()=>onSelect?.(r));card.dataset.station=r.id;if(r.replacementFor)card.dataset.replacementFor=r.replacementFor;
  const name=document.createElement('span');name.className='weather-reading-place';name.textContent=r.label;
- const temperature=document.createElement('strong');temperature.className='weather-reading-temperature';temperature.textContent=Number.isFinite(r.temperatureF)?Math.round(r.temperatureF)+'°F':'—';
- const wind=windPresentation(r),line=document.createElement('span');line.className='weather-reading-wind';
- if(wind.rotation!==null){const arrow=document.createElement('i');arrow.className='weather-wind-arrow';arrow.style.transform='rotate('+wind.rotation+'deg)';line.append(arrow);}
- line.append(document.createTextNode(wind.text));line.title=wind.label;
- const time=document.createElement('small');time.className='weather-reading-time';time.textContent=(forecast?'Forecast ':r.replacementFor?'Nearby · ':'')+(r.observedAt?shortTime.format(new Date(r.observedAt)):'Unavailable');
- time.title=(r.observedAt?'Observed '+detailedTime.format(new Date(r.observedAt)):'No usable recent observation')+(r.source?' · '+r.source:'')+(r.replacementFor?' · Nearby replacement for '+r.replacementFor:'');card.append(name,temperature,line,time);host.append(card);
+ const temperature=document.createElement('strong');temperature.className='weather-reading-temperature';temperature.textContent=text.temperature;
+ const line=document.createElement('span');line.className='weather-reading-wind';
+ if(text.rotation!==null){const arrow=document.createElement('i');arrow.className='weather-wind-arrow';arrow.style.transform='rotate('+text.rotation+'deg)';arrow.setAttribute('aria-hidden','true');line.append(arrow);}
+ line.append(document.createTextNode(text.windText));line.title=text.windLabel;
+ const time=document.createElement('small');time.className='weather-reading-time';time.textContent=text.time;time.title=text.timeTitle;card.append(name,temperature,line,time);host.append(card);
  }scheduleLayout();}
  function render(readings=saved,visible=true,now=Date.now()){saved=Array.isArray(readings)?readings:[];if(forecast)return;host.hidden=!visible;const valid=weatherMarkerReadings(saved,now),next=JSON.stringify(valid);if(next!==signature){signature=next;paint(valid);}else scheduleLayout();if(overview&&valid.length){fit();overview=false;}}
- return{render,fitOverview,stopOverview,getReadings:()=>saved,forecast(readings){const next=JSON.stringify(readings);const changed=!forecast||next!==forecastSignature;forecast=true;forecastSignature=next;host.hidden=false;if(changed)paint(readings);},endForecast(visible){forecast=false;signature='';render(saved,visible);},hide(){host.hidden=true;},expire(visible,now=Date.now()){render(saved,visible,now);}};
+ return{render,fitOverview,stopOverview,getReadings:()=>saved,forecast(readings){const next=JSON.stringify(readings);const changed=!forecast||next!==forecastSignature;forecast=true;forecastSignature=next;host.hidden=false;if(changed)paint(readings);},endForecast(visible){forecast=false;signature='';render(saved,visible);},hide(){host.hidden=true;badgeLayout.publish('weather',[]);},expire(visible,now=Date.now()){render(saved,visible,now);}};
 }

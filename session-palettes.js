@@ -1,5 +1,6 @@
 /* Curated menu palettes. Runs before styles/paint, once per document.
- * Menu colors are independent of map style. Map/data colors do not participate. Each tuple is:
+ * Dark basemaps use the dark family; Light/Streets use the light family.
+ * Selections stay fixed within each family for this document. Each tuple is:
  * surface, raised, soft, ink, muted, line, accent, on-accent, link, focus.
  * Family references and contrast checks: SESSION-PALETTES.md. */
 (() => {
@@ -50,10 +51,12 @@
   ["petrol-rose",["#102226","#1c343b","#2a4650","#edf4f7","#bfd4dc","#799ba8","#e9b7d2","#3b2436","#f4d0e4","#ead9a3"],"dark"]
  ];
  const keys = ['surface','raised','soft','ink','muted','line','accent','on-accent','link','focus'];
- const storageKey = 'andymap:last-palette:v1';
- let previous = '';
- try { previous = sessionStorage.getItem(storageKey) || ''; } catch { /* Private/storage-restricted browser. */ }
- const choices = palettes.filter(p => p[0] !== previous);
+ const storagePrefix = 'andymap:last-palette:v2:';
+ const selectedByTone = new Map();
+ function readPrevious(tone) {
+  try { return sessionStorage.getItem(storagePrefix + tone) || sessionStorage.getItem('andymap:last-palette:v1') || ''; }
+  catch { return ''; }
+ }
  function randomIndex(length) {
   try {
    const values = new Uint32Array(1), limit = Math.floor(0x100000000 / length) * length;
@@ -61,9 +64,33 @@
    return values[0] % length;
   } catch { return Math.floor(Math.random() * length); }
  }
- const selected = choices[randomIndex(choices.length)];
- keys.forEach((key, index) => root.style.setProperty(`--palette-${key}`,selected[1][index]));
- root.dataset.palette = selected[0];
- root.dataset.paletteTone = selected[2];
- try { sessionStorage.setItem(storageKey,selected[0]); } catch { /* Selection still works without storage. */ }
+ const toneForStyle = style => ['positron','liberty'].includes(style) ? 'light' : 'dark';
+ let initialStyle = 'dark';
+ try { initialStyle = localStorage.getItem('andymap.style') || initialStyle; } catch { /* Storage is optional. */ }
+ function applyTone(tone) {
+  if (root.dataset.paletteTone === tone && selectedByTone.has(tone)) return;
+  let selected = selectedByTone.get(tone);
+  if (!selected) {
+   const previous = readPrevious(tone);
+   const choices = palettes.filter(p => p[2] === tone && p[0] !== previous);
+   selected = choices[randomIndex(choices.length)];
+   selectedByTone.set(tone,selected);
+   try { sessionStorage.setItem(storagePrefix + tone,selected[0]); } catch { /* The document still keeps its choice. */ }
+  }
+  keys.forEach((key, index) => root.style.setProperty(`--palette-${key}`,selected[1][index]));
+  root.dataset.palette = selected[0];
+  root.dataset.paletteTone = selected[2];
+ }
+ applyTone(toneForStyle(document.body?.dataset.mapStyle || initialStyle));
+ function followMapStyle() {
+  const body = document.body;
+  if (!body) return;
+  const sync = () => applyTone(toneForStyle(body.dataset.mapStyle || initialStyle));
+  sync();
+  // No subtree, child-list, class, timer or feed observer. Only a deliberate
+  // basemap-style change can switch families, and each family keeps its choice.
+  new MutationObserver(sync).observe(body,{attributes:true,attributeFilter:['data-map-style']});
+ }
+ if (document.body) followMapStyle();
+ else document.addEventListener('DOMContentLoaded',followMapStyle,{once:true});
 })();

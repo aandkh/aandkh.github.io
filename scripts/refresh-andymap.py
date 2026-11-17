@@ -45,6 +45,19 @@ def main():
  with concurrent.futures.ThreadPoolExecutor(max_workers=max(1,min(3,a.workers))) as pool:
   for result in pool.map(run_job,jobs):
    results.append(result);print(('PASS' if result['ok'] else 'REVIEW')+' '+result['name']+' ('+str(result['seconds'])+'s)',flush=True)
+ # Search is derived from existing checked facts. Only event jobs trigger the
+ # finite dynamic source inventory; stable POI/geology/history data is not fetched.
+ if any(name in {'venues','movies','sports','foodtrucks'} for name,_ in jobs):
+  started=time.monotonic()
+  try:
+   search=subprocess.run(['node',str(ROOT/'scripts'/'refresh-search-sources.mjs'),'--dynamic'],cwd=ROOT,text=True,capture_output=True,timeout=240)
+   results.append({'name':'search-events','ok':search.returncode==0,'exitCode':search.returncode,'seconds':round(time.monotonic()-started,1),'stdout':search.stdout[-16000:],'stderr':search.stderr[-8000:]})
+  except Exception as error:results.append({'name':'search-events','ok':False,'error':str(error)})
+ # Offline rebuild has no clock timestamp and writes nothing when facts match.
+ try:
+  search=subprocess.run(['node',str(ROOT/'scripts'/'build-search-index.mjs')],cwd=ROOT,text=True,capture_output=True,timeout=120)
+  results.append({'name':'search-index','ok':search.returncode==0,'exitCode':search.returncode,'stdout':search.stdout[-8000:],'stderr':search.stderr[-8000:]})
+ except Exception as error:results.append({'name':'search-index','ok':False,'error':str(error)})
  report={'attemptedAt':dt.datetime.now(dt.timezone.utc).isoformat(),'results':results,'note':'Successful HTTP retrieval does not establish complete coverage. Review source-level warnings and the maintenance guides before publishing.'}
  pathlib.Path(a.report).write_text(json.dumps(report,indent=2)+'\n');print('Report: '+a.report)
  return 0 if all(r['ok'] for r in results) else 1

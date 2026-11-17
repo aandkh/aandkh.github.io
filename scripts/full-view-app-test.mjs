@@ -27,6 +27,7 @@ function harness(){
   const weatherReadings={stopOverview(){calls.push(['stop-weather-overview']);}};
   const futureRadar={active:false,state:{active:false,time:null},getState(){return this.state;},stop(){this.active=false;this.state={active:false,time:null};calls.push(['stop-radar']);},restoreState(s){this.state=s;this.active=s.active;calls.push(['radar',s]);}};
   const skyCloudMap={state:{active:false,time:null},getState(){return this.state;},close(){this.state={active:false,time:null};},restoreState(s,sky){this.state=s;calls.push(['sky-cloud',s,!!sky]);}};
+  let spotMode=false;const spotUI={point:null};function setSpotMode(on){spotMode=on;if(!on)spotUI.point=null;calls.push(['spot-mode',on]);}function inspectSpot(point){spotUI.point={...point};calls.push(['inspect-spot',point]);}
   const mapKey={toggle:{expanded:'false',getAttribute(){return this.expanded;},click(){this.expanded=this.expanded==='true'?'false':'true';}}};
   function defaultWildlifeOptions(){return {d1:'2025-11-16',d2:'2026-11-16',mapView:'heat',pageLimit:1};}
   let controlDepth={};function getWildlifeControlState(){return {...controlDepth};}function disposeWildlifeControls(){controlDepth={};}
@@ -99,4 +100,7 @@ for(const panel of ['weather','sky']){
  assert.equal(suspended.run('weatherPanelOpen||skyPanelOpen'),false,'A suspended panel must not be reopened by a later loadLayer completion');
  suspended.run("if(weatherPanelOpen)renderWeather();if(skyPanelOpen)renderSky();");assert.equal(suspended.node('#detail').hidden,true);
 }
-console.log('PASS: production app capture/restore preserves Blue Jay/date/analytics state, resets second-link defaults, retains focus layers and camera, hydrates exact species, and cancels stale detail/group work.');
+const spot=harness(),spotState={...base,layers:['radar','traffic','haunted'],view:{panel:'spot',spot:{lat:38.631234,lng:-90.291234,radiusMiles:.5}}};
+spot.apply(spotState);assert.equal(spot.state().view.panel,'spot');assert.deepEqual(spot.state().view.spot,spotState.view.spot);assert.deepEqual(spot.state().layers,spotState.layers);assert.deepEqual(spot.state().center,base.center);assert.equal(spot.state().zoom,base.zoom);assert(spot.calls.some(call=>call[0]==='inspect-spot'));
+spot.apply(second);assert.equal(spot.run('spotMode'),false);assert.equal(spot.state().view.spot,null);assert.equal(spot.state().view.panel,'map');assert.deepEqual(spot.state().layers,second.layers);
+console.log('PASS: production app capture/restore preserves Blue Jay/date/analytics state, resets second-link defaults, retains focus layers and camera, hydrates exact species, and cancels stale detail/group work, and restores shared spot state without changing its camera.');

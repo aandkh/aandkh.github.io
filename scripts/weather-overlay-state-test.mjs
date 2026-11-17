@@ -23,7 +23,7 @@ const saved={document:globalThis.document,L:globalThis.L,fetch:globalThis.fetch,
 const layers=new Set(),mapHandlers={},shell=new Element('main'),container=new Element('div');shell.append(container);
 const map={getContainer:()=>container,getZoom:()=>10,getSize:()=>({x:390,y:720}),getBounds:()=>({toBBoxString:()=>'-90.6,38.4,-90.2,38.8',getWest:()=>-90.6,getEast:()=>-90.2,getSouth:()=>38.4,getNorth:()=>38.8}),on:(key,handler)=>{mapHandlers[key]=handler;}};
 let resolveMetadata,closed=0,started=0,skyOpened=0,readings=[];const forecastCards=[];
-const makeLayer=()=>({on(){return this;},once(name,fn){this.loaded=fn;return this;},addTo(){layers.add(this);queueMicrotask(()=>{if(layers.has(this))this.loaded?.();});return this;},remove(){layers.delete(this);return this;},setOpacity(value){this.opacity=value;return this;},clearLayers(){return this;},bindPopup(){return this;}});
+const makeLayer=()=>({events:new Map(),on(name,fn){if(!this.events.has(name))this.events.set(name,new Set());this.events.get(name).add(fn);return this;},off(name,fn){this.events.get(name)?.delete(fn);return this;},once(name,fn){const listener=()=>{this.off(name,listener);fn();};return this.on(name,listener);},addTo(){layers.add(this);for(const fn of this.events.get('loading')||[])fn();queueMicrotask(()=>{if(layers.has(this))for(const fn of this.events.get('load')||[])fn();});return this;},remove(){layers.delete(this);return this;},setOpacity(value){this.opacity=value;return this;},clearLayers(){return this;},bindPopup(){return this;}});
 try{
  Date.now=()=>base-60000;
  globalThis.document={createElement:tag=>new Element(tag),createTextNode:text=>Object.assign(new Element('#text'),{textContent:text}),body:new Element('body'),addEventListener(){},hidden:false};

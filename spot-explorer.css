@@ -1,0 +1,43 @@
+#spot-mode-toggle{width:40px;min-width:40px;height:40px;padding:8px;display:inline-flex;align-items:center;justify-content:center;border-radius:11px}
+#spot-mode-toggle svg{width:21px;height:21px;pointer-events:none}
+html[data-palette] body #spot-mode-toggle[aria-pressed=true],#spot-mode-toggle[aria-pressed=true]{background:var(--green);color:var(--on-accent,#fff);border-color:var(--green)}
+body.spot-inspection #map,.spot-inspection #map,.spot-mode #map{cursor:crosshair}
+body.spot-inspection #map:active,.spot-inspection #map:active,.spot-mode #map:active{cursor:grabbing}
+#spot-explorer{padding:0 12px 12px;width:min(390px,calc(100% - 24px));max-height:min(70%,650px);overflow-anchor:none;background:var(--surface-raised);color:var(--ink)}
+#spot-explorer>.floating-head{top:0;margin:0 -12px 0;padding:8px 12px;min-height:48px;gap:8px;background:var(--surface-raised);border-bottom:1px solid var(--line)}
+#spot-explorer h2{min-width:0;margin:0;font-size:17px;line-height:1.2;overflow-wrap:anywhere}
+#spot-explorer .spot-head-actions{display:flex;gap:4px;flex:none}
+#spot-explorer .spot-head-actions button{width:auto;height:34px;min-width:38px;border-radius:8px;padding:0 7px;font-size:12px;font-weight:650;background:var(--surface-soft);color:var(--ink)}
+#spot-explorer .spot-head-actions .primary{background:var(--green);color:var(--on-accent,#fff)}
+.spot-intro{display:flex;align-items:center;justify-content:space-between;gap:7px;flex-wrap:wrap;padding:7px 0}
+#spot-explorer .spot-coordinates{font-variant-numeric:tabular-nums;font-size:11px;margin:0;color:var(--muted)}
+#spot-explorer .spot-forecast{font-size:11px;padding:6px 8px;flex:none;border-radius:7px;min-height:32px}
+.spot-radius{display:flex;align-items:center;gap:6px;width:100%;font-size:11px;color:var(--muted);margin:0}
+#spot-explorer .spot-radius select{width:auto;max-width:100%;min-height:30px;padding:4px 23px 4px 8px;font-size:11px;border-radius:7px}
+#spot-explorer .spot-progress{font-size:11px;color:var(--muted);margin:0 0 8px}
+.spot-section{border-top:1px solid var(--line)}
+.spot-section>summary{display:flex;align-items:center;gap:7px;min-height:42px;padding:7px 0;cursor:pointer;list-style:none;font-size:13px}
+.spot-section>summary::-webkit-details-marker{display:none}
+.spot-section>summary:before{content:'›';font-size:18px;line-height:1;width:9px;flex:none}
+.spot-section[open]>summary:before{transform:rotate(90deg)}
+.spot-section>summary>strong{flex:1;min-width:0}
+.spot-count{font-variant-numeric:tabular-nums;color:var(--muted);font-size:11px}
+.spot-state{color:var(--muted);font-size:10px}
+.spot-items{list-style:none;margin:0;padding:0}
+.spot-item{padding:0 0 8px;margin:0 0 7px;border-bottom:1px solid var(--line)}
+.spot-item:last-child{border-bottom:0;margin-bottom:0}
+#spot-explorer .spot-feature,.spot-fact{display:block;width:100%;margin:0;padding:3px 0;border:0;border-radius:0;background:transparent;text-align:left;color:var(--ink);white-space:normal}
+#spot-explorer .spot-feature:hover{background:var(--surface-soft)}
+.spot-item-title,.spot-value,.spot-description,.spot-proximity{display:block;overflow-wrap:anywhere}
+.spot-item-title{font-size:13px;line-height:1.3}
+.spot-value{font-size:14px;font-weight:650;margin-top:3px;font-variant-numeric:tabular-nums}
+.spot-description{font-size:12px;line-height:1.4;margin-top:3px}
+.spot-proximity{font-size:10px;color:var(--muted);margin-top:4px}
+.spot-source{display:inline-block;font-size:10px;margin-top:3px;color:var(--green)}
+#spot-explorer .spot-empty,#spot-explorer .spot-note,#spot-explorer .spot-provenance{font-size:11px;line-height:1.4;margin:6px 0;color:var(--muted)}
+#spot-explorer .spot-more{width:100%;min-height:34px;font-size:12px;margin-bottom:8px;background:var(--surface-soft)}
+.spot-return{position:absolute;z-index:680;bottom:calc(var(--toolbar-height,56px) + 68px);left:12px;padding:9px 12px;max-width:calc(100% - 24px);font-size:12px;border:1px solid var(--line);border-radius:10px;background:var(--surface-raised);color:var(--ink);box-shadow:0 3px 12px #0002}
+.spot-return:before{content:'← ';font-size:15px}
+@media(max-width:800px){#spot-explorer{right:8px;bottom:calc(var(--toolbar-height,56px) + 52px);width:calc(100% - 16px);max-height:48%;padding:0 10px 9px}#spot-explorer>.floating-head{margin:0 -10px;padding:7px 10px;min-height:46px}#spot-explorer h2{font-size:16px}.spot-section>summary{min-height:40px}.spot-return{left:9px}}
+
+.spot-selection-marker{color:var(--green);filter:drop-shadow(0 0 2px #fff) drop-shadow(0 1px 3px #000)}.spot-selection-marker svg{width:28px;height:36px;overflow:visible}

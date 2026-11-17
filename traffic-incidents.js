@@ -1,3 +1,5 @@
+import {getMapBadgeLayout,badgeRectangle,badgeLeaderSegments} from './map-badge-layout.js?v=20261117-explore-layout';
+import {layoutOverviewBadges} from './place-clusters.js?v=20261117-explore-layout';
 // Official MoDOT active traffic impacts. Incident duration is NOT driving delay.
 const TRAFFIC_LAYERS=new Set([0,5,9]);
 const TRAFFIC_STRINGS={DATA_ID:100,ROUTE:240,TRAVELWAY_NAME:240,TYPE_CODE:120,EXT_COMMENT:8000,LEVEL_OF_IMPACT_CODE:60,STATUS_CODE:30};
@@ -42,16 +44,29 @@ export function queryTrafficLayer(layer,signal){return new Promise((resolve,reje
  frame.onerror=()=>finish(Error('Traffic incident source unavailable'));
  window.addEventListener('message',receive);signal?.addEventListener('abort',abort,{once:true});document.body.append(frame);
  });}
+export function trafficBadgeGroups(records,project){
+ const groups=[];
+ for(const r of [...records].sort((a,b)=>String(a.id).localeCompare(String(b.id)))){
+  const p=project([r.lat,r.lng]),point=Array.isArray(p)?p:[p.x,p.y],near=groups.find(group=>Math.abs(group.anchor[0]-point[0])<72&&Math.abs(group.anchor[1]-point[1])<30);
+  if(near){const n=near.cluster.features.length;near.cluster.features.push(r);near.anchor=[(near.anchor[0]*n+point[0])/(n+1),(near.anchor[1]*n+point[1])/(n+1)];near.cluster.center=[(near.cluster.center[0]*n+r.lat)/(n+1),(near.cluster.center[1]*n+r.lng)/(n+1)];near.cluster.bounds=[[Math.min(near.cluster.bounds[0][0],r.lat),Math.min(near.cluster.bounds[0][1],r.lng)],[Math.max(near.cluster.bounds[1][0],r.lat),Math.max(near.cluster.bounds[1][1],r.lng)]];}
+  else groups.push({key:'traffic:'+r.id,provider:'traffic',anchor:point,cluster:{features:[r],center:[r.lat,r.lng],bounds:[[r.lat,r.lng],[r.lat,r.lng]],layerIds:['traffic']}});
+ }return groups;
+}
 export function createTrafficIncidents(map,{onSelect,onStatus}){
- const group=L.layerGroup();let active=false,controller,checked=0,records=[],timer,requestId=0;
- function draw(){group.clearLayers();if(!active)return;const clusters=[];
- for(const r of records){if(!map.getBounds().pad(.1).contains([r.lat,r.lng]))continue;const point=map.latLngToContainerPoint([r.lat,r.lng]),near=clusters.find(c=>Math.abs(c.point.x-point.x)<82&&Math.abs(c.point.y-point.y)<32);if(near)near.items.push(r);else clusters.push({point,items:[r]});}
- for(const cluster of clusters){const items=cluster.items,first=items[0],r=items.length===1?first:{...first,title:items.length+' traffic incidents',label:items.length+' incidents',road:'Nearby roads',delay:null,description:items.map(x=>x.road+' — '+x.title+'. '+x.description+(x.delay?' Reported delay: '+x.delay: ' Delay time not reported.')).join('\n\n'),updated:Math.max(...items.map(x=>x.updated||0))};
- const label=document.createElement('span');label.className='traffic-delay-label'+(r.closed?' is-closed':'');label.textContent=r.label;label.title=r.title+' · '+r.road+(r.delay?'':' · Delay time not reported');const icon=L.divIcon({className:'traffic-incident-marker',html:label,iconSize:[82,30],iconAnchor:[41,15]});L.marker([r.lat,r.lng],{icon,title:label.title,keyboard:true,zIndexOffset:500}).on('click',()=>onSelect(r)).addTo(group);}}
- async function refresh(){if(!active||document.hidden||controller)return;if(Date.now()-checked<180000){draw();return;}const id=++requestId;controller=new AbortController();const signal=controller.signal;
- try{const responses=await Promise.all([0,5,9].map(id=>queryTrafficLayer(id,signal)));if(!active||id!==requestId)return;const unique=new Map();for(const response of responses)for(const f of response.features||[]){const r=trafficRecord(f);if(r)unique.set(r.id,r);}records=[...unique.values()];checked=Date.now();draw();onStatus('');}
- catch(e){if(id===requestId&&active&&e.name!=='AbortError'){records=[];draw();onStatus('Incident reports unavailable. Road colors show traffic flow only.');}}
+ const group=L.layerGroup(),layout=getMapBadgeLayout(map);let active=false,controller,checked=0,records=[],timer,requestId=0;
+ function draw(){group.clearLayers();if(!active){layout.publish('traffic',[]);return;}
+ const size=map.getSize(),obstacles=layout.obstacles('traffic'),groups=trafficBadgeGroups(records.filter(r=>map.getBounds().contains([r.lat,r.lng])),point=>map.latLngToContainerPoint(point));
+ const badges=layoutOverviewBadges(groups,{width:size.x,height:size.y,obstacles,measure:(group,compact)=>{const items=group.cluster.features,label=items.length===1?items[0].label:items.length+' incidents';return compact?{width:items.length===1?Math.max(40,14+label.length*6):Math.max(28,14+String(items.length).length*6),height:24}:{width:Math.max(56,20+label.length*6.3),height:28};}}),visible=badges.filter(b=>b.clearance),boxes=visible.map(badgeRectangle);layout.publish('traffic',boxes);
+ for(const badge of visible){const items=badge.cluster.features,first=items[0],r=items.length===1?first:{...first,title:items.length+' traffic incidents',label:items.length+' incidents',road:'Nearby roads',delay:null,description:items.map(x=>x.road+' — '+x.title+'. '+x.description+(x.delay?' Reported delay: '+x.delay:' Delay time not reported.')).join('\n\n'),updated:Math.max(...items.map(x=>x.updated||0))};
+  const display=map.containerPointToLatLng(L.point(...badge.position)),anchor=map.latLngToContainerPoint(badge.cluster.center);
+  if(badge.displaced){for(const segment of badgeLeaderSegments([anchor.x,anchor.y],badge.position,[...obstacles,...boxes]))L.polyline(segment.map(point=>map.containerPointToLatLng(L.point(...point))),{color:'#b66c4b',weight:1,opacity:.65,interactive:false,className:'traffic-badge-leader'}).addTo(group);if(items.length===1)L.circleMarker(badge.cluster.center,{radius:2,weight:1,color:'#a34535',fillColor:'#fff',fillOpacity:1,interactive:false}).addTo(group);}
+  const label=document.createElement('span');label.className='traffic-delay-label'+(r.closed?' is-closed':'')+(badge.compact?' is-compact':'');label.textContent=badge.compact&&items.length>1?String(items.length):r.label;label.style.width=badge.width+'px';label.style.height=badge.height+'px';label.style.boxSizing='border-box';label.style.padding='0 5px';label.style.minWidth='0';label.style.lineHeight=(badge.height-2)+'px';label.style.textAlign='center';label.title=r.title+' · '+r.road+(r.delay?'':' · Delay time not reported');const icon=L.divIcon({className:'traffic-incident-marker',html:label,iconSize:[badge.width,badge.height],iconAnchor:[badge.width/2,badge.height/2]});L.marker(display,{icon,title:label.title,keyboard:true,zIndexOffset:500}).on('click',()=>onSelect(r)).addTo(group);
+ }}
+ const unregister=layout.register('traffic',draw),scheduleDraw=()=>layout.request('traffic');
+ async function refresh(){if(!active||document.hidden||controller)return;if(Date.now()-checked<180000){scheduleDraw();return;}const id=++requestId;controller=new AbortController();const signal=controller.signal;
+ try{const responses=await Promise.all([0,5,9].map(id=>queryTrafficLayer(id,signal)));if(!active||id!==requestId)return;const unique=new Map();for(const response of responses)for(const f of response.features||[]){const r=trafficRecord(f);if(r)unique.set(r.id,r);}records=[...unique.values()];checked=Date.now();scheduleDraw();onStatus('');}
+ catch(e){if(id===requestId&&active&&e.name!=='AbortError'){records=[];scheduleDraw();onStatus('Incident reports unavailable. Road colors show traffic flow only.');}}
  finally{if(id===requestId)controller=null;}}
- function setVisible(value){active=value;if(value){group.addTo(map);refresh();clearInterval(timer);timer=setInterval(refresh,180000);}else{requestId++;controller?.abort();controller=null;clearInterval(timer);group.remove();onStatus('');}}
- map.on('moveend',draw);document.addEventListener('visibilitychange',()=>{if(!document.hidden&&active)refresh();});return{setVisible,refresh};
+ function setVisible(value){active=value;if(value){group.addTo(map);refresh();clearInterval(timer);timer=setInterval(refresh,180000);}else{requestId++;controller?.abort();controller=null;clearInterval(timer);group.remove();layout.publish('traffic',[]);onStatus('');}}
+ document.addEventListener('visibilitychange',()=>{if(!document.hidden&&active)refresh();});map.on('unload',()=>{unregister();clearInterval(timer);controller?.abort();});return{setVisible,refresh,relayout:scheduleDraw};
 }

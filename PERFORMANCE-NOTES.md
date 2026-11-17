@@ -46,3 +46,13 @@ Representative local CPU measurements (not whole-app/mobile hardware claims):
 Validation: module graph, bundle freshness, refresh policy, source-cache/correction/cancellation, dates/event lifecycle, incidents, Wildlife/Birding, slider/rain lazy rendering, weather layout/insights/radar/sky, routes and geometry checks. Phone UI verified the 224px drawer, Forecast lazy extras, Wildlife group switching, rock-layer zoom/map key. Deployment checks and normal-reload delivery are recorded in the task completion.
 
 Deliberately retained: MapLibre default vector renderer, source rate limits, exact geometries, live feed frequencies, required attribution, all events and historical records. An astronomy coordinate-cache experiment was slower and reverted. Dated lists still construct their rows synchronously; external source latency and real low-end handset GPU/thermal limits cannot be eliminated or certified by desktop preview. No promise of zero lag or perfection.
+
+
+## November 17 overlay and badge pass
+
+- Flood overview uses spatial PNG cells: representative phone viewport 109,114 bytes plus 4,134-byte manifest versus 1,402,055 compressed bytes and 5,714,767 decoded JSON bytes previously. Exact clipped vector cells load from zoom 12, with three requests at a time and bounded decoded cache. Point inspection reads only containing cells. Original source geometry and provenance unchanged.
+- Terrain and other polygon/line layers cache source-part bounds and construct canvas paths only for visible parts. Filters reuse immutable source records.
+- Future radar retains overlapping decoded tiles across pans, tracks the current viewport loading cycle, and cancels listeners/timeouts. Wildlife heat tiles start before observation-list/analytics completion and survive matching-query commits.
+- One ordered animation-frame scheduler reserves controls, traffic, places/aircraft/transit, then weather cards. Dense feeds are grouped before collision placement; leaders clip around cards. Synthetic 1,000-group phone workload retains every record through bounded groups without overlap.
+- Compact weather cards are 72 by 44 CSS pixels (80px wide only for extreme wind values). Phone browser checks confirmed four cards, no collisions with concert/movie groups, area forecast taps, and unchanged 393 by 800 map geometry.
+- Checks: overlay-spatial, radar-tile-reuse, wildlife-heat-orchestration, map-badge-layout, map-badge-app, place-selection and weather-layout scripts. These are local measurements, not a promise of instant upstream delivery on every device.

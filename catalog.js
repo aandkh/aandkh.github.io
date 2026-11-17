@@ -5,7 +5,7 @@ const DISPLAY_COLORS = Object.freeze({
   sports:'#ed4f19',arts:'#a933e8',nightlife:'#b72ee7',markets:'#09a861',family:'#0b8fd9',
   restaurants:'#f05223',parks:'#00a85a',development:'#dc6900',neighborhoods:'#c62edc',
   cycling:'#ef087c',parking:'#1675f8',ev:'#049a88',floodplains:'#008ed9',
-  history:'#8266f7',light:'#8546ec',movies:'#df394c',bars:'#c75c00',roadworks:'#f05b00',
+  history:'#8266f7',haunted:'#a04ce0',light:'#8546ec',movies:'#df394c',bars:'#c75c00',roadworks:'#f05b00',
   restrooms:'#008db1',birding:'#3a9f00',sky:'#6e46eb',weather:'#008fd1',recreation:'#00a68f',
   localfood:'#e74b12',culture:'#b72bdd',communityevents:'#ed3c43',civic:'#a12bd8',
   demographics:'#087fbc',terrain:'#b68400',outages:'#f26a00',foliage:'#ef4d19',crime:'#c52f73',foodtrucks:'#f05223',businesses:'#129e82'
@@ -46,6 +46,7 @@ export const LAYERS = [
   place('ev','EV charging','Get around','Mapped charging stations. No live connector availability or guarantee of operability.'),
   row('floodplains','Floodplains','Explore','flood','FEMA NFHL','https://www.fema.gov/flood-maps/national-flood-hazard-layer','Federal data; local coverage and effective dates vary','Regulatory flood hazard zones, not current flooding. Missing coverage does not mean no risk.','#4f79a3'),
   row('history','History','Explore','snapshot','National Park Service / public historical institutions / NASA GIBS','https://www.nps.gov/jeff/learn/historyculture/index.htm','Original factual summaries with linked sources; NASA imagery attribution','Documented regional battles and major historical events with location precision shown, plus dated regional satellite imagery.','#777ba2'),
+  row('haunted','Haunted Places','Explore','snapshot','Venue records, tourism offices and local reporting','https://www.hecmedia.org/posts/haunted-happenings-around-stl','Original factual summaries with linked sources; OpenStreetMap coordinates ODbL 1.0 where noted','Documented places with attributed ghost stories and local folklore. Historical facts and reported legends are labeled; no supernatural claims are presented as verified.','#a04ce0'),
   row('wildlife','Wildlife','Explore','snapshot','iNaturalist observers and identifiers','https://www.inaturalist.org/','Observation metadata credited to iNaturalist contributors; individual record licenses retained','Dated wild-species observations, seasonal reporting patterns and documented variety. Observation coverage is incomplete; records do not measure abundance.','#348d51'),
   row('light','Light pollution','Explore','light','NASA Black Marble','https://science.nasa.gov/earth/earth-observatory/earth-at-night/maps/','NASA imagery policy; acknowledge NASA / EOSDIS','2016 nighttime lights composite: historical proxy only, not current sky brightness or a Bortle rating.','#8b6b99'),
   row('foliage','Fall foliage','Explore','foliage','Missouri Department of Conservation','https://mdc.mo.gov/trees-plants/fall-color','MDC published report facts and administrative regions; no warranty; credit MDC and Missouri Land Survey Program','Seasonal regional reports with dates. Missouri only; reports older than 14 days are withdrawn. No individual-tree color inferred.','#ef4d19'),
@@ -66,10 +67,11 @@ export const LAYERS = [
   row('terrain','Terrain','Explore','terrain','USGS / U.S. Fish and Wildlife Service / USDA NRCS','https://www.usgs.gov/3d-elevation-program/about-3dep-products-services','US Government geographic products; source-specific credit and interpretation limits retained','Rock types (including limestone), elevation, hillshade, slope, aspect, contours, streams, wetlands, soil units and land cover. Reference maps with varying source dates; not current conditions.','#7d784a'),
 ];
 // Put everyday destinations first, then specialist reference layers.
-const order=['radar','traffic','concerts','movies','sports','communityevents','arts','foodtrucks','localfood','bars','nightlife','restaurants','gyms','festivals','parks','recreation','markets','culture','free','family','exhibitions','transit','parking','roadworks','ev','restrooms','joyrides','cycling','cameras','aircraft','weather','air','alerts','outages','sky','rivers','crime','businesses','foliage','development','neighborhoods','civic','terrain','demographics','floodplains','wildlife','birding','history','light'];
+const order=['radar','traffic','concerts','movies','sports','communityevents','arts','foodtrucks','localfood','bars','nightlife','restaurants','gyms','festivals','parks','recreation','markets','culture','free','family','exhibitions','transit','parking','roadworks','ev','restrooms','joyrides','cycling','cameras','aircraft','weather','air','alerts','outages','sky','rivers','crime','businesses','foliage','development','neighborhoods','civic','terrain','demographics','floodplains','wildlife','birding','history','haunted','light'];
 for(const layer of LAYERS)if(['parks','recreation','localfood','culture'].includes(layer.id))layer.group='To Do';
 LAYERS.sort((a,b)=>order.indexOf(a.id)-order.indexOf(b.id));
 const concerts=LAYERS.find(l=>l.id==='concerts');concerts.source='Official venue calendars / university calendars';concerts.note='University listings plus reviewed calendars for The Pageant, Delmar Hall, Blueberry Hill Duck Room, Enterprise Center, Stifel Theatre, The Factory, Off Broadway, Old Rock House and Red Flag. Partial regional coverage; source check dates shown. Check official pages for showtimes and changes.';
+LAYERS.find(layer=>layer.id==='haunted').searchTerms=['haunted','haunting','ghost','ghosts','paranormal','folklore','spooky'];
 export const BY_ID = Object.fromEntries(LAYERS.map(x => [x.id, x]));
 export const EXAMPLES = [
   { id:'weekend', name:'A day outside', layers:['parks','cycling','radar'], center:[38.635,-90.29], zoom:13 },

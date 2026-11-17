@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import {BY_ID,LAYERS} from '../catalog.js';
+import {symbol} from '../symbols.js';
+import {layerMatchesSearch} from '../layer-search.js';
+import {cleanState,layerSelectable} from '../core.js';
+import {placeHash,readPlaceHash,placeState} from '../short-links.js';
+import {safeSearchSourceFile,resolveSearchFeature} from '../search-catalog.js';
+import {searchFeatureRecord} from './build-search-index.mjs';
+assert.equal(BY_ID.haunted.name,'Haunted Places');assert.equal(BY_ID.haunted.group,'Explore');assert.equal(BY_ID.haunted.kind,'snapshot');assert.equal(LAYERS.filter(layer=>layer.id==='haunted').length,1);assert(layerSelectable('haunted'));
+for(const query of ['haunted','haun','ghost','gho','ghosts','paranormal','folklore','spooky'])assert(layerMatchesSearch(BY_ID.haunted,query),query);
+assert.notEqual(symbol('haunted'),symbol('unknown'));assert.match(symbol('haunted'),/<svg/);assert.match(BY_ID.haunted.note,/legends.*labeled/);
+const feature={type:'Feature',geometry:{type:'Point',coordinates:[-90.22,38.64]},properties:{id:'haunted:test',title:'Documented folklore site',sourceUrl:'https://example.org/history',description:'An attributed story.'}};
+const stop={id:feature.properties.id,title:feature.properties.title,layer:'haunted',lat:38.64,lng:-90.22};
+const hash=placeHash(stop);assert(hash.startsWith('#p=haunted/'));const reference=readPlaceHash(hash);assert.equal(reference.layer,'haunted');assert.deepEqual(placeState(reference).layers,['haunted']);assert.deepEqual(cleanState({v:1,center:[38.64,-90.22],layers:['haunted']}).layers,['haunted']);
+const item=searchFeatureRecord(feature,'haunted','haunted-places.geojson');assert.equal(item.layer,'haunted');assert.equal(item.kind,'Haunted Places');assert.equal(safeSearchSourceFile(item.sourceFile),item.sourceFile);assert.equal(resolveSearchFeature(item,{features:[feature]}),feature);
+for(const file of ['../haunted-places.geojson','https://bad.example/haunted-places.geojson','haunted-places.geojson?x','haunted-places.geojson/../../secret'])assert.equal(safeSearchSourceFile(file),'');
+console.log('PASS: Haunted Places Explore entry, partial aliases, dedicated symbol, saved/shared layer preservation and exact safe GeoJSON search hydration.');

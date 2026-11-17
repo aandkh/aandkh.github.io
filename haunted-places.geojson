@@ -1,0 +1,1173 @@
+{
+  "type": "FeatureCollection",
+  "id": "haunted",
+  "status": "ok",
+  "source": "Venue records, tourism offices and local reporting",
+  "sourceUrl": "https://www.hecmedia.org/posts/haunted-happenings-around-stl",
+  "license": "Original summaries. Linked publications retain their rights. OpenStreetMap coordinates © OpenStreetMap contributors (ODbL) where indicated.",
+  "checkedAt": "2026-11-17",
+  "note": "Documented local legends and reported experiences, in one regional collection. No cemeteries. A venue pin identifies a place, not proof of a haunting or permission to enter.",
+  "recordCount": 24,
+  "features": [
+    {
+      "type": "Feature",
+      "id": "haunted-lemp-mansion",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2157707,
+          38.5931727
+        ]
+      },
+      "properties": {
+        "id": "haunted-lemp-mansion",
+        "sourceId": "curated:haunted-lemp-mansion",
+        "layer": "haunted",
+        "title": "Lemp Mansion",
+        "description": "The former home of the Lemp brewing family is one of St. Louis’s enduring ghost-story landmarks. Accounts of unexplained sounds and presences are connected in local lore to the family’s tragedies. The mansion now operates as a restaurant and inn and offers organized history and paranormal tours.",
+        "address": "3322 DeMenil Place, St. Louis, MO 63118",
+        "lat": 38.5931727,
+        "lng": -90.2157707,
+        "source": "Lemp Mansion / St. Louis Magazine",
+        "sourceUrl": "https://www.lempmansion.com/lempexperience.htm",
+        "url": "https://www.lempmansion.com/lempexperience.htm",
+        "website": "https://www.lempmansion.com/lempexperience.htm",
+        "accessNote": "Visit the restaurant, reserve a room, or book an authorized tour. Closed rooms and neighboring brewery spaces require separate permission.",
+        "accessKind": "public-venue",
+        "locationAccuracy": "Mapped venue location",
+        "coordinateSourceUrl": "https://www.openstreetmap.org/way/526334314",
+        "coordinateSource": "OpenStreetMap contributors — venue location",
+        "hauntSources": [
+          {
+            "title": "Lemp Mansion — The Lemp Experience",
+            "url": "https://www.lempmansion.com/lempexperience.htm"
+          },
+          {
+            "title": "St. Louis Magazine — Ghost tours around St. Louis",
+            "url": "https://www.stlmag.com/culture/ghost-tours/"
+          }
+        ],
+        "sourceCheckedAt": "2026-11-17",
+        "reviewedAt": "2026-11-17",
+        "reviewStatus": "approved",
+        "verificationScope": "Sources document this place and its reported ghost-story tradition; paranormal claims are not established facts. Coordinate marks the venue or stated public reference point."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "haunted-lemp-bottle-works",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2177526,
+          38.5922514
+        ]
+      },
+      "properties": {
+        "id": "haunted-lemp-bottle-works",
+        "sourceId": "curated:haunted-lemp-bottle-works",
+        "layer": "haunted",
+        "title": "Lemp Brewery Bottle Works",
+        "description": "The former brewery’s Bottle Works is another focus of the Lemp neighborhood’s ghost lore. An established local tour operator combines the complex’s brewing history with accounts of unexplained experiences. Community recommendations repeatedly point to these guided brewery tours; the industrial buildings are separate from the Lemp Mansion.",
+        "address": "1820 Cherokee Street, St. Louis, MO 63118",
+        "lat": 38.5922514,
+        "lng": -90.2177526,
+        "source": "St. Louis Paranormal Research Society / r/StLouis",
+        "sourceUrl": "https://www.stlghosttours.com/",
+        "url": "https://www.stlghosttours.com/",
+        "website": "https://www.stlghosttours.com/",
+        "accessNote": "Authorized tour access only. Do not enter vacant buildings, tunnels, fenced areas or working spaces independently.",
+        "accessKind": "ticketed-tour",
+        "locationAccuracy": "Approximate street-address marker for the tour entrance; Census street interpolation.",
+        "coordinateSourceUrl": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=1820+Cherokee+Street%2C+St.+Louis%2C+MO&benchmark=Public_AR_Current&format=json",
+        "coordinateSource": "U.S. Census Geocoder — interpolated street address",
+        "hauntSources": [
+          {
+            "title": "St. Louis Paranormal Research Society — Lemp Brewery tours",
+            "url": "https://www.stlghosttours.com/"
+          },
+          {
+            "title": "r/StLouis — Ghost tour discussion",
+            "url": "https://www.reddit.com/r/StLouis/comments/1wue8yb/ghost_tour/"
+          }
+        ],
+        "sourceCheckedAt": "2026-11-17",
+        "reviewedAt": "2026-11-17",
+        "reviewStatus": "approved",
+        "verificationScope": "Sources document this place and its reported ghost-story tradition; paranormal claims are not established facts. Coordinate marks the venue or stated public reference point."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "haunted-fabulous-fox",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2323843,
+          38.6391224
+        ]
+      },
+      "properties": {
+        "id": "haunted-fabulous-fox",
+        "sourceId": "curated:haunted-fabulous-fox",
+        "layer": "haunted",
+        "title": "Fabulous Fox Theatre",
+        "description": "Opened in 1929 as a movie palace, the Fox has accumulated stories of unexplained activity in its ornate public rooms and backstage areas. Local reporting documents the theater’s ghost-tour tradition.",
+        "address": "527 North Grand Boulevard, St. Louis, MO 63103",
+        "lat": 38.6391224,
+        "lng": -90.2323843,
+        "source": "Fabulous Fox Theatre / HEC Media",
+        "sourceUrl": "https://www.fabulousfox.com/visit/tours",
+        "url": "https://www.fabulousfox.com/visit/tours",
+        "website": "https://www.fabulousfox.com/visit/tours",
+        "accessNote": "Public performances and operator-offered tours. Backstage access is available only when included in an authorized visit.",
+        "accessKind": "public-venue",
+        "locationAccuracy": "Mapped venue location",
+        "coordinateSourceUrl": "https://www.openstreetmap.org/way/202419428",
+        "coordinateSource": "OpenStreetMap contributors — venue location",
+        "hauntSources": [
+          {
+            "title": "Fabulous Fox Theatre — Tours",
+            "url": "https://www.fabulousfox.com/visit/tours"
+          },
+          {
+            "title": "HEC Media — Haunted Happenings Around STL",
+            "url": "https://www.hecmedia.org/posts/haunted-happenings-around-stl"
+          }
+        ],
+        "sourceCheckedAt": "2026-11-17",
+        "reviewedAt": "2026-11-17",
+        "reviewStatus": "approved",
+        "verificationScope": "Sources document this place and its reported ghost-story tradition; paranormal claims are not established facts. Coordinate marks the venue or stated public reference point."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "haunted-powell-hall",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2298947,
+          38.6401454
+        ]
+      },
+      "properties": {
+        "id": "haunted-powell-hall",
+        "sourceId": "curated:haunted-powell-hall",
+        "layer": "haunted",
+        "title": "Powell Hall",
+        "description": "Built as the St. Louis Theatre in 1925, Powell Hall became the symphony’s home in 1968. Local accounts call its rumored resident “George” and describe unexplained lights, sounds and a top-hatted figure.",
+        "address": "718 North Grand Boulevard, St. Louis, MO 63103",
+        "lat": 38.6401454,
+        "lng": -90.2298947,
+        "source": "St. Louis Symphony Orchestra / HEC Media",
+        "sourceUrl": "https://slso.org/about-us/powell-hall-history/",
+        "url": "https://slso.org/get-tickets/powell-hall-tours/",
+        "website": "https://slso.org/get-tickets/powell-hall-tours/",
+        "accessNote": "Attend a concert or an announced hall tour. Private rehearsal, technical and backstage spaces are not independently accessible.",
+        "accessKind": "public-venue",
+        "locationAccuracy": "Mapped venue location",
+        "coordinateSourceUrl": "https://www.openstreetmap.org/way/202425813",
+        "coordinateSource": "OpenStreetMap contributors — venue location",
+        "hauntSources": [
+          {
+            "title": "St. Louis Symphony Orchestra — Powell Hall history",
+            "url": "https://slso.org/about-us/powell-hall-history/"
+          },
+          {
+            "title": "HEC Media — Haunted Happenings Around STL",
+            "url": "https://www.hecmedia.org/posts/haunted-happenings-around-stl"
+          },
+          {
+            "title": "Washington University student guide — Arts in St. Louis",
+            "url": "https://sites.wustl.edu/diso202021/items/type/life-in-the-lou/arts-life-in-the-lou/"
+          }
+        ],
+        "sourceCheckedAt": "2026-11-17",
+        "reviewedAt": "2026-11-17",
+        "reviewStatus": "approved",
+        "verificationScope": "Sources document this place and its reported ghost-story tradition; paranormal claims are not established facts. Coordinate marks the venue or stated public reference point."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "haunted-stifel-theatre",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.202006,
+          38.6275196
+        ]
+      },
+      "properties": {
+        "id": "haunted-stifel-theatre",
+        "sourceId": "curated:haunted-stifel-theatre",
+        "layer": "haunted",
+        "title": "Stifel Theatre",
+        "description": "The 1934 theater has been known as the Kiel Opera House and Peabody Opera House. Local ghost-tour reporting documents its reputation for unexplained backstage activity; stories include a presence called Rachel and unexplained singing. The changing venue names refer to this same historic theater.",
+        "address": "1400 Market Street, St. Louis, MO 63103",
+        "lat": 38.6275196,
+        "lng": -90.202006,
+        "source": "Stifel Theatre / St. Louis Magazine",
+        "sourceUrl": "https://www.stifeltheatre.com/about-us/history",
+        "url": "https://www.stifeltheatre.com/about-us/history",
+        "website": "https://www.stifeltheatre.com/about-us/history",
+        "accessNote": "Public ticketed performances and authorized tours only; backstage rooms are restricted.",
+        "accessKind": "public-venue",
+        "locationAccuracy": "Mapped venue location",
+        "coordinateSourceUrl": "https://www.openstreetmap.org/way/108705184",
+        "coordinateSource": "OpenStreetMap contributors — venue location",
+        "hauntSources": [
+          {
+            "title": "Stifel Theatre — History",
+            "url": "https://www.stifeltheatre.com/about-us/history"
+          },
+          {
+            "title": "St. Louis Magazine — Ghost tours around St. Louis",
+            "url": "https://www.stlmag.com/culture/ghost-tours/"
+          },
+          {
+            "title": "St. Louis Ghosts — Spirits of the Stifel Theatre",
+            "url": "https://stlghosts.com/the-spirits-of-the-stifel-theatre/"
+          }
+        ],
+        "sourceCheckedAt": "2026-11-17",
+        "reviewedAt": "2026-11-17",
+        "reviewStatus": "approved",
+        "verificationScope": "Sources document this place and its reported ghost-story tradition; paranormal claims are not established facts. Coordinate marks the venue or stated public reference point."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "haunted-campbell-house",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.2018605,
+          38.6312762
+        ]
+      },
+      "properties": {
+        "id": "haunted-campbell-house",
+        "sourceId": "curated:haunted-campbell-house",
+        "layer": "haunted",
+        "title": "Campbell House Museum",
+        "description": "This preserved nineteenth-century family home became a museum in 1943. A museum staff member interviewed by St. Louis Magazine described unexplained lights in the otherwise empty house; earlier reporting also recorded ghost hunters’ interest.",
+        "address": "1508 Locust Street, St. Louis, MO 63103",
+        "lat": 38.6312762,
+        "lng": -90.2018605,
+        "source": "Campbell House Museum / St. Louis Magazine",
+        "sourceUrl": "https://campbellhousemuseum.org/",
+        "url": "https://campbellhousemuseum.org/",
+        "website": "https://campbellhousemuseum.org/",
+        "accessNote": "Visit through the museum’s public tours. Follow staff directions and check the museum for current availability.",
+        "accessKind": "public-venue",
+        "locationAccuracy": "Mapped venue location",
+        "coordinateSourceUrl": "https://www.openstreetmap.org/way/201981600",
+        "coordinateSource": "OpenStreetMap contributors — venue location",
+        "hauntSources": [
+          {
+            "title": "Campbell House Museum — Visitor information",
+            "url": "https://campbellhousemuseum.org/"
+          },
+          {
+            "title": "St. Louis Magazine — Campbell House weekend manager",
+            "url": "https://www.stlmag.com/history/campbell-house-museum-weekend-manager/"
+          },
+          {
+            "title": "St. Louis Magazine — Campbell House mysteries",
+            "url": "https://www.stlmag.com/culture/The-Campbell-House-Mysteries-The-Case-of-the-Hidden-Half-Dollars/"
+          }
+        ],
+        "sourceCheckedAt": "2026-11-17",
+        "reviewedAt": "2026-11-17",
+        "reviewStatus": "approved",
+        "verificationScope": "Sources document this place and its reported ghost-story tradition; paranormal claims are not established facts. Coordinate marks the venue or stated public reference point."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "haunted-chase-park-plaza",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.26368,
+          38.6442
+        ]
+      },
+      "properties": {
+        "id": "haunted-chase-park-plaza",
+        "sourceId": "curated:haunted-chase-park-plaza",
+        "layer": "haunted",
+        "title": "Chase Park Plaza",
+        "description": "Opened in 1922, the hotel’s best-known ghost tradition concerns “The Bride,” with accounts of unexpected reflections and apparitions. Historic Hotels of America and local television have revisited these stories.",
+        "address": "212 North Kingshighway Boulevard, St. Louis, MO 63108",
+        "lat": 38.6442,
+        "lng": -90.26368,
+        "source": "Historic Hotels of America / First Alert 4",
+        "sourceUrl": "https://www.historichotels.org/us/press-room/press-releases/the-2026-top-25-historic-hotels-of-america-most-haunted-hotels-list-is-announced",
+        "url": "https://www.historichotels.org/us/press-room/press-releases/the-2026-top-25-historic-hotels-of-america-most-haunted-hotels-list-is-announced",
+        "website": "https://www.historichotels.org/us/press-room/press-releases/the-2026-top-25-historic-hotels-of-america-most-haunted-hotels-list-is-announced",
+        "accessNote": "Use public hotel businesses or a guest reservation. Guest floors, service areas and occupied rooms are private.",
+        "accessKind": "public-venue",
+        "locationAccuracy": "Mapped venue location",
+        "coordinateSourceUrl": "https://www.openstreetmap.org/way/477987752",
+        "coordinateSource": "OpenStreetMap contributors — venue location",
+        "hauntSources": [
+          {
+            "title": "Historic Hotels of America — 2026 haunted hotels",
+            "url": "https://www.historichotels.org/us/press-room/press-releases/the-2026-top-25-historic-hotels-of-america-most-haunted-hotels-list-is-announced"
+          },
+          {
+            "title": "First Alert 4 — Is the Chase Park Plaza haunted?",
+            "url": "https://www.firstalert4.com/2025/10/31/is-chase-park-plaza-haunted/"
+          },
+          {
+            "title": "City of St. Louis — Chase Park Plaza history",
+            "url": "https://dynamic.stlouis-mo.gov/history/structdetail.cfm?Master_ID=1360"
+          }
+        ],
+        "sourceCheckedAt": "2026-11-17",
+        "reviewedAt": "2026-11-17",
+        "reviewStatus": "approved",
+        "verificationScope": "Sources document this place and its reported ghost-story tradition; paranormal claims are not established facts. Coordinate marks the venue or stated public reference point."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "haunted-cupples-house",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.23578,
+          38.63674
+        ]
+      },
+      "properties": {
+        "id": "haunted-cupples-house",
+        "sourceId": "curated:haunted-cupples-house",
+        "layer": "haunted",
+        "title": "Samuel Cupples House",
+        "description": "The 1890 Romanesque mansion on Saint Louis University’s campus is a museum and decorative-arts collection. Its former owner’s supposed lingering presence appears in documented St. Louis ghost-tour lore.",
+        "address": "3673 West Pine Mall, St. Louis, MO 63108",
+        "lat": 38.63674,
+        "lng": -90.23578,
+        "source": "City of St. Louis / ASHS 2009 St. Louis meeting",
+        "sourceUrl": "https://www.stlouis-mo.gov/government/departments/planning/cultural-resources/city-landmarks/Cupples-House.cfm",
+        "url": "https://www.slu.edu/cupples-house/index.php",
+        "website": "https://www.slu.edu/cupples-house/index.php",
+        "accessNote": "Visit during announced museum access or a scheduled tour. University buildings and closed museum rooms are not open for independent exploration.",
+        "accessKind": "public-venue",
+        "locationAccuracy": "Mapped venue location",
+        "coordinateSourceUrl": "https://www.openstreetmap.org/way/338495044",
+        "coordinateSource": "OpenStreetMap contributors — venue location",
+        "hauntSources": [
+          {
+            "title": "City of St. Louis — Samuel Cupples House landmark",
+            "url": "https://www.stlouis-mo.gov/government/departments/planning/cultural-resources/city-landmarks/Cupples-House.cfm"
+          },
+          {
+            "title": "ASHS 2009 St. Louis meeting — Ghost tour itinerary",
+            "url": "https://ashs.confex.com/ashs/2009/webprogramarchives/Session1234.html"
+          },
+          {
+            "title": "Saint Louis University — Cupples House",
+            "url": "https://www.slu.edu/cupples-house/index.php"
+          }
+        ],
+        "sourceCheckedAt": "2026-11-17",
+        "reviewedAt": "2026-11-17",
+        "reviewStatus": "approved",
+        "verificationScope": "Sources document this place and its reported ghost-story tradition; paranormal claims are not established facts. Coordinate marks the venue or stated public reference point."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "haunted-mcpike-mansion",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.182999,
+          38.905659
+        ]
+      },
+      "properties": {
+        "id": "haunted-mcpike-mansion",
+        "sourceId": "curated:haunted-mcpike-mansion",
+        "layer": "haunted",
+        "title": "McPike Mansion",
+        "description": "Built in 1869 for Henry Guest McPike, this Italianate mansion is a long-established center of Alton ghost stories. Visitors and investigators report unexplained presences, especially around the cellar.",
+        "address": "2018 Alby Street, Alton, IL 62002",
+        "lat": 38.905659,
+        "lng": -90.182999,
+        "source": "Great Rivers & Routes / St. Louis Magazine",
+        "sourceUrl": "https://www.riversandroutes.com/directory/the-mcpike-mansion/",
+        "url": "https://www.mcpikemansion.com/",
+        "website": "https://www.mcpikemansion.com/",
+        "accessNote": "Book an authorized mansion or cellar program. The restoration property is private outside permitted visits.",
+        "accessKind": "ticketed-tour",
+        "locationAccuracy": "Tourism office’s property entrance marker, approximately 60 metres from the mansion.",
+        "coordinateSourceUrl": "https://www.riversandroutes.com/directory/the-mcpike-mansion/",
+        "coordinateSource": "Great Rivers & Routes — McPike Mansion",
+        "hauntSources": [
+          {
+            "title": "Great Rivers & Routes — McPike Mansion",
+            "url": "https://www.riversandroutes.com/directory/the-mcpike-mansion/"
+          },
+          {
+            "title": "St. Louis Magazine — Whose ghosts supposedly haunt McPike Mansion?",
+            "url": "https://www.stlmag.com/history/st-louis-sage/whose-ghosts-supposedly-haunt-mcpike-mansion-in-alton/"
+          }
+        ],
+        "sourceCheckedAt": "2026-11-17",
+        "reviewedAt": "2026-11-17",
+        "reviewStatus": "approved",
+        "verificationScope": "Sources document this place and its reported ghost-story tradition; paranormal claims are not established facts. Coordinate marks the venue or stated public reference point."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "haunted-mineral-springs",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.182137,
+          38.889885
+        ]
+      },
+      "properties": {
+        "id": "haunted-mineral-springs",
+        "sourceId": "curated:haunted-mineral-springs",
+        "layer": "haunted",
+        "title": "Mineral Springs Hotel",
+        "description": "Opened in 1914 around a natural spring, this former hotel and spa now contains businesses and spaces used for tours. Its enduring lore includes the “Jasmine Lady,” associated with an unexpected floral scent, and stories about the old pool and staircase. Illinois tourism records these as haunting traditions.",
+        "address": "301 East Broadway, Alton, IL 62002",
+        "lat": 38.889885,
+        "lng": -90.182137,
+        "source": "Great Rivers & Routes / Enjoy Illinois",
+        "sourceUrl": "https://www.riversandroutes.com/directory/mineral-springs-hotel/",
+        "url": "https://www.riversandroutes.com/directory/mineral-springs-hotel/",
+        "website": "https://www.riversandroutes.com/directory/mineral-springs-hotel/",
+        "accessNote": "Public shops have their own hours. Pool, basement and other closed areas require an authorized tour or owner permission.",
+        "accessKind": "public-venue",
+        "locationAccuracy": "Mapped venue location",
+        "coordinateSourceUrl": "https://www.riversandroutes.com/directory/mineral-springs-hotel/",
+        "coordinateSource": "Great Rivers & Routes — Mineral Springs Hotel",
+        "hauntSources": [
+          {
+            "title": "Great Rivers & Routes — Mineral Springs Hotel",
+            "url": "https://www.riversandroutes.com/directory/mineral-springs-hotel/"
+          },
+          {
+            "title": "Enjoy Illinois — Haunting season in Illinois",
+            "url": "https://www.enjoyillinois.com/plan-your-trip/road-trip-itineraries/haunting-season-in-illinois/"
+          }
+        ],
+        "sourceCheckedAt": "2026-11-17",
+        "reviewedAt": "2026-11-17",
+        "reviewStatus": "approved",
+        "verificationScope": "Sources document this place and its reported ghost-story tradition; paranormal claims are not established facts. Coordinate marks the venue or stated public reference point."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "haunted-milton-school",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.135628,
+          38.89735
+        ]
+      },
+      "properties": {
+        "id": "haunted-milton-school",
+        "sourceId": "curated:haunted-milton-school",
+        "layer": "haunted",
+        "title": "Milton School House",
+        "description": "The former school is now a mixed-use building with businesses and residences. Long-running accounts describe unexplained voices and shadows, and local reporting has followed organized investigations. Sensational versions of the school’s story conflict; alleged murders in the folklore are not treated here as verified historical events.",
+        "address": "1320 Milton Road, Alton, IL 62002",
+        "lat": 38.89735,
+        "lng": -90.135628,
+        "source": "Great Rivers & Routes / The Telegraph",
+        "sourceUrl": "https://www.riversandroutes.com/directory/milton-school-house/",
+        "url": "https://www.riversandroutes.com/directory/milton-school-house/",
+        "website": "https://www.riversandroutes.com/directory/milton-school-house/",
+        "accessNote": "Visit public businesses during their hours or an expressly authorized event. Residential floors and closed rooms are private.",
+        "accessKind": "public-venue",
+        "locationAccuracy": "Mapped venue location",
+        "coordinateSourceUrl": "https://www.riversandroutes.com/directory/milton-school-house/",
+        "coordinateSource": "Great Rivers & Routes — Milton School House",
+        "hauntSources": [
+          {
+            "title": "Great Rivers & Routes — Milton School House",
+            "url": "https://www.riversandroutes.com/directory/milton-school-house/"
+          },
+          {
+            "title": "The Telegraph — Milton School House’s haunted reputation",
+            "url": "https://www.thetelegraph.com/news/article/Milton-School-House-purportedly-haunted-going-16543347.php"
+          }
+        ],
+        "sourceCheckedAt": "2026-11-17",
+        "reviewedAt": "2026-11-17",
+        "reviewStatus": "approved",
+        "verificationScope": "Sources document this place and its reported ghost-story tradition; paranormal claims are not established facts. Coordinate marks the venue or stated public reference point."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "haunted-first-unitarian-alton",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.183609,
+          38.890884
+        ]
+      },
+      "properties": {
+        "id": "haunted-first-unitarian-alton",
+        "sourceId": "curated:haunted-first-unitarian-alton",
+        "layer": "haunted",
+        "title": "First Unitarian Church",
+        "description": "This active church is a recurring stop in Alton’s ghost-story tradition. Local lore associates unexplained activity with a former minister, and established walking tours have used the building as a starting point.",
+        "address": "110 East Third Street, Alton, IL 62002",
+        "lat": 38.890884,
+        "lng": -90.183609,
+        "source": "Great Rivers & Routes / Great Rivers & Routes",
+        "sourceUrl": "https://www.riversandroutes.com/directory/first-unitarian-church/",
+        "url": "https://www.riversandroutes.com/directory/first-unitarian-church/",
+        "website": "https://www.riversandroutes.com/directory/first-unitarian-church/",
+        "accessNote": "Respect the working congregation. Enter for public services, announced events or a tour with permission; do not interrupt activities.",
+        "accessKind": "public-venue",
+        "locationAccuracy": "Mapped venue location",
+        "coordinateSourceUrl": "https://www.riversandroutes.com/directory/first-unitarian-church/",
+        "coordinateSource": "Great Rivers & Routes — First Unitarian Church",
+        "hauntSources": [
+          {
+            "title": "Great Rivers & Routes — First Unitarian Church",
+            "url": "https://www.riversandroutes.com/directory/first-unitarian-church/"
+          },
+          {
+            "title": "Great Rivers & Routes — Why Alton Is America’s Most Haunted Small Town",
+            "url": "https://www.riversandroutes.com/blog/why-alton-is-americas-most-haunted-small-town/"
+          },
+          {
+            "title": "Lewis and Clark National Historic Trail — Alton Haunting Tours",
+            "url": "https://www.lewisandclark.travel/listing/alton-haunting-tours/"
+          }
+        ],
+        "sourceCheckedAt": "2026-11-17",
+        "reviewedAt": "2026-11-17",
+        "reviewStatus": "approved",
+        "verificationScope": "Sources document this place and its reported ghost-story tradition; paranormal claims are not established facts. Coordinate marks the venue or stated public reference point."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "haunted-ryder-building",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.184525,
+          38.890007
+        ]
+      },
+      "properties": {
+        "id": "haunted-ryder-building",
+        "sourceId": "curated:haunted-ryder-building",
+        "layer": "haunted",
+        "title": "Simeon Ryder Building",
+        "description": "This early commercial building served several roles in Alton’s development, including courthouse use. Its local ghost stories include workers hearing chairs and tables move when rooms were empty. The building appears in established downtown history and haunted walking tours; current occupants may differ from older accounts.",
+        "address": "31 East Broadway, Alton, IL 62002",
+        "lat": 38.890007,
+        "lng": -90.184525,
+        "source": "Great Rivers & Routes / Alton Odyssey Tours",
+        "sourceUrl": "https://www.riversandroutes.com/directory/ryder-building/",
+        "url": "https://www.riversandroutes.com/directory/ryder-building/",
+        "website": "https://www.riversandroutes.com/directory/ryder-building/",
+        "accessNote": "View the exterior from public streets. Interior access depends on the current operator or an authorized tour.",
+        "accessKind": "public-venue",
+        "locationAccuracy": "Mapped venue location",
+        "coordinateSourceUrl": "https://www.riversandroutes.com/directory/ryder-building/",
+        "coordinateSource": "Great Rivers & Routes — Ryder Building",
+        "hauntSources": [
+          {
+            "title": "Great Rivers & Routes — Ryder Building",
+            "url": "https://www.riversandroutes.com/directory/ryder-building/"
+          },
+          {
+            "title": "Alton Odyssey Tours — Haunted Craft Beer Walk",
+            "url": "https://www.altonodysseytours.com/service/haunted-craft-beer-walk-the-perfect-pairing"
+          },
+          {
+            "title": "Historical Marker Database — Ryder Building",
+            "url": "https://www.hmdb.org/m.asp?m=133290"
+          }
+        ],
+        "sourceCheckedAt": "2026-11-17",
+        "reviewedAt": "2026-11-17",
+        "reviewStatus": "approved",
+        "verificationScope": "Sources document this place and its reported ghost-story tradition; paranormal claims are not established facts. Coordinate marks the venue or stated public reference point."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "haunted-piasa-masonic-temple",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.1886062,
+          38.8913325
+        ]
+      },
+      "properties": {
+        "id": "haunted-piasa-masonic-temple",
+        "sourceId": "curated:haunted-piasa-masonic-temple",
+        "layer": "haunted",
+        "title": "Piasa Masonic Temple",
+        "description": "Completed in 1915, the former Masonic temple is another landmark in Alton’s ghost lore. Tourism accounts describe a soldier figure associated with its basement. Local reporting documents the building’s history and later vacancy.",
+        "address": "300 State Street, Alton, IL 62002",
+        "lat": 38.8913325,
+        "lng": -90.1886062,
+        "source": "Great Rivers & Routes / The Telegraph",
+        "sourceUrl": "https://www.riversandroutes.com/blog/why-alton-is-americas-most-haunted-small-town/",
+        "url": "https://www.thetelegraph.com/news/article/piasa-masonic-temple-alton-illinois-history-20065960.php",
+        "website": "https://www.thetelegraph.com/news/article/piasa-masonic-temple-alton-illinois-history-20065960.php",
+        "accessNote": "Exterior viewing from public streets only. The building is not an open attraction; enter only with explicit owner authorization.",
+        "accessKind": "exterior-only",
+        "locationAccuracy": "Approximate street-address marker; Census street interpolation.",
+        "coordinateSourceUrl": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=300+State+Street%2C+Alton%2C+IL&benchmark=Public_AR_Current&format=json",
+        "coordinateSource": "U.S. Census Geocoder — interpolated street address",
+        "hauntSources": [
+          {
+            "title": "Great Rivers & Routes — Why Alton Is America’s Most Haunted Small Town",
+            "url": "https://www.riversandroutes.com/blog/why-alton-is-americas-most-haunted-small-town/"
+          },
+          {
+            "title": "The Telegraph — Old Masonic Temple completed in 1915",
+            "url": "https://www.thetelegraph.com/news/article/old-masonic-temple-building-completed-1915-19739977.php"
+          },
+          {
+            "title": "The Telegraph — Piasa Masonic Temple history",
+            "url": "https://www.thetelegraph.com/news/article/piasa-masonic-temple-alton-illinois-history-20065960.php"
+          }
+        ],
+        "sourceCheckedAt": "2026-11-17",
+        "reviewedAt": "2026-11-17",
+        "reviewStatus": "approved",
+        "verificationScope": "Sources document this place and its reported ghost-story tradition; paranormal claims are not established facts. Coordinate marks the venue or stated public reference point."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "haunted-alton-prison",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.189392,
+          38.890804
+        ]
+      },
+      "properties": {
+        "id": "haunted-alton-prison",
+        "sourceId": "curated:haunted-alton-prison",
+        "layer": "haunted",
+        "title": "Alton Prison Ruins",
+        "description": "A surviving wall marks the former state penitentiary, later used as a Civil War military prison. Local ghost lore describes the sound of prisoners marching in lockstep, a tradition preserved in historical newspaper retellings. This marker identifies the prison ruins, not a burial ground.",
+        "address": "Broadway and William Street, Alton, IL 62002",
+        "lat": 38.890804,
+        "lng": -90.189392,
+        "source": "Great Rivers & Routes / American Battlefield Trust",
+        "sourceUrl": "https://www.riversandroutes.com/directory/alton-prison-group-friendly/",
+        "url": "https://www.battlefields.org/visit/heritage-sites/alton-military-prison-site",
+        "website": "https://www.battlefields.org/visit/heritage-sites/alton-military-prison-site",
+        "accessNote": "Public historic-site viewing. Stay on visitor areas and do not climb or disturb the surviving wall.",
+        "accessKind": "public-outdoors",
+        "locationAccuracy": "Tourism office’s public historic-site marker.",
+        "coordinateSourceUrl": "https://www.riversandroutes.com/directory/alton-prison-group-friendly/",
+        "coordinateSource": "Great Rivers & Routes — Alton Prison",
+        "hauntSources": [
+          {
+            "title": "Great Rivers & Routes — Alton Prison",
+            "url": "https://www.riversandroutes.com/directory/alton-prison-group-friendly/"
+          },
+          {
+            "title": "American Battlefield Trust — Alton Military Prison Site",
+            "url": "https://www.battlefields.org/visit/heritage-sites/alton-military-prison-site"
+          },
+          {
+            "title": "Madison County ILGenWeb — Historical paranormal newspaper accounts",
+            "url": "https://www.madison.illinoisgenweb.org/paranormal.html"
+          }
+        ],
+        "sourceCheckedAt": "2026-11-17",
+        "reviewedAt": "2026-11-17",
+        "reviewStatus": "approved",
+        "verificationScope": "Sources document this place and its reported ghost-story tradition; paranormal claims are not established facts. Coordinate marks the venue or stated public reference point."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "haunted-hotel-stratford",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.185,
+          38.89056
+        ]
+      },
+      "properties": {
+        "id": "haunted-hotel-stratford",
+        "sourceId": "curated:haunted-hotel-stratford",
+        "layer": "haunted",
+        "title": "Hotel Stratford",
+        "description": "This 1909 former hotel is part of downtown Alton’s historic building stock. Established local haunted tours include the Stratford and accounts associated with its upper-floor spaces. It is not currently an operating hotel.",
+        "address": "229 Market Street, Alton, IL 62002",
+        "lat": 38.89056,
+        "lng": -90.185,
+        "source": "Alton Odyssey Tours / Great Rivers & Routes",
+        "sourceUrl": "https://www.altonodysseytours.com/tour-categories/trolley-tours",
+        "url": "https://www.altonodysseytours.com/tour-categories/trolley-tours",
+        "website": "https://www.altonodysseytours.com/tour-categories/trolley-tours",
+        "accessNote": "View from public streets or attend an authorized tour. It is not an operating public hotel; closed interiors require permission.",
+        "accessKind": "ticketed-tour",
+        "locationAccuracy": "Approximate historic-building marker; not a specific room or reported encounter point.",
+        "coordinateSourceUrl": "https://en.wikipedia.org/wiki/Hotel_Stratford",
+        "coordinateSource": "Hotel Stratford — National Register-linked coordinate record",
+        "hauntSources": [
+          {
+            "title": "Alton Odyssey Tours — Haunted trolley tours",
+            "url": "https://www.altonodysseytours.com/tour-categories/trolley-tours"
+          },
+          {
+            "title": "Great Rivers & Routes — Alton Odyssey Tours",
+            "url": "https://www.riversandroutes.com/directory/alton-odyssey-tours/"
+          },
+          {
+            "title": "AltonWorks — Historic building mission",
+            "url": "https://altonworks.us/our-mission/"
+          }
+        ],
+        "sourceCheckedAt": "2026-11-17",
+        "reviewedAt": "2026-11-17",
+        "reviewStatus": "approved",
+        "verificationScope": "Sources document this place and its reported ghost-story tradition; paranormal claims are not established facts. Coordinate marks the venue or stated public reference point."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "haunted-alton-ywca",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.181541,
+          38.890835
+        ]
+      },
+      "properties": {
+        "id": "haunted-alton-ywca",
+        "sourceId": "curated:haunted-alton-ywca",
+        "layer": "haunted",
+        "title": "Alton YWCA",
+        "description": "The working community center also has a longstanding local reputation for unexplained activity. The Telegraph reported investigations here in 2016, and an established regional operator offers organized visits.",
+        "address": "304 East Third Street, Alton, IL 62002",
+        "lat": 38.890835,
+        "lng": -90.181541,
+        "source": "YWCA Southwestern Illinois / The Telegraph",
+        "sourceUrl": "https://www.ywcaswil.org/",
+        "url": "https://www.ywcaswil.org/",
+        "website": "https://www.ywcaswil.org/",
+        "accessNote": "Respect community programs and participants. Any paranormal visit requires an explicitly booked, authorized event.",
+        "accessKind": "public-venue",
+        "locationAccuracy": "Mapped venue location",
+        "coordinateSourceUrl": "https://downtownalton.com/directory/listing/ywca/",
+        "coordinateSource": "Alton Main Street — YWCA",
+        "hauntSources": [
+          {
+            "title": "YWCA Southwestern Illinois — Visitor information",
+            "url": "https://www.ywcaswil.org/"
+          },
+          {
+            "title": "The Telegraph — Group studies YWCA for paranormal activity",
+            "url": "https://www.thetelegraph.com/news/article/Group-studies-YWCA-for-paranormal-activity-12603365.php"
+          },
+          {
+            "title": "St. Louis Paranormal Research Society — Alton YWCA",
+            "url": "https://www.stlghost.com/haunted-alton-ywca"
+          }
+        ],
+        "sourceCheckedAt": "2026-11-17",
+        "reviewedAt": "2026-11-17",
+        "reviewStatus": "approved",
+        "verificationScope": "Sources document this place and its reported ghost-story tradition; paranormal claims are not established facts. Coordinate marks the venue or stated public reference point."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "haunted-dripping-springs",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.4797,
+          38.7114333
+        ]
+      },
+      "properties": {
+        "id": "haunted-dripping-springs",
+        "sourceId": "curated:haunted-dripping-springs",
+        "layer": "haunted",
+        "title": "Dripping Springs at Creve Coeur Lake",
+        "description": "A longstanding local legend links this spring to a woman whose grief gave Creve Coeur its “broken heart” name; later ghost stories claim cries near the bluff. The lakeside marker preserves the tale, not a verified account of a death or a confirmed Indigenous historical event.",
+        "address": "Creve Coeur Lake Memorial Park, 13450 Marine Avenue, Maryland Heights, MO 63146",
+        "lat": 38.7114333,
+        "lng": -90.4797,
+        "source": "Historical Marker Database / Visit Maryland Heights",
+        "sourceUrl": "https://www.hmdb.org/m.asp?m=150902",
+        "url": "https://visitmarylandheights.org/2013/06/21/creve-coeur-lake-park/",
+        "website": "https://visitmarylandheights.org/2013/06/21/creve-coeur-lake-park/",
+        "accessNote": "Public park trails during posted hours. Remain on designated paths and keep off the bluff face.",
+        "accessKind": "public-outdoors",
+        "locationAccuracy": "Public interpretive-marker location near the spring.",
+        "coordinateSourceUrl": "https://www.hmdb.org/m.asp?m=150902",
+        "coordinateSource": "Historical Marker Database — Dripping Springs",
+        "hauntSources": [
+          {
+            "title": "Historical Marker Database — Dripping Springs",
+            "url": "https://www.hmdb.org/m.asp?m=150902"
+          },
+          {
+            "title": "Visit Maryland Heights — Creve Coeur Lake Park",
+            "url": "https://visitmarylandheights.org/2013/06/21/creve-coeur-lake-park/"
+          },
+          {
+            "title": "HEC Media — Haunted Happenings Around STL",
+            "url": "https://www.hecmedia.org/posts/haunted-happenings-around-stl"
+          }
+        ],
+        "sourceCheckedAt": "2026-11-17",
+        "reviewedAt": "2026-11-17",
+        "reviewStatus": "approved",
+        "verificationScope": "Sources document this place and its reported ghost-story tradition; paranormal claims are not established facts. Coordinate marks the venue or stated public reference point."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "haunted-rock-hollow-zombie-road",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.6007,
+          38.57178
+        ]
+      },
+      "properties": {
+        "id": "haunted-rock-hollow-zombie-road",
+        "sourceId": "curated:haunted-rock-hollow-zombie-road",
+        "layer": "haunted",
+        "title": "Rock Hollow Trail (Zombie Road)",
+        "description": "The former Lawler Ford Road is now the paved Rock Hollow Trail. Generations of local ghost stories surround the wooded route, including shadow figures and a feeling of being watched. Versions of the legends differ.",
+        "address": "777 Ridge Road, Wildwood, MO 63021",
+        "lat": 38.57178,
+        "lng": -90.6007,
+        "source": "City of Wildwood / St. Louis Magazine",
+        "sourceUrl": "https://www.cityofwildwood.com/2035/Rock-Hollow-Trail",
+        "url": "https://www.cityofwildwood.com/2035/Rock-Hollow-Trail",
+        "website": "https://www.cityofwildwood.com/2035/Rock-Hollow-Trail",
+        "accessNote": "Public trail; use designated trailhead parking and obey posted hours. Do not enter outside permitted hours.",
+        "accessKind": "public-outdoors",
+        "locationAccuracy": "Public northern trailhead; not a claimed apparition point.",
+        "coordinateSourceUrl": "https://mapcarta.com/N14120944832",
+        "coordinateSource": "OpenStreetMap trailhead via Mapcarta",
+        "hauntSources": [
+          {
+            "title": "City of Wildwood — Rock Hollow Trail",
+            "url": "https://www.cityofwildwood.com/2035/Rock-Hollow-Trail"
+          },
+          {
+            "title": "St. Louis Magazine — Is Zombie Road Really Haunted?",
+            "url": "https://www.stlmag.com/history/st-louis-sage/is-zombie-road-really-haunted/"
+          },
+          {
+            "title": "r/StLouis — Ghosts/Folklore around STL?",
+            "url": "https://www.reddit.com/r/StLouis/comments/1pmoqbo/ghostsfolklore_around_stl/"
+          },
+          {
+            "title": "r/StLouis — Zombie Road",
+            "url": "https://www.reddit.com/r/StLouis/comments/xwd7fc/zombie_road/"
+          },
+          {
+            "title": "OpenStreetMap trailhead via Mapcarta",
+            "url": "https://mapcarta.com/N14120944832"
+          }
+        ],
+        "sourceCheckedAt": "2026-11-17",
+        "reviewedAt": "2026-11-17",
+        "reviewStatus": "approved",
+        "verificationScope": "Sources document this place and its reported ghost-story tradition; paranormal claims are not established facts. Coordinate marks the venue or stated public reference point."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "haunted-grandel",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.231657,
+          38.640288
+        ]
+      },
+      "properties": {
+        "id": "haunted-grandel",
+        "sourceId": "curated:haunted-grandel",
+        "layer": "haunted",
+        "title": "The Grandel",
+        "description": "Built in 1884 as the First Congregational Church, the Grandel has a long-running reputation for unexplained activity. The Grand Center Arts District has documented the venue's ghost-tour program, and local community discussions repeatedly name the theater among St. Louis haunts.",
+        "address": "3610 Grandel Square, St. Louis, MO 63103",
+        "lat": 38.640288,
+        "lng": -90.231657,
+        "source": "Grand Center Arts District / r/StLouis",
+        "sourceUrl": "https://www.grandcenter.org/the-grandel-haunted-tour/",
+        "url": "https://www.metrotix.com/venues/detail/grandel",
+        "website": "https://www.metrotix.com/venues/detail/grandel",
+        "accessNote": "Attend a public performance or an officially offered tour; backstage and closed areas require permission.",
+        "accessKind": "public-venue",
+        "locationAccuracy": "Published performance-venue marker.",
+        "coordinateSourceUrl": "https://saintlouis.kidsoutandabout.com/venue/grandel-theatre",
+        "coordinateSource": "Kids Out and About — Grandel Theatre",
+        "hauntSources": [
+          {
+            "title": "Grand Center Arts District — The Grandel Haunted Tour",
+            "url": "https://www.grandcenter.org/the-grandel-haunted-tour/"
+          },
+          {
+            "title": "r/StLouis — I know y’all have some ghost stories",
+            "url": "https://www.reddit.com/r/StLouis/comments/d2dqdx"
+          },
+          {
+            "title": "The Grandel — MetroTix",
+            "url": "https://www.metrotix.com/venues/detail/grandel"
+          },
+          {
+            "title": "Kids Out and About — Grandel Theatre",
+            "url": "https://saintlouis.kidsoutandabout.com/venue/grandel-theatre"
+          }
+        ],
+        "sourceCheckedAt": "2026-11-17",
+        "reviewedAt": "2026-11-17",
+        "reviewStatus": "approved",
+        "verificationScope": "Sources document this place and its reported ghost-story tradition; paranormal claims are not established facts. Coordinate marks the venue or stated public reference point."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "haunted-webster-theatre-guild",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.33956,
+          38.59902
+        ]
+      },
+      "properties": {
+        "id": "haunted-webster-theatre-guild",
+        "sourceId": "curated:haunted-webster-theatre-guild",
+        "layer": "haunted",
+        "title": "Theatre Guild of Webster Groves",
+        "description": "The Guild’s own history acknowledges its ghost-story tradition. Accounts describe silhouettes in the audience and a white-suited figure; a 2010 investigation recorded differing interpretations. The building began as the 1909 Suburban School of Music and became the Guild’s home in 1951.",
+        "address": "517 Theatre Lane, Webster Groves, MO 63119",
+        "lat": 38.59902,
+        "lng": -90.33956,
+        "source": "Theatre Guild / Ghost Research Society",
+        "sourceUrl": "https://www.webstergrovestheatreguild.com/history/",
+        "url": "https://www.webstergrovestheatreguild.com/contact/",
+        "website": "https://www.webstergrovestheatreguild.com/contact/",
+        "accessNote": "Public performances and announced events; arrange any investigation with the operator. Historic building has stairs.",
+        "accessKind": "public-venue",
+        "locationAccuracy": "Mapped theater building.",
+        "coordinateSourceUrl": "https://mapcarta.com/N12740592701",
+        "coordinateSource": "OpenStreetMap theater via Mapcarta",
+        "hauntSources": [
+          {
+            "title": "Theatre Guild — History",
+            "url": "https://www.webstergrovestheatreguild.com/history/"
+          },
+          {
+            "title": "Ghost Research Society — Theater Guild Investigation",
+            "url": "https://www.ghostresearch.org/Investigations/theaterguild.html"
+          },
+          {
+            "title": "Theatre Guild — Contact",
+            "url": "https://www.webstergrovestheatreguild.com/contact/"
+          },
+          {
+            "title": "OpenStreetMap theater via Mapcarta",
+            "url": "https://mapcarta.com/N12740592701"
+          },
+          {
+            "title": "St. Louis Magazine — Ghosts of the Guild",
+            "url": "https://www.stlmag.com/events/ghosts-of-the-guild-halloween-party/"
+          }
+        ],
+        "sourceCheckedAt": "2026-11-17",
+        "reviewedAt": "2026-11-17",
+        "reviewStatus": "approved",
+        "verificationScope": "Sources document this place and its reported ghost-story tradition; paranormal claims are not established facts. Coordinate marks the venue or stated public reference point."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "haunted-loretto-hilton",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.34415,
+          38.58883
+        ]
+      },
+      "properties": {
+        "id": "haunted-loretto-hilton",
+        "sourceId": "curated:haunted-loretto-hilton",
+        "layer": "haunted",
+        "title": "Loretto-Hilton Center for the Performing Arts",
+        "description": "Dedicated in 1966, the arts center has its own theater legends. The Repertory Theatre’s educational guide records late-night experiences from carpenters and technicians, including a story of an unseen helper pulling a worker away from a catwalk fall.",
+        "address": "130 Edgar Road, Webster Groves, MO 63119",
+        "lat": 38.58883,
+        "lng": -90.34415,
+        "source": "The Rep / The Rep",
+        "sourceUrl": "https://www.repstl.org/assets/doc/M5-MACBETH-e2a38ccde3.pdf",
+        "url": "https://repstl.org/rep-history/",
+        "website": "https://repstl.org/rep-history/",
+        "accessNote": "Visit through public performances or authorized university programs; catwalks and work areas are not visitor access.",
+        "accessKind": "public-venue",
+        "locationAccuracy": "Mapped theater building.",
+        "coordinateSourceUrl": "https://mapcarta.com/W375010915",
+        "coordinateSource": "OpenStreetMap theater via Mapcarta",
+        "hauntSources": [
+          {
+            "title": "The Rep — Macbeth educational guide, Ghosts section",
+            "url": "https://www.repstl.org/assets/doc/M5-MACBETH-e2a38ccde3.pdf"
+          },
+          {
+            "title": "The Rep — History",
+            "url": "https://repstl.org/rep-history/"
+          },
+          {
+            "title": "Webster University — Campus map",
+            "url": "https://www.webster.edu/campus-map.php"
+          },
+          {
+            "title": "OpenStreetMap theater via Mapcarta",
+            "url": "https://mapcarta.com/W375010915"
+          }
+        ],
+        "sourceCheckedAt": "2026-11-17",
+        "reviewedAt": "2026-11-17",
+        "reviewStatus": "approved",
+        "verificationScope": "Sources document this place and its reported ghost-story tradition; paranormal claims are not established facts. Coordinate marks the venue or stated public reference point."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "haunted-umsl-provincial-house",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.306068,
+          38.701744
+        ]
+      },
+      "properties": {
+        "id": "haunted-umsl-provincial-house",
+        "sourceId": "curated:haunted-umsl-provincial-house",
+        "layer": "haunted",
+        "title": "UMSL Provincial House",
+        "description": "The former Daughters of Charity building is the home of UMSL's Pierre Laclede Honors College. Student accounts of ghostly footsteps have circulated for years and are acknowledged in UMSL's own coverage. A 2011 student-newspaper investigation also interviewed staff who attributed sounds to the old building and remained skeptical.",
+        "address": "Provincial House, UMSL South Campus, St. Louis, MO 63121",
+        "lat": 38.701744,
+        "lng": -90.306068,
+        "source": "UMSL Daily / The Current",
+        "sourceUrl": "https://blogs.umsl.edu/news/2019/11/01/haunted-honors/",
+        "url": "https://www.umsl.edu/honors/contact-us.html",
+        "website": "https://www.umsl.edu/honors/contact-us.html",
+        "accessNote": "Working university building; use announced public campus events or arrange a visit. Restricted areas are not open for independent ghost hunting.",
+        "accessKind": "authorized-visit",
+        "locationAccuracy": "Official Honors College directions point.",
+        "coordinateSourceUrl": "https://www.umsl.edu/honors/contact-us.html",
+        "coordinateSource": "UMSL — Honors College contact and directions",
+        "hauntSources": [
+          {
+            "title": "UMSL Daily — Haunted Honors",
+            "url": "https://blogs.umsl.edu/news/2019/11/01/haunted-honors/"
+          },
+          {
+            "title": "The Current — The dark history of Provincial House, October 24, 2011",
+            "url": "https://www.umsl.edu/services/library/university-archives/Student%20Newspaper/Current%2C%202011-2013/2011/October%2024%2C%202011.pdf"
+          },
+          {
+            "title": "UMSL — Honors College contact and directions",
+            "url": "https://www.umsl.edu/honors/contact-us.html"
+          }
+        ],
+        "sourceCheckedAt": "2026-11-17",
+        "reviewedAt": "2026-11-17",
+        "reviewStatus": "approved",
+        "verificationScope": "Sources document this place and its reported ghost-story tradition; paranormal claims are not established facts. Coordinate marks the venue or stated public reference point."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "haunted-payne-gentry-house",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.399524,
+          38.747181
+        ]
+      },
+      "properties": {
+        "id": "haunted-payne-gentry-house",
+        "sourceId": "curated:haunted-payne-gentry-house",
+        "layer": "haunted",
+        "title": "Payne-Gentry House",
+        "description": "This 1870 cottage preserves Dr. William Payne’s nineteenth-century office. Local ghost-story collections and decades of visitor accounts give the house a reputation for unexplained figures, sounds and photographs.",
+        "address": "4211 Fee Fee Road, Bridgeton, MO 63044",
+        "lat": 38.747181,
+        "lng": -90.399524,
+        "source": "City of Bridgeton / St. Louis Cake Monster",
+        "sourceUrl": "https://www.bridgetonmo.com/facilities/facility/details/PayneGentry-House-20",
+        "url": "https://www.bridgetonmo.com/facilities/facility/details/PayneGentry-House-20",
+        "website": "https://www.bridgetonmo.com/facilities/facility/details/PayneGentry-House-20",
+        "accessNote": "City-owned historic house; tours are managed by the Bridgeton Historical Commission. Check the official visitor page before entering.",
+        "accessKind": "public-venue",
+        "locationAccuracy": "Historic house marker, not the city facility page’s generic park center.",
+        "coordinateSourceUrl": "https://en.wikipedia.org/wiki/Payne-Gentry_House",
+        "coordinateSource": "Payne-Gentry House — coordinate record",
+        "hauntSources": [
+          {
+            "title": "City of Bridgeton — Payne-Gentry House",
+            "url": "https://www.bridgetonmo.com/facilities/facility/details/PayneGentry-House-20"
+          },
+          {
+            "title": "St. Louis Cake Monster — Payne-Gentry House",
+            "url": "https://stlcakemonster.wordpress.com/2015/04/17/cake-monster-tries-to-get-haunted-payne-gentry-house-50/"
+          },
+          {
+            "title": "The Current — Haunted places review, October 14, 2002",
+            "url": "https://www.umsl.edu/library/university-archives/Student%20Newspaper/Current%2C%202002-2004/2002/October%2014%2C%202002.pdf"
+          },
+          {
+            "title": "Riverfront Times — Haunted places",
+            "url": "https://www.riverfronttimes.com/haunted-places-st-louis/"
+          },
+          {
+            "title": "Payne-Gentry House — coordinate record",
+            "url": "https://en.wikipedia.org/wiki/Payne-Gentry_House"
+          }
+        ],
+        "sourceCheckedAt": "2026-11-17",
+        "reviewedAt": "2026-11-17",
+        "reviewStatus": "approved",
+        "verificationScope": "Sources document this place and its reported ghost-story tradition; paranormal claims are not established facts. Coordinate marks the venue or stated public reference point."
+      }
+    }
+  ]
+}

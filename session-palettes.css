@@ -1,4 +1,5 @@
-/* Independent menu palette in every map style. Data colors keep their meaning. */
+/* Dark basemaps use a dark menu palette; Light/Streets use a light palette.
+   The palette bootstrap remembers one selection per family in each document. */
 html[data-palette] body,
 html[data-palette] body[data-map-style] {
  --surface:var(--palette-surface); --surface-raised:var(--palette-raised);
@@ -79,7 +80,7 @@ html[data-palette] body .sky-now button[aria-pressed=true]:hover { background:co
 /* Keep the two transparent date inputs above their visible shared rail. */
 html[data-palette] body .date-range-control input.date-range-handle { background:none; border:0; }
 
-/* Menu tone follows the palette, never the basemap's brightness. */
+/* Native controls and illustrations follow the selected family's tone. */
 html[data-palette] body .brand-mark img { filter:none; }
 html[data-palette] body :is(select,.map-toolbar select) {
  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%2363736b' stroke-width='1.5'%3E%3Cpath d='m6 8 4 4 4-4'/%3E%3C/svg%3E");

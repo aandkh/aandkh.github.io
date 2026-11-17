@@ -1,4 +1,4 @@
-import {BY_ID} from './catalog.js?v=20261116-wildlife-heat';
+import {BY_ID} from './catalog.js?v=20261117-explore-layout';
 
 export const MIXED_CLUSTER_COLOR='#245dff';
 const RASTER_LAYERS=new Set(['radar','traffic','terrain','history','light','floodplains']);
