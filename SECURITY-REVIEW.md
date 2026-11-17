@@ -82,3 +82,9 @@ that every possible secret has been excluded.
 - https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html
 - https://github.com/maplibre/maplibre-gl-js/security/advisories/GHSA-jrc7-96c5-q579
 - https://github.com/maplibre/maplibre-gl-js/commit/1da69f3cd913a39fa948708e01478663bf48bc27
+
+Fallback OpenStreetMap tile images explicitly use `referrerPolicy: strict-origin`,
+which sends only the site origin required by the provider's tile policy
+(https://operations.osmfoundation.org/policies/tiles/). Paths, queries, shared
+fragments and credentials are not added. API requests and other page resources
+retain their existing no-referrer policy.

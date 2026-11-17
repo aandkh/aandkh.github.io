@@ -22,3 +22,5 @@ assert(!/script-src[^;]*(?:unsafe-inline|unsafe-eval|https:)/.test(policy));
 assert(html.indexOf('Content-Security-Policy')<html.indexOf('<script'));
 const app=fs.readFileSync(new URL('../app.js',import.meta.url),'utf8');assert(!app.includes('bindTooltip(f.properties.title)'));assert(app.includes("l.bindTooltip(el('span','',f.properties?.title||'Flood zone'))"));
 console.log('PASS: API traversal/scheme/credential/redirect guards; MapLibre consecutive-attribute regression; CSP and text-only flood tooltips.');
+
+assert.match(fs.readFileSync(new URL('../app.js',import.meta.url),'utf8'),/L\.tileLayer\(CONFIG\.tileUrl,\{[^}]*referrerPolicy:'strict-origin'/,'fallback tiles send only site origin required by provider, not map URL');

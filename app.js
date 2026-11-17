@@ -199,7 +199,7 @@ function applyMapStyle(style){
   else{if(baseLayer)map.removeLayer(baseLayer);baseLayer=L.maplibreGL({style:styleUrl,interactive:false,attributionControl:false});baseLayer.addTo(map);
    const layer=baseLayer,gl=layer.getMaplibreMap();gl.on('error',event=>{if(event.error?.name!=='AbortError'&&baseLayer===layer)$('#tile-warning').hidden=false;});gl.on('style.load',()=>{if(baseLayer===layer)$('#tile-warning').hidden=true;});
   }
- }catch{mapCredits.setBase(false);if(baseLayer)map.removeLayer(baseLayer);baseLayer=L.tileLayer(CONFIG.tileUrl,{maxZoom:19}).addTo(map);toast('Vector map unavailable. Showing the standard street map.');}
+ }catch{mapCredits.setBase(false);if(baseLayer)map.removeLayer(baseLayer);baseLayer=L.tileLayer(CONFIG.tileUrl,{maxZoom:19,referrerPolicy:'strict-origin',updateWhenIdle:true,keepBuffer:1}).addTo(map);toast('Vector map unavailable. Showing the standard street map.');}
  baseLayer?.getContainer?.()?.classList.add('andymap-base-layer');
  try{storage.setItem('andymap.style',mapStyle);}catch{}
 }
