@@ -19,3 +19,11 @@ NWS station metadata verifies C7014 at 38.445, -90.414 (CW7014 Arnold) and E1948
 Sources: https://api.weather.gov/stations/C7014 and https://api.weather.gov/stations/E1948 ; append `/observations?limit=6` for recent measurement history. Precise Lambert and Chesterfield coordinates use https://mesonet.agron.iastate.edu/geojson/network/MO_ASOS.geojson .
 
 Rejected alternatives: KCPS remained stale at November 13 16:53Z in IEM; Arnold/Fenton/Jefferson Barracks river stations had no temperature or wind, and southern MoDOT RWIS stations were inactive. Do not re-enable these merely because their station metadata exists.
+
+## November 17 missing latest-response values
+
+C7014 `/observations/latest` returned null temperature/wind at 11:50Z while
+`/observations?limit=6` supplied valid -1.11°C and calm for that same timestamp.
+After both existing mirrors finish, incomplete stations now try that bounded
+same-station collection before nearby substitutes. Original observation times
+and the two-hour expiration still apply; complete mirrors need no extra request.

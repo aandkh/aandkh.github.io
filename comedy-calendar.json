@@ -2446,6 +2446,29 @@
         ]
       },
       "properties": {
+        "id": "venue-comedy:helium:6a1b52b51a257fa9:2027-03-15T01:15:00+00:00",
+        "title": "Heroes Off Duty Presents: Scrubs & Badges LIVE!",
+        "start": "2027-03-15T01:15:00+00:00",
+        "expiresAt": "2027-03-15T00:00:00-05:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/395945",
+        "sourceCheckedAt": "2026-11-17T12:08:42.484839+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
         "id": "venue-comedy:helium:a1582284cb528d2d:2027-03-20T00:00:00+00:00",
         "title": "Tony Baker",
         "start": "2027-03-20T00:00:00+00:00",
@@ -2916,6 +2939,29 @@
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/377114",
         "sourceCheckedAt": "2026-11-16T12:33:20.803979+00:00",
+        "venueSource": "helium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3491,
+          38.6357
+        ]
+      },
+      "properties": {
+        "id": "venue-comedy:helium:f0dca47e760221e9:2027-04-23T00:30:00+00:00",
+        "title": "Eagle Witt",
+        "start": "2027-04-23T00:30:00+00:00",
+        "expiresAt": "2027-04-23T00:00:00-05:00",
+        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
+        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
+        "source": "Official Helium Comedy Club calendar",
+        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
+        "url": "https://st-louis.heliumcomedy.com/shows/395944",
+        "sourceCheckedAt": "2026-11-17T12:08:42.484839+00:00",
         "venueSource": "helium"
       }
     },

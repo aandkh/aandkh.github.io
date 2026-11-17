@@ -639,6 +639,345 @@
         "refreshGroup": "reviewed:arkadin",
         "coordinateSource": "US Census address geocoder"
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.305033,
+          38.6326416
+        ]
+      },
+      "properties": {
+        "id": "screening:hipointe:2026-11-20:16:00",
+        "title": "Fatherland",
+        "movieTitle": "Fatherland",
+        "venue": "Hi-Pointe Theatre",
+        "start": "2026-11-20T16:00:00-06:00",
+        "expiresAt": "2026-11-20T16:00:00-06:00",
+        "runtimeMinutes": 82,
+        "address": "Hi-Pointe Theatre, 1005 McCausland Ave, St. Louis, MO 63117",
+        "description": "Hi-Pointe Theatre · Official screening. Confirm availability on the theater page.",
+        "url": "https://hipointetheatre.org/movies/fatherland/",
+        "sourceUrl": "https://hipointetheatre.org/purchase/662801/",
+        "source": "Hi-Pointe Theatre · official calendar",
+        "sourceCheckedAt": "2026-11-17T12:11:06.863920+00:00",
+        "refreshGroup": "reviewed:hipointe"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.305033,
+          38.6326416
+        ]
+      },
+      "properties": {
+        "id": "screening:hipointe:2026-11-20:18:15",
+        "title": "Fatherland",
+        "movieTitle": "Fatherland",
+        "venue": "Hi-Pointe Theatre",
+        "start": "2026-11-20T18:15:00-06:00",
+        "expiresAt": "2026-11-20T18:15:00-06:00",
+        "runtimeMinutes": 82,
+        "address": "Hi-Pointe Theatre, 1005 McCausland Ave, St. Louis, MO 63117",
+        "description": "Hi-Pointe Theatre · Official screening. Confirm availability on the theater page.",
+        "url": "https://hipointetheatre.org/movies/fatherland/",
+        "sourceUrl": "https://hipointetheatre.org/purchase/662740/",
+        "source": "Hi-Pointe Theatre · official calendar",
+        "sourceCheckedAt": "2026-11-17T12:11:06.863920+00:00",
+        "refreshGroup": "reviewed:hipointe"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.305033,
+          38.6326416
+        ]
+      },
+      "properties": {
+        "id": "screening:hipointe:2026-11-21:16:00",
+        "title": "Fatherland",
+        "movieTitle": "Fatherland",
+        "venue": "Hi-Pointe Theatre",
+        "start": "2026-11-21T16:00:00-06:00",
+        "expiresAt": "2026-11-21T16:00:00-06:00",
+        "runtimeMinutes": 82,
+        "address": "Hi-Pointe Theatre, 1005 McCausland Ave, St. Louis, MO 63117",
+        "description": "Hi-Pointe Theatre · Official screening. Confirm availability on the theater page.",
+        "url": "https://hipointetheatre.org/movies/fatherland/",
+        "sourceUrl": "https://hipointetheatre.org/purchase/673992/",
+        "source": "Hi-Pointe Theatre · official calendar",
+        "sourceCheckedAt": "2026-11-17T12:11:06.863920+00:00",
+        "refreshGroup": "reviewed:hipointe"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.305033,
+          38.6326416
+        ]
+      },
+      "properties": {
+        "id": "screening:hipointe:2026-11-22:15:00",
+        "title": "Fatherland",
+        "movieTitle": "Fatherland",
+        "venue": "Hi-Pointe Theatre",
+        "start": "2026-11-22T15:00:00-06:00",
+        "expiresAt": "2026-11-22T15:00:00-06:00",
+        "runtimeMinutes": 82,
+        "address": "Hi-Pointe Theatre, 1005 McCausland Ave, St. Louis, MO 63117",
+        "description": "Hi-Pointe Theatre · Official screening. Confirm availability on the theater page.",
+        "url": "https://hipointetheatre.org/movies/fatherland/",
+        "sourceUrl": "https://hipointetheatre.org/purchase/662803/",
+        "source": "Hi-Pointe Theatre · official calendar",
+        "sourceCheckedAt": "2026-11-17T12:11:06.863920+00:00",
+        "refreshGroup": "reviewed:hipointe"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.305033,
+          38.6326416
+        ]
+      },
+      "properties": {
+        "id": "screening:hipointe:2026-11-22:19:30",
+        "title": "Fatherland",
+        "movieTitle": "Fatherland",
+        "venue": "Hi-Pointe Theatre",
+        "start": "2026-11-22T19:30:00-06:00",
+        "expiresAt": "2026-11-22T19:30:00-06:00",
+        "runtimeMinutes": 82,
+        "address": "Hi-Pointe Theatre, 1005 McCausland Ave, St. Louis, MO 63117",
+        "description": "Hi-Pointe Theatre · Official screening. Confirm availability on the theater page.",
+        "url": "https://hipointetheatre.org/movies/fatherland/",
+        "sourceUrl": "https://hipointetheatre.org/purchase/662804/",
+        "source": "Hi-Pointe Theatre · official calendar",
+        "sourceCheckedAt": "2026-11-17T12:11:06.863920+00:00",
+        "refreshGroup": "reviewed:hipointe"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.305033,
+          38.6326416
+        ]
+      },
+      "properties": {
+        "id": "screening:hipointe:2026-11-23:16:30",
+        "title": "Fatherland",
+        "movieTitle": "Fatherland",
+        "venue": "Hi-Pointe Theatre",
+        "start": "2026-11-23T16:30:00-06:00",
+        "expiresAt": "2026-11-23T16:30:00-06:00",
+        "runtimeMinutes": 82,
+        "address": "Hi-Pointe Theatre, 1005 McCausland Ave, St. Louis, MO 63117",
+        "description": "Hi-Pointe Theatre · Official screening. Confirm availability on the theater page.",
+        "url": "https://hipointetheatre.org/movies/fatherland/",
+        "sourceUrl": "https://hipointetheatre.org/purchase/662784/",
+        "source": "Hi-Pointe Theatre · official calendar",
+        "sourceCheckedAt": "2026-11-17T12:11:06.863920+00:00",
+        "refreshGroup": "reviewed:hipointe"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.305033,
+          38.6326416
+        ]
+      },
+      "properties": {
+        "id": "screening:hipointe:2026-11-23:18:30",
+        "title": "Fatherland",
+        "movieTitle": "Fatherland",
+        "venue": "Hi-Pointe Theatre",
+        "start": "2026-11-23T18:30:00-06:00",
+        "expiresAt": "2026-11-23T18:30:00-06:00",
+        "runtimeMinutes": 82,
+        "address": "Hi-Pointe Theatre, 1005 McCausland Ave, St. Louis, MO 63117",
+        "description": "Hi-Pointe Theatre · Official screening. Confirm availability on the theater page.",
+        "url": "https://hipointetheatre.org/movies/fatherland/",
+        "sourceUrl": "https://hipointetheatre.org/purchase/675479/",
+        "source": "Hi-Pointe Theatre · official calendar",
+        "sourceCheckedAt": "2026-11-17T12:11:06.863920+00:00",
+        "refreshGroup": "reviewed:hipointe"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.305033,
+          38.6326416
+        ]
+      },
+      "properties": {
+        "id": "screening:hipointe:2026-11-24:17:00",
+        "title": "Fatherland",
+        "movieTitle": "Fatherland",
+        "venue": "Hi-Pointe Theatre",
+        "start": "2026-11-24T17:00:00-06:00",
+        "expiresAt": "2026-11-24T17:00:00-06:00",
+        "runtimeMinutes": 82,
+        "address": "Hi-Pointe Theatre, 1005 McCausland Ave, St. Louis, MO 63117",
+        "description": "Hi-Pointe Theatre · Official screening. Confirm availability on the theater page.",
+        "url": "https://hipointetheatre.org/movies/fatherland/",
+        "sourceUrl": "https://hipointetheatre.org/purchase/662787/",
+        "source": "Hi-Pointe Theatre · official calendar",
+        "sourceCheckedAt": "2026-11-17T12:11:06.863920+00:00",
+        "refreshGroup": "reviewed:hipointe"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.305033,
+          38.6326416
+        ]
+      },
+      "properties": {
+        "id": "screening:hipointe:2026-11-20:20:00",
+        "title": "Raise the Red Lantern (4K Restoration)",
+        "movieTitle": "Raise the Red Lantern (4K Restoration)",
+        "venue": "Hi-Pointe Theatre",
+        "start": "2026-11-20T20:00:00-06:00",
+        "expiresAt": "2026-11-20T20:00:00-06:00",
+        "runtimeMinutes": 125,
+        "address": "Hi-Pointe Theatre, 1005 McCausland Ave, St. Louis, MO 63117",
+        "description": "Hi-Pointe Theatre · Official screening. Confirm availability on the theater page.",
+        "url": "https://hipointetheatre.org/movies/raise-the-red-lantern-4k-restoration/",
+        "sourceUrl": "https://hipointetheatre.org/purchase/675486/",
+        "source": "Hi-Pointe Theatre · official calendar",
+        "sourceCheckedAt": "2026-11-17T12:11:06.863920+00:00",
+        "refreshGroup": "reviewed:hipointe"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.305033,
+          38.6326416
+        ]
+      },
+      "properties": {
+        "id": "screening:hipointe:2026-11-21:13:00",
+        "title": "Raise the Red Lantern (4K Restoration)",
+        "movieTitle": "Raise the Red Lantern (4K Restoration)",
+        "venue": "Hi-Pointe Theatre",
+        "start": "2026-11-21T13:00:00-06:00",
+        "expiresAt": "2026-11-21T13:00:00-06:00",
+        "runtimeMinutes": 125,
+        "address": "Hi-Pointe Theatre, 1005 McCausland Ave, St. Louis, MO 63117",
+        "description": "Hi-Pointe Theatre · Official screening. Confirm availability on the theater page.",
+        "url": "https://hipointetheatre.org/movies/raise-the-red-lantern-4k-restoration/",
+        "sourceUrl": "https://hipointetheatre.org/purchase/662780/",
+        "source": "Hi-Pointe Theatre · official calendar",
+        "sourceCheckedAt": "2026-11-17T12:11:06.863920+00:00",
+        "refreshGroup": "reviewed:hipointe"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.305033,
+          38.6326416
+        ]
+      },
+      "properties": {
+        "id": "screening:hipointe:2026-11-22:17:00",
+        "title": "Raise the Red Lantern (4K Restoration)",
+        "movieTitle": "Raise the Red Lantern (4K Restoration)",
+        "venue": "Hi-Pointe Theatre",
+        "start": "2026-11-22T17:00:00-06:00",
+        "expiresAt": "2026-11-22T17:00:00-06:00",
+        "runtimeMinutes": 125,
+        "address": "Hi-Pointe Theatre, 1005 McCausland Ave, St. Louis, MO 63117",
+        "description": "Hi-Pointe Theatre · Official screening. Confirm availability on the theater page.",
+        "url": "https://hipointetheatre.org/movies/raise-the-red-lantern-4k-restoration/",
+        "sourceUrl": "https://hipointetheatre.org/purchase/662782/",
+        "source": "Hi-Pointe Theatre · official calendar",
+        "sourceCheckedAt": "2026-11-17T12:11:06.863920+00:00",
+        "refreshGroup": "reviewed:hipointe"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.305033,
+          38.6326416
+        ]
+      },
+      "properties": {
+        "id": "screening:hipointe:2026-11-23:20:15",
+        "title": "Raise the Red Lantern (4K Restoration)",
+        "movieTitle": "Raise the Red Lantern (4K Restoration)",
+        "venue": "Hi-Pointe Theatre",
+        "start": "2026-11-23T20:15:00-06:00",
+        "expiresAt": "2026-11-23T20:15:00-06:00",
+        "runtimeMinutes": 125,
+        "address": "Hi-Pointe Theatre, 1005 McCausland Ave, St. Louis, MO 63117",
+        "description": "Hi-Pointe Theatre · Official screening. Confirm availability on the theater page.",
+        "url": "https://hipointetheatre.org/movies/raise-the-red-lantern-4k-restoration/",
+        "sourceUrl": "https://hipointetheatre.org/purchase/675550/",
+        "source": "Hi-Pointe Theatre · official calendar",
+        "sourceCheckedAt": "2026-11-17T12:11:06.863920+00:00",
+        "refreshGroup": "reviewed:hipointe"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.26891256316,
+          38.579829477721
+        ]
+      },
+      "properties": {
+        "id": "screening:arkadin:2026-11-23:19:00",
+        "layer": "movies",
+        "title": "The Host",
+        "movieTitle": "The Host",
+        "venue": "Arkadin Cinema & Bar",
+        "address": "5228 Gravois Ave, St. Louis, MO 63116",
+        "start": "2026-11-23T19:00:00-06:00",
+        "expiresAt": "2026-11-23T19:00:00-06:00",
+        "url": "https://arkadincinema.com/event/bong-joon-hos-modern-monster-movie-classic-the-host-2006-20th-anniversary-re-release-2/",
+        "sourceUrl": "https://arkadincinema.com/event/bong-joon-hos-modern-monster-movie-classic-the-host-2006-20th-anniversary-re-release-2/",
+        "source": "Arkadin Cinema official calendar",
+        "sourceCheckedAt": "2026-11-17T12:11:06.863920+00:00",
+        "description": "Arkadin Cinema & Bar · Scheduled film screening",
+        "refreshGroup": "reviewed:arkadin",
+        "coordinateSource": "US Census address geocoder"
+      }
     }
   ],
   "note": "Manually reviewed official calendar facts. Automated refresh must not advance these verification timestamps without checking their source."

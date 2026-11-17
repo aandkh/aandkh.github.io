@@ -58,6 +58,13 @@ export async function metroWeatherReadings(readings=[],{now=Date.now(),fetcher=f
   const urls=station.iemId?[['iem','https://mesonet.agron.iastate.edu/json/current.py?network='+station.network+'&station='+station.iemId]]:[];
   if(station.network!=='MO_DCP')urls.push(['nws','https://api.weather.gov/stations/'+station.id+'/observations/latest']);
   await Promise.all(urls.map(async([kind,url])=>{const value=(kind==='iem'?mesonetObservation:stationObservation)(station,await sourceRead(url),now);candidates.push(value);changed();}));
+  // NWS /latest can omit fields present in the same station's recent collection.
+  // Finish both mirrors first so a complete IEM report needs no extra request.
+  if(station.network!=='MO_DCP'&&!complete(bestStationObservation(candidates.filter(r=>r.id===station.id),now))){
+   const sourceUrl='https://api.weather.gov/stations/'+station.id+'/observations?limit=6',history=await sourceRead(sourceUrl);
+   for(const feature of (Array.isArray(history?.features)?history.features:[]).slice(0,6))candidates.push({...stationObservation(station,feature,now),sourceUrl});
+   changed();
+  }
  }
  function reserve(){return reserves??=Promise.all(RESERVES.map(station=>complete(bestStationObservation(candidates.filter(r=>r.id===station.id),now))?Promise.resolve():load(station)));}
  const backend=typeof loadBackend==='function'?Promise.resolve().then(()=>loadBackend({signal})).then(result=>{addReadings(Array.isArray(result)?result:result?.readings);changed();}).catch(error=>{if(signal?.aborted)throw error;}):Promise.resolve();

@@ -25,3 +25,21 @@ const expired=await m.metroWeatherReadings([],{...options,now:now+3*3600000,fetc
 console.log('PASS: Lambert null-temperature rescue, station identity, actual timestamps, missing wind, regional fallback, backend outage and stale-cache expiry');
 
 const south=primaries.find(s=>s.id==='C7014');assert.equal(south.lat,38.445);assert.equal(south.lng,-90.414);const southBackup={id:'E1948',label:'Mehlville',lat:38.47667,lng:-90.3555,temperatureF:40,windMph:2,observedAt:at};const recovered=m.selectMetroReadings([...primaries.filter(s=>s.id!=='C7014'),southBackup],now);assert.equal(recovered[0].id,'E1948');assert.equal(recovered[0].replacementFor,'Arnold');assert.equal(recovered[0].lat,southBackup.lat);
+
+// The NWS latest endpoint can omit fields present in its recent collection.
+const calls=[];
+const historyFetcher=async url=>{
+ calls.push(url);
+ if(url.includes('/C7014/'))return{ok:true,json:async()=>url.includes('?limit=6')?{features:[{properties:{timestamp:at,temperature:{value:-1.11,unitCode:'wmoUnit:degC'},windSpeed:{value:0,unitCode:'wmoUnit:km_h-1'}}}]}:{properties:{timestamp:at,temperature:{value:null,unitCode:'wmoUnit:degC'},windSpeed:{value:null,unitCode:'wmoUnit:km_h-1'}}}};
+ return fetcher(url);
+};
+const sameStation=await m.metroWeatherReadings([],{now,fetcher:historyFetcher,responseCache:new Map(),observationCache:new Map()});
+assert.equal(sameStation[0].id,'C7014');
+assert.equal(sameStation[0].replacementFor,null);
+assert.equal(sameStation[0].observedAt,at);
+assert.equal(sameStation[0].sourceUrl,'https://api.weather.gov/stations/C7014/observations?limit=6');
+assert.equal(sameStation[0].windMph,0);
+assert.ok(Math.abs(sameStation[0].temperatureF-30.002)<0.01);
+assert.equal(calls.filter(u=>u.includes('/C7014/observations?limit=6')).length,1);
+assert.ok(!calls.some(u=>u.includes('/E1948/')||u.includes('station=SET')),'same-station recovery avoids reserve requests');
+console.log('PASS: missing latest NWS values recover from bounded same-station history');
