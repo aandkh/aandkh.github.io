@@ -1,6 +1,6 @@
 import {apiFetch,apiUrl} from './api-client.js?v=20261117-performance';
 import {appendForecastChart} from './forecast-visuals.js?v=20261116-full-speed';
-import {safeUrl} from './core.js?v=20261117-seasonal-stories';
+import {safeUrl} from './core.js?v=20261117-weather-suite';
 import {activeNotices} from './expansion-options.js?v=20261115-road-insights';
 const node=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;};
 const finite=Number.isFinite;
@@ -27,7 +27,7 @@ export function appendWeather(box,result,{format,selectedTime,onSelection}){
  if(w.uv)box.append(node('h3','sky-section-title','UV forecast'),node('p','',`Index ${w.uv.index} · ${w.uv.date} · ZIP ${w.uv.zip}`),node('p','sky-note','Solar-noon forecast for ZIP 63101, not a current reading at the map center.'));
  if(w.outlooks?.length){const d=details('Severe-weather outlook');for(const item of w.outlooks)d.append(node('p','',item.category),node('p','small',`${format(item.start)} to ${format(item.end)}`),link('Official outlook ↗',item.url));box.append(d);}
  if(w.stormReports?.length){const d=details('Storm reports · past 24 hours');for(const report of w.stormReports)d.append(node('p','',`${report.type} · ${report.location}`),node('p','small',format(report.time)),link('Official report source ↗',report.url));box.append(d);}
- box.append(node('p','sky-note','Forecasts and station observations are separate. Snow depth and a live lightning-strike feed are not connected.'));
+ box.append(node('p','sky-note','Forecasts and station observations are separate. The Weather map shows recent lightning density, not individual strike locations.'));
  return forecastChart;
 }
 export function appendSkyExtras(box,sky,{format}){

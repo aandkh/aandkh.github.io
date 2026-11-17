@@ -1648,7 +1648,7 @@ dialog.panel-draggable>:last-child { margin-bottom:16px; }
 /* A flagged spot gets a clean map without changing the selected layer set.
    Hide containers, so asynchronous tiles/markers stay hidden until mode exits.
    The base layer is tagged at creation; the inspection pin uses its own pane. */
-.map-shell.spot-mode #map .leaflet-map-pane>.leaflet-pane:not(.leaflet-tile-pane):not(.leaflet-spot-selection-pane),
+.map-shell.spot-mode #map .leaflet-map-pane>.leaflet-pane:not(.leaflet-tile-pane):not(.leaflet-spot-selection-pane):not(.leaflet-weather-alert-areas-pane):not(.leaflet-weather-alert-badges-pane),
 .map-shell.spot-mode #map .leaflet-tile-pane>:not(.andymap-base-layer),
 .map-shell.spot-mode>.weather-card-grid,
 .map-shell.spot-mode>#legend,
@@ -1747,3 +1747,24 @@ body.spot-inspection #map:active,.spot-inspection #map:active,.spot-mode #map:ac
   grid-column:2; grid-row:3; justify-self:end; margin:0;
   font-size:8.5px; line-height:10px; font-variant-numeric:tabular-nums;
 }
+
+
+/* weather-experience.css */
+.weather-options{padding:0 12px 10px}.weather-toggles{display:grid;gap:4px}.weather-toggles .sub-layer{display:flex;align-items:center;gap:8px;min-height:32px;margin:0;font-size:12px}.weather-toggles input{accent-color:var(--ink)}.weather-playback-choices{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.weather-playback-choices button{font-size:11px;margin:0;flex:1;white-space:nowrap}.lightning-scale{height:7px;margin:6px 0;background:linear-gradient(90deg,#ffc14b24,#ffae1680,#d87c00da)}.weather-warning-banner{position:absolute;z-index:850;top:136px;left:50%;transform:translateX(-50%);width:max-content;max-width:calc(100% - 110px);border:1px solid #a71923;border-radius:12px;background:#fff3f3;color:#941b23;box-shadow:0 2px 10px #0002;padding:3px}.weather-warning-banner[hidden]{display:none}.weather-warning-open{display:flex;align-items:center;gap:7px;text-align:left;color:inherit;background:transparent;border:0;padding:7px 10px;font-size:12px}.weather-warning-open strong{font-size:12px}.weather-warning-open>span:last-child{font-size:10px}.weather-warning-icon{display:grid;place-items:center;border-radius:50%;background:#b81624;color:white;min-width:24px;height:24px;font-weight:800;font-size:17px}.weather-warning-banner small{display:block;font-size:10px;padding:0 10px 5px}.weather-warning-unavailable{background:#fff8e8;color:#714e08;border-color:#bb9b56}.official-warning-detail{padding:12px;border:1px solid #d56970;border-radius:10px;background:color-mix(in srgb,var(--surface) 94%,#de1e36);margin:12px 0}.official-warning-detail h3{font-size:14px;margin:8px 0}.warning-instruction,.warning-headline{white-space:pre-line;line-height:1.55}.radar-heading .radar-switch{font-size:11px;padding:6px 9px;width:auto;white-space:nowrap}.radar-heading strong{flex:1}.observed-radar .radar-heading button{font-size:11px}.observed-radar-open .radar-launch{display:none}.weather-warning-banner~.floating{z-index:900}@media(max-width:600px){.weather-warning-banner{top:100px;max-width:calc(100% - 20px)}.weather-warning-open{flex-wrap:wrap;gap:5px;padding:5px 8px}.weather-warning-open>span:last-child{flex-basis:100%;padding-left:29px}.weather-warning-open strong{font-size:12px}.weather-warning-icon{min-width:20px;height:20px;font-size:15px}.radar-heading strong{font-size:13px}.radar-heading .radar-switch{padding:5px;font-size:10px}}
+
+
+/* weather-outlook.css */
+.weather-outlook{margin:16px 0;padding:12px;border:1px solid var(--line,#d9e2d6);border-radius:10px;color:var(--ink,#203d34);background:var(--surface-raised,#fff)}
+.weather-outlook .weather-outlook-title{font-size:15px;line-height:1.35;margin:0 0 7px;font-weight:750}
+.weather-outlook .weather-outlook-status,.weather-outlook .weather-outlook-note{font-size:11px;line-height:1.5;color:var(--muted,#53685c);margin:0 0 9px}
+.weather-outlook-day{border-top:1px solid var(--line,#d9e2d6)}
+.weather-outlook-day>summary{display:grid;grid-template-columns:64px minmax(0,1fr) 12px;gap:8px;align-items:start;padding:10px 0;cursor:pointer;list-style:none;min-height:44px;box-sizing:border-box}
+.weather-outlook-day>summary::-webkit-details-marker{display:none}.weather-outlook-day>summary::after{content:'+';font-size:17px;line-height:1.2;color:var(--muted,#53685c)}.weather-outlook-day[open]>summary::after{content:'−'}
+.weather-outlook-day>summary:focus-visible{outline:2px solid var(--accent,#245d45);outline-offset:3px;border-radius:3px}
+.weather-outlook-label{font-size:12px;font-weight:700;line-height:1.45}
+.weather-outlook-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.weather-outlook-period{display:flex;flex-direction:column;gap:2px;min-width:0;font-size:12px;line-height:1.35}.weather-outlook-period strong{font-size:13px;font-weight:650}
+.weather-outlook-condition{overflow-wrap:anywhere}.weather-outlook-rain,.weather-outlook-missing{font-size:10px;color:var(--muted,#53685c)}
+.weather-outlook-detail{padding:0 0 12px 72px}.weather-outlook-official+.weather-outlook-official{margin-top:12px}.weather-outlook .weather-outlook-official h4{font-size:12px;margin:0 0 4px}.weather-outlook .weather-outlook-official p{font-size:12px;line-height:1.5;margin:4px 0}.weather-outlook .weather-outlook-time,.weather-outlook .weather-outlook-wind{font-size:11px;color:var(--muted,#53685c)}
+.weather-outlook .weather-outlook-note{margin:10px 0 7px}.weather-outlook-source{font-size:11px;line-height:1.5}
+@media(max-width:480px){.weather-outlook{padding:10px}.weather-outlook-day>summary{grid-template-columns:55px minmax(0,1fr) 10px;gap:6px}.weather-outlook-pair{gap:7px}.weather-outlook-detail{padding-left:0}}

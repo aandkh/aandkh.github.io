@@ -1,5 +1,5 @@
 import {selectionFeatureId} from './selection-focus.js?v=20261117-close-selection';
-import {packMapBadges} from './map-badge-layout.js?v=20261117-performance';
+import {packMapBadges} from './map-badge-layout.js?v=20261117-weather-suite';
 // Cross-category place clustering. Cluster positions are weighted geographic
 // summaries of their members, never substitute coordinates for an actual place.
 const MAX_LAT=85.0511287798066;

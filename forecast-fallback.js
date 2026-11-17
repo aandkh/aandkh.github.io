@@ -1,4 +1,4 @@
-import {weatherJson,weatherAbort} from './weather-request.js?v=20261117-performance';
+import {weatherJson,weatherAbort} from './weather-request.js?v=20261117-weather-suite';
 import {knownNwsGrid} from './nws-grid-points.js?v=20261117-performance';
 
 // Direct public NWS fallback when the map API cannot supply its richer forecast.

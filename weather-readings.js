@@ -1,4 +1,4 @@
-import {getMapBadgeLayout} from './map-badge-layout.js?v=20261117-performance';
+import {getMapBadgeLayout} from './map-badge-layout.js?v=20261117-weather-suite';
 
 export const COMPACT_WEATHER_SIZE=Object.freeze({w:72,h:44});
 export function windPresentation(reading){

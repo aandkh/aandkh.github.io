@@ -46,6 +46,9 @@ try{
 for(const text of ['=WEBSERVICE("https://example.com")',' +1','\t=HYPERLINK("https://example.com")','\r=1','\n@SUM(1)','\u0000-1']){
  const csv=incidentCSV([{properties:{address:text}}]);assert(csv.includes('"\''+text.replaceAll('"','""')+'"'),'Spreadsheet formula prefixes are neutralized, including whitespace/control prefixes');
 }
-assert.equal(usableWildlifePhoto({license_code:'cc-by',attribution:'Photographer',medium_url:'https://user:pass@static.inaturalist.org/photo.jpg'}),null);
-assert.equal(usableWildlifePhoto({license_code:'cc-by',attribution:'Photographer',medium_url:'https://static.inaturalist.org/photo.jpg'}).url,'https://static.inaturalist.org/photo.jpg');
+const wildlifePhoto={id:123,license_code:'cc-by',attribution:'Photographer',medium_url:'https://static.inaturalist.org/photos/123/medium.jpg'};
+assert.equal(usableWildlifePhoto({...wildlifePhoto,medium_url:'https://user:pass@static.inaturalist.org/photos/123/medium.jpg'}),null);
+assert.equal(usableWildlifePhoto(wildlifePhoto).url,wildlifePhoto.medium_url);
+assert.equal(usableWildlifePhoto(wildlifePhoto).sourceUrl,'https://www.inaturalist.org/photos/123','Accepted photo retains its attribution source page');
+assert.equal(usableWildlifePhoto({...wildlifePhoto,id:undefined}),null,'An image without a source photo ID or native page is not publishable');
 console.log('PASS: malicious URL schemes/credentials/control characters/oversize inputs, feature DOM link boundaries, safe link preservation, and CSV formula neutralization.');

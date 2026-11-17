@@ -1,8 +1,8 @@
 // Shared screen-space reservations: controls → exact pins → traffic → places →
 // weather. Display placement never changes a source coordinate or map camera.
 const registries=new WeakMap();
-const PRIORITY={fixed:0,traffic:10,places:20,weather:30};
-const CONTROL_SELECTORS='#map-search,#quick-categories,#sidebar,#detail,#results,#legend,#environment-key,#map-resume,.map-toolbar,.radar-launch,.future-radar,.sky-cloud-controls,.map-attribution,.leaflet-control-zoom,.spot-explorer,dialog.notices-dialog,.aircraft-marker:not(.layout-badge),.place-selected,.vehicle-selection-ring';
+const PRIORITY={fixed:0,alerts:5,traffic:10,places:20,weather:30};
+const CONTROL_SELECTORS='#map-search,#quick-categories,#sidebar,#detail,#results,#legend,#environment-key,#map-resume,.map-toolbar,.radar-launch,.future-radar,.weather-warning-banner,.storm-motion-marker,.sky-cloud-controls,.map-attribution,.leaflet-control-zoom,.spot-explorer,dialog.notices-dialog,.aircraft-marker:not(.layout-badge),.place-selected,.vehicle-selection-ring';
 const valid=box=>box&&[box.x,box.y,box.w,box.h].every(Number.isFinite)&&box.w>0&&box.h>0;
 export const badgeRectangle=badge=>({x:badge.position[0]-badge.width/2,y:badge.position[1]-badge.height/2,w:badge.width,h:badge.height});
 export function rectanglesOverlap(a,b,gap=4){return a.x<b.x+b.w+gap&&a.x+a.w+gap>b.x&&a.y<b.y+b.h+gap&&a.y+a.h+gap>b.y;}

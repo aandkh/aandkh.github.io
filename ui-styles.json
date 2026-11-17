@@ -26,5 +26,7 @@
   "panel-drag.css",
   "global-search.css",
   "spot-explorer.css",
-  "weather-compact.css"
+  "weather-compact.css",
+  "weather-experience.css",
+  "weather-outlook.css"
 ]

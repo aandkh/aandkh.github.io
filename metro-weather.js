@@ -1,4 +1,4 @@
-import {weatherJson,weatherAbort} from './weather-request.js?v=20261117-performance';
+import {weatherJson,weatherAbort} from './weather-request.js?v=20261117-weather-suite';
 
 // Observation mirrors, not forecast substitutions. Keep each value tied to its
 // original station, timestamp and coordinates; a fetch never renews an observation.

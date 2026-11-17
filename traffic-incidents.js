@@ -1,5 +1,5 @@
-import {getMapBadgeLayout,badgeRectangle,badgeLeaderSegments} from './map-badge-layout.js?v=20261117-performance';
-import {layoutOverviewBadges} from './place-clusters.js?v=20261117-performance';
+import {getMapBadgeLayout,badgeRectangle,badgeLeaderSegments} from './map-badge-layout.js?v=20261117-weather-suite';
+import {layoutOverviewBadges} from './place-clusters.js?v=20261117-weather-suite';
 // Official MoDOT active traffic impacts. Incident duration is NOT driving delay.
 const TRAFFIC_LAYERS=new Set([0,5,9]);
 const TRAFFIC_STRINGS={DATA_ID:100,ROUTE:240,TRAVELWAY_NAME:240,TYPE_CODE:120,EXT_COMMENT:8000,LEVEL_OF_IMPACT_CODE:60,STATUS_CODE:30};

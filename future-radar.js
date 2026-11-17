@@ -1,5 +1,5 @@
 import {apiFetch} from './api-client.js?v=20261117-performance';
-import {loadWeatherForecast} from './forecast-fallback.js?v=20261117-performance';
+import {loadWeatherForecast} from './forecast-fallback.js?v=20261117-weather-suite';
 export function forecastFrames(init,now=Date.now()){
  const base=Date.parse(init),start=Math.ceil(now/3600000)*3600000;
  if(!Number.isFinite(base)||base>now||now-base>6*3600000)throw Error('The forecast radar source is out of date.');
@@ -42,13 +42,13 @@ export function trackRadarTiles(layer,{timeoutMs=18000,setTimer=setTimeout,clear
  begin();layer.on('loading',loading);layer.on('tileerror',error);layer.on('load',loaded);
  return{layer,get promise(){return promise;},get ready(){return ready;},cancel(){if(cancelled)return;cancelled=true;finish(Error('Cancelled'));clearTimer(timer);layer.off?.('loading',loading);layer.off?.('tileerror',error);layer.off?.('load',loaded);}};
 }
-export function createFutureRadar(map,{weatherReadings,onStart,onClose}){
- const shell=map.getContainer().parentElement,launch=document.createElement('button');launch.className='radar-launch';launch.textContent='▶';launch.title='Play forecast radar';launch.setAttribute('aria-label','Play forecast radar');shell.append(launch);
+export function createFutureRadar(map,{weatherReadings,onStart,onClose,onLaunch,onPast}){
+ const shell=map.getContainer().parentElement,launch=document.createElement('button');launch.className='radar-launch';launch.textContent='▶';launch.title=onLaunch?'Play weather radar':'Play forecast radar';launch.setAttribute('aria-label',launch.title);shell.append(launch);
  const panel=document.createElement('section');panel.className='future-radar';panel.hidden=true;panel.setAttribute('aria-label','Forecast radar playback');
  panel.innerHTML='<div class="radar-heading"><strong>Forecast radar</strong><button type="button" aria-label="Close forecast radar">×</button></div><div class="radar-controls"><button type="button" aria-label="Play forecast">▶</button><input type="range" min="0" max="24" value="0" aria-label="Forecast time"><output></output></div><small class="radar-status" role="status"></small><small>HRRR precipitation · NWS hourly wind & temperature</small>';
  shell.append(panel);const [close,play]=panel.querySelectorAll('button'),slider=panel.querySelector('input'),output=panel.querySelector('output'),status=panel.querySelector('.radar-status');
  let active=false,playing=false,timer,viewportFrame=0,frames=[],init='',series=[],index=0,displayed=-1,generation=0,session=0,warmed=false,restoreNotice='',cache=new Map();
- const clockFormat=new Intl.DateTimeFormat('en-US',{timeZone:'America/Chicago',hour:'numeric',minute:'2-digit',timeZoneName:'short'}),clock=t=>clockFormat.format(new Date(t));
+ const clockFormat=new Intl.DateTimeFormat('en-US',{timeZone:'America/Chicago',month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'}),clock=t=>clockFormat.format(new Date(t));
  const scrubber=createRadarScrubber({request:i=>{if(active)show(i);},onSeek:i=>{generation++;const time=clock(frames[i].time);status.textContent='Seeking '+time+'…';slider.setAttribute('aria-valuetext','Selected '+time+(displayed>=0?'; showing '+clock(frames[displayed].time):''));}});
  function pause(){scrubber.cancel();playing=false;clearTimeout(timer);play.textContent='▶';play.setAttribute('aria-label','Play forecast');}
  function clearFrames(){for(const entry of cache.values()){entry.cancel();entry.layer.remove();}cache.clear();}
@@ -86,7 +86,7 @@ export function createFutureRadar(map,{weatherReadings,onStart,onClose}){
  function start(){if(!active)return activate();}
  function getState(){const time=active&&displayed>=0?frames[displayed]?.time:null;return{active,time:Number.isFinite(time)?new Date(time).toISOString():null,playing:active&&playing};}
  function restoreState(state){if(!state||state.active!==true){if(active)stop();return Promise.resolve();}return activate({time:state.time,autoplay:false,restoring:true});}
- launch.onclick=start;launch.addEventListener('pointerenter',warm,{once:true});launch.addEventListener('focus',warm,{once:true});close.onclick=stop;play.onclick=()=>{restoreNotice='';scrubber.cancel();if(playing)pause();else{index=Number(slider.value);playing=true;play.textContent='Ⅱ';play.setAttribute('aria-label','Pause forecast');show(index===frames.length-1?0:index);}};
+ launch.onclick=onLaunch||start;if(!onLaunch){launch.addEventListener('pointerenter',warm,{once:true});launch.addEventListener('focus',warm,{once:true});}if(onPast){const past=document.createElement('button');past.type='button';past.textContent='Past hour';past.className='radar-switch';past.onclick=onPast;panel.querySelector('.radar-heading').insertBefore(past,close);}close.onclick=stop;play.onclick=()=>{restoreNotice='';scrubber.cancel();if(playing)pause();else{index=Number(slider.value);playing=true;play.textContent='Ⅱ';play.setAttribute('aria-label','Pause forecast');show(index===frames.length-1?0:index);}};
  slider.oninput=()=>{restoreNotice='';pause();scrubber.seek(Number(slider.value));};slider.onchange=()=>{restoreNotice='';pause();scrubber.commit(Number(slider.value));};document.addEventListener('visibilitychange',()=>{if(document.hidden){pause();if(!active)clearFrames();}});
  map.on('movestart',()=>{if(active){generation++;pause();}});map.on('moveend',()=>{cancelAnimationFrame(viewportFrame);viewportFrame=0;if(active&&!slider.disabled){viewportFrame=requestAnimationFrame(()=>{viewportFrame=0;if(active)show(index);});}else if(!active&&cache.size)clearFrames();});
  return{start,stop,warm,getState,restoreState,refreshStations,get active(){return active;}};

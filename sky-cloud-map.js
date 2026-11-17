@@ -15,9 +15,9 @@ export function skyTimeSelection(times,time){
  let target=times[0];if(Number.isFinite(requested))for(const candidate of times)if(Math.abs(candidate-requested)<Math.abs(target-requested))target=candidate;
  return{time:target,adjusted:time!=null&&(!Number.isFinite(requested)||target!==requested)};
 }
-export function createSkyCloudMap(map,{beforeOpen,format}){
+export function createSkyCloudMap(map,{beforeOpen,format,onClose=()=>{}}){
  let group=null,controller=null,session=0,selectedTime=null,lastSky=null,pendingRestore=null;const drawing=createSkyDrawScheduler();const panel=document.createElement('section');panel.className='sky-cloud-controls';panel.hidden=true;panel.setAttribute('aria-label','Tonight’s viewing map');map.getContainer().parentElement.append(panel);L.DomEvent.disableClickPropagation(panel);L.DomEvent.disableScrollPropagation(panel);
- function close(){session++;drawing.cancel();controller?.abort();group?.remove();group=null;panel.hidden=true;selectedTime=null;pendingRestore=null;}
+ function close(){const wasActive=!panel.hidden;session++;drawing.cancel();controller?.abort();group?.remove();group=null;panel.hidden=true;selectedTime=null;pendingRestore=null;if(wasActive)onClose();}
  async function open(sky,restored=pendingRestore){
   close();lastSky=sky;beforeOpen();const run=++session;controller=new AbortController();const signal=controller.signal;group=L.layerGroup().addTo(map);panel.hidden=false;panel.replaceChildren();
   const head=node('div','','radar-heading'),title=node('strong','Tonight’s viewing map'),exit=node('button','×');exit.setAttribute('aria-label','Close viewing map');exit.onclick=close;head.append(title,exit);

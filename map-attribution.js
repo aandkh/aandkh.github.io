@@ -1,10 +1,11 @@
 // Keep provider-required credits on the map; longer notices stay one click away.
-export function mapCreditItems({vector=true,traffic=false,floodplains=false,year=new Date().getFullYear()}={}){
+export function mapCreditItems({vector=true,traffic=false,floodplains=false,weather=false,year=new Date().getFullYear()}={}){
  const items=[];
  if(vector)items.push({text:'© OpenMapTiles',url:'https://openmaptiles.org/'});
  items.push({text:'© OpenStreetMap contributors',url:'https://www.openstreetmap.org/copyright'});
  if(traffic)items.push({text:'© '+year+' TomTom',url:'/map-credits.html#traffic'});
  if(floodplains)items.push({text:'FEMA / Esri',url:'/map-credits.html#floodplains'});
+ if(weather)items.push({text:"Source: SSEC RealEarth, UW-Madison",url:"/map-credits.html#weather"});
  return items;
 }
 export function installMapCredits(map,{layers=[]}={}){
@@ -22,7 +23,7 @@ export function installMapCredits(map,{layers=[]}={}){
  map.on('click movestart',()=>{info.open=false;});
  let vector=true,selected=[];
  function render(){
-  line.replaceChildren(...mapCreditItems({vector,traffic:selected.includes('traffic'),floodplains:selected.includes('floodplains')}).map(item=>link(item.text,item.url)));
+  line.replaceChildren(...mapCreditItems({vector,traffic:selected.includes('traffic'),floodplains:selected.includes('floodplains'),weather:selected.includes('radar')}).map(item=>link(item.text,item.url)));
   sourceList.replaceChildren();
   for(const layer of layers.filter(l=>selected.includes(l.id))){const li=document.createElement('li');li.append(document.createTextNode(layer.name+': '),link(layer.source,layer.url));sourceList.append(li);}
   if(!sourceList.children.length){const li=document.createElement('li');li.textContent='OpenStreetMap map data'+(vector?' · OpenMapTiles schema · OpenFreeMap tiles':'');sourceList.append(li);}

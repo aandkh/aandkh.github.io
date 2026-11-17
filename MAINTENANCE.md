@@ -94,3 +94,21 @@ tracking scripts are needed for these product analytics.
 Publish only intended source/data files, never `.preview`, `.openai`, temporary
 reports, Python bytecode or private download caches. Check GitHub Pages deployment
 and verify the live entry version and changed flow before reporting completion.
+
+## Weather experience
+
+Read WEATHER-CLOUDS.md, WEATHER-LIGHTNING.md, WEATHER-ALERTS.md,
+STORM-MOTION.md, OBSERVED-RADAR.md, RADAR-METADATA.md and WEATHER-OUTLOOK.md before changing these feeds.
+Current clouds/lightning/motion must pause during past/future radar, winter forecast,
+spot inspection and the sky viewing map. Serious Actual NWS warnings remain active
+even when Weather is unchecked. Show complete official warning instructions,
+retain unexpired warnings with a delayed notice during outages, and never invent a
+point location for a warning area. Radar observations and forecasts have separate times.
+
+Validate weather changes with weather-clouds-test, weather-lightning-test,
+weather-alerts-test, storm-motion-test, observed-radar-test, weather-outlook-test,
+weather-integration-test, radar-metadata-test and weather-share-state-test in scripts/ (Node .mjs),
+plus full-view-app-test, full-view-state-test and the required checks above.
+Review real clear-sky feeds and isolated, clearly marked warning fixtures; never
+ship synthetic active warnings. Keep all current overlays and source timestamps
+independent so a slow or failed feed cannot block the others.

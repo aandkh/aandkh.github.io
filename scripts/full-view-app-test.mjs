@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import {cleanState,REGION} from '../core.js';
 import {cleanLayerModes,cleanOverlayOpacity} from '../expansion-options.js';
 import {BY_ID} from '../catalog.js';
+import {cleanWeatherLayers} from '../share-view-state.js';
 
 // Run the production capture/apply/rehydration functions, replacing only the
 // browser, map renderer and network edges. This checks integration semantics,
@@ -18,7 +19,7 @@ function harness(){
  const listeners=new Map(),nodes=new Map(),calls=[],classes=new Set();
  const node=id=>{if(!nodes.has(id)){const ownClasses=new Set();nodes.set(id,{hidden:true,value:'',scrollTop:0,dataset:{},checked:false,setAttribute(key,value){this[key]=value;},classList:{contains:key=>ownClasses.has(key),add:(...keys)=>keys.forEach(key=>ownClasses.add(key)),remove:(...keys)=>keys.forEach(key=>ownClasses.delete(key))}});}return nodes.get(id);};
  const document={body:{classList:{contains:x=>classes.has(x),remove:(...xs)=>xs.forEach(x=>classes.delete(x)),toggle:(x,on)=>on?classes.add(x):classes.delete(x)}},querySelectorAll:()=>[],addEventListener:(type,handler)=>listeners.set(type,handler)};
- const context=vm.createContext({assert,document,$:node,console,Date,AbortSignal,REGION,BY_ID,cleanLayerModes,cleanOverlayOpacity,cleanState:s=>cleanState(plain(s)),requestAnimationFrame:fn=>fn(),calls,Promise});
+ const context=vm.createContext({assert,document,$:node,console,Date,AbortSignal,REGION,BY_ID,cleanLayerModes,cleanOverlayOpacity,cleanWeatherLayers:value=>cleanWeatherLayers(plain(value)),cleanState:s=>cleanState(plain(s)),requestAnimationFrame:fn=>fn(),calls,Promise});
  vm.runInContext(`
   const enabled=new Set(),requestedLayers=new Set(),data=new Map(),todayAdded=new Set(),parkFilters=new Set(),eventDateRanges=new Map(),openLayerGroups=new Map(),selectedLayerGroups=new Map(),resultLimits=new Map();
   let todayOnly=false,openNow=false,mapStyle='dark',radarMode='intensity',airMode='pm25',layerModes={},overlayOpacity={},focus=null,imageryDate='2025-10-15',historyView='events',historyCategory='all',historyEra='all',historyYears=null,historySort='oldest',historyAncientWildlife=false,historyFossilGroup='all',wildlifeOptions={},crimeTypes=[],crimeSort='low',cyclingSort='distance',joyrideSort='distance',parkSort='distance',weatherTarget=null,forecastSelectedTime=null,skySelectedBody=null,currentResultsLayer=null,layerFilter='all',featuredOptionsOpen=false,detailExpanded=false,routeHighlight=null;
@@ -26,6 +27,8 @@ function harness(){
   const map={center:[38.63,-90.4],zoom:11,setView(c,z){this.center=[...c];this.zoom=z;calls.push(['camera',...c,z]);},getCenter(){return {lat:this.center[0],lng:this.center[1]};},getZoom(){return this.zoom;},invalidateSize(){}};
   const weatherReadings={stopOverview(){calls.push(['stop-weather-overview']);}};
   const futureRadar={active:false,state:{active:false,time:null},getState(){return this.state;},stop(){this.active=false;this.state={active:false,time:null};calls.push(['stop-radar']);},restoreState(s){this.state=s;this.active=s.active;calls.push(['radar',s]);}};
+  const observedRadar={active:false,state:{active:false,time:null},getState(){return this.state;},stop(){this.active=false;this.state={active:false,time:null};calls.push(['stop-observed-radar']);},restoreState(s){this.state=s;this.active=s.active;calls.push(['observed-radar',s]);}};
+  const weatherExperience={preferences:{clouds:true,lightning:true,motion:true},getPreferences(){return {...this.preferences};},setPreferences(value){this.preferences=cleanWeatherLayers(value);calls.push(['weather-preferences',{...this.preferences}]);}};
   const skyCloudMap={state:{active:false,time:null},getState(){return this.state;},close(){this.state={active:false,time:null};},restoreState(s,sky){this.state=s;calls.push(['sky-cloud',s,!!sky]);}};
   let spotMode=false;const spotUI={point:null};function setSpotMode(on){spotMode=on;if(!on)spotUI.point=null;calls.push(['spot-mode',on]);}function inspectSpot(point){spotUI.point={...point};calls.push(['inspect-spot',point]);}
   const mapKey={toggle:{expanded:'false',getAttribute(){return this.expanded;},click(){this.expanded=this.expanded==='true'?'false':'true';}}};
@@ -73,6 +76,16 @@ const second={...base,layers:['traffic'],center:[38.7,-90.5],zoom:10,view:{panel
 h.apply(second);saved=h.state();
 assert.deepEqual(saved.explore,cleanState(second).explore,'Second link cannot inherit previous filters, station, comfort, sky or incident period');
 assert.equal(saved.wildlifeOptions.taxonId,undefined);assert.deepEqual(saved.layers,['traffic']);assert.equal(saved.view.panel,'map');assert.equal(saved.view.search,'');assert.equal(saved.view.resultsLayer,null);assert.equal(saved.view.resultsScroll,0);assert.equal(saved.view.radar.active,false);assert.equal(h.run('skyNowState.secretPreviousField'),undefined);assert(h.calls.some(c=>c[0]==='stop-radar'));
+
+// Observed playback and future forecasts have separate absolute selections.
+// Applying either view stops the old player before it restores the new one.
+const past=harness(),pastState={...base,explore:{weatherLayers:{clouds:false,lightning:true,motion:false}},view:{panel:'observed-radar',observedRadar:{active:true,time:'2026-11-17T08:10:00-06:00',playing:true}}};
+past.run("futureRadar.active=true;futureRadar.state={active:true,time:'2026-11-17T17:00:00Z'};");past.apply(pastState);let pastSaved=past.state();
+assert.equal(pastSaved.view.panel,'observed-radar');assert.deepEqual(pastSaved.view.observedRadar,{active:true,time:'2026-11-17T14:10:00.000Z'});assert.equal(pastSaved.view.radar.active,false);assert.deepEqual(pastSaved.explore.weatherLayers,pastState.explore.weatherLayers);assert.deepEqual(pastSaved.center,base.center);
+assert(past.calls.findIndex(c=>c[0]==='stop-radar')<past.calls.findIndex(c=>c[0]==='observed-radar'),'prior forecast stops before past playback restoration');
+assert(past.calls.findIndex(c=>c[0]==='weather-preferences')<past.calls.findIndex(c=>c[0]==='layer'&&c[1]==='radar'&&c[2]),'shared preferences apply before Weather loads');
+past.apply({...base,view:{panel:'radar',radar:{active:true,time:'2026-11-17T17:00:00Z'}}});pastSaved=past.state();assert.equal(pastSaved.view.panel,'radar');assert.equal(pastSaved.view.observedRadar.active,false);assert.equal(pastSaved.view.radar.time,'2026-11-17T17:00:00.000Z');assert.deepEqual(pastSaved.explore.weatherLayers,{clouds:true,lightning:true,motion:true});assert(past.calls.some(c=>c[0]==='stop-observed-radar'));
+past.apply(pastState);past.apply(second);pastSaved=past.state();assert.equal(pastSaved.view.observedRadar.active,false);assert.equal(pastSaved.view.radar.active,false);assert.equal(pastSaved.view.panel,'map');assert.deepEqual(pastSaved.explore.weatherLayers,{clouds:true,lightning:true,motion:true},'plain old links reset prior weather choices');
 
 const fossil={...base,layers:['history','traffic','radar'],todayOnly:true,openNow:true,focus:{id:'fossil-1',layer:'history',lat:38.61,lng:-90.32,title:'Mastodon'},historyAncientWildlife:true,historyFossilGroup:'Mammals',historyEra:'prehistory',historyYears:[-500000000,-10000],view:{panel:'detail',detailExpanded:true}};
 const f=harness();f.apply(fossil);saved=f.state();assert.deepEqual(saved.layers,fossil.layers);assert(saved.todayOnly&&saved.openNow,'A focused full view must retain both explicit discovery filters');assert.deepEqual(saved.center,fossil.center);assert.equal(saved.zoom,fossil.zoom);assert.deepEqual(saved.historyYears,fossil.historyYears);assert.equal(saved.historyFossilGroup,'Mammals');assert(f.calls.filter(c=>c[0]==='detail').every(c=>c[5]===true),'Restored details must request preservation of the saved camera');

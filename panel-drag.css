@@ -65,7 +65,7 @@ dialog.panel-draggable>:last-child { margin-bottom:16px; }
 /* A flagged spot gets a clean map without changing the selected layer set.
    Hide containers, so asynchronous tiles/markers stay hidden until mode exits.
    The base layer is tagged at creation; the inspection pin uses its own pane. */
-.map-shell.spot-mode #map .leaflet-map-pane>.leaflet-pane:not(.leaflet-tile-pane):not(.leaflet-spot-selection-pane),
+.map-shell.spot-mode #map .leaflet-map-pane>.leaflet-pane:not(.leaflet-tile-pane):not(.leaflet-spot-selection-pane):not(.leaflet-weather-alert-areas-pane):not(.leaflet-weather-alert-badges-pane),
 .map-shell.spot-mode #map .leaflet-tile-pane>:not(.andymap-base-layer),
 .map-shell.spot-mode>.weather-card-grid,
 .map-shell.spot-mode>#legend,

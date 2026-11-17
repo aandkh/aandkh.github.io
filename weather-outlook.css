@@ -1,0 +1,14 @@
+.weather-outlook{margin:16px 0;padding:12px;border:1px solid var(--line,#d9e2d6);border-radius:10px;color:var(--ink,#203d34);background:var(--surface-raised,#fff)}
+.weather-outlook .weather-outlook-title{font-size:15px;line-height:1.35;margin:0 0 7px;font-weight:750}
+.weather-outlook .weather-outlook-status,.weather-outlook .weather-outlook-note{font-size:11px;line-height:1.5;color:var(--muted,#53685c);margin:0 0 9px}
+.weather-outlook-day{border-top:1px solid var(--line,#d9e2d6)}
+.weather-outlook-day>summary{display:grid;grid-template-columns:64px minmax(0,1fr) 12px;gap:8px;align-items:start;padding:10px 0;cursor:pointer;list-style:none;min-height:44px;box-sizing:border-box}
+.weather-outlook-day>summary::-webkit-details-marker{display:none}.weather-outlook-day>summary::after{content:'+';font-size:17px;line-height:1.2;color:var(--muted,#53685c)}.weather-outlook-day[open]>summary::after{content:'−'}
+.weather-outlook-day>summary:focus-visible{outline:2px solid var(--accent,#245d45);outline-offset:3px;border-radius:3px}
+.weather-outlook-label{font-size:12px;font-weight:700;line-height:1.45}
+.weather-outlook-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.weather-outlook-period{display:flex;flex-direction:column;gap:2px;min-width:0;font-size:12px;line-height:1.35}.weather-outlook-period strong{font-size:13px;font-weight:650}
+.weather-outlook-condition{overflow-wrap:anywhere}.weather-outlook-rain,.weather-outlook-missing{font-size:10px;color:var(--muted,#53685c)}
+.weather-outlook-detail{padding:0 0 12px 72px}.weather-outlook-official+.weather-outlook-official{margin-top:12px}.weather-outlook .weather-outlook-official h4{font-size:12px;margin:0 0 4px}.weather-outlook .weather-outlook-official p{font-size:12px;line-height:1.5;margin:4px 0}.weather-outlook .weather-outlook-time,.weather-outlook .weather-outlook-wind{font-size:11px;color:var(--muted,#53685c)}
+.weather-outlook .weather-outlook-note{margin:10px 0 7px}.weather-outlook-source{font-size:11px;line-height:1.5}
+@media(max-width:480px){.weather-outlook{padding:10px}.weather-outlook-day>summary{grid-template-columns:55px minmax(0,1fr) 10px;gap:6px}.weather-outlook-pair{gap:7px}.weather-outlook-detail{padding-left:0}}
