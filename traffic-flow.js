@@ -12,7 +12,11 @@ export function trafficTileURL(template,coords,frame){
 export function createTrafficTileQueue({url,onStatus=()=>{},createImage=()=>new Image(),now=Date.now,schedule=setTimeout,cancel=clearTimeout,concurrency=6}={}){
  const tiles=new Map(),queue=[];let active=0,frame=Math.floor(now()/TRAFFIC_FLOW_INTERVAL),stopped=false,pumpTimer=null;
  function status(){let pending=0,failed=0,retained=0,available=0;for(const tile of tiles.values()){if(tile.receivedAt!==null)available++;if(tile.queued||tile.running)pending++;if(tile.failed)failed++;if(tile.failed&&tile.receivedAt!==null)retained++;}onStatus({pending,failed,retained,status:failed?(available?'partial':'error'):pending?'loading':'ready'});}
- function expire(tile){if(tile.receivedAt!==null&&now()-tile.receivedAt>=RETAIN_MS){tile.clear();tile.receivedAt=null;}}
+ function expire(tile){if(tile.receivedAt!==null&&now()-tile.receivedAt>=RETAIN_MS){cancel(tile.expiryTimer);tile.expiryTimer=null;tile.clear();tile.receivedAt=null;tile.failed=true;}}
+ function armExpiry(tile){
+  cancel(tile.expiryTimer);
+  tile.expiryTimer=schedule(()=>{tile.expiryTimer=null;if(tiles.get(tile.key)!==tile)return;expire(tile);status();},RETAIN_MS);
+ }
  function enqueue(tile){if(stopped||tile.queued||tile.running||!tiles.has(tile.key))return;tile.queued=true;queue.push(tile);}
  function pump(){
   if(stopped)return;
@@ -38,7 +42,7 @@ export function createTrafficTileQueue({url,onStatus=()=>{},createImage=()=>new 
    if(finished)return;attempt++;image=createImage();image.referrerPolicy='no-referrer';image.decoding='async';
    image.onload=()=>{
     if(finished||!tiles.has(tile.key))return;
-    try{tile.paint(image);tile.receivedAt=now();complete(null);}catch(error){complete(error);}
+    try{tile.paint(image);tile.receivedAt=now();armExpiry(tile);complete(null);}catch(error){complete(error);}
    };
    image.onerror=()=>{
     cleanImage();if(attempt<2){retryTimer=schedule(load,500);return;}
@@ -50,9 +54,9 @@ export function createTrafficTileQueue({url,onStatus=()=>{},createImage=()=>new 
   load();
  }
  function add(key,coords,{paint,clear,done}){
-  remove(key);stopped=false;const tile={key,coords:{...coords},paint,clear,done,receivedAt:null,frame:null,failed:false,settled:false,queued:false,running:false,stop:null};tiles.set(key,tile);enqueue(tile);pump();status();
+  remove(key);stopped=false;const tile={key,coords:{...coords},paint,clear,done,receivedAt:null,frame:null,failed:false,settled:false,queued:false,running:false,stop:null,expiryTimer:null};tiles.set(key,tile);enqueue(tile);pump();status();
  }
- function remove(key){const tile=tiles.get(key);if(!tile)return;tiles.delete(key);tile.queued=false;tile.stop?.();status();}
+ function remove(key){const tile=tiles.get(key);if(!tile)return;tiles.delete(key);cancel(tile.expiryTimer);tile.expiryTimer=null;tile.queued=false;tile.stop?.();status();}
  function refresh(){
   const nextFrame=Math.floor(now()/TRAFFIC_FLOW_INTERVAL);frame=nextFrame;
   for(const tile of tiles.values()){expire(tile);if(tile.frame!==frame||tile.failed)enqueue(tile);}

@@ -1,4 +1,4 @@
-import {createTrafficFlowLayer} from './traffic-flow.js?v=20261117-performance';
+import {createTrafficFlowLayer} from './traffic-flow.js?v=20261117-performance2';
 import {referenceLayer,referenceLayerFile} from './reference-layers.js?v=20261117-performance';
 import {selectionAnchor,selectionFeatureId} from './selection-focus.js?v=20261117-close-selection';
 import {createSpotExplorer} from './spot-explorer.js?v=20261117-seasonal-stories';
@@ -489,7 +489,7 @@ async function loadLayer(id,{force=false}={}){
  requests.get(id)?.abort();const controller=new AbortController();controller._requestKey=requestKey;let completeRequest;controller.done=new Promise(resolve=>completeRequest=resolve);requests.set(id,controller);
  data.set(id,{...data.get(id),_hoursStatus:data.get(id)?._hoursStatus||data.get(id)?.status,status:'loading'});queueLayerUI(id);
  const finishWait=startMeasurement('layer:'+id,'request-and-decode');
- if(id==='traffic'&&!drawn.has(id))raster(id);
+ if(id==='traffic'){const flow=drawn.get(id);if(flow)flow.refresh();else raster(id);}
  const commit=result=>{
   if(!enabled.has(id)||requests.get(id)!==controller||controller.signal.aborted)return false;
   if(data.get(id)===result)return true;
@@ -497,7 +497,7 @@ async function loadLayer(id,{force=false}={}){
   const retainHeat=id==='wildlife'&&wildlifeOptions.mapView!=='reports'&&drawn.get(id)?.wildlifeHeatKey===wildlifeHeatKey(wildlifeQuery({...defaultWildlifeOptions(),...(result.query||wildlifeOptions)}));
   const retainTraffic=id==='traffic'&&result.raster&&drawn.has(id);
   if(!retainHeat&&!retainTraffic)removeDrawing(id);
-  if(retainTraffic)drawn.get(id).refresh();else if(result.raster)raster(id);else if(id==='wildlife'||id==='floodplains'&&result.status!=='unavailable'||!['sky','weather'].includes(id)&&result.features?.length)drawFeatures(id,result);
+  if(!retainTraffic){if(result.raster)raster(id);else if(id==='wildlife'||id==='floodplains'&&result.status!=='unavailable'||!['sky','weather'].includes(id)&&result.features?.length)drawFeatures(id,result);}
   queueLayerUI(id);if(id==='parks')enrichParkBackground(result);return true;
  };
  try{

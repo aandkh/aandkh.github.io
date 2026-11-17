@@ -66,14 +66,15 @@ test('Saved reference places become visible before the remote response, then mer
 test('Configured traffic is available before capabilities and begins drawing before metadata resolves',async()=>{
  const h=fixture();assert(h.selectable('traffic'),'the initial capabilities request is not a gate');h.context.capabilities.traffic=false;assert(!h.selectable('traffic'),'explicit source unavailability is respected');h.context.capabilities={};
  const work=h.load('traffic');assert.equal(h.createdTraffic.length,1);const drawing=h.drawn.get('traffic');assert.equal(h.remote.length,1);assert(h.requests.has('traffic'));
- h.remote[0].resolve({id:'traffic',status:'live',raster:true,features:[]});await work;assert.equal(h.drawn.get('traffic'),drawing);assert.equal(h.createdTraffic.length,1);assert.equal(drawing.refreshes,1);
- const refresh=h.load('traffic',{force:true});assert.equal(h.drawn.get('traffic'),drawing);assert.equal(h.createdTraffic.length,1,'refresh does not blank or reconstruct the traffic layer');
- h.remote[1].resolve({id:'traffic',status:'live',raster:true,features:[]});await refresh;assert.equal(h.drawn.get('traffic'),drawing);assert.equal(drawing.refreshes,2);assert(!h.removed.includes('traffic'));
+ h.remote[0].resolve({id:'traffic',status:'live',raster:true,features:[]});await work;assert.equal(h.drawn.get('traffic'),drawing);assert.equal(h.createdTraffic.length,1);assert.equal(drawing.refreshes,0);
+ const refresh=h.load('traffic',{force:true});assert.equal(h.drawn.get('traffic'),drawing);assert.equal(h.createdTraffic.length,1,'refresh does not blank or reconstruct the traffic layer');assert.equal(drawing.refreshes,1,'flow refresh starts before the metadata response');
+ h.remote[1].resolve({id:'traffic',status:'live',raster:true,features:[]});await refresh;assert.equal(h.drawn.get('traffic'),drawing);assert.equal(drawing.refreshes,1);assert(!h.removed.includes('traffic'));
 });
 
 test('Traffic metadata failure keeps existing imagery; disabling a place layer blocks late paints',async()=>{
  const traffic=fixture(),work=traffic.load('traffic'),drawing=traffic.drawn.get('traffic');traffic.remote[0].reject(Error('Metadata timed out'));await work;
  assert.equal(traffic.drawn.get('traffic'),drawing);assert.equal(traffic.data.get('traffic').status,'partial');assert.equal(traffic.data.get('traffic').raster,true);assert.match(traffic.data.get('traffic').note,/metadata could not load/);
+ const next=traffic.load('traffic',{force:true});assert.equal(drawing.refreshes,1,'metadata failure does not block the next flow refresh');traffic.remote[1].reject(Error('Still down'));await next;assert.equal(traffic.drawn.get('traffic'),drawing);
  const places=fixture(),pending=places.load();await tick();places.enabled.delete('restaurants');places.requests.get('restaurants').abort();places.drawn.delete('restaurants');const before=places.draws.length;
  places.remote[0].resolve(result('restaurants',['late-place']));await pending;await tick();assert.equal(places.draws.length,before);assert(!places.drawn.has('restaurants'));
 });
