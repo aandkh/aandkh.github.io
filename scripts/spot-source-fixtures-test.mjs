@@ -66,10 +66,9 @@ test('The real NWS fallback field names produce forecast values without invented
  const weather=nwsHourlyFallback(payload,{...point,now}),section=await inspect({fetchLayer:async()=>weather}).load('weather');assert.equal(section.items.length,2);assert.match(section.items[0].title,/51°F/);assert.match(section.items[0].description,/10 mph wind/);assert.match(section.items[0].description,/0% rain chance/);assert.match(section.items[1].description,/Wind unavailable/);assert(!section.items.some(item=>item.relation==='nearby'));
 });
 
-test('Wildlife uses an explicit point/radius query and preserves approximate source locations',async()=>{
- const saved=read('wildlife-snapshot.json'),center=saved.features[0].geometry.coordinates;let queried;
- const section=await inspect({lat:center[1],lng:center[0],radiusMiles:.15,loadWildlife:async options=>{queried=options;return saved;}}).load('wildlife');
- assert.equal(queried.lat,center[1]);assert.equal(queried.lng,center[0]);assert.equal(queried.radius,.15*1.609344);
- const query=wildlifeQuery({...defaultWildlifeOptions(new Date(now)),...queried});assert.equal(query.get('lat'),String(center[1]));assert.equal(query.get('lng'),String(center[0]));assert(!query.has('swlat'));assert(!query.has('taxon_id'),'point inspection covers all groups rather than an unrelated current species filter');
- assert(section.items.length>0);assert(section.items.every(item=>item.approximate===true));assert(section.items.every(item=>item.description.includes('Approximate observation area')));assert(section.items.some(item=>item.feature.properties.id===saved.features[0].properties.id));
+test('Flag wildlife uses a separate seasonal aggregate adapter with exact point/radius/date',async()=>{
+ const center=[point.lng,point.lat];let queried;
+ const section=await inspect({radiusMiles:.15,loadSeasonalWildlife:async options=>{queried=options;return{items:[{title:'Blue Jay',taxonId:8229,seasonalCount:20,baselineCount:100,approximate:true,relation:'area'}],status:'ready'};}}).load('wildlife');
+ assert.equal(queried.lat,center[1]);assert.equal(queried.lng,center[0]);assert.equal(queried.radiusMiles,.15);assert.equal(queried.now,now);
+ assert.equal(section.items[0].taxonId,8229);assert.equal(section.items[0].seasonalCount,20);assert.equal(section.items[0].relation,'area');assert(!section.items[0].feature,'a species aggregate is never fabricated into a sighting point');
 });

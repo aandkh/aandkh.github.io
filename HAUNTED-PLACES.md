@@ -83,3 +83,11 @@ Each entry's complete supporting links and coordinate source are in its `hauntSo
 - **UMSL Provincial House** — [UMSL Daily — Haunted Honors](https://blogs.umsl.edu/news/2019/11/01/haunted-honors/); [The Current — The dark history of Provincial House, October 24, 2011](https://www.umsl.edu/services/library/university-archives/Student%20Newspaper/Current%2C%202011-2013/2011/October%2024%2C%202011.pdf); [UMSL — Honors College contact and directions](https://www.umsl.edu/honors/contact-us.html).
 
 - **Payne-Gentry House** — [City of Bridgeton — Payne-Gentry House](https://www.bridgetonmo.com/facilities/facility/details/PayneGentry-House-20); [St. Louis Cake Monster — Payne-Gentry House](https://stlcakemonster.wordpress.com/2015/04/17/cake-monster-tries-to-get-haunted-payne-gentry-house-50/); [The Current — Haunted places review, October 14, 2002](https://www.umsl.edu/library/university-archives/Student%20Newspaper/Current%2C%202002-2004/2002/October%2014%2C%202002.pdf); [Riverfront Times — Haunted places](https://www.riverfronttimes.com/haunted-places-st-louis/); [Payne-Gentry House — coordinate record](https://en.wikipedia.org/wiki/Payne-Gentry_House).
+
+## Story detail revision
+
+All 24 entries now explain the particular experiences and backstories behind
+their haunted reputations. Descriptions use direct, original prose, identify
+reported speakers or sources where useful, and distinguish historical events
+from later legends. Full citations remain in each entry's `hauntSources`.
+Descriptions fit the existing 800-character shared-place limit.

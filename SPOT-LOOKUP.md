@@ -18,7 +18,7 @@ all later callbacks. Root UI owns list paging and feature selection.
 | Alerts, traffic, outages | Current supplied alert footprints, MoDOT incidents, county electricity totals and dated official utility notices; unmapped records are counted separately |
 | River levels and rainfall | Nearest supplied river gauges within 15 miles, existing rolling gauge baselines, and dated station rainfall with station distance |
 | Sky | Point-calculated Sun/Moon times and phase, dated valid planetary angles, and the stored historical night-light grid |
-| Wildlife | Existing public research-grade observation adapter, queried at the pin; radius filters displayed approximate locations |
+| Wildlife | Public research-grade species counts in the selected radius over the past five years; current Chicago month weighs 85% and year-round local commonness 15% |
 | Parks, cycling and joyrides | Actual polygon/route geometry distance; park analytics use the existing source snapshot |
 | Quieter surroundings | Actual distance to the existing major-road geometry; not a decibel measurement |
 | Aircraft, transit, construction, foliage | Existing live/reference adapters, with real footprint or point distance |
@@ -63,3 +63,44 @@ half a mile, one mile and three miles. Existing saved larger selections retain
 their radius. Containing polygons still report the enclosing geography, and
 explicit nearest-station references keep their documented wider search radius.
 Wildlife source points remain rounded and labeled approximate.
+
+## Visible matches and seasonal wildlife
+
+The flag menu shows only sections with real entries. Pending, empty and failed
+sections stay hidden; one compact status reports loading or a wholly empty
+result. Navigation shortcuts alone do not qualify as a hit. Existing results
+remain visible during refresh until replacement results arrive.
+
+Only the flag uses `spot-wildlife.js`; the main Wildlife layer retains its
+chosen date filters. Two fully paginated iNaturalist species-count queries use
+the exact flag radius and the past five years: all months and the current
+Chicago calendar month. Only species in the flag-radius baseline are eligible.
+
+Ranking gives seasonal evidence 85% and local year-round commonness 15%.
+With at least 20 current-month reports in the flag radius, seasonal evidence is
+the species' share of those reports. When fewer are available, additional
+queries within ten miles are restricted to the already-local species IDs.
+Each species' nearby month/year rate weights its flag-radius baseline count;
+those values are normalized into seasonal shares. Local evidence contributes
+`min(1, localMonthReports / 20)` and nearby evidence supplies the remainder.
+A species missing nearby evidence gets a neutral 1/12 rate, not a fabricated
+observation. Rows distinguish nearby seasonal counts from flag-radius counts.
+The section explains the evidence area and historical date window once.
+
+These are reported occurrences, not population estimates, live sightings or
+current weather predictions. Private, obscured and threatened-species records
+remain excluded. Query failures never silently become annual fallback results.
+A successful query with no seasonal reports is labeled explicitly. Duplicate
+leaf taxa are not counted twice, and subspecies fold into their species using
+source ancestors. Pagination is bounded at 10,000 taxa per query; an incomplete
+query fails rather than displaying a biased ranking.
+
+Species selection opens its profile with the original flag radius, dates and
+month. An aggregate species never becomes a fabricated animal pin. Saved/shared
+species views preserve the 100-foot radius (0.03048 km).
+
+Primary source contract: https://api.inaturalist.org/v1/docs/ and
+https://github.com/inaturalist/iNaturalistAPI/blob/main/lib/views/swagger_v1.yml.ejs.
+
+Validation: `node scripts/spot-wildlife-test.mjs`, plus the existing spot data,
+source-fixture, explorer UI, integration and wildlife share-state tests.

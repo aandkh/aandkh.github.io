@@ -72,7 +72,7 @@ test('Live and file reads have separate bounded queues; nearby catalog is not bl
  let files=0,live=0,peakFiles=0,peakLive=0,releaseLive;const barrier=new Promise(resolve=>releaseLive=resolve),published=[];
  const fetchJson=async file=>{files++;peakFiles=Math.max(files,peakFiles);await pause();files--;return file==='./search-index.json'?{items:[{id:'near',title:'Nearby cafe',type:'feature',layer:'restaurants',coordinates:[point.lng,point.lat]}]}:{features:[]};};
  const fetchLayer=async()=>{live++;peakLive=Math.max(live,peakLive);await barrier;live--;return{status:'unavailable',features:[]};};
- const inspector=inspect({fetchJson,fetchLayer,loadTraffic:async()=>({features:[]}),loadWildlife:async()=>({features:[]}),loadFloodplains:async()=>({features:[]}),onSection:section=>published.push(section)}),running=inspector.start();
+ const inspector=inspect({fetchJson,fetchLayer,loadTraffic:async()=>({features:[]}),loadSeasonalWildlife:async()=>({items:[],status:'empty'}),loadFloodplains:async()=>({features:[]}),onSection:section=>published.push(section)}),running=inspector.start();
  for(let i=0;i<30&&!published.some(section=>section.id==='restaurants'&&section.items.length);i++)await pause();
  assert(published.some(section=>section.id==='restaurants'&&section.items.length),'cached nearby facts arrive while live network remains pending');
  releaseLive();await running;assert(peakFiles<=3);assert(peakLive<=3);assert(peakFiles>0&&peakLive>0);assert.equal(inspector.sections.length,SPOT_SECTIONS.length);inspector.dispose();

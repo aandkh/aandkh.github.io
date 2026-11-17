@@ -24,7 +24,7 @@
         "sourceId": "curated:haunted-lemp-mansion",
         "layer": "haunted",
         "title": "Lemp Mansion",
-        "description": "The former home of the Lemp brewing family is one of St. Louis’s enduring ghost-story landmarks. Accounts of unexplained sounds and presences are connected in local lore to the family’s tragedies. The mansion now operates as a restaurant and inn and offers organized history and paranormal tours.",
+        "description": "The Lemp family’s documented losses form the background to the mansion’s ghost stories. Brewer William Lemp Sr. died by suicide here in 1904, followed by his sons William Jr. in 1922 and Charles in 1949. Later boarding-house residents reported strange noises and apparitions. One recurring story concerns Charles’s dog: author Jason Offutt recorded guests’ complaints about barking and claws crossing wooden floors, even where rooms had been carpeted. He also described a visitor feeling an unseen dog brush her leg. These reported sounds and sensations, along with sightings attributed to family members, explain the mansion’s enduring haunted reputation.",
         "address": "3322 DeMenil Place, St. Louis, MO 63118",
         "lat": 38.5931727,
         "lng": -90.2157707,
@@ -45,6 +45,18 @@
           {
             "title": "St. Louis Magazine — Ghost tours around St. Louis",
             "url": "https://www.stlmag.com/culture/ghost-tours/"
+          },
+          {
+            "title": "Lemp Mansion — Family history",
+            "url": "https://www.lempmansion.com/history.htm"
+          },
+          {
+            "title": "St. Louis County Library — PastPorts, October 2012",
+            "url": "https://www.slcl.org/sites/default/files/2024-07/pastports-10-2012.pdf"
+          },
+          {
+            "title": "Missouri State Archives — Jason Offutt, Haunted Missouri presentation transcript",
+            "url": "https://www.sos.mo.gov/archives/presentations/ap_transcripts/haunted"
           }
         ],
         "sourceCheckedAt": "2026-11-17",
@@ -68,7 +80,7 @@
         "sourceId": "curated:haunted-lemp-bottle-works",
         "layer": "haunted",
         "title": "Lemp Brewery Bottle Works",
-        "description": "The former brewery’s Bottle Works is another focus of the Lemp neighborhood’s ghost lore. An established local tour operator combines the complex’s brewing history with accounts of unexplained experiences. Community recommendations repeatedly point to these guided brewery tours; the industrial buildings are separate from the Lemp Mansion.",
+        "description": "The Bottle Works stories center on the former brewery’s basements and tunnels. The St. Louis Paranormal Research Society has published clips it identifies as a shadow figure inside the Bottle Works and another moving through a brewery tunnel. A visiting Haunted Auckland investigator also recorded guide Mark Farley’s account of unexplained movement, noises and a captured voice apparently asking investigators to stay. Farley showed the visitor a trail-camera image he interpreted as part of a woman’s face. These are accounts from paranormal investigators exploring spaces once used for brewing and later shoe production, rather than identified historical residents of the building.",
         "address": "1820 Cherokee Street, St. Louis, MO 63118",
         "lat": 38.5922514,
         "lng": -90.2177526,
@@ -89,6 +101,18 @@
           {
             "title": "r/StLouis — Ghost tour discussion",
             "url": "https://www.reddit.com/r/StLouis/comments/1wue8yb/ghost_tour/"
+          },
+          {
+            "title": "St. Louis Paranormal Research Society — Bottle Works and tunnel videos",
+            "url": "https://www.stlghost.com/videos"
+          },
+          {
+            "title": "Haunted Auckland — Shadows Beneath the Brewery",
+            "url": "https://hauntedauckland.com/shadows-beneath-the-brewery-paranormal-activity-at-the-lemp-complex-st-louis-usa/"
+          },
+          {
+            "title": "St. Louis Paranormal Research Society — Lemp Brewery tour background",
+            "url": "https://www.stlghosttours.com/corn-cobb-pipe"
           }
         ],
         "sourceCheckedAt": "2026-11-17",
@@ -112,7 +136,7 @@
         "sourceId": "curated:haunted-fabulous-fox",
         "layer": "haunted",
         "title": "Fabulous Fox Theatre",
-        "description": "Opened in 1929 as a movie palace, the Fox has accumulated stories of unexplained activity in its ornate public rooms and backstage areas. Local reporting documents the theater’s ghost-tour tradition.",
+        "description": "The Fox’s ghost stories attach specific locations to its reported visitors. The St. Louis Paranormal Research Society describes staff and guests seeing an unidentified figure in orchestra-pit seat H-13. St. Louis Ghosts’ tour account names Anna, supposedly a caretaker at the church that preceded the theater, as a woman in a green dress appearing in the mezzanine. The same account calls a formally dressed man near the back walls Jeffrey and places a figure called William around the projection booth. William is blamed for doors opening and closing and equipment changing when the booth is empty.",
         "address": "527 North Grand Boulevard, St. Louis, MO 63103",
         "lat": 38.6391224,
         "lng": -90.2323843,
@@ -133,6 +157,14 @@
           {
             "title": "HEC Media — Haunted Happenings Around STL",
             "url": "https://www.hecmedia.org/posts/haunted-happenings-around-stl"
+          },
+          {
+            "title": "St. Louis Paranormal Research Society — Fox Theatre seat H-13 account",
+            "url": "https://www.stlghost.com/videos"
+          },
+          {
+            "title": "St. Louis Ghosts — Phantom Stagehands and the Tragic Haunts of the Fabulous Fox Theatre",
+            "url": "https://stlghosts.com/phantom-stagehands-and-the-tragic-haunts-of-the-fabulous-fox-theatre/"
           }
         ],
         "sourceCheckedAt": "2026-11-17",
@@ -156,7 +188,7 @@
         "sourceId": "curated:haunted-powell-hall",
         "layer": "haunted",
         "title": "Powell Hall",
-        "description": "Built as the St. Louis Theatre in 1925, Powell Hall became the symphony’s home in 1968. Local accounts call its rumored resident “George” and describe unexplained lights, sounds and a top-hatted figure.",
+        "description": "Powell Hall opened as the St. Louis Theatre in 1925, showing movies and vaudeville before becoming the symphony’s home in 1968. Its best-known ghost is called George. Local accounts describe a formally dressed man with a top hat, while HEC Media records reports of violin music heard late at night. A 2012 report in UMSL’s student newspaper also connects George with doors opening and music sounding without an apparent performer. The tradition imagines a musician lingering in the old theater, although George’s name and identity come from the haunting accounts rather than a documented former resident.",
         "address": "718 North Grand Boulevard, St. Louis, MO 63103",
         "lat": 38.6401454,
         "lng": -90.2298947,
@@ -181,6 +213,10 @@
           {
             "title": "Washington University student guide — Arts in St. Louis",
             "url": "https://sites.wustl.edu/diso202021/items/type/life-in-the-lou/arts-life-in-the-lou/"
+          },
+          {
+            "title": "UMSL — The Current, October 29, 2012",
+            "url": "https://www.umsl.edu/services/library/university-archives/Student%20Newspaper/Current%2C%202011-2013/2012/October%2029%2C%202012.pdf"
           }
         ],
         "sourceCheckedAt": "2026-11-17",
@@ -204,7 +240,7 @@
         "sourceId": "curated:haunted-stifel-theatre",
         "layer": "haunted",
         "title": "Stifel Theatre",
-        "description": "The 1934 theater has been known as the Kiel Opera House and Peabody Opera House. Local ghost-tour reporting documents its reputation for unexplained backstage activity; stories include a presence called Rachel and unexplained singing. The changing venue names refer to this same historic theater.",
+        "description": "Opened in 1934 as the Kiel Opera House, this theater’s recurring ghost story concerns a presence called Rachel. In the St. Louis Ghosts account, an investigator reportedly heard that name whispered in response to a question. The same account places a female figure in the lobby and balcony and describes unexplained singing or whistling. Other reports concern footsteps crossing an empty stage at night and voices seeming to come from beneath a stage trapdoor. Rachel’s name comes from the reported encounter, rather than an identified former performer. The claims concern the same theater previously known as the Peabody Opera House.",
         "address": "1400 Market Street, St. Louis, MO 63103",
         "lat": 38.6275196,
         "lng": -90.202006,
@@ -252,7 +288,7 @@
         "sourceId": "curated:haunted-campbell-house",
         "layer": "haunted",
         "title": "Campbell House Museum",
-        "description": "This preserved nineteenth-century family home became a museum in 1943. A museum staff member interviewed by St. Louis Magazine described unexplained lights in the otherwise empty house; earlier reporting also recorded ghost hunters’ interest.",
+        "description": "The house preserves the home of Robert and Virginia Campbell, whose family lost ten of thirteen children, but its haunting reports include specific modern staff experiences. Weekend manager Victoria L. Schultz told St. Louis Magazine that a motion-activated light came on in the cook’s bedroom one November night. Checking the security cameras on her phone, she could see nobody inside. In earlier reporting, museum director Andy Hahn and another staff member described footsteps and creaking when tours were over. An intern reported seeing an apparition, and a visitor said something nudged their back. The accounts do not identify one particular Campbell as the source.",
         "address": "1508 Locust Street, St. Louis, MO 63103",
         "lat": 38.6312762,
         "lng": -90.2018605,
@@ -300,7 +336,7 @@
         "sourceId": "curated:haunted-chase-park-plaza",
         "layer": "haunted",
         "title": "Chase Park Plaza",
-        "description": "Opened in 1922, the hotel’s best-known ghost tradition concerns “The Bride,” with accounts of unexpected reflections and apparitions. Historic Hotels of America and local television have revisited these stories.",
+        "description": "The hotel’s best-known story concerns an unnamed bride. In the version recorded by Historic Hotels of America, she fell from a nineteenth-floor terrace on her wedding night and landed at the third floor. Later sightings and reflections are attributed to her. A particularly specific episode is set in 1979: a newly appointed hotel director supposedly saw a woman in bridal clothing reflected behind him while shaving, before he knew the legend. The story says he resigned afterward. The terrace death and mirror encounter are presented as hotel folklore, rather than as a verified account of an identified bride.",
         "address": "212 North Kingshighway Boulevard, St. Louis, MO 63108",
         "lat": 38.6442,
         "lng": -90.26368,
@@ -348,7 +384,7 @@
         "sourceId": "curated:haunted-cupples-house",
         "layer": "haunted",
         "title": "Samuel Cupples House",
-        "description": "The 1890 Romanesque mansion on Saint Louis University’s campus is a museum and decorative-arts collection. Its former owner’s supposed lingering presence appears in documented St. Louis ghost-tour lore.",
+        "description": "The mansion’s supposed ghost is Samuel Cupples himself. A traceable version of the story appeared in a 1977 newspaper interview with Father Maurice McNamee, who helped preserve the house: troublesome locks on an art-storage room were blamed on Cupples. Rebekah Beaulieu’s study of historic-house museums records the explanation that his ghost disliked Saint Louis University owning the property, because he had supported Washington University during his lifetime. Later tour accounts describe him roaming the mansion. The story is therefore about the former owner objecting to his house’s new custodians, rather than a documented violent death inside the building.",
         "address": "3673 West Pine Mall, St. Louis, MO 63108",
         "lat": 38.63674,
         "lng": -90.23578,
@@ -373,6 +409,10 @@
           {
             "title": "Saint Louis University — Cupples House",
             "url": "https://www.slu.edu/cupples-house/index.php"
+          },
+          {
+            "title": "Rebekah Beaulieu — Accounting for the past: historic house museums and America’s urban Midwest",
+            "url": "https://www.academia.edu/103824638/Accounting_for_the_past_historic_house_museums_and_Americas_urban_Midwest"
           }
         ],
         "sourceCheckedAt": "2026-11-17",
@@ -396,7 +436,7 @@
         "sourceId": "curated:haunted-mcpike-mansion",
         "layer": "haunted",
         "title": "McPike Mansion",
-        "description": "Built in 1869 for Henry Guest McPike, this Italianate mansion is a long-established center of Alton ghost stories. Visitors and investigators report unexplained presences, especially around the cellar.",
+        "description": "Henry Guest McPike, a fruit grower and former Alton mayor, commissioned the mansion in 1869 and died there in 1910. Owner Sharyn Luedke told St. Louis Magazine that she identifies a dark figure photographed at the cellar doorway as Henry. Her account also names Jenny, his daughter-in-law, as a playful presence blamed for touching visitors’ ears and tugging their hair, and Sarah as a former attendant. Luedke even associates some appearances with Henry’s mother and first wife, although neither lived in the house. These identifications come from the owners’ interpretations of reported encounters, with the cellar a recurring setting.",
         "address": "2018 Alby Street, Alton, IL 62002",
         "lat": 38.905659,
         "lng": -90.182999,
@@ -440,7 +480,7 @@
         "sourceId": "curated:haunted-mineral-springs",
         "layer": "haunted",
         "title": "Mineral Springs Hotel",
-        "description": "Opened in 1914 around a natural spring, this former hotel and spa now contains businesses and spaces used for tours. Its enduring lore includes the “Jasmine Lady,” associated with an unexpected floral scent, and stories about the old pool and staircase. Illinois tourism records these as haunting traditions.",
+        "description": "Great Rivers & Routes records several named legends at this former hotel and mineral-water spa. The Jasmine Lady is linked to a woman called Mary, who supposedly fell down the main staircase after an argument with her husband; unexpected floral perfume is taken as her presence. Another reported figure is Clarence, a seventeen-year-old seen near a pool. The ballroom-bar story concerns Charlie, a mural painter said to have worked off debts before dying by suicide. Tour participants and employees also describe displaced objects, touches and shadowy figures. These are the building’s reported ghost stories, with the staircase, pools and ballroom supplying distinct settings.",
         "address": "301 East Broadway, Alton, IL 62002",
         "lat": 38.889885,
         "lng": -90.182137,
@@ -484,7 +524,7 @@
         "sourceId": "curated:haunted-milton-school",
         "layer": "haunted",
         "title": "Milton School House",
-        "description": "The former school is now a mixed-use building with businesses and residences. Long-running accounts describe unexplained voices and shadows, and local reporting has followed organized investigations. Sensational versions of the school’s story conflict; alleged murders in the folklore are not treated here as verified historical events.",
+        "description": "The old school’s haunting reports often sound like school is still in session: people describe children running through the building after it stopped serving pupils. The Telegraph also records a purported resident ghost called Charlie. Great Rivers & Routes lists unexplained voices, shadows and objects moving or falling among the experiences that attracted investigators, including the television program Ghost Hunters in 2010. The building later housed glassmaking, storage, businesses and residences. Owner Doug Mattingly told The Telegraph in 2021 that he had not personally seen convincing evidence, so the reputation rests on reported encounters rather than an agreed explanation of who is present.",
         "address": "1320 Milton Road, Alton, IL 62002",
         "lat": 38.89735,
         "lng": -90.135628,
@@ -528,7 +568,7 @@
         "sourceId": "curated:haunted-first-unitarian-alton",
         "layer": "haunted",
         "title": "First Unitarian Church",
-        "description": "This active church is a recurring stop in Alton’s ghost-story tradition. Local lore associates unexplained activity with a former minister, and established walking tours have used the building as a starting point.",
+        "description": "The church’s ghost tradition is associated with Reverend Phillip Mercer, whose death by suicide in the building in November 1934 is recorded in the congregation’s history. During the Depression he had reduced and at times waived his salary to help the church. Later haunting accounts attribute unexplained activity to the former minister. The Ghost Research Society records reports of piano music in the sanctuary, doors opening and closing in the hallway, voices without a visible speaker and a tall shadowy figure. Its 2013 investigators also reported sensations of being touched.",
         "address": "110 East Third Street, Alton, IL 62002",
         "lat": 38.890884,
         "lng": -90.183609,
@@ -553,6 +593,14 @@
           {
             "title": "Lewis and Clark National Historic Trail — Alton Haunting Tours",
             "url": "https://www.lewisandclark.travel/listing/alton-haunting-tours/"
+          },
+          {
+            "title": "First Unitarian Church — Congregation history update",
+            "url": "https://www.firstuualton.org/Church_History_Update.pdf"
+          },
+          {
+            "title": "Ghost Research Society — First Unitarian Church investigation, 2013",
+            "url": "https://www.ghostresearch.org/Investigations/firstu.html"
           }
         ],
         "sourceCheckedAt": "2026-11-17",
@@ -576,7 +624,7 @@
         "sourceId": "curated:haunted-ryder-building",
         "layer": "haunted",
         "title": "Simeon Ryder Building",
-        "description": "This early commercial building served several roles in Alton’s development, including courthouse use. Its local ghost stories include workers hearing chairs and tables move when rooms were empty. The building appears in established downtown history and haunted walking tours; current occupants may differ from older accounts.",
+        "description": "Restaurant workers supplied the best-known story about this former Alton courthouse. According to Great Rivers & Routes, cooks preparing food in the basement heard furniture moving on the main floor and reported seeing chairs and tables move without anyone touching them. Other employees described unexplained noises in the building. Its documented history includes construction for sea captain and developer Simeon Ryder in the nineteenth century, courthouse use, and later shops and restaurants. Abraham Lincoln represented Ryder in a debt dispute and delivered an 1840 political speech from the building’s now-removed third floor.",
         "address": "31 East Broadway, Alton, IL 62002",
         "lat": 38.890007,
         "lng": -90.184525,
@@ -624,7 +672,7 @@
         "sourceId": "curated:haunted-piasa-masonic-temple",
         "layer": "haunted",
         "title": "Piasa Masonic Temple",
-        "description": "Completed in 1915, the former Masonic temple is another landmark in Alton’s ghost lore. Tourism accounts describe a soldier figure associated with its basement. Local reporting documents the building’s history and later vacancy.",
+        "description": "The basement legend concerns an unidentified Confederate soldier. Great Rivers & Routes recounts sightings of a soldier figure and the belief that he was a Mason who died in the nearby Alton military prison. The supposed connection is to that prisoner’s membership in the fraternity, rather than a documented death inside this temple. The lodge began in 1844, but the surviving State Street building was completed in 1915, decades after the Civil War. It later became vacant after the Masons left.",
         "address": "300 State Street, Alton, IL 62002",
         "lat": 38.8913325,
         "lng": -90.1886062,
@@ -672,7 +720,7 @@
         "sourceId": "curated:haunted-alton-prison",
         "layer": "haunted",
         "title": "Alton Prison Ruins",
-        "description": "A surviving wall marks the former state penitentiary, later used as a Civil War military prison. Local ghost lore describes the sound of prisoners marching in lockstep, a tradition preserved in historical newspaper retellings. This marker identifies the prison ruins, not a burial ground.",
+        "description": "Ghost stories about the prison were already in print in 1889. A July 5 report in the Auburn Daily Bulletin, preserved by Madison County ILGenWeb, described a ghost heard marching in the distinctive lockstep used by prisoners. The story attached that sound to the old prison after its closure. The surviving wall marks a former Illinois penitentiary that reopened as a military prison in 1862. More than 11,000 Confederate prisoners passed through during the Civil War; overcrowding, poor sanitation, smallpox and other diseases made confinement deadly. Those documented conditions form the historical background to the marching-prisoner legend. This is the prison site, not a burial ground.",
         "address": "Broadway and William Street, Alton, IL 62002",
         "lat": 38.890804,
         "lng": -90.189392,
@@ -697,6 +745,10 @@
           {
             "title": "Madison County ILGenWeb — Historical paranormal newspaper accounts",
             "url": "https://www.madison.illinoisgenweb.org/paranormal.html"
+          },
+          {
+            "title": "Madison County ILGenWeb — Alton Military Prison history and 1889 ghost report",
+            "url": "https://www.madison.illinoisgenweb.org/town_histories/alton_military_prison.html"
           }
         ],
         "sourceCheckedAt": "2026-11-17",
@@ -720,7 +772,7 @@
         "sourceId": "curated:haunted-hotel-stratford",
         "layer": "haunted",
         "title": "Hotel Stratford",
-        "description": "This 1909 former hotel is part of downtown Alton’s historic building stock. Established local haunted tours include the Stratford and accounts associated with its upper-floor spaces. It is not currently an operating hotel.",
+        "description": "Ivy Watson, who grew up in the former hotel, gave Chicago magazine a specific account in 2023. She said that she and her sister used to play with small, white, wispy figures in the ballroom and around hallway corners, but could never get close to them. The five-story building opened in 1909 as the Hotel Illini, with 68 rooms, and later became the Stratford. Alton Odyssey’s haunted tours have included its upper-floor Hilltop Room, connecting the old hotel to downtown Alton’s ghost-tour tradition.",
         "address": "229 Market Street, Alton, IL 62002",
         "lat": 38.89056,
         "lng": -90.185,
@@ -745,6 +797,14 @@
           {
             "title": "AltonWorks — Historic building mission",
             "url": "https://altonworks.us/our-mission/"
+          },
+          {
+            "title": "Chicago magazine — Searching for Our Mississippi, Ivy Watson interview",
+            "url": "https://www.chicagomag.com/chicago-magazine/august-2023/searching-for-our-mississippi/"
+          },
+          {
+            "title": "Clio — Hotel Stratford history",
+            "url": "https://theclio.com/entry/146196"
           }
         ],
         "sourceCheckedAt": "2026-11-17",
@@ -768,7 +828,7 @@
         "sourceId": "curated:haunted-alton-ywca",
         "layer": "haunted",
         "title": "Alton YWCA",
-        "description": "The working community center also has a longstanding local reputation for unexplained activity. The Telegraph reported investigations here in 2016, and an established regional operator offers organized visits.",
+        "description": "During a February 2016 tour, participants said they heard someone approaching behind them in the dance room; another reported a possible image in an Olin Fitness room mirror. The Telegraph also interviewed guide Jolynn Houchins, who described a woman following a route upstairs and a male presence in the basement. Houchins interpreted the latter as an African American man from the Underground Railroad era, while acknowledging no known event in the building explained these figures. The community center itself dates to 1918, so that proposed identity belongs to the tour’s interpretation.",
         "address": "304 East Third Street, Alton, IL 62002",
         "lat": 38.890835,
         "lng": -90.181541,
@@ -816,7 +876,7 @@
         "sourceId": "curated:haunted-dripping-springs",
         "layer": "haunted",
         "title": "Dripping Springs at Creve Coeur Lake",
-        "description": "A longstanding local legend links this spring to a woman whose grief gave Creve Coeur its “broken heart” name; later ghost stories claim cries near the bluff. The lakeside marker preserves the tale, not a verified account of a death or a confirmed Indigenous historical event.",
+        "description": "The park’s water-trail marker tells of Memetonwish, a young Indigenous woman who loved a fur trapper. In that version of the legend, her father forbade the relationship and she jumped from Dripping Springs in despair. Her grief is offered as an explanation for the lake’s French name, meaning broken heart. HEC Media records the later ghost-story claim: visitors hear crying near the bluff, and on full-moon nights a woman is said to appear and repeat the fatal leap.",
         "address": "Creve Coeur Lake Memorial Park, 13450 Marine Avenue, Maryland Heights, MO 63146",
         "lat": 38.7114333,
         "lng": -90.4797,
@@ -864,7 +924,7 @@
         "sourceId": "curated:haunted-rock-hollow-zombie-road",
         "layer": "haunted",
         "title": "Rock Hollow Trail (Zombie Road)",
-        "description": "The former Lawler Ford Road is now the paved Rock Hollow Trail. Generations of local ghost stories surround the wooded route, including shadow figures and a feeling of being watched. Versions of the legends differ.",
+        "description": "One explanation for the Zombie Road name is a 1950s story about an escaped asylum patient nicknamed Zombie: he supposedly vanished nearby, leaving only bloodstained clothes. Other versions populate the old Lawler Ford Road with injured quarry workers, an elderly woman and a killer living in a shack. St. Louis Magazine traced these accounts to the road’s reputation as a secluded teenage gathering place. Historian Troy Taylor found evidence of a nineteenth-century quarry, railway and a woman killed by a train, but no record of the supposed nearby asylum. The former road became the paved Rock Hollow Trail in 2010.",
         "address": "777 Ridge Road, Wildwood, MO 63021",
         "lat": 38.57178,
         "lng": -90.6007,
@@ -920,7 +980,7 @@
         "sourceId": "curated:haunted-grandel",
         "layer": "haunted",
         "title": "The Grandel",
-        "description": "Built in 1884 as the First Congregational Church, the Grandel has a long-running reputation for unexplained activity. The Grand Center Arts District has documented the venue's ghost-tour program, and local community discussions repeatedly name the theater among St. Louis haunts.",
+        "description": "A former crew member identified as Kim described two encounters in a 2014 Dragon Productions account of working on The Kentucky Cycle here. During late-night set work, she said she saw a woman in a wedding dress in the upper balcony, although no such costume appeared in the production. Another night she noticed a man in work boots and a plaid shirt near a lighting pipe where lamps had tilted toward the audience. Fellow crew members identified these as the theater’s legendary bride, supposedly killed while traveling to her wedding, and a former church handyman. Those identities are crew lore; the Grandel’s documented history begins as an 1884 church.",
         "address": "3610 Grandel Square, St. Louis, MO 63103",
         "lat": 38.640288,
         "lng": -90.231657,
@@ -949,6 +1009,10 @@
           {
             "title": "Kids Out and About — Grandel Theatre",
             "url": "https://saintlouis.kidsoutandabout.com/venue/grandel-theatre"
+          },
+          {
+            "title": "Dragon Productions — Ghost Lights and Haunted Theatres, first-person Grandel account",
+            "url": "https://dragonproductionstheatre.blogspot.com/2014/10/ghost-lights-and-haunted-theatres.html"
           }
         ],
         "sourceCheckedAt": "2026-11-17",
@@ -972,7 +1036,7 @@
         "sourceId": "curated:haunted-webster-theatre-guild",
         "layer": "haunted",
         "title": "Theatre Guild of Webster Groves",
-        "description": "The Guild’s own history acknowledges its ghost-story tradition. Accounts describe silhouettes in the audience and a white-suited figure; a 2010 investigation recorded differing interpretations. The building began as the 1909 Suburban School of Music and became the Guild’s home in 1951.",
+        "description": "Accounts collected by the Ghost Research Society describe a woman’s dark outline descending the stairs, a teenage boy near the thermostat, and a man in a white suit at the rear of the auditorium. Workers also reported pencils disappearing and turning up elsewhere; a face was said to peer around the hallway corner between the kitchen and men’s restroom. During an August 2010 investigation, Dale Kaczmarek reported unexplained breathing and apparent voices on recordings, while fellow investigator Stan Suho found nothing he considered paranormal. The Guild acknowledges these stories in its own history. Its building began as Kate Mulroy’s music school in 1909 and opened as the Guild’s theater in 1952.",
         "address": "517 Theatre Lane, Webster Groves, MO 63119",
         "lat": 38.59902,
         "lng": -90.33956,
@@ -1028,7 +1092,7 @@
         "sourceId": "curated:haunted-loretto-hilton",
         "layer": "haunted",
         "title": "Loretto-Hilton Center for the Performing Arts",
-        "description": "Dedicated in 1966, the arts center has its own theater legends. The Repertory Theatre’s educational guide records late-night experiences from carpenters and technicians, including a story of an unseen helper pulling a worker away from a catwalk fall.",
+        "description": "The Rep’s Macbeth educational guide records a backstage legend about an unseen helper on the catwalks. Carpenters and technicians working late have described sensing another presence; in the most specific story, a drowsy worker nearly falls, feels someone grab them and finds themselves safely back on a ledge, although nobody else is nearby. The guide characterizes the reported encounters as helpful rather than threatening and supplies no name or documented death for the supposed spirit. The theater was dedicated in 1966.",
         "address": "130 Edgar Road, Webster Groves, MO 63119",
         "lat": 38.58883,
         "lng": -90.34415,
@@ -1080,7 +1144,7 @@
         "sourceId": "curated:haunted-umsl-provincial-house",
         "layer": "haunted",
         "title": "UMSL Provincial House",
-        "description": "The former Daughters of Charity building is the home of UMSL's Pierre Laclede Honors College. Student accounts of ghostly footsteps have circulated for years and are acknowledged in UMSL's own coverage. A 2011 student-newspaper investigation also interviewed staff who attributed sounds to the old building and remained skeptical.",
+        "description": "The former Daughters of Charity complex generated stories of nuns lingering after it became university space. In a 2003 Current report, Seton Hall resident Laurie Bainter described hearing running upstairs, then finding an empty hallway when she went to complain. Third-floor students reported footsteps in the attic above them; Hannah Smith described repeated knocks at her door with nobody outside. A 2011 article connected the nun stories to real funeral practices: dean Robert Bliss confirmed that rooms now used by the Honors College had held funeral gatherings and a casket. Bliss nevertheless attributed the building’s noises to its age. These accounts concern the Provincial House complex, including its former residence halls.",
         "address": "Provincial House, UMSL South Campus, St. Louis, MO 63121",
         "lat": 38.701744,
         "lng": -90.306068,
@@ -1105,6 +1169,10 @@
           {
             "title": "UMSL — Honors College contact and directions",
             "url": "https://www.umsl.edu/honors/contact-us.html"
+          },
+          {
+            "title": "The Current — Ghosts of Provincial House, February 24, 2003",
+            "url": "https://www.umsl.edu/library/university-archives/Student%20Newspaper/Current%2C%202002-2004/2003/February%2024%2C%202003.pdf"
           }
         ],
         "sourceCheckedAt": "2026-11-17",
@@ -1128,7 +1196,7 @@
         "sourceId": "curated:haunted-payne-gentry-house",
         "layer": "haunted",
         "title": "Payne-Gentry House",
-        "description": "This 1870 cottage preserves Dr. William Payne’s nineteenth-century office. Local ghost-story collections and decades of visitor accounts give the house a reputation for unexplained figures, sounds and photographs.",
+        "description": "A 1989 Current article traced the house’s reputation to children who said they saw a man’s face in an attic window after Bridgeton acquired the property. Historical Society member Doris Baruzzini investigated a similar sighting herself and concluded that stored objects and the viewing angle produced the apparent face. Other accounts were more personal: visitor Kathy Duncan described a sudden chill beside the spinning wheel, and Baruzzini recalled a guide named Betty repeatedly losing her voice in the front bedroom. Visiting psychics interpreted sensations around the house as spirits, including a dog. The 1870 family home also preserves Dr. William Payne’s medical office.",
         "address": "4211 Fee Fee Road, Bridgeton, MO 63044",
         "lat": 38.747181,
         "lng": -90.399524,
@@ -1161,6 +1229,10 @@
           {
             "title": "Payne-Gentry House — coordinate record",
             "url": "https://en.wikipedia.org/wiki/Payne-Gentry_House"
+          },
+          {
+            "title": "The Current — Happy Haunting: Payne-Gentry House Wrapped in Aura of History, October 26, 1989",
+            "url": "https://www.umsl.edu/library/university-archives/Student%20Newspaper/Current%2C%201987-1989/1989/October%2026%2C%201989.pdf"
           }
         ],
         "sourceCheckedAt": "2026-11-17",

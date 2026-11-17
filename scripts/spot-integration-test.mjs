@@ -31,6 +31,7 @@ function fixture(){
  let suspendedPanel={panel:'detail'};const placeSuggestions={close(){calls.push(['close-suggestions']);}};
  function closeDetail(){$('#detail').hidden=true;calls.push(['close-detail']);}function setResults(open){$('#results').hidden=!open;}function setControls(open){calls.push(['controls',open]);}function navigationState(){}function share(){}function openStationForecast(point){calls.push(['forecast',point.lat,point.lng]);}
  function toggle(id,on){calls.push(['toggle',id,on]);if(on){requestedLayers.add(id);enabled.add(id);}else{requestedLayers.delete(id);enabled.delete(id);}}
+ function defaultWildlifeOptions(){return {d1:'2025-11-16',d2:'2026-11-16',month:''};}function exploreBirdObservations(options){calls.push(['seasonal-species',options]);}function revealSearchSection(item){calls.push(['reveal',item]);}
  function toStop(layer,feature){return {...feature.properties,layer};}function showDetail(stop,properties,layer,push,preserveView){$('#detail').hidden=false;calls.push(['feature',layer,stop.id,preserveView]);}function toast(message){calls.push(['toast',message]);}
  `+production+basemap,context);
  return{context,calls,nodes,mapLayers,inspectors,pendingSources,get ui(){return ui;},run:code=>vm.runInContext(code,context),state:()=>plain(vm.runInContext('({spotMode,spotSavedLayers,requested:[...requestedLayers],enabled:[...enabled],spotRevision})',context))};
@@ -60,3 +61,12 @@ console.log('PASS: production spot entry/exit preserves layers/data, vector and 
 
 const smallSpot={v:1,center:[38.65,-90.35],zoom:18,layers:[],view:{panel:'spot',spot:{lat:38.631234,lng:-90.291234,radiusMiles:100/5280}}};
 assert.equal((await decodeViewState(await encodeViewState(smallSpot))).view.spot.radiusMiles,100/5280,'100-foot flag survives a shared link');
+
+// A seasonal species is a profile of local reports, not an invented animal pin.
+const w=fixture();w.run('setSpotMode(true)');
+const seasonalQuery={lat:38.6406,lng:-90.2846,radius:.03048,d1:'2021-11-16',d2:'2026-11-16',month:11};
+w.ui.callbacks.onOpenAction({layer:'wildlife',action:{type:'seasonal-wildlife',taxonId:12727,taxonName:'Northern Cardinal',iconicTaxa:'Aves',query:seasonalQuery}},{lat:38.6406,lng:-90.2846});
+assert.equal(w.state().spotMode,false);
+assert.deepEqual(plain(w.calls.find(call=>call[0]==='seasonal-species')[1]),{...seasonalQuery,taxonId:12727,taxonName:'Northern Cardinal',iconicTaxa:'Aves',mapView:'heat'});
+assert.deepEqual(plain(w.calls.find(call=>call[0]==='reveal')[1]),{layer:'wildlife',target:'.wildlife-species-browser'});
+assert(!w.calls.some(call=>call[0]==='feature'),'aggregate species must not create an exact animal pin');

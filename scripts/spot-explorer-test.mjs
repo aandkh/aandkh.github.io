@@ -63,9 +63,24 @@ test('Source failures stay local and factual proximity labels never imply exactn
  const {ui}=fixture();ui.open(point);
  ui.updateSection('weather',{title:'Weather',status:'loading'});ui.updateSection('history',{title:'History',status:'ready',items:[{title:'Nearby event',relation:'nearby',distanceMeters:804.672},{title:'County data',relation:'area'}]});assert(ui.busy);
  ui.updateSection('weather',{status:'unavailable',note:'Weather feed timed out'});assert.equal(ui.busy,false);
- assert(ui.element.textContent.includes('Other sections are still usable'));assert(ui.element.textContent.includes('Weather feed timed out'));
+ assert(cls(ui.element,'spot-section')[0].hidden,'failed sources with no entries stay out of the menu');assert(!ui.element.textContent.includes('Weather feed timed out'));
  assert(ui.element.textContent.includes('Nearby · 2650 ft'));assert(ui.element.textContent.includes('Area-level information'));assert(!ui.element.textContent.includes('At this spot'));
  assert.equal(spotDistance(undefined),'');assert.equal(spotDistance(-1),'');assert.equal(spotDistance(2),'<50 ft');assert.equal(spotDistance(1609.344),'1.0 mi');
+});
+
+test('Only hit-bearing sections appear, including during progressive refresh',()=>{
+ const {ui}=fixture();ui.open(point);
+ for(const state of ['idle','loading','empty','ready','partial','unavailable','error','stale'])ui.updateSection(state,{title:state,status:state,items:[]});
+ assert.equal(cls(ui.element,'spot-section').filter(n=>!n.hidden).length,0,'no empty category placeholders');
+ ui.updateSection('shortcut',{status:'ready',items:[{title:'Open a map',relation:'reference',action:{type:'layer'}}]});
+ assert.equal(cls(ui.element,'spot-section').filter(n=>!n.hidden).length,0,'a generic shortcut alone is not a hit');
+ assert(ui.busy,'hidden pending sections still participate in completion');
+ ui.updateSection('loading',{status:'ready',items:[{title:'A real match',value:0}]});
+ const section=cls(ui.element,'spot-section').find(n=>!n.hidden);assert(section);assert(section.textContent.includes('A real match'));assert.equal(cls(ui.element,'spot-item').length,1,'zero-valued real readings are retained');
+ ui.updateSection('loading',{status:'loading'});assert(!section.hidden,'existing results remain visible while refreshing');
+ ui.updateSection('loading',{status:'empty',items:[]});assert(section.hidden,'a result that disappears also removes its category');assert.equal(cls(ui.element,'spot-item').length,0);
+ ui.updateSection('weather',{status:'ready',items:[{title:'Forecast'}]});assert.equal(cls(ui.element,'spot-section').filter(n=>!n.hidden).length,1);assert.equal(cls(ui.element,'spot-progress')[0].hidden,true,'completed matches need no filler status');
+ const next=ui.open({...point,lng:-90.5});ui.updateSection('empty',{status:'empty',items:[]},next);ui.finish(next);assert.equal(cls(ui.element,'spot-section').filter(n=>!n.hidden).length,0);assert.match(cls(ui.element,'spot-progress')[0].textContent,/No matching entries/);
 });
 
 test('Feed text is text only and source links reject script and credential URLs',()=>{
@@ -85,7 +100,7 @@ test('Rounded wildlife or incident locations never read as an exact point match'
 
 test('Raster reference actions are clickable and preserve the inspected point for return',()=>{
  let received;const {ui}=fixture({onOpenAction:(item,p)=>{received={item,p};}});ui.open(point);const action={type:'mode',layer:'terrain',modeKey:'terrain',mode:'streams'};
- ui.updateSection('terrain',{status:'ready',items:[{title:'View streams and waterbodies',relation:'reference',layer:'terrain',action}]});
+ ui.updateSection('terrain',{status:'ready',items:[{title:'Ground elevation',value:'142 m',relation:'at'},{title:'View streams and waterbodies',relation:'reference',layer:'terrain',action}]});
  cls(ui.element,'spot-feature')[0].emit('click');assert.deepEqual(received.item.action,action);assert.deepEqual(received.p,point);assert(ui.element.hidden);assert.equal(ui.resumeElement.hidden,false);
 });
 

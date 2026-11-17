@@ -47,16 +47,15 @@ export function createSpotExplorer({shell,onClose=()=>{},onMap=()=>{},onResume=(
  }
  function renderSection(record){
   const d=record.data,items=Array.isArray(d.items)?d.items.filter(item=>typeof item==='string'||item&&typeof item==='object'):[],state=d.status||'ready';
+  // Keep pending source state internally; the menu contains only real entries.
+  record.details.hidden=!items.some(item=>typeof item==='string'||item.relation!=='reference'||!item.action);
+  if(record.details.hidden){record.content.replaceChildren();return;}
   record.heading.textContent=d.title||record.id;record.count.textContent=items.length?String(Number.isSafeInteger(d.total)&&d.total>=items.length?d.total:items.length):'';
   record.state.textContent=statuses[state]??'';record.details.dataset.status=state;
   if(!record.details.open)return;
   record.content.replaceChildren();
-  if(items.length){const list=make('ul','spot-items');for(const item of items.slice(0,record.limit))list.append(itemNode(item));record.content.append(list);
+  const list=make('ul','spot-items');for(const item of items.slice(0,record.limit))list.append(itemNode(item));record.content.append(list);
    if(record.limit<items.length){const more=button('Show '+Math.min(MORE_ITEMS,items.length-record.limit)+' more',()=>{record.limit+=MORE_ITEMS;renderSection(record);},'spot-more');record.content.append(more);}
-  }else if(state==='loading')record.content.append(make('p','spot-empty','Checking this location…'));
-  else if(state==='idle')record.content.append(make('p','spot-empty','Waiting to inspect this source…'));
-  else if(state==='unavailable'||state==='error')record.content.append(make('p','spot-empty','This source is unavailable. Other sections are still usable.'));
-  else if(state==='empty'||state==='ready')record.content.append(make('p','spot-empty','No matching records were returned for this spot.'));
   const notes=[...new Set([d.note,...(Array.isArray(d.notes)?d.notes:d.notes?[d.notes]:[])].filter(Boolean))];for(const note of notes)record.content.append(make('p','spot-note',note));
   if(d.source||d.checkedAt||d.sourceDataAt){const provenance=make('p','spot-provenance'),provider=typeof d.source==='string'?{name:d.source,url:d.sourceUrl}:d.source||{};
    if(provider.name&&!sourceLink(provenance,provider.name,provider.url))provenance.append(make('span','',provider.name));
@@ -65,7 +64,7 @@ export function createSpotExplorer({shell,onClose=()=>{},onMap=()=>{},onResume=(
    record.content.append(provenance);
   }
  }
- function updateProgress(){const pending=[...sections.values()].filter(r=>r.data.status==='loading').length;status.textContent=pending?'Checking '+pending+' '+(pending===1?'section':'sections')+'…':point?'Explore the information below.':'';panel.setAttribute('aria-busy',String(pending>0));}
+ function updateProgress(){const records=[...sections.values()],pending=records.filter(r=>r.data.status==='loading').length,hits=records.some(r=>!r.details.hidden),failed=records.some(r=>['unavailable','error'].includes(r.data.status));status.textContent=pending?'Checking this spot…':point&&!hits?(failed?'No matching entries available from the sources that loaded.':'No matching entries for this spot.') :'';status.hidden=!status.textContent;panel.setAttribute('aria-busy',String(pending>0));}
  function updateSection(id,data={},token=revision){
   if(destroyed||!point||token!==revision||typeof id!=='string'||!id)return false;
   let record=sections.get(id);
@@ -78,10 +77,10 @@ export function createSpotExplorer({shell,onClose=()=>{},onMap=()=>{},onResume=(
   if(!record.userToggled&&record.data.status==='idle'&&data.status!=='idle'&&data.expanded!==false)record.details.open=true;
   record.data={...record.data,...data};renderSection(record);updateProgress();return true;
  }
- function arm(){if(destroyed)return;revision++;point=null;sections.clear();body.replaceChildren();title.textContent='Choose a spot';coordinates.textContent='Tap the map to explore what is here.';status.textContent='';share.disabled=true;forecast.disabled=true;radius.disabled=true;panel.hidden=false;back.hidden=true;panel.scrollTop=0;panel.setAttribute('aria-busy','false');return revision;}
+ function arm(){if(destroyed)return;revision++;point=null;sections.clear();body.replaceChildren();title.textContent='Choose a spot';coordinates.textContent='Tap the map to explore what is here.';status.textContent='';status.hidden=true;share.disabled=true;forecast.disabled=true;radius.disabled=true;panel.hidden=false;back.hidden=true;panel.scrollTop=0;panel.setAttribute('aria-busy','false');return revision;}
  function open(selected){
   if(destroyed||!validPoint(selected))return null;revision++;point=pointCopy(selected);sections.clear();body.replaceChildren();
-  title.textContent=selected.label||'This spot';coordinates.textContent=selected.lat.toFixed(5)+', '+selected.lng.toFixed(5);share.disabled=false;forecast.disabled=false;radius.disabled=false;radius.value=String(point.radiusMiles);status.textContent='Checking this location…';panel.hidden=false;back.hidden=true;savedScroll=panel.scrollTop=0;panel.setAttribute('aria-busy','true');return revision;
+  title.textContent=selected.label||'This spot';coordinates.textContent=selected.lat.toFixed(5)+', '+selected.lng.toFixed(5);share.disabled=false;forecast.disabled=false;radius.disabled=false;radius.value=String(point.radiusMiles);status.textContent='Checking this location…';status.hidden=false;panel.hidden=false;back.hidden=true;savedScroll=panel.scrollTop=0;panel.setAttribute('aria-busy','true');return revision;
  }
  function suspend(){if(destroyed||panel.hidden)return;savedScroll=panel.scrollTop;panel.hidden=true;back.hidden=!point;}
  function resume(){if(destroyed||!point)return false;onResume(pointCopy(point));panel.hidden=false;back.hidden=true;panel.scrollTop=savedScroll;head.focus?.({preventScroll:true});return true;}
