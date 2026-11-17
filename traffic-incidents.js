@@ -1,7 +1,7 @@
 import {getMapBadgeLayout,badgeRectangle,badgeLeaderSegments} from './map-badge-layout.js?v=20261117-weather-suite';
 import {layoutOverviewBadges} from './place-clusters.js?v=20261117-weather-suite';
 import {normalizeModotTraffic,reportedTrafficDelay,trafficGeometry,compareTrafficRoads} from './traffic-details.js?v=20261117-traffic-suite';
-import {trafficIncidentIcon,TRAFFIC_INCIDENT_COLORS,cleanTrafficFilter} from './traffic-ui.js?v=20261117-traffic-suite';
+import {trafficIncidentIcon,TRAFFIC_INCIDENT_COLORS,cleanTrafficFilter} from './traffic-ui.js?v=20261117-traffic-repair';
 // Official MoDOT active traffic impacts. Incident duration is NOT driving delay.
 const TRAFFIC_LAYERS=new Set([0,5,9]),TRAFFIC_LINE_LAYERS=new Set([13,18,22]);
 const TRAFFIC_STRINGS={DATA_ID:100,ROUTE:240,TRAVELWAY_NAME:240,DESIGNATION:8,DIRECTION:16,COUNTY_NAME:80,BEGIN_DESCRIPTION:300,END_DESCRIPTION:300,TYPE_CODE:120,EXT_COMMENT:8000,LEVEL_OF_IMPACT_CODE:60,STATUS_CODE:30};
@@ -62,15 +62,22 @@ export function trafficBadgeGroups(records,project,{zoom=10}={}){
 }
 const shortDirection=value=>({northbound:'NB',southbound:'SB',eastbound:'EB',westbound:'WB','both directions':'both ways'}[value]||value||'');
 const roadText=record=>{const name=record.roadName||record.road||'Road not reported';return name+(record.direction&&!name.endsWith(' '+record.direction)?' '+shortDirection(record.direction):'');};
+export const TRAFFIC_DETAIL_ZOOM=14;
 export function trafficBadgePresentation(records,{zoom=10,compact=false}={}){
- const crash=records.filter(r=>trafficMatchesFilter(r,'crashes')).length,closed=records.filter(r=>trafficMatchesFilter(r,'closures')&&!trafficMatchesFilter(r,'crashes')).length,other=records.length-crash-closed,kind=crash?'crash':closed?'closure':'other';
+ const iconOnly=zoom<TRAFFIC_DETAIL_ZOOM,compactCopy=compact&&iconOnly,crash=records.filter(r=>trafficMatchesFilter(r,'crashes')).length,closed=records.filter(r=>trafficMatchesFilter(r,'closures')&&!trafficMatchesFilter(r,'crashes')).length,other=records.length-crash-closed,kind=crash?'crash':closed?'closure':'other';
  let primary,secondary;
  if(records.length===1){const r=records[0],planned=r.planned||r.status==='planned',action=planned?(/clos(?:ed|ure)/i.test(r.impact||r.title||'')?'Planned closure':'Planned road work'):trafficMatchesFilter(r,'crashes')?'Crash':trafficMatchesFilter(r,'closures')?'Closed':r.title||r.impact||'Road incident';
-  primary=compact?action+' · '+roadText(r):roadText(r);
-  secondary=compact?'':[action,trafficMatchesFilter(r,'crashes')&&trafficMatchesFilter(r,'closures')?'Road closed':null,r.lanes||(!r.crash&&r.closed?r.title:null),r.delay].filter(Boolean).join(' · ');
- }else{primary=[crash?crash+' crash'+(crash===1?'':'es'):'',closed?closed+' closure'+(closed===1?'':'s'):'',other?other+' other':''].filter(Boolean).join(' · ');const roads=[...new Set(records.map(roadText))];secondary=compact?'':roads.slice(0,2).join(' · ')+(roads.length>2?' +'+(roads.length-2)+' roads':'');}
- const width=compact?Math.min(184,Math.max(132,primary.length*5.8+40)):Math.min(236,Math.max(zoom>=13?190:160,Math.max(primary.length,secondary.length)*5.7+42)),height=compact?36:46;
- return{primary,secondary,width,height,kind,color:TRAFFIC_INCIDENT_COLORS[kind],title:records.map(r=>[roadText(r),r.title,r.impact,r.lanes,r.delay].filter(Boolean).join(' · ')).join('\n'),priority:crash?100:closed?80:40};
+  primary=compactCopy?action+' · '+roadText(r):roadText(r);
+  secondary=compactCopy?'':[action,trafficMatchesFilter(r,'crashes')&&trafficMatchesFilter(r,'closures')?'Road closed':null,r.lanes||(!r.crash&&r.closed?r.title:null),r.delay].filter(Boolean).join(' · ');
+ }else{primary=[crash?crash+' crash'+(crash===1?'':'es'):'',closed?closed+' closure'+(closed===1?'':'s'):'',other?other+' other':''].filter(Boolean).join(' · ');const roads=[...new Set(records.map(roadText))];secondary=compactCopy?'':roads.slice(0,2).join(' · ')+(roads.length>2?' +'+(roads.length-2)+' roads':'');}
+ const width=iconOnly?40:Math.min(compact?204:236,Math.max(190,Math.max(primary.length,secondary.length)*5.7+42)),height=iconOnly?40:46;
+ return{primary,secondary,width,height,iconOnly,count:records.length,kind,color:TRAFFIC_INCIDENT_COLORS[kind],title:records.map(r=>[roadText(r),r.title,r.impact,r.lanes,r.delay].filter(Boolean).join(' · ')).join('\n'),priority:crash?100:closed?80:40};
+}
+export function createTrafficBadgeElement(look,{width=look.width,height=look.height,doc=document}={}){
+ const node=doc.createElement('div');node.className='traffic-incident-label'+(look.iconOnly?' traffic-incident-label--icon':'');node.style.cssText='--traffic-incident-color:'+look.color+';width:'+width+'px;height:'+height+'px;';node.title=look.title;node.setAttribute('aria-label',look.title);
+ const symbol=doc.createElement('span');symbol.className='traffic-incident-label-symbol';symbol.innerHTML=trafficIncidentIcon(look.kind);symbol.setAttribute('aria-hidden','true');node.append(symbol);
+ if(look.iconOnly){if(look.count>1){const count=doc.createElement('span');count.className='traffic-incident-count';count.textContent=look.count>99?'99+':String(look.count);count.setAttribute('aria-hidden','true');node.append(count);}return node;}
+ const copy=doc.createElement('span');copy.className='traffic-incident-copy';const primary=doc.createElement('strong');primary.textContent=look.primary;copy.append(primary);if(look.secondary){const secondary=doc.createElement('span');secondary.textContent=look.secondary;copy.append(secondary);}node.append(copy);return node;
 }
 function recordDeadline(record){const value=record.expiresAt||record.endTime;const n=typeof value==='number'?value:Date.parse(value);return Number.isFinite(n)?n:null;}
 function currentExternal(record,time){return record&&Number.isFinite(record.lat)&&Number.isFinite(record.lng)&&record.lat>=38.1&&record.lat<=39.2&&record.lng>=-91.2&&record.lng<=-89.4&&(recordDeadline(record)===null||recordDeadline(record)>time);}
@@ -125,9 +132,8 @@ export function createTrafficIncidents(map,{onSelect=()=>{},onStatus=()=>{},onUp
   for(const r of current){const look=trafficBadgePresentation([r],{zoom}),tooltip=document.createElement('span');tooltip.textContent=look.title;L.circleMarker([r.lat,r.lng],{pane:'traffic-incident-anchors',radius:zoom>=14?5:4,color:look.color,weight:2.5,fillColor:'#fff',fillOpacity:1}).bindTooltip(tooltip).on('click',event=>{if(event.originalEvent)L.DomEvent.stopPropagation(event.originalEvent);onSelect(r);}).addTo(group);}
   for(const badge of placed){const items=badge.cluster.features,look=trafficBadgePresentation(items,{zoom,compact:badge.compact}),first=items[0],r=items.length===1?first:{...first,members:items,clusterCenter:badge.cluster.center,clusterBounds:badge.cluster.bounds,title:look.primary,label:look.primary,road:look.secondary,delay:null,description:'Choose a report to see its exact location and published details.'};
    for(const item of items){const anchor=map.latLngToContainerPoint([item.lat,item.lng]);for(const line of badgeLeaderSegments([anchor.x,anchor.y],badge.position,[...controls,...boxes,...anchorBoxes]))L.polyline(line.map(p=>map.containerPointToLatLng(L.point(...p))),{pane:'traffic-incident-anchors',color:look.color,weight:1.6,opacity:.9,interactive:false,className:'traffic-badge-leader'}).addTo(group);}
-   const node=document.createElement('div');node.className='traffic-incident-label';node.style.cssText='display:flex;align-items:center;gap:7px;box-sizing:border-box;padding:5px 8px;border:2px solid '+look.color+';border-radius:10px;background:#fffaf2;color:#442b20;box-shadow:0 2px 7px #0004;width:'+badge.width+'px;height:'+badge.height+'px;font:700 11px/1.15 system-ui;';node.title=look.title;
-   const symbol=document.createElement('span');symbol.innerHTML=trafficIncidentIcon(look.kind);symbol.style.cssText='display:flex;flex:none;color:'+look.color+';';const copy=document.createElement('span');copy.style.cssText='display:block;min-width:0;';const primary=document.createElement('strong');primary.textContent=look.primary;primary.style.cssText='display:block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;';copy.append(primary);if(look.secondary){const secondary=document.createElement('span');secondary.textContent=look.secondary;secondary.style.cssText='display:block;font-size:10px;font-weight:600;margin-top:3px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;';copy.append(secondary);}node.append(symbol,copy);
-   const display=map.containerPointToLatLng(L.point(...badge.position));L.marker(display,{pane:'traffic-incident-badges',icon:L.divIcon({className:'traffic-incident-marker',html:node,iconSize:[badge.width,badge.height],iconAnchor:[badge.width/2,badge.height/2]}),title:look.title,alt:look.title,keyboard:true}).on('click',()=>onSelect(r)).addTo(group);
+   const node=createTrafficBadgeElement(look,{width:badge.width,height:badge.height});
+   const display=map.containerPointToLatLng(L.point(...badge.position));L.marker(display,{pane:'traffic-incident-badges',icon:L.divIcon({className:'traffic-incident-marker',html:node,iconSize:[badge.width,badge.height],iconAnchor:[badge.width/2,badge.height/2]}),title:look.title,alt:look.title,keyboard:true}).on('add',function(){this.getElement()?.setAttribute('aria-label',look.title);}).on('click',()=>onSelect(r)).addTo(group);
   }
  }
  const unregister=layout.register('traffic',draw),scheduleDraw=()=>layout.request('traffic');

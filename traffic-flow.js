@@ -1,6 +1,8 @@
 // Relative speed comes from the provider's actual roads. An uncolored road is
 // not proof of free flow, and receipt time is not an observation timestamp.
+import {REGION} from './core.js?v=20261117-traffic-repair';
 export const TRAFFIC_FLOW_INTERVAL=300000;
+export const TRAFFIC_FLOW_BOUNDS=Object.freeze([Object.freeze([REGION.south,REGION.west]),Object.freeze([REGION.north,REGION.east])]);
 export const TRAFFIC_FLOW_SOURCE=Object.freeze({name:'TomTom',style:'relative0',url:'https://docs.tomtom.com/traffic-api/documentation/tomtom-maps/v1/traffic-flow/raster-flow-tiles'});
 export const TRAFFIC_FLOW_LEGEND=Object.freeze([
  {id:'moving',label:'Moving well',color:'#2EAB30',description:'At least 75% of the usual free-flow speed.'},
@@ -11,11 +13,19 @@ export const TRAFFIC_FLOW_LEGEND=Object.freeze([
 ].map(Object.freeze));
 const RETAIN_MS=TRAFFIC_FLOW_INTERVAL*2;
 const mercatorY=lat=>(1-Math.asinh(Math.tan(Math.max(-85.05112878,Math.min(85.05112878,lat))*Math.PI/180))/Math.PI)/2;
+export function trafficTileIntersectsRegion(coords){
+ if(!coords||![coords.z,coords.x,coords.y].every(Number.isInteger)||coords.z<0||coords.z>22)return false;
+ const n=2**coords.z;
+ return coords.x>=0&&coords.y>=0&&coords.x<n&&coords.y<n&&coords.x+1>(REGION.west+180)/360*n&&coords.x<(REGION.east+180)/360*n&&coords.y+1>mercatorY(REGION.north)*n&&coords.y<mercatorY(REGION.south)*n;
+}
 // Infinity means retained, but outside the current viewport/zoom. Those tiles
 // must not take download slots from the map the user is actually looking at.
 export function trafficTilePriority(coords,view){
+ if(!trafficTileIntersectsRegion(coords))return Infinity;
  if(!view)return 0;if(coords.z!==Math.round(view.zoom))return Infinity;
- const n=2**coords.z,west=(view.west+180)/360*n,east=(view.east+180)/360*n,north=mercatorY(view.north)*n,south=mercatorY(view.south)*n;
+ const visible={west:Math.max(view.west,REGION.west),east:Math.min(view.east,REGION.east),north:Math.min(view.north,REGION.north),south:Math.max(view.south,REGION.south)};
+ if(visible.west>=visible.east||visible.south>=visible.north)return Infinity;
+ const n=2**coords.z,west=(visible.west+180)/360*n,east=(visible.east+180)/360*n,north=mercatorY(visible.north)*n,south=mercatorY(visible.south)*n;
  if(coords.x+1<=west||coords.x>=east||coords.y+1<=north||coords.y>=south)return Infinity;
  return(coords.x+.5-(west+east)/2)**2+(coords.y+.5-(north+south)/2)**2;
 }
@@ -108,7 +118,7 @@ export function paintTrafficImage(context,image,width,height,zoom){
 }
 export function createTrafficFlowLayer(url,options={}){
  const {onStatus,...leafletOptions}=options;
- const layer=L.gridLayer({pane:'traffic-overlay',className:'traffic-flow-tile',tileSize:256,minZoom:0,maxZoom:22,maxNativeZoom:22,updateWhenIdle:true,updateWhenZooming:false,keepBuffer:2,...leafletOptions});
+ const layer=L.gridLayer({pane:'traffic-overlay',className:'traffic-flow-tile',tileSize:256,minZoom:0,maxZoom:22,maxNativeZoom:22,updateWhenIdle:true,updateWhenZooming:false,keepBuffer:2,...leafletOptions,bounds:TRAFFIC_FLOW_BOUNDS});
  let serial=0,view=null,viewMap=null;
  function updateView(){if(!viewMap)return;const bounds=viewMap.getBounds();view={zoom:viewMap.getZoom(),west:bounds.getWest(),east:bounds.getEast(),north:bounds.getNorth(),south:bounds.getSouth()};queue.updateView();}
  const queue=createTrafficTileQueue({url,priority:coords=>trafficTilePriority(coords,view),batch:true,onStatus:state=>{onStatus?.(state);layer.fire('trafficstatus',state);}});

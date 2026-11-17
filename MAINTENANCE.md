@@ -31,7 +31,7 @@ when unknown and distinguish date-only events from exact showtimes.
 
 ## Specialist guides
 
-- `TRAFFIC-PERFORMANCE.md`: flow queue, source health and the external API configuration issue.
+- `TRAFFIC-PERFORMANCE.md`: regional flow bounds, request queue and visible source health.
 - `TRAFFIC-INCIDENTS.md`, `TRAFFIC-DETAILS.md`, `TRAFFIC-UI.md`: official incidents, exact selections and road-speed key.
 - `ILLINOIS-TRAFFIC.md`: IDOT closures, real affected geometry, planned work and source limits.
 

@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {createTrafficTileQueue,trafficTilePriority,paintTrafficImage,createTrafficFlowLayer,TRAFFIC_FLOW_LEGEND,TRAFFIC_FLOW_SOURCE} from '../traffic-flow.js';
+import {createTrafficTileQueue,trafficTilePriority,trafficTileIntersectsRegion,paintTrafficImage,createTrafficFlowLayer,TRAFFIC_FLOW_LEGEND,TRAFFIC_FLOW_SOURCE,TRAFFIC_FLOW_BOUNDS} from '../traffic-flow.js';
+import {REGION} from '../core.js';
 function fixture(options={}){
  let clock=0,nextTimer=0;const images=[],states=[],timers=new Map(),painted=[],cleared=[],completed=[];
  const queue=createTrafficTileQueue({url:'https://traffic.example/{z}/{x}/{y}.png',now:()=>clock,onStatus:s=>states.push(s),schedule:(fn,ms)=>{timers.set(++nextTimer,{at:clock+ms,fn});return nextTimer;},cancel:id=>timers.delete(id),createImage:()=>{const image={removeAttribute(){this.aborted=true;}};images.push(image);return image;},...options});
@@ -17,6 +18,25 @@ test('Priority selects only current-zoom intersecting tiles and starts the viewp
  const view={zoom:2,west:-100,east:-70,north:50,south:20};assert(Number.isFinite(trafficTilePriority({z:2,x:1,y:1},view)));assert.equal(trafficTilePriority({z:2,x:3,y:1},view),Infinity);assert.equal(trafficTilePriority({z:1,x:1,y:1},view),Infinity);
  const f=fixture({concurrency:2,batch:true,priority:coords=>coords.x});try{
   f.add('edge',5);f.add('near',2);f.add('center',1);assert.equal(f.images.length,0,'batching waits for the synchronous tile list');f.tick(0);assert.equal(f.images.length,2);assert.match(f.images[0].src,/\/1\/1\.png/);assert.match(f.images[1].src,/\/2\/1\.png/);f.images[0].onload();f.tick(0);assert.match(f.images[2].src,/\/5\/1\.png/);
+ }finally{f.queue.destroy();}assert.equal(f.timers.size,0);
+});
+
+test('Shared REGION keeps every intersecting border tile while excluding unsupported neighbors at all four edges',()=>{
+ assert.deepEqual(TRAFFIC_FLOW_BOUNDS,[[REGION.south,REGION.west],[REGION.north,REGION.east]]);
+ for(let y=390;y<=394;y++)for(let x=252;x<=257;x++)assert.equal(trafficTileIntersectsRegion({z:10,x,y}),true,'keep full regional tile '+x+','+y);
+ for(const[x,y]of[[251,392],[258,392],[255,389],[255,395]])assert.equal(trafficTileIntersectsRegion({z:10,x,y}),false,'omit unsupported neighbor '+x+','+y);
+ for(const[z,x,y]of[[8,63,98],[10,254,392],[12,1019,1570],[14,4043,6284],[14,4121,6284],[16,16311,25132],[18,65244,100531],[18,65162,100444]])assert.equal(trafficTileIntersectsRegion({z,x,y}),true,'preserve verified native-zoom coverage');
+});
+
+test('Wide views never request outside-region tiles; retained buffers never contaminate visible regional health',()=>{
+ let view={zoom:10,west:-93,east:-88,north:40,south:37};const f=fixture({batch:true,priority:coords=>trafficTilePriority(coords,view)});
+ try{
+  for(let y=389;y<=395;y++)for(let x=251;x<=258;x++)f.queue.add(x+','+y,{z:10,x,y},{paint(){},clear(){},done(){}});
+  f.tick(0);assert.equal(f.images.length,8);assert.equal(f.states.at(-1).total,30);assert.equal(f.queue.snapshot().pending,22);
+  for(let index=0;index<f.images.length;index++){f.images[index].onload();f.tick(0);}assert.equal(f.images.length,30);assert.equal(f.states.at(-1).available,30);assert.equal(f.states.at(-1).failed,0);
+  for(const image of f.images){const match=image.src.match(/\/10\/(\d+)\/(\d+)\.png/);assert(match&&Number(match[1])>=252&&Number(match[1])<=257&&Number(match[2])>=390&&Number(match[2])<=394);}
+  view={zoom:10,west:-90.39,east:-90.38,north:38.64,south:38.63};f.queue.updateView();assert.equal(f.states.at(-1).total,1);assert.equal(f.states.at(-1).available,1);f.setTime(300000);f.queue.refresh();assert.equal(f.images.length,31);assert.match(f.images.at(-1).src,/\/10\/254\/392\.png/);
+  view={zoom:10,west:-89.2,east:-89.0,north:38.8,south:38.5};f.queue.updateView();f.tick(0);f.queue.refresh({force:true});assert.equal(f.states.at(-1).status,'idle');assert.equal(f.states.at(-1).total,0);assert.equal(f.states.at(-1).available,0);assert.equal(f.states.at(-1).receivedAt,null);assert.equal(f.images.length,31,'a wholly unsupported viewport adds no requests');
  }finally{f.queue.destroy();}assert.equal(f.timers.size,0);
 });
 
@@ -60,7 +80,7 @@ test('Grid layer lifecycle follows the new zoom and removes viewport listeners a
  try{
   globalThis.document={createElement:()=>({getContext:()=>context})};globalThis.Image=class{constructor(){images.push(this);}removeAttribute(){this.aborted=true;}};
   globalThis.L={gridLayer(options){const events={};return{options,on(name,fn){events[name]=fn;return this;},fire(name,event){events[name]?.(event);},getTileSize:()=>({x:256,y:256}),onAdd(){this.createTile({z:zoom,x:zoom===2?1:2,y:zoom===2?1:3},()=>{});}};}};
-  layer=createTrafficFlowLayer('/{z}/{x}/{y}.png',{onStatus:state=>states.push(state)});layer.onAdd(map);await new Promise(resolve=>setTimeout(resolve,1));assert.equal(images.length,1);assert.match(images[0].src,/\/2\/1\/1\.png/);
+  layer=createTrafficFlowLayer('/{z}/{x}/{y}.png',{onStatus:state=>states.push(state)});assert.deepEqual(layer.options.bounds,TRAFFIC_FLOW_BOUNDS);layer.onAdd(map);await new Promise(resolve=>setTimeout(resolve,1));assert.equal(images.length,1);assert.match(images[0].src,/\/2\/1\/1\.png/);
   zoom=3;layer.createTile({z:3,x:2,y:3},()=>{});listeners.get('zoomend')();await new Promise(resolve=>setTimeout(resolve,1));assert.equal(images.length,2);assert.equal(images[0].aborted,true);assert.match(images[1].src,/\/3\/2\/3\.png/);assert.equal(states.at(-1).total,1);assert.equal(states.at(-1).pending,1);
   layer.fire('remove');assert.equal(images[1].aborted,true);assert.equal(listeners.size,0);assert.equal(states.at(-1).status,'idle');
  }finally{layer?.fire('remove');for(const key of Object.keys(saved))if(saved[key]===undefined)delete globalThis[key];else globalThis[key]=saved[key];}

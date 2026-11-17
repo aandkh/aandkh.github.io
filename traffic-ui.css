@@ -35,6 +35,15 @@ body[data-map-style=dark] .traffic-status--warning{color:#e8b966}
 .traffic-result-time{font-size:10px;line-height:1.4;color:var(--muted)}
 .traffic-result-schedule{font-size:11px;line-height:1.4;font-weight:700;color:var(--muted)}
 .traffic-result-open{font-size:10px;color:var(--muted);padding-top:4px;flex:0 0 auto}
+.traffic-incident-label{display:flex;align-items:center;gap:7px;box-sizing:border-box;padding:5px 8px;border:2px solid var(--traffic-incident-color);border-radius:10px;background:#fffaf2;color:#442b20;box-shadow:0 2px 7px #0004;font:700 11px/1.15 system-ui}
+.traffic-incident-label-symbol{display:flex;flex:none;color:var(--traffic-incident-color)}
+.traffic-incident-copy{display:block;min-width:0}
+.traffic-incident-copy>strong,.traffic-incident-copy>span{display:block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.traffic-incident-copy>span{font-size:10px;font-weight:600;margin-top:3px}
+.traffic-incident-label--icon{position:relative;justify-content:center;gap:0;padding:0;border-radius:50%}
+.traffic-incident-label--icon .traffic-incident-label-symbol svg{width:24px;height:24px}
+.traffic-incident-count{position:absolute;top:-1px;right:-1px;display:grid;place-items:center;min-width:15px;height:15px;padding:0 2px;border:1px solid #fffaf2;border-radius:8px;background:var(--traffic-incident-color);color:white;font:750 9px/1 system-ui}
+.traffic-incident-marker:focus-visible{outline:3px solid #4896e8;outline-offset:3px;border-radius:11px}
 /* A movable/expanded detail panel has no stable safe offset for this launcher.
    Keep weather playback in its existing controls while a traffic report is open. */
 .map-shell:has(#detail:not([hidden]) .traffic-incident-details)>.radar-launch{display:none}

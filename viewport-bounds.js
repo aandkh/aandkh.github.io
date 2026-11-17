@@ -1,4 +1,4 @@
-import {REGION} from './core.js?v=20261117-traffic-suite';
+import {REGION} from './core.js?v=20261117-traffic-repair';
 
 function validBounds(value){
  const bounds=typeof value==='string'?value.split(',').map(part=>part.trim()===''?NaN:Number(part)):value;

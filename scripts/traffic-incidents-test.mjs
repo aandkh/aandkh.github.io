@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {cleanTrafficResponse,queryTrafficLayer,trafficRecord,trafficSelectionId,trafficMatchesFilter,trafficBadgeGroups,trafficBadgePresentation,createTrafficFeed} from '../traffic-incidents.js';
+import {cleanTrafficResponse,queryTrafficLayer,trafficRecord,trafficSelectionId,trafficMatchesFilter,trafficBadgeGroups,trafficBadgePresentation,createTrafficBadgeElement,TRAFFIC_DETAIL_ZOOM,createTrafficFeed} from '../traffic-incidents.js';
 import {layoutOverviewBadges} from '../place-clusters.js';
 import {badgeRectangle,rectanglesOverlap} from '../map-badge-layout.js';
 const BASE=1800000000000;
@@ -25,6 +25,38 @@ test('road labels identify crash, direction and reported lanes without invented 
  const compact=trafficBadgePresentation([r],{compact:true});assert.equal(compact.primary,'Crash · I-55 SB');
  assert.equal(trafficBadgePresentation([record(124,{roadName:'Ramp from Broadway to I-44 eastbound',direction:'eastbound'})]).primary,'Ramp from Broadway to I-44 eastbound');
  const planned=record(125,{title:'Bridge work',impact:'Planned closure',planned:true,status:'planned',closed:false,crash:false,kind:'other'});assert.match(trafficBadgePresentation([planned]).secondary,/Planned closure/);assert.equal(trafficBadgePresentation([planned]).kind,'other');
+});
+
+class BadgeElement{
+ constructor(tagName){this.tagName=tagName;this.children=[];this.attributes={};this.style={};this.textContent='';}
+ append(...children){this.children.push(...children);}
+ setAttribute(name,value){this.attributes[name]=String(value);}
+}
+const badgeDocument={createElement:tag=>new BadgeElement(tag)};
+const badgeText=node=>[node.textContent,...node.children.map(badgeText)].join(' ');
+
+test('wide map views render only a compact incident icon while retaining descriptive accessible facts',()=>{
+ const r=record(123);assert.equal(TRAFFIC_DETAIL_ZOOM,14);
+ for(const zoom of[8,10,12,13.999])for(const compact of[false,true]){
+  const look=trafficBadgePresentation([r],{zoom,compact}),node=createTrafficBadgeElement(look,{doc:badgeDocument});
+  assert.equal(look.iconOnly,true);assert.deepEqual([look.width,look.height],[40,40]);assert.equal(look.kind,'crash');assert.equal(node.children.length,1);assert.equal(node.children[0].className,'traffic-incident-label-symbol');assert.equal(badgeText(node).trim(),'','no road text is painted in a wide-view icon');
+  assert.match(node.title,/I-55 SB/);assert.match(node.title,/2 Left Lanes Closed/);assert.equal(node.attributes['aria-label'],node.title);assert.match(node.style.cssText,/width:40px;height:40px/);
+ }
+ for(const zoom of[14,15,18])for(const compact of[false,true]){
+  const look=trafficBadgePresentation([r],{zoom,compact}),node=createTrafficBadgeElement(look,{doc:badgeDocument});assert.equal(look.iconOnly,false);assert.equal(look.height,46);assert(look.width>=190);assert.match(badgeText(node),/I-55 SB/);assert.match(badgeText(node),/2 Left Lanes Closed/,'street-level density fallback retains lane facts');
+ }
+});
+
+test('icon groups use the most important incident symbol and an exact count without a wide label',()=>{
+ const rows=[record(1),record(2,{kind:'closure',crash:false,closed:true,roadName:'Broadway'}),record(3,{kind:'other',crash:false,title:'Roadwork'})],look=trafficBadgePresentation(rows,{zoom:11}),node=createTrafficBadgeElement(look,{doc:badgeDocument});
+ assert.equal(look.kind,'crash');assert.equal(look.count,3);assert.equal(look.width,40);assert.equal(node.children.length,2);assert.equal(node.children[1].className,'traffic-incident-count');assert.equal(node.children[1].textContent,'3');assert.equal(badgeText(node).trim(),'3');assert.match(node.title,/Broadway/);
+ assert.equal(trafficBadgePresentation(rows.slice(1),{zoom:11}).kind,'closure');assert.equal(trafficBadgePresentation(rows.slice(2),{zoom:11}).kind,'other');
+ const large=createTrafficBadgeElement(trafficBadgePresentation(Array.from({length:120},(_,i)=>record(i)),{zoom:10}),{doc:badgeDocument});assert.equal(large.children[1].textContent,'99+');assert.equal(large.title.split('\n').length,120,'the accessible title retains every original report');
+});
+
+test('icon layout uses its actual square footprint and preserves source coordinates and group membership',()=>{
+ const rows=[record(1,{lat:38.6,screen:[100,100]}),record(2,{lat:38.61,screen:[200,100]}),record(3,{lat:38.62,screen:[300,100]})],source=rows.map(r=>[r.lat,r.lng]),anchors=rows.map(r=>({x:r.screen[0]-5,y:r.screen[1]-5,w:10,h:10})),groups=trafficBadgeGroups(rows,p=>rows.find(r=>r.lat===p[0]).screen,{zoom:11}).map(group=>({...group,anchor:[group.anchor[0],group.anchor[1]-36]})),placed=layoutOverviewBadges(groups,{width:420,height:260,obstacles:anchors,measure:(group,compact)=>trafficBadgePresentation(group.cluster.features,{zoom:11,compact})});
+ assert.equal(placed.length,3);assert(placed.every(b=>b.width===40&&b.height===40&&b.clearance));assert.deepEqual(placed.flatMap(b=>b.cluster.features),rows);assert.deepEqual(rows.map(r=>[r.lat,r.lng]),source);for(const badge of placed)for(const anchor of anchors)assert(!rectanglesOverlap(badgeRectangle(badge),anchor,0));
 });
 
 test('filter membership preserves closed crashes and keeps scheduled work explicit',()=>{

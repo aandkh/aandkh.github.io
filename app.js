@@ -1,14 +1,14 @@
 import {trafficFeature,appendTrafficDetails} from './traffic-details.js?v=20261117-traffic-suite';
 import {trafficCollection,currentTrafficRecord,savedTrafficFeature} from './traffic-experience.js?v=20261117-traffic-suite';
 import {loadIllinoisTraffic} from './illinois-traffic.js?v=20261117-traffic-suite';
-import {appendTrafficControls,appendTrafficKey,renderTrafficResults,cleanTrafficFilter} from './traffic-ui.js?v=20261117-traffic-suite';
+import {appendTrafficControls,appendTrafficKey,renderTrafficResults,cleanTrafficFilter} from './traffic-ui.js?v=20261117-traffic-repair';
 import {loadRadarMetadata} from './radar-metadata.js?v=20261117-weather-suite';
 import {appendWeatherOutlook} from './weather-outlook.js?v=20261117-weather-suite';
-import {createWeatherExperience,currentWeatherVisible} from './weather-experience.js?v=20261117-traffic-suite';
+import {createWeatherExperience,currentWeatherVisible} from './weather-experience.js?v=20261117-traffic-repair';
 import {createObservedRadar} from './observed-radar.js?v=20261117-weather-suite';
 import {createWeatherAlerts} from './weather-alerts.js?v=20261117-weather-suite';
 import {createWarningBanner,alertFeature,appendAlertDetails} from './weather-alert-ui.js?v=20261117-weather-suite';
-import {createTrafficFlowLayer} from './traffic-flow.js?v=20261117-traffic-suite';
+import {createTrafficFlowLayer} from './traffic-flow.js?v=20261117-traffic-repair';
 import {referenceLayer,referenceLayerFile} from './reference-layers.js?v=20261117-performance';
 import {selectionAnchor,selectionFeatureId} from './selection-focus.js?v=20261117-close-selection';
 import {createSpotExplorer} from './spot-explorer.js?v=20261117-seasonal-stories';
@@ -45,21 +45,21 @@ import {eventDay,eventOrder,eventTime,eventStamp,groupEventCards} from './event-
 import {venueEvents,mergeVenueEvents} from './concert-calendar.js?v=20261116-full-speed';
 import {createSkyCloudMap} from './sky-cloud-map.js?v=20261117-weather-suite';
 import {COMMUNITY_SOURCES,HIDDEN_LAYERS,CRIME_TYPES,combineCrime,appendAirAdvice,distance,routeMiles,pointInGeometry} from './layer-insights.js?v=20261115-air-clarity';
-import {createTrafficIncidents} from './traffic-incidents.js?v=20261117-traffic-suite';
+import {createTrafficIncidents} from './traffic-incidents.js?v=20261117-traffic-repair';
 import {attachSuggestions} from './search-suggestions.js?v=20261117-performance';
 import {createSearchClient} from './search-worker-client.js?v=20261117-performance';
 import {loadSearchFeature,safeSearchSourceFile} from './search-catalog.js?v=20261117-performance';
 import {SEARCH_ACTIONS,findSearchActionTarget} from './search-actions.js?v=20261117-performance';
 import {createFutureRadar} from './future-radar.js?v=20261117-weather-suite';
 import {searchLayers} from './explore.js?v=20261116-wildlife-heat';
-import {placeHash,readPlaceHash,placeState,findSharedFeature,encodeViewState,decodeViewState,isViewHash} from './short-links.js?v=20261117-traffic-suite';
+import {placeHash,readPlaceHash,placeState,findSharedFeature,encodeViewState,decodeViewState,isViewHash} from './short-links.js?v=20261117-traffic-repair';
 import {appendPlaceNavigation} from './place-navigation.js?v=20261115-road-insights';
 import {TODAY_LAYERS,happeningToday} from './today-filter.js?v=20261116-full-speed';
 import {createWeatherReadings} from './weather-readings.js?v=20261117-weather-suite';
 import {enrichCultureFeature,cultureFeatureDisplayable} from './place-enrichment.js?v=20261115-road-insights';
 import {apiFetch,apiUrl} from './api-client.js?v=20261117-performance';
-import {regionalViewportBounds} from './viewport-bounds.js?v=20261117-traffic-suite';
-import {placeMatchesSearch} from './place-search.js?v=20261117-traffic-suite';
+import {regionalViewportBounds} from './viewport-bounds.js?v=20261117-traffic-repair';
+import {placeMatchesSearch} from './place-search.js?v=20261117-traffic-repair';
 import {filterPlaceFeatures,isExcludedChainPlace} from './chain-places.js?v=20261116-speed';
 import {openingState,isHoursPlaceLayer} from './opening-hours.js?v=20261115-road-insights';
 import {createHoursChecks,placeOpeningState} from './open-now-filter.js?v=20261115-road-insights';
@@ -71,14 +71,14 @@ import {getMapBadgeLayout,badgeRectangle,badgeLeaderSegments} from './map-badge-
 import {appendSkyDiagram} from './forecast-visuals.js?v=20261116-full-speed';
 import {appendVehicleInspector} from './vehicles.js?v=20261115-road-insights';
 import {symbol} from './symbols.js?v=20261117-explore-layout';
-import {overlayStyles,routeOverlayStyles,aircraftDirectionStyles,markerPaint} from './overlay-style.js?v=20261117-traffic-suite';
+import {overlayStyles,routeOverlayStyles,aircraftDirectionStyles,markerPaint} from './overlay-style.js?v=20261117-traffic-repair';
 import {uiIcon} from './ui-icons.js?v=20261115-road-insights';
 import {MODE_DEFAULTS,OPACITY_DEFAULTS,cleanOverlayOpacity,cleanLayerModes,unexpiredFeatures} from './expansion-options.js?v=20261115-road-insights';
-import {appendWeather,appendSkyExtras,createOpeningNotices} from './expansion-ui.js?v=20261117-traffic-suite';
-import {LAYERS,BY_ID,EXAMPLES} from './catalog.js?v=20261117-traffic-suite';
+import {appendWeather,appendSkyExtras,createOpeningNotices} from './expansion-ui.js?v=20261117-traffic-repair';
+import {LAYERS,BY_ID,EXAMPLES} from './catalog.js?v=20261117-traffic-repair';
 import {RADAR_MODES,RADAR_TYPE_KEY,AQI,AIR_MODES} from './environment.js?v=20261115-road-insights';
 import {CONFIG} from './config.js?v=20261115-road-insights';
-import {REGION,coordinate,safeUrl,placeUrl,placeLinks,encodeState,decodeState,cleanState,cleanStop,loadPresets,savePresets,cleanPreset,browserStorage,layerSelectable,skyCloudRows,currentRoadworks,centroid,directionEnd,clusterPoints} from './core.js?v=20261117-traffic-suite';
+import {REGION,coordinate,safeUrl,placeUrl,placeLinks,encodeState,decodeState,cleanState,cleanStop,loadPresets,savePresets,cleanPreset,browserStorage,layerSelectable,skyCloudRows,currentRoadworks,centroid,directionEnd,clusterPoints} from './core.js?v=20261117-traffic-repair';
 const $=s=>document.querySelector(s),el=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;};
 const mapKey=createMapKey($('#environment-key'));if(mapKey.toggle.getAttribute('aria-expanded')==='true')mapKey.toggle.click();
 const btn=(text,fn,cls='')=>{const b=el('button',cls,text);b.type='button';b.addEventListener('click',fn);return b;};
@@ -231,7 +231,7 @@ async function inspectSpot(point){
  closeDetail();setResults(false);setControls(false);const token=spotUI.open(point);
  if(spotMarker)map.removeLayer(spotMarker);spotMarker=L.marker([point.lat,point.lng],{pane:'spot-selection',interactive:false,keyboard:false,icon:L.divIcon({className:'spot-selection-marker',html:'<svg viewBox="0 0 28 36" fill="none" aria-hidden="true"><path d="M6 34V3m0 1c6-4 10 4 16 0v14c-6 4-10-4-16 0" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><circle cx="6" cy="34" r="2" fill="currentColor"/></svg>',iconSize:[28,36],iconAnchor:[6,34]})}).addTo(map);
  try{
-  spotEngineModule??=import('./spot-data.js?v=20261117-traffic-suite');const {createSpotInspector}=await spotEngineModule;if(controller.signal.aborted||revision!==spotRevision)return;
+  spotEngineModule??=import('./spot-data.js?v=20261117-traffic-repair');const {createSpotInspector}=await spotEngineModule;if(controller.signal.aborted||revision!==spotRevision)return;
   const inspector=createSpotInspector({...point,signal:controller.signal,loadedLayers:data,layerModes,fetchJson:readSpotSource,fetchLayer:async(id,options={})=>{
    const {mode='',lat=point.lat,lng=point.lng,bbox,signal=controller.signal}=options;const query=new URLSearchParams({bbox:Array.isArray(bbox)?bbox.join(','):bbox||[Math.max(REGION.west,lng-.035),Math.max(REGION.south,lat-.028),Math.min(REGION.east,lng+.035),Math.min(REGION.north,lat+.028)].join(','),mode,lat:String(lat),lng:String(lng)});
    if(id==='weather')return loadWeatherForecast(lat,lng,{signal,loadPrimary:async({signal:forecastSignal})=>{const response=await apiFetch('/api/layers/weather?'+query,{signal:AbortSignal.any([forecastSignal,AbortSignal.timeout(8000)])});if(!response.ok)throw Error('Forecast unavailable');return response.json();}});
@@ -251,7 +251,13 @@ async function refreshWeatherReadings(){
  }catch(e){if(!controller.signal.aborted){weatherReadingsAt=Date.now();weatherReadings.expire(enabled.has('radar')&&!observedRadar.active&&!spotMode&&!skyCloudMap.active);}}
  finally{if(weatherReadingsRequest===controller)weatherReadingsRequest=null;}
 }
-function refreshTodayView(){for(const id of enabled){const d=data.get(id);if(d?.features?.length){removeDrawing(id);drawFeatures(id,d);}}renderPlaceMarkers();renderResults();renderLayers();}
+function refreshTodayView(){for(const id of enabled){
+ const d=data.get(id);
+ // Today changes discovery results. Dedicated context layers keep their own
+ // drawing and freshness lifecycle even when their metadata contains features.
+ if(['traffic','alerts','floodplains'].includes(id)||d?.raster||id==='wildlife'&&wildlifeOptions.mapView!=='reports')continue;
+ if(d?.features?.length){removeDrawing(id);drawFeatures(id,d);}
+}renderPlaceMarkers();renderResults();renderLayers();}
 function setTodayOnly(value){todayOnly=value===true;if(todayOnly){for(const id of TODAY_LAYERS)if(!requestedLayers.has(id)){todayAdded.add(id);toggle(id,true,false);}}else{for(const id of todayAdded)toggle(id,false);todayAdded.clear();}refreshTodayView();}
 function setMapStyle(style){return measureUI('map-style',()=>applyMapStyle(style));}
 function applyMapStyle(style){

@@ -1,5 +1,5 @@
 import {createSpotSourceCache} from './spot-source-cache.js';
-import {queryTrafficLayer,trafficRecord} from './traffic-incidents.js?v=20261117-traffic-suite';
+import {queryTrafficLayer,trafficRecord} from './traffic-incidents.js?v=20261117-traffic-repair';
 import {trafficFeature} from './traffic-details.js?v=20261117-traffic-suite';
 import {loadIllinoisTraffic} from './illinois-traffic.js?v=20261117-traffic-suite';
 
