@@ -1,3 +1,5 @@
+import {weatherJson,weatherAbort} from './weather-request.js?v=20261117-performance';
+
 // Observation mirrors, not forecast substitutions. Keep each value tied to its
 // original station, timestamp and coordinates; a fetch never renews an observation.
 export const OBSERVATION_MAX_AGE=2*60*60*1000;
@@ -38,17 +40,33 @@ export function selectMetroReadings(candidates,now=Date.now()){
   return primary?{...primary,slot:s.slot,replacementFor:null}:observation(s,null,{temperatureF:null,windMph:null,windFromDeg:null},now);
  });
 }
-export async function metroWeatherReadings(readings=[],{now=Date.now(),fetcher=fetch,signal,responseCache=cache,observationCache=lastGood}={}){
- const candidates=[];
- for(const r of Array.isArray(readings)?readings:[]){const station=[...METRO_STATIONS,...RESERVES].find(s=>s.id===r.id);if(!station)continue;candidates.push(observation({...station,source:r.source||'NOAA Aviation Weather Center · '+r.id,sourceUrl:r.sourceUrl||'https://aviationweather.gov/data/metar/'},r.observedAt,{temperatureF:number(r.temperatureF,-100,140)?r.temperatureF:null,windMph:number(r.windMph,0,230)?r.windMph:null,windFromDeg:number(r.windFromDeg,0,360)?r.windFromDeg:null,windVariable:!!r.windVariable},now));}
- for(const r of observationCache.values())if(current(r,now))candidates.push(r);
- async function read(url){const hit=responseCache.get(url);if(hit&&now-hit.at<120000)return hit.data;
-  try{const timeout=AbortSignal.timeout(6000),r=await fetcher(url,{credentials:'omit',signal:signal?AbortSignal.any([signal,timeout]):timeout});if(!r.ok)throw Error('Observation source unavailable');const data=await r.json();responseCache.set(url,{at:now,data});return data;}catch(e){if(signal?.aborted)throw e;return hit?.data;}
+export async function metroWeatherReadings(readings=[],{now=Date.now(),fetcher=fetch,signal,responseCache=cache,observationCache=lastGood,onUpdate,loadBackend}={}){
+ const stations=[...METRO_STATIONS,...RESERVES],candidates=[];let signature='',queued=false,reserves=null;
+ function addReadings(values){for(const r of Array.isArray(values)?values:[]){const station=stations.find(s=>s.id===r.id);if(!station)continue;candidates.push(observation({...station,source:r.source||'NOAA Aviation Weather Center · '+r.id,sourceUrl:r.sourceUrl||'https://aviationweather.gov/data/metar/'},r.observedAt,{temperatureF:number(r.temperatureF,-100,140)?r.temperatureF:null,windMph:number(r.windMph,0,230)?r.windMph:null,windFromDeg:number(r.windFromDeg,0,360)?r.windFromDeg:null,windVariable:!!r.windVariable},now));}}
+ function publish(final=false){
+  if(signal?.aborted)return;
+  const selected=selectMetroReadings(candidates,now);
+  if(!final&&!selected.some(r=>r.observedAt))return;
+  const next=JSON.stringify(selected);if(next===signature)return;signature=next;
+  for(const station of stations){const best=bestStationObservation(candidates.filter(r=>r.id===station.id),now);if(best)observationCache.set(station.id,best);else observationCache.delete(station.id);}
+  onUpdate?.(selected);
  }
- async function load(station){const urls=station.iemId?[['iem','https://mesonet.agron.iastate.edu/json/current.py?network='+station.network+'&station='+station.iemId]]:[];if(station.network!=='MO_DCP')urls.push(['nws','https://api.weather.gov/stations/'+station.id+'/observations/latest']);const values=await Promise.all(urls.map(async([kind,url])=>(kind==='iem'?mesonetObservation:stationObservation)(station,await read(url),now)));candidates.push(...values);}
- await Promise.all(METRO_STATIONS.map(load));
- // Reserve stations are queried only when a primary cannot provide both values.
- if(METRO_STATIONS.some(s=>!complete(bestStationObservation(candidates.filter(r=>r.id===s.id),now))))await Promise.all(RESERVES.map(s=>complete(bestStationObservation(candidates.filter(r=>r.id===s.id),now))?Promise.resolve():load(s)));
- for(const station of [...METRO_STATIONS,...RESERVES]){const best=bestStationObservation(candidates.filter(r=>r.id===station.id),now);if(best)observationCache.set(station.id,best);else observationCache.delete(station.id);}
- return selectMetroReadings(candidates,now);
+ function changed(){if(!queued){queued=true;queueMicrotask(()=>{queued=false;publish();});}}
+ addReadings(readings);for(const r of observationCache.values())if(current(r,now))candidates.push(r);publish();
+ const sourceRead=async url=>{try{return await weatherJson(url,{fetcher,signal,cache:responseCache,timeout:6000,maxAge:120000,now,staleIfError:true});}catch(error){if(signal?.aborted)throw error;return null;}};
+ async function load(station){
+  const urls=station.iemId?[['iem','https://mesonet.agron.iastate.edu/json/current.py?network='+station.network+'&station='+station.iemId]]:[];
+  if(station.network!=='MO_DCP')urls.push(['nws','https://api.weather.gov/stations/'+station.id+'/observations/latest']);
+  await Promise.all(urls.map(async([kind,url])=>{const value=(kind==='iem'?mesonetObservation:stationObservation)(station,await sourceRead(url),now);candidates.push(value);changed();}));
+ }
+ function reserve(){return reserves??=Promise.all(RESERVES.map(station=>complete(bestStationObservation(candidates.filter(r=>r.id===station.id),now))?Promise.resolve():load(station)));}
+ const backend=typeof loadBackend==='function'?Promise.resolve().then(()=>loadBackend({signal})).then(result=>{addReadings(Array.isArray(result)?result:result?.readings);changed();}).catch(error=>{if(signal?.aborted)throw error;}):Promise.resolve();
+ // Backend and observation mirrors start together; each useful station paints
+ // immediately. A slow mirror cannot hold the other stations behind it.
+ await Promise.all([backend,...METRO_STATIONS.map(async station=>{
+  if(!complete(bestStationObservation((Array.isArray(readings)?readings:[]).filter(r=>r.id===station.id),now)))await load(station);
+  if(!complete(bestStationObservation(candidates.filter(r=>r.id===station.id),now)))await reserve();
+ })]);
+ if(signal?.aborted)throw signal.reason||weatherAbort();
+ publish(true);return selectMetroReadings(candidates,now);
 }

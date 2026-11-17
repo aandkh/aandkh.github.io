@@ -4,9 +4,14 @@ export async function loadProgressiveLayer(snapshot, remote, onProgress, signal)
  const cancellation=()=>signal?.reason||new DOMException('Cancelled','AbortError');
  if(signal?.aborted)throw cancellation();
  const empty={features:[],status:'unavailable'};
- let remoteDone=false,onAbort;
- const remoteTask=Promise.resolve().then(remote).finally(()=>{remoteDone=true;});
- const localTask=Promise.resolve().then(()=>snapshot(empty));
+ let remoteDone=false,localDone=false,onAbort;
+ const remoteTask=Promise.resolve().then(remote).then(live=>{
+  // A slow saved-file decode or enrichment must not hold back usable live
+  // entries. The final result below still merges the complete local snapshot.
+  if(!localDone&&!signal?.aborted&&live?.features?.length)onProgress?.(live);
+  return live;
+ }).finally(()=>{remoteDone=true;});
+ const localTask=Promise.resolve().then(()=>snapshot(empty)).finally(()=>{localDone=true;});
  localTask.then(local=>{
   if(!remoteDone&&!signal?.aborted&&local?.features?.length)onProgress?.(local);
  }).catch(()=>{});

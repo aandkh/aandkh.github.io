@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {gzipSync} from 'node:zlib';
 import {buildSearchIndex,encodeSearchCatalog,searchFeatureRecord} from './build-search-index.mjs';
-import {decodeSearchCatalog,resolveSearchFeature,safeSearchSourceFile} from '../search-catalog.js';
+import {decodeSearchCatalog,resolveSearchFeature,safeSearchSourceFile,loadSearchFeature} from '../search-catalog.js';
 const built=await buildSearchIndex(),encoded=encodeSearchCatalog(built.items,built.sources),items=[...decodeSearchCatalog(encoded)];
 assert.equal(items.length,built.items.length);for(let i=0;i<items.length;i++)assert.deepEqual(items[i],built.items[i],'packed catalog metadata at '+i);
 assert.equal(new Set(items.map(x=>x.layer+':'+x.type+':'+x.id)).size,items.length,'stable IDs are unique within action and layer');
@@ -16,8 +16,13 @@ const payloadCache=new Map();let checked=0;
 for(const item of items.filter(i=>i.type==='feature')){
  assert(safeSearchSourceFile(item.sourceFile),item.sourceFile);let payload=payloadCache.get(item.sourceFile);if(!payload){payload=JSON.parse(await readFile(new URL('../'+item.sourceFile,import.meta.url),'utf8'));payloadCache.set(item.sourceFile,payload);}
  const feature=resolveSearchFeature(item,payload);assert(feature?.properties,'hydration failed: '+item.sourceFile+' '+item.id);assert.equal(String(feature.properties.id||feature.id),item.id);checked++;
+ if(item.detailFile){assert(safeSearchSourceFile(item.detailFile),item.detailFile);const small=JSON.parse(built.detailFiles[item.detailFile]);assert.deepEqual(resolveSearchFeature(item,small),feature,'exact chunk retains full original geometry/properties for '+item.id);}
 }
 for(const bad of ['../secret.json','https://bad.test/a.json','search-sources/../../a.json','incident-archive/2026-11.json?x','__proto__.json'])assert.equal(safeSearchSourceFile(bad),'');
+const chunked=items.find(item=>item.detailFile),calls=[],original=resolveSearchFeature(chunked,payloadCache.get(chunked.sourceFile));
+assert.deepEqual(await loadSearchFeature(chunked,async file=>{calls.push(file);return JSON.parse(built.detailFiles[file]);}),original);assert.deepEqual(calls,[chunked.detailFile]);
+calls.length=0;assert.deepEqual(await loadSearchFeature(chunked,async file=>{calls.push(file);if(file===chunked.detailFile)throw Error('missing chunk');return payloadCache.get(file);}),original);assert.deepEqual(calls,[chunked.detailFile,chunked.sourceFile]);
+assert.deepEqual(await loadSearchFeature(chunked,async file=>file===chunked.detailFile?{features:[]}:payloadCache.get(file)),original,'mismatched chunk falls back to original stable ID');
 assert.equal(searchFeatureRecord({id:'test',properties:{title:'Unnamed footway'}},'parks','x.json'),null);
 const second=await buildSearchIndex();assert.deepEqual(second,built,'repeat builds have no clock churn');
 console.log(`PASS: ${items.length} catalog records; ${checked} exact detail hydrations; Blue Jay, Blues, geology, sky, source guards and deterministic packing (${gzipSync(JSON.stringify(encoded)).length} bytes gzip).`);

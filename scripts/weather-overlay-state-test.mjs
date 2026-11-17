@@ -33,7 +33,7 @@ try{
   if(String(url).includes('refd_1080.json'))return new Promise(resolve=>{resolveMetadata=()=>resolve({ok:true,json:async()=>({model_init_utc:iso(base-3600000)})});});
   if(String(url).includes('sky-lights'))return{ok:true,json:async()=>({checkedAt:iso(base-86400000),expiresAt:iso(base+86400000),cells:[],bounds:[-91.2,38.1,-89.4,39.2]})};
   if(String(url).includes('sky-sites'))return{ok:true,json:async()=>({sites:[]})};
-  return{ok:true,json:async()=>({weather:{hourly:times.map((time,i)=>({time:iso(time),cloudCoverPct:20,temperatureC:10+i,windSpeedMps:2+i,windDirectionDeg:90}))}})};
+  return Response.json({weather:{hourly:times.map((time,i)=>({time:iso(time),cloudCoverPct:20,temperatureC:10+i,windSpeedMps:2+i,windDirectionDeg:90}))}});
  };
  const radar=createFutureRadar(map,{weatherReadings:{getReadings:()=>readings,forecast(rows){forecastCards.push(rows);}},onStart(){started++;},onClose(){closed++;}});
  const restoring=radar.restoreState({active:true,time:iso(times[2]),playing:true});await Promise.resolve();await Promise.resolve();

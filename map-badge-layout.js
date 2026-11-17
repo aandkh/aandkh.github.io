@@ -41,14 +41,25 @@ export function getMapBadgeLayout(map){
 export function packMapBadges(badges,{width,height,obstacles=[],gap=5,padding=5,maxDisplacement=160}={}){
  if(!Number.isFinite(width)||width<=0||!Number.isFinite(height)||height<=0)throw new TypeError('Invalid badge viewport');
  const occupied=obstacles.filter(valid),output=[];
+ // Badge counts are already bounded. A direct scan with early exit is faster
+ // here than allocating candidate rectangles or a screen-space index.
+ const clear=(x,y,w,h)=>{const left=x-w/2,top=y-h/2;for(const other of occupied)if(left<other.x+other.w+gap&&left+w+gap>other.x&&top<other.y+other.h+gap&&top+h+gap>other.y)return false;return true;};
  const ordered=[...badges].sort((a,b)=>(b.priority||0)-(a.priority||0)||a.anchor[1]-b.anchor[1]||a.anchor[0]-b.anchor[0]||a.key.localeCompare(b.key));
  for(const badge of ordered){const w=badge.width,h=badge.height,[ax,ay]=badge.anchor,minX=padding+w/2,maxX=width-padding-w/2,minY=padding+h/2,maxY=height-padding-h/2,candidates=[],seen=new Set();
   const add=(x,y)=>{if(x<minX||x>maxX||y<minY||y>maxY||(x-ax)**2+(y-ay)**2>maxDisplacement**2)return;const key=Math.round(x*10)+':'+Math.round(y*10);if(seen.has(key))return;seen.add(key);candidates.push([x,y]);};
-  if(minX<=maxX&&minY<=maxY){add(Math.max(minX,Math.min(maxX,ax)),Math.max(minY,Math.min(maxY,ay)));for(const box of occupied){const xs=[box.x-w/2-gap,box.x+box.w+w/2+gap],ys=[box.y-h/2-gap,box.y+box.h+h/2+gap];for(const x of xs){add(x,ay);for(const y of ys)add(x,y);}for(const y of ys)add(ax,y);}
-   const step=Math.max(12,Math.min(24,Math.min(w,h)));for(let y=minY;y<=maxY;y+=step)for(let x=minX;x<=maxX;x+=step)add(x,y);add(maxX,maxY);add(minX,maxY);add(maxX,minY);
+  let point=null;
+  if(minX<=maxX&&minY<=maxY){add(Math.max(minX,Math.min(maxX,ax)),Math.max(minY,Math.min(maxY,ay)));
+   // The clamped anchor is the closest possible point inside the viewport.
+   // A free anchor needs no edge candidates, lattice, or distance sort.
+   if(candidates.length&&clear(candidates[0][0],candidates[0][1],w,h))point=candidates[0];
+   if(!point){for(const box of occupied){const xs=[box.x-w/2-gap,box.x+box.w+w/2+gap],ys=[box.y-h/2-gap,box.y+box.h+h/2+gap];for(const x of xs){add(x,ay);for(const y of ys)add(x,y);}for(const y of ys)add(ax,y);}
+   const step=Math.max(12,Math.min(24,Math.min(w,h))),xStart=Math.max(0,Math.ceil((ax-maxDisplacement-minX)/step)),xEnd=Math.min(Math.floor((maxX-minX)/step),Math.floor((ax+maxDisplacement-minX)/step)),yStart=Math.max(0,Math.ceil((ay-maxDisplacement-minY)/step)),yEnd=Math.min(Math.floor((maxY-minY)/step),Math.floor((ay+maxDisplacement-minY)/step));
+   // Keep the original lattice origin and ordering, but don't visit points
+   // outside the displacement square that add() would immediately reject.
+   for(let yi=yStart;yi<=yEnd;yi++)for(let xi=xStart;xi<=xEnd;xi++)add(minX+xi*step,minY+yi*step);add(maxX,maxY);add(minX,maxY);add(maxX,minY);
+   }
   }
-  candidates.sort((a,b)=>(a[0]-ax)**2+(a[1]-ay)**2-((b[0]-ax)**2+(b[1]-ay)**2)||a[1]-b[1]||a[0]-b[0]);
-  const point=candidates.find(([x,y])=>{const box={x:x-w/2,y:y-h/2,w,h};return occupied.every(other=>!rectanglesOverlap(box,other,gap));});
+  if(!point){candidates.sort((a,b)=>(a[0]-ax)**2+(a[1]-ay)**2-((b[0]-ax)**2+(b[1]-ay)**2)||a[1]-b[1]||a[0]-b[0]);point=candidates.find(([x,y])=>clear(x,y,w,h));}
   if(!point){output.push({...badge,position:[ax,ay],clearance:false,displaced:false,leader:null});continue;}
   const displaced=Math.hypot(point[0]-ax,point[1]-ay)>.5,result={...badge,position:point,clearance:true,displaced,leader:displaced?[[ax,ay],point]:null};output.push(result);occupied.push(badgeRectangle(result));
  }

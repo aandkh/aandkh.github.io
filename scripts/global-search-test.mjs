@@ -37,6 +37,13 @@ const dateRanked=createGlobalSearch({layers,fetcher:async()=>({ok:true,json:asyn
 ]})})});await dateRanked.load();
 for(const query of ['blu','blues'])assert.deepEqual(dateRanked.search(query,{now}).map(item=>item.id),['earlier','later','earlier-word','later-word']);
 assert.equal(search.search('Blue Jay',{now})[0].id,48452,'exact species remains first');
+const overlap=createGlobalSearch({fetcher:async()=>({ok:true,json:async()=>({items:[
+ {id:'osm:way/a',title:'Local A',layer:'bars'},
+ {id:'osm:way/a',title:'Local A',layer:'nightlife'},
+ {id:'osm:way/b',title:'Local B',layer:'nightlife'},
+ {id:'osm:way/c',title:'Local C',layer:'parks'}
+]})})});await overlap.load();
+assert.deepEqual(overlap.search('local',{limit:3}).map(item=>[item.layer,item.id]),[['bars','osm:way/a'],['nightlife','osm:way/b'],['parks','osm:way/c']],'category queue advances past a duplicate OSM entity');
 
 assert(search.search('bluegrass',{now}).some(x=>x.id==='today')); // still Nov 16 in Chicago
 assert(!search.search('bluegrass',{now:Date.parse('2026-11-17T06:00:00Z')}).some(x=>x.id==='today'));

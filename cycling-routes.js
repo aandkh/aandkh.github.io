@@ -1,4 +1,4 @@
-import {apiFetch} from './api-client.js?v=20261116-security';
+import {apiFetch} from './api-client.js?v=20261117-performance';
 
 let routePromise,routeAt=0,airPromise,airAt=0;
 const finite=v=>typeof v==='number'&&Number.isFinite(v);

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-const m=await import('data:text/javascript;base64,'+readFileSync(new URL('../metro-weather.js',import.meta.url)).toString('base64'));
+const m=await import('../metro-weather.js');
 const now=Date.parse('2026-11-16T14:45:00Z'),at='2026-11-16T13:51:00Z',lambert=m.METRO_STATIONS.find(s=>s.id==='KSTL');
 const nws=m.stationObservation(lambert,{properties:{timestamp:at,temperature:{value:null,unitCode:'wmoUnit:degC'},windSpeed:{value:0,unitCode:'wmoUnit:km_h-1'},windDirection:{value:0}}},now);
 const iem=m.mesonetObservation(lambert,{id:'STL',network:'MO_ASOS',last_ob:{utc_valid:at,'airtemp[F]':36,'windspeed[kt]':0,'winddirection[deg]':0}},now);

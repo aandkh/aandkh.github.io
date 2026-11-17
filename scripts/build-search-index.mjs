@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import {readFile,writeFile,readdir} from 'node:fs/promises';
+import {readFile,writeFile,readdir,mkdir,unlink} from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
@@ -38,12 +38,12 @@ export function searchFeatureRecord(feature,layer,sourceFile){
  return entry;
 }
 export function encodeSearchCatalog(items,sources){
- const columns=['id','title','layer','type','kind','sourceFile','coordinates','subtitle','keywords','meta'],dictionaries=Object.fromEntries(['layer','type','kind','sourceFile'].map(key=>[key,[...new Set(items.map(row=>row[key]).filter(value=>value!==undefined))].sort()])),lookups=Object.fromEntries(Object.entries(dictionaries).map(([key,values])=>[key,new Map(values.map((value,index)=>[value,index]))]));
+ const columns=['id','title','layer','type','kind','sourceFile','coordinates','subtitle','keywords','detailFile','meta'],dictionaries=Object.fromEntries(['layer','type','kind','sourceFile','detailFile'].map(key=>[key,[...new Set(items.map(row=>row[key]).filter(value=>value!==undefined))].sort()])),lookups=Object.fromEntries(Object.entries(dictionaries).map(([key,values])=>[key,new Map(values.map((value,index)=>[value,index]))]));
  const rows=items.map(item=>{const meta=Object.fromEntries(Object.entries(item).filter(([key,value])=>!columns.includes(key)&&value!==undefined));const row=columns.map(key=>key==='meta'?Object.keys(meta).length?meta:null:item[key]===undefined?null:lookups[key]?lookups[key].get(item[key]):item[key]);while(row.at(-1)===null)row.pop();return row;});
  return{version:2,columns,dictionaries,sources,rows};
 }
 export async function buildSearchIndex({root=ROOT}={}){
- const items=new Map(),sources=[],read=async(file,optional=false)=>{try{const content=await readFile(path.join(root,file),'utf8'),value=JSON.parse(content);const verificationKeys=new Set(['checkedAt','sourceCheckedAt','reviewedAt','generatedAt','observedAt','sourceApiCheckedAt']);sources.push({file,fingerprint:digest(JSON.stringify(value,(key,value)=>verificationKeys.has(key)?undefined:value)),...(value.sourceRequestUrl?{url:value.sourceRequestUrl}:{})});return value;}catch(error){if(optional&&error.code==='ENOENT')return null;throw error;}};
+ const items=new Map(),sources=[],detailSources=new Map(),read=async(file,optional=false)=>{try{const content=await readFile(path.join(root,file),'utf8'),value=JSON.parse(content);const verificationKeys=new Set(['checkedAt','sourceCheckedAt','reviewedAt','generatedAt','observedAt','sourceApiCheckedAt']);sources.push({file,fingerprint:digest(JSON.stringify(value,(key,value)=>verificationKeys.has(key)?undefined:value)),...(value.sourceRequestUrl?{url:value.sourceRequestUrl}:{})});if(Buffer.byteLength(content)>256000&&(Array.isArray(value.features)||value.layers))detailSources.set(file,value);return value;}catch(error){if(optional&&error.code==='ENOENT')return null;throw error;}};
  const add=record=>{if(record){const key=record.layer+':'+record.type+':'+record.id;if(!items.has(key))items.set(key,record);}};
  const mode=(layer,key,value,title,words='')=>add({id:'mode:'+layer+':'+key+':'+value,title,layer,type:'mode',kind:BY_ID[layer]?.name||'Explore',modeKey:key,mode:value,...(words?{keywords:words}:{})});
  for(const layer of LAYERS)if(!HIDDEN.has(layer.id))add({id:layer.id,title:layer.name,layer:layer.id,type:'layer',kind:'Layer',keywords:keywords([layer.group,layer.searchTerms])});
@@ -76,9 +76,27 @@ export async function buildSearchIndex({root=ROOT}={}){
  }
  const priority=item=>['layer','mode','species','sky'].includes(item.type)?0:item.start?1:item.layer==='history'?3:item.layer==='crime'?4:2;
  const list=[...items.values()].sort((a,b)=>priority(a)-priority(b)||a.layer.localeCompare(b.layer)||a.type.localeCompare(b.type)||a.id.localeCompare(b.id));
- return{version:1,sources:sources.sort((a,b)=>a.file.localeCompare(b.file)),items:list};
+ // Keep sourceFile for full-layer/flag use. Exact selections can fetch a small
+ // content-addressed chunk without downloading every place in that category.
+ const detailFiles={};
+ for(const[file,payload]of detailSources){
+  const byLayer=new Map(),index=(layer,features)=>byLayer.set(layer,new Map((features||[]).map(feature=>[txt(feature.properties?.id||feature.id),feature])));
+  if(payload.layers)for(const[layer,data]of Object.entries(payload.layers))index(layer,data.features);else index('',payload.features);
+  let rows=[],records=[],bytes=40;
+  const flush=()=>{if(!rows.length)return;const content=JSON.stringify({type:'FeatureCollection',features:rows})+'\n',name='search-details/'+digest(content)+'.json';detailFiles[name]=content;for(const item of records)item.detailFile=name;rows=[];records=[];bytes=40;};
+  for(const item of list.filter(item=>item.type==='feature'&&item.sourceFile===file)){
+   const feature=(byLayer.get(item.sourceLayer||item.layer)||byLayer.get(''))?.get(item.id);if(!feature)continue;
+   const size=Buffer.byteLength(JSON.stringify(feature))+1;if(rows.length&&bytes+size>128000)flush();rows.push(feature);records.push(item);bytes+=size;
+  }
+  flush();
+ }
+ return{version:1,sources:sources.sort((a,b)=>a.file.localeCompare(b.file)),items:list,detailFiles};
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url)){
  const result=await buildSearchIndex(),content=JSON.stringify(encodeSearchCatalog(result.items,result.sources))+'\n',file=path.join(ROOT,'search-index.json');let old='';try{old=await readFile(file,'utf8');}catch{}
+ await mkdir(path.join(ROOT,'search-details'),{recursive:true});
+ for(const[name,content]of Object.entries(result.detailFiles)){let previous='';try{previous=await readFile(path.join(ROOT,name),'utf8');}catch{}if(content!==previous)await writeFile(path.join(ROOT,name),content);}
+ for(const name of await readdir(path.join(ROOT,'search-details')))if(/^[a-f0-9]{16}\.json$/.test(name)&&!Object.hasOwn(result.detailFiles,'search-details/'+name))await unlink(path.join(ROOT,'search-details',name));
  if(content!==old)await writeFile(file,content);console.log((content===old?'Unchanged':'Built')+' search index: '+result.items.length+' entries / '+Buffer.byteLength(content)+' bytes / '+result.sources.length+' sources');
+ console.log('Exact detail chunks: '+Object.keys(result.detailFiles).length+' files / '+Object.values(result.detailFiles).reduce((n,content)=>n+Buffer.byteLength(content),0)+' bytes');
 }

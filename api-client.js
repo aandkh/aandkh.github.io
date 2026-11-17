@@ -14,4 +14,44 @@ export function apiUrl(path,origin=CONFIG.apiOrigin||''){
  if(url.protocol!=='https:'||url.username||url.password||url.pathname!=='/'||url.search||url.hash)throw new TypeError('Invalid API origin');
  return url.origin+path;
 }
-export function apiFetch(path,options){return fetch(apiUrl(path),{...options,credentials:'omit',redirect:'error',referrerPolicy:'no-referrer'});}
+const abortReason=signal=>signal?.reason||new DOMException('Cancelled','AbortError');
+const requestOptions=options=>({...options,credentials:'omit',redirect:'error',referrerPolicy:'no-referrer'});
+
+// Only simultaneous, equivalent public GETs share work. There is no completed
+// response cache: the API's no-store policy and source timestamps stay intact.
+// One cancelled view must not abort another view waiting for the same response.
+export function createApiClient({fetcher=(...args)=>fetch(...args),origin=CONFIG.apiOrigin||'',maxPending=16}={}){
+ const pending=new Map();
+ return function read(path,options={}){
+  const url=apiUrl(path,origin),signal=options.signal;
+  if(signal?.aborted)return Promise.reject(abortReason(signal));
+  const shareable=(!options.method||options.method.toUpperCase()==='GET')&&!options.body&&!options.headers&&(!options.cache||options.cache==='default')&&!options.integrity&&!options.mode&&!options.keepalive&&/^\/api\/(?:layers\/[a-z]+|weather-readings|capabilities|place|transit-trip)(?:\?|$)/.test(path);
+  if(!shareable)return fetcher(url,requestOptions(options));
+  const parsed=new URL(url,'https://andymap.invalid');parsed.searchParams.sort();const key=parsed.pathname+parsed.search;
+  let job=pending.get(key);
+  if(!job){
+   if(pending.size>=maxPending)return fetcher(url,requestOptions(options));
+   const controller=new AbortController();job={controller,users:0,settled:false,promise:null};pending.set(key,job);
+   job.promise=Promise.resolve().then(()=>fetcher(url,requestOptions({...options,signal:controller.signal}))).then(async response=>{
+    // Read the public JSON body once. Blob storage can be shared by the fresh
+    // Responses below, unlike a chain of unused tee streams from clone().
+    const body=response.body?await response.blob():null;
+    return{body,status:response.status,statusText:response.statusText,headers:response.headers,url:response.url,type:response.type,redirected:response.redirected};
+   }).finally(()=>{job.settled=true;if(pending.get(key)===job)pending.delete(key);});
+  }
+  job.users++;
+  return new Promise((resolve,reject)=>{
+   let finished=false;
+   const release=()=>{if(finished)return false;finished=true;signal?.removeEventListener('abort',cancel);job.users--;if(!job.users&&!job.settled){if(pending.get(key)===job)pending.delete(key);job.controller.abort();}return true;};
+   const cancel=()=>{if(release())reject(abortReason(signal));};
+   signal?.addEventListener('abort',cancel,{once:true});
+   job.promise.then(value=>{
+    if(!release())return;
+    const response=new Response(value.body,{status:value.status,statusText:value.statusText,headers:value.headers});
+    Object.defineProperties(response,{url:{value:value.url},type:{value:value.type},redirected:{value:value.redirected}});
+    resolve(response);
+   },error=>{if(release())reject(error);});
+  });
+ };
+}
+export const apiFetch=createApiClient();

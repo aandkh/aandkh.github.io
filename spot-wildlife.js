@@ -1,4 +1,4 @@
-import {readWildlifeJson,wildlifeQuery} from './wildlife.js?v=20261117-close-selection';
+import {readWildlifeJson,wildlifeQuery} from './wildlife-api.js?v=20261117-performance';
 import {DEFAULT_SPOT_RADIUS_MILES,spotRadiusLabel} from './spot-radius.js?v=20261117-close-selection';
 const API='https://api.inaturalist.org/v1/observations/species_counts?',PAGE_SIZE=200,MAX_PAGES=50;
 export function spotWildlifeSeason(now=Date.now()){
@@ -44,7 +44,12 @@ export async function loadSpotWildlife({lat,lng,radiusMiles=DEFAULT_SPOT_RADIUS_
  if(!Number.isFinite(lat)||!Number.isFinite(lng)||Math.abs(lat)>90||Math.abs(lng)>180||!Number.isFinite(radiusMiles)||radiusMiles<DEFAULT_SPOT_RADIUS_MILES||radiusMiles>10)throw new TypeError('Invalid wildlife area');
  const season=spotWildlifeSeason(now),query={lat,lng,radius:Number((radiusMiles*1.609344).toPrecision(12)),d1:season.d1,d2:season.d2},baselineQuery=wildlifeQuery(query),seasonQuery=wildlifeQuery({...query,month:season.month});
  // Both must succeed. An annual response is not a seasonal substitute on error.
- const [allYearRows,monthRows]=await Promise.all([completeSpeciesCounts(baselineQuery,{signal,readJson}),completeSpeciesCounts(seasonQuery,{signal,readJson})]);
+ const monthController=new AbortController(),monthSignal=signal?AbortSignal.any([signal,monthController.signal]):monthController.signal;
+ const allYearTask=completeSpeciesCounts(baselineQuery,{signal,readJson}),monthTask=completeSpeciesCounts(seasonQuery,{signal:monthSignal,readJson});monthTask.catch(()=>{});
+ let allYearRows;try{allYearRows=await allYearTask;}catch(error){monthController.abort();throw error;}
+ // With no local candidates, return immediately and cancel the unnecessary
+ // seasonal consumer. This cannot suppress another panel's shared request.
+ const monthRows=speciesCounts(allYearRows).size?await monthTask:(monthController.abort(),[]);
  let ranking=rankSpotWildlife(allYearRows,monthRows);
  const useNearby=ranking.taxa.length>0&&ranking.seasonalTotal<20&&radiusMiles<10;
  if(useNearby){

@@ -1,4 +1,5 @@
-import {apiFetch} from './api-client.js?v=20261116-security';
+import {apiFetch} from './api-client.js?v=20261117-performance';
+import {loadWeatherForecast} from './forecast-fallback.js?v=20261117-performance';
 export function forecastFrames(init,now=Date.now()){
  const base=Date.parse(init),start=Math.ceil(now/3600000)*3600000;
  if(!Number.isFinite(base)||base>now||now-base>6*3600000)throw Error('The forecast radar source is out of date.');
@@ -21,7 +22,7 @@ export function cachedForecast(key,load,ttl=600000){
  const promise=Promise.resolve().then(load).catch(error=>{if(forecastCache.get(key)?.promise===promise)forecastCache.delete(key);throw error;});forecastCache.set(key,{at:Date.now(),promise});while(forecastCache.size>32)forecastCache.delete(forecastCache.keys().next().value);return promise;
 }
 const metadata=()=>cachedForecast('hrrr',async()=>{const r=await fetch('https://mesonet.agron.iastate.edu/data/gis/images/4326/hrrr/refd_1080.json',{signal:AbortSignal.timeout(15000)});if(!r.ok)throw Error('Forecast radar unavailable.');return (await r.json()).model_init_utc;},300000);
-const stationForecast=station=>cachedForecast(station.id,async()=>{const r=await apiFetch('/api/layers/weather?lat='+station.lat+'&lng='+station.lng,{signal:AbortSignal.timeout(20000)});if(!r.ok)throw Error('Station forecast unavailable');const d=await r.json();if(!d.weather?.hourly?.length)throw Error('Station forecast unavailable');return d.weather.hourly;});
+const stationForecast=station=>cachedForecast([station.id,station.lat,station.lng].join('/'),async()=>{const result=await loadWeatherForecast(station.lat,station.lng,{loadPrimary:async({signal})=>{const r=await apiFetch('/api/layers/weather?lat='+station.lat+'&lng='+station.lng,{signal});if(!r.ok)throw Error('Station forecast unavailable');return r.json();}});return result.weather.hourly;},300000);
 // Coalesce pointer scrubbing without starting a tile request for every pixel.
 // The displayed frame remains separately labeled until its replacement loads.
 export function createRadarScrubber({request,onSeek=()=>{},delay=100,setTimer=setTimeout,clearTimer=clearTimeout}){
@@ -62,7 +63,7 @@ export function createFutureRadar(map,{weatherReadings,onStart,onClose}){
  function prepareStations(reuse=false){
   const key=station=>[station.id,station.lat,station.lng].join('/'),previous=new Map(reuse?series.map(item=>[key(item.station),item.rows]):[]),stations=weatherReadings.getReadings();
   series=stations.map(station=>({station,rows:previous.get(key(station))||[]}));
-  return Promise.all(series.map(item=>stationForecast(item.station).then(rows=>{item.rows=rows;updateCards();}).catch(()=>{})));
+  return Promise.all(series.map(item=>stationForecast(item.station).then(rows=>{item.rows=rows;if(series.includes(item))updateCards();}).catch(()=>{})));
  }
  // Observations can arrive after a shared radar overlay has already opened.
  // Reconcile its station cards without seeking, restarting playback or changing the frame.
@@ -75,7 +76,7 @@ export function createFutureRadar(map,{weatherReadings,onStart,onClose}){
   }catch(e){if(g===generation&&active){cache.delete(i);entry.layer.remove();pause();status.textContent=e.message;}}
  }
  async function prepare(expectedSession=session){const nextInit=await metadata();if(expectedSession!==session)return false;const nextFrames=forecastFrames(nextInit);if(!nextFrames.length)throw Error('No future frames available.');if(init!==nextInit||frames[0]?.time!==nextFrames[0].time)clearFrames();init=nextInit;frames=nextFrames;return true;}
- async function warm(){if(warmed||active||document.hidden||navigator.connection?.saveData)return;warmed=true;try{prepareStations();const ready=await prepare();if(ready&&!active&&!document.hidden){frame(0);}}catch{warmed=false;}}
+ async function warm(){if(warmed||active||document.hidden||navigator.connection?.saveData)return;warmed=true;try{const ready=await prepare();if(ready&&!active&&!document.hidden){frame(0);}}catch{warmed=false;}}
  async function activate({time=null,autoplay=true,restoring=false}={}){
   const wasActive=active;pause();generation++;if(wasActive)clearFrames();restoreNotice='';active=true;const s=++session;if(!wasActive)onStart();document.body.classList.add('forecast-playing');panel.hidden=false;launch.hidden=true;status.textContent='Loading forecast radar…';slider.disabled=play.disabled=true;output.textContent='';displayed=-1;const started=performance.now();performance.mark('andymap-radar-start');
   prepareStations();weatherReadings.forecast(series.map(s=>forecastReading(s.station,[],0)));

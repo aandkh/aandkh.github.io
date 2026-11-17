@@ -23,3 +23,9 @@ input.value='blur';input.emit('input');input.emit('blur');document.activeElement
 document.activeElement=input;input.value='focus';input.emit('focus');input.emit('keydown',{key:'Escape'});replies.get('focus')([{label:'Late escape response'}]);await Promise.resolve();assert.equal(box.hidden,true);
 input.value='sync';input.emit('input');box.children[2].emit('pointerdown');box.children[2].emit('click');assert.equal(picks[1].label,'Row 2');assert.equal(input.value,'Row 2');
 console.log('PASS: async stale/blur/Escape suppression, 14 bounded text-only rows, touch selection, ArrowUp/Enter navigation and scroll into view.');
+const delayedInput=new Node('input');delayedInput.id='delayed';delayedInput.host=new Node('form');document.activeElement=delayedInput;const typed=[];
+attachSuggestions(delayedInput,{debounceMs:10,suggest:q=>{typed.push(q);return[{label:q}];},choose(){}});
+delayedInput.value='b';delayedInput.emit('input');delayedInput.value='blue';delayedInput.emit('input');await new Promise(resolve=>setTimeout(resolve,20));assert.deepEqual(typed,['blue'],'rapid input uses only the latest query');
+delayedInput.value='cancel';delayedInput.emit('input');delayedInput.emit('blur');document.activeElement=null;await new Promise(resolve=>setTimeout(resolve,20));assert.deepEqual(typed,['blue'],'blur cancels queued input');
+document.activeElement=delayedInput;delayedInput.emit('focus');typed.length=0;delayedInput.emit('compositionstart');delayedInput.value='composing';delayedInput.emit('input');await new Promise(resolve=>setTimeout(resolve,20));assert.equal(typed.length,0);delayedInput.value='finished';delayedInput.emit('compositionend');assert.deepEqual(typed,['finished']);
+console.log('PASS: input coalescing, queued blur cancellation and IME composition.');

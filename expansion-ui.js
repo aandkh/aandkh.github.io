@@ -1,4 +1,4 @@
-import {apiFetch,apiUrl} from './api-client.js?v=20261116-security';
+import {apiFetch,apiUrl} from './api-client.js?v=20261117-performance';
 import {appendForecastChart} from './forecast-visuals.js?v=20261116-full-speed';
 import {safeUrl} from './core.js?v=20261117-seasonal-stories';
 import {activeNotices} from './expansion-options.js?v=20261115-road-insights';

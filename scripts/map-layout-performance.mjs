@@ -1,0 +1,32 @@
+// CPU-only comparisons against the immediately preceding public feature release.
+// These timings do not measure browser/GPU/network performance.
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {execFileSync} from 'node:child_process';
+import {performance} from 'node:perf_hooks';
+import {fileURLToPath} from 'node:url';
+import {packMapBadges} from '../map-badge-layout.js';
+import {clusterPlaceFeatures,layoutOverviewBadges} from '../place-clusters.js';
+import {createViewportGeometryLayer} from '../viewport-geometry.js';
+const revision='8a66f631e55b426df2d4c1b59311dbe11d8d4905',root=fileURLToPath(new URL('..',import.meta.url));
+const baselineURL=(file,dependencies={})=>{let code=execFileSync('git',['show',revision+':'+file],{cwd:root,encoding:'utf8'});code=code.replace(/'\.\/([^'?]+)(?:\?[^']*)?'/g,(_,file)=>JSON.stringify(dependencies[file]||new URL('../'+file,import.meta.url).href));return'data:text/javascript;base64,'+Buffer.from(code).toString('base64');};
+const beforeBadgeURL=baselineURL('map-badge-layout.js'),before=await import(beforeBadgeURL),beforeGeometry=await import(baselineURL('viewport-geometry.js')),beforeClusters=await import(baselineURL('place-clusters.js',{'map-badge-layout.js':beforeBadgeURL}));
+const median=fn=>{for(let i=0;i<3;i++)fn();const samples=[];for(let i=0;i<11;i++){const start=performance.now();fn();samples.push(performance.now()-start);}return samples.sort((a,b)=>a-b)[5];};
+const read=name=>JSON.parse(fs.readFileSync(new URL('../'+name,import.meta.url))).features||[];
+const entries=['wildlife-snapshot.json','recent-incidents.json','concert-calendar.json','movie-screenings.json','gyms.json'].flatMap((name,i)=>read(name).filter(f=>f.geometry?.type==='Point').map(f=>({...f,_layer:['wildlife','crime','concerts','movies','gyms'][i]})));
+const project=(lng,lat,z)=>{const scale=256*2**z,sine=Math.sin(lat*Math.PI/180);return[(lng+180)/360*scale,(.5-Math.log((1+sine)/(1-sine))/(4*Math.PI))*scale];};
+const compare=(name,old,next,details={})=>{assert.deepEqual(next(),old(),name);const a=median(old),b=median(next);console.log(JSON.stringify({name,...details,beforeMs:+a.toFixed(3),afterMs:+b.toFixed(3),speedup:+(a/b).toFixed(2)}));};
+const measure=(name,badges,options)=>compare(name,()=>before.packMapBadges(badges,options),()=>packMapBadges(badges,options),{badges:badges.length});
+for(const [width,height]of [[1280,800],[390,780]]){const zoom=10,[cx,cy]=project(-90.4,38.63,zoom),groups=clusterPlaceFeatures(entries,zoom,{width,height}),overview=groups.map((cluster,i)=>{const[x,y]=project(cluster.center[1],cluster.center[0],zoom);return{key:'place:'+i,provider:'place',cluster,anchor:[x-cx+width/2,y-cy+height/2]};}),badges=overview.map(group=>({...group,width:group.cluster.features.length>1?52:30,height:34}));const obstacles=[{x:12,y:15,w:Math.min(540,width-24),h:100},{x:width-360,y:200,w:350,h:height-250},{x:20,y:height-80,w:260,h:60}],options={width,height,obstacles,maxDisplacement:180};measure('real regional packing '+width+'px ('+entries.length+' source points)',badges,options);compare('complete real regional overview '+width+'px',()=>beforeClusters.layoutOverviewBadges(overview,options),()=>layoutOverviewBadges(overview,options),{groups:overview.length});}
+for(const n of [24,60])measure('spread desktop badges '+n,Array.from({length:n},(_,i)=>({key:'spread:'+i,anchor:[50+i%10*125,200+Math.floor(i/10)*75],width:44,height:34})),{width:1280,height:800,maxDisplacement:180});
+let seed=187;const random=()=>((seed=Math.imul(seed,1664525)+1013904223>>>0)/4294967296);
+for(let run=0;run<150;run++){const width=240+Math.floor(random()*1400),height=280+Math.floor(random()*700),badges=Array.from({length:2+run%50},(_,i)=>({key:'b'+i,anchor:[random()*width,random()*height],width:20+Math.floor(random()*50),height:18+Math.floor(random()*30)})),obstacles=Array.from({length:run%7},()=>({x:random()*width,y:random()*height,w:random()*width*.4,h:random()*height*.4})),options={width,height,obstacles,gap:run%9,padding:run%6,maxDisplacement:run%10?160:0};assert.deepEqual(packMapBadges(badges,options),before.packMapBadges(badges,options),'varied packing '+run);}
+// Exercise actual source geometry through Leaflet's layer lifecycle with a
+// counting harness. Vertices represent geometry constructed/projected again;
+// timing is deliberately omitted because this harness isn't Leaflet's canvas.
+const vertices=g=>{let n=0;const walk=c=>{if(typeof c?.[0]==='number')n++;else if(Array.isArray(c))for(const p of c)walk(p);};if(g?.geometries)for(const child of g.geometries)n+=vertices(child);else walk(g?.coordinates);return n;};
+function panWork(create,features){let builtFeatures=0,builtVertices=0,extent=[-90.36,38.59,-90.22,38.72],zoom=13,frame=null,handler;class Group{constructor(){this.layers=new Set();}addLayer(p){this.layers.add(p);return this;}removeLayer(p){this.layers.delete(p);return this;}onAdd(){}onRemove(){}setStyle(){return this;}bringToFront(){return this;}}
+ const L={featureGroup:()=>new Group(),canvas:()=>({}),geoJSON:features=>{builtFeatures+=features.length;builtVertices+=features.reduce((n,f)=>n+vertices(f.geometry),0);return new Group();}},bounds=a=>({getWest:()=>a[0],getSouth:()=>a[1],getEast:()=>a[2],getNorth:()=>a[3],pad:p=>bounds([a[0]-(a[2]-a[0])*p,a[1]-(a[3]-a[1])*p,a[2]+(a[2]-a[0])*p,a[3]+(a[3]-a[1])*p])}),map={getBounds:()=>bounds(extent),getZoom:()=>zoom,on:(_names,fn)=>handler=fn,off(){}};
+ const oldRAF=globalThis.requestAnimationFrame,oldCancel=globalThis.cancelAnimationFrame;globalThis.requestAnimationFrame=fn=>(frame=fn,1);globalThis.cancelAnimationFrame=()=>{frame=null;};try{const layer=create(L,features);layer.onAdd(map);for(let step=0;step<30;step++){extent=extent.map((v,i)=>v+(i%2===0?.002:.0005));handler();const f=frame;frame=null;f?.();}layer.onRemove(map);return{builtFeatures,builtVertices};}finally{globalThis.requestAnimationFrame=oldRAF;globalThis.cancelAnimationFrame=oldCancel;}}
+for(const name of ['geology.json','quieter-parks.json','cycling-routes.json','joyrides.json']){const data=read(name),old=panWork(beforeGeometry.createViewportGeometryLayer,data),next=panWork(createViewportGeometryLayer,data);assert(next.builtVertices<=old.builtVertices,name);console.log(JSON.stringify({name:'30 small pans '+name,before:old,after:next,geometryReduction:+(1-next.builtVertices/old.builtVertices).toFixed(3)}));}
+console.log('PASS: 150 varied packings match the baseline exactly; real-data pans reuse unchanged geometry.');

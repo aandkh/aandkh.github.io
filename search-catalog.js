@@ -16,7 +16,14 @@ export function resolveSearchFeature(item,payload){
  }
  return null;
 }
-export function safeSearchSourceFile(file){return typeof file==='string'&&/^(?:(?:search-sources\/[a-z-]+|incident-archive\/\d{4}-\d{2})|[a-z][a-z0-9-]*)\.(?:json|geojson)$/.test(file)?file:'';}
+export function safeSearchSourceFile(file){return typeof file==='string'&&/^(?:(?:search-sources\/[a-z-]+|search-details\/[a-f0-9]{16}|incident-archive\/\d{4}-\d{2})|[a-z][a-z0-9-]*)\.(?:json|geojson)$/.test(file)?file:'';}
+// Small exact-detail chunks are optional: stale/missing chunks always fall back
+// to the original public source file, including deployments during an update.
+export async function loadSearchFeature(item,readSource){
+ const files=[...new Set([item?.detailFile,item?.sourceFile].filter(safeSearchSourceFile))];let failure;
+ for(const file of files)try{const feature=resolveSearchFeature(item,await readSource(file));if(feature)return feature;}catch(error){failure=error;}
+ if(failure)throw failure;return null;
+}
 export function* decodeSearchCatalog(payload){
  if(Array.isArray(payload?.items)){yield* payload.items;return;}
  if(payload?.version!==2||!Array.isArray(payload.columns)||!Array.isArray(payload.rows))return[];

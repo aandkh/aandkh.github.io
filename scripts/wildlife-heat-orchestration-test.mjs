@@ -20,14 +20,14 @@ function fixture(mapView='heat'){
   L:{featureGroup:makeGroup,tileLayer(url,options){const events=new Map();const layer={url,options,on(event,fn){events.set(event,fn);return this;},emit(event){events.get(event)?.();},addTo(){this.emit('add');this.emit('loading');return this;}};tiles.push(layer);return layer;}},
  };
  vm.createContext(context);vm.runInContext(production,context);
- return{context,tiles,pending,statuses,removed,drawn,data,requests,enabled,load:()=>context.loadLayer('wildlife'),complete(index,extra={}){pending[index].resolve({id:'wildlife',features:[],status:'partial',query:{...pending[index].options},...extra});}};
+ return{context,tiles,pending,statuses,removed,drawn,data,requests,enabled,load:options=>context.loadLayer('wildlife',options),complete(index,extra={}){pending[index].resolve({id:'wildlife',features:[],status:'partial',query:{...pending[index].options},...extra});}};
 }
 
 test('Heat tile loading starts before observations/analytics settle and commit retains decoded tiles',async()=>{
  const h=fixture(),work=h.load();assert.equal(h.pending.length,1);assert.equal(h.tiles.length,1,'heat starts while the API promise is unresolved');const first=h.drawn.get('wildlife');
  first.emit('tileload');first.emit('load');assert.equal(first.wildlifeHeatStatus.status,'ready');h.complete(0);await work;
  assert.equal(h.tiles.length,1);assert.equal(h.drawn.get('wildlife'),first);assert.equal(h.removed.length,0,'same query commit must not discard tiles');assert.equal(h.data.get('wildlife').status,'partial');
- const again=h.load();assert.equal(h.tiles.length,1,'same-selection refresh reuses current tiles during and after API wait');h.complete(1);await again;assert.equal(h.tiles.length,1);assert.equal(h.drawn.get('wildlife'),first);
+ const again=h.load({force:true});assert.equal(h.tiles.length,1,'same-selection refresh reuses current tiles during and after API wait');h.complete(1);await again;assert.equal(h.tiles.length,1);assert.equal(h.drawn.get('wildlife'),first);
 });
 
 test('A new species immediately replaces old tiles and a late prior request cannot restore them',async()=>{
@@ -52,4 +52,10 @@ test('Report view does not start heat tiles; failed analytics cannot invent or e
 test('Disabling the layer prevents a late response from painting it again',async()=>{
  const h=fixture(),work=h.load();h.enabled.delete('wildlife');h.requests.get('wildlife').abort();h.context.removeDrawing('wildlife');h.complete(0);await work;
  assert(!h.drawn.has('wildlife'));assert.equal(h.tiles.length,1);
+});
+
+test('Repeated requests reuse in-flight work and fresh results; manual refresh still fetches',async()=>{
+ const h=fixture(),first=h.load(),again=h.load();assert.equal(h.pending.length,1);assert(!h.pending[0].options.signal.aborted);h.complete(0);await Promise.all([first,again]);
+ await h.load();assert.equal(h.pending.length,1,'a repeated same-view request does not reload the source');
+ const refresh=h.load({force:true});assert.equal(h.pending.length,2);h.complete(1);await refresh;
 });

@@ -1,5 +1,5 @@
-import {getMapBadgeLayout,badgeRectangle,badgeLeaderSegments} from './map-badge-layout.js?v=20261117-explore-layout';
-import {layoutOverviewBadges} from './place-clusters.js?v=20261117-close-selection';
+import {getMapBadgeLayout,badgeRectangle,badgeLeaderSegments} from './map-badge-layout.js?v=20261117-performance';
+import {layoutOverviewBadges} from './place-clusters.js?v=20261117-performance';
 // Official MoDOT active traffic impacts. Incident duration is NOT driving delay.
 const TRAFFIC_LAYERS=new Set([0,5,9]);
 const TRAFFIC_STRINGS={DATA_ID:100,ROUTE:240,TRAVELWAY_NAME:240,TYPE_CODE:120,EXT_COMMENT:8000,LEVEL_OF_IMPACT_CODE:60,STATUS_CODE:30};
@@ -13,7 +13,7 @@ export function trafficRecord(feature,now=Date.now()){
 // JSONP must never execute with access to the application's DOM or saved maps.
 // The opaque-origin sandbox has no same-origin, top-navigation or popup access.
 export function cleanTrafficResponse(value){
- if(!value||typeof value!=='object'||value.error||value.exceededTransferLimit===true||!Array.isArray(value.features)||value.features.length>200)throw Error('Traffic incident source unavailable');
+ if(!value||typeof value!=='object'||value.error||value.exceededTransferLimit===true||!Array.isArray(value.features)||value.features.length>2000)throw Error('Traffic incident source unavailable');
  const features=[];
  for(const feature of value.features){
   const p=feature?.attributes,g=feature?.geometry;
@@ -31,7 +31,7 @@ export function queryTrafficLayer(layer,signal){return new Promise((resolve,reje
  if(signal?.aborted){reject(new DOMException('Aborted','AbortError'));return;}
  const frame=document.createElement('iframe'),token=crypto.randomUUID();let done=false;
  frame.hidden=true;frame.title='Traffic data';frame.setAttribute('aria-hidden','true');frame.setAttribute('sandbox','allow-scripts');frame.referrerPolicy='no-referrer';
- const url=new URL('./traffic-bridge.html?v=20261116-security',import.meta.url);url.searchParams.set('layer',String(layer));url.searchParams.set('token',token);url.searchParams.set('parentOrigin',window.location.origin);frame.src=url.href;
+ const url=new URL('./traffic-bridge.html?v=20261117-traffic-pages',import.meta.url);url.searchParams.set('layer',String(layer));url.searchParams.set('token',token);url.searchParams.set('parentOrigin',window.location.origin);frame.src=url.href;
  const clean=()=>{clearTimeout(timeout);window.removeEventListener('message',receive);signal?.removeEventListener('abort',abort);frame.remove();};
  const finish=(error,data)=>{if(done)return;done=true;clean();error?reject(error):resolve(data);};
  const abort=()=>finish(new DOMException('Aborted','AbortError'));
@@ -40,7 +40,7 @@ export function queryTrafficLayer(layer,signal){return new Promise((resolve,reje
   if(event.data.ok!==true){finish(Error('Traffic incident source unavailable'));return;}
   try{finish(null,cleanTrafficResponse(event.data.data));}catch(error){finish(error);}
  };
- const timeout=setTimeout(()=>finish(Error('Traffic incident source is slow')),17000);
+ const timeout=setTimeout(()=>finish(Error('Traffic incident source is slow')),22000);
  frame.onerror=()=>finish(Error('Traffic incident source unavailable'));
  window.addEventListener('message',receive);signal?.addEventListener('abort',abort,{once:true});document.body.append(frame);
  });}
@@ -52,8 +52,42 @@ export function trafficBadgeGroups(records,project){
   else groups.push({key:'traffic:'+r.id,provider:'traffic',anchor:point,cluster:{features:[r],center:[r.lat,r.lng],bounds:[[r.lat,r.lng],[r.lat,r.lng]],layerIds:['traffic']}});
  }return groups;
 }
+// Each source publishes independently. A missing impact category cannot erase
+// the other categories, and a failed update never renews cached data's age.
+export function createTrafficFeed({query=queryTrafficLayer,now=Date.now,onUpdate=()=>{}}={}){
+ const states=new Map([...TRAFFIC_LAYERS].map(id=>[id,{features:[],receivedAt:null,attemptAt:null,pending:false,failed:false}]));
+ let generation=0,controller=null;
+ function snapshot(){
+  const time=now(),unique=new Map();let available=0,failed=0,pending=0,retained=0;
+  for(const state of states.values()){
+   if(state.pending)pending++;
+   if(state.failed)failed++;
+   if(state.receivedAt===null||time-state.receivedAt>=360000)continue;
+   available++;if(state.failed)retained++;
+   for(const feature of state.features){const record=trafficRecord(feature,time);if(!record)continue;const previous=unique.get(record.id);if(!previous||(record.updated||0)>(previous.updated||0))unique.set(record.id,record);}
+  }
+  return{records:[...unique.values()],available,failed,pending,retained,status:failed?(available?'partial':'unavailable'):pending?'loading':available===states.size?'ready':'unavailable'};
+ }
+ const publish=()=>onUpdate(snapshot());
+ async function refresh(){
+  if(controller){publish();return;}
+  const time=now(),due=[...states].filter(([,s])=>s.attemptAt===null||time-s.attemptAt>=(s.failed?30000:180000));
+  if(!due.length){publish();return;}
+  const id=++generation;controller=new AbortController();const signal=controller.signal;
+  for(const[,state]of due)state.pending=true;
+  publish();
+  await Promise.allSettled(due.map(async([layer,state])=>{
+   try{const response=await query(layer,signal);if(signal.aborted||id!==generation)return;state.features=response.features;state.receivedAt=now();state.failed=false;}
+   catch(error){if(signal.aborted||id!==generation)return;state.failed=true;}
+   finally{if(id===generation){state.pending=false;state.attemptAt=now();publish();}}
+  }));
+  if(id===generation)controller=null;
+ }
+ function cancel(){generation++;controller?.abort();controller=null;for(const state of states.values())state.pending=false;}
+ return{refresh,snapshot,cancel};
+}
 export function createTrafficIncidents(map,{onSelect,onStatus,getSelected=()=>null}){
- const group=L.layerGroup(),layout=getMapBadgeLayout(map);let active=false,controller,checked=0,records=[],timer,requestId=0;
+ const group=L.layerGroup(),layout=getMapBadgeLayout(map);let active=false,records=[],timer,lastStatus='';
  function draw(){group.clearLayers();if(!active){layout.publish('traffic',[]);return;}
  const size=map.getSize(),obstacles=layout.obstacles('traffic'),groups=trafficBadgeGroups(records.filter(r=>'modot:'+r.id!==getSelected()&&map.getBounds().contains([r.lat,r.lng])),point=>map.latLngToContainerPoint(point));
  const badges=layoutOverviewBadges(groups,{width:size.x,height:size.y,obstacles,measure:(group,compact)=>{const items=group.cluster.features,label=items.length===1?items[0].label:items.length+' incidents';return compact?{width:items.length===1?Math.max(40,14+label.length*6):Math.max(28,14+String(items.length).length*6),height:24}:{width:Math.max(56,20+label.length*6.3),height:28};}}),visible=badges.filter(b=>b.clearance),boxes=visible.map(badgeRectangle);layout.publish('traffic',boxes);
@@ -63,10 +97,19 @@ export function createTrafficIncidents(map,{onSelect,onStatus,getSelected=()=>nu
   const label=document.createElement('span');label.className='traffic-delay-label'+(r.closed?' is-closed':'')+(badge.compact?' is-compact':'');label.textContent=badge.compact&&items.length>1?String(items.length):r.label;label.style.width=badge.width+'px';label.style.height=badge.height+'px';label.style.boxSizing='border-box';label.style.padding='0 5px';label.style.minWidth='0';label.style.lineHeight=(badge.height-2)+'px';label.style.textAlign='center';label.title=r.title+' · '+r.road+(r.delay?'':' · Delay time not reported');const icon=L.divIcon({className:'traffic-incident-marker',html:label,iconSize:[badge.width,badge.height],iconAnchor:[badge.width/2,badge.height/2]});L.marker(display,{icon,title:label.title,keyboard:true,zIndexOffset:500}).on('click',()=>onSelect(r)).addTo(group);
  }}
  const unregister=layout.register('traffic',draw),scheduleDraw=()=>layout.request('traffic');
- async function refresh(){if(!active||document.hidden||controller)return;if(Date.now()-checked<180000){scheduleDraw();return;}const id=++requestId;controller=new AbortController();const signal=controller.signal;
- try{const responses=await Promise.all([0,5,9].map(id=>queryTrafficLayer(id,signal)));if(!active||id!==requestId)return;const unique=new Map();for(const response of responses)for(const f of response.features||[]){const r=trafficRecord(f);if(r)unique.set(r.id,r);}records=[...unique.values()];checked=Date.now();scheduleDraw();onStatus('');}
- catch(e){if(id===requestId&&active&&e.name!=='AbortError'){records=[];scheduleDraw();onStatus('Incident reports unavailable. Road colors show traffic flow only.');}}
- finally{if(id===requestId)controller=null;}}
- function setVisible(value){active=value;if(value){group.addTo(map);refresh();clearInterval(timer);timer=setInterval(refresh,180000);}else{requestId++;controller?.abort();controller=null;clearInterval(timer);group.remove();layout.publish('traffic',[]);onStatus('');}}
- document.addEventListener('visibilitychange',()=>{if(!document.hidden&&active)refresh();});map.on('unload',()=>{unregister();clearInterval(timer);controller?.abort();});return{setVisible,refresh,relayout:scheduleDraw};
+ const feed=createTrafficFeed({onUpdate(state){
+  records=state.records;if(!active)return;scheduleDraw();
+  const text=state.failed?(state.retained?'Some incident updates are unavailable. Previously received reports may remain for up to 6 minutes.':state.available?'Some incident reports are unavailable. Other reported incidents remain visible.':'Incident reports unavailable. Road colors show traffic flow only.') : '';
+  if(text!==lastStatus){lastStatus=text;onStatus(text);}
+ }});
+ function refresh(){if(active&&!document.hidden)return feed.refresh();}
+ function setVisible(value){
+  if(active===value){if(value)refresh();return;}active=value;
+  if(value){group.addTo(map);refresh();clearInterval(timer);timer=setInterval(refresh,30000);}
+  else{feed.cancel();clearInterval(timer);group.remove();layout.publish('traffic',[]);lastStatus='';onStatus('');}
+ }
+ const onVisibility=()=>{if(!document.hidden&&active)refresh();};
+ document.addEventListener('visibilitychange',onVisibility);
+ map.on('unload',()=>{active=false;unregister();clearInterval(timer);feed.cancel();document.removeEventListener('visibilitychange',onVisibility);});
+ return{setVisible,refresh,relayout:scheduleDraw};
 }

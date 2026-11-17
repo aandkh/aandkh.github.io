@@ -1,7 +1,7 @@
 // Searchable entry points to existing controls. These records describe navigation,
 // not claims that a live source currently supplies every optional measurement.
 import {PARK_SORTS} from './park-analytics.js?v=20261116-security';
-import {CYCLING_SORTS} from './cycling-routes.js?v=20261116-security';
+import {CYCLING_SORTS} from './cycling-routes.js?v=20261117-performance';
 import {JOYRIDES_SORTS} from './joyrides.js?v=20261116-security';
 
 const item=(id,title,layer,action,options={})=>({id:'action:'+id,title,layer,type:'action',kind:'Explore '+({weather:'Forecast',parks:'Parks',cycling:'Cycling routes',joyrides:'Joyrides',crime:'Crimes & Crashes',birding:'Birdwatching',wildlife:'Wildlife',sky:'Sky tonight',air:'Air quality',outages:'Outages'}[layer]||layer),action,...options});

@@ -1,4 +1,4 @@
-import {decodeSearchCatalog} from './search-catalog.js?v=20261117-explore-layout';
+import {decodeSearchCatalog} from './search-catalog.js?v=20261117-performance';
 import {EVENT_LAYERS,eventDiscoveryCutoff} from './event-lifecycle.js?v=20261116-full-speed';
 import {isExcludedChainPlace} from './chain-places.js?v=20261116-speed';
 
@@ -26,13 +26,13 @@ function prepare(item,layerNames){
  if(!title||!layer||OMIT_LAYERS.has(layer)||/^unnamed\s+(?:footways?|playgrounds?)$/i.test(title))return null;
  const type=item.type||(['layer','feature','species','sky','mode'].includes(item.kind)?item.kind:layerOption?'layer':'feature');
  if(type==='feature'&&(isExcludedChainPlace(layer,item.feature||item)||layer==='movies'&&movieExcluded(item)))return null;
- const label=normalizeSearch(title),labelWords=words(title),other=normalizeSearch([flatten(item.keywords),item.scientificName,item.subtitle,item.kind,layerNames.get(layer)].filter(Boolean).join(' '));
+ const label=normalizeSearch(title),labelWords=label.split(' ').filter(Boolean),other=normalizeSearch([flatten(item.keywords),item.scientificName,item.subtitle,item.kind,layerNames.get(layer)].filter(Boolean).join(' '));
  const start=item.start??item.feature?.properties?.start;
  const cutoff=EVENT_LAYERS.has(layer)&&start?eventDiscoveryCutoff(start):Infinity;
  const expiresAt=item.expiresAt??item.feature?.properties?.expiresAt,expires=expiresAt?Date.parse(expiresAt):Infinity;
  return {item:{...item,title,label:title,layer,type,kind:(!item.kind||['layer','feature','species','sky','mode'].includes(item.kind))?(layerNames.get(layer)||layer):item.kind},
   key:layer+':'+type+':'+text(type==='species'?(item.taxonId||item.id||title):(item.id||title)),label,labelWords,labelStems:labelWords.map(singular),compact:label.replaceAll(' ',''),
-  all:label+' '+other,allWords:words(other),cutoff,expires:Number.isFinite(expires)?expires:Infinity};
+  all:label+' '+other,allWords:other.split(' ').filter(Boolean),cutoff,expires:Number.isFinite(expires)?expires:Infinity};
 }
 function score(record,query,tokens,stems,compact){
  // Reject almost all rows with native string checks before word-level ranking.
@@ -49,6 +49,14 @@ function score(record,query,tokens,stems,compact){
 }
 // Equivalent matches are ordered by the next published start, not shorter names.
 const rowOrder=(a,b)=>b.score-a.score||a.record.cutoff-b.record.cutoff||a.record.item.title.localeCompare(b.record.item.title)||a.record.key.localeCompare(b.record.key);
+// A broad one-letter query can match most of the catalog. Heapify is linear;
+// ranking only the rows actually shown avoids sorting tens of thousands of hits.
+function bestRows(values,compare=rowOrder){
+ const rows=[...values];
+ const down=i=>{for(;;){const left=i*2+1;if(left>=rows.length)return;const right=left+1,child=right<rows.length&&compare(rows[right],rows[left])<0?right:left;if(compare(rows[i],rows[child])<=0)return;[rows[i],rows[child]]=[rows[child],rows[i]];i=child;}};
+ for(let i=(rows.length>>1)-1;i>=0;i--)down(i);
+ return{peek:()=>rows[0],pop(){const first=rows[0],last=rows.pop();if(rows.length){rows[0]=last;down(0);}return first;},push(value){let i=rows.push(value)-1;while(i){const parent=(i-1)>>1;if(compare(rows[parent],rows[i])<=0)break;[rows[parent],rows[i]]=[rows[i],rows[parent]];i=parent;}}};
+}
 
 /** A small lazy catalog, not a request per keypress. Loaded features supersede
  * matching snapshot IDs. Search includes inactive layers and ignores map bounds.
@@ -93,15 +101,18 @@ export function createGlobalSearch({url='/search-index.json',layers=[],fetcher=g
   };
   for(const record of baseRecords)if(!overrides.has(record.key))consider(record);
   for(const record of overrides.values())consider(record);
-  matches.sort(rowOrder);
+  const ranked=bestRows(matches);
   const count=Math.max(1,Math.min(500,Math.trunc(limit)||14)),picked=[],seen=new Set(),entities=new Set();
   const append=row=>{if(!row||seen.has(row.record.key)||picked.length>=count)return false;const item=row.record.item,entity=item.type==='feature'&&/^osm:/.test(text(item.id))?'osm:'+item.id:row.record.key;if(entities.has(entity))return false;seen.add(row.record.key);entities.add(entity);picked.push(item);return true;};
   // Exact matches stay first. Broad prefixes surface each matching category
   // before dozens of same-team games or repeated screenings fill the list.
-  for(const row of matches)if(row.score>=1100)append(row);
+  while(ranked.peek()?.score>=1100&&picked.length<count)append(ranked.pop());
+  if(picked.length>=count)return picked;
   const categories=new Set(picked.map(item=>item.type==='layer'?'layer':item.layer));
-  for(const row of matches){const category=row.record.item.type==='layer'?'layer':row.record.item.layer;if(!categories.has(category)&&append(row))categories.add(category);}
-  for(const row of matches)append(row);
+  const groups=new Map();for(const row of matches){const category=row.record.item.type==='layer'?'layer':row.record.item.layer;if(!categories.has(category)){if(!groups.has(category))groups.set(category,[]);groups.get(category).push(row);}}
+  const heads=bestRows([...groups].map(([category,rows])=>{const queue=bestRows(rows);return{category,queue,row:queue.pop()};}),(a,b)=>rowOrder(a.row,b.row));
+  while(heads.peek()&&picked.length<count){const head=heads.pop();if(!append(head.row)){head.row=head.queue.pop();if(head.row)heads.push(head);}}
+  while(ranked.peek()&&picked.length<count)append(ranked.pop());
   return picked;
  }
  return {load,search,retry(){if(error){loadPromise=null;error=null;}return load();},get ready(){return ready;},get error(){return error;},get size(){return records.length;}};

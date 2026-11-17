@@ -11,7 +11,7 @@
 - `/v1/observations/histogram?date_field=observed&interval=month_of_year`: full-query monthly observation counts. This is report timing, not biological abundance or an effort-adjusted detection probability.
 - Species name search uses official `/v1/taxa/autocomplete` with `rank=species`, `is_active=true`, `per_page=8`, `locale=en`. It shares the request queue/cache, debounces typing for 350ms, cancels superseded requests, and only offers returned active species IDs. Suggestions are global species names; regional absence is shown as zero reports, not inferred presence.
 - User-selected group, taxon, date bounds and month apply to all three queries. The default is the preceding year through today.
-- Requests are serialized at at least 1.05-second spacing and successful responses cached for 30 minutes. Birding can share `readWildlifeJson` and `wildlifeQuery` to use the same rate limiter. All requests have timeouts. Do not bulk-download historical observations as a routine job.
+- Request starts are spaced by at least 1.05 seconds, with at most two requests in flight, and successful responses cached for 30 minutes. Birding can share `readWildlifeJson` and `wildlifeQuery` to use the same rate limiter. All requests have timeouts. Do not bulk-download historical observations as a routine job.
 
 ## Location protection and attribution
 

@@ -1,5 +1,5 @@
 import {setSafeLink} from './security.js?v=20261116-security';
-import {apiFetch} from './api-client.js?v=20261116-security';
+import {apiFetch} from './api-client.js?v=20261117-performance';
 import {skyConditions,nightLightAt,forecastAt,viewingColor,viewingLabel,tonightTimes} from './sky-quality.js?v=20261115-road-insights';
 const cache=new Map();let references;
 const node=(tag,text,cls='')=>{const n=document.createElement(tag);n.textContent=text;n.className=cls;return n;};

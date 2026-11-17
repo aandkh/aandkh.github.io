@@ -22,9 +22,9 @@ try{
  const fresh=cachedForecast('race-test',async()=>['fresh'],10);assert.deepEqual(await fresh,['fresh']);rejectOld(Error('old failure'));await assert.rejects(old);
  assert.equal(cachedForecast('race-test',()=>{throw Error('new cache was evicted');},10),fresh);
 }finally{Date.now=now;}
-// Only the stable NWS point-to-grid mapping is cached; hourly observations are fetched again.
+// Stable NWS point/grid and five-minute hourly responses are shared; forced refresh remains available.
 const start=new Date().toISOString(),payload={properties:{updateTime:start,periods:[{startTime:start,temperature:55,temperatureUnit:'F',windSpeed:'5 mph',windDirection:'N'}]}};
 const calls=[];const fetcher=async url=>{calls.push(url);return{ok:true,json:async()=>url.includes('/points/')?{properties:{forecastHourly:'https://api.weather.gov/gridpoints/LSX/10,20/forecast/hourly'}}:payload};};
 await loadNwsForecast(38.6,-90.4,{fetcher});await loadNwsForecast(38.6,-90.4,{fetcher});
-assert.equal(calls.filter(u=>u.includes('/points/')).length,1);assert.equal(calls.filter(u=>u.includes('/forecast/hourly')).length,2);
+assert.equal(calls.filter(u=>u.includes('/points/')).length,1);assert.equal(calls.filter(u=>u.includes('/forecast/hourly')).length,1);await loadNwsForecast(38.6,-90.4,{fetcher,force:true});assert.equal(calls.filter(u=>u.includes('/forecast/hourly')).length,2);
 console.log('PASS: weather gesture solve reuse/invalidation, sky draw coalescing/cancellation, radar cache race, NWS mapping cache without forecast staleness');

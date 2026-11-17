@@ -21,19 +21,33 @@ export function visibleGeometry(features,bounds){
  return output;
 }
 export function createViewportGeometryLayer(L,features,{style,onEachFeature,padding=.12,interactive=true}={}){
- const layer=L.featureGroup(),baseAdd=layer.onAdd,baseRemove=layer.onRemove;let map,paths,selected=[],frame;
+ const layer=L.featureGroup(),baseAdd=layer.onAdd,baseRemove=layer.onRemove,paths=new Map();let map,selected=[],frame,coverage=null,renderZoom=null;
  const scheduleFrame=globalThis.requestAnimationFrame||((fn)=>setTimeout(fn,0)),cancelFrame=globalThis.cancelAnimationFrame||clearTimeout;
  const renderer=L.canvas?.({padding:.15});
- const render=()=>{frame=null;if(!map)return;const b=map.getBounds().pad(padding),next=visibleGeometry(features,[b.getWest(),b.getSouth(),b.getEast(),b.getNorth()]);
+ const render=()=>{frame=null;if(!map)return;const view=map.getBounds(),viewport=[view.getWest(),view.getSouth(),view.getEast(),view.getNorth()],zoom=map.getZoom?.();
+  // Paths already cover this padded view. A small pan reuses both the source
+  // index result and Leaflet paths; zoom changes still narrow/widen geometry.
+  if(coverage&&zoom===renderZoom&&viewport[0]>=coverage[0]&&viewport[1]>=coverage[1]&&viewport[2]<=coverage[2]&&viewport[3]<=coverage[3])return;
+  const b=view.pad(padding);coverage=[b.getWest(),b.getSouth(),b.getEast(),b.getNorth()];renderZoom=zoom;const next=visibleGeometry(features,coverage);
   if(next.length===selected.length&&next.every((r,i)=>r.source===selected[i].source&&r.key===selected[i].key))return;
-  const originals=new Map(next.map(r=>[r.feature,r.source]));
-  const nextPaths=L.geoJSON(next.map(r=>r.feature),{style,interactive,renderer,onEachFeature:(f,path)=>onEachFeature?.(originals.get(f)||f,path)});
-  if(paths)layer.removeLayer(paths);paths=nextPaths;selected=next;layer.addLayer(paths);
+  // A newly visible park/route must not destroy and recreate all the other
+  // paths (and their event listeners). Replace only changed source geometry.
+  const wanted=new Set(next.map(r=>r.source));
+  for(const[source,record]of paths)if(!wanted.has(source)){layer.removeLayer(record.path);paths.delete(source);}
+  for(const row of next){const previous=paths.get(row.source);if(previous?.key===row.key)continue;
+   const path=L.geoJSON([row.feature],{style,interactive,renderer,onEachFeature:(_f,path)=>onEachFeature?.(row.source,path)});
+   // Add before removing the old path to avoid an unpainted frame at edges.
+   layer.addLayer(path);if(previous)layer.removeLayer(previous.path);paths.set(row.source,{key:row.key,path});
+  }
+  // Reused paths retain the source paint order even when an earlier feature
+  // first enters from the edge of the viewport.
+  for(const row of next)paths.get(row.source).path.bringToFront?.();
+  selected=next;
  };
  const queue=()=>{if(frame==null)frame=scheduleFrame(render);};
  layer.onAdd=function(nextMap){map=nextMap;baseAdd.call(this,map);map.on('moveend zoomend',queue);render();};
  layer.onRemove=function(oldMap){oldMap.off('moveend zoomend',queue);if(frame!=null)cancelFrame(frame);frame=null;map=null;baseRemove.call(this,oldMap);};
- layer.setStyle=function(nextStyle){style=nextStyle;paths?.setStyle(nextStyle);return this;};
+ layer.setStyle=function(nextStyle){style=nextStyle;for(const record of paths.values())record.path.setStyle(nextStyle);return this;};
  layer.geometryStats=()=>({sourceFeatures:features.length,visibleFeatures:selected.length,visibleParts:selected.reduce((n,f)=>n+f.key.split(',').length,0)});
  return layer;
 }

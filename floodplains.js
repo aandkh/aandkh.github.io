@@ -1,4 +1,4 @@
-import {createViewportGeometryLayer} from './viewport-geometry.js?v=20261117-explore-layout';
+import {createViewportGeometryLayer} from './viewport-geometry.js?v=20261117-performance';
 // Regional FEMA reference snapshot; intentionally not a live flooding feed.
 export const FLOOD_SOURCE_URL='https://www.arcgis.com/home/item.html?id=ccd29fb4bd5e4b44a2d61638829a5d7e';
 export const FLOOD_CLASSES={high:{color:'#4b9fff',label:'1% annual-chance flood hazard'},floodway:{color:'#2360ce',label:'Regulatory floodway'},moderate:{color:'#f2ba4b',label:'0.2% annual-chance flood hazard'},levee:{color:'#c08af0',label:'Levee-related flood zone'},other:{color:'#8eabb9',label:'Other mapped special flood hazard'}};

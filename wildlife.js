@@ -1,70 +1,11 @@
 import {cachedWildlifePhoto,validateWildlifePhoto,wildlifeImageUrl} from './wildlife-photos.js?v=20261117-close-selection';
 import {safeWebUrl,setSafeLink} from './security.js?v=20261116-security';
 import {dateRangeControl} from './date-range.js?v=20261116-full-speed';
-// Public iNaturalist observations are evidence of reports, never animal abundance.
-export const WILDLIFE_BOUNDS={swlat:38.3,swlng:-90.85,nelat:38.99,nelng:-89.95};
-export const WILDLIFE_GROUPS=[['','All wildlife & plants'],['Plantae','Plants'],['Fungi','Fungi'],['Aves','Birds'],['Mammalia','Mammals'],['Insecta','Insects'],['Arachnida','Spiders & relatives'],['Reptilia','Reptiles'],['Amphibia','Amphibians'],['Actinopterygii','Ray-finned fish'],['Mollusca','Mollusks']];
-const API='https://api.inaturalist.org/v1/',cache=new Map(),pendingReads=new Map();let queue=Promise.resolve(),lastRequest=0,cacheBytes=0;
-const CACHE_BYTES=12*1024*1024,CACHE_ENTRIES=48;
-const abortError=signal=>signal?.reason||new DOMException('Aborted','AbortError');
-function dropCache(key){const entry=cache.get(key);if(entry){cacheBytes-=entry.bytes;cache.delete(key);}}
-function rememberRead(url,data,fetcher){
- const bytes=JSON.stringify(data).length*2;dropCache(url);
- if(bytes>CACHE_BYTES)return;
- while(cache.size&&(cache.size>=CACHE_ENTRIES||cacheBytes+bytes>CACHE_BYTES))dropCache(cache.keys().next().value);
- cache.set(url,{at:Date.now(),data,bytes,fetcher});cacheBytes+=bytes;
-}
+import {readWildlifeJson,wildlifeQuery,WILDLIFE_BOUNDS,WILDLIFE_GROUPS} from './wildlife-api.js?v=20261117-performance';
+export {readWildlifeJson,wildlifeQuery,WILDLIFE_BOUNDS,WILDLIFE_GROUPS};
+const API='https://api.inaturalist.org/v1/';
 const safeDate=v=>/^\d{4}-\d{2}-\d{2}$/.test(v||'')&&Number.isFinite(Date.parse(v));
-export function wildlifeQuery(options={}){
- const q=new URLSearchParams({quality_grade:'research',captive:'false',geo:'true',hrank:'species',geoprivacy:'open',taxon_geoprivacy:'open',obscuration:'none',threatened:'false'});
- if(Number.isFinite(options.lat)&&Number.isFinite(options.lng)){q.set('lat',options.lat);q.set('lng',options.lng);q.set('radius',Math.max(.03048,Math.min(25,Number(options.radius)||5)));}
- else for(const[k,v]of Object.entries(options.bounds||WILDLIFE_BOUNDS))if(Object.hasOwn(WILDLIFE_BOUNDS,k)&&Number.isFinite(v))q.set(k,v);
- if(WILDLIFE_GROUPS.some(([k])=>k&&k===options.iconicTaxa))q.set('iconic_taxa',options.iconicTaxa);
- if(Number.isInteger(Number(options.taxonId))&&Number(options.taxonId)>0)q.set('taxon_id',options.taxonId);
- if(safeDate(options.d1))q.set('d1',options.d1);if(safeDate(options.d2))q.set('d2',options.d2);
- if(Number(options.month)>=1&&Number(options.month)<=12)q.set('month',Math.floor(Number(options.month)));
- return q;
-}
-// Share duplicate reads but retain independent cancellation for each consumer.
-// No consumer can cancel a request still needed by another open panel.
-export async function readWildlifeJson(url,{signal,fetcher=fetch}={}){
- if(signal?.aborted)throw abortError(signal);
- const cached=cache.get(url);
- if(cached&&cached.fetcher===fetcher&&Date.now()-cached.at<30*60*1000){cache.delete(url);cache.set(url,cached);return cached.data;}
- if(cached)dropCache(url);
- let entry=pendingReads.get(url);
- if(!entry||entry.fetcher!==fetcher||entry.controller.signal.aborted){
-  const controller=new AbortController();entry={controller,fetcher,users:0,promise:null};
-  const current=entry;
-  current.promise=queue.catch(()=>{}).then(async()=>{
-   if(controller.signal.aborted)throw abortError(controller.signal);
-   const wait=1050-(Date.now()-lastRequest);
-   if(wait>0)await new Promise((resolve,reject)=>{
-    const abort=()=>{clearTimeout(timer);reject(abortError(controller.signal));};
-    const timer=setTimeout(()=>{controller.signal.removeEventListener('abort',abort);resolve();},wait);
-    controller.signal.addEventListener('abort',abort,{once:true});
-   });
-   if(controller.signal.aborted)throw abortError(controller.signal);
-   lastRequest=Date.now();
-   const response=await fetcher(url,{credentials:'omit',signal:AbortSignal.any([controller.signal,AbortSignal.timeout(15000)])});
-   if(!response.ok)throw Error('iNaturalist source unavailable ('+response.status+')');
-   const data=await response.json();
-   if(controller.signal.aborted)throw abortError(controller.signal);
-   if(!data||!Array.isArray(data.results)&&typeof data.results!=='object')throw Error('Invalid iNaturalist response');
-   rememberRead(url,data,fetcher);return data;
-  }).finally(()=>{if(pendingReads.get(url)===current)pendingReads.delete(url);});
-  queue=current.promise.catch(()=>{});pendingReads.set(url,current);
- }
- entry.users++;
- return new Promise((resolve,reject)=>{
-  let settled=false;
-  const finish=(fn,value)=>{if(settled)return;settled=true;signal?.removeEventListener('abort',abort);entry.users--;fn(value);};
-  const abort=()=>{finish(reject,abortError(signal));if(!entry.users){entry.controller.abort();if(pendingReads.get(url)===entry)pendingReads.delete(url);}};
-  signal?.addEventListener('abort',abort,{once:true});
-  if(signal?.aborted){abort();return;}
-  entry.promise.then(value=>finish(resolve,value),error=>finish(reject,error));
- });
-}
+const abortError=signal=>signal?.reason||new DOMException('Aborted','AbortError');
 export function wildlifeObservation(record){
  const t=record?.taxon,c=record?.geojson?.coordinates,date=record?.observed_on;
  if(!Number.isInteger(record?.id)||record.quality_grade!=='research'||record.captive===true||record.obscured||record.geoprivacy==='private'||record.geoprivacy==='obscured'||record.taxon_geoprivacy==='private'||record.taxon_geoprivacy==='obscured'||t?.threatened===true||!t?.name||!Number.isInteger(t.id)||!safeDate(date)||!Array.isArray(c)||!c.every(Number.isFinite)||c[0]<-180||c[0]>180||c[1]<-90||c[1]>90)return null;
@@ -87,15 +28,17 @@ export function wildlifeSnapshot(observations,species,histogram,options={},check
 export function defaultWildlifeOptions(now=new Date()){const parts=Object.fromEntries(new Intl.DateTimeFormat('en-US',{timeZone:'America/Chicago',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(now).map(p=>[p.type,p.value])),end=parts.year+'-'+parts.month+'-'+parts.day,start=new Date(end+'T12:00:00Z');start.setUTCFullYear(start.getUTCFullYear()-1);return{d1:start.toISOString().slice(0,10),d2:end,iconicTaxa:'',taxonId:'',month:'',pageLimit:1,mapView:'heat'};}
 export async function loadWildlife(options={}){
  const {signal,fetcher=fetch,...input}=options,query={...defaultWildlifeOptions(),...input},q=wildlifeQuery(query),limit=Math.max(1,Math.min(5,Math.floor(query.pageLimit)||1));
- const read=path=>readWildlifeJson(API+path,{signal,fetcher});
+ const sourceController=new AbortController(),sourceSignal=signal?AbortSignal.any([signal,sourceController.signal]):sourceController.signal;
+ const read=path=>readWildlifeJson(API+path,{signal:sourceSignal,fetcher});
  try{
-  const first=await read('observations?'+q+'&per_page=200&page=1&order_by=observed_on&order=desc'),observations={...first,results:[...(first.results||[])]},warnings=[];
+  const warnings=[],firstTask=read('observations?'+q+'&per_page=200&page=1&order_by=observed_on&order=desc');
+  const optional=async(path,label)=>{try{return await read(path);}catch{warnings.push(label+' unavailable.');return null;}};
+  const aggregates=Promise.all([optional('observations/species_counts?'+q+'&order_by=count&order=desc&per_page=200&page=1','Species totals'),optional('observations/histogram?'+q+'&date_field=observed&interval=month_of_year','Monthly totals')]);
+  const first=await firstTask,observations={...first,results:[...(first.results||[])]};
   for(let page=2;page<=limit&&observations.results.length<first.total_results;page++){try{const next=await read('observations?'+q+'&per_page=200&page='+page+'&order_by=observed_on&order=desc');observations.results.push(...next.results||[]);if(!next.results?.length)break;}catch(error){if(signal?.aborted)throw error;warnings.push('Additional map reports could not be loaded.');break;}}
-  const optional=async(path,label)=>{try{return await read(path);}catch(error){if(signal?.aborted)throw error;warnings.push(label+' unavailable.');return null;}};
-  const species=await optional('observations/species_counts?'+q+'&order_by=count&order=desc&per_page=200&page=1','Species totals');
-  const histogram=await optional('observations/histogram?'+q+'&date_field=observed&interval=month_of_year','Monthly totals');
+  const [species,histogram]=await aggregates;if(signal?.aborted)throw abortError(signal);
   const snapshot=wildlifeSnapshot(observations,species,histogram,query);if(warnings.length)snapshot.note=warnings.join(' ')+' '+snapshot.note;return snapshot;
- }catch(error){if(signal?.aborted)throw error;
+ }catch(error){sourceController.abort();if(signal?.aborted)throw error;
   try{const r=await fetcher(new URL('./wildlife-snapshot.json?v=20261116-wildlife-heat',import.meta.url),{signal:AbortSignal.timeout(8000)});if(!r.ok)throw error;const saved=await r.json();
    // Never describe a different cached query as the requested one.
    const exact=wildlifeQuery(query).toString()===wildlifeQuery(saved.query||{}).toString();

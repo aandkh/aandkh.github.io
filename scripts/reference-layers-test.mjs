@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import {referenceLayer,referenceLayerFile} from '../reference-layers.js';
+const now=Date.parse('2026-11-17T02:00:00Z'),feature=(id,title,extra={})=>({id,properties:{id,title,...extra},geometry:{type:'Point',coordinates:[-90.3,38.6]}});
+let calls=0,release;const pending=new Promise(r=>release=r),fetcher=async()=>{calls++;await pending;return {ok:true,json:async()=>({id:'restaurants',checkedAt:'2026-11-15T00:00:00Z',note:'Source coverage note.',features:[feature('one','Saved'),feature('two','Second')]})}};
+const a=referenceLayer('restaurants','',undefined,{fetcher,now}),b=referenceLayer('restaurants','',undefined,{fetcher,now});assert.equal(calls,1,'concurrent consumers share the source download');release();const initial=await a;await b;
+assert.equal(initial.features.length,2);assert.equal(initial.status,'partial');assert.equal(initial.checkedAt,'2026-11-15T00:00:00Z');
+const fresh=await referenceLayer('restaurants','',{status:'ready',features:[feature('one','Updated')],checkedAt:'2026-11-17T01:59:00Z'},{fetcher,now});assert.equal(calls,1);assert.deepEqual(fresh.features.map(f=>f.properties.title),['Updated','Second']);assert.equal(initial.features[0].properties.title,'Saved','merging cannot mutate cached records');assert.equal(fresh.referenceCheckedAt,'2026-11-15T00:00:00Z');
+assert.equal(referenceLayerFile('civic','senate'),'search-sources/civic-senate.json');assert.equal(referenceLayerFile('civic','counties'),'search-sources/civic.json');assert.equal(referenceLayerFile('civic','../../secrets'),null);assert.equal(referenceLayerFile('weather'),null);
+const eventFetcher=async()=>({ok:true,json:async()=>({features:[feature('old','Started',{start:'2026-11-16T19:00:00-06:00'}),feature('future','Upcoming',{start:'2026-11-18T20:00:00-06:00'})]})});const events=await referenceLayer('festivals','',undefined,{fetcher:eventFetcher,now});assert.deepEqual(events.features.map(f=>f.id),['future']);
+console.log('PASS: reference snapshots deduplicate downloads, preserve dates, merge live corrections, expire started events and reject unknown paths.');

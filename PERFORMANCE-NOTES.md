@@ -56,3 +56,12 @@ Deliberately retained: MapLibre default vector renderer, source rate limits, exa
 - One ordered animation-frame scheduler reserves controls, traffic, places/aircraft/transit, then weather cards. Dense feeds are grouped before collision placement; leaders clip around cards. Synthetic 1,000-group phone workload retains every record through bounded groups without overlap.
 - Compact weather cards are 72 by 44 CSS pixels (80px wide only for extreme wind values). Phone browser checks confirmed four cards, no collisions with concert/movie groups, area forecast taps, and unchanged 393 by 800 map geometry.
 - Checks: overlay-spatial, radar-tile-reuse, wildlife-heat-orchestration, map-badge-layout, map-badge-app, place-selection and weather-layout scripts. These are local measurements, not a promise of instant upstream delivery on every device.
+
+## November 17 rendering retention
+
+- Badge packing accepts an unobstructed anchor immediately and limits fallback lattice searches to the allowed displacement. Candidate priority, control clearance, group membership, selected-pin reservations and source coordinates are unchanged.
+- Vector layers retain unchanged source paths when other features enter or leave. A padded coverage area avoids rescanning geometry for each small pan. Zoom still updates visible parts; source paint order, original feature callbacks, styles and event cleanup remain intact. Flood detail cells use the same retained-path helper.
+- The benchmark compares against feature release `8a66f631e55b426df2d4c1b59311dbe11d8d4905`. Complete badge overview layout from 1,412 actual regional points measured 3.45 to 0.42 ms at 1280×800 and 4.46 to 3.41 ms at 390×780 in one local run. Both include the existing compact/merge fallback. A separate 150-fixture check requires exact badge output equality.
+- Across 30 simulated small pans using actual datasets, constructed geometry vertices fell from 352,267 to 43,911 for geology, 224,570 to 10,076 for parks, 10,633 to 1,312 for cycling and 349 to 186 for joyrides. These count avoided reconstruction work; the retained geometry is neither simplified nor removed from its relevant viewport.
+
+Reproduce with `node scripts/map-layout-performance.mjs` and `node scripts/viewport-retention-test.mjs`. Additional regressions: `map-badge-layout-test`, `map-badge-app-test`, `overlay-spatial-test`, `floodplains-test`, `place-selection-test`, and `map-render-test`. Measurements are Node CPU comparisons and a Leaflet lifecycle counting harness, not browser frame-rate or low-end phone guarantees.
