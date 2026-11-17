@@ -1,0 +1,580 @@
+{
+  "articles": {
+    "https://www.firstalert4.com/2026/11/10/2-charged-after-flock-cameras-stolen-damaged-halloween-night-st-louis-county/": {
+      "changedAt": "2026-11-17T15:20:52.330050+00:00",
+      "discoveredAt": "2026-11-17T15:20:52.330050+00:00",
+      "publishedAt": "2026-11-10T16:18:46+00:00",
+      "review": {
+        "checkedAt": "2026-11-17T15:25:03.024127+00:00",
+        "disposition": "insufficient-location",
+        "note": "Article attributes multiple October 31 camera thefts/damage across Florissant and Hazelwood to police; no individual public scene blocks or case-specific occurrences are supplied. Do not pin all offenses at one guessed location.",
+        "revision": "3c43251394c7dd0e677e46ac7a6550034aacae1585bd242a8b36df7185995dc6"
+      },
+      "revision": "3c43251394c7dd0e677e46ac7a6550034aacae1585bd242a8b36df7185995dc6",
+      "sources": [
+        "firstalert-county"
+      ],
+      "title": "2 charged after Flock cameras stolen, damaged on Halloween night in St. Louis County",
+      "url": "https://www.firstalert4.com/2026/11/10/2-charged-after-flock-cameras-stolen-damaged-halloween-night-st-louis-county/"
+    },
+    "https://www.firstalert4.com/2026/11/11/ex-employee-sues-onderlaw-claims-assault-online-campaign-ferguson-data-center/": {
+      "changedAt": "2026-11-17T15:20:52.330050+00:00",
+      "discoveredAt": "2026-11-17T15:20:52.330050+00:00",
+      "publishedAt": "2026-11-11T02:52:50+00:00",
+      "review": {
+        "checkedAt": "2026-11-17T15:25:03.024127+00:00",
+        "disposition": "excluded-sensitive",
+        "note": "Civil lawsuit includes sexual-assault allegations. Preserved source exclusions; no map entry created.",
+        "revision": "096596727c6768f9917ddba6fc6c2764743ad95edb67bae7f6e7047e1dcee909"
+      },
+      "revision": "096596727c6768f9917ddba6fc6c2764743ad95edb67bae7f6e7047e1dcee909",
+      "sources": [
+        "firstalert-county"
+      ],
+      "title": "Ex-employee sues OnderLaw, claims assault, online campaign for Ferguson data center",
+      "url": "https://www.firstalert4.com/2026/11/11/ex-employee-sues-onderlaw-claims-assault-online-campaign-ferguson-data-center/"
+    },
+    "https://www.firstalert4.com/2026/11/11/family-community-remember-man-killed-youth-football-championship-madison/": {
+      "changedAt": "2026-11-17T15:20:52.330050+00:00",
+      "discoveredAt": "2026-11-17T15:20:52.330050+00:00",
+      "publishedAt": "2026-11-11T04:28:50+00:00",
+      "review": {
+        "checkedAt": "2026-11-17T15:25:03.024127+00:00",
+        "disposition": "outside-region",
+        "note": "Memorial follow-up for November 1 shooting in Madison, Illinois, not St. Louis City or County.",
+        "revision": "56c68893d083b65796690d2d08f88cdafd2251b59cc728117ae0db2f70c35f57"
+      },
+      "revision": "56c68893d083b65796690d2d08f88cdafd2251b59cc728117ae0db2f70c35f57",
+      "sources": [
+        "firstalert-crime"
+      ],
+      "title": "Family, community remember man killed at youth football championship in Madison",
+      "url": "https://www.firstalert4.com/2026/11/11/family-community-remember-man-killed-youth-football-championship-madison/"
+    },
+    "https://www.firstalert4.com/2026/11/11/former-st-louis-county-jail-officer-charged-with-accepting-bribes-smuggle-contraband/": {
+      "changedAt": "2026-11-17T15:20:52.330050+00:00",
+      "discoveredAt": "2026-11-17T15:20:52.330050+00:00",
+      "publishedAt": "2026-11-11T17:40:05+00:00",
+      "review": {
+        "checkedAt": "2026-11-17T15:25:03.024127+00:00",
+        "disposition": "historical-followup",
+        "note": "Charging report describes at least eight alleged contraband deliveries during October–November, without individual occurrence dates. Do not use November 11 publication date as an offense date.",
+        "revision": "35d794e04e8a3050201f4836e0e336e11440070820ca35c97578d1af0a728c83"
+      },
+      "revision": "35d794e04e8a3050201f4836e0e336e11440070820ca35c97578d1af0a728c83",
+      "sources": [
+        "firstalert-county",
+        "firstalert-crime"
+      ],
+      "title": "Former St. Louis County jail officer charged with accepting bribes to smuggle contraband",
+      "url": "https://www.firstalert4.com/2026/11/11/former-st-louis-county-jail-officer-charged-with-accepting-bribes-smuggle-contraband/"
+    },
+    "https://www.firstalert4.com/2026/11/11/green-tree-elementary-school-briefly-locked-down-after-stolen-vehicle-pursuit-lake-st-louis/": {
+      "changedAt": "2026-11-17T15:20:52.330050+00:00",
+      "discoveredAt": "2026-11-17T15:20:52.330050+00:00",
+      "publishedAt": "2026-11-11T18:13:29+00:00",
+      "review": {
+        "checkedAt": "2026-11-17T15:25:03.024127+00:00",
+        "disposition": "outside-region",
+        "note": "November 11 pursuit and brief school lockdown occurred in Lake Saint Louis, St. Charles County.",
+        "revision": "17af95badd935d8481d3ba4d8ee5d51a3639b00ed7de3c51719431ae09b8582a"
+      },
+      "revision": "17af95badd935d8481d3ba4d8ee5d51a3639b00ed7de3c51719431ae09b8582a",
+      "sources": [
+        "firstalert-crime"
+      ],
+      "title": "Green Tree Elementary School briefly locked down after stolen vehicle pursuit in Lake Saint Louis",
+      "url": "https://www.firstalert4.com/2026/11/11/green-tree-elementary-school-briefly-locked-down-after-stolen-vehicle-pursuit-lake-st-louis/"
+    },
+    "https://www.firstalert4.com/2026/11/11/man-critically-injured-south-city-shooting/": {
+      "changedAt": "2026-11-17T15:20:52.330050+00:00",
+      "discoveredAt": "2026-11-17T15:20:52.330050+00:00",
+      "publishedAt": "2026-11-11T18:15:40+00:00",
+      "review": {
+        "checkedAt": "2026-11-17T15:25:03.024127+00:00",
+        "disposition": "mapped",
+        "note": "Added incident:city-grant-street-fatal-shooting-20261111; corrected full article identifies Grant Street in North City, not earlier Grant Place. One death explicitly reported.",
+        "revision": "69c48d38cb88c4c3d1b7371bc63859f407a03d3204f616e740ee95b9a5504772"
+      },
+      "revision": "69c48d38cb88c4c3d1b7371bc63859f407a03d3204f616e740ee95b9a5504772",
+      "sources": [
+        "firstalert-crime"
+      ],
+      "title": "Man killed in North City shooting",
+      "url": "https://www.firstalert4.com/2026/11/11/man-critically-injured-south-city-shooting/"
+    },
+    "https://www.firstalert4.com/2026/11/11/police-man-toddler-shot-car-cahokia-heights/": {
+      "changedAt": "2026-11-17T15:20:52.330050+00:00",
+      "discoveredAt": "2026-11-17T15:20:52.330050+00:00",
+      "publishedAt": "2026-11-11T19:29:21+00:00",
+      "review": {
+        "checkedAt": "2026-11-17T15:25:03.024127+00:00",
+        "disposition": "outside-region",
+        "note": "November 11 shooting occurred in Cahokia Heights, St. Clair County, Illinois.",
+        "revision": "230df9e9e2e53b282a52d645f8f65437d12b16a1ef113a9defd9bb3ec7d70894"
+      },
+      "revision": "230df9e9e2e53b282a52d645f8f65437d12b16a1ef113a9defd9bb3ec7d70894",
+      "sources": [
+        "firstalert-crime"
+      ],
+      "title": "Man dead, baby injured after being shot in car in Cahokia Heights",
+      "url": "https://www.firstalert4.com/2026/11/11/police-man-toddler-shot-car-cahokia-heights/"
+    },
+    "https://www.firstalert4.com/2026/11/11/st-louis-police-investigate-mans-death-homicide-months-after-reported-assault/": {
+      "changedAt": "2026-11-17T15:20:52.330050+00:00",
+      "discoveredAt": "2026-11-17T15:20:52.330050+00:00",
+      "publishedAt": "2026-11-11T22:11:56+00:00",
+      "review": {
+        "checkedAt": "2026-11-17T15:25:03.024127+00:00",
+        "disposition": "insufficient-location",
+        "note": "March 21 assault location was explicitly not disclosed. May death newly classified homicide; the hospital where the victim sought care is not the scene. No invented map point.",
+        "revision": "de27e27fe920cefaf59241025fd597ababbfb32a5ab7df6723e48d8bc7947216"
+      },
+      "revision": "de27e27fe920cefaf59241025fd597ababbfb32a5ab7df6723e48d8bc7947216",
+      "sources": [
+        "firstalert-crime"
+      ],
+      "title": "St. Louis police investigate man’s death as homicide months after reported assault",
+      "url": "https://www.firstalert4.com/2026/11/11/st-louis-police-investigate-mans-death-homicide-months-after-reported-assault/"
+    },
+    "https://www.firstalert4.com/2026/11/12/coaches-families-gather-ferguson-honor-man-killed-youth-football-game/": {
+      "changedAt": "2026-11-17T15:20:52.330050+00:00",
+      "discoveredAt": "2026-11-17T15:20:52.330050+00:00",
+      "publishedAt": "2026-11-12T04:30:40+00:00",
+      "review": {
+        "checkedAt": "2026-11-17T15:25:03.024127+00:00",
+        "disposition": "outside-region",
+        "note": "Ferguson gathering was a memorial; the underlying November 1 shooting was in Madison, Illinois. Do not map the memorial as the crime scene.",
+        "revision": "73e2c62d53effe3137d23619061f23deee50b3183f1fa4f875ed59c7245a15c1"
+      },
+      "revision": "73e2c62d53effe3137d23619061f23deee50b3183f1fa4f875ed59c7245a15c1",
+      "sources": [
+        "firstalert-county"
+      ],
+      "title": "Coaches, families gather in Ferguson to honor man killed at youth football game",
+      "url": "https://www.firstalert4.com/2026/11/12/coaches-families-gather-ferguson-honor-man-killed-youth-football-game/"
+    },
+    "https://www.firstalert4.com/2026/11/12/neighbors-shaken-man-dies-toddler-injured-after-being-shot-car-cahokia-heights/": {
+      "changedAt": "2026-11-17T15:20:52.330050+00:00",
+      "discoveredAt": "2026-11-17T15:20:52.330050+00:00",
+      "publishedAt": "2026-11-12T00:03:28+00:00",
+      "review": {
+        "checkedAt": "2026-11-17T15:25:03.024127+00:00",
+        "disposition": "outside-region",
+        "note": "Follow-up to Cahokia Heights shooting in Illinois, not St. Louis City or County.",
+        "revision": "b4185fc3d306bc2b62dbe0a3148a922f1a4ee5d635f78cb889435ee034e91111"
+      },
+      "revision": "b4185fc3d306bc2b62dbe0a3148a922f1a4ee5d635f78cb889435ee034e91111",
+      "sources": [
+        "firstalert-crime"
+      ],
+      "title": "Neighbors shaken as man dies, toddler injured after being shot in car in Cahokia Heights",
+      "url": "https://www.firstalert4.com/2026/11/12/neighbors-shaken-man-dies-toddler-injured-after-being-shot-car-cahokia-heights/"
+    },
+    "https://www.firstalert4.com/2026/11/12/police-investigating-after-man-shot-killed-following-altercation/": {
+      "changedAt": "2026-11-17T15:20:52.330050+00:00",
+      "discoveredAt": "2026-11-17T15:20:52.330050+00:00",
+      "publishedAt": "2026-11-13T15:23:06+00:00",
+      "review": {
+        "checkedAt": "2026-11-17T15:25:03.024127+00:00",
+        "disposition": "already-mapped",
+        "note": "Same November 10 Criterion Avenue fatal shooting as incident:county-criterion. Reported fatality and preliminary altercation details match existing official-source record.",
+        "revision": "f02b4ba47bdd6190cd05751136ddbdf09bf5e6f1c0bed3685ba69e90b36c1b49"
+      },
+      "revision": "f02b4ba47bdd6190cd05751136ddbdf09bf5e6f1c0bed3685ba69e90b36c1b49",
+      "sources": [
+        "firstalert-county",
+        "firstalert-crime"
+      ],
+      "title": "Police investigating after man shot, killed following altercation",
+      "url": "https://www.firstalert4.com/2026/11/12/police-investigating-after-man-shot-killed-following-altercation/"
+    },
+    "https://www.firstalert4.com/2026/11/12/students-recount-their-experience-after-2-students-teacher-stabbed-warren-county-middle-school/": {
+      "changedAt": "2026-11-17T15:20:52.330050+00:00",
+      "discoveredAt": "2026-11-17T15:20:52.330050+00:00",
+      "publishedAt": "2026-11-12T20:23:38+00:00",
+      "review": {
+        "checkedAt": "2026-11-17T15:25:03.024127+00:00",
+        "disposition": "outside-region",
+        "note": "Warrenton school attack in Warren County; not St. Louis City or County.",
+        "revision": "0c8a0cfe70e2915c988cdbd4c1643bc7b9b433088f27de683bebe9aef30fa8a2"
+      },
+      "revision": "0c8a0cfe70e2915c988cdbd4c1643bc7b9b433088f27de683bebe9aef30fa8a2",
+      "sources": [
+        "firstalert-crime"
+      ],
+      "title": "Students recount their experience after 2 students, teacher stabbed at Warren County middle school",
+      "url": "https://www.firstalert4.com/2026/11/12/students-recount-their-experience-after-2-students-teacher-stabbed-warren-county-middle-school/"
+    },
+    "https://www.firstalert4.com/2026/11/12/suspect-custody-after-incident-blackhawk-middle-school-police-say/": {
+      "changedAt": "2026-11-17T15:20:52.330050+00:00",
+      "discoveredAt": "2026-11-17T15:20:52.330050+00:00",
+      "publishedAt": "2026-11-12T22:45:23+00:00",
+      "review": {
+        "checkedAt": "2026-11-17T15:25:03.024127+00:00",
+        "disposition": "outside-region",
+        "note": "Warrenton school attack in Warren County; not St. Louis City or County.",
+        "revision": "cc8a8c0379fa04ee0fe9605a0793f57626f96b1a468a663b1ecdef0ba1456694"
+      },
+      "revision": "cc8a8c0379fa04ee0fe9605a0793f57626f96b1a468a663b1ecdef0ba1456694",
+      "sources": [
+        "firstalert-crime"
+      ],
+      "title": "2 students, teacher stabbed at Warrenton middle school",
+      "url": "https://www.firstalert4.com/2026/11/12/suspect-custody-after-incident-blackhawk-middle-school-police-say/"
+    },
+    "https://www.firstalert4.com/2026/11/13/parent-student-who-witnessed-black-hawk-middle-school-stabbing-speaks-out/": {
+      "changedAt": "2026-11-17T15:20:52.330050+00:00",
+      "discoveredAt": "2026-11-17T15:20:52.330050+00:00",
+      "publishedAt": "2026-11-13T04:20:38+00:00",
+      "review": {
+        "checkedAt": "2026-11-17T15:25:03.024127+00:00",
+        "disposition": "outside-region",
+        "note": "Parent reaction to Warrenton school attack in Warren County.",
+        "revision": "25aab5fd58139b8c8f284cb642f114119763f6e79db8e1ad7891ea1adefa6ba9"
+      },
+      "revision": "25aab5fd58139b8c8f284cb642f114119763f6e79db8e1ad7891ea1adefa6ba9",
+      "sources": [
+        "firstalert-crime"
+      ],
+      "title": "Parent of student who witnessed Black Hawk Middle School stabbing speaks out",
+      "url": "https://www.firstalert4.com/2026/11/13/parent-student-who-witnessed-black-hawk-middle-school-stabbing-speaks-out/"
+    },
+    "https://www.firstalert4.com/2026/11/13/there-is-no-right-way-feel-after-trauma-psychologist-aftermath-stabbing-warren-county-middle-school/": {
+      "changedAt": "2026-11-17T15:20:52.330050+00:00",
+      "discoveredAt": "2026-11-17T15:20:52.330050+00:00",
+      "publishedAt": "2026-11-13T01:22:09+00:00",
+      "review": {
+        "checkedAt": "2026-11-17T15:25:03.024127+00:00",
+        "disposition": "outside-region",
+        "note": "Psychologist/commentary follow-up to Warrenton school attack in Warren County.",
+        "revision": "f679fce602eabf376a148be2dd97aab360df936d53ac778054b8bb9d995a49ea"
+      },
+      "revision": "f679fce602eabf376a148be2dd97aab360df936d53ac778054b8bb9d995a49ea",
+      "sources": [
+        "firstalert-crime"
+      ],
+      "title": "‘There is no right way to feel after a trauma’: Psychologist on aftermath of a stabbing at Warren County middle school",
+      "url": "https://www.firstalert4.com/2026/11/13/there-is-no-right-way-feel-after-trauma-psychologist-aftermath-stabbing-warren-county-middle-school/"
+    },
+    "https://www.firstalert4.com/2026/11/14/school-leader-says-district-policies-call-very-long-suspension-or-expulsion-after-black-hawk-middle-school-stabbing/": {
+      "changedAt": "2026-11-17T15:20:52.330050+00:00",
+      "discoveredAt": "2026-11-17T15:20:52.330050+00:00",
+      "publishedAt": "2026-11-14T00:29:08+00:00",
+      "review": {
+        "checkedAt": "2026-11-17T15:25:03.024127+00:00",
+        "disposition": "outside-region",
+        "note": "School-policy follow-up to Warrenton school attack in Warren County.",
+        "revision": "13e47e86af8191b060e05b06d5a529b581f6648f443021d30d0bcf9c903cb56d"
+      },
+      "revision": "13e47e86af8191b060e05b06d5a529b581f6648f443021d30d0bcf9c903cb56d",
+      "sources": [
+        "firstalert-crime"
+      ],
+      "title": "School leader says district policies call for ‘very long suspension or expulsion’ after Black Hawk Middle School stabbing",
+      "url": "https://www.firstalert4.com/2026/11/14/school-leader-says-district-policies-call-very-long-suspension-or-expulsion-after-black-hawk-middle-school-stabbing/"
+    },
+    "https://www.firstalert4.com/2026/11/14/woman-arrested-connection-with-video-circulating-apparent-animal-abuse/": {
+      "changedAt": "2026-11-17T15:20:52.330050+00:00",
+      "discoveredAt": "2026-11-17T15:20:52.330050+00:00",
+      "publishedAt": "2026-11-14T21:32:25+00:00",
+      "review": {
+        "checkedAt": "2026-11-17T15:25:03.024127+00:00",
+        "disposition": "insufficient-location",
+        "note": "Bellefontaine Neighbors animal-abuse report supplies police awareness/arrest dates but neither occurrence date nor public incident location. No home address or date inferred.",
+        "revision": "11709aa0b6406cc8d86efefa7ff095bb9ff068b4fac2173d69e5615d12b6cd09"
+      },
+      "revision": "11709aa0b6406cc8d86efefa7ff095bb9ff068b4fac2173d69e5615d12b6cd09",
+      "sources": [
+        "firstalert-county"
+      ],
+      "title": "Woman arrested in connection with circulating video showing apparent animal abuse",
+      "url": "https://www.firstalert4.com/2026/11/14/woman-arrested-connection-with-video-circulating-apparent-animal-abuse/"
+    },
+    "https://www.firstalert4.com/2026/11/15/19-year-old-seriously-injured-shooting-bellefontaine-neighbors/": {
+      "changedAt": "2026-11-17T15:20:52.330050+00:00",
+      "discoveredAt": "2026-11-17T15:20:52.330050+00:00",
+      "publishedAt": "2026-11-15T01:20:04+00:00",
+      "review": {
+        "checkedAt": "2026-11-17T15:25:03.024127+00:00",
+        "disposition": "already-mapped",
+        "note": "Same November 14 Cabot/Kilgore shooting as incident:county-bellefontaine-cabot-20261114; one injury, serious but stable, already retained.",
+        "revision": "5a01a2b36142dbc6d6a43284cf43c58ea65fc87304e756df0e116328ce10b7ec"
+      },
+      "revision": "5a01a2b36142dbc6d6a43284cf43c58ea65fc87304e756df0e116328ce10b7ec",
+      "sources": [
+        "firstalert-county"
+      ],
+      "title": "19-year-old seriously injured in shooting in Bellefontaine Neighbors",
+      "url": "https://www.firstalert4.com/2026/11/15/19-year-old-seriously-injured-shooting-bellefontaine-neighbors/"
+    },
+    "https://www.firstalert4.com/2026/11/16/car-crashes-into-lincoln-county-mobile-home-with-4-people-inside/": {
+      "changedAt": "2026-11-17T15:20:52.330050+00:00",
+      "discoveredAt": "2026-11-17T15:20:52.330050+00:00",
+      "publishedAt": "2026-11-16T23:48:46+00:00",
+      "review": {
+        "checkedAt": "2026-11-17T15:25:03.024127+00:00",
+        "disposition": "outside-region",
+        "note": "November 15 rollover into home occurred at Highway 47/Gravens Road near Troy, Lincoln County.",
+        "revision": "cbf8e846cc8e92f0ed9bff9e7633ce92ee7e96c142b6a5ce111e4ceabb3a43f4"
+      },
+      "revision": "cbf8e846cc8e92f0ed9bff9e7633ce92ee7e96c142b6a5ce111e4ceabb3a43f4",
+      "sources": [
+        "firstalert-crime"
+      ],
+      "title": "Car crashes into Lincoln County mobile home with 4 people inside",
+      "url": "https://www.firstalert4.com/2026/11/16/car-crashes-into-lincoln-county-mobile-home-with-4-people-inside/"
+    },
+    "https://www.firstalert4.com/2026/11/16/dutchtown-residents-share-mixed-reactions-after-police-shooting-that-killed-man/": {
+      "changedAt": "2026-11-17T15:20:52.330050+00:00",
+      "discoveredAt": "2026-11-17T15:20:52.330050+00:00",
+      "publishedAt": "2026-11-16T04:29:50+00:00",
+      "review": {
+        "checkedAt": "2026-11-17T15:25:03.024127+00:00",
+        "disposition": "already-mapped",
+        "note": "Reaction article about November 14 Dutchtown officer shooting; incident:dutchtown-officer-shooting already records one police-caused death and BB-pistol details from SLMPD.",
+        "revision": "2eb9e8d02787e2cb19372efb7325464ada4917ef9535a9fdec73f810f09f8168"
+      },
+      "revision": "2eb9e8d02787e2cb19372efb7325464ada4917ef9535a9fdec73f810f09f8168",
+      "sources": [
+        "firstalert-crime"
+      ],
+      "title": "Dutchtown residents share mixed reactions after police shooting that killed man",
+      "url": "https://www.firstalert4.com/2026/11/16/dutchtown-residents-share-mixed-reactions-after-police-shooting-that-killed-man/"
+    },
+    "https://www.firstalert4.com/2026/11/16/man-killed-hit-and-run-jennings-police-investigating/": {
+      "changedAt": "2026-11-17T15:20:52.330050+00:00",
+      "discoveredAt": "2026-11-17T15:20:52.330050+00:00",
+      "publishedAt": "2026-11-16T21:10:22+00:00",
+      "review": {
+        "checkedAt": "2026-11-17T15:25:03.024127+00:00",
+        "disposition": "mapped",
+        "note": "Verified occurrence and public-location precision; added incident:county-jennings-lucas-hunt-fatal-hit-run-20261114.",
+        "revision": "84b277738c8d09442dac9d6469c50272f134fe3a655ad4a09a25773be49f0f0d"
+      },
+      "revision": "84b277738c8d09442dac9d6469c50272f134fe3a655ad4a09a25773be49f0f0d",
+      "sources": [
+        "firstalert-county"
+      ],
+      "title": "Man killed in hit-and-run in Jennings, police investigating",
+      "url": "https://www.firstalert4.com/2026/11/16/man-killed-hit-and-run-jennings-police-investigating/"
+    },
+    "https://www.firstalert4.com/2026/11/16/new-sexual-assault-allegations-revealed-lawsuit-against-former-riverview-officer-city/": {
+      "changedAt": "2026-11-17T15:20:52.330050+00:00",
+      "discoveredAt": "2026-11-17T15:20:52.330050+00:00",
+      "publishedAt": "2026-11-16T22:28:10+00:00",
+      "review": {
+        "checkedAt": "2026-11-17T15:25:03.024127+00:00",
+        "disposition": "excluded-sensitive",
+        "note": "Sexual-assault lawsuit and related alleged offenses excluded from mapped incident feed.",
+        "revision": "f9bd1ecbc156d8de2b1e1f1f6c42a34cff47b55668e624783385ee664dcf0714"
+      },
+      "revision": "f9bd1ecbc156d8de2b1e1f1f6c42a34cff47b55668e624783385ee664dcf0714",
+      "sources": [
+        "firstalert-county"
+      ],
+      "title": "New sexual assault allegations revealed in lawsuit against former Riverview officer, city",
+      "url": "https://www.firstalert4.com/2026/11/16/new-sexual-assault-allegations-revealed-lawsuit-against-former-riverview-officer-city/"
+    },
+    "https://www.firstalert4.com/2026/11/16/police-responding-possible-road-rage-shooting-quiktrip/": {
+      "changedAt": "2026-11-17T15:20:52.330050+00:00",
+      "discoveredAt": "2026-11-17T15:20:52.330050+00:00",
+      "publishedAt": "2026-11-16T23:49:49+00:00",
+      "review": {
+        "checkedAt": "2026-11-17T15:25:03.024127+00:00",
+        "disposition": "mapped",
+        "note": "Verified occurrence and public-location precision; added incident:county-florissant-quiktrip-shooting-20261116.",
+        "revision": "3aeccfa3445e6a8ae44a0c77ae177df45eebacd9da8336c3a63e1a2f0f18da3e"
+      },
+      "revision": "3aeccfa3445e6a8ae44a0c77ae177df45eebacd9da8336c3a63e1a2f0f18da3e",
+      "sources": [
+        "firstalert-county"
+      ],
+      "title": "Police responding to possible road rage shooting at QuikTrip",
+      "url": "https://www.firstalert4.com/2026/11/16/police-responding-possible-road-rage-shooting-quiktrip/"
+    },
+    "https://www.firstalert4.com/2026/11/16/st-louis-county-man-accused-child-abuse-lunging-officer-with-scissors/": {
+      "changedAt": "2026-11-17T15:20:52.330050+00:00",
+      "discoveredAt": "2026-11-17T15:20:52.330050+00:00",
+      "publishedAt": "2026-11-16T22:13:37+00:00",
+      "review": {
+        "checkedAt": "2026-11-17T15:25:03.024127+00:00",
+        "disposition": "excluded-sensitive",
+        "note": "Domestic child-abuse allegations involving minors and an unspecified private home; retained source exclusions and no map point.",
+        "revision": "6837663c4815b90bd3107b4698e60152644f0d8cc135a4f817258f798eac09e0"
+      },
+      "revision": "6837663c4815b90bd3107b4698e60152644f0d8cc135a4f817258f798eac09e0",
+      "sources": [
+        "firstalert-county",
+        "firstalert-crime"
+      ],
+      "title": "St. Louis County man accused of child abuse, lunging at officer with scissors",
+      "url": "https://www.firstalert4.com/2026/11/16/st-louis-county-man-accused-child-abuse-lunging-officer-with-scissors/"
+    },
+    "https://www.firstalert4.com/2026/11/16/stifel-executive-charged-dent-county-fatal-atv-crash/": {
+      "changedAt": "2026-11-17T15:20:52.330050+00:00",
+      "discoveredAt": "2026-11-17T15:20:52.330050+00:00",
+      "publishedAt": "2026-11-16T20:14:41+00:00",
+      "review": {
+        "checkedAt": "2026-11-17T15:25:03.024127+00:00",
+        "disposition": "outside-region",
+        "note": "October 31 fatal ATV crash occurred on County Road 6520 in Dent County; a St. Louis employer/residence does not make this a regional incident.",
+        "revision": "3af6df6d4051162618aca9483cfebd8a8b790d9b02125530e77751c4b86c3ba3"
+      },
+      "revision": "3af6df6d4051162618aca9483cfebd8a8b790d9b02125530e77751c4b86c3ba3",
+      "sources": [
+        "firstalert-crime"
+      ],
+      "title": "Stifel executive charged in Dent County fatal ATV crash",
+      "url": "https://www.firstalert4.com/2026/11/16/stifel-executive-charged-dent-county-fatal-atv-crash/"
+    },
+    "https://www.firstalert4.com/2026/11/16/suspect-arrested-connection-with-explosive-device-biourja-ethanol-plant-peoria/": {
+      "changedAt": "2026-11-17T15:20:52.330050+00:00",
+      "discoveredAt": "2026-11-17T15:20:52.330050+00:00",
+      "publishedAt": "2026-11-16T18:30:31+00:00",
+      "review": {
+        "checkedAt": "2026-11-17T15:25:03.024127+00:00",
+        "disposition": "outside-region",
+        "note": "Explosive-device investigation occurred in Peoria, Illinois.",
+        "revision": "b6507d288f215f17bf87b022ec5f166b94bd413474e5979d24f9c21288b5e4ac"
+      },
+      "revision": "b6507d288f215f17bf87b022ec5f166b94bd413474e5979d24f9c21288b5e4ac",
+      "sources": [
+        "firstalert-crime"
+      ],
+      "title": "Peoria Mayor Rita Ali says suspect in custody in connection with explosive device found at BioUrja plant",
+      "url": "https://www.firstalert4.com/2026/11/16/suspect-arrested-connection-with-explosive-device-biourja-ethanol-plant-peoria/"
+    },
+    "https://www.firstalert4.com/2026/11/16/woman-injured-rollover-crash-i-70-st-louis-county/": {
+      "changedAt": "2026-11-17T15:20:52.330050+00:00",
+      "discoveredAt": "2026-11-17T15:20:52.330050+00:00",
+      "publishedAt": "2026-11-16T11:23:12+00:00",
+      "review": {
+        "checkedAt": "2026-11-17T15:25:03.024127+00:00",
+        "disposition": "mapped",
+        "note": "Verified occurrence and public-location precision; added incident:county-i70-airflight-rollover-20261115.",
+        "revision": "e6099104be653617d38a5cd8d01008ca21a84a7b64a0fea7e6d2422bba3d87b2"
+      },
+      "revision": "e6099104be653617d38a5cd8d01008ca21a84a7b64a0fea7e6d2422bba3d87b2",
+      "sources": [
+        "firstalert-county"
+      ],
+      "title": "Woman injured in rollover crash on I-70 in St. Louis County",
+      "url": "https://www.firstalert4.com/2026/11/16/woman-injured-rollover-crash-i-70-st-louis-county/"
+    },
+    "https://www.firstalert4.com/2026/11/17/parents-seek-safety-details-classes-resume-after-warrenton-school-stabbing/": {
+      "changedAt": "2026-11-17T15:20:52.330050+00:00",
+      "discoveredAt": "2026-11-17T15:20:52.330050+00:00",
+      "publishedAt": "2026-11-17T04:27:52+00:00",
+      "review": {
+        "checkedAt": "2026-11-17T15:25:03.024127+00:00",
+        "disposition": "outside-region",
+        "note": "School safety meeting follow-up in Warrenton, Warren County.",
+        "revision": "838db9ecf6fde7a8c794db02a29628ce570696bba0e1bb45cdcdbcb393e95506"
+      },
+      "revision": "838db9ecf6fde7a8c794db02a29628ce570696bba0e1bb45cdcdbcb393e95506",
+      "sources": [
+        "firstalert-crime"
+      ],
+      "title": "Parents seek safety details as classes resume after Warrenton school stabbing",
+      "url": "https://www.firstalert4.com/2026/11/17/parents-seek-safety-details-classes-resume-after-warrenton-school-stabbing/"
+    },
+    "https://www.firstalert4.com/2026/11/17/police-pursuit-ends-crash-closing-lanes-westbound-i-70-st-peters/": {
+      "changedAt": "2026-11-17T15:20:52.330050+00:00",
+      "discoveredAt": "2026-11-17T15:20:52.330050+00:00",
+      "publishedAt": "2026-11-17T14:16:18+00:00",
+      "review": {
+        "checkedAt": "2026-11-17T15:25:03.024127+00:00",
+        "disposition": "outside-region",
+        "note": "November 17 pursuit crash occurred on I-70 between Mid Rivers Mall Drive and Route 79 in St. Peters, St. Charles County; injuries unknown.",
+        "revision": "35c7f7322feae2ead390104b8dc6c53f7be06f98155c734f6bea99c8f6d6a4b3"
+      },
+      "revision": "35c7f7322feae2ead390104b8dc6c53f7be06f98155c734f6bea99c8f6d6a4b3",
+      "sources": [
+        "firstalert-crime"
+      ],
+      "title": "Police pursuit ends in crash, closing lanes on westbound I-70 in St. Peters",
+      "url": "https://www.firstalert4.com/2026/11/17/police-pursuit-ends-crash-closing-lanes-westbound-i-70-st-peters/"
+    },
+    "https://www.firstalert4.com/2026/11/17/police-woman-arrested-accused-threatening-school-staff-students/": {
+      "changedAt": "2026-11-17T15:20:52.330050+00:00",
+      "discoveredAt": "2026-11-17T15:20:52.330050+00:00",
+      "publishedAt": "2026-11-17T01:27:20+00:00",
+      "review": {
+        "checkedAt": "2026-11-17T15:25:03.024127+00:00",
+        "disposition": "mapped",
+        "note": "Verified occurrence and public-location precision; added incident:county-pattonville-heights-threats-20261114.",
+        "revision": "4f5f086e4a6f45094fbdd3b222934efc05d9e61b8bc71eff60498bf57b3bf980"
+      },
+      "revision": "4f5f086e4a6f45094fbdd3b222934efc05d9e61b8bc71eff60498bf57b3bf980",
+      "sources": [
+        "firstalert-county"
+      ],
+      "title": "POLICE: Woman arrested, accused of threatening school staff and students",
+      "url": "https://www.firstalert4.com/2026/11/17/police-woman-arrested-accused-threatening-school-staff-students/"
+    }
+  },
+  "sources": {
+    "firstalert-county": {
+      "articleUrls": [
+        "https://www.firstalert4.com/2026/11/17/police-woman-arrested-accused-threatening-school-staff-students/",
+        "https://www.firstalert4.com/2026/11/17/jake-zimmerman-vows-make-st-louis-county-government-boring-again/",
+        "https://www.firstalert4.com/2026/11/16/police-responding-possible-road-rage-shooting-quiktrip/",
+        "https://www.firstalert4.com/2026/11/16/new-sexual-assault-allegations-revealed-lawsuit-against-former-riverview-officer-city/",
+        "https://www.firstalert4.com/2026/11/16/st-louis-county-man-accused-child-abuse-lunging-officer-with-scissors/",
+        "https://www.firstalert4.com/2026/11/16/man-killed-hit-and-run-jennings-police-investigating/",
+        "https://www.firstalert4.com/2026/11/16/woman-injured-rollover-crash-i-70-st-louis-county/",
+        "https://www.firstalert4.com/2026/11/15/19-year-old-seriously-injured-shooting-bellefontaine-neighbors/",
+        "https://www.firstalert4.com/2026/11/14/woman-arrested-connection-with-video-circulating-apparent-animal-abuse/",
+        "https://www.firstalert4.com/2026/11/13/flights-lambert-stop-faa-issues-national-ground-stop/",
+        "https://www.firstalert4.com/2026/11/12/police-investigating-after-man-shot-killed-following-altercation/",
+        "https://www.firstalert4.com/2026/11/12/coaches-families-gather-ferguson-honor-man-killed-youth-football-game/",
+        "https://www.firstalert4.com/2026/11/12/i-64-closed-both-directions-chesterfield-due-downed-powerline-highway/",
+        "https://www.firstalert4.com/2026/11/11/former-st-louis-county-jail-officer-charged-with-accepting-bribes-smuggle-contraband/",
+        "https://www.firstalert4.com/2026/11/11/ex-employee-sues-onderlaw-claims-assault-online-campaign-ferguson-data-center/",
+        "https://www.firstalert4.com/2026/11/10/new-cheesecake-factory-location-opens-west-county-mall/",
+        "https://www.firstalert4.com/2026/11/10/maplewood-richmond-heights-schools-project-206m-budget-gap-seek-community-input/",
+        "https://www.firstalert4.com/2026/11/10/your-guide-holiday-events-around-st-louis/",
+        "https://www.firstalert4.com/2026/11/10/2-charged-after-flock-cameras-stolen-damaged-halloween-night-st-louis-county/",
+        "https://www.firstalert4.com/2026/11/09/clayton-considers-pilot-program-allowing-largely-free-parking-shoppers-diners/"
+      ],
+      "contentChangedAt": "2026-11-17T15:20:52.330050+00:00",
+      "etag": "W/\"117d3-wcRgwolySuJoa7D5OwbGJ5mSGcc\"",
+      "lastModified": "Tue, 17 Nov 2026 15:17:13 GMT",
+      "latestPublishedAt": "2026-11-17T01:27:20+00:00",
+      "oldestPublishedAt": "2026-11-09T23:25:37+00:00",
+      "url": "https://www.firstalert4.com/arc/outboundfeeds/rss/category/news/st-louis-county/?outputType=xml"
+    },
+    "firstalert-crime": {
+      "articleUrls": [
+        "https://www.firstalert4.com/2026/11/17/police-pursuit-ends-crash-closing-lanes-westbound-i-70-st-peters/",
+        "https://www.firstalert4.com/2026/11/17/parents-seek-safety-details-classes-resume-after-warrenton-school-stabbing/",
+        "https://www.firstalert4.com/2026/11/16/car-crashes-into-lincoln-county-mobile-home-with-4-people-inside/",
+        "https://www.firstalert4.com/2026/11/16/st-louis-county-man-accused-child-abuse-lunging-officer-with-scissors/",
+        "https://www.firstalert4.com/2026/11/16/stifel-executive-charged-dent-county-fatal-atv-crash/",
+        "https://www.firstalert4.com/2026/11/16/suspect-arrested-connection-with-explosive-device-biourja-ethanol-plant-peoria/",
+        "https://www.firstalert4.com/2026/11/16/dutchtown-residents-share-mixed-reactions-after-police-shooting-that-killed-man/",
+        "https://www.firstalert4.com/2026/11/14/school-leader-says-district-policies-call-very-long-suspension-or-expulsion-after-black-hawk-middle-school-stabbing/",
+        "https://www.firstalert4.com/2026/11/12/police-investigating-after-man-shot-killed-following-altercation/",
+        "https://www.firstalert4.com/2026/11/13/parent-student-who-witnessed-black-hawk-middle-school-stabbing-speaks-out/",
+        "https://www.firstalert4.com/2026/11/13/there-is-no-right-way-feel-after-trauma-psychologist-aftermath-stabbing-warren-county-middle-school/",
+        "https://www.firstalert4.com/2026/11/12/suspect-custody-after-incident-blackhawk-middle-school-police-say/",
+        "https://www.firstalert4.com/2026/11/12/students-recount-their-experience-after-2-students-teacher-stabbed-warren-county-middle-school/",
+        "https://www.firstalert4.com/2026/11/12/neighbors-shaken-man-dies-toddler-injured-after-being-shot-car-cahokia-heights/",
+        "https://www.firstalert4.com/2026/11/11/st-louis-police-investigate-mans-death-homicide-months-after-reported-assault/",
+        "https://www.firstalert4.com/2026/11/11/police-man-toddler-shot-car-cahokia-heights/",
+        "https://www.firstalert4.com/2026/11/11/man-critically-injured-south-city-shooting/",
+        "https://www.firstalert4.com/2026/11/11/green-tree-elementary-school-briefly-locked-down-after-stolen-vehicle-pursuit-lake-st-louis/",
+        "https://www.firstalert4.com/2026/11/11/former-st-louis-county-jail-officer-charged-with-accepting-bribes-smuggle-contraband/",
+        "https://www.firstalert4.com/2026/11/11/family-community-remember-man-killed-youth-football-championship-madison/"
+      ],
+      "contentChangedAt": "2026-11-17T15:20:52.330050+00:00",
+      "etag": "W/\"11e0b-N+qfedV/7V3AVLP77G/AxL8YIKs\"",
+      "lastModified": "Tue, 17 Nov 2026 15:18:29 GMT",
+      "latestPublishedAt": "2026-11-17T14:16:18+00:00",
+      "oldestPublishedAt": "2026-11-11T04:28:50+00:00",
+      "url": "https://www.firstalert4.com/arc/outboundfeeds/rss/category/news/crime/?outputType=xml"
+    }
+  },
+  "version": 1
+}

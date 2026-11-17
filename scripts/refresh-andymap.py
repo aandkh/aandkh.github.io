@@ -25,9 +25,14 @@ def run_job(item):
  name,args=item;start=time.monotonic()
  try:
   p=subprocess.run([sys.executable,str(ROOT/'scripts'/args[0]),*args[1:]],cwd=ROOT,text=True,capture_output=True,timeout=900)
+  if name=='venues':
+   meetings=subprocess.run([sys.executable,str(ROOT/'scripts'/'refresh-public-meetings.py')],cwd=ROOT,text=True,capture_output=True,timeout=600)
+   p.stdout+='\nOfficial public meeting refresh:\n'+meetings.stdout;p.stderr+='\n'+meetings.stderr;p.returncode=p.returncode or meetings.returncode
   if name=='incidents':
    city=subprocess.run([sys.executable,str(ROOT/'scripts'/'incident-city-refresh.py'),'--days','30'],cwd=ROOT,text=True,capture_output=True,timeout=900)
    p.stdout+='\nCity and municipal refresh:\n'+city.stdout;p.stderr+='\n'+city.stderr;p.returncode=p.returncode or city.returncode
+   watch=subprocess.run([sys.executable,str(ROOT/'scripts'/'incident-source-watch.py')],cwd=ROOT,text=True,capture_output=True,timeout=600)
+   p.stdout+='\nSupplemental incident source watch (exit 2 means articles need review):\n'+watch.stdout;p.stderr+='\n'+watch.stderr;p.returncode=p.returncode or watch.returncode
    coverage=subprocess.run([sys.executable,str(ROOT/'scripts'/'incident-coverage-check.py')],cwd=ROOT,text=True,capture_output=True,timeout=120)
    p.stdout+='\nCombined coverage check:\n'+coverage.stdout;p.stderr+='\n'+coverage.stderr;p.returncode=p.returncode or coverage.returncode
   if name=='quieter':

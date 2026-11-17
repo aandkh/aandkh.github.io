@@ -6,7 +6,8 @@ import path from 'node:path';
 import {searchFeatureRecord} from './build-search-index.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 export const STATIC_SEARCH_SOURCES=['restaurants','bars','nightlife','recreation','culture','markets','family','parking','ev','development','neighborhoods','civic','civic:municipalities','civic:unified','civic:elementary','civic:secondary','civic:congress','civic:senate','civic:house'];
-export const DYNAMIC_SEARCH_SOURCES=['concerts','arts','movies','sports','communityevents','communityevents:meetings','exhibitions','free','festivals','foodtrucks'];
+// Public meetings come directly from refresh-public-meetings.py; the API meeting feed is unavailable.
+export const DYNAMIC_SEARCH_SOURCES=['concerts','arts','movies','sports','communityevents','exhibitions','free','festivals','foodtrucks'];
 const allowed=new Set([...STATIC_SEARCH_SOURCES,...DYNAMIC_SEARCH_SOURCES]);
 const bounds='-91.2,38.1,-89.4,39.2';
 export async function refreshSearchSources(ids,{fetcher=fetch,rootDirectory=root}={}){

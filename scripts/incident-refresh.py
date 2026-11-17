@@ -227,7 +227,7 @@ def main():
      if e.get('category') not in ['police','other-homicide'] or outcome(e.get('deaths')) is None or e['deaths']<1 or not e.get('sourceUrl') or not e.get('summary'):raise ValueError('Fatality attribution requires sourced, explicit count: '+p['id'])
     if sum(e['deaths'] for e in evidence)>p.get('deaths',0):raise ValueError('Attributed deaths exceed reported total: '+p['id'])
    new.append(f)
-  for source in ['city-releases','county-releases','county-reviewed-news','county-chesterfield-bulletins']:
+  for source in ['city-releases','city-reviewed-news','county-releases','county-reviewed-news','county-chesterfield-bulletins']:
    items=[f for f in reviewed.get('features',[]) if f['properties'].get('sourceId')==source]
    if items and source in source_meta:source_meta[source].update({'checkedAt':reviewed.get('sourceReviews',{}).get(source,reviewed.get('reviewedAt')),'latestIncidentDate':max(f['properties']['incidentAt'][:10] for f in items)})
  metadata['sources']=list(source_meta.values());metadata['coverageNote']='City and County are always shown together. City and Florissant public maps supplement County and participating municipal feeds, which update weekly. Chesterfield daily bulletins, reviewed municipal investigations and Highway Patrol reporting add newer County cases. Agency exclusions and approval delays remain. These are reported incidents, not a complete regional census or safety ranking. Locations are approximate; unknown outcomes are not zero.'

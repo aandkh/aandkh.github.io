@@ -4,6 +4,7 @@ const DIRECT=new Set(['restaurants','bars','nightlife','markets','parking','ev',
 const CIVIC=new Set(['counties','municipalities','unified','elementary','secondary','congress','senate','house']);
 const caches=new WeakMap();
 export function referenceLayerFile(id,mode=''){
+ if(id==='communityevents'&&mode==='meetings')return 'search-sources/communityevents-meetings.json';
  if(DIRECT.has(id))return 'search-sources/'+id+'.json';
  if(id==='civic'&&CIVIC.has(mode||'counties'))return 'search-sources/civic'+(!mode||mode==='counties'?'':'-'+mode)+'.json';
  return null;

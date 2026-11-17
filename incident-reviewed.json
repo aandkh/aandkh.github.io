@@ -1,5 +1,5 @@
 {
-  "reviewedAt": "2026-11-15T19:44:02.622984+00:00",
+  "reviewedAt": "2026-11-17T15:24:11.004855+00:00",
   "features": [
     {
       "type": "Feature",
@@ -12,12 +12,12 @@
       },
       "properties": {
         "id": "incident:moline-acres-officer-shooting-in-city",
-        "title": "Officer shooting investigation \u00b7 Lindell Marketplace",
+        "title": "Officer shooting investigation · Lindell Marketplace",
         "incidentAt": "2026-11-14T17:00:00-06:00",
         "incidentKind": "shooting",
         "description": "Police reported a security officer fired a shot following reported threats and a pursuit. A suspect was detained; no injuries were reported. Preliminary official report; not a finding of guilt. Incident time is approximate. Location is an approximate area, not an exact scene.",
         "address": "Lindell Marketplace area, St. Louis, MO",
-        "source": "SLMPD \u00b7 official investigation summary",
+        "source": "SLMPD · official investigation summary",
         "url": "https://slmpd.org/force-detectives-investigate-moline-acres-officer-shooting-in-city/",
         "sourceUrl": "https://slmpd.org/force-detectives-investigate-moline-acres-officer-shooting-in-city/",
         "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
@@ -43,12 +43,12 @@
       },
       "properties": {
         "id": "incident:dutchtown-officer-shooting",
-        "title": "Fatal officer shooting investigation \u00b7 Dutchtown",
+        "title": "Fatal officer shooting investigation · Dutchtown",
         "incidentAt": "2026-11-14T17:45:00-06:00",
         "incidentKind": "shooting",
         "description": "Police reported an attempted carjacking and threats with what investigators later identified as a BB pistol. Officers shot the suspect, who died at hospital. No officers or other citizens were reported injured. Preliminary official report; not a finding of guilt. Incident time is approximate. Location is an approximate area, not an exact scene.",
         "address": "4000 block of Meramec at Gustine Avenue, St. Louis, MO",
-        "source": "SLMPD \u00b7 official investigation summary",
+        "source": "SLMPD · official investigation summary",
         "url": "https://slmpd.org/force-detectives-investigating-officer-involved-shooting-in-dutchtown/",
         "sourceUrl": "https://slmpd.org/force-detectives-investigating-officer-involved-shooting-in-dutchtown/",
         "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
@@ -82,7 +82,7 @@
       },
       "properties": {
         "id": "incident:county-criterion",
-        "title": "Fatal shooting investigation \u00b7 Criterion Avenue",
+        "title": "Fatal shooting investigation · Criterion Avenue",
         "incidentAt": "2026-11-10T17:05:00-06:00",
         "incidentKind": "shooting",
         "jurisdiction": "county",
@@ -90,7 +90,7 @@
         "description": "Police reported a man was found with gunshot injuries after an altercation and later died at hospital. A person of interest was interviewed. The investigation remains preliminary. Location marks the approximate reported block, not an exact scene.",
         "address": "1400 block of Criterion Avenue, St. Louis County",
         "locationAccuracy": "Approximate reported block",
-        "source": "St. Louis County Police \u00b7 official investigation summary",
+        "source": "St. Louis County Police · official investigation summary",
         "sourceUrl": "https://www.stlouiscountypolice.com/department-news/press-releases/news-release-homicide-investigation-in-the-1400-block-of-criterion-avenue/",
         "url": "https://www.stlouiscountypolice.com/department-news/press-releases/news-release-homicide-investigation-in-the-1400-block-of-criterion-avenue/",
         "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
@@ -121,12 +121,12 @@
       },
       "properties": {
         "id": "incident:wells-goodfellow-officer-shooting",
-        "title": "Fatal officer shooting investigation \u00b7 Wells/Goodfellow",
+        "title": "Fatal officer shooting investigation · Wells/Goodfellow",
         "incidentAt": "2026-11-09T10:50:00-06:00",
         "incidentKind": "shooting",
         "description": "Police reported an exchange of gunfire during an assault investigation. The suspect died at the scene; no officers were reported injured. The Force Investigation Unit was investigating. Preliminary official report; not a finding of guilt. Incident time is approximate. Location is an approximate area, not an exact scene.",
         "address": "5300 block of Lotus Avenue, St. Louis, MO",
-        "source": "SLMPD \u00b7 official investigation summary",
+        "source": "SLMPD · official investigation summary",
         "url": "https://slmpd.org/force-detectives-investigating-officer-involved-shooting-in-wells-goodfellow/",
         "sourceUrl": "https://slmpd.org/force-detectives-investigating-officer-involved-shooting-in-wells-goodfellow/",
         "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
@@ -160,12 +160,12 @@
       },
       "properties": {
         "id": "incident:tower-grove-crash",
-        "title": "Fatal moped crash \u00b7 Tower Grove South",
+        "title": "Fatal moped crash · Tower Grove South",
         "incidentAt": "2026-11-09T21:00:00-06:00",
         "incidentKind": "crash",
         "description": "Police reported a moped left Gravois Avenue and struck a light pole. The driver died at the scene. The cause remained under investigation. Preliminary official report; not a finding of guilt. Incident time is approximate. Location is an approximate area, not an exact scene.",
-        "address": "Gravois Avenue at Gustine Street \u00b7 approximate intersection area, St. Louis, MO",
-        "source": "SLMPD \u00b7 official investigation summary",
+        "address": "Gravois Avenue at Gustine Street · approximate intersection area, St. Louis, MO",
+        "source": "SLMPD · official investigation summary",
         "url": "https://slmpd.org/man-dies-in-single-vehicle-crash-in-tower-grove-south/",
         "sourceUrl": "https://slmpd.org/man-dies-in-single-vehicle-crash-in-tower-grove-south/",
         "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
@@ -190,12 +190,12 @@
       },
       "properties": {
         "id": "incident:bevo-motorcycle-crash",
-        "title": "Critical-injury motorcycle crash \u00b7 Bevo",
+        "title": "Critical-injury motorcycle crash · Bevo",
         "incidentAt": "2026-11-09T20:00:00-06:00",
         "incidentKind": "crash",
         "description": "Police reported a collision between a motorcycle and a left-turning car. The motorcyclist was hospitalized in critical condition; Accident Reconstruction was investigating. Preliminary official report; not a finding of guilt. Incident time is approximate. Location is an approximate area, not an exact scene.",
         "address": "4300 block of South Kingshighway at Winona Avenue, St. Louis, MO",
-        "source": "SLMPD \u00b7 official investigation summary",
+        "source": "SLMPD · official investigation summary",
         "url": "https://slmpd.org/man-critically-injured-in-motorcycle-crash-in-bevo/",
         "sourceUrl": "https://slmpd.org/man-critically-injured-in-motorcycle-crash-in-bevo/",
         "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
@@ -221,12 +221,12 @@
       },
       "properties": {
         "id": "incident:downtown-shooting",
-        "title": "Fatal shooting \u00b7 Downtown",
+        "title": "Fatal shooting · Downtown",
         "incidentAt": "2026-11-08T18:30:00-06:00",
         "incidentKind": "shooting",
         "description": "Police reported a man was shot near Washington Avenue and later died at hospital. Two suspects were apprehended in Illinois. Investigation continued. Preliminary official report; not a finding of guilt. Incident time is approximate. Location is an approximate area, not an exact scene.",
-        "address": "200 block of Washington Avenue \u00b7 reported overpass area, St. Louis, MO",
-        "source": "SLMPD \u00b7 official investigation summary",
+        "address": "200 block of Washington Avenue · reported overpass area, St. Louis, MO",
+        "source": "SLMPD · official investigation summary",
         "url": "https://slmpd.org/man-shot-killed-in-downtown-two-suspects-arrested/",
         "sourceUrl": "https://slmpd.org/man-shot-killed-in-downtown-two-suspects-arrested/",
         "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
@@ -264,12 +264,12 @@
       },
       "properties": {
         "id": "incident:baden-shooting",
-        "title": "Fatal shooting \u00b7 Baden",
+        "title": "Fatal shooting · Baden",
         "incidentAt": "2026-11-08T13:00:00-06:00",
         "incidentKind": "shooting",
         "description": "Police reported a man was found with gunshot wounds and died at the scene. Homicide detectives were investigating the circumstances. Preliminary official report; not a finding of guilt. Incident time is approximate. Location is an approximate area, not an exact scene.",
         "address": "8900 block of Newby Street, St. Louis, MO",
-        "source": "SLMPD \u00b7 official investigation summary",
+        "source": "SLMPD · official investigation summary",
         "url": "https://slmpd.org/man-shot-killed-in-baden-2/",
         "sourceUrl": "https://slmpd.org/man-shot-killed-in-baden-2/",
         "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
@@ -298,7 +298,7 @@
       },
       "properties": {
         "id": "incident:county-wellston-sutter",
-        "title": "Fatal officer shooting investigation \u00b7 Wellston",
+        "title": "Fatal officer shooting investigation · Wellston",
         "incidentAt": "2026-11-05T13:05:00-06:00",
         "incidentKind": "shooting",
         "jurisdiction": "county",
@@ -306,7 +306,7 @@
         "description": "Police reported a warrant encounter escalated into a barricade and later an officer shooting. One man died at hospital. The time shown is the start of the encounter, not the later shooting. County detectives are investigating. Location marks the approximate reported block, not an exact scene.",
         "address": "1200 block of Sutter Avenue, Wellston, St. Louis County",
         "locationAccuracy": "Approximate reported block",
-        "source": "St. Louis County Police \u00b7 official investigation summary",
+        "source": "St. Louis County Police · official investigation summary",
         "sourceUrl": "https://www.stlouiscountypolice.com/department-news/press-releases/news-release-officer-involved-shooting-investigation-in-the-1200-block-of-sutter-avenue-wellston-mo/",
         "url": "https://www.stlouiscountypolice.com/department-news/press-releases/news-release-officer-involved-shooting-investigation-in-the-1200-block-of-sutter-avenue-wellston-mo/",
         "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
@@ -328,7 +328,7 @@
       },
       "properties": {
         "id": "incident:county-wallington",
-        "title": "Fatal shooting investigation \u00b7 Wallington Walk",
+        "title": "Fatal shooting investigation · Wallington Walk",
         "incidentAt": "2026-11-05T23:05:00-06:00",
         "incidentKind": "shooting",
         "jurisdiction": "county",
@@ -336,7 +336,7 @@
         "description": "County police reported a man with gunshot injuries was pronounced dead at the scene. The release reported no suspect in custody. The investigation remains preliminary. Location marks the approximate reported block, not an exact scene.",
         "address": "7300 block of Wallington Walk, St. Louis County",
         "locationAccuracy": "Approximate reported block",
-        "source": "St. Louis County Police \u00b7 official investigation summary",
+        "source": "St. Louis County Police · official investigation summary",
         "sourceUrl": "https://www.stlouiscountypolice.com/department-news/press-releases/news-release-homicide-investigation-in-the-7300-block-of-wallington-walk/",
         "url": "https://www.stlouiscountypolice.com/department-news/press-releases/news-release-homicide-investigation-in-the-7300-block-of-wallington-walk/",
         "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
@@ -358,7 +358,7 @@
       },
       "properties": {
         "id": "incident:county-north67",
-        "title": "Triple shooting investigation \u00b7 North Highway 67",
+        "title": "Triple shooting investigation · North Highway 67",
         "incidentAt": "2026-11-01T00:14:00-05:00",
         "incidentKind": "shooting",
         "jurisdiction": "county",
@@ -366,7 +366,7 @@
         "description": "County police reported one man died and two others received treatment for non-life-threatening gunshot injuries following a shooting at a business. The investigation remains preliminary. Location marks the approximate reported block, not an exact scene.",
         "address": "4000 block of North Highway 67, St. Louis County",
         "locationAccuracy": "Approximate reported block",
-        "source": "St. Louis County Police \u00b7 official investigation summary",
+        "source": "St. Louis County Police · official investigation summary",
         "sourceUrl": "https://www.stlouiscountypolice.com/department-news/press-releases/news-release-triple-shooting-homicide-investigation-in-the-4000-block-of-north-highway-67/",
         "url": "https://www.stlouiscountypolice.com/department-news/press-releases/news-release-triple-shooting-homicide-investigation-in-the-4000-block-of-north-highway-67/",
         "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
@@ -389,7 +389,7 @@
       },
       "properties": {
         "id": "incident:jeff-vander-lou-accidental-shooting",
-        "title": "Child injured in reported accidental shooting \u00b7 Jeff-Vander-Lou",
+        "title": "Child injured in reported accidental shooting · Jeff-Vander-Lou",
         "incidentAt": "2026-11-09",
         "incidentDate": "2026-11-09",
         "incidentTimeAccuracy": "date-only",
@@ -400,7 +400,7 @@
         "description": "Police said a child was injured in a reported accidental shooting. Hospital notification was around 8:20 p.m.; the exact shooting time was not reported. The child was described as critical but stable. Approximate reported block, not an exact scene.",
         "address": "3000 block James Cool Papa Bell Avenue, St. Louis, MO",
         "sourceId": "city-releases",
-        "source": "SLMPD \u00b7 official investigation summary",
+        "source": "SLMPD · official investigation summary",
         "sourceUrl": "https://slmpd.org/3-year-old-shot-in-apparent-accidental-shooting/",
         "url": "https://slmpd.org/3-year-old-shot-in-apparent-accidental-shooting/",
         "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
@@ -422,7 +422,7 @@
       },
       "properties": {
         "id": "incident:mt-pleasant-pulaski-shooting",
-        "title": "Shooting injury \u00b7 Mt. Pleasant",
+        "title": "Shooting injury · Mt. Pleasant",
         "incidentAt": "2026-11-06T20:00:00-06:00",
         "incidentDate": "2026-11-06",
         "incidentTimeAccuracy": "approximate",
@@ -433,7 +433,7 @@
         "description": "Police reported one person was shot and hospitalized in critical but stable condition. Officers located evidence of gunfire on the reported block. Time is approximate. Approximate reported block, not an exact scene.",
         "address": "3200 block Pulaski Street, St. Louis, MO",
         "sourceId": "city-releases",
-        "source": "SLMPD \u00b7 official investigation summary",
+        "source": "SLMPD · official investigation summary",
         "sourceUrl": "https://slmpd.org/19-year-old-hospitalized-following-mt-pleasant-shooting/",
         "url": "https://slmpd.org/19-year-old-hospitalized-following-mt-pleasant-shooting/",
         "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
@@ -459,7 +459,7 @@
       },
       "properties": {
         "id": "incident:pennsylvania-deputies-shots",
-        "title": "Exchange of gunfire investigated \u00b7 Pennsylvania Avenue",
+        "title": "Exchange of gunfire investigated · Pennsylvania Avenue",
         "incidentAt": "2026-11-06",
         "incidentDate": "2026-11-06",
         "incidentTimeAccuracy": "date-only",
@@ -470,7 +470,7 @@
         "description": "Police reported an exchange of gunfire during a pursuit that entered the City. The reported pursuit began around 9:20 p.m.; the exact shooting time was not supplied. Police reported no injuries during the exchange. Approximate reported block, not an exact scene.",
         "address": "6900 block Pennsylvania Avenue, St. Louis, MO",
         "sourceId": "city-releases",
-        "source": "SLMPD \u00b7 official investigation summary",
+        "source": "SLMPD · official investigation summary",
         "sourceUrl": "https://slmpd.org/fiu-investigating-after-shots-fired-at-deputies/",
         "url": "https://slmpd.org/fiu-investigating-after-shots-fired-at-deputies/",
         "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
@@ -492,7 +492,7 @@
       },
       "properties": {
         "id": "incident:fox-park-party-shooting",
-        "title": "Fatal shooting \u00b7 Fox Park",
+        "title": "Fatal shooting · Fox Park",
         "incidentAt": "2026-11-01T06:15:00-06:00",
         "incidentDate": "2026-11-01",
         "incidentTimeAccuracy": "approximate",
@@ -503,7 +503,7 @@
         "description": "Police reported one person died after a shooting at a short-term rental party. Time is approximate; the investigation was preliminary. Approximate reported block, not an exact scene.",
         "address": "2700 block Ann Avenue, St. Louis, MO",
         "sourceId": "city-releases",
-        "source": "SLMPD \u00b7 official investigation summary",
+        "source": "SLMPD · official investigation summary",
         "sourceUrl": "https://slmpd.org/18-year-old-shot-killed-at-short-term-rental-party-in-fox-park/",
         "url": "https://slmpd.org/18-year-old-shot-killed-at-short-term-rental-party-in-fox-park/",
         "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
@@ -528,7 +528,7 @@
       },
       "properties": {
         "id": "incident:baden-single-vehicle-fatal",
-        "title": "Fatal rolling-vehicle incident \u00b7 Baden",
+        "title": "Fatal rolling-vehicle incident · Baden",
         "incidentAt": "2026-11-01T12:45:00-06:00",
         "incidentDate": "2026-11-01",
         "incidentTimeAccuracy": "approximate",
@@ -539,7 +539,7 @@
         "description": "Police reported a woman was trapped after a parked vehicle rolled on an incline. She later died at a hospital. Time is approximate. Approximate reported block, not an exact scene.",
         "address": "8200 block North Broadway, St. Louis, MO",
         "sourceId": "city-releases",
-        "source": "SLMPD \u00b7 official investigation summary",
+        "source": "SLMPD · official investigation summary",
         "sourceUrl": "https://slmpd.org/woman-dies-in-fatal-single-vehicle-accident-in-baden/",
         "url": "https://slmpd.org/woman-dies-in-fatal-single-vehicle-accident-in-baden/",
         "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
@@ -560,7 +560,7 @@
       },
       "properties": {
         "id": "incident:lasalle-park-hickory-shooting",
-        "title": "Shooting injury \u00b7 LaSalle Park",
+        "title": "Shooting injury · LaSalle Park",
         "incidentAt": "2026-10-31T22:00:00-05:00",
         "incidentDate": "2026-10-31",
         "incidentTimeAccuracy": "approximate",
@@ -571,7 +571,7 @@
         "description": "Police reported a teenager was shot near a bus stop and hospitalized in stable condition. The report was published November 1; the incident occurred October 31. Time is approximate. Approximate reported block, not an exact scene.",
         "address": "1000 block Hickory Street, St. Louis, MO",
         "sourceId": "city-releases",
-        "source": "SLMPD \u00b7 official investigation summary",
+        "source": "SLMPD · official investigation summary",
         "sourceUrl": "https://slmpd.org/16-year-old-injured-in-lasalle-park-shooting/",
         "url": "https://slmpd.org/16-year-old-injured-in-lasalle-park-shooting/",
         "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
@@ -592,7 +592,7 @@
       },
       "properties": {
         "id": "incident:mark-twain-fatal-stabbing",
-        "title": "Fatal stabbing investigation \u00b7 Mark Twain",
+        "title": "Fatal stabbing investigation · Mark Twain",
         "incidentAt": "2026-10-30T02:00:00-05:00",
         "incidentDate": "2026-10-30",
         "incidentTimeAccuracy": "approximate",
@@ -603,7 +603,7 @@
         "description": "Police reported a man died with multiple puncture wounds after officers responded to a cutting call. A person was detained pending investigation. Time is approximate. Approximate reported block, not an exact scene.",
         "address": "5900 block Dressell Avenue, St. Louis, MO",
         "sourceId": "city-releases",
-        "source": "SLMPD \u00b7 official investigation summary",
+        "source": "SLMPD · official investigation summary",
         "sourceUrl": "https://slmpd.org/call-for-cutting-prompts-homicide-investigation-in-mark-twain-neighborhood/",
         "url": "https://slmpd.org/call-for-cutting-prompts-homicide-investigation-in-mark-twain-neighborhood/",
         "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
@@ -628,7 +628,7 @@
       },
       "properties": {
         "id": "incident:washington-party-shooting",
-        "title": "Two shooting injuries \u00b7 Washington Avenue",
+        "title": "Two shooting injuries · Washington Avenue",
         "incidentAt": "2026-11-01",
         "incidentDate": "2026-11-01",
         "incidentTimeAccuracy": "date-only",
@@ -639,7 +639,7 @@
         "description": "Police reported two people arrived at a hospital with non-life-threatening gunshot wounds after a short-term rental party. The report described the incident as shortly after midnight. Approximate reported block, not an exact scene.",
         "address": "5200 block Washington Avenue, St. Louis, MO",
         "sourceId": "city-releases",
-        "source": "SLMPD \u00b7 official investigation summary",
+        "source": "SLMPD · official investigation summary",
         "sourceUrl": "https://slmpd.org/short-term-rental-party-ends-in-shots-fired/",
         "url": "https://slmpd.org/short-term-rental-party-ends-in-shots-fired/",
         "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
@@ -660,7 +660,7 @@
       },
       "properties": {
         "id": "incident:baden-canaan-fatal-shooting",
-        "title": "Fatal shooting investigation \u00b7 Baden",
+        "title": "Fatal shooting investigation · Baden",
         "incidentAt": "2026-11-06T13:00:00-06:00",
         "incidentDate": "2026-11-06",
         "incidentTimeAccuracy": "approximate",
@@ -671,7 +671,7 @@
         "description": "Police reported one man died at the scene. Another man said he had been attacked before firing; investigators said the circumstances remained under investigation. Time is approximate. Approximate reported block, not an exact scene.",
         "address": "900 block Canaan Avenue, St. Louis, MO",
         "sourceId": "city-releases",
-        "source": "SLMPD \u00b7 official investigation summary",
+        "source": "SLMPD · official investigation summary",
         "sourceUrl": "https://slmpd.org/homicide-detectives-investigating-after-baden-shooting-leaves-one-dead/",
         "url": "https://slmpd.org/homicide-detectives-investigating-after-baden-shooting-leaves-one-dead/",
         "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
@@ -692,7 +692,7 @@
       },
       "properties": {
         "id": "incident:ville-sarah-shooting",
-        "title": "Shooting injury \u00b7 The Ville",
+        "title": "Shooting injury · The Ville",
         "incidentAt": "2026-11-06T03:00:00-06:00",
         "incidentDate": "2026-11-06",
         "incidentTimeAccuracy": "approximate",
@@ -703,7 +703,7 @@
         "description": "Police reported a man was shot while entering a residence and taken to a hospital in critical condition. Time is approximate. Approximate reported block, not an exact scene.",
         "address": "2500 block North Sarah Street, St. Louis, MO",
         "sourceId": "city-releases",
-        "source": "SLMPD \u00b7 official investigation summary",
+        "source": "SLMPD · official investigation summary",
         "sourceUrl": "https://slmpd.org/man-shot-in-the-ville-3/",
         "url": "https://slmpd.org/man-shot-in-the-ville-3/",
         "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
@@ -729,7 +729,7 @@
       },
       "properties": {
         "id": "incident:debaliviere-pershing-shooting",
-        "title": "Shooting injury \u00b7 DeBaliviere Place",
+        "title": "Shooting injury · DeBaliviere Place",
         "incidentAt": "2026-11-04T19:30:00-06:00",
         "incidentDate": "2026-11-04",
         "incidentTimeAccuracy": "approximate",
@@ -740,7 +740,7 @@
         "description": "Police reported a teenager was shot and hospitalized in critical condition. The report was published November 6; the incident occurred November 4. Time is approximate. Approximate reported block, not an exact scene.",
         "address": "5500 block Pershing Avenue, St. Louis, MO",
         "sourceId": "city-releases",
-        "source": "SLMPD \u00b7 official investigation summary",
+        "source": "SLMPD · official investigation summary",
         "sourceUrl": "https://slmpd.org/teen-shot-in-debaliviere-place-2/",
         "url": "https://slmpd.org/teen-shot-in-debaliviere-place-2/",
         "sourceCheckedAt": "2026-11-15T18:42:58.846142+00:00",
@@ -762,7 +762,7 @@
       },
       "properties": {
         "id": "incident:county-bellefontaine-cabot-20261114",
-        "title": "Shooting injury \u00b7 Bellefontaine Neighbors",
+        "title": "Shooting injury · Bellefontaine Neighbors",
         "incidentAt": "2026-11-14",
         "incidentDate": "2026-11-14",
         "incidentTimeAccuracy": "date-only",
@@ -773,7 +773,7 @@
         "jurisdiction": "county",
         "address": "Cabot Drive near Kilgore Drive, Bellefontaine Neighbors, MO",
         "sourceId": "county-reviewed-news",
-        "source": "First Alert 4 \u00b7 Bellefontaine Neighbors Police reporting",
+        "source": "First Alert 4 · Bellefontaine Neighbors Police reporting",
         "sourceUrl": "https://www.firstalert4.com/2026/11/15/19-year-old-seriously-injured-shooting-bellefontaine-neighbors/",
         "url": "https://www.firstalert4.com/2026/11/15/19-year-old-seriously-injured-shooting-bellefontaine-neighbors/",
         "sourceCheckedAt": "2026-11-15T19:44:02.622984+00:00",
@@ -795,7 +795,7 @@
       },
       "properties": {
         "id": "incident:county-manchester-stabbing-20261109",
-        "title": "Fatal stabbing \u00b7 Manchester",
+        "title": "Fatal stabbing · Manchester",
         "incidentAt": "2026-11-09T23:50:00-06:00",
         "incidentDate": "2026-11-09",
         "incidentTimeAccuracy": "approximate",
@@ -806,7 +806,7 @@
         "jurisdiction": "county",
         "address": "700 block Westbrooke Village Drive, Manchester, MO",
         "sourceId": "county-reviewed-news",
-        "source": "First Alert 4 \u00b7 Manchester Police reporting",
+        "source": "First Alert 4 · Manchester Police reporting",
         "sourceUrl": "https://www.firstalert4.com/2026/11/10/woman-custody-after-man-stabbed-death-manchester-apartment/",
         "url": "https://www.firstalert4.com/2026/11/10/woman-custody-after-man-stabbed-death-manchester-apartment/",
         "sourceCheckedAt": "2026-11-15T19:44:02.622984+00:00",
@@ -836,7 +836,7 @@
       },
       "properties": {
         "id": "incident:county-i70-bermuda-rollover-20261114",
-        "title": "Injury rollover \u00b7 I-70 near Bermuda Drive",
+        "title": "Injury rollover · I-70 near Bermuda Drive",
         "incidentAt": "2026-11-14T11:16:00-06:00",
         "incidentDate": "2026-11-14",
         "incidentTimeAccuracy": "approximate",
@@ -847,7 +847,7 @@
         "jurisdiction": "county",
         "address": "Westbound I-70 east of Bermuda Drive, St. Louis County, MO",
         "sourceId": "county-reviewed-news",
-        "source": "KTTN \u00b7 Missouri State Highway Patrol reporting",
+        "source": "KTTN · Missouri State Highway Patrol reporting",
         "sourceUrl": "https://www.kttn.com/st-peters-man-injured-in-interstate-70-guardrail-rollover-crash/",
         "url": "https://www.kttn.com/st-peters-man-injured-in-interstate-70-guardrail-rollover-crash/",
         "sourceCheckedAt": "2026-11-15T19:44:02.622984+00:00",
@@ -869,7 +869,7 @@
       },
       "properties": {
         "id": "incident:county-bridgeton-pursuit-crash-20261107",
-        "title": "Fatal collision \u00b7 Bridgeton",
+        "title": "Fatal collision · Bridgeton",
         "incidentAt": "2026-11-07",
         "incidentDate": "2026-11-07",
         "incidentTimeAccuracy": "date-only",
@@ -880,7 +880,7 @@
         "jurisdiction": "county",
         "address": "St. Charles Rock Road near I-270, Bridgeton, MO",
         "sourceId": "county-reviewed-news",
-        "source": "First Alert 4 \u00b7 Bridgeton Police reporting",
+        "source": "First Alert 4 · Bridgeton Police reporting",
         "sourceUrl": "https://www.firstalert4.com/2026/11/09/1-dead-crash-during-police-pursuit-st-louis-county/",
         "url": "https://www.firstalert4.com/2026/11/09/1-dead-crash-during-police-pursuit-st-louis-county/",
         "sourceCheckedAt": "2026-11-15T19:44:02.622984+00:00",
@@ -902,7 +902,7 @@
       },
       "properties": {
         "id": "incident:county-nibrs:1f6b4c17ba68668f",
-        "title": "Assault report \u00b7 Baxter Center",
+        "title": "Assault report · Baxter Center",
         "incidentAt": "2026-11-12T00:09:00-06:00",
         "incidentDate": "2026-11-12",
         "incidentTimeAccuracy": "reported local time",
@@ -915,7 +915,7 @@
         "reportNumber": "26-4944",
         "reportingAgency": "CHESTERFIELD",
         "sourceId": "county-chesterfield-bulletins",
-        "source": "Chesterfield Police Department \u00b7 daily crime bulletin",
+        "source": "Chesterfield Police Department · daily crime bulletin",
         "url": "https://content.civicplus.com/api/assets/mo-chesterfield/9b8fd313-b0e9-41ac-8539-6aa2b6490893?cache=1800",
         "sourceUrl": "https://content.civicplus.com/api/assets/mo-chesterfield/9b8fd313-b0e9-41ac-8539-6aa2b6490893?cache=1800",
         "sourceCheckedAt": "2026-11-16T18:17:53.095226+00:00",
@@ -936,7 +936,7 @@
       },
       "properties": {
         "id": "incident:county-nibrs:4f7560b705b09716",
-        "title": "Credit-card fraud report \u00b7 Greenfield Village",
+        "title": "Credit-card fraud report · Greenfield Village",
         "incidentAt": "2026-11-11T11:45:00-06:00",
         "incidentDate": "2026-11-11",
         "incidentTimeAccuracy": "reported local time",
@@ -944,12 +944,12 @@
         "incidentTypes": [
           "fraud"
         ],
-        "description": "Police reported unauthorized purchases using another person\u2019s credit-card information. Preliminary police report; not a finding of guilt. Injury and death counts were not supplied.",
+        "description": "Police reported unauthorized purchases using another person’s credit-card information. Preliminary police report; not a finding of guilt. Injury and death counts were not supplied.",
         "address": "Stablestone Court area, Greenfield Village, Chesterfield, MO",
         "reportNumber": "26-4959",
         "reportingAgency": "CHESTERFIELD",
         "sourceId": "county-chesterfield-bulletins",
-        "source": "Chesterfield Police Department \u00b7 daily crime bulletin",
+        "source": "Chesterfield Police Department · daily crime bulletin",
         "url": "https://content.civicplus.com/api/assets/mo-chesterfield/9b8fd313-b0e9-41ac-8539-6aa2b6490893?cache=1800",
         "sourceUrl": "https://content.civicplus.com/api/assets/mo-chesterfield/9b8fd313-b0e9-41ac-8539-6aa2b6490893?cache=1800",
         "sourceCheckedAt": "2026-11-16T18:17:53.095226+00:00",
@@ -970,7 +970,7 @@
       },
       "properties": {
         "id": "incident:county-nibrs:74fa737a9418d3f0",
-        "title": "Identity-fraud report \u00b7 Sycamore Drive",
+        "title": "Identity-fraud report · Sycamore Drive",
         "incidentAt": "2026-11-12T09:41:00-06:00",
         "incidentDate": "2026-11-12",
         "incidentTimeAccuracy": "reported local time",
@@ -978,12 +978,12 @@
         "incidentTypes": [
           "fraud"
         ],
-        "description": "Police reported misuse of another person\u2019s identity to access benefits. Preliminary police report; not a finding of guilt. Injury and death counts were not supplied.",
+        "description": "Police reported misuse of another person’s identity to access benefits. Preliminary police report; not a finding of guilt. Injury and death counts were not supplied.",
         "address": "Sycamore Drive area, Chesterfield, MO",
         "reportNumber": "26-4952",
         "reportingAgency": "CHESTERFIELD",
         "sourceId": "county-chesterfield-bulletins",
-        "source": "Chesterfield Police Department \u00b7 daily crime bulletin",
+        "source": "Chesterfield Police Department · daily crime bulletin",
         "url": "https://content.civicplus.com/api/assets/mo-chesterfield/9b8fd313-b0e9-41ac-8539-6aa2b6490893?cache=1800",
         "sourceUrl": "https://content.civicplus.com/api/assets/mo-chesterfield/9b8fd313-b0e9-41ac-8539-6aa2b6490893?cache=1800",
         "sourceCheckedAt": "2026-11-16T18:17:53.095226+00:00",
@@ -1004,7 +1004,7 @@
       },
       "properties": {
         "id": "incident:county-nibrs:cf11d9e486d3d3ad",
-        "title": "Impaired-driving report \u00b7 Wild Horse Creek Road",
+        "title": "Impaired-driving report · Wild Horse Creek Road",
         "incidentAt": "2026-11-11T18:33:00-06:00",
         "incidentDate": "2026-11-11",
         "incidentTimeAccuracy": "reported local time",
@@ -1017,7 +1017,7 @@
         "reportNumber": "26-4939",
         "reportingAgency": "CHESTERFIELD",
         "sourceId": "county-chesterfield-bulletins",
-        "source": "Chesterfield Police Department \u00b7 daily crime bulletin",
+        "source": "Chesterfield Police Department · daily crime bulletin",
         "url": "https://content.civicplus.com/api/assets/mo-chesterfield/e8c9d3c0-bebd-4869-8a2d-45007355e462?cache=1800",
         "sourceUrl": "https://content.civicplus.com/api/assets/mo-chesterfield/e8c9d3c0-bebd-4869-8a2d-45007355e462?cache=1800",
         "sourceCheckedAt": "2026-11-16T18:17:53.095226+00:00",
@@ -1038,7 +1038,7 @@
       },
       "properties": {
         "id": "incident:county-nibrs:06e338753f476a8f",
-        "title": "Impaired-driving report \u00b7 Clayton and Baxter roads",
+        "title": "Impaired-driving report · Clayton and Baxter roads",
         "incidentAt": "2026-11-11T07:38:00-06:00",
         "incidentDate": "2026-11-11",
         "incidentTimeAccuracy": "reported local time",
@@ -1051,7 +1051,7 @@
         "reportNumber": "26-4930",
         "reportingAgency": "CHESTERFIELD",
         "sourceId": "county-chesterfield-bulletins",
-        "source": "Chesterfield Police Department \u00b7 daily crime bulletin",
+        "source": "Chesterfield Police Department · daily crime bulletin",
         "url": "https://content.civicplus.com/api/assets/mo-chesterfield/e8c9d3c0-bebd-4869-8a2d-45007355e462?cache=1800",
         "sourceUrl": "https://content.civicplus.com/api/assets/mo-chesterfield/e8c9d3c0-bebd-4869-8a2d-45007355e462?cache=1800",
         "sourceCheckedAt": "2026-11-16T18:17:53.095226+00:00",
@@ -1072,7 +1072,7 @@
       },
       "properties": {
         "id": "incident:county-nibrs:1664fbb48d944c9f",
-        "title": "Stabbing report \u00b7 Lydia Hill Drive area",
+        "title": "Stabbing report · Lydia Hill Drive area",
         "incidentAt": "2026-11-09T05:50:00-06:00",
         "incidentDate": "2026-11-09",
         "incidentTimeAccuracy": "reported local time",
@@ -1085,7 +1085,7 @@
         "reportNumber": "26-4897",
         "reportingAgency": "CHESTERFIELD",
         "sourceId": "county-chesterfield-bulletins",
-        "source": "Chesterfield Police Department \u00b7 daily crime bulletin",
+        "source": "Chesterfield Police Department · daily crime bulletin",
         "url": "https://content.civicplus.com/api/assets/mo-chesterfield/aa537cc2-46e6-4f6b-9dfe-a53ed8046daf?cache=1800",
         "sourceUrl": "https://content.civicplus.com/api/assets/mo-chesterfield/aa537cc2-46e6-4f6b-9dfe-a53ed8046daf?cache=1800",
         "sourceCheckedAt": "2026-11-16T18:17:53.095226+00:00",
@@ -1106,7 +1106,7 @@
       },
       "properties": {
         "id": "incident:county-nibrs:52767951da836879",
-        "title": "Impaired-driving report \u00b7 I-64 at Clarkson",
+        "title": "Impaired-driving report · I-64 at Clarkson",
         "incidentAt": "2026-11-09T23:48:00-06:00",
         "incidentDate": "2026-11-09",
         "incidentTimeAccuracy": "reported local time",
@@ -1119,7 +1119,7 @@
         "reportNumber": "26-4914",
         "reportingAgency": "CHESTERFIELD",
         "sourceId": "county-chesterfield-bulletins",
-        "source": "Chesterfield Police Department \u00b7 daily crime bulletin",
+        "source": "Chesterfield Police Department · daily crime bulletin",
         "url": "https://content.civicplus.com/api/assets/mo-chesterfield/aa537cc2-46e6-4f6b-9dfe-a53ed8046daf?cache=1800",
         "sourceUrl": "https://content.civicplus.com/api/assets/mo-chesterfield/aa537cc2-46e6-4f6b-9dfe-a53ed8046daf?cache=1800",
         "sourceCheckedAt": "2026-11-16T18:17:53.095226+00:00",
@@ -1128,12 +1128,226 @@
         "locationSourceUrl": "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?SingleLine=I-64+%26+Clarkson+Rd%2C+Chesterfield%2C+Missouri&f=json&outFields=Addr_type%2CMatch_addr%2CLongLabel%2CScore&maxLocations=3",
         "color": "#c52f73"
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.313,
+          38.802
+        ]
+      },
+      "properties": {
+        "id": "incident:county-florissant-quiktrip-shooting-20261116",
+        "title": "Shooting injury · Florissant QuikTrip",
+        "incidentAt": "2026-11-16T15:45:00-06:00",
+        "incidentDate": "2026-11-16",
+        "incidentTimeAccuracy": "approximate",
+        "incidentKind": "shooting",
+        "incidentTypes": [
+          "shooting"
+        ],
+        "jurisdiction": "county",
+        "address": "QuikTrip, 2100 block of N. Highway 67 at Thunderbird Avenue, Florissant, MO",
+        "sourceId": "county-reviewed-news",
+        "source": "First Alert 4 · Florissant Police reporting",
+        "sourceUrl": "https://www.firstalert4.com/2026/11/16/police-responding-possible-road-rage-shooting-quiktrip/",
+        "url": "https://www.firstalert4.com/2026/11/16/police-responding-possible-road-rage-shooting-quiktrip/",
+        "sourceCheckedAt": "2026-11-17T15:19:32.335693+00:00",
+        "description": "Florissant police reported a shooting in the rear parking lot of the QuikTrip around 3:45 p.m. on November 16. One person was hospitalized in stable condition. Police said preliminary information suggested a road-rage incident; the investigation remained ongoing.",
+        "locationAccuracy": "Approximate reported public business/intersection area, rounded to about 100 m; not an exact position in the parking lot.",
+        "locationSourceUrl": "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?SingleLine=N+Highway+67+%26+Thunderbird+Ave%2C+Florissant%2C+Missouri&f=json&outFields=Addr_type%2CMatch_addr%2CLongLabel%2CScore&maxLocations=3",
+        "color": "#c52f73",
+        "injuries": 1,
+        "severity": "injury"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.282,
+          38.717
+        ]
+      },
+      "properties": {
+        "id": "incident:county-jennings-lucas-hunt-fatal-hit-run-20261114",
+        "title": "Fatal hit-and-run · Lucas and Hunt Road",
+        "incidentAt": "2026-11-14",
+        "incidentDate": "2026-11-14",
+        "incidentTimeAccuracy": "date-only",
+        "incidentKind": "crash",
+        "incidentTypes": [
+          "crash"
+        ],
+        "jurisdiction": "county",
+        "address": "5400 block of Lucas and Hunt Road, Jennings, MO",
+        "sourceId": "county-reviewed-news",
+        "source": "First Alert 4 · St. Louis County Police reporting",
+        "sourceUrl": "https://www.firstalert4.com/2026/11/16/man-killed-hit-and-run-jennings-police-investigating/",
+        "url": "https://www.firstalert4.com/2026/11/16/man-killed-hit-and-run-jennings-police-investigating/",
+        "sourceCheckedAt": "2026-11-17T15:19:32.335693+00:00",
+        "description": "County police reported finding a pedestrian critically injured in the southbound lanes of Lucas and Hunt Road after responding around 7 p.m. on November 14. The person later died in hospital. The vehicle had left the scene; the investigation remained active. Exact collision time was not supplied.",
+        "locationAccuracy": "Approximate reported public road block, rounded to about 100 m; not an exact collision location.",
+        "locationSourceUrl": "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?SingleLine=5400+Lucas+and+Hunt+Rd%2C+Jennings%2C+Missouri&f=json&outFields=Addr_type%2CMatch_addr%2CLongLabel%2CScore&maxLocations=3",
+        "color": "#ed5900",
+        "deaths": 1,
+        "severity": "fatal"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.366,
+          38.739
+        ]
+      },
+      "properties": {
+        "id": "incident:county-i70-airflight-rollover-20261115",
+        "title": "Injury rollover · I-70 at Airflight Drive",
+        "incidentAt": "2026-11-15T23:45:00-06:00",
+        "incidentDate": "2026-11-15",
+        "incidentTimeAccuracy": "approximate",
+        "incidentKind": "crash",
+        "incidentTypes": [
+          "crash"
+        ],
+        "jurisdiction": "county",
+        "address": "Eastbound I-70 at Airflight Drive, St. Louis County, MO",
+        "sourceId": "county-reviewed-news",
+        "source": "First Alert 4 · Missouri State Highway Patrol reporting",
+        "sourceUrl": "https://www.firstalert4.com/2026/11/16/woman-injured-rollover-crash-i-70-st-louis-county/",
+        "url": "https://www.firstalert4.com/2026/11/16/woman-injured-rollover-crash-i-70-st-louis-county/",
+        "sourceCheckedAt": "2026-11-17T15:19:32.335693+00:00",
+        "description": "Highway Patrol reported an eastbound SUV left the right side of I-70 at Airflight Drive around 11:45 p.m. on November 15, overturned and struck a sign. One person was taken to hospital with minor injuries.",
+        "locationAccuracy": "Approximate reported public interchange, rounded to about 100 m; not an exact vehicle position.",
+        "locationSourceUrl": "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?SingleLine=I-70+%26+Airflight+Dr%2C+St+Louis+County%2C+Missouri&f=json&outFields=Addr_type%2CMatch_addr%2CLongLabel%2CScore&maxLocations=3",
+        "color": "#ed5900",
+        "injuries": 1,
+        "severity": "minor injury"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.28,
+          38.741
+        ]
+      },
+      "properties": {
+        "id": "incident:county-ferguson-ward-shooting-20261115",
+        "title": "Shooting injury · Ward street area, Ferguson",
+        "incidentAt": "2026-11-15",
+        "incidentDate": "2026-11-15",
+        "incidentTimeAccuracy": "date-only",
+        "incidentKind": "shooting",
+        "incidentTypes": [
+          "shooting"
+        ],
+        "jurisdiction": "county",
+        "address": "Ward street area, Ferguson, MO",
+        "sourceId": "county-reviewed-news",
+        "source": "KMOX · Ferguson Police reporting",
+        "sourceUrl": "https://x.com/kmoxnews/status/2122139032318554581",
+        "url": "https://x.com/kmoxnews/status/2122139032318554581",
+        "sourceCheckedAt": "2026-11-17T15:22:23.630229+00:00",
+        "description": "Ferguson police reported a shooting in the Ward street area before 2 p.m. on November 15. One person was taken to hospital; the condition was not reported. The person sought help afterward at a store on West Florissant, which was not the shooting location.",
+        "locationAccuracy": "Approximate Ward street area, not an exact scene or building. The report says Ward Avenue; mapped geography names this street Ward Drive.",
+        "locationSourceUrl": "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?SingleLine=Ward+Drive%2C+Ferguson%2C+Missouri&f=json&outFields=Addr_type%2CMatch_addr%2CLongLabel%2CScore&maxLocations=3",
+        "color": "#c52f73",
+        "injuries": 1,
+        "severity": "injury",
+        "corroboratingSourceUrls": [
+          "https://www.teapaw.org/kmoxnews/status/2122139032318554581",
+          "https://www.aol.com/articles/man-seeks-help-store-following-000725000.html"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.426,
+          38.718
+        ]
+      },
+      "properties": {
+        "id": "incident:county-pattonville-heights-threats-20261114",
+        "title": "Threat report · Pattonville Heights Middle School",
+        "incidentAt": "2026-11-14",
+        "incidentDate": "2026-11-14",
+        "incidentTimeAccuracy": "date-only",
+        "incidentKind": "other",
+        "incidentTypes": [
+          "other"
+        ],
+        "jurisdiction": "county",
+        "address": "Pattonville Heights Middle School, Maryland Heights, MO",
+        "sourceId": "county-reviewed-news",
+        "source": "First Alert 4 · Maryland Heights Police reporting",
+        "sourceUrl": "https://www.firstalert4.com/2026/11/17/police-woman-arrested-accused-threatening-school-staff-students/",
+        "url": "https://www.firstalert4.com/2026/11/17/police-woman-arrested-accused-threatening-school-staff-students/",
+        "sourceCheckedAt": "2026-11-17T15:22:23.630229+00:00",
+        "description": "Maryland Heights police reported threats directed at staff and students of Pattonville Heights Middle School on November 14. An adult was arrested November 16 and charged with making a terrorist threat. Police said there was no active threat to the community. The marker identifies the affected public school, not where the threats originated.",
+        "locationAccuracy": "Affected public school, rounded to about 100 m; the location where the threats originated was not reported.",
+        "locationSourceUrl": "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?SingleLine=Pattonville+Heights+Middle+School%2C+Maryland+Heights%2C+Missouri&f=json&outFields=Addr_type%2CMatch_addr%2CLongLabel%2CScore&maxLocations=3",
+        "color": "#c52f73",
+        "offenses": [
+          "Making a terrorist threat (reported charge)"
+        ],
+        "corroboratingSourceUrls": [
+          "https://heights.psdr3.org/our-school/back-to-school-resources"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.217,
+          38.675
+        ]
+      },
+      "properties": {
+        "id": "incident:city-grant-street-fatal-shooting-20261111",
+        "title": "Fatal shooting · Grant Street",
+        "incidentAt": "2026-11-11T11:45:00-06:00",
+        "incidentDate": "2026-11-11",
+        "incidentTimeAccuracy": "approximate",
+        "incidentKind": "shooting",
+        "incidentTypes": [
+          "shooting"
+        ],
+        "jurisdiction": "city",
+        "address": "5300 block of Grant Street, St. Louis, MO",
+        "sourceId": "city-reviewed-news",
+        "source": "First Alert 4 · SLMPD reporting",
+        "sourceUrl": "https://www.firstalert4.com/2026/11/11/man-critically-injured-south-city-shooting/",
+        "url": "https://www.firstalert4.com/2026/11/11/man-critically-injured-south-city-shooting/",
+        "sourceCheckedAt": "2026-11-17T15:24:11.004855+00:00",
+        "description": "Police reported a shooting shortly before noon on November 11. One person died at a hospital and homicide investigators were requested. Investigators corrected the reported scene to Grant Street in North City, rather than the initially reported Grant Place in South City. Circumstances remained under investigation.",
+        "locationAccuracy": "Approximate corrected public road block, rounded to about 100 m; not an exact scene.",
+        "locationSourceUrl": "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?SingleLine=5300+Grant+Street%2C+St+Louis%2C+Missouri&f=json&outFields=Addr_type%2CMatch_addr%2CLongLabel%2CScore&maxLocations=3",
+        "corroborationUrl": "https://www.aol.com/articles/man-critically-injured-south-st-182316000.html",
+        "color": "#c52f73",
+        "deaths": 1,
+        "severity": "fatal"
+      }
     }
   ],
   "sourceReviews": {
-    "county-reviewed-news": "2026-11-15T19:44:02.622984+00:00",
+    "county-reviewed-news": "2026-11-17T15:22:23.630229+00:00",
     "county-releases": "2026-11-15T19:44:02.622984+00:00",
     "city-releases": "2026-11-15T19:44:02.622984+00:00",
-    "county-chesterfield-bulletins": "2026-11-16T18:17:53.095226+00:00"
+    "county-chesterfield-bulletins": "2026-11-16T18:17:53.095226+00:00",
+    "city-reviewed-news": "2026-11-17T15:24:11.004855+00:00"
   }
 }

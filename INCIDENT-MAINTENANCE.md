@@ -4,19 +4,55 @@ The map always combines St. Louis City and St. Louis County. Agency IDs below se
 
 ## Daily at 6 a.m. America/Chicago
 
-Run these commands **sequentially**; both write the same archive:
+The existing restricted daily runner executes County, then City/Florissant, then
+the changed-news watch, then the coverage check **sequentially**. Do not launch a
+second archive refresh concurrently. Routine maintenance uses:
 
 ```sh
-python scripts/incident-refresh.py --days 45
-python scripts/incident-city-refresh.py --days 30
-python scripts/incident-coverage-check.py
-python scripts/incident-tests.py
-node scripts/incident-tests.mjs
+python scripts/refresh-andymap.py --only venues movies sports foodtrucks incidents rivers outages rain
 ```
 
-The first command refreshes official County/participating-municipal crime and County Police injury/fatal crash data. The second refreshes both the official City public map and Florissant Police’s municipal public map. Florissant is in St. Louis County; it is not included in the weekly County NIBRS feed, so omitting this source silently loses its reports. They preserve older months and reviewed releases, report source failures, and return nonzero on a failed source. A failed refresh retains the last verified data and records the failure; it must not be described as a successful check. No browser request, credential, account, or third-party API key is needed. Do not run the commands concurrently.
+The incident stages refresh official County/participating-municipal crime, County Police injury/fatal crashes, the City public map and Florissant's municipal map. Florissant is in St. Louis County; it is not included in the weekly County NIBRS feed, so omitting it silently loses its reports. The stages preserve older months and reviewed releases and report source failures. A failed refresh retains the last verified data and must not be described as a successful check. Run relevant tests when changing an adapter or archive behavior, not as a daily full-site regression suite.
 
 After the machine refresh, visit the primary release pages below, read new and updated reports, and update `incident-reviewed.json` with source-backed occurrence dates, approximate locations, and explicit reported outcomes. Update its `reviewedAt` and per-source `sourceReviews` times only after visiting those sources. A City review does not establish that County and municipal sources were checked. Then run `python scripts/incident-refresh.py --repack` to merge those reviews and rebuild the month index without redownloading feeds. The automated jobs are source downloads; reading releases is a separate part of the requested daily AI maintenance.
+
+### Changed-report supplement for weekly-feed gaps
+
+`scripts/incident-source-watch.py` checks First Alert 4's public
+[County RSS](https://www.firstalert4.com/arc/outboundfeeds/rss/category/news/st-louis-county/?outputType=xml)
+and [Crime RSS](https://www.firstalert4.com/arc/outboundfeeds/rss/category/news/crime/?outputType=xml).
+The Crime desk catches reports not tagged to the County section and also includes
+City reporting; the map remains one combined regional view. These are additional
+reported cases, not a replacement for the police sources or proof of full coverage.
+
+Read `/tmp/andymap-incident-source-report.json` after the runner. Exit code 2 means
+new/changed reports need review, not that their download failed. The persistent
+`incident-source-watch.json` stores URLs, publication dates, text fingerprints and
+review decisions only. It does not store full articles, inferred scenes or
+outcome counts. Conditional HTTP requests and fingerprints
+avoid rereading unchanged stories; changed article text reopens review even if
+the headline is unchanged. An article leaving the short RSS window never removes
+its review record or an archived incident. Fetch/parse failures preserve prior
+records. When a feed window no longer overlaps the previous snapshot, inspect
+that source's section archive to bridge the gap; do not call the capped response
+complete. No unchanged static source inventory needs a research pass.
+
+For each candidate, read the actual article, compare its occurrence and reported
+area with archived cases, and record verified additions or corrections in
+`incident-reviewed.json`. A feed publication timestamp is never an incident time.
+Keep case aliases when independently verified; do not merge unrelated events
+merely because their points are close. After review, acknowledge the exact
+current revision:
+
+```sh
+python scripts/incident-source-watch.py --resolve ARTICLE_URL --disposition mapped --note 'Verified occurrence and public location; added stable incident ID.'
+```
+
+Other dispositions are `already-mapped`, `outside-region`, `not-incident`,
+`insufficient-location`, `excluded-sensitive`, and `historical-followup`; explain
+the actual reason. Acknowledging a candidate is not a source download and must
+not be done without reviewing it. Repack only when verified facts changed. Keep
+weekly-feed lag visible even when the supplement supplies newer incidents.
 
 Once a week, refresh the full still-available source window (`--days 179` for City, `--days 180` for County) to catch late approvals and corrections. The public mapping provider retains 180 days. The local archive has no seven-day expiration. Do not discard old months when a source ages out a record.
 

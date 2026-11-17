@@ -9,7 +9,7 @@ import {createObservedRadar} from './observed-radar.js?v=20261117-weather-suite'
 import {createWeatherAlerts} from './weather-alerts.js?v=20261117-weather-suite';
 import {createWarningBanner,alertFeature,appendAlertDetails} from './weather-alert-ui.js?v=20261117-weather-suite';
 import {createTrafficFlowLayer} from './traffic-flow.js?v=20261117-construction-layer';
-import {referenceLayer,referenceLayerFile} from './reference-layers.js?v=20261117-performance';
+import {referenceLayer,referenceLayerFile} from './reference-layers.js?v=20261117-coverage';
 import {selectionAnchor,selectionFeatureId} from './selection-focus.js?v=20261117-close-selection';
 import {createSpotExplorer} from './spot-explorer.js?v=20261117-seasonal-stories';
 import {installPanelDrag} from './panel-drag.js?v=20261117-explore-layout';
@@ -592,7 +592,7 @@ async function loadLayer(id,{force=false}={}){
   else if(['concerts','arts','movies','sports','foodtrucks','localfood','businesses','outages','parks','birding'].includes(id)){
    result=await loadProgressiveLayer(value=>localLayerSnapshot(id,value),()=>remote(id,8000),commit,controller.signal);
   }else if(id==='communityevents'){
-   const snapshot=async live=>{const sources=await Promise.allSettled(COMMUNITY_SOURCES.map(source=>referenceLayer(source)));const seen=new Map();for(const [i,entry]of sources.entries())if(entry.status==='fulfilled')for(const feature of entry.value.features)seen.set(String(feature.properties?.id||feature.id),{...feature,properties:{...feature.properties,_sourceLayer:COMMUNITY_SOURCES[i]}});for(const feature of live.features||[])seen.set(String(feature.properties?.id||feature.id),feature);return{...live,features:[...seen.values()],status:live.status==='unavailable'?'partial':live.status,note:live.note||'Saved community calendars and family places; source dates apply.'};};
+   const snapshot=async live=>{const sources=await Promise.allSettled([...COMMUNITY_SOURCES.map(source=>referenceLayer(source)),referenceLayer('communityevents','meetings')]);const seen=new Map();for(const [i,entry]of sources.entries())if(entry.status==='fulfilled')for(const feature of entry.value.features)seen.set(String(feature.properties?.id||feature.id),{...feature,properties:{...feature.properties,_sourceLayer:COMMUNITY_SOURCES[i]||'communityevents'}});for(const feature of live.features||[])seen.set(String(feature.properties?.id||feature.id),feature);return{...live,features:[...seen.values()],status:live.status==='unavailable'?'partial':live.status,note:live.note||'Saved community calendars and family places; source dates apply.'};};
    result=await loadProgressiveLayer(snapshot,async()=>{const sources=await Promise.allSettled(COMMUNITY_SOURCES.map(source=>remote(source,12000)));
    const seen=new Set(),features=[];
    sources.forEach((entry,index)=>{if(entry.status!=='fulfilled')return;for(const feature of entry.value.features||[]){
