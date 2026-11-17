@@ -1,3 +1,4 @@
+import {cachedWildlifePhoto,validateWildlifePhoto,wildlifeImageUrl} from './wildlife-photos.js?v=20261117-close-selection';
 import {safeWebUrl,setSafeLink} from './security.js?v=20261116-security';
 import {dateRangeControl} from './date-range.js?v=20261116-full-speed';
 // Public iNaturalist observations are evidence of reports, never animal abundance.
@@ -16,7 +17,7 @@ function rememberRead(url,data,fetcher){
 const safeDate=v=>/^\d{4}-\d{2}-\d{2}$/.test(v||'')&&Number.isFinite(Date.parse(v));
 export function wildlifeQuery(options={}){
  const q=new URLSearchParams({quality_grade:'research',captive:'false',geo:'true',hrank:'species',geoprivacy:'open',taxon_geoprivacy:'open',obscuration:'none',threatened:'false'});
- if(Number.isFinite(options.lat)&&Number.isFinite(options.lng)){q.set('lat',options.lat);q.set('lng',options.lng);q.set('radius',Math.max(.5,Math.min(25,Number(options.radius)||5)));}
+ if(Number.isFinite(options.lat)&&Number.isFinite(options.lng)){q.set('lat',options.lat);q.set('lng',options.lng);q.set('radius',Math.max(.03048,Math.min(25,Number(options.radius)||5)));}
  else for(const[k,v]of Object.entries(options.bounds||WILDLIFE_BOUNDS))if(Object.hasOwn(WILDLIFE_BOUNDS,k)&&Number.isFinite(v))q.set(k,v);
  if(WILDLIFE_GROUPS.some(([k])=>k&&k===options.iconicTaxa))q.set('iconic_taxa',options.iconicTaxa);
  if(Number.isInteger(Number(options.taxonId))&&Number(options.taxonId)>0)q.set('taxon_id',options.taxonId);
@@ -71,11 +72,17 @@ export function wildlifeObservation(record){
  const observer=String(record.user?.login||'iNaturalist observer'),url='https://www.inaturalist.org/observations/'+record.id;
  return{type:'Feature',id:'inat:'+record.id,geometry:{type:'Point',coordinates},properties:{id:'inat:'+record.id,title:t.preferred_common_name||t.name,description:t.name+' · Observed '+date+' · '+(WILDLIFE_GROUPS.find(([k])=>k===t.iconic_taxon_name)?.[1]||'Wildlife'),observedAt:date,observationDate:date,source:'iNaturalist · '+observer,url,sourceUrl:url,taxonId:t.id,scientificName:t.name,taxonGroup:t.iconic_taxon_name||'',taxonRank:t.rank||'',observer,license:record.license_code||null,locationAccuracy:'Approximate observation area · rounded to about 1 km'+(accuracy>1000?' · source accuracy ±'+Math.round(accuracy/1000)+' km':''),accuracyMeters:accuracy,wildlifeObservation:true}};
 }
+
+export function sortWildlifeReports(features=[],taxa=[]){
+ const counts=new Map(taxa.map(t=>[Number(t.id),Number.isFinite(t.count)?t.count:-1]));
+ return [...features].sort((a,b)=>{const x=a.properties||{},y=b.properties||{};return (counts.get(Number(y.taxonId))??-1)-(counts.get(Number(x.taxonId))??-1)||String(x.title||x.scientificName||'').localeCompare(String(y.title||y.scientificName||''))||String(y.observationDate||'').localeCompare(String(x.observationDate||''))||String(a.id).localeCompare(String(b.id));});
+}
 export function wildlifeSnapshot(observations,species,histogram,options={},checkedAt=new Date().toISOString()){
  const seen=new Set(),features=[];for(const row of observations.results||[]){const f=wildlifeObservation(row);if(f&&!seen.has(f.id)){seen.add(f.id);features.push(f);}}
  const taxa=(species?.results||[]).filter(r=>Number.isInteger(r.taxon?.id)&&r.taxon?.name&&Number.isFinite(r.count)).map(r=>({id:r.taxon.id,name:r.taxon.preferred_common_name||r.taxon.name,scientificName:r.taxon.name,rank:r.taxon.rank,count:r.count,threatened:r.taxon.threatened===true}));
+ taxa.sort((a,b)=>b.count-a.count||a.name.localeCompare(b.name));
  const counts=histogram?.results?.month_of_year||{},months=Array.from({length:12},(_,i)=>({month:i+1,count:Number.isFinite(Number(counts[i+1]))?Number(counts[i+1]):0}));
- return{id:'wildlife',type:'FeatureCollection',features,status:features.length?'partial':'empty',checkedAt,source:'iNaturalist',queryPolicy:'public-unthreatened-v2',query:{...options},totalInView:features.length,analytics:{matchingObservations:Number(observations.total_results)||0,mappedObservations:features.length,loadedObservations:(observations.results||[]).length,distinctTaxa:Number.isFinite(species?.total_results)?species.total_results:null,taxa,months,seasonalityAvailable:!!histogram?.results?.month_of_year},note:'Research-grade wild observations; reports are not population counts or complete species inventories. Map points show approximate areas, not guaranteed current presence. Private, obscured and threatened-species records are not mapped.'};
+ return{id:'wildlife',type:'FeatureCollection',features:sortWildlifeReports(features,taxa),status:features.length?'partial':'empty',checkedAt,source:'iNaturalist',queryPolicy:'public-unthreatened-v2',query:{...options},totalInView:features.length,analytics:{matchingObservations:Number(observations.total_results)||0,mappedObservations:features.length,loadedObservations:(observations.results||[]).length,distinctTaxa:Number.isFinite(species?.total_results)?species.total_results:null,taxa,months,seasonalityAvailable:!!histogram?.results?.month_of_year},note:'Research-grade wild observations; reports are not population counts or complete species inventories. Map points show approximate areas, not guaranteed current presence. Private, obscured and threatened-species records are not mapped.'};
 }
 export function defaultWildlifeOptions(now=new Date()){const parts=Object.fromEntries(new Intl.DateTimeFormat('en-US',{timeZone:'America/Chicago',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(now).map(p=>[p.type,p.value])),end=parts.year+'-'+parts.month+'-'+parts.day,start=new Date(end+'T12:00:00Z');start.setUTCFullYear(start.getUTCFullYear()-1);return{d1:start.toISOString().slice(0,10),d2:end,iconicTaxa:'',taxonId:'',month:'',pageLimit:1,mapView:'heat'};}
 export async function loadWildlife(options={}){
@@ -85,7 +92,7 @@ export async function loadWildlife(options={}){
   const first=await read('observations?'+q+'&per_page=200&page=1&order_by=observed_on&order=desc'),observations={...first,results:[...(first.results||[])]},warnings=[];
   for(let page=2;page<=limit&&observations.results.length<first.total_results;page++){try{const next=await read('observations?'+q+'&per_page=200&page='+page+'&order_by=observed_on&order=desc');observations.results.push(...next.results||[]);if(!next.results?.length)break;}catch(error){if(signal?.aborted)throw error;warnings.push('Additional map reports could not be loaded.');break;}}
   const optional=async(path,label)=>{try{return await read(path);}catch(error){if(signal?.aborted)throw error;warnings.push(label+' unavailable.');return null;}};
-  const species=await optional('observations/species_counts?'+q+'&per_page=200&page=1','Species totals');
+  const species=await optional('observations/species_counts?'+q+'&order_by=count&order=desc&per_page=200&page=1','Species totals');
   const histogram=await optional('observations/histogram?'+q+'&date_field=observed&interval=month_of_year','Monthly totals');
   const snapshot=wildlifeSnapshot(observations,species,histogram,query);if(warnings.length)snapshot.note=warnings.join(' ')+' '+snapshot.note;return snapshot;
  }catch(error){if(signal?.aborted)throw error;
@@ -93,7 +100,7 @@ export async function loadWildlife(options={}){
    // Never describe a different cached query as the requested one.
    const exact=wildlifeQuery(query).toString()===wildlifeQuery(saved.query||{}).toString();
    const defaultSelection=!Number.isFinite(input.lat)&&!input.bounds&&!input.d1&&!input.d2&&!query.iconicTaxa&&!query.taxonId&&!query.month;
-   if(saved.queryPolicy==='public-unthreatened-v2'&&(exact||defaultSelection))return{...saved,status:'partial',cached:true,note:'Live source unavailable. Showing saved observations checked '+saved.checkedAt+'. '+saved.note};
+   if(saved.queryPolicy==='public-unthreatened-v2'&&(exact||defaultSelection))return{...saved,features:sortWildlifeReports(saved.features,saved.analytics?.taxa),status:'partial',cached:true,note:'Live source unavailable. Showing saved observations checked '+saved.checkedAt+'. '+saved.note};
   }catch{}
   return{id:'wildlife',features:[],status:'unavailable',query,note:'iNaturalist could not supply this selection. Try again shortly.'};
  }
@@ -119,22 +126,70 @@ export async function loadWildlifeSpecies(id,{signal,fetcher=fetch}={}){
   summary:typeof t.wikipedia_summary==='string'?t.wikipedia_summary:'',
   wikipediaUrl:safeWildlifeUrl(t.wikipedia_url,'en.wikipedia.org'),
   taxonomy:(t.ancestors||[]).filter(a=>['kingdom','phylum','class','order','family','genus'].includes(a.rank)).map(a=>({rank:a.rank,name:a.preferred_common_name||a.name,scientificName:a.name})),
-  photo:usableWildlifePhoto(t.default_photo)};
+  photo:[t.default_photo,...(t.taxon_photos||[]).map(p=>p.photo)].map(usableWildlifePhoto).find(Boolean)||null};
 }
 function safeWildlifeUrl(value,host){try{const u=new URL(safeWebUrl(value));if(u.hostname===host){u.protocol='https:';return u.href;}}catch{}return '';}
 export function usableWildlifePhoto(photo){
  if(!photo||!['cc0','cc-by','cc-by-sa'].includes(photo.license_code)||!photo.attribution)return null;
- try{const u=new URL(safeWebUrl(photo.medium_url));if(u.protocol!=='https:'||!['inaturalist-open-data.s3.amazonaws.com','static.inaturalist.org'].includes(u.hostname))return null;return{url:u.href,credit:photo.attribution,license:photo.license_code};}catch{return null;}
+ const sourceUrl=safeWildlifeUrl(photo.native_page_url,'www.inaturalist.org')||safeWildlifeUrl(photo.native_page_url,'www.flickr.com')||(Number.isSafeInteger(photo.id)?'https://www.inaturalist.org/photos/'+photo.id:'');
+ const raw=photo.medium_url||photo.url,url=wildlifeImageUrl(raw);if(!url)return null;
+ return validateWildlifePhoto({url:url.replace(/\/(?:square|small)\./,'/medium.'),thumbnailUrl:photo.small_url||photo.square_url||url,credit:photo.attribution,license:photo.license_code,sourceUrl,licenseUrl:sourceUrl});
+}
+export function wildlifePhotoFigure(photo,name,{thumbnail=false}={}){
+ const figure=node('figure',undefined,thumbnail?'wildlife-species-thumbnail':'wildlife-species-photo'),img=node('img');
+ img.src=thumbnail?photo.thumbnailUrl:photo.url;img.alt=name||'Species photograph';img.loading='lazy';img.decoding='async';img.referrerPolicy='no-referrer';img.width=thumbnail?80:400;img.height=thumbnail?64:300;img.onerror=()=>figure.remove();
+ const caption=node('figcaption'),credit=photo.sourceUrl?link(photo.credit,photo.sourceUrl):document.createTextNode(photo.credit),licenseUrl=photo.licenseUrl||photo.sourceUrl;
+ caption.append(credit,document.createTextNode(' · '),licenseUrl?link(photo.license.toUpperCase(),licenseUrl):document.createTextNode(photo.license.toUpperCase()));figure.append(img,caption);return figure;
+}
+const dynamicPhotos=new Map();
+export async function resolveWildlifeSpeciesPhoto(id,{signal,fetcher=fetch}={}){
+ if(signal?.aborted)throw abortError(signal);
+ const cached=await cachedWildlifePhoto(id,{fetcher}).catch(()=>null);if(signal?.aborted)throw abortError(signal);if(cached)return cached;
+ const key=String(id),remembered=dynamicPhotos.get(key);
+ if(remembered&&remembered.fetcher===fetcher&&Date.now()-remembered.at<30*60*1000)return remembered.photo;
+ if(signal?.aborted)throw abortError(signal);
+ const taxon=await loadWildlifeSpecies(id,{signal,fetcher}),photo=taxon.photo||null;
+ if(signal?.aborted)throw abortError(signal);
+ dynamicPhotos.delete(key);while(dynamicPhotos.size>=128)dynamicPhotos.delete(dynamicPhotos.keys().next().value);
+ dynamicPhotos.set(key,{photo,fetcher,at:Date.now()});return photo;
+}
+// Metadata stays shared, but missing photographs are resolved only for visible
+// rows. Two jobs at a time enter the existing rate-limited, deduplicated API queue.
+const visiblePhotoJobs=[];let activePhotoJobs=0;
+function drainVisiblePhotos(){
+ while(activePhotoJobs<2&&visiblePhotoJobs.length){const job=visiblePhotoJobs.shift();if(job.signal?.aborted||!job.target.isConnected)continue;activePhotoJobs++;
+  Promise.resolve().then(job.load).catch(()=>{}).finally(()=>{activePhotoJobs--;drainVisiblePhotos();});
+ }
+}
+export function whenWildlifePhotoVisible(target,load,{signal,Observer=typeof IntersectionObserver==='function'?IntersectionObserver:null}={}){
+ if(signal?.aborted)return()=>{};let observer=null,done=false;
+ const cancel=()=>{done=true;observer?.disconnect();signal?.removeEventListener('abort',cancel);target.removeEventListener?.('pointerenter',run);target.removeEventListener?.('focusin',run);};
+ const run=()=>{if(done||signal?.aborted||!target.isConnected)return;cancel();
+  for(let i=visiblePhotoJobs.length-1;i>=0;i--)if(visiblePhotoJobs[i].signal?.aborted||!visiblePhotoJobs[i].target.isConnected)visiblePhotoJobs.splice(i,1);
+  if(visiblePhotoJobs.length<64){visiblePhotoJobs.push({target,load,signal});drainVisiblePhotos();}
+ };
+ if(Observer){observer=new Observer(entries=>{if(entries.some(entry=>entry.target===target&&entry.isIntersecting))run();},{rootMargin:'100px 0px'});observer.observe(target);}
+ else{target.addEventListener?.('pointerenter',run,{once:true});target.addEventListener?.('focusin',run,{once:true});}
+ signal?.addEventListener('abort',cancel,{once:true});return cancel;
+}
+const thumbnailVisibility=new WeakMap();
+function disposeWildlifeThumbnails(list){for(const row of list.children||[]){const summary=row.children?.[0];thumbnailVisibility.get(summary)?.();thumbnailVisibility.delete(summary);}}
+function appendWildlifeThumbnail(summary,taxon,signal){
+ const show=photo=>{if(!photo||signal?.aborted||!summary.isConnected)return;summary.className='wildlife-taxon-summary has-photo';summary.append(wildlifePhotoFigure(photo,taxon.name,{thumbnail:true}));};
+ cachedWildlifePhoto(taxon.id).catch(()=>null).then(photo=>{if(signal?.aborted||!summary.isConnected)return;if(photo){show(photo);return;}
+  thumbnailVisibility.set(summary,whenWildlifePhotoVisible(summary,()=>resolveWildlifeSpeciesPhoto(taxon.id,{signal}).then(show),{signal}));
+ });
 }
 export function wildlifeSpeciesProfile(taxon,{onMap,localCount,signal}={}){
- const host=node('section',undefined,'wildlife-species-profile'),title=node('h4',taxon.name||taxon.scientificName||'Species'),status=node('p','Loading species information…','small');host.append(title);
+ const host=node('section',undefined,'wildlife-species-profile'),title=node('h4',taxon.name||taxon.scientificName||'Species'),status=node('p','Loading species information…','small'),photoHost=node('div',undefined,'wildlife-profile-photo');host.append(title,photoHost);
+ let hasPhoto=false;const showPhoto=photo=>{if(!photo||hasPhoto||signal?.aborted||!host.isConnected)return;hasPhoto=true;photoHost.append(wildlifePhotoFigure(photo,taxon.name||taxon.scientificName));};const cachedPhoto=cachedWildlifePhoto(taxon.id).then(photo=>{showPhoto(photo);return photo;}).catch(()=>null);
  if(taxon.scientificName&&taxon.scientificName!==taxon.name)host.append(node('p',taxon.scientificName,'wildlife-scientific-name'));
  if(Number.isFinite(localCount))host.append(node('p',localCount.toLocaleString()+' regional reports in your selected dates','small'));
  if(onMap){const mapButton=node('button','Show this species on map');mapButton.type='button';mapButton.className='primary';mapButton.onclick=onMap;host.append(mapButton);}
  host.append(status,link('iNaturalist species record ↗','https://www.inaturalist.org/taxa/'+taxon.id));
  loadWildlifeSpecies(taxon.id,{signal}).then(t=>{
   if(!host.isConnected)return;status.remove();
-  if(t.photo){const figure=node('figure'),img=node('img');img.src=t.photo.url;img.alt=t.name;img.loading='lazy';img.referrerPolicy='no-referrer';img.onerror=()=>figure.remove();const caption=node('figcaption');caption.append(document.createTextNode(t.photo.credit+' · '),link(t.photo.license.toUpperCase(),'https://creativecommons.org/'+(t.photo.license==='cc0'?'publicdomain/zero/1.0/':'licenses/'+t.photo.license.slice(3)+'/4.0/')));figure.append(img,caption);host.append(figure);}
+  cachedPhoto.then(reviewed=>{if(!reviewed)showPhoto(t.photo);});
   if(t.summary&&t.wikipediaUrl){const parsed=new DOMParser().parseFromString(t.summary,'text/html');parsed.querySelectorAll('script,style,iframe').forEach(n=>n.remove());const summary=parsed.body.textContent.trim();if(summary){host.append(node('p',summary,'wildlife-species-summary'));const credit=node('p',undefined,'small');credit.append(link('Wikipedia summary ↗',t.wikipediaUrl),document.createTextNode(' · via iNaturalist · '),link('CC BY-SA','https://creativecommons.org/licenses/by-sa/4.0/'));host.append(credit);}}
   if(t.taxonomy.length){const dl=node('dl',undefined,'wildlife-taxonomy');for(const a of t.taxonomy){dl.append(node('dt',a.rank),node('dd',a.name+(a.name!==a.scientificName?' · '+a.scientificName:'')));}host.append(dl);}
   if(!t.summary)host.append(node('p','No species description is supplied here. Open the source record for more information.','small'));
@@ -153,11 +208,11 @@ function wildlifeSpeciesBrowser(snapshot,query,change,signal,state){
  host.append(node('h4','Explore species'));
  if(!a){host.append(node('p',snapshot.status==='unavailable'?'Species reports are temporarily unavailable.':'Loading species recorded here…','small'));return host;}
  let taxa=[...a.taxa],page=1,loading=false;const restorePage=state.speciesPage,expanded=new Set(state.speciesExpandedIds);
- const caption=node('p',taxa.length?'Choose a species to learn about it and map its reports.':'No species reported for these filters.','small'),order=node('select'),list=node('div',undefined,'wildlife-taxon-list'),more=node('button','Load more species');order.setAttribute('aria-label','Sort regional species');
- for(const[v,label]of [['count','Most reported'],['name','Name A–Z']]){const o=node('option',label);o.value=v;order.append(o);}order.value=state.speciesSort;
+ const caption=node('p',taxa.length?'Ordered by local observation reports. Choose a species to learn about it.':'No species reported for these filters.','small'),order=node('select'),list=node('div',undefined,'wildlife-taxon-list'),more=node('button','Load more species');order.setAttribute('aria-label','Sort regional species');
+ for(const[v,label]of [['count','Most commonly seen'],['name','Name A–Z']]){const o=node('option',label);o.value=v;order.append(o);}order.value=state.speciesSort;
  const canLoad=()=>page<50&&taxa.length>=page*200&&(a.distinctTaxa===null||taxa.length<a.distinctTaxa);
- const draw=()=>{list.replaceChildren();for(const t of [...taxa].sort((x,y)=>state.speciesSort==='name'?x.name.localeCompare(y.name):y.count-x.count||x.name.localeCompare(y.name)).slice(0,state.speciesVisibleCount)){const row=node('details',undefined,'wildlife-taxon-row'),summary=node('summary');summary.append(node('strong',t.name),node('small',t.scientificName+' · '+t.count.toLocaleString()+' reports'));row.append(summary);let loaded=false;const profile=()=>{if(!loaded){loaded=true;row.append(wildlifeSpeciesProfile(t,{localCount:t.count,signal,onMap:()=>change({taxonId:t.id,taxonName:t.name})}));}};row.open=expanded.has(t.id);if(row.open)profile();row.ontoggle=()=>{if(row.open){expanded.add(t.id);profile();}else expanded.delete(t.id);state.speciesExpandedIds=[...expanded].slice(0,64);};list.append(row);}more.hidden=state.speciesVisibleCount>=taxa.length&&!canLoad();more.disabled=loading;more.textContent=loading?'Loading species…':'Show more species';};
- async function nextPage(){const data=await readWildlifeJson(API+'observations/species_counts?'+wildlifeQuery(query)+'&per_page=200&page='+(page+1),{signal});if(!host.isConnected||signal?.aborted)return false;const rows=wildlifeSnapshot({results:[]},data,null).analytics.taxa,seen=new Set(taxa.map(t=>t.id));taxa.push(...rows.filter(t=>!seen.has(t.id)));page++;state.speciesPage=page;return rows.length>0;}
+ const draw=()=>{disposeWildlifeThumbnails(list);list.replaceChildren();for(const t of [...taxa].sort((x,y)=>state.speciesSort==='name'?x.name.localeCompare(y.name):y.count-x.count||x.name.localeCompare(y.name)).slice(0,state.speciesVisibleCount)){const row=node('details',undefined,'wildlife-taxon-row'),summary=node('summary');summary.append(node('strong',t.name),node('small',t.scientificName+' · '+t.count.toLocaleString()+' reports'));row.append(summary);appendWildlifeThumbnail(summary,t,signal);let loaded=false;const profile=()=>{if(!loaded){loaded=true;row.append(wildlifeSpeciesProfile(t,{localCount:t.count,signal,onMap:()=>change({taxonId:t.id,taxonName:t.name})}));}};row.open=expanded.has(t.id);if(row.open)profile();row.ontoggle=()=>{if(row.open){expanded.add(t.id);profile();}else expanded.delete(t.id);state.speciesExpandedIds=[...expanded].slice(0,64);};list.append(row);}more.hidden=state.speciesVisibleCount>=taxa.length&&!canLoad();more.disabled=loading;more.textContent=loading?'Loading species…':'Show more species';};
+ async function nextPage(){const data=await readWildlifeJson(API+'observations/species_counts?'+wildlifeQuery(query)+'&order_by=count&order=desc&per_page=200&page='+(page+1),{signal});if(!host.isConnected||signal?.aborted)return false;const rows=wildlifeSnapshot({results:[]},data,null).analytics.taxa,seen=new Set(taxa.map(t=>t.id));taxa.push(...rows.filter(t=>!seen.has(t.id)));page++;state.speciesPage=page;return rows.length>0;}
  order.onchange=()=>{state.speciesSort=order.value==='name'?'name':'count';state.speciesVisibleCount=6;draw();};more.type='button';more.onclick=async()=>{if(loading)return;if(state.speciesVisibleCount<taxa.length){state.speciesVisibleCount=Math.min(10000,state.speciesVisibleCount+12);draw();return;}loading=true;draw();try{await nextPage();state.speciesVisibleCount=Math.min(10000,state.speciesVisibleCount+12);}catch{if(!signal?.aborted)caption.textContent='More species could not be loaded. Your existing list is retained.';}finally{loading=false;if(host.isConnected&&!signal?.aborted)draw();}};
  draw();host.append(caption,order,list,more);
  if(restorePage>1){loading=true;draw();Promise.resolve().then(async()=>{try{while(page<restorePage&&canLoad()&&host.isConnected&&!signal?.aborted){if(!await nextPage())break;draw();}if(host.isConnected&&!signal?.aborted)state.speciesPage=page;}catch{if(!signal?.aborted){state.speciesPage=page;caption.textContent='Some shared species pages could not load. Showing available species.';}}finally{loading=false;if(host.isConnected&&!signal?.aborted)draw();}});}
@@ -186,11 +241,11 @@ export function wildlifeControls(snapshot={},onChange=()=>{},onViewChange=()=>{}
  const a=snapshot.analytics;
  if(a){host.append(node('p',a.matchingObservations.toLocaleString()+' matching reports · '+(a.distinctTaxa===null?'Taxon count unavailable':a.distinctTaxa.toLocaleString()+' recorded taxa'),'small'));
  if(a.seasonalityAvailable){host.append(node('h4','Reports by observation month'));const chart=node('div',undefined,'wildlife-months'),max=Math.max(1,...a.months.map(m=>m.count));for(const m of a.months){const button=node('button');button.type='button';button.setAttribute('aria-label',longMonths[m.month-1]+': '+m.count+' reports; filter this month');button.setAttribute('aria-pressed',String(Number(query.month)===m.month));const bar=node('i');bar.style.height=(m.count/max*48+2)+'px';button.append(bar,node('span',shortMonths[m.month-1]),node('small',m.count.toLocaleString()));button.onclick=()=>change({month:Number(query.month)===m.month?'':m.month});chart.append(button);}host.append(chart);}
- host.append(node('p',a.mappedObservations+' individual observation areas available from the '+a.loadedObservations+' newest downloaded reports. The heatmap and monthly counts cover the full matching query; this list shows the newest downloaded reports.','small'));
+ host.append(node('p',a.mappedObservations+' individual observation areas available from the '+a.loadedObservations+' newest downloaded reports. The heatmap and monthly counts cover the full matching query; this list orders the downloaded reports by local species report counts.','small'));
  if(a.loadedObservations<a.matchingObservations&&Number(query.pageLimit||1)<5){const more=node('button','Load 200 more observation reports');more.type='button';more.onclick=()=>change({pageLimit:Number(query.pageLimit||1)+1});host.append(more);}
  }
  host.append(node('p',snapshot.note||'Choose a group or month to explore documented observations.','small'));const q=wildlifeQuery(query);host.append(link('View matching iNaturalist records ↗','https://www.inaturalist.org/observations?'+q));return host;
 }
 export function appendWildlifeDetails(host,p={}){
- if(!p.wildlifeObservation)return false;const card=node('section',undefined,'insight-card');card.append(node('h3',p.scientificName),node('p','Observed '+p.observationDate+' · '+p.locationAccuracy,'small'),node('p','Research-grade community identification · wild organism. An observation is not a current-presence guarantee.','small'),link('Observation by '+p.observer+' ↗','https://www.inaturalist.org/observations/'+String(p.id||'').replace('inat:','')));if(p.taxonId){const learn=node('details'),summary=node('summary','About this species');learn.append(summary);let loaded=false;learn.ontoggle=()=>{if(learn.open&&!loaded){loaded=true;learn.append(wildlifeSpeciesProfile({id:p.taxonId,name:p.title,scientificName:p.scientificName}));}};card.append(learn);}const licenses={'cc0':'https://creativecommons.org/publicdomain/zero/1.0/','cc-by':'https://creativecommons.org/licenses/by/4.0/','cc-by-sa':'https://creativecommons.org/licenses/by-sa/4.0/','cc-by-nc':'https://creativecommons.org/licenses/by-nc/4.0/','cc-by-nc-sa':'https://creativecommons.org/licenses/by-nc-sa/4.0/','cc-by-nd':'https://creativecommons.org/licenses/by-nd/4.0/','cc-by-nc-nd':'https://creativecommons.org/licenses/by-nc-nd/4.0/'};if(licenses[p.license]){const credit=node('p',undefined,'small');credit.append(link('Observation license · '+p.license.toUpperCase(),licenses[p.license]));card.append(credit);}host.append(card);return true;
+ if(!p.wildlifeObservation)return false;const card=node('section',undefined,'insight-card');card.append(node('h3',p.scientificName),node('p','Observed '+p.observationDate+' · '+p.locationAccuracy,'small'),node('p','Research-grade community identification · wild organism. An observation is not a current-presence guarantee.','small'),link('Observation by '+p.observer+' ↗','https://www.inaturalist.org/observations/'+String(p.id||'').replace('inat:','')));if(p.taxonId){const photoHost=node('div',undefined,'wildlife-observation-photo');card.append(photoHost);resolveWildlifeSpeciesPhoto(p.taxonId).then(photo=>{if(photo&&photoHost.isConnected)photoHost.append(wildlifePhotoFigure(photo,p.title||p.scientificName));}).catch(()=>{});const learn=node('details'),summary=node('summary','About this species');learn.append(summary);let loaded=false;learn.ontoggle=()=>{if(learn.open&&!loaded){loaded=true;learn.append(wildlifeSpeciesProfile({id:p.taxonId,name:p.title,scientificName:p.scientificName}));}};card.append(learn);}const licenses={'cc0':'https://creativecommons.org/publicdomain/zero/1.0/','cc-by':'https://creativecommons.org/licenses/by/4.0/','cc-by-sa':'https://creativecommons.org/licenses/by-sa/4.0/','cc-by-nc':'https://creativecommons.org/licenses/by-nc/4.0/','cc-by-nc-sa':'https://creativecommons.org/licenses/by-nc-sa/4.0/','cc-by-nd':'https://creativecommons.org/licenses/by-nd/4.0/','cc-by-nc-nd':'https://creativecommons.org/licenses/by-nc-nd/4.0/'};if(licenses[p.license]){const credit=node('p',undefined,'small');credit.append(link('Observation license · '+p.license.toUpperCase(),licenses[p.license]));card.append(credit);}host.append(card);return true;
 }

@@ -1,5 +1,5 @@
 import {getMapBadgeLayout,badgeRectangle,badgeLeaderSegments} from './map-badge-layout.js?v=20261117-explore-layout';
-import {layoutOverviewBadges} from './place-clusters.js?v=20261117-explore-layout';
+import {layoutOverviewBadges} from './place-clusters.js?v=20261117-close-selection';
 // Official MoDOT active traffic impacts. Incident duration is NOT driving delay.
 const TRAFFIC_LAYERS=new Set([0,5,9]);
 const TRAFFIC_STRINGS={DATA_ID:100,ROUTE:240,TRAVELWAY_NAME:240,TYPE_CODE:120,EXT_COMMENT:8000,LEVEL_OF_IMPACT_CODE:60,STATUS_CODE:30};
@@ -52,12 +52,12 @@ export function trafficBadgeGroups(records,project){
   else groups.push({key:'traffic:'+r.id,provider:'traffic',anchor:point,cluster:{features:[r],center:[r.lat,r.lng],bounds:[[r.lat,r.lng],[r.lat,r.lng]],layerIds:['traffic']}});
  }return groups;
 }
-export function createTrafficIncidents(map,{onSelect,onStatus}){
+export function createTrafficIncidents(map,{onSelect,onStatus,getSelected=()=>null}){
  const group=L.layerGroup(),layout=getMapBadgeLayout(map);let active=false,controller,checked=0,records=[],timer,requestId=0;
  function draw(){group.clearLayers();if(!active){layout.publish('traffic',[]);return;}
- const size=map.getSize(),obstacles=layout.obstacles('traffic'),groups=trafficBadgeGroups(records.filter(r=>map.getBounds().contains([r.lat,r.lng])),point=>map.latLngToContainerPoint(point));
+ const size=map.getSize(),obstacles=layout.obstacles('traffic'),groups=trafficBadgeGroups(records.filter(r=>'modot:'+r.id!==getSelected()&&map.getBounds().contains([r.lat,r.lng])),point=>map.latLngToContainerPoint(point));
  const badges=layoutOverviewBadges(groups,{width:size.x,height:size.y,obstacles,measure:(group,compact)=>{const items=group.cluster.features,label=items.length===1?items[0].label:items.length+' incidents';return compact?{width:items.length===1?Math.max(40,14+label.length*6):Math.max(28,14+String(items.length).length*6),height:24}:{width:Math.max(56,20+label.length*6.3),height:28};}}),visible=badges.filter(b=>b.clearance),boxes=visible.map(badgeRectangle);layout.publish('traffic',boxes);
- for(const badge of visible){const items=badge.cluster.features,first=items[0],r=items.length===1?first:{...first,title:items.length+' traffic incidents',label:items.length+' incidents',road:'Nearby roads',delay:null,description:items.map(x=>x.road+' — '+x.title+'. '+x.description+(x.delay?' Reported delay: '+x.delay:' Delay time not reported.')).join('\n\n'),updated:Math.max(...items.map(x=>x.updated||0))};
+ for(const badge of visible){const items=badge.cluster.features,first=items[0],r=items.length===1?first:{...first,members:items,clusterCenter:badge.cluster.center,title:items.length+' traffic incidents',label:items.length+' incidents',road:'Nearby roads',delay:null,description:items.map(x=>x.road+' — '+x.title+'. '+x.description+(x.delay?' Reported delay: '+x.delay:' Delay time not reported.')).join('\n\n'),updated:Math.max(...items.map(x=>x.updated||0))};
   const display=map.containerPointToLatLng(L.point(...badge.position)),anchor=map.latLngToContainerPoint(badge.cluster.center);
   if(badge.displaced){for(const segment of badgeLeaderSegments([anchor.x,anchor.y],badge.position,[...obstacles,...boxes]))L.polyline(segment.map(point=>map.containerPointToLatLng(L.point(...point))),{color:'#b66c4b',weight:1,opacity:.65,interactive:false,className:'traffic-badge-leader'}).addTo(group);if(items.length===1)L.circleMarker(badge.cluster.center,{radius:2,weight:1,color:'#a34535',fillColor:'#fff',fillOpacity:1,interactive:false}).addTo(group);}
   const label=document.createElement('span');label.className='traffic-delay-label'+(r.closed?' is-closed':'')+(badge.compact?' is-compact':'');label.textContent=badge.compact&&items.length>1?String(items.length):r.label;label.style.width=badge.width+'px';label.style.height=badge.height+'px';label.style.boxSizing='border-box';label.style.padding='0 5px';label.style.minWidth='0';label.style.lineHeight=(badge.height-2)+'px';label.style.textAlign='center';label.title=r.title+' · '+r.road+(r.delay?'':' · Delay time not reported');const icon=L.divIcon({className:'traffic-incident-marker',html:label,iconSize:[badge.width,badge.height],iconAnchor:[badge.width/2,badge.height/2]});L.marker(display,{icon,title:label.title,keyboard:true,zIndexOffset:500}).on('click',()=>onSelect(r)).addTo(group);

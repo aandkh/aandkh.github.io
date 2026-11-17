@@ -53,3 +53,13 @@ City share the same lookup architecture.
 The tests cover real source contracts plus polygon holes, line distances,
 temporal filtering, ordering, all-metric Census lookup, source failures, unknown
 wind, approximate locations, cancellation, caching and independent read queues.
+
+## Starting radius
+
+A new flag defaults to exactly 100 feet (`100/5280` miles), shared by the map UI,
+all nearby spatial lookups, catalog buckets and share-link validation through
+`spot-radius.js`. The picker includes 100ft, 300ft, the existing 800ft option,
+half a mile, one mile and three miles. Existing saved larger selections retain
+their radius. Containing polygons still report the enclosing geography, and
+explicit nearest-station references keep their documented wider search radius.
+Wildlife source points remain rounded and labeled approximate.

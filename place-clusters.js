@@ -1,3 +1,4 @@
+import {selectionFeatureId} from './selection-focus.js?v=20261117-close-selection';
 import {packMapBadges} from './map-badge-layout.js?v=20261117-explore-layout';
 // Cross-category place clustering. Cluster positions are weighted geographic
 // summaries of their members, never substitute coordinates for an actual place.
@@ -8,7 +9,7 @@ const MAX_LAT=85.0511287798066;
 export function separateSelectedPlace(entries,selection,provider){
  if(!selection)return{selected:null,remaining:entries};
  const community=new Set(['communityevents','exhibitions','family','free']),canonical=layer=>community.has(layer)?'communityevents':layer;
- const matches=feature=>{const layer=feature._layer??provider??feature.properties?._sourceLayer,identity=String(feature.properties?.id||feature.id||'');return canonical(layer)===canonical(selection.layer)&&(identity===selection.id||feature.properties?.alternateIds?.includes(selection.id));};
+ const matches=feature=>{const layer=feature._layer??provider??feature.properties?._sourceLayer,identity=selectionFeatureId(feature,layer),selectedId=String(selection.id??'');return canonical(layer)===canonical(selection.layer)&&(identity===selectedId||feature.properties?.alternateIds?.some(id=>String(id)===selectedId));};
  const selected=entries.find(matches)||null;
  return selected?{selected,remaining:entries.filter(feature=>!matches(feature))}:{selected:null,remaining:entries};
 }

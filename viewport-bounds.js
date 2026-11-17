@@ -1,4 +1,4 @@
-import {REGION} from './core.js?v=20261117-explore-layout';
+import {REGION} from './core.js?v=20261117-close-selection';
 
 function validBounds(value){
  const bounds=typeof value==='string'?value.split(',').map(part=>part.trim()===''?NaN:Number(part)):value;

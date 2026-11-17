@@ -65,7 +65,7 @@ test('Static catalog returns every nearby record, sorts dates, preserves approxi
  const fetchJson=async file=>{assert.equal(file,'./search-index.json');reads++;return{items};};
  const first=inspect({fetchJson}),restaurants=await first.load('restaurants'),concerts=await first.load('concerts'),crime=await first.load('crime');
  assert.equal(restaurants.items.length,117);assert.deepEqual(concerts.items.map(item=>item.title),['Soon event','Future event']);assert(crime.items[0].approximate);assert.notEqual(crime.items[0].relation,'at');
- const next=inspect({fetchJson,lng:point.lng+.001});assert.equal((await next.load('restaurants')).items.length,117);assert.equal(reads,1,'stable file reads and decoded spatial buckets reused');first.dispose();next.dispose();
+ const next=inspect({fetchJson,lng:point.lng+.0001});assert.equal((await next.load('restaurants')).items.length,117);assert.equal(reads,1,'stable file reads and decoded spatial buckets reused');first.dispose();next.dispose();
 });
 
 test('Live and file reads have separate bounded queues; nearby catalog is not blocked by weather',async()=>{
@@ -82,4 +82,11 @@ test('Disposed point requests cannot repaint a newer point or mistake a failure 
  let release;const pending=new Promise(resolve=>release=resolve),updates=[];
  const inspector=inspect({fetchLayer:async()=>pending,onSection:section=>updates.push(section)}),loading=inspector.load('weather');await pause();inspector.dispose();const before=updates.length;release({weather:{hourly:[]}});await loading;assert.equal(updates.length,before);
  const failed=await inspect({loadTraffic:async()=>{throw Error('Traffic source offline');}}).load('traffic');assert.equal(failed.status,'unavailable');assert.match(failed.note,/offline/);assert.equal(failed.items.length,0);
+});
+
+test('Default flag radius includes 50 feet and excludes 200 feet across all nearby lookup categories',async()=>{
+ const north=feet=>({type:'Point',coordinates:[point.lng,point.lat+feet*.3048/111195]}),features=[feature('50 feet',{},north(50)),feature('200 feet',{},north(200))];
+ for(const layer of ['restaurants','parks','concerts','wildlife']){const result=await spatialFeatureItems({features},layer,{...point,now});assert.deepEqual(result.items.map(item=>item.title),['50 feet'],layer);}
+ const catalog={items:features.map(f=>({id:f.id,title:f.id,type:'feature',layer:'restaurants',coordinates:f.geometry.coordinates}))};
+ const inspector=inspect({fetchJson:async()=>catalog});assert.deepEqual((await inspector.load('restaurants')).items.map(item=>item.title),['50 feet']);inspector.dispose();
 });

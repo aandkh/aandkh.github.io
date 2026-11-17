@@ -1,5 +1,5 @@
-import {BY_ID} from './catalog.js?v=20261117-explore-layout';
-import {coordinate,cleanState,decodeState} from './core.js?v=20261117-explore-layout';
+import {BY_ID} from './catalog.js?v=20261117-close-selection';
+import {coordinate,cleanState,decodeState} from './core.js?v=20261117-close-selection';
 
 // Stable 64-bit reference, independent of feed ordering and changing event details.
 export function placeToken(id){

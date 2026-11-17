@@ -88,3 +88,9 @@ test('Raster reference actions are clickable and preserve the inspected point fo
  ui.updateSection('terrain',{status:'ready',items:[{title:'View streams and waterbodies',relation:'reference',layer:'terrain',action}]});
  cls(ui.element,'spot-feature')[0].emit('click');assert.deepEqual(received.item.action,action);assert.deepEqual(received.p,point);assert(ui.element.hidden);assert.equal(ui.resumeElement.hidden,false);
 });
+
+test('A new flag starts at 100 feet and changing to larger radii preserves callbacks',()=>{
+ const calls=[],{ui}=fixture({onRadiusChange:(radius,p)=>calls.push([radius,p])});ui.open({lat:point.lat,lng:point.lng});assert.equal(ui.point.radiusMiles,100/5280);
+ const select=nodes(ui.element).find(n=>n.tagName==='SELECT');assert.equal(select.value,String(100/5280));assert.equal(select.children[0].textContent,'100 ft');
+ select.value=String(300/5280);select.emit('change');assert.equal(calls[0][0],300/5280);assert.equal(ui.point.radiusMiles,300/5280);
+});

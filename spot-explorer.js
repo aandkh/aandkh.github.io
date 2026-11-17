@@ -1,9 +1,10 @@
+import {DEFAULT_SPOT_RADIUS_MILES,SPOT_RADII,normalizeSpotRadius,spotRadiusLabel} from './spot-radius.js?v=20261117-close-selection';
 import {safeWebUrl} from './security.js?v=20261116-security';
 
 const FIRST_ITEMS=3, MORE_ITEMS=10;
 const statuses={idle:'Explore',loading:'Loading…',ready:'',partial:'Partial coverage',unavailable:'Unavailable',empty:'No reports',stale:'Older reading',error:'Unavailable'};
-const RADII=[.15,.5,1,3];
-const pointCopy=p=>p?{lat:p.lat,lng:p.lng,radiusMiles:RADII.includes(p.radiusMiles)?p.radiusMiles:1,...(p.label?{label:p.label}:{})}:null;
+const RADII=SPOT_RADII;
+const pointCopy=p=>p?{lat:p.lat,lng:p.lng,radiusMiles:normalizeSpotRadius(p.radiusMiles),...(p.label?{label:p.label}:{})}:null;
 const validPoint=p=>p&&typeof p.lat==='number'&&Number.isFinite(p.lat)&&Math.abs(p.lat)<=90&&typeof p.lng==='number'&&Number.isFinite(p.lng)&&Math.abs(p.lng)<=180;
 export function spotDistance(meters){
  if(typeof meters!=='number'||!Number.isFinite(meters)||meters<0)return '';
@@ -25,7 +26,7 @@ export function createSpotExplorer({shell,onClose=()=>{},onMap=()=>{},onResume=(
  const mapButton=button('Map',()=>{suspend();onMap(pointCopy(point));});mapButton.setAttribute('aria-label','Show map and keep this spot');
  const exit=button('Exit',()=>{const selected=pointCopy(point);close();onClose(selected);});exit.setAttribute('aria-label','Exit spot inspection');actions.append(share,mapButton,exit);head.append(title,actions);
  const intro=make('div','spot-intro'),coordinates=make('p','spot-coordinates'),forecast=button('Forecast here',()=>{if(!point)return;suspend();onForecast?.(pointCopy(point));},'spot-forecast');forecast.hidden=typeof onForecast!=='function';intro.append(coordinates,forecast);
- const radiusLabel=make('label','spot-radius','Nearby radius '),radius=make('select');radius.setAttribute('aria-label','Nearby search radius');for(const miles of RADII){const option=make('option','',miles===.15?'800 ft':miles+' mi');option.value=String(miles);radius.append(option);}radius.value='1';radiusLabel.append(radius);intro.append(radiusLabel);
+ const radiusLabel=make('label','spot-radius','Nearby radius '),radius=make('select');radius.setAttribute('aria-label','Nearby search radius');for(const miles of RADII){const option=make('option','',spotRadiusLabel(miles));option.value=String(miles);radius.append(option);}radius.value=String(DEFAULT_SPOT_RADIUS_MILES);radiusLabel.append(radius);intro.append(radiusLabel);
  radius.addEventListener('change',()=>{if(!point)return;const miles=Number(radius.value);if(!RADII.includes(miles))return;point={...point,radiusMiles:miles};onRadiusChange(miles,pointCopy(point));});
  const status=make('p','spot-progress');status.setAttribute('role','status');status.setAttribute('aria-live','polite');
  const body=make('div','spot-sections');panel.append(head,intro,status,body);

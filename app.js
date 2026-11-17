@@ -1,10 +1,11 @@
-import {createSpotExplorer} from './spot-explorer.js?v=20261117-explore-layout';
+import {selectionAnchor,selectionFeatureId} from './selection-focus.js?v=20261117-close-selection';
+import {createSpotExplorer} from './spot-explorer.js?v=20261117-close-selection';
 import {installPanelDrag} from './panel-drag.js?v=20261117-explore-layout';
 import {shouldRefreshLayer} from './refresh-policy.js?v=20261116-full-speed';
 import {eventDateMatches,eventDateRangeControl} from './event-date-range.js?v=20261116-full-speed';
 import {createWildlifeHeatLayer,wildlifeHeatKey} from './wildlife-heat.js?v=20261117-explore-layout';
-import {appendBirdingAnalytics} from './birding-analytics.js?v=20261116-security';
-import {loadWildlife,wildlifeControls,disposeWildlifeControls,getWildlifeControlState,appendWildlifeDetails,WILDLIFE_BOUNDS,wildlifeQuery,defaultWildlifeOptions,readWildlifeJson,wildlifeObservation,searchWildlifeTaxa} from './wildlife.js?v=20261116-security';
+import {appendBirdingAnalytics} from './birding-analytics.js?v=20261117-close-selection';
+import {loadWildlife,wildlifeControls,disposeWildlifeControls,getWildlifeControlState,appendWildlifeDetails,WILDLIFE_BOUNDS,wildlifeQuery,defaultWildlifeOptions,readWildlifeJson,wildlifeObservation,searchWildlifeTaxa} from './wildlife.js?v=20261117-close-selection';
 import {loadHistoricalEvents,filterHistoricalEvents,historicalEventStamp,appendHistoricalEvidence,historicalFilterControls,historicalEra,HISTORY_CATEGORIES} from './historical-events.js?v=20261116-history-deep-time';
 import {createViewportGeometryLayer} from './viewport-geometry.js?v=20261117-explore-layout';
 import {loadFloodplains,createFloodplainLayer,floodLabel,appendFloodKey} from './floodplains.js?v=20261117-explore-layout';
@@ -32,40 +33,40 @@ import {eventDay,eventOrder,eventTime,eventStamp,groupEventCards} from './event-
 import {venueEvents,mergeVenueEvents} from './concert-calendar.js?v=20261116-full-speed';
 import {createSkyCloudMap} from './sky-cloud-map.js?v=20261116-security';
 import {COMMUNITY_SOURCES,HIDDEN_LAYERS,CRIME_TYPES,combineCrime,appendAirAdvice,distance,routeMiles,pointInGeometry} from './layer-insights.js?v=20261115-air-clarity';
-import {createTrafficIncidents} from './traffic-incidents.js?v=20261117-explore-layout';
+import {createTrafficIncidents} from './traffic-incidents.js?v=20261117-close-selection';
 import {attachSuggestions} from './search-suggestions.js?v=20261117-explore-layout';
 import {createGlobalSearch} from './global-search.js?v=20261117-explore-layout';
 import {resolveSearchFeature,safeSearchSourceFile} from './search-catalog.js?v=20261117-explore-layout';
 import {SEARCH_ACTIONS,findSearchActionTarget} from './search-actions.js?v=20261117-explore-layout';
 import {createFutureRadar} from './future-radar.js?v=20261117-explore-layout';
 import {searchLayers} from './explore.js?v=20261116-wildlife-heat';
-import {placeHash,readPlaceHash,placeState,findSharedFeature,encodeViewState,decodeViewState,isViewHash} from './short-links.js?v=20261117-explore-layout';
+import {placeHash,readPlaceHash,placeState,findSharedFeature,encodeViewState,decodeViewState,isViewHash} from './short-links.js?v=20261117-close-selection';
 import {appendPlaceNavigation} from './place-navigation.js?v=20261115-road-insights';
 import {TODAY_LAYERS,happeningToday} from './today-filter.js?v=20261116-full-speed';
 import {createWeatherReadings} from './weather-readings.js?v=20261117-explore-layout';
 import {enrichCultureFeature,cultureFeatureDisplayable} from './place-enrichment.js?v=20261115-road-insights';
 import {apiFetch,apiUrl} from './api-client.js?v=20261116-security';
-import {regionalViewportBounds} from './viewport-bounds.js?v=20261117-explore-layout';
-import {placeMatchesSearch} from './place-search.js?v=20261117-explore-layout';
+import {regionalViewportBounds} from './viewport-bounds.js?v=20261117-close-selection';
+import {placeMatchesSearch} from './place-search.js?v=20261117-close-selection';
 import {filterPlaceFeatures,isExcludedChainPlace} from './chain-places.js?v=20261116-speed';
 import {openingState,isHoursPlaceLayer} from './opening-hours.js?v=20261115-road-insights';
 import {createHoursChecks,placeOpeningState} from './open-now-filter.js?v=20261115-road-insights';
 import {createMapKey} from './map-key.js?v=20261115-road-insights';
 import {layerMatchesSearch} from './layer-search.js?v=20261117-explore-layout';
 import {measureUI,startMeasurement} from './ui-performance.js?v=20261115-road-insights';
-import {clusterPlaceFeatures,separateSelectedPlace,aggregateOverviewGroups,layoutOverviewBadges} from './place-clusters.js?v=20261117-explore-layout';
+import {clusterPlaceFeatures,separateSelectedPlace,aggregateOverviewGroups,layoutOverviewBadges} from './place-clusters.js?v=20261117-close-selection';
 import {getMapBadgeLayout,badgeRectangle,badgeLeaderSegments} from './map-badge-layout.js?v=20261117-explore-layout';
 import {appendSkyDiagram} from './forecast-visuals.js?v=20261116-full-speed';
 import {appendVehicleInspector} from './vehicles.js?v=20261115-road-insights';
 import {symbol} from './symbols.js?v=20261117-explore-layout';
-import {overlayStyles,routeOverlayStyles,aircraftDirectionStyles,markerPaint} from './overlay-style.js?v=20261117-explore-layout';
+import {overlayStyles,routeOverlayStyles,aircraftDirectionStyles,markerPaint} from './overlay-style.js?v=20261117-close-selection';
 import {uiIcon} from './ui-icons.js?v=20261115-road-insights';
 import {MODE_DEFAULTS,OPACITY_DEFAULTS,cleanOverlayOpacity,cleanLayerModes,unexpiredFeatures} from './expansion-options.js?v=20261115-road-insights';
-import {appendWeather,appendSkyExtras,createOpeningNotices} from './expansion-ui.js?v=20261117-explore-layout';
-import {LAYERS,BY_ID,EXAMPLES} from './catalog.js?v=20261117-explore-layout';
+import {appendWeather,appendSkyExtras,createOpeningNotices} from './expansion-ui.js?v=20261117-close-selection';
+import {LAYERS,BY_ID,EXAMPLES} from './catalog.js?v=20261117-close-selection';
 import {RADAR_MODES,RADAR_TYPE_KEY,AQI,AIR_MODES} from './environment.js?v=20261115-road-insights';
 import {CONFIG} from './config.js?v=20261115-road-insights';
-import {REGION,coordinate,safeUrl,placeUrl,placeLinks,encodeState,decodeState,cleanState,cleanStop,loadPresets,savePresets,cleanPreset,browserStorage,layerSelectable,skyCloudRows,currentRoadworks,centroid,directionEnd,clusterPoints} from './core.js?v=20261117-explore-layout';
+import {REGION,coordinate,safeUrl,placeUrl,placeLinks,encodeState,decodeState,cleanState,cleanStop,loadPresets,savePresets,cleanPreset,browserStorage,layerSelectable,skyCloudRows,currentRoadworks,centroid,directionEnd,clusterPoints} from './core.js?v=20261117-close-selection';
 const $=s=>document.querySelector(s),el=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;};
 const mapKey=createMapKey($('#environment-key'));if(mapKey.toggle.getAttribute('aria-expanded')==='true')mapKey.toggle.click();
 const btn=(text,fn,cls='')=>{const b=el('button',cls,text);b.type='button';b.addEventListener('click',fn);return b;};
@@ -128,6 +129,7 @@ installPanelDrag($('#map').parentElement);
 const mapCredits=installMapCredits(map,{layers:LAYERS});
 // Fixed panes keep traffic above radar regardless of refresh completion order.
 map.createPane('spot-selection');map.getPane('spot-selection').style.zIndex='650';
+map.createPane('selected-location');map.getPane('selected-location').style.zIndex='675';
 map.createPane('weather-overlay');map.getPane('weather-overlay').style.zIndex='350';
 map.createPane('traffic-overlay');map.getPane('traffic-overlay').style.zIndex='450';
 const placeMarkers=L.layerGroup().addTo(map);
@@ -135,13 +137,15 @@ const badgeLayout=getMapBadgeLayout(map);badgeLayout.register('places',drawPlace
 const weatherReadings=createWeatherReadings(map,{formatTime:format,fitOnLoad:false,onSelect:openStationForecast});let weatherReadingsAt=0,weatherReadingsRequest=null;
 const futureRadar=createFutureRadar(map,{weatherReadings,onStart(){skyCloudMap.close();closeDetail();setResults(false);setControls(false);drawn.get('radar')?.setOpacity(0);},onClose(){drawn.get('radar')?.setOpacity(overlayOpacity.radar);weatherReadings.endForecast(enabled.has('radar'));}});
 const trafficNote=el('div','traffic-note');trafficNote.hidden=true;$('#map').parentElement.append(trafficNote);
-const trafficIncidents=createTrafficIncidents(map,{onStatus(text){trafficNote.textContent=text;trafficNote.hidden=!text;},onSelect(r){
- skyCloudMap.close();if(futureRadar.active)futureRadar.stop();closeDetail();setResults(false);setControls(false);focus=cleanStop({id:'modot:'+r.id,layer:'traffic',lat:r.lat,lng:r.lng,title:r.title,description:[r.delay?'Reported delay: '+r.delay:'Delay time not reported',r.road,r.description].filter(Boolean).join(' · '),source:'MoDOT',observedAt:r.updated?new Date(r.updated).toISOString():'',url:'https://traveler.modot.org/mapv3/index.html'});const box=$('#detail');box.replaceChildren();box.hidden=false;const head=el('div','floating-head'),close=btn('×',()=>closeDetail({restoreFocus:true}));close.setAttribute('aria-label','Close traffic incident');head.append(el('span','eyebrow','TRAFFIC'),close);box.append(head,el('h2','',r.title),el('p','event-time',r.delay?'Reported delay: '+r.delay:'Delay time not reported'),el('p','',r.road),el('p','traffic-description',r.description),el('p','small','MoDOT · Updated '+format(r.updated?new Date(r.updated).toISOString():null)),link('Official traffic map ↗','https://traveler.modot.org/mapv3/index.html'));focusDetailHeading();
+const trafficIncidents=createTrafficIncidents(map,{getSelected:()=>focus?.layer==='traffic'?focus.id:null,onStatus(text){trafficNote.textContent=text;trafficNote.hidden=!text;},onSelect(r){
+ const feature=record=>({_layer:'traffic',type:'Feature',geometry:{type:'Point',coordinates:[record.lng,record.lat]},properties:{id:'modot:'+record.id,title:record.title,description:[record.delay?'Reported delay: '+record.delay:'Delay time not reported',record.road,record.description].filter(Boolean).join(' · '),source:'MoDOT',observedAt:record.updated?new Date(record.updated).toISOString():'',url:'https://traveler.modot.org/mapv3/index.html'}});
+ if(r.members?.length>1){showMixedCluster({features:r.members.map(feature)});positionForDetails(r.clusterCenter,Math.min(map.getMaxZoom(),map.getZoom()+2));return;}
+ showFeature('traffic',feature(r));
 }});
 const skyCloudMap=createSkyCloudMap(map,{format,beforeOpen(){if(futureRadar.active)futureRadar.stop();closeDetail();setResults(false);setControls(false);}});function showSkyCloudMap(sky){skyCloudMap.open(sky);}
 const spotUI=createSpotExplorer({shell:$('#map').parentElement,onClose:()=>setSpotMode(false),onMap:()=>{spotFeatureRevision++;closeDetail();setResults(false);},onResume:()=>{spotFeatureRevision++;closeDetail();setResults(false);setControls(false);},onShare:()=>share(),onRadiusChange:(radiusMiles,point)=>inspectSpot({...point,radiusMiles}),onLoadSection:id=>spotInspector?.load(id),onOpenAction:(item,point)=>{setSpotMode(false);if(item.layer==='sky'&&point)Object.assign(skyNowState,{lat:point.lat,lng:point.lng,usingLocation:true});const action=item.action;if(action?.type==='mode')openSearchMode(action);else if(action?.action)openSearchAction(action);else if(item.layer&&Object.hasOwn(BY_ID,item.layer))openLayer(item.layer);},onForecast:point=>{spotFeatureRevision++;openStationForecast({...point,label:'This spot'});},onOpenFeature:async(item)=>{
  const revision=spotRevision,featureRevision=++spotFeatureRevision;closeDetail();setResults(false);
- try{let feature=item.feature;if(!feature&&item.searchItem){const hit=item.searchItem,payload=await readSearchSource(hit.sourceFile);feature=resolveSearchFeature(hit,payload);}if(!spotMode||revision!==spotRevision||featureRevision!==spotFeatureRevision)return;if(feature){const id=item.layer||item.searchItem?.layer;if(!Object.hasOwn(BY_ID,id))return;if(EVENT_LAYERS.has(id)&&!eventDiscoverable(feature)){toast('This event has already started.');spotUI.resume();return;}showDetail(toStop(id,feature),{...feature.properties,_routeGeometry:feature.geometry},id,false,true);spotUI.suspend();}else toast('Details are unavailable for this record.');}catch{if(spotMode&&revision===spotRevision&&featureRevision===spotFeatureRevision)toast('This record could not load. Try it again.');}
+ try{let feature=item.feature;if(!feature&&item.searchItem){const hit=item.searchItem,payload=await readSearchSource(hit.sourceFile);feature=resolveSearchFeature(hit,payload);}if(!spotMode||revision!==spotRevision||featureRevision!==spotFeatureRevision)return;if(feature){const id=item.layer||item.searchItem?.layer;if(!Object.hasOwn(BY_ID,id))return;if(EVENT_LAYERS.has(id)&&!eventDiscoverable(feature)){toast('This event has already started.');spotUI.resume();return;}spotUI.suspend();showDetail(toStop(id,feature),{...feature.properties,_routeGeometry:feature.geometry},id,false,false);}else toast('Details are unavailable for this record.');}catch{if(spotMode&&revision===spotRevision&&featureRevision===spotFeatureRevision)toast('This record could not load. Try it again.');}
 }});
 function setSpotMode(on){
  if(on===spotMode)return;
@@ -165,7 +169,7 @@ async function inspectSpot(point){
  closeDetail();setResults(false);setControls(false);const token=spotUI.open(point);
  if(spotMarker)map.removeLayer(spotMarker);spotMarker=L.marker([point.lat,point.lng],{pane:'spot-selection',interactive:false,keyboard:false,icon:L.divIcon({className:'spot-selection-marker',html:'<svg viewBox="0 0 28 36" fill="none" aria-hidden="true"><path d="M6 34V3m0 1c6-4 10 4 16 0v14c-6 4-10-4-16 0" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><circle cx="6" cy="34" r="2" fill="currentColor"/></svg>',iconSize:[28,36],iconAnchor:[6,34]})}).addTo(map);
  try{
-  spotEngineModule??=import('./spot-data.js?v=20261117-explore-layout');const {createSpotInspector}=await spotEngineModule;if(controller.signal.aborted||revision!==spotRevision)return;
+  spotEngineModule??=import('./spot-data.js?v=20261117-close-selection');const {createSpotInspector}=await spotEngineModule;if(controller.signal.aborted||revision!==spotRevision)return;
   const inspector=createSpotInspector({...point,signal:controller.signal,loadedLayers:data,layerModes,fetchJson:readSpotSource,fetchLayer:async(id,options={})=>{
    const {mode='',lat=point.lat,lng=point.lng,bbox,signal=controller.signal}=options;const query=new URLSearchParams({bbox:Array.isArray(bbox)?bbox.join(','):bbox||[Math.max(REGION.west,lng-.035),Math.max(REGION.south,lat-.028),Math.min(REGION.east,lng+.035),Math.min(REGION.north,lat+.028)].join(','),mode,lat:String(lat),lng:String(lng)});
    try{const response=await apiFetch('/api/layers/'+id+'?'+query,{signal:AbortSignal.any([signal,AbortSignal.timeout(12000)])});if(!response.ok)throw Error('Source unavailable');const result=await response.json();if(id==='weather'&&!result.weather?.hourly?.length)throw Error('Forecast unavailable');return result;}catch(error){if(id==='weather'&&!signal.aborted)return loadNwsForecast(lat,lng,{signal});throw error;}
@@ -348,7 +352,7 @@ function positionForDetails(latlng,zoom=map.getZoom()){
  const target=narrowScreen.matches?L.point(size.x/2,Math.max(90,((document.body.classList.contains('shared-view')?12:124)+panelRect.top-mapRect.top)/2)):L.point(Math.max(120,(panelRect.left-mapRect.left)/2),size.y/2);
  map.setView(map.unproject(map.project(latlng,zoom).add(size.divideBy(2).subtract(target)),zoom),zoom,{animate:false});
 }
-map.on('resize',()=>{if(!restoredCamera&&focus&&coordinate(focus.lat,focus.lng)&&!$('#detail').hidden&&!detailExpanded)positionForDetails([focus.lat,focus.lng]);});
+map.on('resize',()=>{if(!restoredCamera&&focus&&coordinate(focus.lat,focus.lng)&&!$('#detail').hidden&&!detailExpanded)positionForDetails(selectedMarker?.getLatLng?.()||[focus.lat,focus.lng]);});
 function closeDetail({restoreFocus=false}={}){
  sharedCluster=[];
  birdDetailAnalytics?.destroy();birdDetailAnalytics=null;
@@ -579,12 +583,14 @@ function renderSky(){
  if(inspection)restoreInspection(inspection);else focusDetailHeading();
 }
 function selectedPointMarker(stop,id){
- const paint=markerPaint(id),host=el('div'),pin=el('span'),label=el('small','','Selected');
- Object.assign(host.style,{position:'relative',width:'70px',height:'72px'});Object.assign(pin.style,{position:'absolute',left:'17px',top:'9px',width:'36px',height:'36px',display:'grid',placeItems:'center',border:'2px solid #fff',borderRadius:'50%',boxSizing:'border-box',background:paint.color,color:paint.ink,boxShadow:'0 0 0 4px var(--surface),0 0 0 6px '+paint.color});pin.innerHTML=symbol(id);const glyph=pin.querySelector('svg');if(glyph){glyph.style.width='21px';glyph.style.height='21px';}
- Object.assign(label.style,{position:'absolute',left:'0',top:'54px',width:'70px',height:'17px',lineHeight:'17px',textAlign:'center',fontSize:'10px',fontWeight:'700',borderRadius:'8px',background:'var(--surface)',color:'var(--ink)',boxShadow:'0 1px 4px #0003'});host.append(pin,label);
- const marker=L.marker([stop.lat,stop.lng],{icon:L.divIcon({className:'place-selected selected-focus',html:host,iconSize:[70,72],iconAnchor:[35,27]}),interactive:false,keyboard:false,title:'Selected: '+stop.title,alt:stop.title,zIndexOffset:1000}).addTo(map);marker.getElement()?.setAttribute('aria-current','true');return marker;
+ const host=el('div'),pin=el('span'),label=el('small','','Selected');
+ Object.assign(host.style,{position:'relative',width:'70px',height:'82px'});
+ Object.assign(pin.style,{position:'absolute',left:'13px',top:'2px',width:'44px',height:'58px',filter:'drop-shadow(0 2px 3px #0008)'});
+ pin.innerHTML='<svg viewBox="0 0 44 58" width="44" height="58" aria-hidden="true"><path d="M22 56C18 48 2 33 2 22a20 20 0 1 1 40 0c0 11-16 26-20 34Z" fill="#ffd24c" stroke="#fff" stroke-width="3" stroke-linejoin="round"/><circle cx="22" cy="22" r="11" fill="#182c3b"/><path d="M22 15v14m-7-7h14" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/></svg>';
+ Object.assign(label.style,{position:'absolute',left:'0',top:'63px',width:'70px',height:'17px',lineHeight:'17px',textAlign:'center',fontSize:'10px',fontWeight:'700',borderRadius:'8px',background:'var(--surface)',color:'var(--ink)',boxShadow:'0 1px 4px #0003'});host.append(pin,label);
+ const marker=L.marker([stop.lat,stop.lng],{pane:'selected-location',icon:L.divIcon({className:'place-selected selected-focus',html:host,iconSize:[70,82],iconAnchor:[35,58]}),interactive:false,keyboard:false,title:'Selected: '+stop.title,alt:'Selected: '+stop.title,zIndexOffset:1000}).addTo(map);marker.getElement()?.setAttribute('aria-current','true');return marker;
 }
-function toStop(id,f,anchor){const p=f.properties||{},c=coordinate(anchor?.lat,anchor?.lng)?[anchor.lat,anchor.lng]:centroid(f.geometry);return c&&coordinate(...c)?cleanStop({id:String(p.id||f.id||''),layer:p._sourceLayer||id,title:p.title||p.name||BY_ID[id].name,lat:c[0],lng:c[1],description:p.description||p.address||'',address:p.address,ownershipEvidence:p.ownershipEvidence,vehicle:p.vehicle,url:placeUrl(p.canonicalWebsite,p.website,p.url),socialLinks:p.socialLinks,start:p.start,end:p.end,source:p.source||BY_ID[id].source,observedAt:p.observedAt||data.get(id)?.observedAt,sourceId:p.sourceId,sourceCheckedAt:p.sourceCheckedAt,sourceUrl:p.sourceUrl,accessNote:p.accessNote,openingHours:p.openingHours,hoursSourceUrl:p.hoursSourceUrl,hoursCheckedAt:p.hoursCheckedAt,hoursExpiresAt:p.hoursExpiresAt}):null;}
+function toStop(id,f,anchor){const p=f.properties||{},c=selectionAnchor(f.geometry,anchor);return c&&coordinate(...c)?cleanStop({id:selectionFeatureId(f,id),layer:p._sourceLayer||id,title:p.title||p.name||BY_ID[id].name,lat:c[0],lng:c[1],description:p.description||p.address||'',address:p.address,ownershipEvidence:p.ownershipEvidence,vehicle:p.vehicle,url:placeUrl(p.canonicalWebsite,p.website,p.url),socialLinks:p.socialLinks,start:p.start,end:p.end,source:p.source||BY_ID[id].source,observedAt:p.observedAt||data.get(id)?.observedAt,sourceId:p.sourceId,sourceCheckedAt:p.sourceCheckedAt,sourceUrl:p.sourceUrl,accessNote:p.accessNote,openingHours:p.openingHours,hoursSourceUrl:p.hoursSourceUrl,hoursCheckedAt:p.hoursCheckedAt,hoursExpiresAt:p.hoursExpiresAt}):null;}
 function showFeature(id,f,anchor){
  if(EVENT_LAYERS.has(id)&&!eventDiscoverable(f)){refreshEventDiscovery();toast('This event has started and is no longer in upcoming results.');return;}
  const box=$('#detail');
@@ -627,11 +633,11 @@ function showDetail(stop,properties={},id=stop?.layer,shared=false,preserveView=
  const time=stop?.observedAt||properties.observedAt;if(time)sourceDetails.append(el('p','source-date','Observed: '+format(time)));if(properties.stale)sourceDetails.append(el('p','source-date','This individual observation is stale.'));
  const websites=placeLinks({...properties,socialLinks:properties.socialLinks||stop?.socialLinks},stop?.url),links=el('div','place-links');for(const item of websites)links.append(link((item.label==='Website'&&id==='movies'&&!isCalendarEvent?'Theater website':item.label)+' ↗',item.url));
  if(id==='movies'&&!isCalendarEvent)box.append(el('p','source-date','Theater location; check its website for showtimes.'));
- if(stop){if(selectedMarker)map.removeLayer(selectedMarker);selectedMarker=selectedPointMarker(stop,id);const actions=el('div','minor-actions');actions.append(btn('Share',()=>share(),'primary'),btn('Save',()=>{if(presets.length>=40){toast('Your saved maps are full. Remove one to save this place.');return;}presets.push({id:newPresetId(),name:stop.title,state:currentState()});if(storePresets()){renderPresets();toast('Place saved in Saved maps.');}}));if(document.body.classList.contains('shared-view'))box.append(actions);else box.insertBefore(actions,box.querySelector('h2')?.nextSibling||null);sourceDetails.append(el('p','small',`${stop.lat.toFixed(5)}, ${stop.lng.toFixed(5)}`));}if(websites.length)box.append(links);
+ if(stop){if(properties._routeGeometry?.type&&properties._routeGeometry.type!=='Point')highlightRoute(properties._routeGeometry,{fit:false});if(selectedMarker)map.removeLayer(selectedMarker);selectedMarker=selectedPointMarker(stop,id);const actions=el('div','minor-actions');actions.append(btn('Share',()=>share(),'primary'),btn('Save',()=>{if(presets.length>=40){toast('Your saved maps are full. Remove one to save this place.');return;}presets.push({id:newPresetId(),name:stop.title,state:currentState()});if(storePresets()){renderPresets();toast('Place saved in Saved maps.');}}));if(document.body.classList.contains('shared-view'))box.append(actions);else box.insertBefore(actions,box.querySelector('h2')?.nextSibling||null);sourceDetails.append(el('p','small',`${stop.lat.toFixed(5)}, ${stop.lng.toFixed(5)}`));}if(websites.length)box.append(links);
  const lookup=id==='gyms'?'':properties.sourceId?.startsWith('curated:')?properties.sourceId:/^(node|way|relation)\/[1-9]\d{0,16}$/.test(properties.sourceId||'')?properties.sourceId:stop?.id?.startsWith('osm:')?stop.id.slice(4):'';
  if(lookup){const curated=lookup.startsWith('curated:'),check=el('div','source-control');check.append(el('p','small',curated?'Checking the official page…':'Checking current source tags for hours and closure flags…'));(curated?box:sourceDetails).append(check);checkPlace(stop,check,properties,closureNotice,lookup,freshness,hoursLine);}
  if(sourceDetails.childElementCount>1&&(!isCalendarEvent||shared))box.append(sourceDetails);
- if(stop){if(!preserveView){restoredCamera=false;positionForDetails([stop.lat,stop.lng],Math.min(map.getMaxZoom(),Math.max(17,map.getZoom())));}renderPlaceMarkers();}focusDetailHeading();restoreViewScroll();
+ if(stop){if(!preserveView){restoredCamera=false;positionForDetails([stop.lat,stop.lng],Math.min(map.getMaxZoom(),Math.max(18,map.getZoom())));}renderPlaceMarkers();}focusDetailHeading();restoreViewScroll();
 }
 function showVehicle(stop,properties,id,shared,preserveView=false){
  properties={...stop,...properties};rememberDetailOrigin();closeDetail();focus=stop;sharedFocus=shared;const box=$('#detail');box.replaceChildren();box.hidden=false;$('#results').hidden=true;
@@ -639,7 +645,7 @@ function showVehicle(stop,properties,id,shared,preserveView=false){
  const sourceDetails=el('details','place-source-details');sourceDetails.append(el('summary','','Position'));
  if(id==='transit')appendTransitRoute(box,properties);
  if(stop){selectedMarker=selectedPointMarker(stop,id);const actions=el('div','minor-actions');actions.append(btn('Share reported position',()=>share()));box.append(actions);sourceDetails.append(el('p','small',stop.lat.toFixed(5)+', '+stop.lng.toFixed(5)));}box.append(sourceDetails);
- if(stop){if(!preserveView){restoredCamera=false;positionForDetails([stop.lat,stop.lng],Math.min(map.getMaxZoom(),Math.max(17,map.getZoom())));}renderPlaceMarkers();}focusDetailHeading();restoreViewScroll();
+ if(stop){if(!preserveView){restoredCamera=false;positionForDetails([stop.lat,stop.lng],Math.min(map.getMaxZoom(),Math.max(18,map.getZoom())));}renderPlaceMarkers();}focusDetailHeading();restoreViewScroll();
 }
 function appendTransitRoute(host,properties){
  const vehicle=properties.vehicle;if(!vehicle?.tripId||!vehicle.routeId||!/^\d{8}$/.test(vehicle.startDate||'')){host.append(el('p','small','The feed did not supply a dated trip that can be matched to a published route.'));return;}
@@ -649,7 +655,7 @@ function appendTransitRoute(host,properties){
    if(result.route?.geometry?.type!=='LineString'||!Array.isArray(result.stops))throw Error('Invalid published route');
    const p=result.route.properties,heading=el('div','transit-route-heading'),badge=el('span','transit-route-badge',p.routeShortName||'Metro'),copy=el('div');const color=/^#[0-9a-f]{6}$/i.test(p.color)?p.color:'#296b83';card.style.setProperty('--route-color',color);badge.style.setProperty('--route-color',color);copy.append(el('p','transit-route-destination',p.headsign?'Toward '+p.headsign.replace(/^TO\s+/i,''):'Published trip route'));badge.setAttribute('aria-label','Route '+(p.routeShortName||p.routeLongName||'Metro'));heading.append(badge,copy);card.replaceChildren(heading);
    const paint=routeOverlayStyles(color,map.getZoom(),mapStyle),group=L.layerGroup(),outline=L.geoJSON(result.route,{style:paint.casing,interactive:false}),line=L.geoJSON(result.route,{style:paint.foreground,interactive:false});group.addLayer(outline);group.addLayer(line);const stopMarkers=new Map(),stopButtons=new Map();
-   let selectedStop=-1;const resizeStops=()=>{const paint=routeOverlayStyles(color,map.getZoom(),mapStyle);outline.setStyle(paint.casing);line.setStyle(paint.foreground);for(const[i,marker]of stopMarkers){const terminal=i===0||i===result.stops.length-1,selected=i===selectedStop,show=selected||terminal||map.getZoom()>=14;if(show){if(!group.hasLayer(marker))group.addLayer(marker);marker.setStyle({radius:selected?7:terminal?5:3.5,fillColor:selected?'#e7bd45':'#fff',weight:selected?3:1.5});}else if(group.hasLayer(marker))group.removeLayer(marker);}};const selectStop=(stop,index)=>{selectedStop=index;const c=stop.geometry.coordinates;positionForDetails([c[1],c[0]],Math.max(map.getZoom(),16));resizeStops();for(const[i,button]of stopButtons)button.setAttribute('aria-pressed',String(i===index));stopMarkers.get(index)?.openTooltip();};
+   let selectedStop=-1;const resizeStops=()=>{const paint=routeOverlayStyles(color,map.getZoom(),mapStyle);outline.setStyle(paint.casing);line.setStyle(paint.foreground);for(const[i,marker]of stopMarkers){const terminal=i===0||i===result.stops.length-1,selected=i===selectedStop,show=!selected&&(terminal||map.getZoom()>=14);if(show){if(!group.hasLayer(marker))group.addLayer(marker);marker.setStyle({radius:selected?7:terminal?5:3.5,fillColor:selected?'#e7bd45':'#fff',weight:selected?3:1.5});}else if(group.hasLayer(marker))group.removeLayer(marker);}};const selectStop=(stop,index)=>{selectedStop=index;const c=stop.geometry.coordinates;if(selectedMarker)map.removeLayer(selectedMarker);selectedMarker=selectedPointMarker({lat:c[1],lng:c[0],title:stop.properties.title},'transit');positionForDetails([c[1],c[0]],Math.min(map.getMaxZoom(),Math.max(map.getZoom(),18)));resizeStops();renderPlaceMarkers();for(const[i,button]of stopButtons)button.setAttribute('aria-pressed',String(i===index));stopMarkers.get(index)?.openTooltip();};
    const disclosure=el('details','transit-route-stops'),summary=el('summary','',result.stops.length+' scheduled stops'),list=el('ol','transit-stop-list');
    result.stops.forEach((stop,index)=>{const c=stop.geometry?.coordinates;if(!Array.isArray(c)||!coordinate(c[1],c[0]))return;const marker=L.circleMarker([c[1],c[0]],{radius:4,color:'#233c44',weight:2,fillColor:'#fff',fillOpacity:1}),tooltip=el('span','',stop.properties.title);marker.bindTooltip(tooltip,{direction:'top'});marker.on('click',()=>selectStop(stop,index));stopMarkers.set(index,marker);const item=el('li'),button=btn('',()=>selectStop(stop,index),'transit-stop-button');button.setAttribute('aria-pressed','false');button.append(el('span','transit-stop-number',String(index+1)),el('span','transit-stop-name',stop.properties.title));item.append(button);list.append(item);stopButtons.set(index,button);});
    const fit=()=>map.fitBounds(line.getBounds(),narrowScreen.matches?{paddingTopLeft:[32,60],paddingBottomRight:[32,$('#detail').clientHeight+45],maxZoom:14}:{paddingTopLeft:[40,70],paddingBottomRight:[$('#detail').clientWidth+40,75],maxZoom:14});
@@ -885,7 +891,7 @@ async function openSharedPlace(place){
  }
 }
 let hashReadRevision=0;window.addEventListener('hashchange',async()=>{const revision=++hashReadRevision,hash=location.hash;try{const place=readPlaceHash(hash);if(place){openSharedPlace(place);return;}const s=isViewHash(hash)?await decodeViewState(hash):decodeState(hash);if(s&&revision===hashReadRevision&&hash===location.hash)applyState(s,{shared:!!s.focus});}catch(e){if(revision===hashReadRevision)toast(e.message);}});
-map.on('click',event=>{if(spotMode&&!map.dragging?.moved()&&!map.boxZoom?.moved())inspectSpot({lat:event.latlng.lat,lng:event.latlng.lng,radiusMiles:spotUI.point?.radiusMiles||1});});
+map.on('click',event=>{if(spotMode&&!map.dragging?.moved()&&!map.boxZoom?.moved())inspectSpot({lat:event.latlng.lat,lng:event.latlng.lng,radiusMiles:spotUI.point?.radiusMiles||(100/5280)});});
 $('#spot-mode-toggle').onclick=()=>setSpotMode(!spotMode);
 if(initial)applyState(initial,{shared:!!initial.focus||!!sharedPlace});else for(const id of ['radar','traffic'])toggle(id,true,false);
 renderLayers();renderPresets();
@@ -921,6 +927,7 @@ for(const button of document.querySelectorAll('[data-quick]'))button.onclick=()=
   if(todayOnly)setTodayOnly(false);
   if(id==='food'){currentResultsLayer='food';for(const layer of ['restaurants','bars'])if(!requestedLayers.has(layer))toggle(layer,true,false);setResults(true);}
   else if(id==='weather'){$('#results').hidden=true;toggle('weather',true,false);renderWeather();setControls(false);}
+  else if(id==='sky'){setResults(false);toggle('sky',true,false);renderSky();setControls(false);}
   else if(id==='air'){setResults(false);closeDetail();toggle('air',true,false);setControls(false);if(mapKey.toggle.getAttribute('aria-expanded')!=='true')mapKey.toggle.click();}
  }
  syncQuickCategories();
@@ -1065,7 +1072,7 @@ async function chooseGlobalSuggestion(item){
   if(!latest&&!item.feature&&item.sourceFile){const payload=await readSearchSource(item.sourceFile);if(revision!==searchSelectionRevision||!openingHeader?.isConnected||$('#detail').hidden)return;const full=resolveSearchFeature(item,payload);if(full){feature=full;showFeature(id,full);}}
   if(revision!==searchSelectionRevision)return;
   if(!feature){openLayer(id);toast('This result’s details are unavailable. Showing its layer.');return;}
-  if(['Polygon','MultiPolygon','LineString','MultiLineString'].includes(feature.geometry?.type))highlightRoute(feature.geometry);
+  // showDetail highlights source geometry without replacing the close selection view.
  }catch{if(revision!==searchSelectionRevision||!openingHeader?.isConnected||$('#detail').hidden)return;if(feature){feature={...feature,properties:{...feature.properties,description:'Details could not load. Try this result again.'}};showFeature(id,feature);}else toast('This result could not load. Please try again.');}
 }
 placeSuggestions=attachSuggestions($('#place-search'),{limit:14,onQuery:prepareGlobalSearch,suggest:query=>query?globalMatches(query):[],choose:chooseGlobalSuggestion});
@@ -1134,10 +1141,10 @@ for(const panel of [$('#detail'),$('#results')])new MutationObserver(navigationS
 let scrollRestoreFrame=0;const sharedContentObserver=new MutationObserver(()=>{if(viewScrollRestore&&!scrollRestoreFrame)scrollRestoreFrame=requestAnimationFrame(()=>{scrollRestoreFrame=0;restoreViewScroll();});});for(const panel of [$('#detail'),$('#results')])sharedContentObserver.observe(panel,{childList:true,subtree:true});
 navigationState();
 
-function highlightRoute(geometry){
+function highlightRoute(geometry,{fit=true}={}){
  if(routeHighlight)map.removeLayer(routeHighlight);
  routeHighlight=L.geoJSON(geometry,{style:{color:'#f4b84a',weight:7,opacity:.95,fill:false},interactive:false}).addTo(map);
- const bounds=routeHighlight.getBounds();if(!bounds.isValid())return;
+ if(!fit)return;const bounds=routeHighlight.getBounds();if(!bounds.isValid())return;
  const d=$('#detail');map.fitBounds(bounds,narrowScreen.matches?{paddingTopLeft:[24,48],paddingBottomRight:[24,Math.min(d.clientHeight+88,map.getSize().y*.62)],maxZoom:15}:{paddingTopLeft:[36,120],paddingBottomRight:[d.clientWidth+44,88],maxZoom:15});
 }
 function joyrideControls(){

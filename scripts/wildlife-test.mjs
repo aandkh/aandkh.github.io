@@ -18,6 +18,6 @@ const {loadWildlifeSpecies,usableWildlifePhoto}=await import('../wildlife.js');
 const profile=await loadWildlifeSpecies(123456789,{fetcher:async()=>({ok:true,json:async()=>({results:[{id:123456789,name:'Testus animalis',preferred_common_name:'Test animal',rank:'species',wikipedia_url:'javascript:alert(1)',wikipedia_summary:'Source description',ancestors:[{rank:'family',name:'Testidae'},{rank:'subtribe',name:'Hidden rank'}],default_photo:{license_code:'cc-by-nc',attribution:'Photographer',medium_url:'https://static.inaturalist.org/photo.jpg'}}]})})});
 assert.equal(profile.wikipediaUrl,'');assert.equal(profile.photo,null);assert.equal(profile.taxonomy.length,1);assert.equal(profile.summary,'Source description');
 assert.equal(usableWildlifePhoto({license_code:'cc-by',attribution:'A',medium_url:'https://untrusted.example/photo.jpg'}),null);
-assert.equal(usableWildlifePhoto({license_code:'cc-by',attribution:'A',medium_url:'https://static.inaturalist.org/photo.jpg'}).credit,'A');
+assert.equal(usableWildlifePhoto({id:123,license_code:'cc-by',attribution:'A',medium_url:'https://static.inaturalist.org/photo.jpg'}).credit,'A');
 await assert.rejects(()=>loadWildlifeSpecies('bad'));
 console.log('PASS: species profiles preserve sourced facts, reject unsafe links and restrict reusable images');
