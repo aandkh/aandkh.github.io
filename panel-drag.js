@@ -1,0 +1,187 @@
+/* Resize overlay inspectors without touching the map or rebuilding their content. */
+const PANEL_SELECTOR = '#results, #detail, .future-radar, .sky-cloud-controls, #environment-key';
+const HEADER_SELECTOR = '.floating-head, .radar-heading, .map-key-toggle';
+const instances = new WeakMap();
+const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+
+export function panelResizeBounds({height, bottom = 0, header = 44, narrow = false}) {
+  const inset = clamp(Number(bottom) || 0, 0, Math.max(0, height - header));
+  const min = Math.max(36, Math.ceil(header + 2));
+  // A full-width phone sheet always leaves a strip of map above it.
+  const mapSpace = narrow ? Math.max(96, Math.min(180, height * .22)) : 8;
+  return {bottom: inset, min, max: Math.max(min, Math.floor(height - inset - mapSpace))};
+}
+export function panelDragHeight(startTop, pointerDelta, shellBottom, bounds) {
+  return clamp(shellBottom - bounds.bottom - startTop - pointerDelta, bounds.min, bounds.max);
+}
+
+export function installPanelDrag(shell) {
+  if (!shell?.ownerDocument) return null;
+  if (instances.has(shell)) return instances.get(shell);
+  const doc = shell.ownerDocument, win = doc.defaultView, records = new Map();
+  let drag = null, frame = 0, refreshFrame = 0, suppressClick = false, suppressTimer = 0;
+  const visible = node => !node.hidden && node.getClientRects().length && win.getComputedStyle(node).visibility !== 'hidden';
+  const titleFor = record => record.panel.querySelector('h2')?.textContent || record.panel.getAttribute('aria-label') || 'Map';
+  const metrics = record => {
+    const sr = shell.getBoundingClientRect(), pr = record.panel.getBoundingClientRect();
+    let bottom = 8;
+    for (const control of shell.querySelectorAll('.map-toolbar, .map-attribution')) {
+      if (!visible(control)) continue;
+      const r = control.getBoundingClientRect();
+      if (r.top >= sr.top + sr.height * .5) bottom = Math.max(bottom, sr.bottom - r.top + 6);
+    }
+    return {...panelResizeBounds({height:sr.height, bottom, header:record.head.getBoundingClientRect().height,
+      narrow:pr.width > sr.width * .75}), shellBottom:sr.bottom};
+  };
+  function setCollapsed(record, collapsed) {
+    if (record.panel.classList.contains('panel-drag-collapsed') !== collapsed) record.panel.classList.toggle('panel-drag-collapsed', collapsed);
+    // Clipped controls must not receive keyboard focus. Keep their existing inert state.
+    for (const child of record.panel.children) {
+      if (child === record.head) continue;
+      if (collapsed) {
+        if (!record.inert.has(child)) record.inert.set(child, child.inert);
+        child.inert = true;
+      } else if (record.inert.has(child)) {
+        child.inert = record.panel.id === 'environment-key' && record.panel.dataset.expanded === 'false' ? true : record.inert.get(child);record.inert.delete(child);
+      }
+    }
+  }
+  function paint(record, height, bounds, remember = true) {
+    const size = clamp(height, bounds.min, bounds.max);
+    if (remember) record.height = size;
+    record.panel.style.setProperty('--panel-drag-height', size + 'px');
+    record.panel.style.setProperty('--panel-drag-bottom', bounds.bottom + 'px');
+    if (!record.panel.classList.contains('panel-user-sized')) record.panel.classList.add('panel-user-sized');
+    setCollapsed(record, size <= bounds.min + 1);
+    record.head.setAttribute('aria-description', 'Drag up or down to resize. Keyboard: Up and Down arrows; Home to minimize, End to expand.');
+  }
+  function reset(record) {
+    record.height = null;record.panel.classList.remove('panel-user-sized');setCollapsed(record, false);
+  }
+  function refresh(record) {
+    if (!record.panel.isConnected) {records.delete(record.panel);return;}
+    for (const child of record.inert.keys()) if (child.parentElement !== record.panel) record.inert.delete(child);
+    const head = [...record.panel.children].find(node => node.matches(HEADER_SELECTOR));
+    if (!head) return;
+    if (record.head !== head) {
+      record.head = head;head.classList.add('panel-drag-header');
+      if (!head.matches('button')) {head.tabIndex = 0;head.setAttribute('role', 'group');}
+      head.setAttribute('aria-keyshortcuts', 'ArrowUp ArrowDown Home End');
+      head.title = 'Drag up or down to resize';
+      head.setAttribute('aria-description', 'Drag up or down to resize. Keyboard: Up and Down arrows; Home to minimize, End to expand.');
+    }
+    if (!head.matches('button')) head.setAttribute('aria-label', titleFor(record) + ' panel size');
+    if (!visible(record.panel)) return;
+    if (record.panel.id === 'environment-key' && record.panel.dataset.expanded === 'false') {
+      record.panel.classList.remove('panel-user-sized');setCollapsed(record, false);return;
+    }
+    if (record.height !== null) paint(record, record.height, metrics(record), false);
+  }
+  function scheduleRefresh() {
+    if (!refreshFrame) refreshFrame = win.requestAnimationFrame(() => {
+      refreshFrame = 0;for (const record of records.values()) refresh(record);
+    });
+  }
+  function attach(panel) {
+    if (records.has(panel)) return;
+    const record = {panel, head:null, height:null, inert:new Map()};records.set(panel, record);
+    panel.classList.add('panel-draggable');refresh(record);
+    observer.observe(panel, {childList:true, attributes:true, attributeFilter:['hidden','data-expanded']});
+  }
+  const observer = new win.MutationObserver(changes => {
+    for (const change of changes) if (change.target === shell) {
+      for (const node of change.addedNodes) if (node.nodeType === 1 && node.matches(PANEL_SELECTOR)) attach(node);
+    }
+    scheduleRefresh();
+  });
+  observer.observe(shell, {childList:true});
+  for (const panel of shell.querySelectorAll(PANEL_SELECTOR)) attach(panel);
+  const resize = win.ResizeObserver ? new win.ResizeObserver(scheduleRefresh) : null;
+  resize?.observe(shell);
+  for (const control of shell.querySelectorAll('.map-toolbar, .map-attribution')) resize?.observe(control);
+
+  function flushDrag() {
+    frame = 0;if (!drag?.active) return;
+    const height = panelDragHeight(drag.top, drag.y - drag.startY, drag.bottom, drag.bounds);
+    paint(drag.record, height, drag.bounds);
+    drag.record.panel.scrollTop = drag.scroll;
+  }
+  function down(event) {
+    if (drag || event.isPrimary === false || (event.button !== undefined && event.button !== 0)) return;
+    const head = event.target.closest?.('.panel-drag-header');
+    const record = head && records.get(head.parentElement);
+    if (!record || record.head !== head || event.target.closest('input,select,textarea,[contenteditable=true]')) return;
+    const box = record.panel.getBoundingClientRect(), bounds = metrics(record);
+    drag = {record, id:event.pointerId, startY:event.clientY, y:event.clientY, top:box.top,
+      bottom:bounds.shellBottom, bounds, scroll:record.panel.scrollTop, active:false};
+    if (!event.target.closest('button,a')) event.preventDefault();
+    event.stopPropagation();
+  }
+  function move(event) {
+    if (!drag || event.pointerId !== drag.id) return;
+    drag.y = event.clientY;
+    if (!drag.active && Math.abs(drag.y - drag.startY) < 5) return;
+    if (!drag.active) {
+      drag.active = true;drag.record.panel.classList.add('panel-is-dragging');
+      try {drag.record.head.setPointerCapture(event.pointerId);} catch {}
+      // Map key uses a button for its entire header. A real upward drag opens it;
+      // an ordinary tap still follows the original expand/collapse handler.
+      if (drag.record.panel.id === 'environment-key' && drag.record.panel.dataset.expanded === 'false' && drag.y < drag.startY) drag.record.head.click();
+    }
+    event.preventDefault();event.stopPropagation();
+    if (!frame) frame = win.requestAnimationFrame(flushDrag);
+  }
+  function finish(event) {
+    if (!drag || event.pointerId !== drag.id) return;
+    if (drag.active) {
+      if (frame) {win.cancelAnimationFrame(frame);frame = 0;}flushDrag();
+      drag.record.panel.classList.remove('panel-is-dragging');
+      try {drag.record.head.releasePointerCapture(event.pointerId);} catch {}
+      suppressClick = true;win.clearTimeout(suppressTimer);
+      suppressTimer = win.setTimeout(() => {suppressClick = false;}, 450);
+      event.preventDefault();event.stopPropagation();
+    }
+    drag = null;
+  }
+  function click(event) {
+    if (suppressClick && event.detail !== 0 && event.target.closest?.('.panel-drag-header')) {
+      suppressClick = false;event.preventDefault();event.stopImmediatePropagation();return;
+    }
+    const control = event.target.closest?.('.detail-expand,.more-map');
+    const record = control && records.get(control.closest(PANEL_SELECTOR));
+    // Existing Expand/More map controls can still take over after a manual size.
+    if (record) reset(record);
+  }
+  function key(event) {
+    const record = records.get(event.target.parentElement);
+    if (!record || record.head !== event.target || !['ArrowUp','ArrowDown','Home','End'].includes(event.key)) return;
+    event.preventDefault();event.stopPropagation();
+    if (record.panel.id === 'environment-key' && record.panel.dataset.expanded === 'false') {
+      if (event.key === 'ArrowDown' || event.key === 'Home') return;
+      record.head.click();
+    }
+    const bounds = metrics(record), current = record.panel.getBoundingClientRect().height;
+    const amount = event.shiftKey ? 80 : 32;
+    const next = event.key === 'Home' ? bounds.min : event.key === 'End' ? bounds.max : current + (event.key === 'ArrowUp' ? amount : -amount);
+    paint(record, next, bounds);
+  }
+  function blur() { if (drag) finish({pointerId:drag.id,preventDefault(){},stopPropagation(){}}); }
+  shell.addEventListener('pointerdown', down);
+  shell.addEventListener('click', click, true);
+  shell.addEventListener('keydown', key);
+  win.addEventListener('pointermove', move, {passive:false});
+  win.addEventListener('pointerup', finish, {passive:false});
+  win.addEventListener('pointercancel', finish, {passive:false});
+  win.addEventListener('resize', scheduleRefresh);
+  win.addEventListener('blur', blur);
+  win.visualViewport?.addEventListener('resize', scheduleRefresh);
+  const api = {refresh:scheduleRefresh, destroy() {
+    observer.disconnect();resize?.disconnect();win.cancelAnimationFrame(frame);win.cancelAnimationFrame(refreshFrame);win.clearTimeout(suppressTimer);
+    shell.removeEventListener('pointerdown', down);shell.removeEventListener('click', click, true);shell.removeEventListener('keydown', key);
+    win.removeEventListener('pointermove', move);win.removeEventListener('pointerup', finish);win.removeEventListener('pointercancel', finish);
+    win.removeEventListener('resize', scheduleRefresh);win.removeEventListener('blur', blur);win.visualViewport?.removeEventListener('resize', scheduleRefresh);
+    for (const record of records.values()) {reset(record);record.panel.classList.remove('panel-draggable');}
+    instances.delete(shell);
+  }};
+  instances.set(shell, api);return api;
+}

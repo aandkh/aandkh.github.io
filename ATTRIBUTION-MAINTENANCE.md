@@ -46,3 +46,12 @@ Primary references reviewed November 15, 2026:
 
 Do not promise complete legal certification: published source requirements were
 reviewed, but private account contracts and later provider changes need their own review.
+
+November 16 UI cleanup: removed Andymap's successful-fetch instruction strip
+(`MoDOT incidents · tap a label for details…`). It was application help text,
+not a notice supplied by MoDOT. The official Traveler Information Map and the
+TravelerInformationMod service metadata did not require that wording or a
+persistent instruction banner. MoDOT credit and its official link remain in
+incident details and Credits; actual feed-failure notices still appear.
+Checked https://traveler.modot.org/mapv3/ and
+https://mapsonline.modot.mo.gov/arcgis/rest/services/TravelerInformation/TravelerInformationMod/MapServer.

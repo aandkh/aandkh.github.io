@@ -1464,3 +1464,138 @@ body[data-map-style=dark] .date-range-handle::-moz-range-thumb{background:#c7dba
 .history-filter-field select{background-repeat:no-repeat;background-position:right 8px center;background-size:12px 12px}.history-controls .layer-choices{padding:0;display:flex;gap:4px}.history-controls .layer-choice{flex:1;min-width:0;min-height:32px!important;padding:5px!important;font-size:11px!important}.history-controls .date-range-track{margin-top:0}
 
 .history-filter-field:first-child{grid-column:1/-1}
+
+
+/* session-palettes.css */
+/* Menu chrome only. Data colors (AQI, precipitation, traffic, wildlife heat,
+   transit routes and map markers) keep their established meanings. */
+html[data-palette] body {
+ --surface:var(--palette-light-surface); --surface-raised:var(--palette-light-raised);
+ --surface-soft:var(--palette-light-soft); --ink:var(--palette-light-ink);
+ --muted:var(--palette-light-muted); --line:var(--palette-light-line);
+ --green:var(--palette-light-accent); --accent:var(--green); --lime:var(--surface-soft);
+ --on-accent:var(--palette-light-on-accent); --link:var(--palette-light-link);
+ --focus:var(--palette-light-focus); --border:var(--line); --panel-soft:var(--surface-soft);
+ --fine-line:color-mix(in srgb,var(--line) 64%,transparent); color-scheme:light;
+ --ui-shadow:0 2px 5px #10182010,0 12px 28px #10182014;
+ --panel-shadow:0 2px 5px #10182010,0 16px 50px #10182029;
+ background:var(--surface); color:var(--ink);
+}
+html[data-palette] body[data-map-style=dark] {
+ --surface:var(--palette-dark-surface); --surface-raised:var(--palette-dark-raised);
+ --surface-soft:var(--palette-dark-soft); --ink:var(--palette-dark-ink);
+ --muted:var(--palette-dark-muted); --line:var(--palette-dark-line);
+ --green:var(--palette-dark-accent); --on-accent:var(--palette-dark-on-accent);
+ --link:var(--palette-dark-link); --focus:var(--palette-dark-focus); color-scheme:dark;
+ --ui-shadow:0 2px 5px #0003,0 12px 26px #0002;
+ --panel-shadow:0 2px 5px #0003,0 16px 50px #0006;
+}
+html[data-palette] body :is(header,#sidebar,.layers-head) { background:var(--surface); color:var(--ink); }
+html[data-palette] body :is(.brand,.region,.region span) { color:var(--ink); }
+html[data-palette] body a { color:var(--link); }
+html[data-palette] body .brand { color:var(--ink); }
+html[data-palette] body :is(button,input,textarea,select,.file-button) { color:var(--ink); background-color:var(--surface-raised); border-color:var(--line); }
+html[data-palette] body :is(button,.file-button):hover { background-color:var(--surface-soft); }
+html[data-palette] body :is(button,input,textarea,select,a,summary):focus-visible { outline-color:var(--focus); }
+html[data-palette] body :is(input,textarea)::placeholder { color:var(--muted); opacity:1; }
+html[data-palette] body input { accent-color:var(--green); }
+html[data-palette] body :is(.floating,.floating-head,#environment-key,#map-search,.search-suggestions,.map-tools-left,dialog,.map-attribution-panel) { color:var(--ink); background:var(--surface-raised); border-color:var(--line)!important; }
+html[data-palette] body .map-toolbar { border-color:var(--line); }
+html[data-palette] body :is(.map-toolbar select,.map-toolbar button,.legend-pill,.leaflet-control-zoom,.map-attribution) { border-color:var(--line)!important; color:var(--ink); background-color:var(--surface-raised); }
+html[data-palette] body :is(.map-attribution a,.map-attribution-info>summary,.leaflet-control-attribution a) { color:var(--link); }
+html[data-palette] body :is(.leaflet-control-attribution,.leaflet-tooltip,.leaflet-popup-content-wrapper,.leaflet-popup-tip) { color:var(--ink); background:var(--surface-raised); border-color:var(--line); }
+html[data-palette] body :is(.tabs,.privacy,.tip,.stop-card,.weather-insight,.weather-insight-option,.joyride-stat,.cycling-details,.insight-card) { background:var(--surface-soft); border-color:var(--line); }
+html[data-palette] body .tabs button { background:transparent; color:var(--muted); }
+html[data-palette] body .tabs button[aria-pressed=true] { color:var(--ink); background:var(--surface-raised); border-color:var(--green); }
+html[data-palette] body .tabs button:not([aria-pressed=true]):hover { color:var(--ink); background:var(--surface-soft); }
+html[data-palette] body .tabs button span { color:var(--ink); background:var(--surface-soft); }
+html[data-palette] body :is(.layer-filter-bar button[aria-pressed=true],#layer-list .layer-row.active) { color:var(--ink); background:var(--surface-soft); border-color:var(--line); }
+html[data-palette] body #layer-list .layer-row:hover { background:var(--surface-soft); }
+html[data-palette] body :is(.layer-row button,.layer-row.active small,.group-count,.group-icon,.group-toggle,.eyebrow,.result-card small,.floating .source-date) { color:var(--muted); }
+html[data-palette] body :is(.group-toggle,.text-button,#all-results,.result-card,.date-range-tools button) { background:transparent; }
+html[data-palette] body :is(.group-toggle,.text-button,#all-results,.result-card):hover { background:var(--surface-soft); }
+html[data-palette] body .layer-row:has(input:disabled) label { color:var(--muted); }
+html[data-palette] body :is(.layer-row input[type=checkbox],.hours-filter input[type=checkbox]) { border-color:var(--muted); background:var(--surface-raised); }
+html[data-palette] body :is(.layer-row input[type=checkbox],.hours-filter input[type=checkbox]):checked { background:var(--green); border-color:var(--green); }
+html[data-palette] body :is(.layer-row input[type=checkbox],.hours-filter input[type=checkbox]):checked:after { border-color:var(--on-accent); }
+html[data-palette] body :is(.layer-row input[type=checkbox],.hours-filter input[type=checkbox]):disabled { background:transparent; border-color:var(--line); }
+html[data-palette] body :is(.floating-head button,#close-layers,#map-return,#search-submit) { background:var(--surface); color:var(--ink); }
+html[data-palette] body :is(.primary,#results-share,.radar-launch,#quick-categories button[aria-pressed=true],.wildlife-view button[aria-pressed=true],.park-filter-row button[aria-pressed=true]) { background:var(--green); color:var(--on-accent); border-color:var(--green); }
+html[data-palette] body :is(.primary,#results-share,.radar-launch,#quick-categories button[aria-pressed=true],.wildlife-view button[aria-pressed=true],.park-filter-row button[aria-pressed=true]):hover { background:color-mix(in srgb,var(--green) 90%,var(--ink)); color:var(--on-accent); border-color:var(--green); }
+html[data-palette] body .map-toolbar #mobile-controls { background:var(--green)!important; color:var(--on-accent)!important; border-color:var(--green)!important; }
+html[data-palette] body .map-toolbar #mobile-controls:hover { background:color-mix(in srgb,var(--green) 90%,var(--ink))!important; }
+html[data-palette] body .map-shell:has(#results:not([hidden])) #results-toggle { background:var(--surface-soft)!important; color:var(--ink)!important; border-color:var(--line)!important; }
+html[data-palette] body .floating .floating-head .detail-expand { background:var(--surface-soft); color:var(--ink); }
+html[data-palette] body .future-radar { background:var(--surface-raised); color:var(--ink); border:1px solid var(--line); }
+html[data-palette] body #toast { background:var(--green); color:var(--on-accent); border-color:var(--green); }
+html[data-palette] body #legend .hours-filter-chip { color:var(--link); border-color:var(--green); }
+html[data-palette] body :is(.panel,.floating) { scrollbar-color:var(--line) transparent; }
+html[data-palette] body :is(.panel,.floating)::-webkit-scrollbar-thumb { background:var(--line); }
+html[data-palette] body .date-range-fill { background:var(--green); }
+html[data-palette] body .date-range-handle::-webkit-slider-thumb { background:var(--green); box-shadow:0 0 0 1px var(--green),0 1px 4px #0003; }
+html[data-palette] body .date-range-handle::-moz-range-thumb { background:var(--green); box-shadow:0 0 0 1px var(--green),0 1px 4px #0003; }
+html[data-palette] body .date-range-handle:focus-visible::-webkit-slider-thumb { outline-color:var(--focus); }
+html[data-palette] body .date-range-handle:focus-visible::-moz-range-thumb { outline-color:var(--focus); }
+html[data-palette] body .wildlife-months button i { background:var(--green); }
+@media(max-width:800px) {
+ html[data-palette] body .map-toolbar,html[data-palette] body.controls-open .map-toolbar { background:var(--surface-raised)!important; }
+}
+/* Weather cards are buttons with their own legacy text colors; theme the whole
+   card together so a light surface never inherits the old white station text. */
+html[data-palette] body .weather-card-grid button.weather-reading { background:var(--surface-raised); color:var(--ink); border-color:var(--line); }
+html[data-palette] body .weather-card-grid button.weather-reading:hover { background:var(--surface-soft); }
+html[data-palette] body .weather-card-grid :is(.weather-reading-temperature,.weather-reading-place,.weather-reading-wind) { color:var(--ink); }
+html[data-palette] body .weather-card-grid .weather-reading-time { color:var(--muted); opacity:1; }
+html[data-palette] body .sky-now button[aria-pressed=true] { background:var(--green); color:var(--on-accent); border-color:var(--green); }
+html[data-palette] body .sky-now button[aria-pressed=true]:hover { background:color-mix(in srgb,var(--green) 90%,var(--ink)); }
+/* Keep the two transparent date inputs above their visible shared rail. */
+html[data-palette] body .date-range-control input.date-range-handle { background:none; border:0; }
+
+
+/* panel-drag.css */
+/* Header resizing affects only overlays. Never change the map element or its shell. */
+.panel-draggable>.panel-drag-header {
+  touch-action:none;
+  cursor:ns-resize;
+  user-select:none;
+  -webkit-user-select:none;
+}
+.panel-draggable>.panel-drag-header:before {
+  content:"";
+  position:absolute;
+  top:2px;
+  left:calc(50% - 14px);
+  width:28px;
+  height:3px;
+  border-radius:3px;
+  background:currentColor;
+  opacity:.25;
+  pointer-events:none;
+}
+.panel-draggable>.panel-drag-header:focus-visible {
+  outline:2px solid var(--green);
+  outline-offset:-3px;
+}
+.panel-draggable>.radar-heading {
+  position:sticky;
+  top:-12px;
+  z-index:3;
+  min-height:44px;
+  margin:-12px -12px 8px;
+  padding:6px 12px;
+  background:inherit;
+}
+.panel-draggable>.map-key-toggle { position:relative; }
+.future-radar.panel-draggable { overflow:auto; }
+.map-shell>.panel-draggable.panel-user-sized {
+  top:auto!important;
+  bottom:var(--panel-drag-bottom)!important;
+  height:var(--panel-drag-height)!important;
+  max-height:none!important;
+  min-height:0!important;
+  transition:none!important;
+}
+.map-shell>.panel-draggable.panel-drag-collapsed { overflow:hidden!important; }
+.panel-is-dragging,.panel-is-dragging * { cursor:ns-resize!important; }
+/* While dragging a header, all text and page scrolling stay stationary. */
+.panel-is-dragging { overflow-anchor:none; }

@@ -1,3 +1,4 @@
+import {installPanelDrag} from './panel-drag.js?v=20261117-palettes-panels';
 import {shouldRefreshLayer} from './refresh-policy.js?v=20261116-full-speed';
 import {eventDateMatches,eventDateRangeControl} from './event-date-range.js?v=20261116-full-speed';
 import {createWildlifeHeatLayer} from './wildlife-heat.js?v=20261116-wildlife-heat';
@@ -29,7 +30,7 @@ import {eventDay,eventOrder,eventTime,eventStamp,groupEventCards} from './event-
 import {venueEvents,mergeVenueEvents} from './concert-calendar.js?v=20261116-full-speed';
 import {createSkyCloudMap} from './sky-cloud-map.js?v=20261116-security';
 import {COMMUNITY_SOURCES,HIDDEN_LAYERS,CRIME_TYPES,combineCrime,appendAirAdvice,distance,routeMiles,pointInGeometry} from './layer-insights.js?v=20261115-air-clarity';
-import {createTrafficIncidents} from './traffic-incidents.js?v=20261116-security';
+import {createTrafficIncidents} from './traffic-incidents.js?v=20261117-palettes-panels';
 import {attachSuggestions} from './search-suggestions.js?v=20261115-road-insights';
 import {createFutureRadar} from './future-radar.js?v=20261116-security';
 import {searchLayers} from './explore.js?v=20261116-wildlife-heat';
@@ -110,6 +111,7 @@ function defaultZoom(){
  return window.matchMedia('(max-width: 800px)').matches?CONFIG.mobileZoom:CONFIG.zoom;
 }
 const map=L.map('map',{preferCanvas:true,attributionControl:false,zoomControl:true,zoomSnap:.5,minZoom:8,maxZoom:18,maxBounds:[[REGION.south,REGION.west],[REGION.north,REGION.east]],maxBoundsViscosity:.8}).setView(initial?.center||CONFIG.center,initial?.zoom||defaultZoom());
+installPanelDrag($('#map').parentElement);
 const mapCredits=installMapCredits(map,{layers:LAYERS});
 // Fixed panes keep traffic above radar regardless of refresh completion order.
 map.createPane('weather-overlay');map.getPane('weather-overlay').style.zIndex='350';

@@ -21,5 +21,7 @@
   "wildlife.css",
   "date-range.css",
   "mobile-compact.css",
-  "historical-events.css"
+  "historical-events.css",
+  "session-palettes.css",
+  "panel-drag.css"
 ]
