@@ -1,6 +1,6 @@
 // Relative speed comes from the provider's actual roads. An uncolored road is
 // not proof of free flow, and receipt time is not an observation timestamp.
-import {REGION} from './core.js?v=20261117-traffic-repair';
+import {REGION} from './core.js?v=20261117-construction-layer';
 export const TRAFFIC_FLOW_INTERVAL=300000;
 export const TRAFFIC_FLOW_BOUNDS=Object.freeze([Object.freeze([REGION.south,REGION.west]),Object.freeze([REGION.north,REGION.east])]);
 export const TRAFFIC_FLOW_SOURCE=Object.freeze({name:'TomTom',style:'relative0',url:'https://docs.tomtom.com/traffic-api/documentation/tomtom-maps/v1/traffic-flow/raster-flow-tiles'});

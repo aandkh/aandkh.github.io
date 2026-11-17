@@ -1,7 +1,7 @@
 import {normalizeSpotRadius} from './spot-radius.js?v=20261117-close-selection';
 // Small, deterministic state validation shared by presets and map links.
 // No fetches, DOM access, or date-dependent defaults belong in this module.
-import {BY_ID,LAYERS} from './catalog.js?v=20261117-traffic-repair';
+import {BY_ID,LAYERS} from './catalog.js?v=20261117-construction-layer';
 const CRIME_TYPES=['homicide','rape','robbery','assault','burglary','theft','vehicle','arson'];
 const CYCLING_SORTS=['distance','short','long','terrain-low','terrain-high','easy','hard','air'];
 const JOYRIDE_SORTS=['distance','short','long','hills','climbing','grade','winding','straight','time'];

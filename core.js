@@ -1,7 +1,7 @@
 import {enrichCultureFeature,cultureFeatureDisplayable} from './place-enrichment.js?v=20261115-road-insights';
 import {cleanVehicle} from './vehicles.js?v=20261115-road-insights';
-import {BY_ID} from './catalog.js?v=20261117-traffic-repair';
-import {cleanExploreViewState} from './share-view-state.js?v=20261117-traffic-repair';
+import {BY_ID} from './catalog.js?v=20261117-construction-layer';
+import {cleanExploreViewState} from './share-view-state.js?v=20261117-construction-layer';
 import {safeUrl} from './security.js?v=20261116-security';
 export {safeUrl};
 import {isExcludedChainPlace} from './chain-places.js?v=20261116-speed';
@@ -78,8 +78,10 @@ export function layerSelectable(id,capabilities={}){
 export function skyCloudRows(sky,now=Date.now()){
  return (Array.isArray(sky?.clouds)?sky.clouds:[]).filter(row=>row&&typeof row.time==='string'&&Number.isFinite(Date.parse(row.time))&&Date.parse(row.time)>=now&&Number.isFinite(row.percent)&&row.percent>=0&&row.percent<=100).slice(0,24);
 }
+const roadworkCalendar=new Intl.DateTimeFormat('en-CA',{timeZone:'America/Chicago',year:'numeric',month:'2-digit',day:'2-digit'});
 export function currentRoadworks(features,now=Date.now()){
- return (Array.isArray(features)?features:[]).filter(feature=>{const p=feature?.properties||{},end=Date.parse(p.end),feed=Date.parse(p.feedUpdatedAt||p.observedAt),source=p.sourceReportedAt?Date.parse(p.sourceReportedAt):feed;return Number.isFinite(end)&&end>now&&Number.isFinite(feed)&&feed<=now&&now-feed<=600000&&Number.isFinite(source)&&source<=now&&now-source<=600000;});
+ const day=roadworkCalendar.format(new Date(now));
+ return (Array.isArray(features)?features:[]).filter(feature=>{const p=feature?.properties||{};if(p.trafficDetail&&p.freshnessBasis==='active-source-query'){const received=typeof p.receivedAt==='number'?p.receivedAt:Date.parse(p.receivedAt),expiry=Date.parse(p.expiresAt);return Number.isFinite(received)&&received<=now&&now-received<360000&&(!Number.isFinite(expiry)||expiry>now)&&(!p.reportedEndDate||p.reportedEndDate>=day)&&(!p.reportedStartDate||p.reportedStartDate<=day);}const end=Date.parse(p.end),feed=Date.parse(p.feedUpdatedAt||p.observedAt),source=p.sourceReportedAt?Date.parse(p.sourceReportedAt):feed;return Number.isFinite(end)&&end>now&&Number.isFinite(feed)&&feed<=now&&now-feed<=600000&&Number.isFinite(source)&&source<=now&&now-source<=600000;});
 }
 export function loadPresets(storage){try{const a=JSON.parse(storage.getItem('andymap.presets.v1')||'[]');const seen=new Set();return Array.isArray(a)?a.slice(0,40).map(cleanPreset).filter(p=>{if(!p||seen.has(p.id))return false;seen.add(p.id);return true;}):[];}catch{return [];}}
 export function savePresets(storage,presets){storage.setItem('andymap.presets.v1',JSON.stringify(presets.slice(0,40).map(cleanPreset).filter(Boolean)));}

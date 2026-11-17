@@ -1,14 +1,14 @@
-import {trafficFeature,appendTrafficDetails} from './traffic-details.js?v=20261117-traffic-suite';
-import {trafficCollection,currentTrafficRecord,savedTrafficFeature} from './traffic-experience.js?v=20261117-traffic-suite';
+import {trafficFeature,appendTrafficDetails} from './traffic-details.js?v=20261117-construction-layer';
+import {trafficCollection,currentTrafficRecord,savedTrafficFeature} from './traffic-experience.js?v=20261117-construction-layer';
 import {loadIllinoisTraffic} from './illinois-traffic.js?v=20261117-traffic-suite';
-import {appendTrafficControls,appendTrafficKey,renderTrafficResults,cleanTrafficFilter} from './traffic-ui.js?v=20261117-traffic-repair';
+import {appendTrafficControls,appendTrafficKey,renderTrafficResults,cleanTrafficFilter} from './traffic-ui.js?v=20261117-construction-layer';
 import {loadRadarMetadata} from './radar-metadata.js?v=20261117-weather-suite';
 import {appendWeatherOutlook} from './weather-outlook.js?v=20261117-weather-suite';
-import {createWeatherExperience,currentWeatherVisible} from './weather-experience.js?v=20261117-traffic-repair';
+import {createWeatherExperience,currentWeatherVisible} from './weather-experience.js?v=20261117-construction-layer';
 import {createObservedRadar} from './observed-radar.js?v=20261117-weather-suite';
 import {createWeatherAlerts} from './weather-alerts.js?v=20261117-weather-suite';
 import {createWarningBanner,alertFeature,appendAlertDetails} from './weather-alert-ui.js?v=20261117-weather-suite';
-import {createTrafficFlowLayer} from './traffic-flow.js?v=20261117-traffic-repair';
+import {createTrafficFlowLayer} from './traffic-flow.js?v=20261117-construction-layer';
 import {referenceLayer,referenceLayerFile} from './reference-layers.js?v=20261117-performance';
 import {selectionAnchor,selectionFeatureId} from './selection-focus.js?v=20261117-close-selection';
 import {createSpotExplorer} from './spot-explorer.js?v=20261117-seasonal-stories';
@@ -45,21 +45,22 @@ import {eventDay,eventOrder,eventTime,eventStamp,groupEventCards} from './event-
 import {venueEvents,mergeVenueEvents} from './concert-calendar.js?v=20261116-full-speed';
 import {createSkyCloudMap} from './sky-cloud-map.js?v=20261117-weather-suite';
 import {COMMUNITY_SOURCES,HIDDEN_LAYERS,CRIME_TYPES,combineCrime,appendAirAdvice,distance,routeMiles,pointInGeometry} from './layer-insights.js?v=20261115-air-clarity';
-import {createTrafficIncidents} from './traffic-incidents.js?v=20261117-traffic-repair';
+import {createTrafficIncidents} from './traffic-incidents.js?v=20261117-construction-layer';
+import {loadRoadworks} from './roadworks-source.js?v=20261117-construction-layer';
 import {attachSuggestions} from './search-suggestions.js?v=20261117-performance';
 import {createSearchClient} from './search-worker-client.js?v=20261117-performance';
 import {loadSearchFeature,safeSearchSourceFile} from './search-catalog.js?v=20261117-performance';
 import {SEARCH_ACTIONS,findSearchActionTarget} from './search-actions.js?v=20261117-performance';
 import {createFutureRadar} from './future-radar.js?v=20261117-weather-suite';
 import {searchLayers} from './explore.js?v=20261116-wildlife-heat';
-import {placeHash,readPlaceHash,placeState,findSharedFeature,encodeViewState,decodeViewState,isViewHash} from './short-links.js?v=20261117-traffic-repair';
+import {placeHash,readPlaceHash,placeState,findSharedFeature,encodeViewState,decodeViewState,isViewHash} from './short-links.js?v=20261117-construction-layer';
 import {appendPlaceNavigation} from './place-navigation.js?v=20261115-road-insights';
 import {TODAY_LAYERS,happeningToday} from './today-filter.js?v=20261116-full-speed';
 import {createWeatherReadings} from './weather-readings.js?v=20261117-weather-suite';
 import {enrichCultureFeature,cultureFeatureDisplayable} from './place-enrichment.js?v=20261115-road-insights';
 import {apiFetch,apiUrl} from './api-client.js?v=20261117-performance';
-import {regionalViewportBounds} from './viewport-bounds.js?v=20261117-traffic-repair';
-import {placeMatchesSearch} from './place-search.js?v=20261117-traffic-repair';
+import {regionalViewportBounds} from './viewport-bounds.js?v=20261117-construction-layer';
+import {placeMatchesSearch} from './place-search.js?v=20261117-construction-layer';
 import {filterPlaceFeatures,isExcludedChainPlace} from './chain-places.js?v=20261116-speed';
 import {openingState,isHoursPlaceLayer} from './opening-hours.js?v=20261115-road-insights';
 import {createHoursChecks,placeOpeningState} from './open-now-filter.js?v=20261115-road-insights';
@@ -71,14 +72,14 @@ import {getMapBadgeLayout,badgeRectangle,badgeLeaderSegments} from './map-badge-
 import {appendSkyDiagram} from './forecast-visuals.js?v=20261116-full-speed';
 import {appendVehicleInspector} from './vehicles.js?v=20261115-road-insights';
 import {symbol} from './symbols.js?v=20261117-explore-layout';
-import {overlayStyles,routeOverlayStyles,aircraftDirectionStyles,markerPaint} from './overlay-style.js?v=20261117-traffic-repair';
+import {overlayStyles,routeOverlayStyles,aircraftDirectionStyles,markerPaint} from './overlay-style.js?v=20261117-construction-layer';
 import {uiIcon} from './ui-icons.js?v=20261115-road-insights';
 import {MODE_DEFAULTS,OPACITY_DEFAULTS,cleanOverlayOpacity,cleanLayerModes,unexpiredFeatures} from './expansion-options.js?v=20261115-road-insights';
-import {appendWeather,appendSkyExtras,createOpeningNotices} from './expansion-ui.js?v=20261117-traffic-repair';
-import {LAYERS,BY_ID,EXAMPLES} from './catalog.js?v=20261117-traffic-repair';
+import {appendWeather,appendSkyExtras,createOpeningNotices} from './expansion-ui.js?v=20261117-construction-layer';
+import {LAYERS,BY_ID,EXAMPLES} from './catalog.js?v=20261117-construction-layer';
 import {RADAR_MODES,RADAR_TYPE_KEY,AQI,AIR_MODES} from './environment.js?v=20261115-road-insights';
 import {CONFIG} from './config.js?v=20261115-road-insights';
-import {REGION,coordinate,safeUrl,placeUrl,placeLinks,encodeState,decodeState,cleanState,cleanStop,loadPresets,savePresets,cleanPreset,browserStorage,layerSelectable,skyCloudRows,currentRoadworks,centroid,directionEnd,clusterPoints} from './core.js?v=20261117-traffic-repair';
+import {REGION,coordinate,safeUrl,placeUrl,placeLinks,encodeState,decodeState,cleanState,cleanStop,loadPresets,savePresets,cleanPreset,browserStorage,layerSelectable,skyCloudRows,currentRoadworks,centroid,directionEnd,clusterPoints} from './core.js?v=20261117-construction-layer';
 const $=s=>document.querySelector(s),el=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;};
 const mapKey=createMapKey($('#environment-key'));if(mapKey.toggle.getAttribute('aria-expanded')==='true')mapKey.toggle.click();
 const btn=(text,fn,cls='')=>{const b=el('button',cls,text);b.type='button';b.addEventListener('click',fn);return b;};
@@ -127,7 +128,7 @@ function loadForecastExtras(){
 }
 
 let parkSort='distance',parkEnrichmentRevision=0;const parkFilters=new Set();const parkBoundsCache=new WeakMap();
-const selectable=id=>!['cameras','restrooms'].includes(id)&&((id==='traffic'&&capabilities.traffic!==false)||!!referenceLayerFile(id,layerModes[id]||'')||['traffic','alerts','weather','sky','concerts','arts','movies','sports','gyms','cycling','joyrides','foodtrucks','businesses','localfood','outages','terrain','crime','floodplains','birding','wildlife','history','haunted'].includes(id)||layerSelectable(id,capabilities));
+const selectable=id=>!['cameras','restrooms'].includes(id)&&((id==='traffic'&&capabilities.traffic!==false)||!!referenceLayerFile(id,layerModes[id]||'')||['traffic','roadworks','alerts','weather','sky','concerts','arts','movies','sports','gyms','cycling','joyrides','foodtrucks','businesses','localfood','outages','terrain','crime','floodplains','birding','wildlife','history','haunted'].includes(id)||layerSelectable(id,capabilities));
 const storage=browserStorage(()=>window.localStorage);
 let skyPanelOpen=false,weatherPanelOpen=false,skyNowController=null;
 const skyNowState={};
@@ -161,9 +162,10 @@ weatherAlerts=createWeatherAlerts(map,{onSelect:record=>showFeature('alerts',ale
 
 const trafficNote=el('div','traffic-note');trafficNote.hidden=true;$('#map').parentElement.append(trafficNote);
 const trafficMessages={incidents:'',flow:''};function updateTrafficNote(part,text){trafficMessages[part]=text;trafficNote.textContent=Object.values(trafficMessages).filter(Boolean).join(' ');trafficNote.hidden=!trafficNote.textContent;}
-const trafficIncidents=createTrafficIncidents(map,{additionalSources:[{id:'idot',source:'IDOT',label:'Illinois closures and road work',load:loadIllinoisTraffic}],getSelected:()=>focus?.layer==='traffic'?focus.id:null,onStatus(text){updateTrafficNote('incidents',text);},onUpdate(state){
+const trafficIncidents=createTrafficIncidents(map,{additionalSources:[{id:'idot',source:'IDOT',label:'Illinois closures and road work',load:loadIllinoisTraffic}],getSelected:()=>focus?.layer==='traffic'?focus.id:null,showConstruction:()=>enabled.has('roadworks'),showIncidents:()=>enabled.has('traffic'),onStatus(text){updateTrafficNote('incidents',text);},onUpdate(state){
  trafficState=state;data.set('traffic',trafficCollection(data.get('traffic'),state));updateSelectedTraffic(state);if(enabled.has('traffic'))queueLayerUI('traffic');
 },onSelect:openTrafficRecord});
+function syncTrafficVisibility(){trafficIncidents.setVisible(enabled.has('traffic')||enabled.has('roadworks'));trafficIncidents.relayout();}
 function setTrafficFilter(value){trafficFilter=cleanTrafficFilter(value);trafficIncidents.setFilter(trafficFilter);renderLayers();renderResults();renderLegend();}
 function openTrafficRecord(record){
  if(record.members?.length>1){const features=record.members.map(trafficFeature).filter(Boolean).map(f=>({...f,_layer:'traffic'}));showMixedCluster({features});positionForDetails(record.clusterCenter,Math.min(map.getMaxZoom(),map.getZoom()+2));return;}
@@ -231,7 +233,7 @@ async function inspectSpot(point){
  closeDetail();setResults(false);setControls(false);const token=spotUI.open(point);
  if(spotMarker)map.removeLayer(spotMarker);spotMarker=L.marker([point.lat,point.lng],{pane:'spot-selection',interactive:false,keyboard:false,icon:L.divIcon({className:'spot-selection-marker',html:'<svg viewBox="0 0 28 36" fill="none" aria-hidden="true"><path d="M6 34V3m0 1c6-4 10 4 16 0v14c-6 4-10-4-16 0" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><circle cx="6" cy="34" r="2" fill="currentColor"/></svg>',iconSize:[28,36],iconAnchor:[6,34]})}).addTo(map);
  try{
-  spotEngineModule??=import('./spot-data.js?v=20261117-traffic-repair');const {createSpotInspector}=await spotEngineModule;if(controller.signal.aborted||revision!==spotRevision)return;
+  spotEngineModule??=import('./spot-data.js?v=20261117-construction-layer');const {createSpotInspector}=await spotEngineModule;if(controller.signal.aborted||revision!==spotRevision)return;
   const inspector=createSpotInspector({...point,signal:controller.signal,loadedLayers:data,layerModes,fetchJson:readSpotSource,fetchLayer:async(id,options={})=>{
    const {mode='',lat=point.lat,lng=point.lng,bbox,signal=controller.signal}=options;const query=new URLSearchParams({bbox:Array.isArray(bbox)?bbox.join(','):bbox||[Math.max(REGION.west,lng-.035),Math.max(REGION.south,lat-.028),Math.min(REGION.east,lng+.035),Math.min(REGION.north,lat+.028)].join(','),mode,lat:String(lat),lng:String(lng)});
    if(id==='weather')return loadWeatherForecast(lat,lng,{signal,loadPrimary:async({signal:forecastSignal})=>{const response=await apiFetch('/api/layers/weather?'+query,{signal:AbortSignal.any([forecastSignal,AbortSignal.timeout(8000)])});if(!response.ok)throw Error('Forecast unavailable');return response.json();}});
@@ -346,7 +348,7 @@ async function loadCapabilities(){
   const response=await apiFetch('/api/capabilities',{cache:'no-store',signal:AbortSignal.timeout(8000)});if(!response.ok)return;
   const result=await response.json();if(!result.layers||typeof result.layers!=='object'||Array.isArray(result.layers))return;
   capabilities=Object.fromEntries(Object.entries(result.layers).filter(([id,value])=>Object.hasOwn(BY_ID,id)&&typeof value==='boolean'));
-  for(const id of [...enabled])if(!selectable(id)){enabled.delete(id);if(id==='traffic'){trafficIncidents.setVisible(false);updateTrafficNote('flow','');}requests.get(id)?.abort();requests.delete(id);removeDrawing(id);}
+  for(const id of [...enabled])if(!selectable(id)){enabled.delete(id);if(id==='traffic'||id==='roadworks')syncTrafficVisibility();if(id==='traffic')updateTrafficNote('flow','');requests.get(id)?.abort();requests.delete(id);removeDrawing(id);}
   for(const id of requestedLayers)if(selectable(id)&&!enabled.has(id))toggle(id,true,false);
   renderLayers();renderResults();
  }catch{/* Keep configured-source defaults usable when the configuration request fails. */}
@@ -395,7 +397,7 @@ function renderLegend(){mapCredits.update(enabled);syncQuickCategories();renderE
 function boundsParam(){const b=map.getBounds(),bounds=regionalViewportBounds([b.getWest(),b.getSouth(),b.getEast(),b.getNorth()])||[REGION.west,REGION.south,REGION.east,REGION.north];return bounds.map(n=>n.toFixed(5)).join(',');}
 function removeDrawing(id){const layer=drawn.get(id);if(layer)map.removeLayer(layer);drawn.delete(id);geometryRestylers.delete(id);tileHealth.delete(id);if(!['radar','traffic','weather','sky','air','light','floodplains','demographics','terrain'].includes(id))renderPlaceMarkers();}
 function expireRoadworks(){const result=data.get('roadworks');if(!enabled.has('roadworks')||!Array.isArray(result?.features))return;const current=currentRoadworks(result.features);if(current.length===result.features.length)return;data.set('roadworks',{...result,features:current,status:current.length?result.status:'stale',displayExpiry:true,note:result.displayExpiry?result.note:(result.note||BY_ID.roadworks.note)+' Expired records are hidden until a current source response is available.'});removeDrawing('roadworks');if(current.length)drawFeatures('roadworks',{...result,features:current});renderResults();}
-function toggle(id,on,adjustZoom=true){if(!Object.hasOwn(BY_ID,id))return;if(on){requestedLayers.add(id);if(!selectable(id)){renderLayers();return;}enabled.add(id);if(id==='alerts')weatherAlerts.setShowAll(true);if(id==='traffic')trafficIncidents.setVisible(true);loadLayer(id);if(id==='radar'){weatherReadings.expire(true);refreshWeatherReadings();}if(id==='sky'&&adjustZoom){renderSky();setControls(false);}if(id==='weather'&&adjustZoom){renderWeather();setControls(false);}}else{if(currentResultsLayer===id)currentResultsLayer=null;requestedLayers.delete(id);enabled.delete(id);if(id==='alerts')weatherAlerts.setShowAll(false);if(id==='radar')syncCurrentWeather();if(id==='sky')skyCloudMap.close();if(id==='traffic'){trafficIncidents.setVisible(false);updateTrafficNote('flow','');}if(id==='radar'){weatherReadings.hide();weatherReadingsRequest?.abort();}requests.get(id)?.abort();requests.delete(id);removeDrawing(id);if(id==='sky'&&skyPanelOpen||id==='weather'&&weatherPanelOpen)closeDetail();renderLayers();renderResults();}}
+function toggle(id,on,adjustZoom=true){if(!Object.hasOwn(BY_ID,id))return;if(on){requestedLayers.add(id);if(!selectable(id)){renderLayers();return;}enabled.add(id);if(id==='alerts')weatherAlerts.setShowAll(true);if(id==='traffic'||id==='roadworks')syncTrafficVisibility();loadLayer(id);if(id==='radar'){weatherReadings.expire(true);refreshWeatherReadings();}if(id==='sky'&&adjustZoom){renderSky();setControls(false);}if(id==='weather'&&adjustZoom){renderWeather();setControls(false);}}else{if(currentResultsLayer===id)currentResultsLayer=null;requestedLayers.delete(id);enabled.delete(id);if(id==='alerts')weatherAlerts.setShowAll(false);if(id==='radar')syncCurrentWeather();if(id==='sky')skyCloudMap.close();if(id==='traffic'||id==='roadworks')syncTrafficVisibility();if(id==='traffic')updateTrafficNote('flow','');if(id==='radar'){weatherReadings.hide();weatherReadingsRequest?.abort();}requests.get(id)?.abort();requests.delete(id);removeDrawing(id);if(id==='sky'&&skyPanelOpen||id==='weather'&&weatherPanelOpen)closeDetail();renderLayers();renderResults();}}
 function raster(id){let layer;
  if(id==='terrain'){const d=data.get(id);if(d?.tileUrl){layer=L.tileLayer(d.tileUrl,{opacity:overlayOpacity.terrain,maxNativeZoom:d.maxNativeZoom||16,maxZoom:18,updateWhenIdle:true,keepBuffer:1});}else{if(!d?.imageUrl||!Array.isArray(d.bounds))return;if(d.minZoom&&map.getZoom()<d.minZoom){map.setZoom(d.minZoom);return;}layer=L.imageOverlay(d.imageUrl,d.bounds,{opacity:overlayOpacity.terrain});layer.on('error',()=>{if(tileHealth.get(id)!=='error'){tileHealth.set(id,'error');renderLegend();}});}}
 
@@ -553,7 +555,7 @@ async function loadLayer(id,{force=false}={}){
  const mode=id==='radar'?radarMode:id==='air'?airMode:layerModes[id]||'',center=id==='weather'&&weatherTarget?{...weatherTarget}:map.getCenter();
  const location=['sky','weather'].includes(id)?'&lat='+center.lat.toFixed(5)+'&lng='+center.lng.toFixed(5):'';
  const bbox=boundsParam(),query='?bbox='+bbox+'&mode='+mode+location;
- const localOnly=['gyms','cycling','joyrides','haunted','history','wildlife'].includes(id)||id==='crime'&&mode==='recent'||id==='terrain'&&(GEOLOGY_MODES.has(mode)||mode==='streams');
+ const localOnly=['gyms','cycling','joyrides','haunted','history','wildlife','roadworks'].includes(id)||id==='crime'&&mode==='recent'||id==='terrain'&&(GEOLOGY_MODES.has(mode)||mode==='streams');
  const requestKey=JSON.stringify([id,mode,localOnly?'':location||bbox,id==='wildlife'?[wildlifeQuery({...defaultWildlifeOptions(),...wildlifeOptions}).toString(),Math.max(1,Math.min(5,Math.floor(wildlifeOptions.pageLimit)||1))]:null,id==='history'?[historyView,imageryDate]:null,id==='crime'?incidentFilters:null]);
  const existing=requests.get(id),previous=data.get(id),freshFor=localOnly?300000:30000;
  if(!force&&existing?._requestKey===requestKey&&!existing.signal.aborted)return existing.done;
@@ -582,6 +584,7 @@ async function loadLayer(id,{force=false}={}){
   if(['gyms','cycling','joyrides','haunted'].includes(id))result=await localLayerSnapshot(id);
   else if(id==='wildlife'){if(wildlifeOptions.mapView!=='reports')drawFeatures(id,{query:wildlifeOptions});result=await loadWildlife({...wildlifeOptions,signal:controller.signal});}
   else if(id==='history')result=historyView==='imagery'?{id:'history',status:'ready',features:[],raster:true}:await loadHistoricalEvents();
+  else if(id==='roadworks')result=await loadRoadworks({signal:controller.signal,force});
   else if(id==='floodplains')result=await loadFloodplains({overview:true,signal:controller.signal});
   else if(id==='terrain'&&GEOLOGY_MODES.has(mode))result=await terrainGeology(mode);
   else if(id==='terrain'&&mode==='streams')result=await terrainStreams();
@@ -697,6 +700,7 @@ function restoreCluster(){
 
 function showDetail(stop,properties={},id=stop?.layer,shared=false,preserveView=false){if(observedRadar.active)observedRadar.stop();skyCloudMap.close();if(futureRadar.active)futureRadar.stop();if(isExcludedChainPlace(id==='gyms'?'gyms':'',{...stop,...properties})||excludedPlaceSources.has(stop?.sourceId)){closeDetail();return;}if(['aircraft','transit'].includes(id))return showVehicle(stop,properties,id,shared,preserveView);properties={...stop,...properties};rememberDetailOrigin();closeDetail();focus=stop;sharedFocus=shared;const box=$('#detail');box.replaceChildren();box.hidden=false;$('#results').hidden=true;const head=el('div','floating-head'),close=btn('×',()=>closeDetail({restoreFocus:true}));close.setAttribute('aria-label','Close place details');head.append(detailCategory(id,!!properties.start),close);detailExpansion(head);box.append(head,el('h2','',stop?.title||properties.title||properties.name||'Selected place'));if(eventDay(properties.start))box.append(el('p','event-entry-when detail-event-when',eventStamp(properties.start)));if(EVENT_LAYERS.has(id)&&eventHasStarted(properties.start))box.append(el('p','event-history-note',isEventDate(properties.start)?'This event’s listed date has passed.':'This event has already started. It is no longer shown in upcoming results.'));if(id==='gyms')box.append(el('p','gym-kind',GYM_GROUPS[properties.gymGroup]||'Gyms'));if(id==='movies'&&movieFacts(properties))box.append(el('p','movie-facts',movieFacts(properties)));if(properties.incidentAt){box.append(el('p','result-event-time','Incident: '+incidentStamp(properties)),el('p','small',(properties.locationAccuracy||'Approximate area')+' · '+(properties.jurisdiction==='county'?'St. Louis County':'St. Louis City')+(Number.isFinite(properties.deaths)?' · '+properties.deaths+' reported deaths':'')+(Number.isFinite(properties.injuries)?' · '+properties.injuries+' reported injuries':'')));}if(id==='alerts')appendAlertDetails(box,properties,{format});const description=id==='traffic'?properties.description||stop?.description||'Official traffic report.':stop?.description||properties.description||'A location selected on the map.';const category=/^OpenStreetMap (.+)\.$/.exec(description)?.[1]?.replaceAll('_',' ');if(description!==properties.address&&(!category||category.toLowerCase()!==String(BY_ID[id]?.name||'').toLowerCase().replace(/s$/,'')))box.append(el('p','place-description',category?category[0].toUpperCase()+category.slice(1):description));
  if(id==='traffic'&&properties.trafficDetail)mountTrafficSelection(box,stop,properties);
+ if(id==='roadworks'&&properties.trafficDetail)appendTrafficDetails(box,properties,{format});
  if(id==='air'){appendAirAdvice(box,properties);box.append(btn('Forecast & ventilation windows',()=>{if(!enabled.has('weather'))toggle('weather',true);else{renderWeather();setControls(false);}},'sky-refresh'));}
  if(['cycling','joyrides'].includes(id)&&properties._routeGeometry)box.append(btn('Show full route',()=>highlightRoute(properties._routeGeometry),'sky-refresh'));
  if(id==='parks'){
@@ -720,7 +724,7 @@ function showDetail(stop,properties={},id=stop?.layer,shared=false,preserveView=
  const hoursLine=!isCalendarEvent&&isHoursPlaceLayer(id)?el('p','listed-opening'):null;if(hoursLine){renderHoursLine(hoursLine,{...properties,...(shared?{hoursStatus:'unknown'}:{})});box.append(hoursLine);}
  if(properties.accessNote)box.append(el('p','',properties.accessNote));if(id==='localfood'&&properties.ownershipEvidence?.some(item=>safeUrl(item.url))){const evidence=el('details','extra-disclosure');evidence.append(el('summary','','Local ownership evidence'));for(const item of properties.ownershipEvidence||[])if(safeUrl(item.url))evidence.append(link('Official source ↗',item.url),el('p','small',item.note));box.append(evidence);}
  const freshness=el('p','source-date');if(properties.sourceCheckedAt){freshness.append(document.createTextNode((id==='joyrides'?'Road geometry checked ':id==='cycling'?'Route source checked ':['gyms','recreation','culture','birding','haunted'].includes(id)?'Source checked ':id==='localfood'?'Ownership evidence checked ':isCalendarEvent?'Calendar checked ':'Official page checked ')+format(properties.sourceCheckedAt)));box.append(freshness);}
- if(id==='roadworks'){const reported=properties.eventReportedAt||properties.sourceReportedAt||properties.feedUpdatedAt||properties.observedAt;if(reported)box.append(el('p','source-date',(properties.eventReportedAt||properties.sourceReportedAt?'Reported: ':'Feed updated: ')+format(reported)));if(properties.checkedAt)box.append(el('p','source-date','Retrieved: '+format(properties.checkedAt)));}
+ if(id==='roadworks'&&!properties.trafficDetail){const reported=properties.eventReportedAt||properties.sourceReportedAt||properties.feedUpdatedAt||properties.observedAt;if(reported)box.append(el('p','source-date',(properties.eventReportedAt||properties.sourceReportedAt?'Reported: ':'Feed updated: ')+format(reported)));if(properties.checkedAt)box.append(el('p','source-date','Retrieved: '+format(properties.checkedAt)));}
  const closureNotice=el('p','place-warning','The source reports a closure or disuse flag. Check with the business before visiting.');closureNotice.hidden=!properties.closureStatus&&!properties.closureFlag;box.append(closureNotice);
  if(properties.access)sourceDetails.append(el('p','',`Mapped access: ${properties.access}`));if(properties.providerUpdatedAt)sourceDetails.append(el('p','small',`Provider record updated: ${properties.providerUpdatedAt} (timezone not supplied)`));
  const time=stop?.observedAt||properties.observedAt;if(time&&id!=='traffic')sourceDetails.append(el('p','source-date','Observed: '+format(time)));if(properties.stale&&id!=='traffic')sourceDetails.append(el('p','source-date','This individual observation is stale.'));

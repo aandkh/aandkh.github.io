@@ -1,5 +1,5 @@
-import {BY_ID} from './catalog.js?v=20261117-traffic-repair';
-import {coordinate,cleanState,decodeState} from './core.js?v=20261117-traffic-repair';
+import {BY_ID} from './catalog.js?v=20261117-construction-layer';
+import {coordinate,cleanState,decodeState} from './core.js?v=20261117-construction-layer';
 
 // Stable 64-bit reference, independent of feed ordering and changing event details.
 export function placeToken(id){

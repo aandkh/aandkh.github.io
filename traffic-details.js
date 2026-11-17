@@ -89,6 +89,8 @@ export function appendTrafficDetails(host,properties,{format=value=>defaultTime.
  line('Road',properties.road);line('Impact',properties.impact);line('Affected lanes',properties.lanes);line('From',properties.from);line('To',properties.to);line('County',properties.county);line('Detour',properties.detour);
  line('Reported driving delay',properties.reportedDelay||'Not reported');line('Location',properties.locationNote);
  if(properties.startedAt)line('Reported start',format(properties.startedAt));if(properties.expiresAt)line('Reported end',format(properties.expiresAt));
+ if(properties.reportedStartDate||properties.reportedEndDate)line('Reported work dates',[properties.reportedStartDate||'Start not supplied',properties.reportedEndDate||'End not supplied'].join(' to '));
+ if(properties.reportedWorkHours)line('Reported work hours',properties.reportedWorkHours);
  line('Incident updated',properties.updatedAt?format(properties.updatedAt):'Time not supplied by source');
  if(properties.receivedAt!==null&&stamp(properties.receivedAt)!==null)line('Source checked',format(iso(properties.receivedAt)));
  if(properties.sourceUpdatedAt)line('Dataset updated',format(properties.sourceUpdatedAt));

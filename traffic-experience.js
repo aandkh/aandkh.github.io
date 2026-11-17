@@ -1,4 +1,4 @@
-import {trafficFeature} from './traffic-details.js?v=20261117-traffic-suite';
+import {trafficFeature} from './traffic-details.js?v=20261117-construction-layer';
 
 // Incident records are independent of raster metadata. A slow/failed color feed
 // must not erase reports that have already arrived from official road agencies.

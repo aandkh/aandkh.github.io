@@ -1,4 +1,4 @@
-import {TRAFFIC_FLOW_LEGEND,TRAFFIC_FLOW_SOURCE} from './traffic-flow.js?v=20261117-traffic-repair';
+import {TRAFFIC_FLOW_LEGEND,TRAFFIC_FLOW_SOURCE} from './traffic-flow.js?v=20261117-construction-layer';
 
 // Shared fixed symbols keep map incidents, filters and the key consistent.
 export const TRAFFIC_INCIDENT_COLORS=Object.freeze({crash:'#b42331',closure:'#8d2435',other:'#95630b'});

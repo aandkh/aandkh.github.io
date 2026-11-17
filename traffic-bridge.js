@@ -2,12 +2,12 @@
 (()=>{
  'use strict';
  if(window.parent===window)return;
- const query=new URLSearchParams(location.search),layer=query.get('layer'),token=query.get('token'),parentOrigin=query.get('parentOrigin'),dataId=query.get('dataId'),lineLayer=['13','18','22'].includes(layer);
- if(!['0','5','9','13','18','22'].includes(layer)||!/^[a-f0-9-]{36}$/i.test(token||'')||lineLayer&&(!/^\d{1,16}$/.test(dataId||'')||!Number.isSafeInteger(Number(dataId)))||!lineLayer&&dataId!==null)return;
+ const query=new URLSearchParams(location.search),layer=query.get('layer'),token=query.get('token'),parentOrigin=query.get('parentOrigin'),dataId=query.get('dataId'),detailLayer=['13','18','22'].includes(layer),workZone=['15','20','23','37'].includes(layer),lineLayer=detailLayer||workZone;
+ if(!['0','5','9','13','18','22','15','20','23','37'].includes(layer)||!/^[a-f0-9-]{36}$/i.test(token||'')||detailLayer&&(!/^\d{1,16}$/.test(dataId||'')||!Number.isSafeInteger(Number(dataId)))||!detailLayer&&dataId!==null)return;
  try{const origin=new URL(parentOrigin);if(!['http:','https:'].includes(origin.protocol)||origin.origin!==parentOrigin)return;}catch{return;}
  const source='https://mapsonline.modot.mo.gov/arcgis/rest/services/TravelerInformation/TravelerInformationMod/MapServer/';
- const pageSize=200,maxRecords=lineLayer?200:2000,features=[];let finished=false,script,callback,offset=0,vertices=0;
- const fields=['DATA_ID','ROUTE','TRAVELWAY_NAME','DESIGNATION','DIRECTION','COUNTY_NAME','BEGIN_DESCRIPTION','END_DESCRIPTION','TYPE_CODE','EXT_COMMENT','LEVEL_OF_IMPACT_CODE','STATUS_CODE','START_DATE','END_DATE','DEACTIVATION_DATE','LAST_CHANGED_DATE','STATUS_DATE'];
+ const pageSize=200,maxRecords=workZone?1000:lineLayer?200:2000,features=[];let finished=false,script,callback,offset=0,vertices=0;
+ const fields=workZone?['ID','COUNTY_NAME','DESIGNATION','TRAVELWAY_NAME','DIRECTION','STATUS_DATE','START_DATE','END_DATE','START_TIME','END_TIME','WORK_TYPE','NUMBER_LANES_CLOSED','STATUS','BEG_REF_PT','END_REF_PT','LEVEL_OF_IMPACT','ACTIVATION_DATE','DEACTIVATION_DATE','LAST_CHANGED_DATE']:['DATA_ID','ROUTE','TRAVELWAY_NAME','DESIGNATION','DIRECTION','COUNTY_NAME','BEGIN_DESCRIPTION','END_DESCRIPTION','TYPE_CODE','EXT_COMMENT','LEVEL_OF_IMPACT_CODE','STATUS_CODE','START_DATE','END_DATE','DEACTIVATION_DATE','LAST_CHANGED_DATE','STATUS_DATE'];
  const validPoint=point=>Array.isArray(point)&&point.length>=2&&Number.isFinite(point[0])&&Number.isFinite(point[1])&&Math.abs(point[0])<=180&&Math.abs(point[1])<=90;
  function geometry(value){
   if(!lineLayer)return Number.isFinite(value?.x)&&Number.isFinite(value?.y)?{x:value.x,y:value.y}:null;
@@ -24,7 +24,7 @@
    if(finished)return;
    if(!data||data.error||!Array.isArray(data.features)||data.features.length>pageSize||features.length+data.features.length>maxRecords){finish(false);return;}
    // Only bounded plain data crosses the frame boundary; the parent validates again.
-   for(const feature of data.features){const attributes={};for(const key of fields){const value=feature?.attributes?.[key];if(typeof value==='string')attributes[key]=value.slice(0,key==='EXT_COMMENT'?8000:500);else if(Number.isFinite(value))attributes[key]=value;}const shape=geometry(feature?.geometry);if(!shape){finish(false);return;}if(lineLayer&&String(attributes.DATA_ID)!==String(Number(dataId))){finish(false);return;}features.push({attributes,geometry:shape});}
+   for(const feature of data.features){const attributes={};for(const key of fields){const value=feature?.attributes?.[key];if(typeof value==='string')attributes[key]=value.slice(0,key==='EXT_COMMENT'?8000:500);else if(Number.isFinite(value))attributes[key]=value;}const shape=geometry(feature?.geometry);if(!shape){finish(false);return;}if(detailLayer&&String(attributes.DATA_ID)!==String(Number(dataId))){finish(false);return;}features.push({attributes,geometry:shape});}
    if(data.exceededTransferLimit===true){
     // MoDOT supports ordered pagination. Never mistake a truncated page for all incidents.
     if(!data.features.length||features.length>=maxRecords){finish(false);return;}
@@ -32,7 +32,7 @@
    }else finish(true,{features});
   };
   script.onerror=()=>finish(false);
-  const params=new URLSearchParams({f:'json',where:"STATUS_CODE = 'ACTIVE'"+(lineLayer?' AND DATA_ID = '+String(Number(dataId)):''),geometry:'-91.2,38.1,-89.4,39.2',geometryType:'esriGeometryEnvelope',inSR:'4326',outSR:'4326',spatialRel:'esriSpatialRelIntersects',outFields:fields.join(','),orderByFields:'OBJECT_ID ASC',resultOffset:String(offset),resultRecordCount:String(pageSize),callback});
+  const params=new URLSearchParams({f:'json',where:workZone?"STATUS = 'ACTIVE'":"STATUS_CODE = 'ACTIVE'"+(detailLayer?' AND DATA_ID = '+String(Number(dataId)):''),geometry:'-91.2,38.1,-89.4,39.2',geometryType:'esriGeometryEnvelope',inSR:'4326',outSR:'4326',spatialRel:'esriSpatialRelIntersects',outFields:fields.join(','),orderByFields:workZone?'OBJECTID ASC':'OBJECT_ID ASC',resultOffset:String(offset),resultRecordCount:String(pageSize),callback});
   script.src=source+layer+'/query?'+params;script.referrerPolicy='no-referrer';document.head.append(script);
  }
  page();

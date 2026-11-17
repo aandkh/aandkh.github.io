@@ -31,3 +31,5 @@ Filters are `all`, `crashes`, `closures`, `other`. Closed crashes match both rel
 Traffic map badges stay as 40-pixel icons below zoom 14, with a small count for grouped reports. At zoom 14 and closer, the bubbles show the road, direction and reported impact. Tooltips and accessible labels retain the full report at every zoom. Source dots and leader lines continue to identify the actual reported locations; selecting a report isolates its exact location.
 
 Run `node --test scripts/traffic-ui-test.mjs` for source-status, timestamp, exact selection, query, filter, ordering and safe-text regression checks. Browser layout is reviewed by the parent integration task in the managed preview.
+
+Construction reports are excluded from traffic map icons, source dots and grouped counts unless the Road closures and construction layer is selected. This includes construction-related closures from MoDOT and IDOT. Crashes and other unplanned incidents remain eligible. Full source records stay available for explicit report selection.

@@ -1,6 +1,6 @@
 import {createSpotSourceCache} from './spot-source-cache.js';
-import {queryTrafficLayer,trafficRecord} from './traffic-incidents.js?v=20261117-traffic-repair';
-import {trafficFeature} from './traffic-details.js?v=20261117-traffic-suite';
+import {queryTrafficLayer,trafficRecord} from './traffic-incidents.js?v=20261117-construction-layer';
+import {trafficFeature} from './traffic-details.js?v=20261117-construction-layer';
 import {loadIllinoisTraffic} from './illinois-traffic.js?v=20261117-traffic-suite';
 
 // Successive flags share bounded raw reports. Moving a flag cancels only that

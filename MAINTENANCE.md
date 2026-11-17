@@ -33,6 +33,7 @@ when unknown and distinguish date-only events from exact showtimes.
 
 - `TRAFFIC-PERFORMANCE.md`: regional flow bounds, request queue and visible source health.
 - `TRAFFIC-INCIDENTS.md`, `TRAFFIC-DETAILS.md`, `TRAFFIC-UI.md`: official incidents, exact selections and road-speed key.
+- `ROADWORKS-SOURCE.md`: optional Missouri construction segments, calendar dates and source-check freshness.
 - `ILLINOIS-TRAFFIC.md`: IDOT closures, real affected geometry, planned work and source limits.
 
 - `EVENTS-MAINTENANCE.md`: concerts, comedy, local independent movies and sports.

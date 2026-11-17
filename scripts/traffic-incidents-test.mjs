@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {cleanTrafficResponse,queryTrafficLayer,trafficRecord,trafficSelectionId,trafficMatchesFilter,trafficBadgeGroups,trafficBadgePresentation,createTrafficBadgeElement,TRAFFIC_DETAIL_ZOOM,createTrafficFeed} from '../traffic-incidents.js';
+import {cleanTrafficResponse,queryTrafficLayer,trafficRecord,trafficSelectionId,trafficMatchesFilter,isTrafficConstruction,trafficBadgeGroups,trafficBadgePresentation,createTrafficBadgeElement,TRAFFIC_DETAIL_ZOOM,createTrafficFeed} from '../traffic-incidents.js';
 import {layoutOverviewBadges} from '../place-clusters.js';
 import {badgeRectangle,rectanglesOverlap} from '../map-badge-layout.js';
 const BASE=1800000000000;
@@ -114,4 +114,9 @@ test('cancelled source generations cannot overwrite a resumed feed',async()=>{
  const c=clock(),requests=[],feed=createTrafficFeed({...c,query:(layer,signal)=>new Promise(resolve=>requests.push({layer,signal,resolve}))});
  const old=feed.refresh();feed.cancel();assert.ok(requests.every(r=>r.signal.aborted));assert.equal(c.timers,0);const resumed=feed.refresh();assert.equal(requests.length,6);
  requests.slice(3).forEach((r,i)=>r.resolve({features:i===0?[raw(2)]:[]}));await resumed;requests.slice(0,3).forEach(r=>r.resolve({features:[raw(1)]}));await old;assert.deepEqual(feed.snapshot().records.map(r=>r.id),['2']);feed.destroy();assert.equal(c.timers,0);
+});
+
+test('construction map gate recognizes both sources without hiding crashes or other closures',()=>{
+ for(const r of [{construction:true},{sourceCategory:'construction'},{title:'Road Work',closed:true},{title:'Bridge Construction',kind:'closure'},{title:'Utility Work'},{title:'Road Maintenance'}])assert.equal(isTrafficConstruction(r),true);
+ for(const r of [{title:'Vehicle Crash',crash:true,construction:true},{title:'Road Closed',kind:'closure'},{title:'Flooding'},{title:'Debris on road'}])assert.equal(isTrafficConstruction(r),false);
 });

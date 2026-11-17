@@ -1,46 +1,47 @@
 import {getMapBadgeLayout,badgeRectangle,badgeLeaderSegments} from './map-badge-layout.js?v=20261117-weather-suite';
 import {layoutOverviewBadges} from './place-clusters.js?v=20261117-weather-suite';
-import {normalizeModotTraffic,reportedTrafficDelay,trafficGeometry,compareTrafficRoads} from './traffic-details.js?v=20261117-traffic-suite';
-import {trafficIncidentIcon,TRAFFIC_INCIDENT_COLORS,cleanTrafficFilter} from './traffic-ui.js?v=20261117-traffic-repair';
+import {normalizeModotTraffic,reportedTrafficDelay,trafficGeometry,compareTrafficRoads} from './traffic-details.js?v=20261117-construction-layer';
+import {trafficIncidentIcon,TRAFFIC_INCIDENT_COLORS,cleanTrafficFilter} from './traffic-ui.js?v=20261117-construction-layer';
 // Official MoDOT active traffic impacts. Incident duration is NOT driving delay.
-const TRAFFIC_LAYERS=new Set([0,5,9]),TRAFFIC_LINE_LAYERS=new Set([13,18,22]);
+const TRAFFIC_LAYERS=new Set([0,5,9]),TRAFFIC_LINE_LAYERS=new Set([13,18,22]),WORK_ZONE_LAYERS=new Set([15,20,23,37]);
 const TRAFFIC_STRINGS={DATA_ID:100,ROUTE:240,TRAVELWAY_NAME:240,DESIGNATION:8,DIRECTION:16,COUNTY_NAME:80,BEGIN_DESCRIPTION:300,END_DESCRIPTION:300,TYPE_CODE:120,EXT_COMMENT:8000,LEVEL_OF_IMPACT_CODE:60,STATUS_CODE:30};
+const WORK_ZONE_STRINGS={ID:100,COUNTY_NAME:80,DESIGNATION:8,TRAVELWAY_NAME:240,DIRECTION:16,STATUS_DATE:40,START_DATE:40,END_DATE:40,START_TIME:40,END_TIME:40,WORK_TYPE:240,NUMBER_LANES_CLOSED:40,STATUS:30,BEG_REF_PT:500,END_REF_PT:500,LEVEL_OF_IMPACT:60,ACTIVATION_DATE:40,DEACTIVATION_DATE:40,LAST_CHANGED_DATE:40};
 const TRAFFIC_DATES=['START_DATE','END_DATE','DEACTIVATION_DATE','LAST_CHANGED_DATE','STATUS_DATE'];
 export const delayLabel=reportedTrafficDelay;
 export function trafficRecord(feature,now=Date.now(),receivedAt=null){return normalizeModotTraffic(feature,{now,receivedAt});}
 // JSONP must never execute with access to the application's DOM or saved maps.
 // The opaque-origin sandbox has no same-origin, top-navigation or popup access.
-export function cleanTrafficResponse(value,{line=false,dataId}={}){
- if(!value||typeof value!=='object'||value.error||value.exceededTransferLimit===true||!Array.isArray(value.features)||value.features.length>(line?200:2000))throw Error('Traffic incident source unavailable');
+export function cleanTrafficResponse(value,{line=false,dataId,workZone=false}={}){
+ if(!value||typeof value!=='object'||value.error||value.exceededTransferLimit===true||!Array.isArray(value.features)||value.features.length>(workZone?1000:line?200:2000))throw Error('Traffic incident source unavailable');
  const features=[];let vertices=0;
  for(const feature of value.features){
   const p=feature?.attributes,g=feature?.geometry;
   if(!p||typeof p!=='object'||!g)continue;
   const shape=trafficGeometry(g);if(!shape||(line?!shape.type.includes('LineString'):shape.type!=='Point'))continue;
   const attributes={};
-  for(const [key,limit]of Object.entries(TRAFFIC_STRINGS))if(typeof p[key]==='string')attributes[key]=p[key].slice(0,limit);else if(key==='DATA_ID'&&Number.isSafeInteger(p[key]))attributes[key]=String(p[key]);
-  for(const key of TRAFFIC_DATES)if(Number.isFinite(p[key])&&p[key]>=0&&p[key]<=8640000000000000)attributes[key]=p[key];
-  if(!attributes.DATA_ID)continue;
-  if(line){if(attributes.DATA_ID!==String(Number(dataId)))throw Error('Traffic incident ID mismatch');const paths=shape.type==='LineString'?[shape.coordinates]:shape.coordinates;vertices+=paths.reduce((n,path)=>n+path.length,0);if(vertices>20000)throw Error('Traffic geometry too large');features.push({attributes,geometry:{paths}});}
+  for(const [key,limit]of Object.entries(workZone?WORK_ZONE_STRINGS:TRAFFIC_STRINGS))if(typeof p[key]==='string')attributes[key]=p[key].slice(0,limit);else if(key===(workZone?'ID':'DATA_ID')&&Number.isSafeInteger(p[key]))attributes[key]=String(p[key]);
+  if(!workZone)for(const key of TRAFFIC_DATES)if(Number.isFinite(p[key])&&p[key]>=0&&p[key]<=8640000000000000)attributes[key]=p[key];
+  if(!attributes[workZone?'ID':'DATA_ID'])continue;
+  if(line){if(!workZone&&attributes.DATA_ID!==String(Number(dataId)))throw Error('Traffic incident ID mismatch');const paths=shape.type==='LineString'?[shape.coordinates]:shape.coordinates;vertices+=paths.reduce((n,path)=>n+path.length,0);if(vertices>20000)throw Error('Traffic geometry too large');features.push({attributes,geometry:{paths}});}
   else features.push({attributes,geometry:{x:shape.coordinates[0],y:shape.coordinates[1]}});
  }
  return {features};
 }
 export function queryTrafficLayer(layer,signal,{dataId}={}){return new Promise((resolve,reject)=>{
- const line=TRAFFIC_LINE_LAYERS.has(layer);
+ const workZone=WORK_ZONE_LAYERS.has(layer),detail=TRAFFIC_LINE_LAYERS.has(layer),line=detail||workZone;
  if(!TRAFFIC_LAYERS.has(layer)&&!line){reject(new TypeError('Invalid traffic layer'));return;}
- if(line&&(!/^\d{1,16}$/.test(String(dataId??''))||!Number.isSafeInteger(Number(dataId)))||!line&&dataId!==undefined){reject(new TypeError('Invalid traffic incident ID'));return;}
+ if(detail&&(!/^\d{1,16}$/.test(String(dataId??''))||!Number.isSafeInteger(Number(dataId)))||!detail&&dataId!==undefined){reject(new TypeError('Invalid traffic incident ID'));return;}
  if(signal?.aborted){reject(new DOMException('Aborted','AbortError'));return;}
  const frame=document.createElement('iframe'),token=crypto.randomUUID();let done=false;
  frame.hidden=true;frame.title='Traffic data';frame.setAttribute('aria-hidden','true');frame.setAttribute('sandbox','allow-scripts');frame.referrerPolicy='no-referrer';
- const url=new URL('./traffic-bridge.html?v=20261117-traffic-suite',import.meta.url);url.searchParams.set('layer',String(layer));url.searchParams.set('token',token);url.searchParams.set('parentOrigin',window.location.origin);if(line)url.searchParams.set('dataId',String(Number(dataId)));frame.src=url.href;
+ const url=new URL('./traffic-bridge.html?v=20261117-construction-layer',import.meta.url);url.searchParams.set('layer',String(layer));url.searchParams.set('token',token);url.searchParams.set('parentOrigin',window.location.origin);if(detail)url.searchParams.set('dataId',String(Number(dataId)));frame.src=url.href;
  const clean=()=>{clearTimeout(timeout);window.removeEventListener('message',receive);signal?.removeEventListener('abort',abort);frame.remove();};
  const finish=(error,data)=>{if(done)return;done=true;clean();error?reject(error):resolve(data);};
  const abort=()=>finish(new DOMException('Aborted','AbortError'));
  const receive=event=>{
   if(event.source!==frame.contentWindow||event.origin!=='null'||event.data?.type!=='andymap-traffic'||event.data?.token!==token)return;
   if(event.data.ok!==true){finish(Error('Traffic incident source unavailable'));return;}
-  try{finish(null,cleanTrafficResponse(event.data.data,{line,dataId}));}catch(error){finish(error);}
+  try{finish(null,cleanTrafficResponse(event.data.data,{line,dataId,workZone}));}catch(error){finish(error);}
  };
  const timeout=setTimeout(()=>finish(Error('Traffic incident source is slow')),22000);
  frame.onerror=()=>finish(Error('Traffic incident source unavailable'));
@@ -50,6 +51,12 @@ export const trafficSelectionId=record=>record.selectionId||('modot:'+record.id)
 export function trafficMatchesFilter(record,filter='all'){
  const crash=record.crash===true||record.kind==='crash',closed=!record.planned&&record.status!=='planned'&&(record.closed===true||record.kind==='closure');
  return filter==='crashes'?crash:filter==='closures'?closed:filter==='other'?!crash&&!closed:true;
+}
+// Construction belongs to the optional road-work layer, including work that
+// closes a road. A crash near a work zone remains a live traffic incident.
+export function isTrafficConstruction(record){
+ if(record.crash===true||record.kind==='crash')return false;
+ return record.construction===true||record.sourceCategory==='construction'||/\b(?:(?:re)?construction|road[ -]?works?|work[ -]?zone|maintenance|resurfac(?:ing|e)|paving|bridge (?:work|repair)|utility work)\b/i.test(record.title||'');
 }
 export function trafficBadgeGroups(records,project,{zoom=10}={}){
  const groups=[],threshold=zoom>=14?[6,6]:zoom>=12?[32,18]:[68,30];
@@ -120,11 +127,11 @@ export function createTrafficFeed({query=queryTrafficLayer,additionalSources=[],
  function cancel(){generation++;paused=true;controller?.abort();controller=null;work=null;for(const state of states.values())state.pending=false;cancelSchedule(expiryTimer);expiryTimer=null;}
  return{refresh,snapshot,cancel,destroy:cancel};
 }
-export function createTrafficIncidents(map,{onSelect=()=>{},onStatus=()=>{},onUpdate=()=>{},getSelected=()=>null,query=queryTrafficLayer,additionalSources=[],now=Date.now}={}){
+export function createTrafficIncidents(map,{onSelect=()=>{},onStatus=()=>{},onUpdate=()=>{},getSelected=()=>null,showConstruction=()=>false,showIncidents=()=>true,query=queryTrafficLayer,additionalSources=[],now=Date.now}={}){
  const group=L.layerGroup(),layout=getMapBadgeLayout(map),geometryCache=new Map();let active=false,records=[],timer,lastStatus='',filter='all',visibleCount=0;
  for(const[name,z]of[['traffic-incident-anchors',615],['traffic-incident-badges',620]]){if(!map.getPane(name))map.createPane(name);map.getPane(name).style.zIndex=String(z);}
  function draw(){group.clearLayers();if(!active){visibleCount=0;layout.publish('traffic',[]);return;}
-  const size=map.getSize(),controls=layout.obstacles('traffic'),current=records.filter(r=>trafficMatchesFilter(r,filter)&&trafficSelectionId(r)!==getSelected()&&map.getBounds().contains([r.lat,r.lng]));visibleCount=current.length;
+  const size=map.getSize(),controls=layout.obstacles('traffic'),current=records.filter(r=>(isTrafficConstruction(r)?showConstruction():showIncidents()&&trafficMatchesFilter(r,filter))&&trafficSelectionId(r)!==getSelected()&&map.getBounds().contains([r.lat,r.lng]));visibleCount=current.length;
   const anchorBoxes=current.map(r=>{const p=map.latLngToContainerPoint([r.lat,r.lng]);return{x:p.x-5,y:p.y-5,w:10,h:10};}),obstacles=[...controls,...anchorBoxes],zoom=map.getZoom(),groups=trafficBadgeGroups(current,p=>map.latLngToContainerPoint(p),{zoom}).map(g=>({...g,priority:trafficBadgePresentation(g.cluster.features,{zoom}).priority,anchor:[g.anchor[0],g.anchor[1]-36]}));
   const placed=layoutOverviewBadges(groups,{width:size.x,height:size.y,obstacles,measure:(g,compact)=>trafficBadgePresentation(g.cluster.features,{zoom,compact})}).filter(b=>b.clearance),boxes=placed.map(badgeRectangle);layout.publish('traffic',[...boxes,...anchorBoxes]);
   // Every dot is a source coordinate. Group labels never replace these dots
