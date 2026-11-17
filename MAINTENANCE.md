@@ -31,6 +31,10 @@ when unknown and distinguish date-only events from exact showtimes.
 
 ## Specialist guides
 
+- `TRAFFIC-PERFORMANCE.md`: flow queue, source health and the external API configuration issue.
+- `TRAFFIC-INCIDENTS.md`, `TRAFFIC-DETAILS.md`, `TRAFFIC-UI.md`: official incidents, exact selections and road-speed key.
+- `ILLINOIS-TRAFFIC.md`: IDOT closures, real affected geometry, planned work and source limits.
+
 - `EVENTS-MAINTENANCE.md`: concerts, comedy, local independent movies and sports.
 - `INCIDENT-MAINTENANCE.md`: City + County crime/crash archive and public locations.
 - `LOCAL-DISCOVERY-MAINTENANCE.md`: food trucks, local food and new businesses.
@@ -108,7 +112,7 @@ point location for a warning area. Radar observations and forecasts have separat
 Validate weather changes with weather-clouds-test, weather-lightning-test,
 weather-alerts-test, storm-motion-test, observed-radar-test, weather-outlook-test,
 weather-integration-test, radar-metadata-test and weather-share-state-test in scripts/ (Node .mjs),
-plus full-view-app-test, full-view-state-test and the required checks above.
+plus full-view-app-test, share-view-state-test and the required checks above.
 Review real clear-sky feeds and isolated, clearly marked warning fixtures; never
 ship synthetic active warnings. Keep all current overlays and source timestamps
 independent so a slow or failed feed cannot block the others.

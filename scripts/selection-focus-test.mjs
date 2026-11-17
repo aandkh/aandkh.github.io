@@ -4,6 +4,8 @@ import vm from 'node:vm';
 import {selectionAnchor,selectionFeatureId} from '../selection-focus.js';
 import {separateSelectedPlace} from '../place-clusters.js';
 import {pointInGeometry} from '../layer-insights.js';
+import {trafficFeature} from '../traffic-details.js';
+import {loadIllinoisTraffic} from '../illinois-traffic.js';
 
 const point={type:'Point',coordinates:[-90.3,38.6]},feature={type:'Feature',geometry:point,properties:{title:'An exact place'}};
 assert.deepEqual(selectionAnchor(point,{lat:38.61,lng:-90.31}),[38.6,-90.3],'a displaced label never replaces the original point');
@@ -26,11 +28,12 @@ const unnamedNeighbor={...anonymous,properties:{title:'A different place'}};asse
 
 const app=fs.readFileSync(new URL('../app.js',import.meta.url),'utf8'),calls=[],map={};let callback;
 const traffic=app.slice(app.indexOf('const trafficIncidents=createTrafficIncidents('),app.indexOf('const skyCloudMap='));
-vm.runInNewContext(traffic,{map,focus:{layer:'traffic',id:'modot:123'},trafficNote:{},createTrafficIncidents:(m,options)=>{callback=options;return{};},showFeature:(id,f)=>calls.push(['feature',id,f]),showMixedCluster:group=>calls.push(['group',group]),positionForDetails:(...args)=>calls.push(['position',...args])});
+vm.runInNewContext(traffic,{map,trafficFeature,loadIllinoisTraffic,focus:{layer:'traffic',id:'modot:123'},trafficNote:{},createTrafficIncidents:(m,options)=>{callback=options;return{};},showFeature:(id,f)=>calls.push(['feature',id,f]),showMixedCluster:group=>calls.push(['group',group]),positionForDetails:(...args)=>calls.push(['position',...args])});
 map.getMaxZoom=()=>18;map.getZoom=()=>11;
-const record={id:'123',title:'Crash',lat:38.6,lng:-90.3,road:'I-64',description:'Lane closure',updated:Date.now()};
+const record={id:'123',selectionId:'modot:123',source:'MoDOT',title:'Crash',lat:38.6,lng:-90.3,road:'I-64',description:'Lane closure',updated:Date.now()};
+assert.equal(callback.additionalSources.length,1);assert.equal(callback.additionalSources[0].source,'IDOT');assert.equal(callback.additionalSources[0].load,loadIllinoisTraffic,'production traffic controller includes the official Illinois loader');
 assert.equal(callback.getSelected(),'modot:123');callback.onSelect(record);assert.equal(calls[0][0],'feature');assert.equal(calls[0][1],'traffic');assert.deepEqual([...calls[0][2].geometry.coordinates],[-90.3,38.6]);assert.equal(calls[0][2].properties.id,'modot:123');
-callback.onSelect({...record,members:[record,{...record,id:'124'}],clusterCenter:[38.6,-90.3]});assert.equal(calls[1][0],'group');assert.deepEqual(calls[1][1].features.map(f=>f.properties.id),['modot:123','modot:124'],'grouped incidents expose individually selectable records');
+callback.onSelect({...record,members:[record,{...record,id:'124',selectionId:'modot:124'}],clusterCenter:[38.6,-90.3]});assert.equal(calls[1][0],'group');assert.deepEqual(calls[1][1].features.map(f=>f.properties.id),['modot:123','modot:124'],'grouped incidents expose individually selectable records');
 
 let routeHighlight=null,fits=0;const layer={addTo(){return this;},getBounds(){return{isValid:()=>true};}};
 const highlight=app.slice(app.indexOf('function highlightRoute('),app.indexOf('function joyrideControls('));

@@ -1,7 +1,7 @@
 import {normalizeSpotRadius} from './spot-radius.js?v=20261117-close-selection';
 // Small, deterministic state validation shared by presets and map links.
 // No fetches, DOM access, or date-dependent defaults belong in this module.
-import {BY_ID,LAYERS} from './catalog.js?v=20261117-weather-suite';
+import {BY_ID,LAYERS} from './catalog.js?v=20261117-traffic-suite';
 const CRIME_TYPES=['homicide','rape','robbery','assault','burglary','theft','vehicle','arson'];
 const CYCLING_SORTS=['distance','short','long','terrain-low','terrain-high','easy','hard','air'];
 const JOYRIDE_SORTS=['distance','short','long','hills','climbing','grade','winding','straight','time'];
@@ -31,13 +31,14 @@ function weatherTarget(value){const v=record(value);if(!coordinates(v))return nu
 // Existing links enable the new weather context by default. Only explicit
 // booleans override it; strings, inherited fields and unknown keys are ignored.
 export function cleanWeatherLayers(value){const v=record(value);return Object.fromEntries(['clouds','lightning','motion'].map(key=>[key,has(v,key)&&typeof v[key]==='boolean'?v[key]:true]));}
+export function cleanTrafficFilter(value){return choice(value,['all','crashes','closures','other'],'all');}
 function skyState(value){const v=record(value),heading=number(v.heading,-360000,360000,180),out={heading:((heading%360)+360)%360,mode:choice(v.mode,['horizon','all'],'horizon'),usingLocation:v.usingLocation===true,search:text(v.search,160),category:choice(v.category,['all','star','planet','constellation'],'all'),selected:text(v.selected,100,null)};if(out.selected&&!/^(?:body|star|constellation):[A-Za-z0-9 _-]+$/.test(out.selected))out.selected=null;if(coordinates(v,false)){out.lat=v.lat;out.lng=v.lng;}else out.usingLocation=false;return out;}
 export function cleanBirdingView(value){if(value===null||value===undefined)return null;const v=record(value),out={d1:date(v.d1),d2:date(v.d2),taxonId:integer(v.taxonId,1,Number.MAX_SAFE_INTEGER,3),view:choice(v.view,['months','seasons','first'],'months')};if(out.d1&&out.d2&&out.d1>out.d2){out.d1='';out.d2='';}if(coordinates(v))Object.assign(out,{lat:v.lat,lng:v.lng,radius:number(v.radius,.5,25,5)});const bounds=regionBounds(v.bounds);if(bounds)out.bounds=bounds;return out;}
 export function cleanExploreState(value){
  const v=record(value),prefs=record(v.weatherInsightPreferences),eventDateRanges={};
  for(const [id,raw] of Object.entries(record(v.eventDateRanges))){const range=dateRange(raw);if(layer(id)&&range)eventDateRanges[id]=range;}
  let minF=number(prefs.minF,32,90,55),maxF=number(prefs.maxF,32,90,78);if(minF>maxF){minF=55;maxF=78;}
- return {todayAdded:list(v.todayAdded,Object.keys(BY_ID)),crimeTypes:list(v.crimeTypes,CRIME_TYPES,['homicide','rape','robbery','assault']),crimeSort:choice(v.crimeSort,['low','high','count'],'low'),incidentFilters:incidentState(v.incidentFilters),cyclingSort:choice(v.cyclingSort,CYCLING_SORTS,'distance'),joyrideSort:choice(v.joyrideSort,JOYRIDE_SORTS,'distance'),parkSort:choice(v.parkSort,PARK_SORTS,'distance'),parkFilters:list(v.parkFilters,PARK_FILTERS),eventDateRanges,weatherLayers:cleanWeatherLayers(v.weatherLayers),weatherTarget:weatherTarget(v.weatherTarget),forecastSelectedTime:time(v.forecastSelectedTime),weatherInsightPreferences:{comfort:choice(prefs.comfort,['cool','mild','warm'],'mild'),minF,maxF},skySelectedBody:choice(v.skySelectedBody,BODIES,null),skyNowState:skyState(v.skyNowState)};
+ return {todayAdded:list(v.todayAdded,Object.keys(BY_ID)),crimeTypes:list(v.crimeTypes,CRIME_TYPES,['homicide','rape','robbery','assault']),crimeSort:choice(v.crimeSort,['low','high','count'],'low'),incidentFilters:incidentState(v.incidentFilters),cyclingSort:choice(v.cyclingSort,CYCLING_SORTS,'distance'),joyrideSort:choice(v.joyrideSort,JOYRIDE_SORTS,'distance'),parkSort:choice(v.parkSort,PARK_SORTS,'distance'),parkFilters:list(v.parkFilters,PARK_FILTERS),eventDateRanges,weatherLayers:cleanWeatherLayers(v.weatherLayers),trafficFilter:cleanTrafficFilter(has(v,'trafficFilter')?v.trafficFilter:undefined),weatherTarget:weatherTarget(v.weatherTarget),forecastSelectedTime:time(v.forecastSelectedTime),weatherInsightPreferences:{comfort:choice(prefs.comfort,['cool','mild','warm'],'mild'),minF,maxF},skySelectedBody:choice(v.skySelectedBody,BODIES,null),skyNowState:skyState(v.skyNowState)};
 }
 function temporalOverlay(value){const v=record(value),ms=time(v.time);return {active:v.active===true,time:ms===null?null:new Date(ms).toISOString()};}
 export function cleanViewState(value,{legacyFocus=false}={}){

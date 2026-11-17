@@ -1,0 +1,76 @@
+// Public IDOT construction/closure reports. These are scheduled road impacts,
+// not a live crash feed, speed measurements, or estimated driving delay.
+export const ILLINOIS_TRAFFIC_SOURCE='https://www.gettingaroundillinois.com/RoadConstruction/index.html';
+export const ILLINOIS_TRAFFIC_REGION=Object.freeze({west:-91.2,south:38.1,east:-89.4,north:39.2});
+const BASE='https://services2.arcgis.com/aIrBD8yn1TDTEXoz/arcgis/rest/services/',DAY=86400000,TTL=180000,MAX_PAGE=200,MAX_ROWS=1000,MAX_BYTES=1048576;
+const sources=Object.freeze({
+ closures:{name:'Illinois road closures',path:'ClosureIncidents/FeatureServer/0',fields:'OBJECTID,ID,GlobalID,ConstructionType,ClosureType,DetourRoute,EndDate,Location,StartDate,NearTown,County,SubmissionID,St_Name,Direction'},
+ extents:{name:'Illinois closure segments',path:'ClosureIncidentExtents/FeatureServer/0',fields:'OBJECTID,ID,ConstructionType,DetourRoute,EndDate,Location,StartDate,NearTown,Route1,Route2,Route3,Route4,Route1Direction,Route2Direction,Route3Direction,SuggestionToMotorist,TrafficAlert,WorkTimes1,WorkTimes2,County,SubmissionID,St_Name'},
+ construction:{name:'Illinois road construction',path:'Road_Construction_Public/FeatureServer/2',fields:'OBJECTID,StartDate,EndDate,Comments,Location,SubmissionID,GlobalID,IDOT_GlobalID'}
+});
+const finite=value=>typeof value==='number'&&Number.isFinite(value),text=(value,max=8000)=>typeof value==='string'?value.trim().slice(0,max):'',stamp=value=>finite(value)&&value>0&&value<8640000000000000?value:null,iso=value=>value===null?null:new Date(value).toISOString();
+const inside=p=>p[0]>=ILLINOIS_TRAFFIC_REGION.west&&p[0]<=ILLINOIS_TRAFFIC_REGION.east&&p[1]>=ILLINOIS_TRAFFIC_REGION.south&&p[1]<=ILLINOIS_TRAFFIC_REGION.north;
+const validPoint=p=>Array.isArray(p)&&p.length>=2&&finite(p[0])&&finite(p[1])&&Math.abs(p[0])<=180&&Math.abs(p[1])<=90;
+function crossingSpan(a,b){
+ const r=ILLINOIS_TRAFFIC_REGION,dx=b[0]-a[0],dy=b[1]-a[1];let lo=0,hi=1;
+ for(const[p,q]of [[-dx,a[0]-r.west],[dx,r.east-a[0]],[-dy,a[1]-r.south],[dy,r.north-a[1]]]){if(p===0){if(q<0)return null;}else{const t=q/p;if(p<0)lo=Math.max(lo,t);else hi=Math.min(hi,t);if(lo>hi)return null;}}return[lo,hi];
+}
+export function illinoisTrafficGeometry(value){
+ if(!value||typeof value!=='object'||value.spatialReference?.wkid&&value.spatialReference.wkid!==4326)return null;
+ if(finite(value.x)&&finite(value.y))return inside([value.x,value.y])?{type:'Point',coordinates:[value.x,value.y]}:null;
+ const paths=value.paths;if(!Array.isArray(paths)||!paths.length||paths.length>64||paths.some(path=>!Array.isArray(path)||path.length<2)||paths.reduce((count,path)=>count+path.length,0)>20000||paths.some(path=>path.some(p=>!validPoint(p))))return null;
+ if(!paths.some(path=>path.some((point,i)=>i&&crossingSpan(path[i-1],point))))return null;
+ const clean=paths.map(path=>path.map(point=>point.slice(0,2)));return clean.length===1?{type:'LineString',coordinates:clean[0]}:{type:'MultiLineString',coordinates:clean};
+}
+function anchor(geometry){if(geometry.type==='Point')return geometry.coordinates;const paths=geometry.type==='LineString'?[geometry.coordinates]:geometry.coordinates,points=paths.flatMap(path=>path.filter(inside));if(points.length)return points[Math.floor(points.length/2)];for(const path of paths)for(let i=1;i<path.length;i++){const span=crossingSpan(path[i-1],path[i]);if(span){const t=(span[0]+span[1])/2;return[path[i-1][0]+t*(path[i][0]-path[i-1][0]),path[i-1][1]+t*(path[i][1]-path[i-1][1])];}}return null;}
+const normalized=value=>text(value,300).replace(/\s+/g,' ').toUpperCase(),identity=value=>text(value,120).replace(/[{}]/g,'').toLowerCase();
+function hash(value){let n=2166136261;for(const c of value){n^=c.charCodeAt(0);n=Math.imul(n,16777619);}return(n>>>0).toString(36);}
+const eventKey=p=>normalized(p.Location)+'|'+(stamp(p.StartDate)??'')+'|'+(stamp(p.EndDate)??'');
+const titleCase=value=>value===value.toUpperCase()?value.toLowerCase().replace(/\b[a-z]/g,c=>c.toUpperCase()):value;
+function routeLabel(value){return text(value,300).replace(/\b([IUS])0*(\d+)\b/g,(_,kind,number)=>({I:'I-',U:'US-',S:'IL-'}[kind]+Number(number))).replace(/\bSR-(\d+)\b/g,'IL-$1');}
+const roadPlaceholder=value=>/^(?:0+|N\/?A|UNKNOWN|NONE|NULL|NOT (?:AVAILABLE|PROVIDED|REPORTED)|-+)$/i.test(value);
+function locationRoadLabel(value){return titleCase(routeLabel(value)).replace(/\b(?:Nb|Sb|Eb|Wb)\b/g,direction=>direction.toUpperCase()).replace(/\bIl[- ]?(\d+)\b/g,'IL-$1').replace(/\bUs-(\d+)\b/g,'US-$1');}
+function exactPointDistance(point,geometry){const paths=geometry.type==='LineString'?[geometry.coordinates]:geometry.type==='MultiLineString'?geometry.coordinates:[];const cos=Math.cos(point[1]*Math.PI/180);let best=Infinity;for(const path of paths)for(let i=1;i<path.length;i++){const a=[(path[i-1][0]-point[0])*cos,path[i-1][1]-point[1]],b=[(path[i][0]-point[0])*cos,path[i][1]-point[1]],dx=b[0]-a[0],dy=b[1]-a[1],t=Math.max(0,Math.min(1,-(a[0]*dx+a[1]*dy)/(dx*dx+dy*dy||1)));best=Math.min(best,Math.hypot(a[0]+t*dx,a[1]+t*dy)*111320);}return best;}
+export function illinoisTrafficRecord(feature,{category='closures',now=Date.now(),checkedAt=null}={}){
+ const p=feature?.attributes||{},geometry=illinoisTrafficGeometry(feature?.geometry);if(!geometry||!text(p.Location,500))return null;
+ const start=stamp(p.StartDate),end=stamp(p.EndDate);if(end!==null&&end<=now||start!==null&&start>now+30*DAY||start!==null&&end!==null&&end<start)return null;
+ if(/\b(?:cancelled|canceled|completed|reopened|road open)\b/i.test([p.ConstructionType,p.ClosureType].map(v=>text(v,100)).join(' ')))return null;
+ const planned=start!==null&&start>now,scheduleUnknown=start===null,construction=category==='construction',closure=!construction&&/\b(?:(?:road|ramp|bridge|highway)\s+closed|full(?: road)? closure|all lanes closed)\b/i.test([p.ConstructionType,p.ClosureType].map(v=>text(v,100)).join(' '));
+ const id=identity(p.ID||p.IDOT_GlobalID||p.GlobalID)||'event-'+hash(category+'|'+eventKey(p)+'|'+text(p.SubmissionID,120))+'-'+(Number.isSafeInteger(p.OBJECTID)?p.OBJECTID:hash(JSON.stringify(geometry))),selectionId='idot:'+(construction?'construction:':'closure:')+id;
+ const point=anchor(geometry),roadCandidates=[text(p.St_Name,300),text(p.Route1,100),text(p.Comments,300).split(':')[0]],rawRoad=roadCandidates.find(Boolean)||'',roadName=roadCandidates.map(routeLabel).find(value=>value&&!roadPlaceholder(value))||locationRoadLabel(text(p.Location,300)),direction=text(p.Direction||p.Route1Direction,75),closed=closure&&!planned&&!scheduleUnknown;
+ const rawDescription=[text(p.Location,500),text(p.Comments),text(p.SuggestionToMotorist),text(p.TrafficAlert),text(p.WorkTimes1,500),text(p.WorkTimes2,500),text(p.DetourRoute,1000)?'Detour: '+text(p.DetourRoute,1000):''].filter(Boolean).filter((value,i,array)=>array.indexOf(value)===i).join('\n');
+ const impact=planned?(closure?'Planned closure':'Planned road work'):closure?'Reported closure':construction?'Road work':'Reported road impact';
+ return{id,selectionId,source:'IDOT',sourceURL:ILLINOIS_TRAFFIC_SOURCE,sourceUrl:ILLINOIS_TRAFFIC_SOURCE,sourceCategory:category,lat:point[1],lng:point[0],geometry,geometryKind:geometry.type==='Point'?'point':'segment',locationNote:geometry.type==='Point'?'Official reported location; the full affected road segment is not supplied.':'The highlighted segment is the road geometry published by IDOT.',title:planned?impact:titleCase(text(p.ConstructionType,120))||(construction?'Road construction':'Reported closure'),road:roadName+(direction?' · '+direction:''),roadName,rawRoad,direction,description:rawDescription,rawDescription,kind:closure&&!planned?'closure':'other',closed,crash:false,construction,planned,status:planned?'planned':'reported',scheduleUnknown,impact,delay:null,reportedDelay:null,label:planned?'Planned':closed?'Closed':construction?'Road work':'Reported closure',county:titleCase(text(p.County,80)),town:titleCase(text(p.NearTown,80)),detour:text(p.DetourRoute,1000)||null,startedAt:iso(start),expiresAt:iso(end),startTime:start,endTime:end,updated:null,updatedAt:null,receivedAt:stamp(checkedAt),checkedAt:stamp(checkedAt),sourceUpdatedAt:null,_eventKey:eventKey(p)};
+}
+export function normalizeIllinoisTraffic(results,{now=Date.now()}={}){
+ const pointRows=(results.closures?.features||[]).map(feature=>illinoisTrafficRecord(feature,{now,checkedAt:results.closures.checkedAt})).filter(Boolean),extentRows=(results.extents?.features||[]).map(feature=>illinoisTrafficRecord(feature,{category:'extents',now,checkedAt:results.extents.checkedAt})).filter(Boolean),workRows=(results.construction?.features||[]).map(feature=>illinoisTrafficRecord(feature,{category:'construction',now,checkedAt:results.construction.checkedAt})).filter(Boolean);
+ const used=new Set();
+ for(const point of pointRows){const matches=extentRows.filter(row=>!used.has(row)&&row._eventKey===point._eventKey&&exactPointDistance(point.geometry.coordinates,row.geometry)<=150);if(matches.length!==1)continue;const extent=matches[0];if(pointRows.filter(other=>other._eventKey===point._eventKey&&exactPointDistance(other.geometry.coordinates,extent.geometry)<=150).length!==1)continue;used.add(extent);point.reportedPoint={lat:point.lat,lng:point.lng};point.geometry=extent.geometry;point.geometryKind='segment';point.locationNote=extent.locationNote;point.description=point.rawDescription=[...new Set([point.rawDescription,extent.rawDescription].filter(Boolean))].join('\n');if(!point.direction)point.direction=extent.direction;point.receivedAt=point.checkedAt=Math.min(point.checkedAt??Infinity,extent.checkedAt??Infinity);if(!Number.isFinite(point.checkedAt))point.receivedAt=point.checkedAt=null;}
+ const unique=new Map();for(const record of [...pointRows,...extentRows.filter(row=>!used.has(row)),...workRows]){delete record._eventKey;if(!unique.has(record.selectionId))unique.set(record.selectionId,record);}return[...unique.values()];
+}
+const dateSQL=time=>new Date(time).toISOString().slice(0,19).replace('T',' ');
+export function illinoisTrafficQueryUrl(category,{now=Date.now(),offset=0}={}){
+ const source=sources[category];if(!source||!Number.isInteger(offset)||offset<0||offset>=MAX_ROWS)throw Error('Invalid Illinois traffic query');const r=ILLINOIS_TRAFFIC_REGION;
+ const p=new URLSearchParams({f:'json',where:"Location IS NOT NULL AND (EndDate IS NULL OR EndDate > TIMESTAMP '"+dateSQL(now)+"') AND (StartDate IS NULL OR StartDate <= TIMESTAMP '"+dateSQL(now+30*DAY)+"')",geometry:[r.west,r.south,r.east,r.north].join(','),geometryType:'esriGeometryEnvelope',inSR:'4326',spatialRel:'esriSpatialRelIntersects',outSR:'4326',outFields:source.fields,returnGeometry:'true',orderByFields:'OBJECTID ASC',resultRecordCount:String(MAX_PAGE),resultOffset:String(offset)});return BASE+source.path+'/query?'+p;
+}
+const caches=new WeakMap();
+function cacheFor(fetcher){let cache=caches.get(fetcher);if(!cache){cache=new Map();caches.set(fetcher,cache);}return cache;}
+async function boundedJson(response){
+ if(!response.ok)throw Error('IDOT reports are unavailable.');if(Number(response.headers?.get?.('content-length'))>MAX_BYTES)throw Error('IDOT response exceeded the download limit.');let body='';
+ if(response.body?.getReader){const reader=response.body.getReader(),decoder=new TextDecoder();let bytes=0;try{for(;;){const{done,value}=await reader.read();if(done)break;bytes+=value.byteLength;if(bytes>MAX_BYTES)throw Error('IDOT response exceeded the download limit.');body+=decoder.decode(value,{stream:true});}body+=decoder.decode();}catch(error){await reader.cancel().catch(()=>{});throw error;}finally{reader.releaseLock();}}
+ else{body=await response.text();if(new TextEncoder().encode(body).byteLength>MAX_BYTES)throw Error('IDOT response exceeded the download limit.');}
+ const data=JSON.parse(body);if(data?.error||!Array.isArray(data?.features)||data.features.length>MAX_PAGE||data.spatialReference?.wkid&&data.spatialReference.wkid!==4326)throw Error('IDOT reports are unavailable.');return data;
+}
+async function retrieve(category,{fetcher,signal,now}){
+ const features=[],seen=new Set();for(let offset=0;offset<MAX_ROWS;offset+=MAX_PAGE){const response=await fetcher(illinoisTrafficQueryUrl(category,{now,offset}),{signal,credentials:'omit',referrerPolicy:'no-referrer',redirect:'error'}),data=await boundedJson(response);if(signal.aborted)throw signal.reason;let added=0;for(const feature of data.features){const id=feature?.attributes?.OBJECTID;if(!Number.isSafeInteger(id)||seen.has(id))continue;seen.add(id);features.push(feature);added++;}if(data.exceededTransferLimit!==true)return{features,checkedAt:Date.now()};if(!added)throw Error('IDOT pagination did not advance.');}throw Error('IDOT regional reports exceeded the supported limit.');
+}
+function sharedLayer(category,{fetcher,signal,now,force=false}){
+ if(signal?.aborted)return Promise.reject(signal.reason||new DOMException('Aborted','AbortError'));const cache=cacheFor(fetcher),hit=cache.get(category);if(!force&&hit?.data&&now-hit.data.checkedAt>=0&&now-hit.data.checkedAt<TTL)return Promise.resolve(hit.data);
+ let pending=hit?.pending;if(!pending||pending.controller.signal.aborted){const controller=new AbortController();pending={controller,users:new Set(),settled:false,promise:null};const entry={pending,data:hit?.data};cache.set(category,entry);pending.promise=retrieve(category,{fetcher,signal:AbortSignal.any([controller.signal,AbortSignal.timeout(12000)]),now}).then(data=>{entry.data=data;return data;}).finally(()=>{pending.settled=true;entry.pending=null;});pending.promise.catch(()=>{});}
+ return new Promise((resolve,reject)=>{const user={};pending.users.add(user);const finish=()=>{pending.users.delete(user);signal?.removeEventListener('abort',abort);};const abort=()=>{finish();reject(signal.reason||new DOMException('Aborted','AbortError'));if(!pending.users.size&&!pending.settled)pending.controller.abort();};signal?.addEventListener('abort',abort,{once:true});pending.promise.then(value=>{finish();resolve(value);},error=>{finish();reject(error);});});
+}
+export async function loadIllinoisTraffic({signal,fetcher=fetch,now=Date.now(),force=false}={}){
+ const kinds=Object.keys(sources),settled=await Promise.allSettled(kinds.map(category=>sharedLayer(category,{fetcher,signal,now,force})));if(signal?.aborted)throw signal.reason||new DOMException('Aborted','AbortError');const results={},states=[];
+ settled.forEach((result,i)=>{const id=kinds[i];if(result.status==='fulfilled')results[id]=result.value;states.push({id,source:'IDOT',name:sources[id].name,status:result.status==='fulfilled'?'ready':'unavailable',checkedAt:result.status==='fulfilled'?result.value.checkedAt:null,sourceUpdatedAt:null});});
+ if(!Object.keys(results).length)throw Error('Illinois closure and construction reports are unavailable.');const checkedAt=Math.min(...Object.values(results).map(result=>result.checkedAt));return{records:normalizeIllinoisTraffic(results,{now}),status:Object.keys(results).length===kinds.length?'ready':'partial',checkedAt,receivedAt:checkedAt,sourceUpdatedAt:null,source:'IDOT',sourceURL:ILLINOIS_TRAFFIC_SOURCE,sources:states,coverageNote:'IDOT closure and construction schedules; not a live crash or speed feed. Individual report update times are not supplied.'};
+}

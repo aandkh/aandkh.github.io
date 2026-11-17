@@ -1,0 +1,47 @@
+.traffic-controls{display:grid;gap:7px;margin:8px 0;color:var(--ink)}
+.traffic-control-label{font-size:11px;font-weight:700;color:var(--muted)}
+.traffic-filters{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
+.traffic-filter,.traffic-browse{border:1px solid var(--line);border-radius:7px;background:var(--surface);color:var(--ink);font:inherit;cursor:pointer;min-height:36px;padding:6px;font-size:11px}
+.traffic-filter[aria-pressed=true]{background:var(--ink);color:var(--surface);border-color:var(--ink);font-weight:700}
+.traffic-filter:focus-visible,.traffic-browse:focus-visible,.traffic-result-card:focus-visible{outline:2px solid #4896e8;outline-offset:2px}
+.traffic-browse{justify-self:start;padding-inline:11px;font-weight:700}
+.traffic-key{display:grid;gap:8px;min-width:0;color:var(--ink)}
+.traffic-key-title{font-size:12px}
+.traffic-speed-key{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 10px}
+.traffic-speed-entry{display:flex;align-items:center;gap:6px;font-size:11px;line-height:1.2}
+.traffic-speed-swatch{width:24px;height:5px;flex:0 0 24px;border-radius:2px;box-shadow:0 0 0 1px #0002}
+.traffic-speed-swatch.is-closed{height:6px;border:1px solid #666;background-image:repeating-linear-gradient(90deg,transparent 0 6px,#f2f2f2 6px 10px);box-sizing:border-box}
+.traffic-coverage-note,.traffic-status,.traffic-sources{margin:0;font-size:10px;line-height:1.4;color:var(--muted)}
+.traffic-status--warning{color:#a15b00}
+body[data-map-style=dark] .traffic-status--warning{color:#e8b966}
+.traffic-incident-key{display:flex;flex-wrap:wrap;gap:6px 10px;border-top:1px solid var(--line);padding-top:7px}
+.traffic-incident-key-entry{display:inline-flex;align-items:center;gap:4px;font-size:10px;line-height:1.2}
+.traffic-incident-symbol{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;flex:0 0 24px;border-radius:5px;background:#fff;border:1px solid currentColor;box-sizing:border-box}
+.traffic-incident-symbol svg{display:block;width:20px;height:20px}
+.traffic-sources{display:flex;flex-wrap:wrap;gap:3px 10px}
+.traffic-source{color:inherit;text-underline-offset:2px}
+.traffic-results{display:grid;gap:10px}
+.traffic-results h2{margin:0;font-size:18px}
+.traffic-results .traffic-status,.traffic-results .traffic-coverage-note{font-size:11px}
+.traffic-results .traffic-controls{margin:0}
+.traffic-result-summary{margin:0;color:var(--muted);font-size:12px}
+.traffic-result-list{display:grid;gap:7px}
+.traffic-result-card{display:flex;align-items:flex-start;gap:9px;text-align:left;width:100%;padding:11px;border:1px solid var(--line);border-radius:9px;background:var(--surface);color:var(--ink);font:inherit;cursor:pointer}
+.traffic-result-card:hover{background:var(--surface-raised)}
+.traffic-result-body{display:grid;gap:4px;min-width:0;flex:1}
+.traffic-result-road{font-size:13px;line-height:1.35;overflow-wrap:anywhere}
+.traffic-result-impact{font-size:12px;line-height:1.4}
+.traffic-result-description{font-size:11px;line-height:1.4;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+.traffic-result-time{font-size:10px;line-height:1.4;color:var(--muted)}
+.traffic-result-schedule{font-size:11px;line-height:1.4;font-weight:700;color:var(--muted)}
+.traffic-result-open{font-size:10px;color:var(--muted);padding-top:4px;flex:0 0 auto}
+/* A movable/expanded detail panel has no stable safe offset for this launcher.
+   Keep weather playback in its existing controls while a traffic report is open. */
+.map-shell:has(#detail:not([hidden]) .traffic-incident-details)>.radar-launch{display:none}
+#detail .traffic-incident-details{margin:14px 0;padding:3px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+#detail .traffic-incident-details p{display:grid;grid-template-columns:minmax(84px,32%) minmax(0,1fr);gap:10px;margin:0;padding:7px 0;font-size:12px;line-height:1.5;white-space:normal;color:var(--ink)}
+#detail .traffic-incident-details p+p{border-top:1px solid color-mix(in srgb,var(--line) 65%,transparent)}
+#detail .traffic-incident-details strong{font-size:11px;font-weight:650;color:var(--muted)}
+#detail:has(.traffic-incident-details) .place-description{font-size:13px;line-height:1.6;white-space:pre-line}
+#detail:has(.traffic-incident-details) .place-source-details{margin-top:14px}
+@media(max-width:420px){.traffic-filter,.traffic-browse{min-height:40px}.traffic-result-card{padding:10px 8px}.traffic-result-open{display:none}}

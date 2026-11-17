@@ -4,7 +4,9 @@ import assert from 'node:assert/strict';
 import {cleanState,REGION} from '../core.js';
 import {cleanLayerModes,cleanOverlayOpacity} from '../expansion-options.js';
 import {BY_ID} from '../catalog.js';
-import {cleanWeatherLayers} from '../share-view-state.js';
+import {cleanWeatherLayers,cleanTrafficFilter} from '../share-view-state.js';
+import {trafficFeature} from '../traffic-details.js';
+import {currentTrafficRecord,savedTrafficFeature} from '../traffic-experience.js';
 
 // Run the production capture/apply/rehydration functions, replacing only the
 // browser, map renderer and network edges. This checks integration semantics,
@@ -19,11 +21,12 @@ function harness(){
  const listeners=new Map(),nodes=new Map(),calls=[],classes=new Set();
  const node=id=>{if(!nodes.has(id)){const ownClasses=new Set();nodes.set(id,{hidden:true,value:'',scrollTop:0,dataset:{},checked:false,setAttribute(key,value){this[key]=value;},classList:{contains:key=>ownClasses.has(key),add:(...keys)=>keys.forEach(key=>ownClasses.add(key)),remove:(...keys)=>keys.forEach(key=>ownClasses.delete(key))}});}return nodes.get(id);};
  const document={body:{classList:{contains:x=>classes.has(x),remove:(...xs)=>xs.forEach(x=>classes.delete(x)),toggle:(x,on)=>on?classes.add(x):classes.delete(x)}},querySelectorAll:()=>[],addEventListener:(type,handler)=>listeners.set(type,handler)};
- const context=vm.createContext({assert,document,$:node,console,Date,AbortSignal,REGION,BY_ID,cleanLayerModes,cleanOverlayOpacity,cleanWeatherLayers:value=>cleanWeatherLayers(plain(value)),cleanState:s=>cleanState(plain(s)),requestAnimationFrame:fn=>fn(),calls,Promise});
+ const context=vm.createContext({assert,document,$:node,console,Date,AbortSignal,REGION,BY_ID,cleanLayerModes,cleanOverlayOpacity,cleanTrafficFilter,trafficFeature,currentTrafficRecord,savedTrafficFeature,cleanWeatherLayers:value=>cleanWeatherLayers(plain(value)),cleanState:s=>cleanState(plain(s)),requestAnimationFrame:fn=>fn(),calls,Promise});
  vm.runInContext(`
   const enabled=new Set(),requestedLayers=new Set(),data=new Map(),todayAdded=new Set(),parkFilters=new Set(),eventDateRanges=new Map(),openLayerGroups=new Map(),selectedLayerGroups=new Map(),resultLimits=new Map();
   let todayOnly=false,openNow=false,mapStyle='dark',radarMode='intensity',airMode='pm25',layerModes={},overlayOpacity={},focus=null,imageryDate='2025-10-15',historyView='events',historyCategory='all',historyEra='all',historyYears=null,historySort='oldest',historyAncientWildlife=false,historyFossilGroup='all',wildlifeOptions={},crimeTypes=[],crimeSort='low',cyclingSort='distance',joyrideSort='distance',parkSort='distance',weatherTarget=null,forecastSelectedTime=null,skySelectedBody=null,currentResultsLayer=null,layerFilter='all',featuredOptionsOpen=false,detailExpanded=false,routeHighlight=null;
-  const incidentFilters={},weatherInsightPreferences={},skyNowState={};let viewRestoreRevision=0,viewScrollRestore=null,sharedCluster=[],restoredCamera=false,suspendedPanel=null,birdResultsAnalytics=null,birdDetailAnalytics=null,birdingSharedState=null,weatherPanelOpen=false,skyPanelOpen=false,skyNowController=null,placeLinkRequest=0;const capabilities={};
+  const incidentFilters={},weatherInsightPreferences={},skyNowState={};let trafficFilter='all',trafficState={records:[],status:'idle'},viewRestoreRevision=0,viewScrollRestore=null,sharedCluster=[],restoredCamera=false,suspendedPanel=null,birdResultsAnalytics=null,birdDetailAnalytics=null,birdingSharedState=null,weatherPanelOpen=false,skyPanelOpen=false,skyNowController=null,placeLinkRequest=0;const capabilities={};
+  const trafficIncidents={setFilter(value){trafficFilter=value;calls.push(['traffic-filter',value]);},getState(){return trafficState;},refresh(){calls.push(['traffic-refresh']);return Promise.resolve(trafficState);}};
   const map={center:[38.63,-90.4],zoom:11,setView(c,z){this.center=[...c];this.zoom=z;calls.push(['camera',...c,z]);},getCenter(){return {lat:this.center[0],lng:this.center[1]};},getZoom(){return this.zoom;},invalidateSize(){}};
   const weatherReadings={stopOverview(){calls.push(['stop-weather-overview']);}};
   const futureRadar={active:false,state:{active:false,time:null},getState(){return this.state;},stop(){this.active=false;this.state={active:false,time:null};calls.push(['stop-radar']);},restoreState(s){this.state=s;this.active=s.active;calls.push(['radar',s]);}};
@@ -116,4 +119,23 @@ for(const panel of ['weather','sky']){
 const spot=harness(),spotState={...base,layers:['radar','traffic','haunted'],view:{panel:'spot',spot:{lat:38.631234,lng:-90.291234,radiusMiles:.5}}};
 spot.apply(spotState);assert.equal(spot.state().view.panel,'spot');assert.deepEqual(spot.state().view.spot,spotState.view.spot);assert.deepEqual(spot.state().layers,spotState.layers);assert.deepEqual(spot.state().center,base.center);assert.equal(spot.state().zoom,base.zoom);assert(spot.calls.some(call=>call[0]==='inspect-spot'));
 spot.apply(second);assert.equal(spot.run('spotMode'),false);assert.equal(spot.state().view.spot,null);assert.equal(spot.state().view.panel,'map');assert.deepEqual(spot.state().layers,second.layers);
+// Traffic filtering is independent of the complete source records. Shared
+// reports hydrate by canonical identity, even when a different filter is set.
+const traffic=harness(),trafficFocus={id:'modot:42',layer:'traffic',title:'Saved crash',source:'MoDOT',lat:38.61,lng:-90.39};
+traffic.context.currentTraffic={id:'42',selectionId:'modot:42',source:'MoDOT',lat:38.61,lng:-90.39,title:'Current crash report',kind:'crash',road:'I-64',delay:null,updatedAt:'2026-11-17T14:00:00Z',receivedAt:Date.parse('2026-11-17T15:00:00Z')};
+traffic.run('trafficState={status:"ready",records:[currentTraffic],pending:0,failed:0};');
+traffic.apply({...base,focus:trafficFocus,explore:{trafficFilter:'closures'},view:{panel:'detail'}});await new Promise(resolve=>setImmediate(resolve));
+assert.equal(traffic.state().explore.trafficFilter,'closures');assert.equal(traffic.state().focus.id,'modot:42');
+const currentTrafficDetail=traffic.calls.filter(call=>call[0]==='detail').at(-1);assert.equal(currentTrafficDetail[2].trafficDetail,true);assert.equal(currentTrafficDetail[2].updatedAt,'2026-11-17T14:00:00.000Z');assert.equal(currentTrafficDetail[2].receivedAt,Date.parse('2026-11-17T15:00:00Z'));assert.equal(currentTrafficDetail[2].reportedDelay,null);assert.equal(currentTrafficDetail[5],true,'shared traffic hydration preserves the supplied camera');
+assert(traffic.calls.findIndex(call=>call[0]==='traffic-filter')<traffic.calls.findIndex(call=>call[0]==='layer'&&call[2]),'traffic filter applies before map layers start');
+traffic.apply(second);assert.equal(traffic.state().explore.trafficFilter,'all','old shared maps reset a prior traffic filter');
+for(const [status,expected]of[['ready','not-active'],['partial','unconfirmed'],['unavailable','unconfirmed']]){
+ traffic.context.trafficStatus=status;traffic.run('trafficState={status:trafficStatus,records:[],pending:0,failed:trafficStatus==="ready"?0:1};');
+ traffic.apply({...base,focus:trafficFocus,view:{panel:'detail'}});await new Promise(resolve=>setImmediate(resolve));const fallback=traffic.calls.filter(call=>call[0]==='detail').at(-1);
+ assert.equal(fallback[1],trafficFocus.id);assert.equal(fallback[2]._trafficUnconfirmed,true);assert.equal(fallback[2].trafficCurrentStatus,expected);assert.deepEqual(traffic.state().center,base.center);
+}
+const trafficGroup=harness();let resolveTraffic;trafficGroup.context.pendingTraffic=new Promise(resolve=>resolveTraffic=resolve);trafficGroup.context.groupTraffic={...traffic.context.currentTraffic};
+trafficGroup.run("trafficIncidents.refresh=()=>pendingTraffic.then(()=>{trafficState={status:'ready',records:[groupTraffic]};data.set('traffic',{features:[trafficFeature(groupTraffic)]});});");
+trafficGroup.apply({...base,layers:['traffic'],explore:{trafficFilter:'closures'},view:{panel:'cluster',cluster:[{layer:'traffic',id:'modot:42'}]}});await new Promise(resolve=>setImmediate(resolve));
+assert(!trafficGroup.calls.some(call=>call[0]==='cluster'),'fast raster metadata cannot finish a cluster before official reports arrive');resolveTraffic();await new Promise(resolve=>setImmediate(resolve));assert.deepEqual(plain(trafficGroup.calls.find(call=>call[0]==='cluster')?.[1]),['modot:42'],'shared traffic group restores exact source identity independent of active category filter');
 console.log('PASS: production app capture/restore preserves Blue Jay/date/analytics state, resets second-link defaults, retains focus layers and camera, hydrates exact species, and cancels stale detail/group work, and restores shared spot state without changing its camera.');

@@ -1,7 +1,7 @@
 import {enrichCultureFeature,cultureFeatureDisplayable} from './place-enrichment.js?v=20261115-road-insights';
 import {cleanVehicle} from './vehicles.js?v=20261115-road-insights';
-import {BY_ID} from './catalog.js?v=20261117-weather-suite';
-import {cleanExploreViewState} from './share-view-state.js?v=20261117-weather-suite';
+import {BY_ID} from './catalog.js?v=20261117-traffic-suite';
+import {cleanExploreViewState} from './share-view-state.js?v=20261117-traffic-suite';
 import {safeUrl} from './security.js?v=20261116-security';
 export {safeUrl};
 import {isExcludedChainPlace} from './chain-places.js?v=20261116-speed';

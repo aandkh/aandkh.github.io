@@ -4,6 +4,7 @@ import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 import {loadProgressiveLayer} from '../progressive-layer.js';
 import {referenceLayer as readReference,referenceLayerFile} from '../reference-layers.js';
+import {trafficCollection} from '../traffic-experience.js';
 
 // Exercise the actual shipping orchestration, with controlled network timing.
 // These are behavior checks: source requests, visible commits and cancellation.
@@ -16,14 +17,14 @@ const feature=id=>({type:'Feature',id,geometry:{type:'Point',coordinates:[-90.3,
 const result=(id,features)=>({id,status:'ready',features:features.map(feature),checkedAt:'2026-11-17T01:00:00Z'});
 
 function fixture(){
- const remote=[],local=[],draws=[],removed=[],createdTraffic=[],drawn=new Map(),data=new Map(),requests=new Map(),enabled=new Set(['restaurants','traffic','civic']);
+ const remote=[],local=[],draws=[],removed=[],createdTraffic=[],incidentRefreshes=[],drawn=new Map(),data=new Map(),requests=new Map(),enabled=new Set(['restaurants','traffic','civic']);
  let bounds='-90.5,38.5,-90.2,38.8';
  const fetcher=async path=>{local.push(path);return Response.json(result('restaurants',['published-place']));};
  const context=vm.createContext({Promise,AbortController,AbortSignal,Date,Array,Number,Set,Map,URLSearchParams,
   data,drawn,requests,enabled,layerRefreshAt:new Map(),layerModes:{},radarMode:'intensity',airMode:'pm25',weatherTarget:null,GEOLOGY_MODES:new Set(),EVENT_LAYERS:new Set(),capabilities:{},BY_ID:{traffic:{},restaurants:{},civic:{}},layerSelectable:()=>false,
   map:{getCenter:()=>({lat:38.6,lng:-90.3})},boundsParam:()=>bounds,
   startMeasurement:()=>()=>{},queueLayerUI(){},renderResults(){},renderSky(){},renderWeather(){},skyPanelOpen:false,weatherPanelOpen:false,
-  loadProgressiveLayer,referenceLayerFile,
+  loadProgressiveLayer,referenceLayerFile,trafficCollection,trafficState:{status:'unavailable',records:[]},trafficIncidents:{refresh:options=>{incidentRefreshes.push(options);return Promise.resolve();}},
   referenceLayer:(id,mode,live)=>readReference(id,mode,live,{fetcher}),
   apiFetch(path,options){return new Promise((resolve,reject)=>remote.push({path,options,resolve:value=>resolve(Response.json(value)),reject}));},
   removeDrawing(id){removed.push(id);drawn.delete(id);},
@@ -31,7 +32,7 @@ function fixture(){
   raster(id){assert.equal(id,'traffic');const layer={refreshes:0,refresh(){this.refreshes++;}};createdTraffic.push(layer);drawn.set(id,layer);},
  });
  vm.runInContext(eligibility+production,context);
- return{context,remote,local,draws,removed,createdTraffic,drawn,data,requests,enabled,
+ return{context,remote,local,draws,removed,createdTraffic,incidentRefreshes,drawn,data,requests,enabled,
   load:(id='restaurants',options)=>context.loadLayer(id,options),setBounds:value=>{bounds=value;},
   selectable:id=>vm.runInContext('selectable('+JSON.stringify(id)+')',context)};
 }
@@ -63,11 +64,13 @@ test('Saved reference places become visible before the remote response, then mer
  assert.deepEqual(h.data.get('restaurants').features.map(f=>f.id),['published-place','live-place']);assert.equal(h.data.get('restaurants').features[0].properties.title,'New source title');
 });
 
-test('Configured traffic is available before capabilities and begins drawing before metadata resolves',async()=>{
- const h=fixture();assert(h.selectable('traffic'),'the initial capabilities request is not a gate');h.context.capabilities.traffic=false;assert(!h.selectable('traffic'),'explicit source unavailability is respected');h.context.capabilities={};
+test('Official traffic reports remain available independently of flow capability and imagery begins before metadata resolves',async()=>{
+ const h=fixture();assert(h.selectable('traffic'),'the initial capabilities request is not a gate');h.context.capabilities.traffic=false;assert(h.selectable('traffic'),'a missing flow key cannot disable independent official incident reports');h.context.capabilities={};
+ h.context.trafficState={status:'ready',records:[{id:'42',selectionId:'modot:42',source:'MoDOT',title:'Crash',lat:38.6,lng:-90.3}]};
  const work=h.load('traffic');assert.equal(h.createdTraffic.length,1);const drawing=h.drawn.get('traffic');assert.equal(h.remote.length,1);assert(h.requests.has('traffic'));
- h.remote[0].resolve({id:'traffic',status:'live',raster:true,features:[]});await work;assert.equal(h.drawn.get('traffic'),drawing);assert.equal(h.createdTraffic.length,1);assert.equal(drawing.refreshes,0);
+ h.remote[0].resolve({id:'traffic',status:'live',raster:true,features:[]});await work;assert.equal(h.drawn.get('traffic'),drawing);assert.equal(h.createdTraffic.length,1);assert.equal(drawing.refreshes,0);assert.equal(h.data.get('traffic').features[0].properties.id,'modot:42','late raster metadata keeps independently received reports');
  const refresh=h.load('traffic',{force:true});assert.equal(h.drawn.get('traffic'),drawing);assert.equal(h.createdTraffic.length,1,'refresh does not blank or reconstruct the traffic layer');assert.equal(drawing.refreshes,1,'flow refresh starts before the metadata response');
+ assert.equal(h.incidentRefreshes.length,1);assert.equal(h.incidentRefreshes[0].force,true,'manual refresh updates independent incident sources too');
  h.remote[1].resolve({id:'traffic',status:'live',raster:true,features:[]});await refresh;assert.equal(h.drawn.get('traffic'),drawing);assert.equal(drawing.refreshes,1);assert(!h.removed.includes('traffic'));
 });
 

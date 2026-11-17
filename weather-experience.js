@@ -1,7 +1,7 @@
 import {createWeatherClouds,CLOUD_SOURCE} from './weather-clouds.js?v=20261117-weather-suite';
 import {createWeatherLightning} from './weather-lightning.js?v=20261117-weather-suite';
 import {createStormMotion} from './storm-motion.js?v=20261117-weather-suite';
-import {cleanWeatherLayers} from './share-view-state.js?v=20261117-weather-suite';
+import {cleanWeatherLayers} from './share-view-state.js?v=20261117-traffic-suite';
 
 // One visibility decision for every path into observed, forecast and spot views.
 export function currentWeatherVisible(context={}){

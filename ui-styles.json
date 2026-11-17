@@ -28,5 +28,6 @@
   "spot-explorer.css",
   "weather-compact.css",
   "weather-experience.css",
-  "weather-outlook.css"
+  "weather-outlook.css",
+  "traffic-ui.css"
 ]
