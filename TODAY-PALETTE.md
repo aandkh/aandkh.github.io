@@ -1,6 +1,6 @@
 # November 18 temporary palette
 
-`today-palette.js` enables a GTA VI-inspired pink/violet/turquoise menu palette
+`today-palette.js` enables a GTA VI-inspired reference-matched indigo/violet/pink/coral gradient and glow menu palette
 only from November 18, 2026 midnight to November 19 midnight in America/Chicago
 (CST, UTC−06). The exact expiry is `2026-11-19T06:00:00Z`.
 

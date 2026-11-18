@@ -1,16 +1,16 @@
-/* GTA VI-inspired sunset pink, violet and tropical turquoise, November 18 only.
+/* Reference-matched GTA VI-inspired indigo, violet, pink and coral, November 18 only.
    Override tokens, not map/traffic/weather semantics. The normal session palette
    remains intact underneath and returns when today-palette.js removes the flag. */
 html[data-today-palette="vice-sunset"][data-palette-tone="dark"] {
- --palette-surface:#20152f!important;
- --palette-raised:#30213f!important;
- --palette-soft:#432c50!important;
+ --palette-surface:#19182f!important;
+ --palette-raised:#292241!important;
+ --palette-soft:#3d2b50!important;
  --palette-ink:#fff3ed!important;
  --palette-muted:#dec2dc!important;
  --palette-line:#a882ad!important;
  --palette-accent:#ff9fc8!important;
  --palette-on-accent:#34162e!important;
- --palette-link:#83e2dc!important;
+ --palette-link:#c8bdff!important;
  --palette-focus:#ffd094!important;
 }
 html[data-today-palette="vice-sunset"][data-palette-tone="light"] {
@@ -22,10 +22,49 @@ html[data-today-palette="vice-sunset"][data-palette-tone="light"] {
  --palette-line:#bc8bac!important;
  --palette-accent:#a32971!important;
  --palette-on-accent:#ffffff!important;
- --palette-link:#006b70!important;
+ --palette-link:#6536a0!important;
  --palette-focus:#a32971!important;
 }
+/* Static glow only: no pulsing or additional motion. Strong fills retain contrast. */
+html[data-today-palette="vice-sunset"] body {
+ --vice-gradient:linear-gradient(115deg,#375dd6 0%,#8645c6 35%,#ee3ca9 68%,#ff9568 100%);
+ --vice-glow:0 0 0 1px #df79e175,0 0 14px #e950b83d,0 0 28px #6556e82b;
+}
 html[data-today-palette="vice-sunset"] body header {
- border-bottom-color:var(--palette-accent);
- box-shadow:0 2px 0 var(--palette-link);
+ background:linear-gradient(110deg,#19182f,#392655 55%,#5c2c56)!important;
+ border-bottom:2px solid #dd6bc1;
+ box-shadow:0 2px 13px #f254ba66,0 4px 24px #7062df40;
+}
+html[data-today-palette="vice-sunset"] body header .brand {
+ color:#fff3fa;text-shadow:0 0 13px #c68aff66;
+}
+html[data-today-palette="vice-sunset"] body #sidebar {
+ background:linear-gradient(165deg,#19182f 0%,#29203e 65%,#422541 100%)!important;
+ border-color:#9c67bf;
+}
+html[data-today-palette="vice-sunset"] body :is(.map-toolbar,#map-search,#quick-categories button,.tabs,.floating,dialog) {
+ box-shadow:var(--vice-glow);
+}
+html[data-today-palette="vice-sunset"] body :is(.primary,#mobile-controls[aria-expanded=true]) {
+ background:linear-gradient(115deg,#b7c7ff,#e8aff3 45%,#ffacd1 70%,#ffc28c)!important;
+ color:#34162e;border-color:#f9b4e4;
+ box-shadow:0 0 11px #f05ac96b,0 0 21px #8665f33b;
+}
+html[data-today-palette="vice-sunset"] body :is(.primary,#mobile-controls[aria-expanded=true]):hover {
+ background:linear-gradient(115deg,#cbd5ff,#f0c7fa 45%,#ffc9e3 70%,#ffd5af)!important;
+}
+html[data-today-palette="vice-sunset"][data-palette-tone="light"] body header {
+ background:linear-gradient(110deg,#ececff,#f5e1fa 50%,#ffe3e3 78%,#ffebd9)!important;
+ box-shadow:0 2px 11px #c14fa64d,0 4px 20px #6556e826;
+}
+html[data-today-palette="vice-sunset"][data-palette-tone="light"] body header .brand {color:#36213f;text-shadow:0 0 12px #bd64bd33;}
+html[data-today-palette="vice-sunset"][data-palette-tone="light"] body #sidebar {
+ background:linear-gradient(165deg,#f2efff 0%,#fff1f6 60%,#ffede5 100%)!important;
+}
+html[data-today-palette="vice-sunset"][data-palette-tone="light"] body :is(.primary,#mobile-controls[aria-expanded=true]) {
+ background:linear-gradient(115deg,#424cad,#853895 50%,#a32971 80%,#a84036)!important;
+ color:#fff;border-color:#aa449a;
+}
+html[data-today-palette="vice-sunset"][data-palette-tone="light"] body :is(.primary,#mobile-controls[aria-expanded=true]):hover {
+ background:linear-gradient(115deg,#363c93,#702d80 50%,#8f2361 80%,#91352c)!important;
 }
