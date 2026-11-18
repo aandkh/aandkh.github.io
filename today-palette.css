@@ -1,0 +1,31 @@
+/* GTA VI-inspired sunset pink, violet and tropical turquoise, November 18 only.
+   Override tokens, not map/traffic/weather semantics. The normal session palette
+   remains intact underneath and returns when today-palette.js removes the flag. */
+html[data-today-palette="vice-sunset"][data-palette-tone="dark"] {
+ --palette-surface:#20152f!important;
+ --palette-raised:#30213f!important;
+ --palette-soft:#432c50!important;
+ --palette-ink:#fff3ed!important;
+ --palette-muted:#dec2dc!important;
+ --palette-line:#a882ad!important;
+ --palette-accent:#ff9fc8!important;
+ --palette-on-accent:#34162e!important;
+ --palette-link:#83e2dc!important;
+ --palette-focus:#ffd094!important;
+}
+html[data-today-palette="vice-sunset"][data-palette-tone="light"] {
+ --palette-surface:#fff1f4!important;
+ --palette-raised:#fffafa!important;
+ --palette-soft:#f8e1ee!important;
+ --palette-ink:#36213f!important;
+ --palette-muted:#75516f!important;
+ --palette-line:#bc8bac!important;
+ --palette-accent:#a32971!important;
+ --palette-on-accent:#ffffff!important;
+ --palette-link:#006b70!important;
+ --palette-focus:#a32971!important;
+}
+html[data-today-palette="vice-sunset"] body header {
+ border-bottom-color:var(--palette-accent);
+ box-shadow:0 2px 0 var(--palette-link);
+}
