@@ -27,7 +27,7 @@ for(const tone of ['dark','light']) {
 }
 console.log(`PASS: temporary palette dates, midnight expiry, sleeping-tab resume, duplicate execution, ${count} text contrast pairs (minimum ${min.toFixed(2)}:1), primary and focus contrast.`);
 // All gradient stops meet primary text contrast; gradients interpolate between them.
-for(const [fg,stops] of [['#34162e',['#b7c7ff','#e8aff3','#ffacd1','#ffc28c','#cbd5ff','#f0c7fa','#ffc9e3','#ffd5af']],['#ffffff',['#424cad','#853895','#a32971','#a84036','#363c93','#702d80','#8f2361','#91352c']]])for(const bg of stops)assert.ok(contrast(fg,bg)>=4.5,`${fg}/${bg} gradient contrast`);
+for(const [fg,stops] of [['#34162e',['#91a7ff','#d98dff','#ff83ca','#ffae68','#cbd5ff','#f0c7fa','#ffc9e3','#ffd5af']],['#ffffff',['#353dc8','#8d19b3','#ae126e','#b72b3e','#363c93','#702d80','#8f2361','#91352c']]])for(const bg of stops)assert.ok(contrast(fg,bg)>=4.5,`${fg}/${bg} gradient contrast`);
 assert.ok(css.includes('box-shadow:var(--vice-glow)'),'reference glow is applied to controls');
 assert.ok(!css.includes('animation:'),'glow is static, not distracting/pulsing');
 const html=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8');
