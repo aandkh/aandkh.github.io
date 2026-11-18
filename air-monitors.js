@@ -1,4 +1,4 @@
-import {airportReports,loadRegionalWeather} from './regional-weather.js?v=20261118-metro-wind';
+import {airportReports,loadRegionalWeather} from './regional-weather.js?v=20261118-station-feed';
 import {weatherJson} from './weather-request.js?v=20261117-weather-suite';
 // Keep wind and air measurements independently tied to their reporting station.
 export const AIR_MONITOR_URL='https://services.arcgis.com/cJ9YHowT8TU7DUyn/arcgis/rest/services/Air%20Now%20Current%20Monitor%20Data%20Public/FeatureServer/0/query';

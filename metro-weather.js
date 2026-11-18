@@ -1,5 +1,5 @@
-import {CARD_MAX_AGE,loadRegionalWeather,usableAge,normalizeReading} from './regional-weather.js?v=20261118-metro-wind';
-import {STATIONS} from './weather-stations.js?v=20261118-metro-wind';
+import {CARD_MAX_AGE,loadRegionalWeather,usableAge,normalizeReading} from './regional-weather.js?v=20261118-station-feed';
+import {STATIONS} from './weather-stations.js?v=20261118-station-feed';
 
 export const OBSERVATION_MAX_AGE=CARD_MAX_AGE;
 // Fixed reference points from the original overview. Markers always use the reporting instrument's coordinates.

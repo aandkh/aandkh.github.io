@@ -1,5 +1,5 @@
-import {weatherJson,weatherAbort} from './weather-request.js?v=20261118-metro-wind';
-import {STATIONS} from './weather-stations.js?v=20261118-metro-wind';
+import {weatherJson,weatherAbort} from './weather-request.js?v=20261118-station-feed';
+import {STATIONS} from './weather-stations.js?v=20261118-station-feed';
 
 export const MINUTE = 60000;
 export const CARD_MAX_AGE = 20 * MINUTE;
@@ -79,10 +79,29 @@ export function iemSingle(station,payload,now=Date.now()) {
   windFromDeg:p['winddirection[deg]'],windVariable:variable(p.raw),observedAt:p.utc_valid,
   source:'Iowa Environmental Mesonet · '+station.id,sourceUrl:'https://mesonet.agron.iastate.edu/sites/site.php?station='+(station.iemId||station.id)+'&network='+station.network},now);
 }
+function finduReport(r,now){
+ const station=STATIONS.get(r.id);
+ if(!station || !/^[A-Z]\d{4}$/.test(r.id) || !range(r.distanceMiles,0,90))return null;
+ // The table's distance and compass direction are relative to this fixed query point.
+ // Match both to the surveyed station before putting a live report on the map.
+ const north=(station.lat-38.67)*111.2,east=(station.lng+90.41)*86.8,km=Math.hypot(east,north);
+ const sectors=['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
+ const compass=sectors.indexOf(r.compass);
+ const bearing=(Math.atan2(east,north)*180/Math.PI+360)%360;
+ if(Math.abs(km-r.distanceMiles*1.609344)>2 || compass<0 || (km>2 && Math.abs((bearing-compass*22.5+540)%360-180)>35))return null;
+ const call=r.id[0]+'W'+r.id.slice(1);
+ return normalizeReading({...station,observedAt:r.observedAt,temperatureF:r.temperatureF,windMph:r.windMph,
+  windFromDeg:r.windFromDeg,windVariable:false,dryWeather:r.dryWeather,source:'CWOP report · findU',
+  sourceUrl:'http://www.findu.com/cgi-bin/wx.cgi?call='+call},now);
+}
 export function snapshotReports(p,{now=Date.now()}={}) {
  if(p?.schema!==1 || !Array.isArray(p.readings) || p.readings.length>500) throw Error('Invalid regional station snapshot');
  return p.readings.flatMap(r=>{
   if(!r)return [];
+  if(r.feed==='findu-cwop'){
+   const observation=finduReport(r,now);
+   return observation?[observation]:[];
+  }
   const mu=r.feed==='missouri-mesonet' && Object.hasOwn(muUrls,r.id);
   if(!mu && !['wxalerts-cwop','wxalerts-metar','wxalerts-aprs'].includes(r.feed))return [];
   const ob=normalizeReading({id:r.id,lat:r.lat,lng:r.lng,label:stationLabel(r.id,r.lat,r.lng,r.label),

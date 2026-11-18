@@ -1,4 +1,4 @@
-import {composeAirOverlay} from './air-overlay-integration.js?v=20261118-metro-wind';
+import {composeAirOverlay} from './air-overlay-integration.js?v=20261118-station-feed';
 
 self.onmessage = ({data}) => {
  try {self.postMessage({overlay:composeAirOverlay(data.result, data.options)});}

@@ -46,6 +46,14 @@ test('station-level QC, ID, units and missing measurements remain intact',()=>{
  const snap={schema:1,readings:[{...reading('G6295',2),feed:'wxalerts-cwop'},{...reading('G6790',45),feed:'wxalerts-cwop'},null]};
  assert.equal(snapshotReports(snap,{now}).length,1);assert.equal(snapshotReports(snap,{now})[0].label,'Imperial');
 });
+test('direct CWOP packets use a verified station location and the reported time',()=>{
+ const packet={id:'F6595',feed:'findu-cwop',observedAt:iso(2),temperatureF:67,windMph:5,windFromDeg:164,distanceMiles:4.9,compass:'E'};
+ const rows=snapshotReports({schema:1,readings:[packet,{...packet,distanceMiles:30},{...packet,compass:'W'},{...packet,id:'G9999'}]},{now});
+ assert.equal(rows.length,1);
+ assert.equal(rows[0].lat,STATIONS.get('F6595').lat);
+ assert.equal(rows[0].observedAt,iso(2));
+ assert.equal(rows[0].source,'CWOP report · findU');
+});
 test('source outages preserve dates and repeated reads share source requests with air',async()=>{
  const calls=[],fetcher=async (url,options)=>{
   calls.push(url);assert.equal(options.cache,'no-cache');

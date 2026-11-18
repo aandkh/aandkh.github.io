@@ -16,7 +16,7 @@ concurrency:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 3
+    timeout-minutes: 17
     steps:
       - uses: actions/checkout@v4
         with:
@@ -29,17 +29,25 @@ jobs:
           branch=weather-observations-live
           ref=refs/heads/$branch
           upstream=$(git ls-remote --heads origin "$ref" | cut -f1)
+          samples=1
           if [[ -n "$upstream" ]]; then
             git fetch --depth=1 origin "$ref"
             [[ "$(git ls-tree --name-only FETCH_HEAD)" == "observations.json" ]]
             git show FETCH_HEAD:observations.json > observations.json
+            previous=$(git show -s --format=%ct FETCH_HEAD)
+            # Scheduled jobs occasionally start late. Bridge a delayed cycle with three extra samples.
+            if (( $(date +%s) - previous >= 480 )); then samples=4; fi
           fi
-          python scripts/refresh-weather-observations.py observations.json
-          blob=$(git hash-object -w observations.json)
-          tree=$(printf '100644 blob %s\tobservations.json\n' "$blob" | git mktree)
-          if [[ -n "$upstream" && "$(git rev-parse 'FETCH_HEAD^{tree}')" == "$tree" ]]; then exit 0; fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          # This dedicated single-file ref holds only the current readings. No site rebuild or historical archive.
-          commit=$(git commit-tree "$tree" -m 'Latest regional temperature and wind observations')
-          git push --force-with-lease="$ref:$upstream" origin "$commit:$ref"
+          for ((sample=1; sample<=samples; sample++)); do
+            if (( sample > 1 )); then sleep 240; fi
+            python scripts/refresh-weather-observations.py observations.json
+            blob=$(git hash-object -w observations.json)
+            tree=$(printf '100644 blob %s\tobservations.json\n' "$blob" | git mktree)
+            if [[ -n "$upstream" && "$(git rev-parse "$upstream^{tree}")" == "$tree" ]]; then continue; fi
+            # This dedicated single-file ref holds only current readings. No site rebuild or data archive.
+            commit=$(git commit-tree "$tree" -m 'Latest regional temperature and wind observations')
+            git push --force-with-lease="$ref:$upstream" origin "$commit:$ref"
+            upstream=$commit
+          done

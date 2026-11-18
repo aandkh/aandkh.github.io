@@ -2,6 +2,7 @@
 import argparse
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
+from email.utils import parsedate_to_datetime
 from html import unescape
 import json
 import math
@@ -11,6 +12,7 @@ import sys
 from urllib.request import Request, urlopen
 
 URL = "https://api.wxalerts.org/stations?bbox=-91.2,38.1,-89.4,39.2&units=us&max_age_minutes=45&domain=land"
+FINDU_URL = "http://www.findu.com/cgi-bin/wxnear.cgi?lat=38.67&lon=-90.41&limit=85&noold=1"
 PERMITTED = {"metar", "cwop", "aprs"}
 
 
@@ -97,13 +99,52 @@ def missouri_row(id_, page, now):
                  observedAt=at.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"))]
 
 
+def findu_rows(page, issued, now):
+    # The table gives elapsed time since the CWOP report, relative to the server's UTC date.
+    # A cached copy must keep its original clock. Only registered weather calls are included.
+    if not issued or not issued.tzinfo or not -60 <= (now-issued).total_seconds() < 45*60:
+        return []
+    rows = []
+    for tr in re.findall(r"<tr\b[^>]*>(.*?)</tr>", page, re.I|re.S):
+        cells = [unescape(re.sub(r"<[^>]*>", "", cell)).strip() for cell in re.findall(r"<td\b[^>]*>(.*?)</td>", tr, re.I|re.S)]
+        rows.append(cells)
+    header = ["call","distance","direction","age","temp","speed","gust","direction","rain*","rain 24h","rain midnight","humidity","barometer"]
+    if not rows or [c.lower() for c in rows[0]] != header:
+        raise ValueError("Unknown findU regional format")
+    result = []
+    def numeric(value, low, high):
+        return number(float(value), low, high) if re.fullmatch(r"-?\d+(?:\.\d+)?", value) else None
+    for row in rows[1:]:
+        if len(row) != len(header): continue
+        code = re.fullmatch(r"([A-Z])W(\d{4})", row[0].upper())
+        duration = re.fullmatch(r"(\d\d):(\d\d):([0-5]\d):([0-5]\d)",row[3])
+        if not code or not duration: continue
+        days, hours, minutes, seconds = map(int, duration.groups())
+        at = (issued - timedelta(days=days,hours=hours,minutes=minutes,seconds=seconds)).replace(second=0,microsecond=0)
+        if not 0 <= (now-at).total_seconds() < 45*60: continue
+        temp,speed = numeric(row[4],-100,140),numeric(row[5],0,150)
+        miles,humidity = numeric(row[1],0,90),numeric(row[11],0,100)
+        if miles is None or (temp is None and speed is None): continue
+        result.append(dict(id=code[1]+code[2],feed="findu-cwop",distanceMiles=miles,compass=row[2],
+                           observedAt=at.strftime("%Y-%m-%dT%H:%M:%SZ"),temperatureF=temp,windMph=speed,
+                           windFromDeg=numeric(row[7],0,360),windVariable=False,
+                           dryWeather=False if humidity is not None and humidity>55 else None))
+    return result
+
+
 def collect(source, now):
-    address = URL if source == "wxalerts" else "https://agebb.missouri.edu/weather/realtime/"+MU[source][3]+".asp"
+    if source in MU:
+        address = "https://agebb.missouri.edu/weather/realtime/"+MU[source][3]+".asp"
+    else:
+        address = FINDU_URL if source == "findu" else URL
     req = Request(address, headers={"User-Agent":"Andymap weather observations (www.andrewhanes.com)"})
     try:
         with urlopen(req, timeout=16) as response:
             if source == "wxalerts":
                 return station_rows(json.load(response), now)
+            if source == "findu":
+                date = response.headers.get("Date")
+                return findu_rows(response.read(120000).decode("latin-1"), parsedate_to_datetime(date) if date else None, now)
             return missouri_row(source, response.read().decode("latin-1"), now)
     except (OSError, ValueError, KeyError) as error:
         print(f"{source}: {error}", file=sys.stderr)
@@ -115,8 +156,8 @@ def main():
     parser.add_argument("output", type=Path)
     args = parser.parse_args()
     now = datetime.now(timezone.utc)
-    with ThreadPoolExecutor(max_workers=3) as pool:
-        rows = [r for batch in pool.map(lambda source: collect(source, now), ["wxalerts", *MU]) for r in batch]
+    with ThreadPoolExecutor(max_workers=4) as pool:
+        rows = [r for batch in pool.map(lambda source: collect(source, now), ["wxalerts", "findu", *MU]) for r in batch]
     if not rows:
         raise ValueError("No valid observations to publish")
     # Brief feed omissions cannot discard a newer measurement already served.
@@ -128,9 +169,10 @@ def main():
         key = (r["id"],r["feed"])
         if key not in latest or stamp >= parse_time(latest[key]["observedAt"]):
             latest[key] = r
-    snapshot = dict(schema=1, attribution="Data: WxAlerts (wxalerts.org). NOAA aviation, CWOP / APRS and University of Missouri Mesonet observations.", readings=[latest[k] for k in sorted(latest)])
+    snapshot = dict(schema=1, attribution="Data: WxAlerts (wxalerts.org), CWOP via findU, NOAA aviation and University of Missouri Mesonet.", readings=[latest[k] for k in sorted(latest)])
     args.output.write_text(json.dumps(snapshot, separators=(",",":"),allow_nan=False)+"\n")
-    print(f"{len(latest)} measured stations. Latest report {max(r['observedAt'] for r in rows)}")
+    stations = {r["id"] for r in latest.values()}
+    print(f"{len(stations)} measured stations. Latest report {max(r['observedAt'] for r in rows)}")
 
 
 if __name__ == "__main__":

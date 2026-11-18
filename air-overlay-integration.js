@@ -1,4 +1,4 @@
-import {buildLandfillContours, landfillAt} from './air-wind-screening.js?v=20261118-metro-wind';
+import {buildLandfillContours, landfillAt} from './air-wind-screening.js?v=20261118-station-feed';
 import {airAdvice, gradeSeverity, localWindowsGrade, localGradeColor, ODOR_BANDS} from './air-grades.js?v=20261118-local-air';
 import {pointInGeometry} from './layer-insights.js?v=20261118-local-air';
 import {REGION} from './core.js?v=20261117-construction-layer';
@@ -111,7 +111,7 @@ export function composeAirDisplay(result, {signal, mode='pm25', now=Date.now()}=
  if(typeof Worker==='undefined')return Promise.resolve(composeAirOverlay(result,options));
  return new Promise((resolve,reject)=>{
   let worker;
-  try {worker=new Worker(new URL('./air-overlay-worker.js?v=20261118-metro-wind',import.meta.url),{type:'module'});}
+  try {worker=new Worker(new URL('./air-overlay-worker.js?v=20261118-station-feed',import.meta.url),{type:'module'});}
   catch {resolve(composeAirOverlay(result,options));return;}
   function finish(){worker.terminate();signal?.removeEventListener('abort',abort);}
   function abort(){finish();reject(signal.reason);}

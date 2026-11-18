@@ -1,11 +1,11 @@
-import {WIND_MAX_AGE,MINUTE} from './regional-weather.js?v=20261118-metro-wind';
+import {WIND_MAX_AGE,MINUTE} from './regional-weather.js?v=20261118-station-feed';
 import {ODOR_BANDS} from './air-grades.js?v=20261118-local-air';
 // Local odor potential, expressed only on Andymap's windows-grade ladder.
 // Distances are cartographic assumptions in metres, not gas concentrations.
 import {LANDFILLS} from './landfill-sites.js?v=20261118-local-air';
 import {coordinate} from './core.js?v=20261117-construction-layer';
 import {pointInGeometry} from './layer-insights.js?v=20261118-local-air';
-import {airBearingDistance} from './air-monitors.js?v=20261118-metro-wind';
+import {airBearingDistance} from './air-monitors.js?v=20261118-station-feed';
 
 const RAD = Math.PI / 180;
 const METRES_PER_DEGREE = 111195;
