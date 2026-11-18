@@ -11,7 +11,7 @@ const reading=(id,age,extra={})=>({...STATIONS.get(id),observedAt:iso(age),tempe
 const nws=(at,over={})=>({properties:{timestamp:at,temperature:{value:14,unitCode:'wmoUnit:degC',qualityControl:'V'},windSpeed:{value:0,unitCode:'wmoUnit:km_h-1',qualityControl:'V'},windDirection:{value:0,unitCode:'wmoUnit:degree_(angle)',qualityControl:'V'},...over}});
 const direction=(r,slot)=>r.find(x=>x.slot===slot);
 test('newest complete report wins a fixed sector even with the old primary still reporting',()=>{
- const primaries=METRO_STATIONS.map(s=>reading(s.id,16));
+ const primaries=METRO_STATIONS.map(s=>reading(s.id,7));
  const selected=selectMetroReadings([...primaries,reading('E1948',4),reading('F6176',2),reading('G6790',1),reading('MOA28',3),reading('G2231',0)],now);
  assert.deepEqual(selected.map(r=>r.id),['E1948','F6176','G6790','MOA28']);
  assert.equal(direction(selected,'s').replacementFor,'Arnold');
@@ -21,15 +21,15 @@ test('newest complete report wins a fixed sector even with the old primary still
  assert.equal(new Set(selected.map(r=>r.id)).size,4);
 });
 test('quiet northern area can use St. Peters without crowding the western station',()=>{
- const quiet=[reading('C7014',10),reading('KSTL',24),reading('E8100',15),reading('D0367',3),reading('MOA28',5)];
+ const quiet=[reading('C7014',2),reading('KSTL',24),reading('E8100',5),reading('D0367',3),reading('MOA28',5)];
  assert.deepEqual(selectMetroReadings(quiet,now).map(r=>r.id),['C7014','E8100','D0367','MOA28']);
  assert.equal(direction(selectMetroReadings([...quiet,reading('F6176',4)],now),'n').id,'F6176');
  assert.equal(direction(selectMetroReadings(quiet,now+6*minute),'n').unavailable,true);
 });
 test('out-of-sector clusters, expired and future updates cannot fill another corner',()=>{
- const old=selectMetroReadings([reading('C7014',20),reading('KSTL',-1),reading('G2231',1),...Array(8).fill(reading('G6295',2))],now);
+ const old=selectMetroReadings([reading('C7014',8),reading('KSTL',-1),reading('G2231',1),...Array(8).fill(reading('G6295',2))],now);
  assert.equal(old.filter(x=>x.observedAt).length,1);assert.equal(old[0].id,'G6295');
- const partial=selectMetroReadings([reading('C7014',2,{windMph:null}),reading('E1948',18),reading('G6295',30)],now)[0];
+ const partial=selectMetroReadings([reading('C7014',2,{windMph:null}),reading('E1948',7),reading('G6295',30)],now)[0];
  assert.equal(partial.id,'E1948');assert.equal(selectMetroReadings([reading('C7014',2,{windMph:null})],now)[0].windMph,null);
  const after=weatherMarkerReadings( selectMetroReadings(METRO_STATIONS.map(s=>reading(s.id,1)),now), now+CARD_MAX_AGE);
  assert.equal(after.length,4);assert.ok(after.every(r=>r.temperatureF===null && r.windMph===null && !r.observedAt));
@@ -71,4 +71,20 @@ test('source outages preserve dates and repeated reads share source requests wit
  assert.equal(retained[0].observedAt,iso(1));
  const expired=await metroWeatherReadings([],{...opts,fetcher:down,now:now+46*minute});
  assert.ok(expired.every(r=>r.unavailable && !r.observedAt));
+});
+
+test('a fresh neighbor beats a slower local station; at equal times the nearer one wins',()=>{
+ const reports=['C7014','KSTL','D0367','MOA28'].map(id=>reading(id,2));
+ const north=direction(selectMetroReadings([...reports,reading('G1169',0)],now),'n');
+ assert.equal(north.id,'G1169');assert.equal(north.observedAt,iso(0));
+ assert.equal(direction(selectMetroReadings([...reports,reading('G1169',2)],now),'n').id,'KSTL');
+ assert.ok(selectMetroReadings(METRO_STATIONS.map(s=>reading(s.id,8)),now).every(r=>r.unavailable));
+});
+test('findU source-grid distances, fixed amateur transmitters and newly discovered weather positions are supported',()=>{
+ const packet=(id,feed,dist,compass,coordinates={})=>({id,feed,distanceMiles:dist,compass,observedAt:iso(1),temperatureF:64,windMph:2,...coordinates});
+ const rows=snapshotReports({schema:1,readings:[packet('G6014','findu-cwop',39.1,'E'),packet('G6295','findu-cwop',10.6,'S'),
+  packet('K0PFX-8','findu-aprs',3.7,'N'),packet('F1234','findu-cwop',3.7,'N',{lat:38.73,lng:-90.4255}),
+  packet('F1235','findu-cwop',20,'N',{lat:38.73,lng:-90.4255}),packet('W1TEST','findu-aprs',3.7,'N',{lat:38.73,lng:-90.4255})]},{now});
+ assert.deepEqual(rows.map(r=>r.id),['G6014','G6295','K0PFX-8','F1234']);
+ assert.equal(rows[1].label,'Murphy');assert.equal(rows[1].lat,38.497);assert.equal(rows[2].label,'Bridgeton');
 });

@@ -1,5 +1,5 @@
-import {CARD_MAX_AGE,loadRegionalWeather,usableAge,normalizeReading} from './regional-weather.js?v=20261118-station-feed';
-import {STATIONS} from './weather-stations.js?v=20261118-station-feed';
+import {CARD_MAX_AGE,loadRegionalWeather,usableAge,normalizeReading} from './regional-weather.js?v=20261118-live-stations';
+import {STATIONS} from './weather-stations.js?v=20261118-live-stations';
 
 export const OBSERVATION_MAX_AGE=CARD_MAX_AGE;
 // Fixed reference points from the original overview. Markers always use the reporting instrument's coordinates.
@@ -15,7 +15,7 @@ const xy=(a,b)=>[(b.lng-a.lng)*86.8,(b.lat-a.lat)*111.2];
 const distance=(a,b)=>Math.hypot(...xy(a,b));
 function eligible(station,anchor,expanded=false) {
  const [x,y]=xy(anchor,station);
- if (Math.hypot(x,y)>(expanded?20:12) || station.lat<38.40 || station.lat>38.81 || station.lng< -90.69 || station.lng> -90.17) return false;
+ if (Math.hypot(x,y)>(expanded?26:12) || station.lat<38.40 || station.lat>38.81 || station.lng< -90.69 || station.lng> -90.17) return false;
  // A quiet sector may borrow a station up to four km across its nearest-sector boundary.
  return METRO_STATIONS.every(other=>{
   if(other===anchor)return true;
@@ -24,7 +24,8 @@ function eligible(station,anchor,expanded=false) {
  });
 }
 function compareRows(a,b,anchor) {
- return Number(complete(b))-Number(complete(a)) || Date.parse(b.observedAt)-Date.parse(a.observedAt) ||
+ return Number(complete(b))-Number(complete(a)) || Number(Number.isFinite(b.temperatureF))-Number(Number.isFinite(a.temperatureF)) ||
+  Date.parse(b.observedAt)-Date.parse(a.observedAt) ||
   (anchor ? distance(anchor,a)-distance(anchor,b) : 0) ||
   Number(Number.isFinite(b.windFromDeg))-Number(Number.isFinite(a.windFromDeg)) || a.id.localeCompare(b.id);
 }
@@ -37,10 +38,10 @@ function spaced(chosen,r,i) {
   return Math.hypot(x,y)>=.60*Math.hypot(a,b) && x*a+y*b>=.40*(a*a+b*b);
  });
 }
-function score(selection,now,local) {
+function score(selection,now) {
  const ages=selection.filter(r=>r.observedAt).map(r=>now-Date.parse(r.observedAt));
- const borrowed=selection.filter((r,i)=>r.observedAt && !local[i].has(r)).length;
- return [4-selection.filter(complete).length,4-ages.length,borrowed,Math.max(0,...ages),ages.reduce((sum,v)=>sum+v,0),
+ return [4-selection.filter(complete).length,4-selection.filter(r=>Number.isFinite(r.temperatureF)).length,
+  4-ages.length,Math.max(0,...ages),ages.reduce((sum,v)=>sum+v,0),
   selection.reduce((sum,r,i)=>sum+distance(r,METRO_STATIONS[i]),0)];
 }
 function lowerScore(a,b) {
@@ -49,15 +50,12 @@ function lowerScore(a,b) {
 }
 export function selectMetroReadings(candidates,now=Date.now()) {
  const reports=candidates.filter(r=>current(r,now));
- const local=METRO_STATIONS.map(anchor=>new Set(reports.filter(r=>eligible(r,anchor))));
- const lists=METRO_STATIONS.map((anchor,i)=>{
-  const sorted=reports.filter(r=>eligible(r,anchor,true)).sort((a,b)=>
-   Number(complete(b))-Number(complete(a)) || Number(local[i].has(b))-Number(local[i].has(a)) || compareRows(a,b,anchor));
+ const lists=METRO_STATIONS.map(anchor=>{
+  const sorted=reports.filter(r=>eligible(r,anchor,true)).sort((a,b)=>compareRows(a,b,anchor));
   const distinct=[];
   for(const r of sorted){
    if(distinct.some(other=>other.id===r.id || distance(other,r)<.15))continue;
    distinct.push(r);
-   if(distinct.length===12)break;
   }
   distinct.push({...anchor,temperatureF:null,windMph:null,windFromDeg:null,observedAt:null,unavailable:true,expiresAt:null});
   return distinct;
@@ -67,8 +65,11 @@ export function selectMetroReadings(candidates,now=Date.now()) {
   let bestScore=null;
   function choose(chosen){
    const i=chosen.length;
+   // Each remaining sector's first candidate is its unconstrained optimum.
+   // Prune a branch only when even that best case cannot improve the layout.
+   if(bestScore && i<lists.length && !lowerScore(score(chosen.concat(lists.slice(i).map(rows=>rows[0])),now),bestScore))return;
    if(i===lists.length){
-    const candidateScore=score(chosen,now,local);
+    const candidateScore=score(chosen,now);
     if(!bestScore||lowerScore(candidateScore,bestScore)){selected=chosen;bestScore=candidateScore;}
     return;
    }

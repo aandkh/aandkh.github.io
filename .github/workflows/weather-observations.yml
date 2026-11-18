@@ -10,44 +10,62 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
+  actions: write
 concurrency:
   group: regional-weather-snapshot
   cancel-in-progress: false
 jobs:
   refresh:
-    runs-on: ubuntu-latest
-    timeout-minutes: 17
+    if: github.repository == 'aandkh/aandkh.github.io' && github.event.repository.private == false
+    runs-on: ubuntu-slim
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
         with:
           sparse-checkout: scripts/refresh-weather-observations.py
           sparse-checkout-cone-mode: false
-      - name: Publish current observations
+      - name: Publish measured station reports
+        env:
+          GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
           set -euo pipefail
-          branch=weather-observations-live
-          ref=refs/heads/$branch
+          ref=refs/heads/weather-observations-live
           upstream=$(git ls-remote --heads origin "$ref" | cut -f1)
-          samples=1
           if [[ -n "$upstream" ]]; then
             git fetch --depth=1 origin "$ref"
-            [[ "$(git ls-tree --name-only FETCH_HEAD)" == "observations.json" ]]
-            git show FETCH_HEAD:observations.json > observations.json
-            previous=$(git show -s --format=%ct FETCH_HEAD)
-            # Scheduled jobs occasionally start late. Bridge a delayed cycle with three extra samples.
-            if (( $(date +%s) - previous >= 480 )); then samples=4; fi
+            upstream=$(git rev-parse FETCH_HEAD)
+            [[ "$(git ls-tree --name-only "$upstream")" == "observations.json" ]]
+            git show "$upstream:observations.json" > observations.json
           fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          for ((sample=1; sample<=samples; sample++)); do
-            if (( sample > 1 )); then sleep 240; fi
-            python scripts/refresh-weather-observations.py observations.json
+          start=$SECONDS
+          queued=false
+          published=false
+          for sample in 0 1 2 3; do
+            delay=$((start + 120 * sample - SECONDS))
+            if (( delay > 0 )); then sleep "$delay"; fi
+            # Queue one successor while this run still covers the interval. Native
+            # timers can be delayed for hours. The concurrency group admits one writer.
+            if (( sample >= 1 )) && [[ "$queued" == false ]]; then
+              if gh workflow run weather-observations.yml --repo "$GITHUB_REPOSITORY" --ref main; then
+                queued=true
+              else
+                echo '::warning::Handoff delayed. Will retry; the independent schedule also remains active.'
+              fi
+            fi
+            if ! python3 scripts/refresh-weather-observations.py observations.json; then
+              echo '::warning::Upstream observations unavailable in this sample.'
+              continue
+            fi
             blob=$(git hash-object -w observations.json)
             tree=$(printf '100644 blob %s\tobservations.json\n' "$blob" | git mktree)
-            if [[ -n "$upstream" && "$(git rev-parse "$upstream^{tree}")" == "$tree" ]]; then continue; fi
-            # This dedicated single-file ref holds only current readings. No site rebuild or data archive.
-            commit=$(git commit-tree "$tree" -m 'Latest regional temperature and wind observations')
-            git push --force-with-lease="$ref:$upstream" origin "$commit:$ref"
-            upstream=$commit
+            if [[ -z "$upstream" || "$(git rev-parse "$upstream^{tree}")" != "$tree" ]]; then
+              commit=$(git commit-tree "$tree" -m 'Latest regional temperature and wind observations')
+              git push --force-with-lease="$ref:$upstream" origin "$commit:$ref"
+              upstream=$commit
+            fi
+            published=true
           done
+          [[ "$published" == true && "$queued" == true ]]

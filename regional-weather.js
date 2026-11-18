@@ -1,10 +1,10 @@
 import {weatherJson,weatherAbort} from './weather-request.js?v=20261118-station-feed';
-import {STATIONS} from './weather-stations.js?v=20261118-station-feed';
+import {STATIONS,FINDU_RELOCATIONS} from './weather-stations.js?v=20261118-live-stations';
 
 export const MINUTE = 60000;
-export const CARD_MAX_AGE = 20 * MINUTE;
+export const CARD_MAX_AGE = 8 * MINUTE;
 export const WIND_MAX_AGE = 45 * MINUTE;
-export const WEATHER_POLL = MINUTE;
+export const WEATHER_POLL = 30000;
 export const AIR_WIND_POLL = 2 * MINUTE;
 export const AIRPORT_URL = 'https://mesonet.agron.iastate.edu/api/1/currents.json?networkclass=ASOS&wfo=LSX';
 const SNAPSHOT = 'https://raw.githubusercontent.com/aandkh/aandkh.github.io/weather-observations-live/observations.json';
@@ -80,32 +80,40 @@ export function iemSingle(station,payload,now=Date.now()) {
   source:'Iowa Environmental Mesonet · '+station.id,sourceUrl:'https://mesonet.agron.iastate.edu/sites/site.php?station='+(station.iemId||station.id)+'&network='+station.network},now);
 }
 function finduReport(r,now){
- const station=STATIONS.get(r.id);
- if(!station || !/^[A-Z]\d{4}$/.test(r.id) || !range(r.distanceMiles,0,90))return null;
- // The table's distance and compass direction are relative to this fixed query point.
- // Match both to the surveyed station before putting a live report on the map.
- const north=(station.lat-38.67)*111.2,east=(station.lng+90.41)*86.8,km=Math.hypot(east,north);
+ const surveyed=FINDU_RELOCATIONS.get(r.id)||STATIONS.get(r.id),hasPosition=r.lat!=null||r.lng!=null;
+ const aprs=r.feed==='findu-aprs';
+ if((aprs?!surveyed:!/^[A-Z]\d{4}$/.test(r.id)) || !range(r.distanceMiles,0,90))return null;
+ if(hasPosition && !inRegion(r.lat,r.lng))return null;
+ if(aprs && hasPosition && Math.hypot((surveyed.lat-r.lat)*111.2,(surveyed.lng-r.lng)*86.8)>1)return null;
+ const matches=hasPosition && surveyed && Math.hypot((surveyed.lat-r.lat)*111.2,(surveyed.lng-r.lng)*86.8)<1;
+ const station=hasPosition?{id:r.id,lat:r.lat,lng:r.lng,label:matches?surveyed.label:stationLabel(r.id,r.lat,r.lng)}:surveyed;
+ if(!station)return null;
+ // findU's table uses 60 units per degree on both axes. This check matches the
+ // published table to the station. The map itself uses the real coordinates.
+ const dLat=station.lat-38.67,dLng=station.lng+90.41,tableDistance=60*Math.hypot(dLat,dLng);
+ const north=dLat*111.2,east=dLng*86.8,km=Math.hypot(east,north);
  const sectors=['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
  const compass=sectors.indexOf(r.compass);
  const bearing=(Math.atan2(east,north)*180/Math.PI+360)%360;
- if(Math.abs(km-r.distanceMiles*1.609344)>2 || compass<0 || (km>2 && Math.abs((bearing-compass*22.5+540)%360-180)>35))return null;
- const call=r.id[0]+'W'+r.id.slice(1);
+ if(Math.abs(tableDistance-r.distanceMiles)>.6 || compass<0 || (km>2 && Math.abs((bearing-compass*22.5+540)%360-180)>38))return null;
+ const call=aprs?r.id:r.id[0]+'W'+r.id.slice(1);
  return normalizeReading({...station,observedAt:r.observedAt,temperatureF:r.temperatureF,windMph:r.windMph,
-  windFromDeg:r.windFromDeg,windVariable:false,dryWeather:r.dryWeather,source:'CWOP report · findU',
+  windFromDeg:r.windFromDeg,windVariable:false,dryWeather:r.dryWeather,source:aprs?'APRS weather report · findU':'CWOP report · findU',
   sourceUrl:'http://www.findu.com/cgi-bin/wx.cgi?call='+call},now);
 }
 export function snapshotReports(p,{now=Date.now()}={}) {
  if(p?.schema!==1 || !Array.isArray(p.readings) || p.readings.length>500) throw Error('Invalid regional station snapshot');
  return p.readings.flatMap(r=>{
   if(!r)return [];
-  if(r.feed==='findu-cwop'){
+  if(r.feed==='findu-cwop'||r.feed==='findu-aprs'){
    const observation=finduReport(r,now);
    return observation?[observation]:[];
   }
   const mu=r.feed==='missouri-mesonet' && Object.hasOwn(muUrls,r.id);
-  if(!mu && !['wxalerts-cwop','wxalerts-metar','wxalerts-aprs'].includes(r.feed))return [];
+  const madis=r.feed==='noaa-madis';
+  if(!mu && !madis && !['wxalerts-cwop','wxalerts-metar','wxalerts-aprs'].includes(r.feed))return [];
   const ob=normalizeReading({id:r.id,lat:r.lat,lng:r.lng,label:stationLabel(r.id,r.lat,r.lng,r.label),
-   source:mu?'University of Missouri Mesonet':r.feed==='wxalerts-metar'?'NOAA aviation · WxAlerts':'CWOP / APRS · WxAlerts',sourceUrl:mu?muUrls[r.id]:wxSource,
+   source:mu?'University of Missouri Mesonet':madis?'NOAA MADIS':r.feed==='wxalerts-metar'?'NOAA aviation · WxAlerts':'CWOP / APRS · WxAlerts',sourceUrl:mu?muUrls[r.id]:madis?'https://madis.ncep.noaa.gov/':wxSource,
    observedAt:r.observedAt,temperatureF:r.temperatureF,windMph:r.windMph,windFromDeg:r.windFromDeg,
    windVariable:r.windVariable,dryWeather:r.dryWeather},now);
   return ob?[ob]:[];
@@ -113,7 +121,7 @@ export function snapshotReports(p,{now=Date.now()}={}) {
 }
 // Bounded, independent histories also cover quiet sectors when the regional feed is delayed.
 const firstHistories=['C7014','F6176','G6790','MOA28'];
-const extraHistories=['E1948','G6295','D4248','G1169','D0367','G3356','D6513','F6595','G5557','F0271','E4319','G2231'];
+const extraHistories=['E1948','G6295','D4248','G1169','D0367','G3356','D6513','F6595','G5557','F0271','E4319','G2231','UP912','UP916','UR616','SCLM7'];
 const botanical={...STATIONS.get('MBGM7'),network:'MO_DCP'};
 export async function loadRegionalWeather({now=Date.now(),signal,fetcher=fetch,responseCache,onBatch,force=false}={}) {
  const reports=[];
@@ -125,7 +133,9 @@ export async function loadRegionalWeather({now=Date.now(),signal,fetcher=fetch,r
    return rows;
   } catch(error){if(signal?.aborted)throw signal.reason||error;return [];}
  }
- const snapshot=read(SNAPSHOT,p=>snapshotReports(p,{now}),MINUTE);
+ // Visitors share each cache key. A CDN copy of the moving branch must not
+ // hide a newly published report for the raw host's five-minute cache lifetime.
+ const snapshot=read(SNAPSHOT+'?minute='+Math.floor(now/MINUTE),p=>snapshotReports(p,{now}),WEATHER_POLL);
  const airports=read(AIRPORT_URL,p=>airportReports(p,{now}),2*MINUTE);
  const garden=read('https://mesonet.agron.iastate.edu/json/current.py?network=MO_DCP&station=MBGM7',p=>[iemSingle(botanical,p,now)].filter(Boolean),3*MINUTE);
  // Every cycle compares broad sources. The smaller histories have independent three-minute caches.

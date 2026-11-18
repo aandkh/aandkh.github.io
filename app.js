@@ -1,6 +1,6 @@
-import {WEATHER_POLL,AIR_WIND_POLL,WIND_MAX_AGE,usableAge} from './regional-weather.js?v=20261118-station-feed';
+import {WEATHER_POLL,AIR_WIND_POLL,WIND_MAX_AGE,usableAge} from './regional-weather.js?v=20261118-live-stations';
 import {composeAirDisplay,currentAirGeometry,currentAirOverlay,airFeatureAtPoint} from './air-overlay-integration.js?v=20261118-station-feed';
-import {loadAirMonitors,mergeAirMonitors,appendAirLocationMeasurements,loadWindReadings,weatherWinds,windSignature} from './air-monitors.js?v=20261118-station-feed';
+import {loadAirMonitors,mergeAirMonitors,appendAirLocationMeasurements,loadWindReadings,weatherWinds,windSignature} from './air-monitors.js?v=20261118-live-stations';
 import {ODOR_BANDS} from './air-grades.js?v=20261118-local-air';
 import {trafficFeature,appendTrafficDetails} from './traffic-details.js?v=20261117-construction-layer';
 import {trafficCollection,currentTrafficRecord,savedTrafficFeature} from './traffic-experience.js?v=20261117-construction-layer';
@@ -41,7 +41,7 @@ import {sortRivers,enrichRivers,riverAverages} from './river-insights.js?v=20261
 import {appendSkySummary} from './sky-quality.js?v=20261115-road-insights';
 import {gymPlaces,gymGroup,GYM_GROUPS,sortGyms} from './gyms.js?v=20261115-road-insights';
 import {enrichMovies,movieFacts} from './movie-screenings.js?v=20261116-full-speed';
-import {metroWeatherReadings} from './metro-weather.js?v=20261118-station-feed';
+import {metroWeatherReadings} from './metro-weather.js?v=20261118-live-stations';
 import {enrichBirding,appendBirdingEvidence} from './birding-community.js?v=20261116-birding';
 import {TERRAIN_OPTIONS,GEOLOGY_MODES,terrainGeology} from './terrain-geology.js?v=20261117-explore-layout';
 import {recentIncidents,incidentExplorer,incidentFilters,filterIncidents,incidentStamp} from './recent-incidents.js?v=20261116-security';
@@ -249,13 +249,18 @@ async function inspectSpot(point){
 }
 
 async function refreshWeatherReadings(force=false){
- if(!enabled.has('radar')||observedRadar.active||spotMode||skyCloudMap.active||document.hidden||weatherReadingsRequest)return;
- const controller=new AbortController();weatherReadingsRequest=controller;
+ if(!enabled.has('radar')||observedRadar.active||spotMode||skyCloudMap.active||document.hidden)return;
+ const started=Date.now();
+ if(weatherReadingsRequest){
+  if(!force && !weatherReadingsRequest.signal.aborted && started-weatherReadingsAt>=0 && started-weatherReadingsAt<WEATHER_POLL)return;
+  weatherReadingsRequest.abort();
+ }
+ const controller=new AbortController();weatherReadingsRequest=controller;weatherReadingsAt=started;
  try{
   const current=await metroWeatherReadings([],{signal:controller.signal,force,loadBackend:async({signal})=>{const r=await apiFetch('/api/weather-readings',{signal:AbortSignal.any([signal,AbortSignal.timeout(6000)])});if(!r.ok)throw Error('Station readings unavailable');return r.json();},onUpdate:current=>{if(!controller.signal.aborted&&enabled.has('radar')&&!observedRadar.active&&!spotMode&&!skyCloudMap.active){weatherReadings.render(current,true);futureRadar.refreshStations();}}});
   if(controller.signal.aborted||!enabled.has('radar')||observedRadar.active||spotMode||skyCloudMap.active)return;
-  weatherReadingsAt=Date.now();weatherReadings.render(current,true);futureRadar.refreshStations();
- }catch(e){if(!controller.signal.aborted){weatherReadingsAt=Date.now();weatherReadings.expire(enabled.has('radar')&&!observedRadar.active&&!spotMode&&!skyCloudMap.active);}}
+  weatherReadings.render(current,true);futureRadar.refreshStations();
+ }catch(e){if(!controller.signal.aborted){weatherReadings.expire(enabled.has('radar')&&!observedRadar.active&&!spotMode&&!skyCloudMap.active);}}
  finally{if(weatherReadingsRequest===controller)weatherReadingsRequest=null;}
 }
 function refreshTodayView(){for(const id of enabled){
