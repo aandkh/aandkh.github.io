@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 const script=fs.readFileSync(new URL('../session-palettes.js',import.meta.url),'utf8');
 const css=fs.readFileSync(new URL('../session-palettes.css',import.meta.url),'utf8');
+const finish=fs.readFileSync(new URL('../today-palette.css',import.meta.url),'utf8');
 function boot(index,storage=new Map(),options={}) {
  const values=new Map(),root={dataset:{},style:{setProperty:(k,v)=>values.set(k,v)}};
  const body={dataset:{mapStyle:options.style??'dark'}},listeners=new Map(),observers=[];
@@ -21,10 +22,16 @@ function boot(index,storage=new Map(),options={}) {
 function rgb(hex){return hex.match(/[a-f0-9]{2}/gi).map(v=>parseInt(v,16));}
 function luminance(hex){return rgb(hex).map(n=>n/255).map(n=>n<=.04045?n/12.92:((n+.055)/1.055)**2.4).reduce((s,n,i)=>s+n*[.2126,.7152,.0722][i],0);}
 function contrast(a,b){const x=luminance(a),y=luminance(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);}
-function blend(a,b){return '#'+rgb(a).map((v,i)=>Math.round(v*.9+rgb(b)[i]*.1).toString(16).padStart(2,'0')).join('');}
-const ids=new Set();let minimum=99,checked=0;
+function mix(a,b,weight=.9){const other=rgb(b);return '#'+rgb(a).map((v,i)=>Math.round(v*weight+other[i]*(1-weight)).toString(16).padStart(2,'0')).join('');}
+function tintSettings(selector){
+ const block=finish.split(selector+' {')[1].split('}')[0];
+ return Object.fromEntries([...block.matchAll(/--([\w-]+):([^;]+);/g)].map(([,name,value])=>[name,value]));
+}
+const sharedSettings=tintSettings('html[data-today-palette="session-glow"] body');
+const settings={light:sharedSettings,dark:{...sharedSettings,...tintSettings('html[data-today-palette="session-glow"][data-palette-tone="dark"] body')}};
+const ids=new Set(),ramps=new Set();let minimum=99,checked=0,minGradient=21,gradientChecks=0;
 for(const [mode,style,count]of [['dark','dark',21],['light','positron',20]])for(let i=0;i<count;i++){
- const result=boot(i,new Map(),{style});ids.add(result.id);assert.equal(result.values.size,10);
+ const result=boot(i,new Map(),{style});ids.add(result.id);assert.equal(result.values.size,13);
  assert.equal(result.root.dataset.paletteTone,mode,'Palette family follows basemap brightness');
  const v=key=>result.values.get(`--palette-${key}`);
  for(const background of ['surface','raised','soft'])assert.ok(mode==='dark'?luminance(v(background))<.09:luminance(v(background))>.7,`${result.id} ${background} must preserve its chosen tone`);
@@ -32,11 +39,31 @@ for(const [mode,style,count]of [['dark','dark',21],['light','positron',20]])for(
   const ratio=contrast(v(foreground),v(background));minimum=Math.min(minimum,ratio);checked++;
   assert.ok(ratio>=4.5,`${result.id} ${mode} ${foreground}/${background}: ${ratio.toFixed(2)}`);
  }
- for(const background of [v('accent'),blend(v('accent'),v('ink'))]){
+ for(const background of [v('accent'),mix(v('accent'),v('ink'))]){
   const ratio=contrast(v('on-accent'),background);minimum=Math.min(minimum,ratio);checked++;
   assert.ok(ratio>=4.5,`${result.id} ${mode} accent text: ${ratio.toFixed(2)}`);
  }
  for(const background of ['surface','raised','soft'])assert.ok(contrast(v('focus'),v(background))>=3,`${result.id} focus ${mode}/${background}`);
+ const ramp=['start','middle','end'].map(stop=>v('gradient-'+stop)),tint=settings[mode];
+ assert.equal(new Set(ramp).size,3);
+ ramps.add(ramp.join(','));
+ for(const [role,base,foregrounds] of [
+  ['header',v('surface'),['ink','focus']],
+  ['panel',v(tint['panel-base'].match(/--palette-([\w-]+)/)[1]),['ink','muted','link','focus']],
+  ['action',tint['action-base'],['on-accent']]
+ ]){
+  const stops=ramp.map(color=>mix(color,base,parseFloat(tint[role+'-tint'])/100));
+  for(let stop=1;stop<stops.length;stop++)for(let sample=0;sample<=20;sample++){
+   const background=mix(stops[stop],stops[stop-1],sample/20);
+   const backgrounds=role==='action'?[background,mix(base,background,.16)]:[background];
+   for(const bg of backgrounds)for(const fg of foregrounds){
+    const ratio=contrast(v(fg),bg);
+    assert.ok(ratio>=(fg==='focus'?3:4.5),`${result.id} ${role} ${fg} on ${bg}: ${ratio.toFixed(2)}`);
+    if(fg!=='focus')minGradient=Math.min(minGradient,ratio);
+    gradientChecks++;
+   }
+  }
+ }
  const id=result.id,before=JSON.stringify([...result.values]);result.rerun();
  assert.equal(result.id,id);assert.equal(JSON.stringify([...result.values]),before,'duplicate execution must not recolor an active document');
  assert.equal(result.observers.length,1,'duplicate execution must not add observers');
@@ -50,6 +77,7 @@ for(const [mode,style,count]of [['dark','dark',21],['light','positron',20]])for(
  assert.notEqual(boot(i,store,{style}).id,id,'next instance chooses another palette within its family');
 }
 assert.equal(ids.size,41,'41 unique palettes: 20 light plus 20 dark plus original green');
+assert.equal(ramps.size,ids.size,'every palette has its own three-color gradient');
 assert.ok(ids.has('andymap'),'Original dark green remains selectable');
 const original=boot(0).values;
 for(const [key,value]of Object.entries({surface:'#172321',raised:'#293a33',soft:'#2b3e32',ink:'#f1f3e9',muted:'#bfcbc1',line:'#3b4a3e',accent:'#c2d9a5'}))assert.equal(original.get('--palette-'+key),value,'Preserve original '+key);
@@ -69,3 +97,4 @@ assert.match(css,/data-palette-tone=dark/);
 assert.match(css,/color-scheme:dark/);
 assert.ok(!/\.traffic-delay-label|\.radar-scale|\.wildlife-heat-scale|\.air-official-band|\.place-cluster|\.place-symbol|\.transit-route-badge/.test(css),'semantic data colors remain untouched');
 console.log(`PASS: ${ids.size} palettes in matching map-style families, ${checked} text contrast checks; minimum ${minimum.toFixed(2)}:1; stable per family, fresh on reload, storage failures handled.`);
+console.log(`PASS: ${ramps.size} distinct gradients, ${gradientChecks} text and focus checks across the stops and their blends; minimum gradient text contrast ${minGradient.toFixed(2)}:1.`);

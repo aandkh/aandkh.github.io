@@ -1,23 +1,7 @@
-# Permanent Vice sunset palette
+# November 18 release-day theme
 
-Owner direction November 18: retain today's vivid Vice City-inspired appearance,
-then make it permanent with 40% less vibrance starting tomorrow.
+Andymap shows the vivid Vice sunset theme during November 18, 2026 in St. Louis. At midnight CST on November 19 (06:00 UTC), the map switches to the light or dark session palette already selected for that visit. Open tabs switch on the timer or when they return from sleep. Later visits start with the regular randomized palette before the first paint.
 
-`today-palette.js` keeps vivid mode through November 18, 2026 America/Chicago.
-At `2026-11-19T06:00:00Z` (midnight CST), it switches to permanent soft mode.
-Open tabs switch with a timer; pageshow and visibility checks cover suspended tabs.
-All future visits immediately receive soft mode. No further deployment is needed.
+Each of the 41 session palettes supplies three coordinated colors in `session-palettes.js`. The shared rules in `today-palette.css` use those colors for the header, menus, search and primary controls. The rules adjust tint strength for dark and light maps. The glow is static. Forced-colors mode uses the browser’s control rendering.
 
-`scripts/build-vice-soft.py` generates the soft CSS from vivid CSS by multiplying
-HSL saturation and glow opacity by 0.60, preserving hue and lightness (with 8-bit
-rounding). It does not apply a filter to map content or recolor semantic data.
-Dark/light modes remain separate. No logos, tracking, storage, access, layout,
-pointer handling, or map behavior changes.
-
-Normal session palettes are retained underneath for potential future changes.
-To disable the Vice theme, remove the two today-palette tags from index.html.
-
-Verification: `node scripts/today-palette-test.mjs` tests midnight transition,
-long-term permanence, sleeping tabs, repeat initialization, and both palette
-families' text/focus contrast. `node scripts/session-palettes-test.mjs` checks the
-unchanged underlying palette system.
+Run `node scripts/today-palette-test.mjs` to check the transition, and `node scripts/session-palettes-test.mjs` to check every palette and the text and focus contrast across its gradients.

@@ -31,6 +31,8 @@ palette once; switching back restores the earlier document choice rather than
 randomizing again. Light and Streets share the same light choice. A shared link
 or saved view that restores a map style also receives the matching menu family.
 
+Each palette also defines three colors for the gradient and glow on headers, menus and actions. The release-day date switch and visual checks are described in [the theme notes](TODAY-PALETTE.md).
+
 ## Palette families
 
 The first nine alternatives adapt well-established editor/design palette families
