@@ -37,6 +37,15 @@ button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-vis
 .leaflet-top.leaflet-left{top:70px;left:6px}
 .leaflet-control-zoom a{color:var(--ink)!important;background:var(--surface-raised)!important;border-color:var(--line)!important}
 .leaflet-control-attribution{padding:3px 7px!important;font-size:9px!important;line-height:1.35!important;border-radius:5px 0 0 0}
+#map > .map-center-pin {
+ position: absolute;
+ left: 50%;
+ bottom: 50%;
+ transform: translateX(-50%);
+ z-index: 675;
+ pointer-events: none;
+ user-select: none;
+}
 #map-caption{display:none}
 #legend{bottom:30px;left:16px;max-width:calc(100% - 290px);max-height:100px;overflow:auto;gap:6px;z-index:490}
 .legend-pill{background:var(--surface-raised);border-color:var(--line);color:var(--ink);padding:8px 10px;font-size:11px;box-shadow:var(--ui-shadow)}
