@@ -80,6 +80,27 @@ test('a fresh neighbor beats a slower local station; at equal times the nearer o
  assert.equal(direction(selectMetroReadings([...reports,reading('G1169',2)],now),'n').id,'KSTL');
  assert.ok(selectMetroReadings(METRO_STATIONS.map(s=>reading(s.id,8)),now).every(r=>r.unavailable));
 });
+test('new measurements reach all four sectors when the raw CDN serves an older successful response',async()=>{
+ for(const originAvailable of [true,false]){
+  const urls=[];
+  const payload=age=>({schema:1,readings:METRO_STATIONS.map(s=>({...reading(s.id,age),feed:'wxalerts-cwop'}))});
+  const fetcher=async(url,options)=>{
+   urls.push(url);
+   if(url.includes('raw.githubusercontent'))return Response.json(payload(18));
+   if(url.includes('api.github.com')){
+    assert.equal(options.headers.Accept,'application/vnd.github.raw+json');
+    return originAvailable?Response.json(payload(1)):new Response(null,{status:403});
+   }
+   if(url.includes('cdn.jsdelivr'))return Response.json(payload(2));
+   return Response.json(url.includes('currents.json')?{data:[]}:{features:[]});
+  };
+  const opts={now,fetcher,responseCache:new Map(),observationCache:new Map()};
+  const [cards]=await Promise.all([metroWeatherReadings([],opts),loadRegionalWeather(opts)]);
+  assert.ok(cards.every(card=>card.observedAt===iso(originAvailable?1:2)));
+  assert.equal(urls.filter(u=>u.includes('api.github.com')).length,1);
+  assert.equal(urls.filter(u=>u.includes('cdn.jsdelivr')).length,originAvailable?0:1);
+ }
+});
 test('findU source-grid distances, fixed amateur transmitters and newly discovered weather positions are supported',()=>{
  const packet=(id,feed,dist,compass,coordinates={})=>({id,feed,distanceMiles:dist,compass,observedAt:iso(1),temperatureF:64,windMph:2,...coordinates});
  const rows=snapshotReports({schema:1,readings:[packet('G6014','findu-cwop',39.1,'E'),packet('G6295','findu-cwop',10.6,'S'),

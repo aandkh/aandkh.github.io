@@ -1,4 +1,4 @@
-import {weatherJson,weatherAbort} from './weather-request.js?v=20261118-station-feed';
+import {weatherJson,weatherAbort} from './weather-request.js?v=20261118-station-delivery';
 import {STATIONS,FINDU_RELOCATIONS} from './weather-stations.js?v=20261118-live-stations';
 
 export const MINUTE = 60000;
@@ -8,6 +8,8 @@ export const WEATHER_POLL = 30000;
 export const AIR_WIND_POLL = 2 * MINUTE;
 export const AIRPORT_URL = 'https://mesonet.agron.iastate.edu/api/1/currents.json?networkclass=ASOS&wfo=LSX';
 const SNAPSHOT = 'https://raw.githubusercontent.com/aandkh/aandkh.github.io/weather-observations-live/observations.json';
+const SNAPSHOT_API = 'https://api.github.com/repos/aandkh/aandkh.github.io/contents/observations.json?ref=weather-observations-live';
+const SNAPSHOT_CDN = 'https://cdn.jsdelivr.net/gh/aandkh/aandkh.github.io@weather-observations-live/observations.json';
 const range = (v,min,max) => Number.isFinite(v) && v >= min && v <= max;
 const inRegion = (lat,lng) => range(lat,38.1,39.2) && range(lng,-91.2,-89.4);
 const cleanId = id => typeof id === 'string' && /^[A-Z0-9][A-Z0-9-]{0,15}$/.test(id);
@@ -125,17 +127,24 @@ const extraHistories=['E1948','G6295','D4248','G1169','D0367','G3356','D6513','F
 const botanical={...STATIONS.get('MBGM7'),network:'MO_DCP'};
 export async function loadRegionalWeather({now=Date.now(),signal,fetcher=fetch,responseCache,onBatch,force=false}={}) {
  const reports=[];
- async function read(url,parse,ttl) {
+ async function read(url,parse,ttl,accept) {
   try {
-   const data=await weatherJson(url,{now,fetcher,signal,cache:responseCache,maxAge:ttl,timeout:6500,staleIfError:true,force,cacheMode:'no-cache'});
+   const data=await weatherJson(url,{now,fetcher,signal,cache:responseCache,maxAge:ttl,timeout:6500,staleIfError:true,force,cacheMode:'no-cache',accept});
    const rows=parse(data);
    if(rows.length&&!signal?.aborted){reports.push(...rows);onBatch?.(rows);}
    return rows;
   } catch(error){if(signal?.aborted)throw signal.reason||error;return [];}
  }
- // Visitors share each cache key. A CDN copy of the moving branch must not
- // hide a newly published report for the raw host's five-minute cache lifetime.
- const snapshot=read(SNAPSHOT+'?minute='+Math.floor(now/MINUTE),p=>snapshotReports(p,{now}),WEATHER_POLL);
+ // The raw host can resolve a moving branch to an older revision even on a new URL.
+ // Compare real observation times from the repository and the public CDN independently.
+ const parseSnapshot=p=>snapshotReports(p,{now});
+ const batch=Math.floor(now/(2*MINUTE));
+ const raw=read(SNAPSHOT+'?minute='+Math.floor(now/MINUTE),parseSnapshot,WEATHER_POLL);
+ const origin=read(SNAPSHOT_API+'&batch='+batch,parseSnapshot,2*MINUTE,'application/vnd.github.raw+json');
+ const snapshot=Promise.all([raw,origin]).then(groups=>{
+  if(groups.some(group=>group.some(r=>usableAge(r.observedAt,now,4*MINUTE))))return;
+  return read(SNAPSHOT_CDN+'?batch='+batch,parseSnapshot,2*MINUTE);
+ });
  const airports=read(AIRPORT_URL,p=>airportReports(p,{now}),2*MINUTE);
  const garden=read('https://mesonet.agron.iastate.edu/json/current.py?network=MO_DCP&station=MBGM7',p=>[iemSingle(botanical,p,now)].filter(Boolean),3*MINUTE);
  // Every cycle compares broad sources. The smaller histories have independent three-minute caches.

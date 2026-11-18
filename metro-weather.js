@@ -1,4 +1,4 @@
-import {CARD_MAX_AGE,loadRegionalWeather,usableAge,normalizeReading} from './regional-weather.js?v=20261118-live-stations';
+import {CARD_MAX_AGE,loadRegionalWeather,usableAge,normalizeReading} from './regional-weather.js?v=20261118-station-delivery';
 import {STATIONS} from './weather-stations.js?v=20261118-live-stations';
 
 export const OBSERVATION_MAX_AGE=CARD_MAX_AGE;
