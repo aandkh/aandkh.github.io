@@ -1,0 +1,45 @@
+name: Refresh regional temperature and wind
+on:
+  push:
+    branches: [main]
+    paths:
+      - scripts/refresh-weather-observations.py
+      - .github/workflows/weather-observations.yml
+  schedule:
+    - cron: '2-59/5 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: regional-weather-snapshot
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts/refresh-weather-observations.py
+          sparse-checkout-cone-mode: false
+      - name: Publish current observations
+        shell: bash
+        run: |
+          set -euo pipefail
+          branch=weather-observations-live
+          ref=refs/heads/$branch
+          upstream=$(git ls-remote --heads origin "$ref" | cut -f1)
+          if [[ -n "$upstream" ]]; then
+            git fetch --depth=1 origin "$ref"
+            [[ "$(git ls-tree --name-only FETCH_HEAD)" == "observations.json" ]]
+            git show FETCH_HEAD:observations.json > observations.json
+          fi
+          python scripts/refresh-weather-observations.py observations.json
+          blob=$(git hash-object -w observations.json)
+          tree=$(printf '100644 blob %s\tobservations.json\n' "$blob" | git mktree)
+          if [[ -n "$upstream" && "$(git rev-parse 'FETCH_HEAD^{tree}')" == "$tree" ]]; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          # This dedicated single-file ref holds only the current readings. No site rebuild or historical archive.
+          commit=$(git commit-tree "$tree" -m 'Latest regional temperature and wind observations')
+          git push --force-with-lease="$ref:$upstream" origin "$commit:$ref"

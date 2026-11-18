@@ -1,45 +1,60 @@
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
-const m=await import('../metro-weather.js');
-const now=Date.parse('2026-11-16T14:45:00Z'),at='2026-11-16T13:51:00Z',lambert=m.METRO_STATIONS.find(s=>s.id==='KSTL');
-const nws=m.stationObservation(lambert,{properties:{timestamp:at,temperature:{value:null,unitCode:'wmoUnit:degC'},windSpeed:{value:0,unitCode:'wmoUnit:km_h-1'},windDirection:{value:0}}},now);
-const iem=m.mesonetObservation(lambert,{id:'STL',network:'MO_ASOS',last_ob:{utc_valid:at,'airtemp[F]':36,'windspeed[kt]':0,'winddirection[deg]':0}},now);
-assert.equal(nws.temperatureF,null);assert.equal(iem.temperatureF,36);assert.equal(iem.windMph,0);
-assert.equal(m.bestStationObservation([nws,iem],now).source,iem.source,'same-station complete mirror rescues missing NWS temperature');
-const missing=m.mesonetObservation(lambert,{id:'STL',last_ob:{utc_valid:at,'airtemp[F]':36,'windspeed[kt]':null}},now);assert.equal(missing.windMph,null,'missing wind is never calm');
-assert.equal(m.mesonetObservation(lambert,{id:'SUS',last_ob:{utc_valid:at,'airtemp[F]':80,'windspeed[kt]':5}},now).observedAt,null,'wrong station rejected');
-assert.equal(m.bestStationObservation([iem],now+7200000),null,'old readings expire by observation time');
-assert.equal(m.stationObservation(lambert,{properties:{timestamp:'2026-11-16T15:00:00Z',temperature:{value:5,unitCode:'wmoUnit:degC'}}},now).temperatureF,null,'future timestamps rejected');
-const primaries=m.METRO_STATIONS.map(s=>({...s,temperatureF:40,windMph:3,observedAt:at}));
-const backup={id:'KALN',label:'Alton',lat:38.8897,lng:-90.0316,temperatureF:39,windMph:2,observedAt:at};
-const chosen=m.selectMetroReadings([...primaries.filter(s=>s.id!=='KSTL'),backup],now);
-assert.equal(chosen.length,4);assert.equal(chosen[1].id,'KALN');assert.equal(chosen[1].label,'Alton');assert.equal(chosen[1].replacementFor,'Lambert');assert.equal(chosen[1].slot,'n');assert.equal(chosen[1].lat,backup.lat);assert.equal(new Set(chosen.map(r=>r.id)).size,4,'fallback never duplicates another primary card');
-const unavailable=m.selectMetroReadings([],now);assert.equal(unavailable.length,4);assert.ok(unavailable.every(r=>r.temperatureF===null&&r.windMph===null));
-// A backend outage still gets all four cards from independent observation mirrors.
-let requests=0;
-const fetcher=async url=>{requests++;const id=new URL(url).searchParams.get('station');if(!id){if(!url.includes('/C7014/'))throw Error('NWS source outage');return{ok:true,json:async()=>({properties:{timestamp:at,temperature:{value:5,unitCode:'wmoUnit:degC'},windSpeed:{value:3,unitCode:'wmoUnit:km_h-1'}}})};}return{ok:true,json:async()=>({id,network:id==='MBGM7'?'MO_DCP':'MO_ASOS',last_ob:{utc_valid:at,'airtemp[F]':id==='STL'?36:38,'windspeed[kt]':2}})}};
-const options={now,fetcher,responseCache:new Map(),observationCache:new Map()};
-const result=await m.metroWeatherReadings([],options);assert.equal(result.length,4);assert.ok(result.every(r=>Number.isFinite(r.temperatureF)&&r.windMph>0));assert.equal(result.find(r=>r.id==='KSTL').temperatureF,36);assert.equal(requests,6,'reserve stations not fetched when primaries are complete');
-const retained=await m.metroWeatherReadings([],{...options,now:now+180000,fetcher:async()=>{throw Error('All sources down')}});assert.equal(retained.find(r=>r.id==='KSTL').observedAt,at,'failure keeps actual observation time');
-const expired=await m.metroWeatherReadings([],{...options,now:now+3*3600000,fetcher:async()=>{throw Error('All sources down')}});assert.ok(expired.every(r=>r.temperatureF===null&&r.windMph===null),'failure cannot make stale values current');
-console.log('PASS: Lambert null-temperature rescue, station identity, actual timestamps, missing wind, regional fallback, backend outage and stale-cache expiry');
+import test from 'node:test';
+import {selectMetroReadings,metroWeatherReadings,METRO_STATIONS} from '../metro-weather.js';
+import {nwsReport,iemSingle,airportReports,snapshotReports,loadRegionalWeather,CARD_MAX_AGE} from '../regional-weather.js';
+import {weatherMarkerReadings} from '../weather-readings.js';
+import {STATIONS} from '../weather-stations.js';
 
-const south=primaries.find(s=>s.id==='C7014');assert.equal(south.lat,38.445);assert.equal(south.lng,-90.414);const southBackup={id:'E1948',label:'Mehlville',lat:38.47667,lng:-90.3555,temperatureF:40,windMph:2,observedAt:at};const recovered=m.selectMetroReadings([...primaries.filter(s=>s.id!=='C7014'),southBackup],now);assert.equal(recovered[0].id,'E1948');assert.equal(recovered[0].replacementFor,'Arnold');assert.equal(recovered[0].lat,southBackup.lat);
-
-// The NWS latest endpoint can omit fields present in its recent collection.
-const calls=[];
-const historyFetcher=async url=>{
- calls.push(url);
- if(url.includes('/C7014/'))return{ok:true,json:async()=>url.includes('?limit=6')?{features:[{properties:{timestamp:at,temperature:{value:-1.11,unitCode:'wmoUnit:degC'},windSpeed:{value:0,unitCode:'wmoUnit:km_h-1'}}}]}:{properties:{timestamp:at,temperature:{value:null,unitCode:'wmoUnit:degC'},windSpeed:{value:null,unitCode:'wmoUnit:km_h-1'}}}};
- return fetcher(url);
-};
-const sameStation=await m.metroWeatherReadings([],{now,fetcher:historyFetcher,responseCache:new Map(),observationCache:new Map()});
-assert.equal(sameStation[0].id,'C7014');
-assert.equal(sameStation[0].replacementFor,null);
-assert.equal(sameStation[0].observedAt,at);
-assert.equal(sameStation[0].sourceUrl,'https://api.weather.gov/stations/C7014/observations?limit=6');
-assert.equal(sameStation[0].windMph,0);
-assert.ok(Math.abs(sameStation[0].temperatureF-30.002)<0.01);
-assert.equal(calls.filter(u=>u.includes('/C7014/observations?limit=6')).length,1);
-assert.ok(!calls.some(u=>u.includes('/E1948/')||u.includes('station=SET')),'same-station recovery avoids reserve requests');
-console.log('PASS: missing latest NWS values recover from bounded same-station history');
+const now=Date.parse('2026-11-18T18:05:00Z'),minute=60000;
+const iso=age=>new Date(now-age*minute).toISOString();
+const reading=(id,age,extra={})=>({...STATIONS.get(id),observedAt:iso(age),temperatureF:63,windMph:3,windFromDeg:210,...extra});
+const nws=(at,over={})=>({properties:{timestamp:at,temperature:{value:14,unitCode:'wmoUnit:degC',qualityControl:'V'},windSpeed:{value:0,unitCode:'wmoUnit:km_h-1',qualityControl:'V'},windDirection:{value:0,unitCode:'wmoUnit:degree_(angle)',qualityControl:'V'},...over}});
+const direction=(r,slot)=>r.find(x=>x.slot===slot);
+test('newest complete report wins a fixed sector even with the old primary still reporting',()=>{
+ const primaries=METRO_STATIONS.map(s=>reading(s.id,16));
+ const selected=selectMetroReadings([...primaries,reading('E1948',4),reading('F6176',2),reading('G6790',1),reading('MOA28',3),reading('G2231',0)],now);
+ assert.deepEqual(selected.map(r=>r.id),['E1948','F6176','G6790','MOA28']);
+ assert.equal(direction(selected,'s').replacementFor,'Arnold');
+ assert.equal(direction(selected,'w').lng,STATIONS.get('G6790').lng);
+ const distance=(a,b)=>Math.hypot((a.lat-b.lat)*111.2,(a.lng-b.lng)*86.8);
+ for(let i=0;i<4;i++)for(let j=0;j<i;j++)assert.ok(distance(selected[i],selected[j])>=.60*distance(METRO_STATIONS[i],METRO_STATIONS[j])-.001);
+ assert.equal(new Set(selected.map(r=>r.id)).size,4);
+});
+test('out-of-sector clusters, expired and future updates cannot fill another corner',()=>{
+ const old=selectMetroReadings([reading('C7014',20),reading('KSTL',-1),reading('G2231',1),...Array(8).fill(reading('G6295',2))],now);
+ assert.equal(old.filter(x=>x.observedAt).length,1);assert.equal(old[0].id,'G6295');
+ const partial=selectMetroReadings([reading('C7014',2,{windMph:null}),reading('E1948',18),reading('G6295',30)],now)[0];
+ assert.equal(partial.id,'E1948');assert.equal(selectMetroReadings([reading('C7014',2,{windMph:null})],now)[0].windMph,null);
+ const after=weatherMarkerReadings( selectMetroReadings(METRO_STATIONS.map(s=>reading(s.id,1)),now), now+CARD_MAX_AGE);
+ assert.equal(after.length,4);assert.ok(after.every(r=>r.temperatureF===null && r.windMph===null && !r.observedAt));
+});
+test('station-level QC, ID, units and missing measurements remain intact',()=>{
+ const s=STATIONS.get('KSTL');
+ const live=nwsReport(s,nws(iso(3)),now);assert.equal(live.windMph,0);assert.equal(live.temperatureF,57.2);
+ assert.equal(nwsReport(s,nws(iso(3),{temperature:{value:30,unitCode:'wmoUnit:degC',qualityControl:'X'}}),now).temperatureF,null);
+ assert.equal(nwsReport(s,nws(iso(3),{station:'https://api.weather.gov/stations/KSUS'}),now),null);
+ assert.equal(nwsReport(s,nws(iso(-1)),now),null);
+ const direct=iemSingle({...s,iemId:'STL',network:'MO_ASOS'},{id:'STL',last_ob:{utc_valid:iso(2),'airtemp[F]':36,'windspeed[kt]':null}},now);
+ assert.equal(direct.temperatureF,36);assert.equal(direct.windMph,null);
+ assert.equal(airportReports({data:[{network:'MO_ASOS',station:'STL',lat:s.lat,lon:s.lng,sknt:6,tmpf:64,drct:180,utc_valid:iso(2)}]},{now})[0].id,'KSTL');
+ const snap={schema:1,readings:[{...reading('G6295',2),feed:'wxalerts-cwop'},{...reading('G6790',45),feed:'wxalerts-cwop'},null]};
+ assert.equal(snapshotReports(snap,{now}).length,1);assert.equal(snapshotReports(snap,{now})[0].label,'Imperial');
+});
+test('source outages preserve dates and repeated reads share source requests with air',async()=>{
+ const calls=[],fetcher=async (url,options)=>{
+  calls.push(url);assert.equal(options.cache,'no-cache');
+  if(url.includes('raw.githubusercontent'))return Response.json({schema:1,readings:METRO_STATIONS.map(s=>({...reading(s.id,3),feed:'wxalerts-cwop'}))});
+  if(url.includes('C7014/'))return Response.json({features:[nws(iso(1)),nws(iso(9))]});
+  return Response.json(url.includes('currents.json')?{data:[]}:{});
+ };
+ const opts={now,fetcher,responseCache:new Map(),observationCache:new Map()};
+ const [cards,all]=await Promise.all([metroWeatherReadings([],{...opts}),loadRegionalWeather(opts)]);
+ assert.equal(cards.length,4);assert.ok(cards.every(r=>r.observedAt));assert.equal(cards[0].observedAt,iso(1));
+ assert.ok(all.length>4);assert.equal(calls.filter(u=>u.includes('raw.githubusercontent')).length,1);
+ assert.equal(calls.filter(u=>u.includes('C7014/')).length,1);
+ const down=async()=>{throw Error('outage');};
+ const retained=await metroWeatherReadings([],{...opts,fetcher:down,now:now+3*minute});
+ assert.equal(retained[0].observedAt,iso(1));
+ const expired=await metroWeatherReadings([],{...opts,fetcher:down,now:now+46*minute});
+ assert.ok(expired.every(r=>r.unavailable && !r.observedAt));
+});

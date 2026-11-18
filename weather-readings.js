@@ -12,7 +12,13 @@ export function windPresentation(reading){
  return{text:Math.round(speed)+' mph · '+direction,rotation:(degrees+180)%360,label:'Wind from '+direction};
 }
 export function weatherMarkerReadings(readings,now=Date.now()){
- return (Array.isArray(readings)?readings:[]).filter(r=>r&&typeof r.id==='string'&&Number.isFinite(r.lat)&&Number.isFinite(r.lng)&&r.lat>=38.1&&r.lat<=39.2&&r.lng>=-91.2&&r.lng<=-89.4&&Number.isFinite(Date.parse(r.expiresAt))&&Date.parse(r.expiresAt)>now);
+ return (Array.isArray(readings)?readings:[]).flatMap(r=>{
+  if(!r || typeof r.id!=='string' || !Number.isFinite(r.lat) || !Number.isFinite(r.lng) ||
+    r.lat<38.1 || r.lat>39.2 || r.lng< -91.2 || r.lng> -89.4) return [];
+  if(Date.parse(r.expiresAt)>now && Date.parse(r.observedAt)<=now)return [r];
+  if(!['n','s','e','w'].includes(r.slot))return [];
+  return [{...r,unavailable:true,observedAt:null,expiresAt:null,temperatureF:null,windMph:null,windFromDeg:null,windVariable:false}];
+ });
 }
 const overlapArea=(a,b,gap=0)=>Math.max(0,Math.min(a.x+a.w+gap,b.x+b.w+gap)-Math.max(a.x,b.x))*Math.max(0,Math.min(a.y+a.h+gap,b.y+b.h+gap)-Math.max(a.y,b.y));
 // Four cards are solved together: obstacle clearance wins over distance to a
@@ -67,7 +73,7 @@ export function weatherCardText(reading,{forecast=false}={}){
  const windText=Number.isFinite(r.windMph)&&r.windMph>=0?Math.round(r.windMph)+' mph':'— mph';
  const timeTitle=(forecast?'Forecast: ':'Observed: ')+fullTime+(r.source?' · '+r.source:'')+(r.replacementFor?' · Nearby replacement for '+r.replacementFor:'');
  return{temperature,windText,rotation:wind.rotation,windLabel:wind.label,time,timeTitle,wideWind:Number.isFinite(r.windMph)&&Math.round(r.windMph)>=100,
-  accessible:'Forecast for '+r.label+'. '+(temperature==='—'?'Temperature unavailable':temperature)+'. '+wind.text+'. '+wind.label+'. '+timeTitle};
+  accessible:(forecast?'Forecast for ':'Weather at ')+r.label+'. '+(temperature==='—'?'Temperature unavailable':temperature)+'. '+wind.text+'. '+wind.label+'. '+timeTitle};
 }
 // Cut leader strokes around labels so they never draw across incident text.
 export function weatherLeaderSegments(start,end,obstacles=[]){

@@ -8,7 +8,7 @@ import {resolveSearchFeature} from '../search-catalog.js';
 import {BY_ID} from '../catalog.js';
 import {EVENT_LAYERS,eventDiscoverable} from '../event-lifecycle.js';
 const source=fs.readFileSync(new URL('../app.js',import.meta.url),'utf8');
-const production=source.slice(source.indexOf('const spotUI=createSpotExplorer('),source.indexOf('async function refreshWeatherReadings()'));
+const production=source.slice(source.indexOf('const spotUI=createSpotExplorer('),source.indexOf('async function refreshWeatherReadings('));
 const basemap=source.slice(source.indexOf('function applyMapStyle(style){'),source.indexOf("try{mapStyle=initial?.mapStyle"));
 assert(production.includes('async function inspectSpot'));
 const plain=value=>JSON.parse(JSON.stringify(value));

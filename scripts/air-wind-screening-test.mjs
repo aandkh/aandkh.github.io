@@ -43,7 +43,7 @@ test('IEM units, station age, calm, variable winds and dry-weather fields retain
  const raw={lat:38.75,lon:-90.37,station:'STL',network:'MO_ASOS',utc_valid:'2026-11-18T17:51Z',sknt:10,drct:210,raw:'KSTL 181751Z 21010KT',relh:42,phour:0};
  const parse=r=>airportWinds({data:[{...raw,...r}]},{now});
  assert.ok(Math.abs(parse({})[0].windMph-11.5078)<.001);assert.equal(parse({})[0].dryWeather,true);
- assert.equal(parse({phour:null})[0].dryWeather,false);assert.equal(parse({drct:null,raw:'VRB06KT'})[0].windVariable,true);
+ assert.equal(parse({phour:null})[0].dryWeather,null);assert.equal(parse({drct:null,raw:'VRB06KT'})[0].windVariable,true);
  assert.equal(parse({raw:'19006KT 130V240'})[0].windVariable,true);assert.equal(parse({sknt:0})[0].windMph,0);
  for(const r of [{utc_valid:'2026-11-18T15:51Z'},{sknt:null},{network:'KS_ASOS'}])assert.deepEqual(parse(r),[]);
 });
@@ -64,4 +64,22 @@ test('regional inventory contains mapped disposal footprints, duplicate permits 
  }
  const ball={lat:38.703645,lng:-90.422295};
  assert.match(landfillAt(rows,ball)?.properties.landfill.site.name||'',/Missouri Pass/);
+});
+
+test('fresh neighborhood wind can replace an older nearby airport and expires at 45 minutes',()=>{
+ const old={...airport,lat:site.lat,windFromDeg:270,observedAt:new Date(now-37*60000).toISOString()};
+ const recent={...airport,lat:site.lat+.025,windFromDeg:90,observedAt:new Date(now-4*60000).toISOString()};
+ assert.equal(build(null,{airportReadings:[old,recent]})[0].properties.landfill.wind.toward,270);
+ const expired={...recent,observedAt:new Date(now-45*60000).toISOString()};
+ assert.equal(build(expired)[0].properties.landfill.wind,null);
+ const closeCalm={...recent,lat:site.lat,windMph:0};
+ assert.equal(build(null,{airportReadings:[recent,closeCalm]})[0].properties.landfill.wind.toward,null);
+});
+test('ash uses nearby dry evidence only with recent strong wind and respects a measured wet condition',()=>{
+ const sites=[{...site,profile:'ash'}];
+ const rapid={...airport,windMph:16,observedAt:new Date(now-4*60000).toISOString()};
+ const proof={...rapid,lat:rapid.lat+.02,dryWeather:true};
+ assert.ok(build(null,{sites,airportReadings:[rapid,proof]})[0].properties.landfill.wind.drySupport);
+ assert.equal(build(null,{sites,airportReadings:[{...rapid,dryWeather:false},proof]}).length,0);
+ assert.equal(build(null,{sites,airportReadings:[rapid,{...proof,observedAt:new Date(now-35*60000).toISOString()}]}).length,0);
 });

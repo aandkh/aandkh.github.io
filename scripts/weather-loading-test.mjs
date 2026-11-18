@@ -22,7 +22,9 @@ const richer={weather:{forecastUpdatedAt:stamp,hourly:[{time:new Date(now).toISO
  const backend=deferred(),nws=deferred(),updates=[];let completed=false;
  const fetcher=async url=>{
   if(url.includes('api.weather.gov'))return nws.promise;
-  const id=new URL(url).searchParams.get('station');return Response.json({id,network:id==='MBGM7'?'MO_DCP':'MO_ASOS',last_ob:{utc_valid:stamp,'airtemp[F]':51,'windspeed[kt]':2}});
+  if(url.includes('currents.json'))return Response.json({data:METRO_STATIONS.filter(s=>['KSTL','KSUS'].includes(s.id)).map(s=>({station:s.iemId,network:s.network,lat:s.lat,lon:s.lng,utc_valid:stamp,tmpf:51,sknt:2}))});
+  if(url.includes('current.py'))return Response.json({id:'MBGM7',network:'MO_DCP',last_ob:{utc_valid:stamp,'airtemp[F]':51,'windspeed[kt]':2}});
+  return Response.json({schema:1,readings:[]});
  };
  const pending=metroWeatherReadings([],{fetcher,now,responseCache:new Map(),observationCache:new Map(),loadBackend:()=>backend.promise,onUpdate:value=>updates.push(value)}).then(result=>{completed=true;return result;});
  await tick();assert.equal(completed,false);assert(updates.some(rows=>rows.filter(r=>r.temperatureF===51).length===3),'three IEM stations paint before slow NWS/backend');
