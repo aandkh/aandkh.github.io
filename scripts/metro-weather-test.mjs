@@ -20,6 +20,12 @@ test('newest complete report wins a fixed sector even with the old primary still
  for(let i=0;i<4;i++)for(let j=0;j<i;j++)assert.ok(distance(selected[i],selected[j])>=.60*distance(METRO_STATIONS[i],METRO_STATIONS[j])-.001);
  assert.equal(new Set(selected.map(r=>r.id)).size,4);
 });
+test('quiet northern area can use St. Peters without crowding the western station',()=>{
+ const quiet=[reading('C7014',10),reading('KSTL',24),reading('E8100',15),reading('D0367',3),reading('MOA28',5)];
+ assert.deepEqual(selectMetroReadings(quiet,now).map(r=>r.id),['C7014','E8100','D0367','MOA28']);
+ assert.equal(direction(selectMetroReadings([...quiet,reading('F6176',4)],now),'n').id,'F6176');
+ assert.equal(direction(selectMetroReadings(quiet,now+6*minute),'n').unavailable,true);
+});
 test('out-of-sector clusters, expired and future updates cannot fill another corner',()=>{
  const old=selectMetroReadings([reading('C7014',20),reading('KSTL',-1),reading('G2231',1),...Array(8).fill(reading('G6295',2))],now);
  assert.equal(old.filter(x=>x.observedAt).length,1);assert.equal(old[0].id,'G6295');

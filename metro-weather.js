@@ -13,14 +13,14 @@ const complete=r=>Number.isFinite(r?.temperatureF) && Number.isFinite(r?.windMph
 const current=(r,now)=>r && usableAge(r.observedAt,now,CARD_MAX_AGE) && (Number.isFinite(r.temperatureF)||Number.isFinite(r.windMph));
 const xy=(a,b)=>[(b.lng-a.lng)*86.8,(b.lat-a.lat)*111.2];
 const distance=(a,b)=>Math.hypot(...xy(a,b));
-function eligible(station,anchor) {
+function eligible(station,anchor,expanded=false) {
  const [x,y]=xy(anchor,station);
- if (Math.hypot(x,y)>12 || station.lat<38.40 || station.lat>38.81 || station.lng< -90.69 || station.lng> -90.17) return false;
- // Each instrument belongs to one geographical sector. Pairwise spacing is enforced during selection.
+ if (Math.hypot(x,y)>(expanded?20:12) || station.lat<38.40 || station.lat>38.81 || station.lng< -90.69 || station.lng> -90.17) return false;
+ // A quiet sector may borrow a station up to four km across its nearest-sector boundary.
  return METRO_STATIONS.every(other=>{
   if(other===anchor)return true;
   const [dx,dy]=xy(anchor,other);
-  return x*dx+y*dy<.5*(dx*dx+dy*dy);
+  return x*dx+y*dy<.5*(dx*dx+dy*dy)+(expanded?4*Math.hypot(dx,dy):0);
  });
 }
 function compareRows(a,b,anchor) {
@@ -32,11 +32,15 @@ export function bestStationObservation(rows,now=Date.now(),anchor) {
  return rows.filter(r=>current(r,now) && (!anchor || eligible(r,anchor))).sort((a,b)=>compareRows(a,b,anchor))[0]||null;
 }
 function spaced(chosen,r,i) {
- return chosen.every((other,j)=>distance(other,r)>=.60*distance(METRO_STATIONS[j],METRO_STATIONS[i]));
+ return chosen.every((other,j)=>{
+  const [x,y]=xy(other,r),[a,b]=xy(METRO_STATIONS[j],METRO_STATIONS[i]);
+  return Math.hypot(x,y)>=.60*Math.hypot(a,b) && x*a+y*b>=.40*(a*a+b*b);
+ });
 }
-function score(selection,now) {
+function score(selection,now,local) {
  const ages=selection.filter(r=>r.observedAt).map(r=>now-Date.parse(r.observedAt));
- return [4-selection.filter(complete).length,4-ages.length,Math.max(0,...ages),ages.reduce((sum,v)=>sum+v,0),
+ const borrowed=selection.filter((r,i)=>r.observedAt && !local[i].has(r)).length;
+ return [4-selection.filter(complete).length,4-ages.length,borrowed,Math.max(0,...ages),ages.reduce((sum,v)=>sum+v,0),
   selection.reduce((sum,r,i)=>sum+distance(r,METRO_STATIONS[i]),0)];
 }
 function lowerScore(a,b) {
@@ -44,8 +48,11 @@ function lowerScore(a,b) {
  return false;
 }
 export function selectMetroReadings(candidates,now=Date.now()) {
- const lists=METRO_STATIONS.map(anchor=>{
-  const sorted=candidates.filter(r=>current(r,now)&&eligible(r,anchor)).sort((a,b)=>compareRows(a,b,anchor));
+ const reports=candidates.filter(r=>current(r,now));
+ const local=METRO_STATIONS.map(anchor=>new Set(reports.filter(r=>eligible(r,anchor))));
+ const lists=METRO_STATIONS.map((anchor,i)=>{
+  const sorted=reports.filter(r=>eligible(r,anchor,true)).sort((a,b)=>
+   Number(complete(b))-Number(complete(a)) || Number(local[i].has(b))-Number(local[i].has(a)) || compareRows(a,b,anchor));
   const distinct=[];
   for(const r of sorted){
    if(distinct.some(other=>other.id===r.id || distance(other,r)<.15))continue;
@@ -61,7 +68,7 @@ export function selectMetroReadings(candidates,now=Date.now()) {
   function choose(chosen){
    const i=chosen.length;
    if(i===lists.length){
-    const candidateScore=score(chosen,now);
+    const candidateScore=score(chosen,now,local);
     if(!bestScore||lowerScore(candidateScore,bestScore)){selected=chosen;bestScore=candidateScore;}
     return;
    }
