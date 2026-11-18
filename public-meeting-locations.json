@@ -109,6 +109,17 @@
     "source": "US Census Geocoder",
     "sourceUrl": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=4220+Duncan+Ave+St.+Louis%2C+MO+63110&benchmark=Public_AR_Current&format=json"
   },
+  "4543 magnolia ave. st. louis, mo 63110": {
+    "address": "4543 Magnolia Ave. St. Louis, MO 63110",
+    "coordinates": [
+      -90.264422877346,
+      38.609476791773
+    ],
+    "locationAccuracy": "Approximate published street address · Census address interpolation",
+    "matchedAddress": "4543 MAGNOLIA AVE, SAINT LOUIS, MO, 63110",
+    "source": "US Census Geocoder",
+    "sourceUrl": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=4543+Magnolia+Ave.+St.+Louis%2C+MO+63110&benchmark=Public_AR_Current&format=json"
+  },
   "5595 grand drive in forest park, st. louis st. louis, mo 63112": {
     "address": "5595 Grand Drive in Forest Park, St. Louis St. Louis, MO 63112",
     "coordinates": [

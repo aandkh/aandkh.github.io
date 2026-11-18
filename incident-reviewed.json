@@ -1,5 +1,5 @@
 {
-  "reviewedAt": "2026-11-17T15:24:11.004855+00:00",
+  "reviewedAt": "2026-11-18T12:04:28.818648+00:00",
   "features": [
     {
       "type": "Feature",
@@ -1341,10 +1341,87 @@
         "deaths": 1,
         "severity": "fatal"
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.299,
+          38.774
+        ]
+      },
+      "properties": {
+        "id": "incident:county-florissant-s-waterford-shooting-20261117",
+        "title": "Shooting injury · South Waterford, Florissant",
+        "incidentAt": "2026-11-17T12:30:00-06:00",
+        "incidentDate": "2026-11-17",
+        "incidentTimeAccuracy": "approximate",
+        "incidentKind": "shooting",
+        "incidentTypes": [
+          "shooting"
+        ],
+        "jurisdiction": "county",
+        "address": "1400 block of South Waterford Drive, Florissant, MO",
+        "sourceId": "county-reviewed-news",
+        "source": "First Alert 4 · Florissant Police reporting",
+        "sourceUrl": "https://www.firstalert4.com/2026/11/17/florissant-police-investigating-shooting/",
+        "url": "https://www.firstalert4.com/2026/11/17/florissant-police-investigating-shooting/",
+        "sourceCheckedAt": "2026-11-18T12:04:28.818648+00:00",
+        "description": "Florissant police reported a shooting shortly before 12:30 p.m. on November 17 in the parking lot of Grandview Garden Apartments. One person was shot in the lower leg and taken to a hospital. The investigation remained ongoing.",
+        "locationAccuracy": "Approximate reported public apartment-complex block, rounded to about 100 m; not an exact position within the parking lot.",
+        "locationSourceUrl": "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?SingleLine=1400+South+Waterford%2C+Florissant%2C+Missouri&f=json&outFields=Addr_type%2CMatch_addr%2CLongLabel%2CScore&maxLocations=3",
+        "color": "#c52f73",
+        "injuries": 1,
+        "severity": "injury"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.337,
+          38.763
+        ]
+      },
+      "properties": {
+        "id": "incident:county-berkeley-road-rage-fatal-shooting-20260922",
+        "title": "Fatal road-rage shooting · North Hanley and Frost",
+        "incidentAt": "2026-09-22T23:00:00-05:00",
+        "incidentDate": "2026-09-22",
+        "incidentTimeAccuracy": "approximate",
+        "incidentKind": "shooting",
+        "incidentTypes": [
+          "shooting"
+        ],
+        "jurisdiction": "county",
+        "address": "North Hanley Road at Frost Avenue, Berkeley, MO",
+        "sourceId": "county-reviewed-news",
+        "source": "First Alert 4 · Berkeley Police and St. Louis County Prosecutor reporting",
+        "sourceUrl": "https://www.firstalert4.com/2026/11/18/no-charges-be-issued-fatal-berkeley-road-rage-shooting/",
+        "url": "https://www.firstalert4.com/2026/11/18/no-charges-be-issued-fatal-berkeley-road-rage-shooting/",
+        "sourceCheckedAt": "2026-11-18T12:04:28.818648+00:00",
+        "description": "Berkeley police reported that a road-rage confrontation continued to an ATM near North Hanley and Frost around 11 p.m. on September 22. One driver fired five times, killing the other driver. Police reported both people had guns; the County Prosecutor's Office later said no charges would be filed after reviewing the evidence.",
+        "locationAccuracy": "Approximate reported public intersection and ATM area, rounded to about 100 m; not an exact position within the property.",
+        "locationSourceUrl": "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?SingleLine=North+Hanley+Road+and+Frost+Avenue%2C+Berkeley%2C+Missouri&f=json&outFields=Addr_type%2CMatch_addr%2CLongLabel%2CScore&maxLocations=3",
+        "color": "#c52f73",
+        "deaths": 1,
+        "severity": "fatal",
+        "fatalityEvidence": [
+          {
+            "category": "other-homicide",
+            "deaths": 1,
+            "sourceUrl": "https://www.firstalert4.com/2026/11/18/no-charges-be-issued-fatal-berkeley-road-rage-shooting/",
+            "summary": "Berkeley police reported one driver fired five times and killed the other driver during the confrontation; prosecutors later declined charges.",
+            "checkedAt": "2026-11-18T12:04:28.818648+00:00"
+          }
+        ]
+      }
     }
   ],
   "sourceReviews": {
-    "county-reviewed-news": "2026-11-17T15:22:23.630229+00:00",
+    "county-reviewed-news": "2026-11-18T12:04:28.818648+00:00",
     "county-releases": "2026-11-15T19:44:02.622984+00:00",
     "city-releases": "2026-11-15T19:44:02.622984+00:00",
     "county-chesterfield-bulletins": "2026-11-16T18:17:53.095226+00:00",

@@ -462,6 +462,42 @@
       "title": "Woman injured in rollover crash on I-70 in St. Louis County",
       "url": "https://www.firstalert4.com/2026/11/16/woman-injured-rollover-crash-i-70-st-louis-county/"
     },
+    "https://www.firstalert4.com/2026/11/17/florissant-police-investigating-shooting/": {
+      "changedAt": "2026-11-18T11:58:48.099669+00:00",
+      "discoveredAt": "2026-11-18T11:58:48.099669+00:00",
+      "publishedAt": "2026-11-17T19:37:59+00:00",
+      "review": {
+        "checkedAt": "2026-11-18T12:05:18.593421+00:00",
+        "disposition": "mapped",
+        "note": "Verified Nov. 17 occurrence, approximate public block and one reported injury; added stable reviewed incident.",
+        "revision": "1d56dd2d28542d2675951233c91be0742399431a2b81554e4a91301c5f53b5d6"
+      },
+      "revision": "1d56dd2d28542d2675951233c91be0742399431a2b81554e4a91301c5f53b5d6",
+      "sources": [
+        "firstalert-county",
+        "firstalert-crime"
+      ],
+      "title": "Florissant police investigating shooting",
+      "url": "https://www.firstalert4.com/2026/11/17/florissant-police-investigating-shooting/"
+    },
+    "https://www.firstalert4.com/2026/11/17/man-admits-shooting-ballwin-officer/": {
+      "changedAt": "2026-11-18T11:58:48.099669+00:00",
+      "discoveredAt": "2026-11-18T11:58:48.099669+00:00",
+      "publishedAt": "2026-11-17T18:19:45+00:00",
+      "review": {
+        "checkedAt": "2026-11-18T12:05:18.807885+00:00",
+        "disposition": "historical-followup",
+        "note": "Verified this is a 2016 shooting sentencing follow-up, not a new 2026 incident.",
+        "revision": "df927cdf35093bddc291448636aa49170fb99efc2c8718963125bd72b5a2f5df"
+      },
+      "revision": "df927cdf35093bddc291448636aa49170fb99efc2c8718963125bd72b5a2f5df",
+      "sources": [
+        "firstalert-county",
+        "firstalert-crime"
+      ],
+      "title": "Man admits to shooting Ballwin officer",
+      "url": "https://www.firstalert4.com/2026/11/17/man-admits-shooting-ballwin-officer/"
+    },
     "https://www.firstalert4.com/2026/11/17/parents-seek-safety-details-classes-resume-after-warrenton-school-stabbing/": {
       "changedAt": "2026-11-17T15:20:52.330050+00:00",
       "discoveredAt": "2026-11-17T15:20:52.330050+00:00",
@@ -478,6 +514,23 @@
       ],
       "title": "Parents seek safety details as classes resume after Warrenton school stabbing",
       "url": "https://www.firstalert4.com/2026/11/17/parents-seek-safety-details-classes-resume-after-warrenton-school-stabbing/"
+    },
+    "https://www.firstalert4.com/2026/11/17/police-man-orders-doordash-hospital-shoots-delivery-drivers-after-complaints-with-order/": {
+      "changedAt": "2026-11-18T11:58:48.099669+00:00",
+      "discoveredAt": "2026-11-18T11:58:48.099669+00:00",
+      "publishedAt": "2026-11-17T20:35:12+00:00",
+      "review": {
+        "checkedAt": "2026-11-18T12:05:18.467168+00:00",
+        "disposition": "already-mapped",
+        "note": "Verified Nov. 14 occurrence at Cardinal Glennon; already mapped as City case 26042686 at 1400 S Grand.",
+        "revision": "12624d653662b1e7dd63862f6c0a18de1760cadf77cc7d511e3bc9347fda2434"
+      },
+      "revision": "12624d653662b1e7dd63862f6c0a18de1760cadf77cc7d511e3bc9347fda2434",
+      "sources": [
+        "firstalert-crime"
+      ],
+      "title": "Police: Man orders DoorDash to hospital, shoots at delivery drivers after complaints with order",
+      "url": "https://www.firstalert4.com/2026/11/17/police-man-orders-doordash-hospital-shoots-delivery-drivers-after-complaints-with-order/"
     },
     "https://www.firstalert4.com/2026/11/17/police-pursuit-ends-crash-closing-lanes-westbound-i-70-st-peters/": {
       "changedAt": "2026-11-17T15:20:52.330050+00:00",
@@ -512,11 +565,31 @@
       ],
       "title": "POLICE: Woman arrested, accused of threatening school staff and students",
       "url": "https://www.firstalert4.com/2026/11/17/police-woman-arrested-accused-threatening-school-staff-students/"
+    },
+    "https://www.firstalert4.com/2026/11/18/no-charges-be-issued-fatal-berkeley-road-rage-shooting/": {
+      "changedAt": "2026-11-18T11:58:48.099669+00:00",
+      "discoveredAt": "2026-11-18T11:58:48.099669+00:00",
+      "publishedAt": "2026-11-18T04:07:31+00:00",
+      "review": {
+        "checkedAt": "2026-11-18T12:05:18.678139+00:00",
+        "disposition": "mapped",
+        "note": "Verified Sept. 22 occurrence, reported public intersection, one death and no-charge update; added stable reviewed incident.",
+        "revision": "f7f9d08c6d2a50319fa6fa78cf0e63a8aeb7dc20731a48904b603943b6a79d37"
+      },
+      "revision": "f7f9d08c6d2a50319fa6fa78cf0e63a8aeb7dc20731a48904b603943b6a79d37",
+      "sources": [
+        "firstalert-county"
+      ],
+      "title": "No charges to be issued in fatal Berkeley road rage shooting",
+      "url": "https://www.firstalert4.com/2026/11/18/no-charges-be-issued-fatal-berkeley-road-rage-shooting/"
     }
   },
   "sources": {
     "firstalert-county": {
       "articleUrls": [
+        "https://www.firstalert4.com/2026/11/18/no-charges-be-issued-fatal-berkeley-road-rage-shooting/",
+        "https://www.firstalert4.com/2026/11/17/florissant-police-investigating-shooting/",
+        "https://www.firstalert4.com/2026/11/17/man-admits-shooting-ballwin-officer/",
         "https://www.firstalert4.com/2026/11/17/police-woman-arrested-accused-threatening-school-staff-students/",
         "https://www.firstalert4.com/2026/11/17/jake-zimmerman-vows-make-st-louis-county-government-boring-again/",
         "https://www.firstalert4.com/2026/11/16/police-responding-possible-road-rage-shooting-quiktrip/",
@@ -533,20 +606,22 @@
         "https://www.firstalert4.com/2026/11/11/former-st-louis-county-jail-officer-charged-with-accepting-bribes-smuggle-contraband/",
         "https://www.firstalert4.com/2026/11/11/ex-employee-sues-onderlaw-claims-assault-online-campaign-ferguson-data-center/",
         "https://www.firstalert4.com/2026/11/10/new-cheesecake-factory-location-opens-west-county-mall/",
-        "https://www.firstalert4.com/2026/11/10/maplewood-richmond-heights-schools-project-206m-budget-gap-seek-community-input/",
-        "https://www.firstalert4.com/2026/11/10/your-guide-holiday-events-around-st-louis/",
-        "https://www.firstalert4.com/2026/11/10/2-charged-after-flock-cameras-stolen-damaged-halloween-night-st-louis-county/",
-        "https://www.firstalert4.com/2026/11/09/clayton-considers-pilot-program-allowing-largely-free-parking-shoppers-diners/"
+        "https://www.firstalert4.com/2026/11/10/maplewood-richmond-heights-schools-project-206m-budget-gap-seek-community-input/"
       ],
-      "contentChangedAt": "2026-11-17T15:20:52.330050+00:00",
-      "etag": "W/\"117d3-wcRgwolySuJoa7D5OwbGJ5mSGcc\"",
-      "lastModified": "Tue, 17 Nov 2026 15:17:13 GMT",
-      "latestPublishedAt": "2026-11-17T01:27:20+00:00",
-      "oldestPublishedAt": "2026-11-09T23:25:37+00:00",
+      "contentChangedAt": "2026-11-18T11:58:48.099669+00:00",
+      "etag": "W/\"fa70-oTXlzVVPdftTrasDMKKdoAiWVsE\"",
+      "lastModified": "Wed, 18 Nov 2026 11:58:52 GMT",
+      "latestPublishedAt": "2026-11-18T04:07:31+00:00",
+      "oldestPublishedAt": "2026-11-10T23:01:36+00:00",
       "url": "https://www.firstalert4.com/arc/outboundfeeds/rss/category/news/st-louis-county/?outputType=xml"
     },
     "firstalert-crime": {
       "articleUrls": [
+        "https://www.firstalert4.com/2026/11/17/man-spend-rest-his-life-prison-after-st-louis-jury-finds-him-guilty-sexually-abusing-2-girls/",
+        "https://www.firstalert4.com/2026/11/17/police-man-orders-doordash-hospital-shoots-delivery-drivers-after-complaints-with-order/",
+        "https://www.firstalert4.com/2026/11/17/florissant-police-investigating-shooting/",
+        "https://www.firstalert4.com/2026/11/17/man-admits-shooting-ballwin-officer/",
+        "https://www.firstalert4.com/2026/11/17/man-sentenced-sending-racist-job-rejection-emails-after-being-fired/",
         "https://www.firstalert4.com/2026/11/17/police-pursuit-ends-crash-closing-lanes-westbound-i-70-st-peters/",
         "https://www.firstalert4.com/2026/11/17/parents-seek-safety-details-classes-resume-after-warrenton-school-stabbing/",
         "https://www.firstalert4.com/2026/11/16/car-crashes-into-lincoln-county-mobile-home-with-4-people-inside/",
@@ -561,18 +636,13 @@
         "https://www.firstalert4.com/2026/11/12/suspect-custody-after-incident-blackhawk-middle-school-police-say/",
         "https://www.firstalert4.com/2026/11/12/students-recount-their-experience-after-2-students-teacher-stabbed-warren-county-middle-school/",
         "https://www.firstalert4.com/2026/11/12/neighbors-shaken-man-dies-toddler-injured-after-being-shot-car-cahokia-heights/",
-        "https://www.firstalert4.com/2026/11/11/st-louis-police-investigate-mans-death-homicide-months-after-reported-assault/",
-        "https://www.firstalert4.com/2026/11/11/police-man-toddler-shot-car-cahokia-heights/",
-        "https://www.firstalert4.com/2026/11/11/man-critically-injured-south-city-shooting/",
-        "https://www.firstalert4.com/2026/11/11/green-tree-elementary-school-briefly-locked-down-after-stolen-vehicle-pursuit-lake-st-louis/",
-        "https://www.firstalert4.com/2026/11/11/former-st-louis-county-jail-officer-charged-with-accepting-bribes-smuggle-contraband/",
-        "https://www.firstalert4.com/2026/11/11/family-community-remember-man-killed-youth-football-championship-madison/"
+        "https://www.firstalert4.com/2026/11/11/st-louis-police-investigate-mans-death-homicide-months-after-reported-assault/"
       ],
-      "contentChangedAt": "2026-11-17T15:20:52.330050+00:00",
-      "etag": "W/\"11e0b-N+qfedV/7V3AVLP77G/AxL8YIKs\"",
-      "lastModified": "Tue, 17 Nov 2026 15:18:29 GMT",
-      "latestPublishedAt": "2026-11-17T14:16:18+00:00",
-      "oldestPublishedAt": "2026-11-11T04:28:50+00:00",
+      "contentChangedAt": "2026-11-18T11:58:48.099669+00:00",
+      "etag": "W/\"1183e-Amu93lYdIJVt/ZnR/dyidZYPKoI\"",
+      "lastModified": "Wed, 18 Nov 2026 11:58:57 GMT",
+      "latestPublishedAt": "2026-11-17T20:55:09+00:00",
+      "oldestPublishedAt": "2026-11-11T22:11:56+00:00",
       "url": "https://www.firstalert4.com/arc/outboundfeeds/rss/category/news/crime/?outputType=xml"
     }
   },
