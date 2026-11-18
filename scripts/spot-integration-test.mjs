@@ -27,6 +27,7 @@ function fixture(){
  let spotMode=false,spotSavedLayers=[],spotRequest=null,spotInspector=null,spotMarker=null,spotRevision=0,spotFeatureRevision=0;
  let spotEngineModule=Promise.resolve({createSpotInspector}),baseLayer=null,mapStyle='dark';
  const requestedLayers=new Set(['radar','traffic','wildlife']),enabled=new Set(requestedLayers),data=new Map([['wildlife',{identity:'retained'}]]),layerModes={terrain:'rocks'};
+ let spotMoved=false;const observedRadar={active:false};function syncCurrentWeather(){}function loadAirMonitors(){return Promise.resolve({features:[],airportReadings:[]});}
  const futureRadar={active:true,stop(){this.active=false;calls.push(['stop-radar']);}},skyCloudMap={close(){calls.push(['close-sky']);}},weatherReadings={stopOverview(){calls.push(['stop-overview']);}};
  let suspendedPanel={panel:'detail'};const placeSuggestions={close(){calls.push(['close-suggestions']);}};
  function closeDetail(){$('#detail').hidden=true;calls.push(['close-detail']);}function setResults(open){$('#results').hidden=!open;}function setControls(open){calls.push(['controls',open]);}function navigationState(){}function share(){}function openStationForecast(point){calls.push(['forecast',point.lat,point.lng]);}

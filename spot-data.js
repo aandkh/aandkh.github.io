@@ -13,7 +13,9 @@ import {withRiverBaselines} from './river-insights.js?v=20261116-full-speed';
 import {nightLightAt} from './sky-quality.js?v=20261116-full-speed';
 import {skyDiagramModel} from './forecast-visuals.js?v=20261116-full-speed';
 import {mergeOutages} from './outages-expanded.js?v=20261116-security';
-import {airAdvice} from './air-grades.js?v=20261115-air-clarity';
+import {airAdvice,landfillEffect} from './air-grades.js?v=20261118-local-air';
+import {composeAirOverlay, airFeatureAtPoint} from './air-overlay-integration.js?v=20261118-local-air';
+import {mergeAirMonitors} from './air-monitors.js?v=20261118-local-air';
 const MILE=1609.344,DAY=86400000,finite=Number.isFinite;
 const HIDDEN=new Set(['cameras','restrooms','family','exhibitions','free','light','civic','neighborhoods']);
 const extras=[{id:'geography',title:'Geography & boundaries'},{id:'rain',title:'Recent rainfall'},{id:'quieter',title:'Quieter surroundings'}];
@@ -82,7 +84,7 @@ export async function spatialFeatureItems(data,layer,{lat,lng,radiusMiles=DEFAUL
 }
 function queueGate(limit,signal){let active=0;const queued=[];function pump(){while(active<limit&&queued.length){const job=queued.shift();if(signal.aborted){job.reject(signal.reason||new DOMException('Aborted','AbortError'));continue;}active++;Promise.resolve().then(job.run).then(job.resolve,job.reject).finally(()=>{active--;pump();});}}return run=>new Promise((resolve,reject)=>{queued.push({run,resolve,reject});pump();});}
 const readDefault=async(url,{signal}={})=>{const r=await fetch(url,{credentials:'omit',signal});if(!r.ok)throw Error('Source unavailable ('+r.status+')');return r.json();};
-export function createSpotInspector({lat,lng,radiusMiles=DEFAULT_SPOT_RADIUS_MILES,signal,loadedLayers=new Map(),layerModes={},fetchJson=readDefault,fetchLayer,onSection=()=>{},now=Date.now(),loadFloodplains,loadSeasonalWildlife,loadTraffic,loadElevation}={}){
+export function createSpotInspector({lat,lng,radiusMiles=DEFAULT_SPOT_RADIUS_MILES,signal,loadedLayers=new Map(),layerModes={},fetchJson=readDefault,fetchLayer,onSection=()=>{},now=Date.now(),loadFloodplains,loadSeasonalWildlife,loadTraffic,loadElevation,loadAirSources}={}){
  if(!finite(lat)||!finite(lng)||Math.abs(lat)>90||Math.abs(lng)>180)throw new TypeError('Invalid map point');
  radiusMiles=Math.max(DEFAULT_SPOT_RADIUS_MILES,Math.min(10,Number(radiusMiles)||DEFAULT_SPOT_RADIUS_MILES));const controller=new AbortController();signal?.addEventListener('abort',()=>controller.abort(signal.reason),{once:true});if(signal?.aborted)controller.abort(signal.reason);
  const localSignal=controller.signal,gate=queueGate(3,localSignal),jobs=new Map(),sections=SPOT_SECTIONS.map(s=>({...s,status:'idle',items:[],note:'',notes:[]})),states=new Map(sections.map(s=>[s.id,s])),point=[lng,lat];
@@ -106,7 +108,27 @@ export function createSpotInspector({lat,lng,radiusMiles=DEFAULT_SPOT_RADIUS_MIL
  async function weather(){const data=await remote('weather'),w=data.weather;if(!w)throw Error(data.note||'Forecast unavailable');const items=[],o=w.observation;
   if(o){const temperature=finite(o.temperatureC)?Math.round(o.temperatureC*9/5+32)+'°F':finite(o.temperatureF)?Math.round(o.temperatureF)+'°F':'Temperature unavailable',wind=finite(o.windSpeedMps)?Math.round(o.windSpeedMps*2.236936)+' mph':finite(o.windMph)?Math.round(o.windMph)+' mph':'Wind unavailable';items.push({title:temperature,description:join(wind,text(o.description||o.textDescription),stamp(o.timestamp||o.observedAt),now-Date.parse(o.timestamp||o.observedAt)>90*60000?'Older observation':''),relation:'nearby',...(finite(o.lat)&&finite(o.lng)?{distanceMeters:geodesicDistance(point,[o.lng,o.lat])}:{}),layer:'weather',sourceLabel:text(o.stationName||o.stationId||o.station||w.stationName)||'Nearby reporting station',sourceUrl:text(o.sourceUrl||data.sourceUrl)});}
   const hours=(w.hourly||[]).filter(h=>Date.parse(h.time)+3600000>now).slice(0,6);for(const hour of hours){const temperature=finite(hour.temperatureC)?Math.round(hour.temperatureC*9/5+32)+'°F':'Temperature unavailable',wind=finite(hour.windSpeedMps)?Math.round(hour.windSpeedMps*2.236936)+' mph wind':'Wind unavailable',rain=finite(hour.precipitationProbabilityPct)?Math.round(hour.precipitationProbabilityPct)+'% rain chance':'';items.push({title:stamp(hour.time)+' · '+temperature,description:join(wind,rain),relation:'area',layer:'weather',sourceLabel:'NWS forecast grid',sourceUrl:text(data.sourceUrl)});}return{status:items.length?'ready':'partial',items,source:data.source||'NWS',checkedAt:w.forecastUpdatedAt||data.checkedAt,note:data.note||'Grid forecast for this point; station observations are nearby, not a thermometer at the pin.'};}
- async function air(){const results=await Promise.allSettled(['pm25','ozone'].map(async mode=>{const data=await remote('air',mode),matches=await fromFeatures('air',data,{containOnly:true});for(const item of matches.items){const advice=airAdvice(item.feature.properties);item.description=join(item.description,advice?.grade?'Open the windows: '+advice.grade+(advice.precision==='band'?' · Estimated':''):'');}return matches;}));const items=results.flatMap(r=>r.status==='fulfilled'?r.value.items:[]);return{status:results.every(r=>r.status==='rejected')?'unavailable':results.some(r=>r.status==='rejected')?'partial':'ready',items,note:'Regional reported AQI areas containing the pin; not a measurement at each address. Missing values stay unknown.'};}
+ async function air(){
+  const modes=['pm25','ozone'], target={lat,lng}, previous=loaded('air');
+  const local=loadAirSources ? loadAirSources({signal:localSignal,now}) : Promise.resolve({
+   features:(previous?.features||[]).filter(f=>f.properties?.airMonitor),airportReadings:previous?.airportReadings||[]});
+  const [sources,...regions]=await Promise.allSettled([local,...modes.map(mode=>remote('air',mode))]);
+  const monitors=sources.status==='fulfilled'?sources.value:{features:[],airportReadings:[]};
+  const items=[];let failures=0, localOnlyShown=false;
+  for(let i=0;i<modes.length;i++){
+   const regional=regions[i].status==='fulfilled'?regions[i].value:{features:[],status:'unavailable'};
+   if(regional.status==='unavailable')failures++;
+   const overlay=composeAirOverlay(mergeAirMonitors(regional,monitors),{mode:modes[i],now,point:target});
+   const feature=airFeatureAtPoint(overlay,target,now);
+   if(!feature)continue;
+   const p=feature.properties,advice=airAdvice(p);
+   if(p.landfill&&!advice.category){if(localOnlyShown)continue;localOnlyShown=true;}
+   const item=featureItem(feature,'air',regional,0,point);
+   item.description=join('Open the windows: '+advice.grade+(advice.precision==='band'?' · Estimated':''),advice.category?advice.text:'Pollutant AQI unavailable',p.landfill?.site.name&&p.landfill.site.name+' · modeled '+landfillEffect(p.landfill));
+   items.push(item);
+  }
+  return {status:failures===2&&!items.length?'unavailable':failures?'partial':'ready',items,note:'The local windows grade includes modeled landfill influence where applicable. EPA AQI describes the selected pollutant.'};
+ }
  async function terrain(){
   const results=await Promise.allSettled([local('geology.json').then(data=>fromFeatures('terrain',data,{containOnly:true})),gate(async()=>{if(loadElevation)return loadElevation({lat,lng,signal:localSignal});const module=await import('./spot-terrain.js?v=20261117-explore-layout');return module.loadSpotElevation({lat,lng,signal:localSignal});})]);
   const items=results.flatMap(result=>result.status==='fulfilled'?result.value.items||[]:[]),failures=results.flatMap((result,index)=>result.status==='rejected'?[index?'Elevation source unavailable':'Bedrock source unavailable']:[]);

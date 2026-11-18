@@ -2,9 +2,11 @@
 
 Reviewed November 15, 2026. Implementation: `air-grades.js`, scoped styling: `air-grades.css`; `layer-insights.js` re-exports the existing app interface. No extra network requests. The visible card is intentionally compact.
 
-## Display contract
+The pollutant-only ladder below supplies the background grade. Inside a modeled landfill footprint the displayed Open The Windows Score also accounts for local nuisance potential. Its Estimated label, fill colors, fallbacks and source attribution are described in [Local air measurements](LOCAL-AIR-MEASUREMENTS.md#landfill-estimates-in-the-air-quality-fill). The EPA reading and its health guidance retain their source values.
 
-The live `/api/layers/air` feed supplies EPA AirNow regional **category contours**, not a numeric AQI or a PM2.5 concentration. Preserve its original six categories, colors, observation time, preliminary-data status and source attribution. A shaded area is interpolated between monitors, not measured at every address. Unshaded/missing is unknown.
+## Pollutant display contract
+
+The live `/api/layers/air` feed supplies EPA AirNow regional **category contours**, not a numeric AQI or a PM2.5 concentration. Preserve its original six categories, colors, observation time, preliminary-data status and source attribution. A shaded area is interpolated between monitors, not measured at every address. Missing pollutant data is unknown. A location can still have a labeled landfill-only estimate.
 
 The 17 grades are **Andymap display subdivisions**, not EPA health categories or validated personal health scores. Lower AQI means a better tier for the same pollutant and time basis. Subtiers within an official category share its health guidance. Never claim that S+ means zero pollution, uniquely “best possible air,” or no health risk.
 
@@ -38,7 +40,7 @@ Category input accepts integer numbers 1–6 or strings containing one of those 
 
 ## Compact presentation
 
-Andrew removed the grade guide and the cigarettes/Burning Man/everyday-exposure explanations on November 15. The air card shows one grade, an adjacent **Estimated** qualifier only for a category fallback, the supplied air reading, the official EPA category, a short window recommendation and compact provider credit/timestamp. No expandable grade list, exposure comparison, methodology explanation or redundant reference menus. Preserve the internal 17-grade boundaries without rendering them as a public guide. The unsupported exposure-comparison helper has been removed.
+Andrew removed the grade guide and the cigarettes/Burning Man/everyday-exposure explanations on November 15. The air card shows one grade, an adjacent **Estimated** qualifier for a category fallback, monitor interpolation, or modeled local adjustment, the supplied air reading, the official EPA category, a short window recommendation and compact provider credit/timestamp. No expandable grade list, exposure comparison, methodology explanation or redundant reference menus. Preserve the internal 17-grade boundaries without rendering them as a public guide. The unsupported exposure-comparison helper has been removed.
 
 Official source references remain in the site's central credits. Do not add the removed explanations back during maintenance.
 

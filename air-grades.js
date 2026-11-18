@@ -31,6 +31,36 @@ export const AIR_GRADES=Object.freeze([
  {grade:'S+',min:0,max:5,category:1,title:'Lowest slice of this scale',detail:'The best tier in this ladder requires a reported AQI of 0–5. It means a very low index for the selected pollutant, not the best possible air everywhere, zero pollution or zero health risk.'}
 ].map(tier=>Object.freeze(tier)));
 
+// The same bands drive the polygon fills, selected point, and map key.
+// The green-to-yellow ramp ends within the site's Moderate color family.
+export const ODOR_BANDS = [
+  {grade: 'A',  color: '#82cf31', label: 'Slight'},
+  {grade: 'A-', color: '#c7d82d', label: 'Mild'},
+  {grade: 'B+', color: '#ecd42c', label: 'Elevated'},
+  {grade: 'B-', color: '#d6af00', label: 'Strongest'}
+];
+
+const severityByGrade = new Map(AIR_GRADES.map((tier, i) => [tier.grade, AIR_GRADES.length - i]));
+export const landfillEffect = local => local?.site.profile === 'ash' ? 'dust' : 'odor';
+export const gradeSeverity = grade => severityByGrade.get(grade) || 0;
+
+// Blend independent nuisances on the ordinal windows scale. Landfill evidence
+// alone cannot promote a location into an EPA health-alert color.
+export function localWindowsGrade(background, level) {
+ const band=ODOR_BANDS[level];
+ if(!band)return background.grade;
+ let grade=band.grade;
+ if(background.category===2) {
+  const steps=level>=2?2:1;
+  const rank=Math.min(gradeSeverity('C+'),gradeSeverity(background.grade)+steps);
+  const adjusted=AIR_GRADES[AIR_GRADES.length-rank].grade;
+  if(gradeSeverity(adjusted)>gradeSeverity(grade))grade=adjusted;
+ }
+ return gradeSeverity(grade)>gradeSeverity(background.grade)?grade:background.grade;
+}
+export const localGradeColor = grade => ODOR_BANDS.find(b=>b.grade===grade)?.color ||
+ ({'B':'#e7c52b','C+':'#d19e15'})[grade];
+
 export function airPollutant(p={}){
  p=p||{};
  const text=[p.pollutant,p.parameter].filter(Boolean).join(' ')||[p.title,p.id].filter(Boolean).join(' ');
@@ -47,7 +77,7 @@ function sensitivity(pollutant){
  if(pollutant==='PM2.5'||pollutant==='PM10')return'Particle-sensitive groups include people with heart or lung disease, older adults, children and teenagers, pregnant people, and people with substantial outdoor exposure. A personal care plan may call for extra caution.';
  return'Sensitivity depends on the pollutant. Check its official guidance and any personal care plan; this score does not know your health history.';
 }
-export function airAdvice(p={}){
+function pollutantAdvice(p={}){
  p=p||{};
  const pollutant=airPollutant(p),reported=finite(p.aqi)&&p.aqi>=0?Math.round(p.aqi):null,sourceCategory=typeof p.category==='number'?p.category:typeof p.category==='string'&&/^[1-6]$/.test(p.category.trim())?Number(p.category.trim()):NaN;
  const estimated=p.airMonitorEstimate&&finite(p.estimatedAqi)?Math.round(p.estimatedAqi):null;
@@ -65,6 +95,15 @@ export function airAdvice(p={}){
   meaning:exact?exact.detail:info.meaning,tip:info.windows,activity:info.activity,example:info.example,sensitive:sensitivity(pollutant),
   precisionNote:p.airMonitorEstimate?'Estimated category from same-hour monitor interpolation. This is not a measurement at your location.':exact?'Andymap grade from the supplied numeric AQI.':cat===6?'Estimated from the reported Hazardous category; no numeric AQI was supplied.':'Estimated from the midpoint of the reported '+info.name+' range (AQI '+bandLabel(info)+'). No numeric AQI was supplied.'};
 }
+// Only the local windows grade combines odor and the selected pollutant.
+// AQI, EPA category, and health guidance always come from the pollutant data.
+export function airAdvice(p = {}) {
+ const background = pollutantAdvice(p), local = ODOR_BANDS[p?.landfill?.level];
+ if (!local) return background;
+ const grade=localWindowsGrade(background,p.landfill.level);
+ return grade===background.grade ? background : {...background, grade, precision:'band', localWins:true};
+}
+
 export function tierForAQI(aqi){return finite(aqi)&&aqi>=0?AIR_GRADES.find(t=>Math.round(aqi)>=t.min&&Math.round(aqi)<=t.max)||null:null;}
 const node=(doc,tag,text,cls='')=>{const n=doc.createElement(tag);if(text!==undefined)n.textContent=text;n.className=cls;return n;};
 function link(doc,text,url){const a=node(doc,'a',text);a.href=url;a.target='_blank';a.rel='noopener noreferrer';return a;}
@@ -82,9 +121,16 @@ export function appendAirAdvice(host,p={}){
  const heading=node(doc,'div',undefined,'air-grade-heading');heading.dataset.precision=a.precision;
  const result=node(doc,'span',undefined,'air-grade-result');result.append(node(doc,'span',a.grade,'air-grade-value'));
  if(a.precision==='band')result.append(node(doc,'small','Estimated','air-grade-estimated'));
- heading.append(node(doc,'strong','Open The Windows Score'),result);box.append(heading,node(doc,'p',a.text,'air-grade-reading'));
+ heading.append(node(doc,'strong','Open The Windows Score'),result);box.append(heading);
+ if(!p.landfill || a.category)box.append(node(doc,'p',a.text,'air-grade-reading'));
  if(a.category){const official=node(doc,'span','EPA · '+a.official,'air-official-band');official.dataset.category=String(a.category);box.append(official);}
- box.append(node(doc,'p',WINDOW_SUMMARIES[a.category]||'A reliable reading is unavailable. Check current local air information.','air-window-tip'));
+ const local = p.landfill, band = ODOR_BANDS[local?.level];
+ if (band) {
+  box.append(node(doc,'p',local.site.name+' · '+band.label+' '+landfillEffect(local)+' potential (modeled)','air-window-tip'));
+ }
+ if (!band || !a.localWins) box.append(node(doc,'p',WINDOW_SUMMARIES[a.category]||'A reliable reading is unavailable. Check current local air information.','air-window-tip'));
+ if (a.localWins && !a.category) box.append(node(doc,'small','Local estimate only. Pollutant AQI unavailable.','small'));
+ if (!a.category && band) {host.append(box);return;}
  const credit=node(doc,'p',undefined,'small provider-credit');credit.append(link(doc,'EPA AirNow','https://www.airnow.gov/'),doc.createTextNode(' & '),link(doc,'reporting agencies','https://www.airnow.gov/partners/'),doc.createTextNode(' · preliminary data'));
  const at=Date.parse(p.observedAt);if(Number.isFinite(at))credit.append(doc.createTextNode(' · '+new Date(at).toLocaleString('en-US',{timeZone:'America/Chicago',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})+' Central'));
  box.append(credit);host.append(box);
