@@ -37,6 +37,7 @@ export function airPollutant(p={}){
  if(/pm\s*2\.?5/i.test(text))return'PM2.5';
  if(/\bozone\b|\bo3\b/i.test(text))return'Ozone';
  if(/pm\s*10/i.test(text))return'PM10';
+ if(/\bno2\b|nitrogen dioxide/i.test(text))return'NO₂';
  return'Selected pollutant';
 }
 const bandLabel=({min,max})=>max===Infinity?min+'+':min+'–'+max;
@@ -49,19 +50,20 @@ function sensitivity(pollutant){
 export function airAdvice(p={}){
  p=p||{};
  const pollutant=airPollutant(p),reported=finite(p.aqi)&&p.aqi>=0?Math.round(p.aqi):null,sourceCategory=typeof p.category==='number'?p.category:typeof p.category==='string'&&/^[1-6]$/.test(p.category.trim())?Number(p.category.trim()):NaN;
+ const estimated=p.airMonitorEstimate&&finite(p.estimatedAqi)?Math.round(p.estimatedAqi):null;
  const hasCategory=Number.isInteger(sourceCategory)&&sourceCategory>=1&&sourceCategory<=6;
- const category=reported!==null?categoryFor(reported):hasCategory?sourceCategory:null;
+ const category=reported!==null?categoryFor(reported):estimated!==null?categoryFor(estimated):hasCategory?sourceCategory:null;
  if(!category)return{grade:'Unknown',precision:'unknown',pollutant,text:'No usable air-quality reading here.',meaning:'Unshaded areas and missing readings are not a clean-air guarantee.',tip:'Check current official air information before using this score to decide about windows.',grades:[]};
  const conflict=reported!==null&&hasCategory&&sourceCategory!==category;
  // Neither conflicting field is enough to support window/activity advice.
  if(conflict)return{grade:'Unknown',precision:'unknown',pollutant,text:pollutant+' · inconsistent source fields',meaning:'The source’s AQI and category disagree. No grade is assigned until those values can be reconciled.',precisionNote:'The source’s AQI and category disagree; check the official reading.',tip:'This inconsistent record cannot support a window recommendation. Check current official air information.',grades:[]};
  const cat=category,info=CATEGORIES[cat],grades=AIR_GRADES.filter(t=>t.category===cat),exact=reported!==null?tierForAQI(reported):null;
  // Category midpoint is a display estimate, never an invented numeric observation.
- const representative=exact||tierForAQI(Number.isFinite(info.max)?Math.floor((info.min+info.max)/2):info.min);
+ const representative=exact||(estimated!==null?tierForAQI(estimated):null)||tierForAQI(Number.isFinite(info.max)?Math.floor((info.min+info.max)/2):info.min);
  return{grade:representative.grade,precision:exact?'value':'band',aqi:exact?reported:null,category:cat,pollutant,official:info.name,band:bandLabel(info),grades,
-  text:pollutant+' · AQI '+(exact?reported:bandLabel(info))+' · '+info.name+(reported>500?' · beyond the AQI scale':''),
+  text:pollutant+' · AQI '+(exact?reported:estimated!==null?'about '+estimated+' (estimated)':bandLabel(info))+' · '+info.name+(reported>500?' · beyond the AQI scale':''),
   meaning:exact?exact.detail:info.meaning,tip:info.windows,activity:info.activity,example:info.example,sensitive:sensitivity(pollutant),
-  precisionNote:exact?'Andymap grade from the supplied numeric AQI.':cat===6?'Estimated from the reported Hazardous category; no numeric AQI was supplied.':'Estimated from the midpoint of the reported '+info.name+' range (AQI '+bandLabel(info)+'). No numeric AQI was supplied.'};
+  precisionNote:p.airMonitorEstimate?'Estimated category from same-hour monitor interpolation. This is not a measurement at your location.':exact?'Andymap grade from the supplied numeric AQI.':cat===6?'Estimated from the reported Hazardous category; no numeric AQI was supplied.':'Estimated from the midpoint of the reported '+info.name+' range (AQI '+bandLabel(info)+'). No numeric AQI was supplied.'};
 }
 export function tierForAQI(aqi){return finite(aqi)&&aqi>=0?AIR_GRADES.find(t=>Math.round(aqi)>=t.min&&Math.round(aqi)<=t.max)||null:null;}
 const node=(doc,tag,text,cls='')=>{const n=doc.createElement(tag);if(text!==undefined)n.textContent=text;n.className=cls;return n;};

@@ -4,7 +4,7 @@ export const RADAR_MODES={
  winter:{label:'Winter precipitation · forecast',note:'HRRR model forecast: rain, snow, freezing rain and ice pellets (sleet). This is a forecast, not observed radar.'}
 };
 export const AQI=[null,{label:'Good',range:'0–50',color:'#00e400'},{label:'Moderate',range:'51–100',color:'#ffff00'},{label:'Unhealthy for sensitive groups',range:'101–150',color:'#ff7e00'},{label:'Unhealthy',range:'151–200',color:'#ff0000'},{label:'Very unhealthy',range:'201–300',color:'#8f3f97'},{label:'Hazardous',range:'301+',color:'#7e0023'}];
-export const AIR_MODES={pm25:'Fine particles · PM2.5',ozone:'Ozone'};
+export const AIR_MODES={pm25:'Fine particles · PM2.5',ozone:'Ozone',no2:'Nitrogen dioxide · NO₂'};
 // Exact colors from NOAA's advertised conus_pcpn_typ legend; provenance in reports/noaa-precipitation-legend.json.
 export const RADAR_TYPE_KEY=[
  {label:'Rain · warm stratiform',color:'#0450a4'},
