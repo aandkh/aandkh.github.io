@@ -1,16 +1,23 @@
-# November 18 temporary palette
+# Permanent Vice sunset palette
 
-`today-palette.js` enables a GTA VI-inspired reference-matched indigo/violet/pink/coral gradient and glow menu palette
-only from November 18, 2026 midnight to November 19 midnight in America/Chicago
-(CST, UTC−06). The exact expiry is `2026-11-19T06:00:00Z`.
+Owner direction November 18: retain today's vivid Vice City-inspired appearance,
+then make it permanent with 40% less vibrance starting tomorrow.
 
-The override is presentation-only. Existing dark and light session palettes remain
-untouched underneath. A timer removes the root flag at midnight; visibility and
-pageshow checks also handle suspended tabs. Subsequent visits after expiration do
-not activate it. No storage, analytics, logos, map data colors, or access settings
-are changed. The existing family selector continues to follow Dark/Light/Streets.
+`today-palette.js` keeps vivid mode through November 18, 2026 America/Chicago.
+At `2026-11-19T06:00:00Z` (midnight CST), it switches to permanent soft mode.
+Open tabs switch with a timer; pageshow and visibility checks cover suspended tabs.
+All future visits immediately receive soft mode. No further deployment is needed.
 
-To remove early, remove the two `today-palette` tags from index.html. After expiry
-the files may be removed along with those tags; no rollback deployment is required.
-Tests: `node scripts/today-palette-test.mjs` and
-`node scripts/session-palettes-test.mjs`.
+`scripts/build-vice-soft.py` generates the soft CSS from vivid CSS by multiplying
+HSL saturation and glow opacity by 0.60, preserving hue and lightness (with 8-bit
+rounding). It does not apply a filter to map content or recolor semantic data.
+Dark/light modes remain separate. No logos, tracking, storage, access, layout,
+pointer handling, or map behavior changes.
+
+Normal session palettes are retained underneath for potential future changes.
+To disable the Vice theme, remove the two today-palette tags from index.html.
+
+Verification: `node scripts/today-palette-test.mjs` tests midnight transition,
+long-term permanence, sleeping tabs, repeat initialization, and both palette
+families' text/focus contrast. `node scripts/session-palettes-test.mjs` checks the
+unchanged underlying palette system.

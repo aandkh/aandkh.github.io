@@ -1,6 +1,6 @@
-/* Reference-matched GTA VI-inspired indigo, violet, pink and coral, November 18 only.
+/* Reference-matched GTA VI-inspired indigo, violet, pink and coral, vivid today, permanently softer from November 19.
    Override tokens, not map/traffic/weather semantics. The normal session palette
-   remains intact underneath and returns when today-palette.js removes the flag. */
+   remains intact underneath; the timed script selects the permanent soft mode. */
 html[data-today-palette="vice-sunset"][data-palette-tone="dark"] {
  --palette-surface:#20134d!important;
  --palette-raised:#322063!important;
@@ -67,4 +67,76 @@ html[data-today-palette="vice-sunset"][data-palette-tone="light"] body :is(.prim
 }
 html[data-today-palette="vice-sunset"][data-palette-tone="light"] body :is(.primary,#mobile-controls[aria-expanded=true]):hover {
  background:linear-gradient(115deg,#363c93,#702d80 50%,#8f2361 80%,#91352c)!important;
+}
+
+/* Generated permanent soft mode: saturation and glow opacity × 0.60. */
+/* Reference-matched GTA VI-inspired indigo, violet, pink and coral, vivid today, permanently softer from November 19.
+   Override tokens, not map/traffic/weather semantics. The normal session palette
+   remains intact underneath; the timed script selects the permanent soft mode. */
+html[data-today-palette="vice-sunset"][data-vice-intensity="soft"][data-palette-tone="dark"] {
+ --palette-surface:#261f41!important;
+ --palette-raised:#382d56!important;
+ --palette-soft:#49325c!important;
+ --palette-ink:#fbf4f1!important;
+ --palette-muted:#e8d2eb!important;
+ --palette-line:#c796e5!important;
+ --palette-accent:#e495c5!important;
+ --palette-on-accent:#2e1c2a!important;
+ --palette-link:#e0c9f2!important;
+ --palette-focus:#eacda9!important;
+}
+html[data-today-palette="vice-sunset"][data-vice-intensity="soft"][data-palette-tone="light"] {
+ --palette-surface:#faecf4!important;
+ --palette-raised:#fdf7fc!important;
+ --palette-soft:#f1ddee!important;
+ --palette-ink:#342739!important;
+ --palette-muted:#60485b!important;
+ --palette-line:#b47dad!important;
+ --palette-accent:#8f3168!important;
+ --palette-on-accent:#ffffff!important;
+ --palette-link:#663c8e!important;
+ --palette-focus:#8f3168!important;
+}
+/* Static glow only: no pulsing or additional motion. Strong fills retain contrast. */
+html[data-today-palette="vice-sunset"][data-vice-intensity="soft"] body {
+ --vice-gradient:linear-gradient(115deg,#576eb6 0%,#865fac 35%,#ca60a1 68%,#e1a186 100%);
+ --vice-glow:0 0 0 1px #e494d985,0 0 23px #d249aa5c,0 0 44px #8766d947;
+}
+html[data-today-palette="vice-sunset"][data-vice-intensity="soft"] body header {
+ background:linear-gradient(110deg,#261f41,#572f72 55%,#863261)!important;
+ border-bottom:2px solid #de7cc9;
+ box-shadow:0 2px 23px #d453b27a,0 4px 42px #9566d95c;
+}
+html[data-today-palette="vice-sunset"][data-vice-intensity="soft"] body header .brand {
+ color:#fdf5fa;text-shadow:0 0 13px #d39ee770;
+}
+html[data-today-palette="vice-sunset"][data-vice-intensity="soft"] body #sidebar {
+ background:linear-gradient(165deg,#261f41 0%,#3f2759 65%,#622a54 100%)!important;
+ border-color:#d18ee3;
+}
+html[data-today-palette="vice-sunset"][data-vice-intensity="soft"] body :is(.map-toolbar,#map-search,#quick-categories button,.tabs,.floating,dialog) {
+ box-shadow:var(--vice-glow);
+}
+html[data-today-palette="vice-sunset"][data-vice-intensity="soft"] body :is(.primary,#mobile-controls[aria-expanded=true]) {
+ background:linear-gradient(115deg,#a7b4e9,#d1a4e8 45%,#e69cc6 70%,#e1b086)!important;
+ color:#2e1c2a;border-color:#e8a2d9;
+ box-shadow:0 0 21px #d351b27a,0 0 40px #916ddb5c;
+}
+html[data-today-palette="vice-sunset"][data-vice-intensity="soft"] body :is(.primary,#mobile-controls[aria-expanded=true]):hover {
+ background:linear-gradient(115deg,#d5dbf5,#ead1f0 45%,#f4d4e3 70%,#efd6bf)!important;
+}
+html[data-today-palette="vice-sunset"][data-vice-intensity="soft"][data-palette-tone="light"] body header {
+ background:linear-gradient(110deg,#e2dff7,#eed4f4 50%,#f5d7e8 78%,#f0dbc4)!important;
+ box-shadow:0 2px 22px #be50a75c,0 4px 38px #8366ca3d;
+}
+html[data-today-palette="vice-sunset"][data-vice-intensity="soft"][data-palette-tone="light"] body header .brand {color:#342739;text-shadow:0 0 12px #ab76ab1f;}
+html[data-today-palette="vice-sunset"][data-vice-intensity="soft"][data-palette-tone="light"] body #sidebar {
+ background:linear-gradient(165deg,#eae5f9 0%,#f9e6f2 60%,#f5e0d6 100%)!important;
+}
+html[data-today-palette="vice-sunset"][data-vice-intensity="soft"][data-palette-tone="light"] body :is(.primary,#mobile-controls[aria-expanded=true]) {
+ background:linear-gradient(115deg,#5257ab,#7d3894 50%,#8f3168 80%,#9b4752)!important;
+ color:#ffffff;border-color:#b14b98;
+}
+html[data-today-palette="vice-sunset"][data-vice-intensity="soft"][data-palette-tone="light"] body :is(.primary,#mobile-controls[aria-expanded=true]):hover {
+ background:linear-gradient(115deg,#494c80,#663e6f 50%,#79395e 80%,#7d4640)!important;
 }
