@@ -1,0 +1,89 @@
+name: Refresh local air measurements
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '23 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+  pages: write
+  id-token: write
+concurrency:
+  group: air-local-pages
+  cancel-in-progress: false
+jobs:
+  refresh-and-publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install PDF text extractor
+        run: sudo apt-get update && sudo apt-get install -y poppler-utils
+      - name: Test ingestion
+        run: |
+          python scripts/air-local-test.py
+          python scripts/airnow-gases-test.py
+      - name: Refresh official DNR measurements
+        id: dnr
+        continue-on-error: true
+        run: python scripts/refresh-air-local.py
+      - name: Refresh official EPA gas measurements
+        id: epa
+        continue-on-error: true
+        run: python scripts/build-airnow-gases.py
+      - name: Require at least one successful source refresh
+        if: steps.dnr.outcome != 'success' && steps.epa.outcome != 'success'
+        run: exit 1
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Wait for legacy Pages and reject superseded builds
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const {owner, repo} = context.repo;
+            const head = async () => (await github.rest.repos.getCommit({owner, repo, ref: 'main'})).data.sha;
+            if (await head() !== context.sha) throw new Error('Superseded by newer main commit; do not publish stale source.');
+            const pages = (await github.rest.repos.getPages({owner, repo})).data;
+            if (pages.build_type === 'legacy') {
+              // Branch Pages and this custom workflow must not race. Wait for
+              // GitHub's legacy publisher to finish, then publish fresh data last.
+              let settled = false;
+              for (let attempt = 0; attempt < 60; attempt++) {
+                // Verified built-in Pages workflow for this repository. Filter
+                // same-head history explicitly: hourly refresh runs must never
+                // push the legacy build out of a generic 100-run history page.
+                const workflow_id = 163495078;
+                const same = await github.rest.actions.listWorkflowRuns({owner, repo, workflow_id, head_sha: context.sha, per_page: 1});
+                const recent = await github.rest.actions.listWorkflowRuns({owner, repo, workflow_id, per_page: 100});
+                const sameCommit = same.data.workflow_runs.some(r => r.head_sha === context.sha && r.status === 'completed');
+                const active = recent.data.workflow_runs.some(r => r.status !== 'completed');
+                if (sameCommit && !active) { settled = true; break; }
+                if (await head() !== context.sha) throw new Error('New main commit arrived while waiting.');
+                await new Promise(resolve => setTimeout(resolve, 15000));
+              }
+              if (!settled) throw new Error('Legacy Pages has not settled; avoid concurrent publication.');
+            }
+            if (await head() !== context.sha) throw new Error('New main commit arrived; do not publish stale source.');
+      - name: Upload refreshed site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - name: Final main revision guard
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const {owner, repo} = context.repo;
+            const latest = (await github.rest.repos.getCommit({owner, repo, ref: 'main'})).data.sha;
+            if (latest !== context.sha) throw new Error('Superseded before deployment; skipping stale publication.');
+      - name: Deploy Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

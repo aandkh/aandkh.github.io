@@ -1,0 +1,180 @@
+{
+  "schemaVersion": 1,
+  "fetchedAt": "2026-11-18T16:57:20Z",
+  "maxAgeHours": 4,
+  "sources": [
+    {
+      "name": "EPA AirNow / reporting agencies",
+      "url": "https://files.airnowtech.org/airnow/2026/20261118/HourlyAQObs_2026111815.dat",
+      "documentationUrl": "https://docs.airnowapi.org/docs/HourlyAQObsFactSheet.pdf",
+      "observedAt": "2026-11-18T15:00:00Z",
+      "periodEnd": "2026-11-18T16:00:00Z",
+      "status": "preliminary"
+    }
+  ],
+  "stations": [
+    {
+      "id": "290990019",
+      "aqsId": "290990019",
+      "name": "Arnold West",
+      "lat": 38.448581,
+      "lon": -90.398436,
+      "source": "Missouri Department of Natural Resources",
+      "sourceUrl": "https://files.airnowtech.org/airnow/2026/20261118/HourlyAQObs_2026111815.dat",
+      "observedAt": "2026-11-18T15:00:00Z",
+      "status": "preliminary",
+      "readings": [
+        {
+          "parameter": "NO2",
+          "value": 15.2,
+          "unit": "ppb",
+          "averagingPeriod": "1 hour",
+          "observedAt": "2026-11-18T15:00:00Z",
+          "periodEnd": "2026-11-18T16:00:00Z",
+          "status": "preliminary",
+          "aqi": 14
+        }
+      ]
+    },
+    {
+      "id": "290990027",
+      "aqsId": "290990027",
+      "name": "Herculaneum, Mott Street",
+      "lat": 38.263394,
+      "lon": -90.379667,
+      "source": "Missouri Department of Natural Resources",
+      "sourceUrl": "https://files.airnowtech.org/airnow/2026/20261118/HourlyAQObs_2026111815.dat",
+      "observedAt": "2026-11-18T15:00:00Z",
+      "status": "preliminary",
+      "readings": [
+        {
+          "parameter": "SO2",
+          "value": 0.3,
+          "unit": "ppb",
+          "averagingPeriod": "1 hour",
+          "observedAt": "2026-11-18T15:00:00Z",
+          "periodEnd": "2026-11-18T16:00:00Z",
+          "status": "preliminary"
+        }
+      ]
+    },
+    {
+      "id": "291831002",
+      "aqsId": "291831002",
+      "name": "West Alton",
+      "lat": 38.8725,
+      "lon": -90.226389,
+      "source": "Missouri Department of Natural Resources",
+      "sourceUrl": "https://files.airnowtech.org/airnow/2026/20261118/HourlyAQObs_2026111815.dat",
+      "observedAt": "2026-11-18T15:00:00Z",
+      "status": "preliminary",
+      "readings": [
+        {
+          "parameter": "NO2",
+          "value": 15.2,
+          "unit": "ppb",
+          "averagingPeriod": "1 hour",
+          "observedAt": "2026-11-18T15:00:00Z",
+          "periodEnd": "2026-11-18T16:00:00Z",
+          "status": "preliminary",
+          "aqi": 14
+        }
+      ]
+    },
+    {
+      "id": "291890016",
+      "aqsId": "291890016",
+      "name": "Rider Trail I-70",
+      "lat": 38.75264,
+      "lon": -90.44884,
+      "source": "Missouri Department of Natural Resources",
+      "sourceUrl": "https://files.airnowtech.org/airnow/2026/20261118/HourlyAQObs_2026111815.dat",
+      "observedAt": "2026-11-18T15:00:00Z",
+      "status": "preliminary",
+      "readings": [
+        {
+          "parameter": "NO2",
+          "value": 24.4,
+          "unit": "ppb",
+          "averagingPeriod": "1 hour",
+          "observedAt": "2026-11-18T15:00:00Z",
+          "periodEnd": "2026-11-18T16:00:00Z",
+          "status": "preliminary",
+          "aqi": 23
+        },
+        {
+          "parameter": "SO2",
+          "value": 2.1,
+          "unit": "ppb",
+          "averagingPeriod": "1 hour",
+          "observedAt": "2026-11-18T15:00:00Z",
+          "periodEnd": "2026-11-18T16:00:00Z",
+          "status": "preliminary"
+        }
+      ]
+    },
+    {
+      "id": "295100085",
+      "aqsId": "295100085",
+      "name": "Blair Street",
+      "lat": 38.656449,
+      "lon": -90.198548,
+      "source": "Missouri Department of Natural Resources",
+      "sourceUrl": "https://files.airnowtech.org/airnow/2026/20261118/HourlyAQObs_2026111815.dat",
+      "observedAt": "2026-11-18T15:00:00Z",
+      "status": "preliminary",
+      "readings": [
+        {
+          "parameter": "SO2",
+          "value": 1.8,
+          "unit": "ppb",
+          "averagingPeriod": "1 hour",
+          "observedAt": "2026-11-18T15:00:00Z",
+          "periodEnd": "2026-11-18T16:00:00Z",
+          "status": "preliminary"
+        },
+        {
+          "parameter": "CO",
+          "value": 0.3,
+          "unit": "ppm",
+          "averagingPeriod": "1 hour",
+          "observedAt": "2026-11-18T15:00:00Z",
+          "periodEnd": "2026-11-18T16:00:00Z",
+          "status": "preliminary"
+        }
+      ]
+    },
+    {
+      "id": "295100094",
+      "aqsId": "295100094",
+      "name": "Forest Park",
+      "lat": 38.631057,
+      "lon": -90.281144,
+      "source": "Missouri Department of Natural Resources",
+      "sourceUrl": "https://files.airnowtech.org/airnow/2026/20261118/HourlyAQObs_2026111815.dat",
+      "observedAt": "2026-11-18T15:00:00Z",
+      "status": "preliminary",
+      "readings": [
+        {
+          "parameter": "NO2",
+          "value": 19.1,
+          "unit": "ppb",
+          "averagingPeriod": "1 hour",
+          "observedAt": "2026-11-18T15:00:00Z",
+          "periodEnd": "2026-11-18T16:00:00Z",
+          "status": "preliminary",
+          "aqi": 18
+        },
+        {
+          "parameter": "CO",
+          "value": 0.4,
+          "unit": "ppm",
+          "averagingPeriod": "1 hour",
+          "observedAt": "2026-11-18T15:00:00Z",
+          "periodEnd": "2026-11-18T16:00:00Z",
+          "status": "preliminary"
+        }
+      ]
+    }
+  ]
+}

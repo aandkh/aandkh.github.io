@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "fetchedAt": "2026-11-18T16:54:46Z",
+  "maxAgeHours": 4,
+  "sources": [
+    {
+      "name": "Missouri DNR",
+      "url": "https://dnrservices.mo.gov/env/esp/aqm/docs/ridertrail.pdf",
+      "siteUrl": "https://dnr.mo.gov/air/hows-air/monitoring/sites/rider-trail-i-70-st-louis-county",
+      "reportPrintedAt": "2026-11-18T16:11:00Z",
+      "sourceTimeZone": "CST (UTC-06:00 year-round)",
+      "status": "preliminary"
+    }
+  ],
+  "stations": [
+    {
+      "id": "dnr-29-189-0016",
+      "name": "Rider Trail I-70",
+      "lat": 38.75264,
+      "lon": -90.44884,
+      "sourceUrl": "https://dnrservices.mo.gov/env/esp/aqm/docs/ridertrail.pdf",
+      "siteUrl": "https://dnr.mo.gov/air/hows-air/monitoring/sites/rider-trail-i-70-st-louis-county",
+      "observedAt": "2026-11-18T15:00:00Z",
+      "status": "preliminary",
+      "readings": [
+        {
+          "parameter": "SO2",
+          "value": 2.1,
+          "unit": "ppb",
+          "averagingPeriod": "1 hour",
+          "observedAt": "2026-11-18T15:00:00Z",
+          "periodEnd": "2026-11-18T16:00:00Z",
+          "status": "preliminary"
+        },
+        {
+          "parameter": "NO",
+          "value": 32.4,
+          "unit": "ppb",
+          "averagingPeriod": "1 hour",
+          "observedAt": "2026-11-18T15:00:00Z",
+          "periodEnd": "2026-11-18T16:00:00Z",
+          "status": "preliminary"
+        },
+        {
+          "parameter": "NO2",
+          "value": 24.4,
+          "unit": "ppb",
+          "averagingPeriod": "1 hour",
+          "observedAt": "2026-11-18T15:00:00Z",
+          "periodEnd": "2026-11-18T16:00:00Z",
+          "status": "preliminary"
+        },
+        {
+          "parameter": "NOx",
+          "value": 56.8,
+          "unit": "ppb",
+          "averagingPeriod": "1 hour",
+          "observedAt": "2026-11-18T15:00:00Z",
+          "periodEnd": "2026-11-18T16:00:00Z",
+          "status": "preliminary"
+        }
+      ],
+      "wind": {
+        "speed": 5.1,
+        "directionFromDegrees": 163.0,
+        "unit": "mph",
+        "averagingPeriod": "1 hour",
+        "observedAt": "2026-11-18T15:00:00Z",
+        "periodEnd": "2026-11-18T16:00:00Z",
+        "status": "preliminary"
+      }
+    }
+  ]
+}
