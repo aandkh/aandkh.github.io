@@ -87,16 +87,16 @@
       "url": "https://www.firstalert4.com/2026/11/11/green-tree-elementary-school-briefly-locked-down-after-stolen-vehicle-pursuit-lake-st-louis/"
     },
     "https://www.firstalert4.com/2026/11/11/man-critically-injured-south-city-shooting/": {
-      "changedAt": "2026-11-17T15:20:52.330050+00:00",
+      "changedAt": "2026-11-19T11:58:31.180461+00:00",
       "discoveredAt": "2026-11-17T15:20:52.330050+00:00",
-      "publishedAt": "2026-11-11T18:15:40+00:00",
+      "publishedAt": "2026-11-18T16:54:43+00:00",
       "review": {
-        "checkedAt": "2026-11-17T15:25:03.024127+00:00",
-        "disposition": "mapped",
-        "note": "Added incident:city-grant-street-fatal-shooting-20261111; corrected full article identifies Grant Street in North City, not earlier Grant Place. One death explicitly reported.",
-        "revision": "69c48d38cb88c4c3d1b7371bc63859f407a03d3204f616e740ee95b9a5504772"
+        "checkedAt": "2026-11-19T12:03:23.976605+00:00",
+        "disposition": "already-mapped",
+        "note": "Current revision confirms the existing Nov. 11 Grant Street homicide record; corrected 5300 block, approximate time, one death and investigation status are already mapped.",
+        "revision": "29eb6fe097df0e61e08774372713a13fe654c89351ea8c48ecbf9dba0e641b2a"
       },
-      "revision": "69c48d38cb88c4c3d1b7371bc63859f407a03d3204f616e740ee95b9a5504772",
+      "revision": "29eb6fe097df0e61e08774372713a13fe654c89351ea8c48ecbf9dba0e641b2a",
       "sources": [
         "firstalert-crime"
       ],
@@ -566,6 +566,23 @@
       "title": "POLICE: Woman arrested, accused of threatening school staff and students",
       "url": "https://www.firstalert4.com/2026/11/17/police-woman-arrested-accused-threatening-school-staff-students/"
     },
+    "https://www.firstalert4.com/2026/11/18/judge-denies-church-shooters-request-supervised-outings-mental-health-facility/": {
+      "changedAt": "2026-11-19T11:58:31.180461+00:00",
+      "discoveredAt": "2026-11-19T11:58:31.180461+00:00",
+      "publishedAt": "2026-11-18T16:14:50+00:00",
+      "review": {
+        "checkedAt": "2026-11-19T12:03:24.360813+00:00",
+        "disposition": "historical-followup",
+        "note": "Current court story concerns the March 8, 2009 Maryville, Illinois church shooting; it is historical and outside the maintained City/County incident region.",
+        "revision": "4fb49046495fd263a78038c391e1e6351f0de7f9b061d1381bbcaf0bfd313f60"
+      },
+      "revision": "4fb49046495fd263a78038c391e1e6351f0de7f9b061d1381bbcaf0bfd313f60",
+      "sources": [
+        "firstalert-crime"
+      ],
+      "title": "Judge denies church shooter’s request for supervised outings from mental health facility",
+      "url": "https://www.firstalert4.com/2026/11/18/judge-denies-church-shooters-request-supervised-outings-mental-health-facility/"
+    },
     "https://www.firstalert4.com/2026/11/18/no-charges-be-issued-fatal-berkeley-road-rage-shooting/": {
       "changedAt": "2026-11-18T11:58:48.099669+00:00",
       "discoveredAt": "2026-11-18T11:58:48.099669+00:00",
@@ -582,11 +599,32 @@
       ],
       "title": "No charges to be issued in fatal Berkeley road rage shooting",
       "url": "https://www.firstalert4.com/2026/11/18/no-charges-be-issued-fatal-berkeley-road-rage-shooting/"
+    },
+    "https://www.firstalert4.com/2026/11/18/police-yorkie-seen-being-repeatedly-hit-circulating-video-good-spirits/": {
+      "changedAt": "2026-11-19T11:58:31.180461+00:00",
+      "discoveredAt": "2026-11-19T11:58:31.180461+00:00",
+      "publishedAt": "2026-11-18T17:48:55+00:00",
+      "review": {
+        "checkedAt": "2026-11-19T12:03:23.614417+00:00",
+        "disposition": "insufficient-location",
+        "note": "Article confirms police investigation/arrest but does not establish a defensible occurrence date or public incident location; do not infer a scene from the investigating municipality.",
+        "revision": "2e2cd4cba4b701fb82c4ad96084f755d38eb5d9331b0d5e420fcea64d817b1cf"
+      },
+      "revision": "2e2cd4cba4b701fb82c4ad96084f755d38eb5d9331b0d5e420fcea64d817b1cf",
+      "sources": [
+        "firstalert-county",
+        "firstalert-crime"
+      ],
+      "title": "Police: Yorkie seen being repeatedly hit in circulating video ‘in good spirits’",
+      "url": "https://www.firstalert4.com/2026/11/18/police-yorkie-seen-being-repeatedly-hit-circulating-video-good-spirits/"
     }
   },
   "sources": {
     "firstalert-county": {
       "articleUrls": [
+        "https://www.firstalert4.com/2026/11/19/st-louis-county-welcomes-more-than-20-new-corrections-officers-graduation-ceremony/",
+        "https://www.firstalert4.com/2026/11/18/inside-normandy-schools-command-center-monitoring-330-cameras/",
+        "https://www.firstalert4.com/2026/11/18/police-yorkie-seen-being-repeatedly-hit-circulating-video-good-spirits/",
         "https://www.firstalert4.com/2026/11/18/no-charges-be-issued-fatal-berkeley-road-rage-shooting/",
         "https://www.firstalert4.com/2026/11/17/florissant-police-investigating-shooting/",
         "https://www.firstalert4.com/2026/11/17/man-admits-shooting-ballwin-officer/",
@@ -603,20 +641,21 @@
         "https://www.firstalert4.com/2026/11/12/police-investigating-after-man-shot-killed-following-altercation/",
         "https://www.firstalert4.com/2026/11/12/coaches-families-gather-ferguson-honor-man-killed-youth-football-game/",
         "https://www.firstalert4.com/2026/11/12/i-64-closed-both-directions-chesterfield-due-downed-powerline-highway/",
-        "https://www.firstalert4.com/2026/11/11/former-st-louis-county-jail-officer-charged-with-accepting-bribes-smuggle-contraband/",
-        "https://www.firstalert4.com/2026/11/11/ex-employee-sues-onderlaw-claims-assault-online-campaign-ferguson-data-center/",
-        "https://www.firstalert4.com/2026/11/10/new-cheesecake-factory-location-opens-west-county-mall/",
-        "https://www.firstalert4.com/2026/11/10/maplewood-richmond-heights-schools-project-206m-budget-gap-seek-community-input/"
+        "https://www.firstalert4.com/2026/11/11/former-st-louis-county-jail-officer-charged-with-accepting-bribes-smuggle-contraband/"
       ],
-      "contentChangedAt": "2026-11-18T11:58:48.099669+00:00",
-      "etag": "W/\"fa70-oTXlzVVPdftTrasDMKKdoAiWVsE\"",
-      "lastModified": "Wed, 18 Nov 2026 11:58:52 GMT",
-      "latestPublishedAt": "2026-11-18T04:07:31+00:00",
-      "oldestPublishedAt": "2026-11-10T23:01:36+00:00",
+      "contentChangedAt": "2026-11-19T11:58:31.180461+00:00",
+      "etag": "W/\"d7d9-K+7Z5RfEetNKUIk7Twi1iZaK/t0\"",
+      "lastModified": "Thu, 19 Nov 2026 11:58:35 GMT",
+      "latestPublishedAt": "2026-11-19T04:37:07+00:00",
+      "oldestPublishedAt": "2026-11-11T17:40:05+00:00",
       "url": "https://www.firstalert4.com/arc/outboundfeeds/rss/category/news/st-louis-county/?outputType=xml"
     },
     "firstalert-crime": {
       "articleUrls": [
+        "https://www.firstalert4.com/2026/11/18/federal-grand-jury-indicts-man-deadly-cahokia-heights-fire/",
+        "https://www.firstalert4.com/2026/11/18/police-yorkie-seen-being-repeatedly-hit-circulating-video-good-spirits/",
+        "https://www.firstalert4.com/2026/11/11/man-critically-injured-south-city-shooting/",
+        "https://www.firstalert4.com/2026/11/18/judge-denies-church-shooters-request-supervised-outings-mental-health-facility/",
         "https://www.firstalert4.com/2026/11/17/man-spend-rest-his-life-prison-after-st-louis-jury-finds-him-guilty-sexually-abusing-2-girls/",
         "https://www.firstalert4.com/2026/11/17/police-man-orders-doordash-hospital-shoots-delivery-drivers-after-complaints-with-order/",
         "https://www.firstalert4.com/2026/11/17/florissant-police-investigating-shooting/",
@@ -632,17 +671,13 @@
         "https://www.firstalert4.com/2026/11/14/school-leader-says-district-policies-call-very-long-suspension-or-expulsion-after-black-hawk-middle-school-stabbing/",
         "https://www.firstalert4.com/2026/11/12/police-investigating-after-man-shot-killed-following-altercation/",
         "https://www.firstalert4.com/2026/11/13/parent-student-who-witnessed-black-hawk-middle-school-stabbing-speaks-out/",
-        "https://www.firstalert4.com/2026/11/13/there-is-no-right-way-feel-after-trauma-psychologist-aftermath-stabbing-warren-county-middle-school/",
-        "https://www.firstalert4.com/2026/11/12/suspect-custody-after-incident-blackhawk-middle-school-police-say/",
-        "https://www.firstalert4.com/2026/11/12/students-recount-their-experience-after-2-students-teacher-stabbed-warren-county-middle-school/",
-        "https://www.firstalert4.com/2026/11/12/neighbors-shaken-man-dies-toddler-injured-after-being-shot-car-cahokia-heights/",
-        "https://www.firstalert4.com/2026/11/11/st-louis-police-investigate-mans-death-homicide-months-after-reported-assault/"
+        "https://www.firstalert4.com/2026/11/13/there-is-no-right-way-feel-after-trauma-psychologist-aftermath-stabbing-warren-county-middle-school/"
       ],
-      "contentChangedAt": "2026-11-18T11:58:48.099669+00:00",
-      "etag": "W/\"1183e-Amu93lYdIJVt/ZnR/dyidZYPKoI\"",
-      "lastModified": "Wed, 18 Nov 2026 11:58:57 GMT",
-      "latestPublishedAt": "2026-11-17T20:55:09+00:00",
-      "oldestPublishedAt": "2026-11-11T22:11:56+00:00",
+      "contentChangedAt": "2026-11-19T11:58:31.180461+00:00",
+      "etag": "W/\"eef2-BczdR/gJgcuGuaViCkkzdc72idU\"",
+      "lastModified": "Thu, 19 Nov 2026 11:58:39 GMT",
+      "latestPublishedAt": "2026-11-18T22:25:24+00:00",
+      "oldestPublishedAt": "2026-11-13T01:22:09+00:00",
       "url": "https://www.firstalert4.com/arc/outboundfeeds/rss/category/news/crime/?outputType=xml"
     }
   },

@@ -560,29 +560,6 @@
         ]
       },
       "properties": {
-        "id": "venue-comedy:helium:721ec2b03289e1d5:2026-11-19T01:30:00+00:00",
-        "title": "Damon Darling",
-        "start": "2026-11-19T01:30:00+00:00",
-        "expiresAt": "2026-11-19T00:00:00-06:00",
-        "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
-        "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
-        "source": "Official Helium Comedy Club calendar",
-        "sourceUrl": "https://st-louis.heliumcomedy.com/events",
-        "url": "https://st-louis.heliumcomedy.com/shows/345117",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
-        "venueSource": "helium"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -90.3491,
-          38.6357
-        ]
-      },
-      "properties": {
         "id": "venue-comedy:helium:f6d17406a96a25ce:2026-11-20T01:30:00+00:00",
         "title": "Damon Darling",
         "start": "2026-11-20T01:30:00+00:00",
@@ -592,7 +569,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/355075",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -615,7 +592,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/390123",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -638,7 +615,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/383463",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -661,7 +638,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/383464",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -684,7 +661,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/383466",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -707,7 +684,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/383467",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -730,7 +707,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/391551",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -753,7 +730,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/389330",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -776,7 +753,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/383465",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -799,7 +776,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/387872",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -822,7 +799,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/384133",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -845,7 +822,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/384134",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -868,7 +845,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/384135",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -891,7 +868,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/384137",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -914,7 +891,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/384138",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -937,7 +914,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/384136",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -960,7 +937,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/384202",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -983,7 +960,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/339007",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1006,7 +983,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/364661",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1029,7 +1006,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/390124",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1052,7 +1029,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/394191",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1075,7 +1052,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/394192",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1098,7 +1075,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/394193",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1121,7 +1098,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/390647",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1144,7 +1121,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/394194",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1167,7 +1144,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/383207",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1190,7 +1167,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/371158",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1213,7 +1190,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/370576",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1236,7 +1213,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/386007",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1259,7 +1236,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/367784",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1282,7 +1259,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/367785",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1296,16 +1273,16 @@
         ]
       },
       "properties": {
-        "id": "venue-comedy:helium:f63b50b70f8e4598:2026-12-12T18:00:00+00:00",
+        "id": "venue-comedy:helium:f63b50b70f8e4598:2026-12-12T20:00:00+00:00",
         "title": "Grinch Drag Brunch",
-        "start": "2026-12-12T18:00:00+00:00",
+        "start": "2026-12-12T20:00:00+00:00",
         "expiresAt": "2026-12-13T00:00:00-06:00",
         "description": "Helium Comedy Club · Check the official listing for tickets, admission requirements and changes.",
         "address": "Helium Comedy Club, 1151 Saint Louis Galleria, Richmond Heights, MO",
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/395405",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1328,7 +1305,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/367787",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1351,7 +1328,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/367788",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1374,7 +1351,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/387246",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1397,7 +1374,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/367786",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1420,7 +1397,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/385041",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1443,7 +1420,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/386751",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1466,7 +1443,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/386752",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1489,7 +1466,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/386754",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1512,7 +1489,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/386755",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1535,7 +1512,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/386753",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1558,7 +1535,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/382694",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1581,7 +1558,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/394190",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1604,7 +1581,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/393722",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1627,7 +1604,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/393721",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1650,7 +1627,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/394670",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1673,7 +1650,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/394671",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1696,7 +1673,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/394672",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1719,7 +1696,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/394673",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1742,7 +1719,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/387377",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1765,7 +1742,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/390967",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1788,7 +1765,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/390969",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1811,7 +1788,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/391614",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1834,7 +1811,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/392809",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1857,7 +1834,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/392848",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1880,7 +1857,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/392849",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1903,7 +1880,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/392851",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1926,7 +1903,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/392852",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1949,7 +1926,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/392850",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1972,7 +1949,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/396142",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -1995,7 +1972,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/392855",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2018,7 +1995,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/392856",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2041,7 +2018,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/392857",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2064,7 +2041,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/392859",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2087,7 +2064,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/392858",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2110,7 +2087,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/391679",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2133,7 +2110,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/392196",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2156,7 +2133,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/392197",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2179,7 +2156,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/392198",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2202,7 +2179,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/392199",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2225,7 +2202,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/392200",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2248,7 +2225,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/393490",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2271,7 +2248,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/394511",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2294,7 +2271,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/377111",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2317,7 +2294,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/390968",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2340,7 +2317,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/393496",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2363,7 +2340,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/375819",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2386,7 +2363,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/375820",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2409,7 +2386,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/375821",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2432,7 +2409,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/375822",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2455,7 +2432,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/375823",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2478,7 +2455,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/395945",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2501,7 +2478,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/392840",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2524,7 +2501,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/392841",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2547,7 +2524,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/392842",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2570,7 +2547,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/392843",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2593,7 +2570,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/392844",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2616,7 +2593,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/395029",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2639,7 +2616,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/383097",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2662,7 +2639,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/383098",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2685,7 +2662,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/383099",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2708,7 +2685,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/383100",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2731,7 +2708,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/383101",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2754,7 +2731,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/387401",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2777,7 +2754,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/387402",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2800,7 +2777,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/394824",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2823,7 +2800,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/387403",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2846,7 +2823,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/387404",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2869,7 +2846,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/368223",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2892,7 +2869,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/368224",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2915,7 +2892,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/368226",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2938,7 +2915,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/368225",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2961,7 +2938,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/377114",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -2984,7 +2961,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/395944",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -3007,7 +2984,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/393498",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -3030,7 +3007,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/389257",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -3053,7 +3030,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/390784",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -3076,7 +3053,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/390785",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -3099,7 +3076,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/390786",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -3122,7 +3099,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/390787",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -3145,7 +3122,7 @@
         "source": "Official Helium Comedy Club calendar",
         "sourceUrl": "https://st-louis.heliumcomedy.com/events",
         "url": "https://st-louis.heliumcomedy.com/shows/390788",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "helium"
       }
     },
@@ -3168,7 +3145,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=c1c51fe7-0e10-4350-97b0-33da33e2e62d",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -3191,7 +3168,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=368f2986-e61c-44c7-8ba9-e465f94681fb",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -3214,7 +3191,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=ee4c4210-7225-4997-8efb-4bb5a94afe73",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -3237,7 +3214,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=767fd749-8041-48e3-ae76-30d8abf1eddb",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -3260,7 +3237,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=5a72b15d-e659-451e-9583-cd12493d9c4f",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -3283,7 +3260,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=69bcff10-7c04-40d8-9e3f-4ef9178f94fc",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -3306,7 +3283,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=6455bf48-e518-4998-9527-e85cf198186d",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -3329,7 +3306,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=c59041b9-3a0d-484e-a9f3-f96a06703615",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -3352,7 +3329,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=a04bbd0b-48ee-4b96-a1e8-3d62a323854c",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -3375,7 +3352,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=369c81b6-ffe0-4c2f-bccb-602ea5ab8eb4",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -3398,7 +3375,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=29e6ed5f-adae-4195-945b-69f3e7e398fb",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -3421,7 +3398,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=9975aa23-3331-48cc-a854-78caf13941e9",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -3444,7 +3421,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=6694f9b6-99c3-4c52-96c4-4ddf289b2c7b",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -3467,7 +3444,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=6e81e2e7-a085-44ff-afa3-c08d592b51ec",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -3490,7 +3467,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=9cdfda1b-2116-444d-84d5-9c77896a5e11",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -3513,7 +3490,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=29329cf3-573c-4e7f-93ae-711171d52824",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -3536,7 +3513,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=33a4c5a7-a40f-46d5-a5f5-409d5be9f3ab",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -3559,7 +3536,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=a2e36b4c-01e0-4a7e-afb9-6e05382c9166",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -3582,7 +3559,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=f6fec342-e96e-4778-a825-3c7557b395d2",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -3605,7 +3582,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=9615fccf-5f4e-4eae-8c4d-539a18e846f5",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -3628,7 +3605,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=c2fedc96-4aa9-4430-8cff-c5d045ae9360",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -3651,7 +3628,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=f45bb8cc-e207-4f6e-82c2-b1042db6ab63",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -3674,7 +3651,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=2e805cac-4716-44fd-9a66-bbea9ffb8f1a",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -3697,7 +3674,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=552b7210-3133-4f78-9277-355935b6daa2",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -3720,7 +3697,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=04a7c6fa-3fe1-4a7f-abd7-f388588f1827&sid=9625ef0c-909d-4443-bc7b-ec21fc81ebcf",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -3743,7 +3720,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=444bbc59-2f61-4c8b-ab8a-21c4815857b2&sid=c219d1eb-67d5-44fd-9d90-93273d713557",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -3766,7 +3743,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=444bbc59-2f61-4c8b-ab8a-21c4815857b2&sid=7b1da152-3f9f-4a71-a4bb-da4bec2d890a",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -3789,7 +3766,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=444bbc59-2f61-4c8b-ab8a-21c4815857b2&sid=65ad8aba-8753-41fd-8f00-97a0cacad4e7",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -3812,7 +3789,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=444bbc59-2f61-4c8b-ab8a-21c4815857b2&sid=b68ff0e2-0c19-43c7-965e-73493c6803fd",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -3835,7 +3812,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=444bbc59-2f61-4c8b-ab8a-21c4815857b2&sid=53e7d2ce-6cf2-49cb-ad96-2d010ebfad52",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -3858,7 +3835,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=6b28744d-dd64-4533-be9e-7a3877e4115a&sid=002a6d3b-3629-4270-b7bf-57a350a72eb0",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -3881,7 +3858,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=6b28744d-dd64-4533-be9e-7a3877e4115a&sid=ec95be5b-14dd-48e2-b59d-234ca41c9960",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -3904,7 +3881,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=6b28744d-dd64-4533-be9e-7a3877e4115a&sid=9d83d5f1-c666-4413-9c4d-b50a80110b29",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -3927,7 +3904,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=6b28744d-dd64-4533-be9e-7a3877e4115a&sid=f2d568f8-3e6e-423c-8b7d-cf20073c2225",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -3950,7 +3927,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=6b28744d-dd64-4533-be9e-7a3877e4115a&sid=53c28c47-fdcb-4648-bae2-0518a7697eff",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -3973,7 +3950,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=ab25072d-6fb2-474a-afa9-45d40c3e2970&sid=518a095c-eeeb-4e28-b5c6-e01ce0b06ca5",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -3996,7 +3973,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=ab25072d-6fb2-474a-afa9-45d40c3e2970&sid=849062fa-c4fa-4e1d-9d26-d3dbce0be0fb",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -4019,7 +3996,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=ab25072d-6fb2-474a-afa9-45d40c3e2970&sid=bc43d3c1-d8c3-4dfb-a0c1-9c5c8ccdb50d",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -4042,7 +4019,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=ab25072d-6fb2-474a-afa9-45d40c3e2970&sid=394bd202-6a31-41c9-8e7a-dbf847e45c84",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -4065,7 +4042,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=ab25072d-6fb2-474a-afa9-45d40c3e2970&sid=0cad4b90-4506-4b24-8b2f-9a14285facab",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -4088,7 +4065,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=8628bea0-f1f1-4459-a571-d38b5bcf387b&sid=6266588d-487f-48ce-9c3d-a3099d7c9dcd",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -4111,7 +4088,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=8628bea0-f1f1-4459-a571-d38b5bcf387b&sid=69cd6414-a8f9-476c-b6c5-bad3958c998e",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -4134,7 +4111,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=8628bea0-f1f1-4459-a571-d38b5bcf387b&sid=d5a299be-c182-4df9-b232-251a9e4a8470",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -4157,7 +4134,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=8628bea0-f1f1-4459-a571-d38b5bcf387b&sid=6f7d47e9-719c-4bf8-9446-2ece3f3bf7fe",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -4180,7 +4157,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=8628bea0-f1f1-4459-a571-d38b5bcf387b&sid=13ec95d0-e880-44d9-9e6c-3e618cedd146",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -4203,7 +4180,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=8628bea0-f1f1-4459-a571-d38b5bcf387b&sid=48b6cfaa-6926-4dc5-964a-b2f59784c6cc",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -4226,7 +4203,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=4d4b3bbf-fda1-4d22-9e43-fc78500ec9ee&sid=a11e3c35-1a3d-46f1-bf97-05b728eed4da",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -4249,7 +4226,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=4d4b3bbf-fda1-4d22-9e43-fc78500ec9ee&sid=e9c04204-9b1e-48f6-a542-893bf1899314",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -4272,7 +4249,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=4d4b3bbf-fda1-4d22-9e43-fc78500ec9ee&sid=ede1b2e0-b8e4-46df-abcf-a662da9699af",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -4295,7 +4272,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=4d4b3bbf-fda1-4d22-9e43-fc78500ec9ee&sid=b7918759-ca39-4743-9419-5f1ae3f45489",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -4318,7 +4295,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=4d4b3bbf-fda1-4d22-9e43-fc78500ec9ee&sid=15dd49e4-ada2-4b65-8187-561e469572c5",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -4341,7 +4318,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=4d4b3bbf-fda1-4d22-9e43-fc78500ec9ee&sid=e69aeefa-3bd8-4782-b46b-a09b1c33e80e",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -4364,7 +4341,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=e87de4ca-7a23-47b9-8c05-decafba41508&sid=95e4d1a2-b84d-4d03-94f7-6a562c5e0e3e",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -4387,7 +4364,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=e87de4ca-7a23-47b9-8c05-decafba41508&sid=01788826-c3a2-42af-85c3-d2d8e348325b",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -4410,7 +4387,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=e87de4ca-7a23-47b9-8c05-decafba41508&sid=afc07c9a-892f-4129-8c1e-7bc3f570ce84",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -4433,7 +4410,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=bbe773e7-1f7a-4803-81b0-2b3a88b4407f&sid=02b7cdae-0054-45b3-9d83-0242bc6b65a7",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -4456,7 +4433,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=bbe773e7-1f7a-4803-81b0-2b3a88b4407f&sid=76009ced-225d-e6fd-848c-80b2eeac5c8c",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -4479,7 +4456,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=bbe773e7-1f7a-4803-81b0-2b3a88b4407f&sid=9819b254-1e3e-f7b6-b705-693ab9c46f05",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -4502,7 +4479,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=30ea2d68-bdd0-4f6a-a305-27ae5b1a44e4&sid=703951e4-f6ed-42d9-a5aa-4bb762847198",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -4525,7 +4502,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=30ea2d68-bdd0-4f6a-a305-27ae5b1a44e4&sid=e4754f22-56ce-427a-b2bb-88721c1ea26f",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -4548,7 +4525,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=30ea2d68-bdd0-4f6a-a305-27ae5b1a44e4&sid=ff8c0d70-67a2-4214-aa34-66c40a4acfe4",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -4571,7 +4548,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=30ea2d68-bdd0-4f6a-a305-27ae5b1a44e4&sid=3d4c5272-4704-4671-b30a-a6dd60089156",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -4594,7 +4571,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=30ea2d68-bdd0-4f6a-a305-27ae5b1a44e4&sid=08a7d0d2-bd69-48cc-93a7-e9dbe4303ef7",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -4617,7 +4594,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=cbf43cbf-7a5f-47c4-8a30-21a42780f335&sid=cd2965e9-7503-43a3-8093-e14efd87996e",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -4640,7 +4617,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=cbf43cbf-7a5f-47c4-8a30-21a42780f335&sid=7bee75c7-7d71-4ab3-95b5-41730a5c3443",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -4663,7 +4640,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=cbf43cbf-7a5f-47c4-8a30-21a42780f335&sid=4f1ffd59-2b14-4148-b6ae-fc2c3a176229",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -4686,7 +4663,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=cbf43cbf-7a5f-47c4-8a30-21a42780f335&sid=21edd28c-71db-0fd5-abdc-66a367ffc615",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -4709,7 +4686,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=3207564b-e90d-414c-a447-0d7e0df3bbd0&sid=3f0c8def-5c9b-4fdf-91db-ac2bb0748927",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -4732,7 +4709,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=3207564b-e90d-414c-a447-0d7e0df3bbd0&sid=a430fce4-8877-4b7f-8763-a311e5eaf14b",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     },
@@ -4755,7 +4732,7 @@
         "source": "Official Westport Funny Bone calendar",
         "sourceUrl": "https://stlouisfunnybone.com/events",
         "url": "https://standupmedia.com/newreservations/?club=718bd264-309b-4fa0-a6fa-0b93455f88d0&c=3207564b-e90d-414c-a447-0d7e0df3bbd0&sid=fe613893-be87-48f1-b197-0051e4709f7b",
-        "sourceCheckedAt": "2026-11-18T12:01:53.847756+00:00",
+        "sourceCheckedAt": "2026-11-19T12:01:41.027584+00:00",
         "venueSource": "funny"
       }
     }
