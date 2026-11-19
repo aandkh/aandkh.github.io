@@ -40,8 +40,14 @@ html[data-today-palette="vice-sunset"] body #sidebar {
  background:linear-gradient(165deg,#20134d 0%,#3e166a 65%,#74185d 100%)!important;
  border-color:#e272ff;
 }
-html[data-today-palette="vice-sunset"] body :is(.map-toolbar,#map-search,#quick-categories button,.tabs,.floating,dialog) {
+html[data-today-palette="vice-sunset"] body :is(#map-search,#quick-categories button,.tabs,.floating,dialog) {
  box-shadow:var(--vice-glow);
+}
+@media (min-width:801px) {
+ html[data-today-palette="vice-sunset"] body .map-toolbar :is(.map-tools-left,#results-toggle) {box-shadow:var(--vice-glow);}
+}
+@media (max-width:800px) {
+ html[data-today-palette="vice-sunset"] body .map-toolbar {box-shadow:var(--vice-glow);}
 }
 html[data-today-palette="vice-sunset"] body :is(.primary,#mobile-controls[aria-expanded=true]) {
  background:linear-gradient(115deg,#91a7ff,#d98dff 45%,#ff83ca 70%,#ffae68)!important;

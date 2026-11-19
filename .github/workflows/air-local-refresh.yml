@@ -40,8 +40,15 @@ jobs:
         id: epa
         continue-on-error: true
         run: python scripts/build-airnow-gases.py
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Refresh regional EPA air contours
+        id: contours
+        continue-on-error: true
+        run: node scripts/build-regional-air.mjs
       - name: Require at least one successful source refresh
-        if: steps.dnr.outcome != 'success' && steps.epa.outcome != 'success'
+        if: steps.dnr.outcome != 'success' && steps.epa.outcome != 'success' && steps.contours.outcome != 'success'
         run: exit 1
       - name: Configure Pages
         uses: actions/configure-pages@v5

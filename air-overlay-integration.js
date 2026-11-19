@@ -88,14 +88,16 @@ function combineBackground(regional, estimated) {
 
 export function composeAirOverlay(result = {}, {mode = 'pm25', now = Date.now(), sites, point} = {}) {
  const stations = (result.features || []).filter(f => f.properties?.airMonitor);
- const regional = result.regionalFeatures || (result.features || []).filter(f => !f.properties?.airMonitor && !f.properties?.landfill && !f.properties?.airMonitorEstimate);
+ const rawRegional = result.regionalFeatures || (result.features || []).filter(f => !f.properties?.airMonitor && !f.properties?.landfill && !f.properties?.airMonitorEstimate);
+ const regional = rawRegional.filter(f=>(f.properties?.regionalValidUntil??Infinity)>now);
  const estimated = buildMeasuredAirOverlay(stations, {mode, now});
  const contours = buildLandfillContours(stations, {now, airportReadings:result.airportReadings, sites:sites ?? result.landfillSites, point});
  let background, overlayClippingFailed = false;
  try {background = point ? [...estimated, ...regional] : combineBackground(regional, estimated);}
- catch {background = regional; overlayClippingFailed = true;}
+ catch {background = regional.length ? regional : estimated; overlayClippingFailed = true;}
  const areas = point ? [] : integrateLandfillColors(background, contours);
  const expiry = Math.min(...contours.map(c => c.properties.landfill.wind?.expires ?? Infinity),
+  ...regional.map(f=>f.properties?.regionalValidUntil??Infinity),
   ...estimated.map(f => Date.parse(f.properties.observedAt) + 4 * 3600000 + 1));
  return {...result, status: background.length ? (result.status === 'unavailable' ? 'partial' : result.status || 'ready') : 'partial',
   regionalFeatures: regional, background, landfillContours: contours, landfillSites:sites ?? result.landfillSites,
@@ -111,7 +113,7 @@ export function composeAirDisplay(result, {signal, mode='pm25', now=Date.now()}=
  if(typeof Worker==='undefined')return Promise.resolve(composeAirOverlay(result,options));
  return new Promise((resolve,reject)=>{
   let worker;
-  try {worker=new Worker(new URL('./air-overlay-worker.js?v=20261118-station-feed',import.meta.url),{type:'module'});}
+  try {worker=new Worker(new URL('./air-overlay-worker.js?v=20261118-air-coverage',import.meta.url),{type:'module'});}
   catch {resolve(composeAirOverlay(result,options));return;}
   function finish(){worker.terminate();signal?.removeEventListener('abort',abort);}
   function abort(){finish();reject(signal.reason);}

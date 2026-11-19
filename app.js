@@ -1,6 +1,7 @@
 import {WEATHER_POLL,AIR_WIND_POLL,WIND_MAX_AGE,usableAge} from './regional-weather.js?v=20261118-station-delivery';
-import {composeAirDisplay,currentAirGeometry,currentAirOverlay,airFeatureAtPoint} from './air-overlay-integration.js?v=20261118-station-feed';
-import {loadAirMonitors,mergeAirMonitors,appendAirLocationMeasurements,loadWindReadings,weatherWinds,windSignature} from './air-monitors.js?v=20261118-station-delivery';
+import {composeAirDisplay,currentAirGeometry,currentAirOverlay,airFeatureAtPoint} from './air-overlay-integration.js?v=20261118-air-coverage';
+import {loadAirMonitors,appendAirLocationMeasurements,loadWindReadings,weatherWinds,windSignature} from './air-monitors.js?v=20261118-air-coverage';
+import {loadAirSurface,loadRegionalAir} from './air-load.js?v=20261118-air-coverage';
 import {ODOR_BANDS} from './air-grades.js?v=20261118-local-air';
 import {trafficFeature,appendTrafficDetails} from './traffic-details.js?v=20261117-construction-layer';
 import {trafficCollection,currentTrafficRecord,savedTrafficFeature} from './traffic-experience.js?v=20261117-construction-layer';
@@ -238,9 +239,10 @@ async function inspectSpot(point){
  closeDetail();setResults(false);setControls(false);const token=spotUI.open(point);
  if(spotMarker)map.removeLayer(spotMarker);spotMarker=L.marker([point.lat,point.lng],{pane:'spot-selection',interactive:false,keyboard:false,icon:L.divIcon({className:'spot-selection-marker',html:'<svg viewBox="0 0 28 36" fill="none" aria-hidden="true"><path d="M6 34V3m0 1c6-4 10 4 16 0v14c-6 4-10-4-16 0" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><circle cx="6" cy="34" r="2" fill="currentColor"/></svg>',iconSize:[28,36],iconAnchor:[6,34]})}).addTo(map);
  try{
-  spotEngineModule??=import('./spot-data.js?v=20261118-station-feed');const {createSpotInspector}=await spotEngineModule;if(controller.signal.aborted||revision!==spotRevision)return;
+  spotEngineModule??=import('./spot-data.js?v=20261118-air-coverage');const {createSpotInspector}=await spotEngineModule;if(controller.signal.aborted||revision!==spotRevision)return;
   const inspector=createSpotInspector({...point,signal:controller.signal,loadedLayers:data,layerModes,loadAirSources:loadAirMonitors,fetchJson:readSpotSource,fetchLayer:async(id,options={})=>{
    const {mode='',lat=point.lat,lng=point.lng,bbox,signal=controller.signal}=options;const query=new URLSearchParams({bbox:Array.isArray(bbox)?bbox.join(','):bbox||[Math.max(REGION.west,lng-.035),Math.max(REGION.south,lat-.028),Math.min(REGION.east,lng+.035),Math.min(REGION.north,lat+.028)].join(','),mode,lat:String(lat),lng:String(lng)});
+   if(id==='air')return loadRegionalAir(mode,{signal});
    if(id==='weather')return loadWeatherForecast(lat,lng,{signal,loadPrimary:async({signal:forecastSignal})=>{const response=await apiFetch('/api/layers/weather?'+query,{signal:AbortSignal.any([forecastSignal,AbortSignal.timeout(8000)])});if(!response.ok)throw Error('Forecast unavailable');return response.json();}});
    const response=await apiFetch('/api/layers/'+id+'?'+query,{signal:AbortSignal.any([signal,AbortSignal.timeout(12000)])});if(!response.ok)throw Error('Source unavailable');return response.json();
   },onSection:section=>{if(revision===spotRevision&&!controller.signal.aborted)spotUI.updateSection(section.id,section,token);}});
@@ -403,7 +405,11 @@ function renderEnvironmentKey(){mapKey.updateVisibility(['traffic','radar','air'
  if(enabled.has('air')){
   const overlay=data.get('air'), current=airFeatureAtPoint(overlay,map.getCenter())?.properties;
   host.dataset.airStatus=overlay?.status||'none';host.dataset.airFeatureCount=String(overlay?.features?.length||0);
-  appendAirAdvice(host,current);
+  if(!current&&(!overlay||requests.has('air')||overlay.status==='loading')){
+   const card=el('section','insight-card air-advice');
+   card.append(el('strong','','Open The Windows Score'),el('p','air-grade-reading','Checking local air quality…'));
+   host.append(card);
+  }else appendAirAdvice(host,current);
   host.append(el('strong','','Estimated local windows grade'));
   const ramp=el('span','key-row');
   for(const band of ODOR_BANDS){const chip=el('i');chip.style.background=band.color;ramp.append(chip);}
@@ -584,12 +590,13 @@ async function loadLayer(id,{force=false}={}){
  const location=['sky','weather'].includes(id)?'&lat='+center.lat.toFixed(5)+'&lng='+center.lng.toFixed(5):'';
  const bbox=boundsParam(),query='?bbox='+bbox+'&mode='+mode+location;
  const localOnly=['gyms','cycling','joyrides','haunted','history','wildlife','roadworks'].includes(id)||id==='crime'&&mode==='recent'||id==='terrain'&&(GEOLOGY_MODES.has(mode)||mode==='streams');
- const requestKey=JSON.stringify([id,mode,localOnly?'':location||bbox,id==='wildlife'?[wildlifeQuery({...defaultWildlifeOptions(),...wildlifeOptions}).toString(),Math.max(1,Math.min(5,Math.floor(wildlifeOptions.pageLimit)||1))]:null,id==='history'?[historyView,imageryDate]:null,id==='crime'?incidentFilters:null]);
+ const requestKey=JSON.stringify([id,mode,localOnly||id==='air'?'':location||bbox,id==='wildlife'?[wildlifeQuery({...defaultWildlifeOptions(),...wildlifeOptions}).toString(),Math.max(1,Math.min(5,Math.floor(wildlifeOptions.pageLimit)||1))]:null,id==='history'?[historyView,imageryDate]:null,id==='crime'?incidentFilters:null]);
  const existing=requests.get(id),previous=data.get(id),freshFor=localOnly?300000:30000;
  if(!force&&existing?._requestKey===requestKey&&!existing.signal.aborted)return existing.done;
  if(!force&&!existing&&previous?._requestKey===requestKey&&previous.status!=='unavailable'&&previous.status!=='loading'&&Date.now()-(layerRefreshAt.get(id)||0)<freshFor&&(drawn.has(id)||['weather','sky'].includes(id)))return;
  requests.get(id)?.abort();const controller=new AbortController();controller._requestKey=requestKey;let completeRequest;controller.done=new Promise(resolve=>completeRequest=resolve);requests.set(id,controller);
- data.set(id,{...data.get(id),_hoursStatus:data.get(id)?._hoursStatus||data.get(id)?.status,status:'loading'});queueLayerUI(id);
+ const keep=id==='air'&&previous?.airOverlayMode!==mode?null:previous;
+ data.set(id,{...keep,_hoursStatus:keep?._hoursStatus||keep?.status,status:'loading'});queueLayerUI(id);
  const finishWait=startMeasurement('layer:'+id,'request-and-decode');
  if(id==='traffic'){const flow=drawn.get(id);if(flow)flow.refresh({force});else raster(id);}
  const commit=result=>{
@@ -611,18 +618,7 @@ async function loadLayer(id,{force=false}={}){
   let result;
   if(['gyms','cycling','joyrides','haunted'].includes(id))result=await localLayerSnapshot(id);
   else if(id==='air'){
-   const sources=Promise.allSettled([
-    mode==='no2'?Promise.resolve({features:[],status:'unavailable'}):remote(id,10000),
-    loadAirMonitors({mode,signal:controller.signal,force})
-   ]);
-   if(!previous?.background||previous.airOverlayMode!==mode){
-    const nearby=await composeAirDisplay({features:[]},{mode,signal:controller.signal});
-    commit(nearby);
-   }
-   const [areas,monitors]=await sources;
-   const inputs=mergeAirMonitors(areas.status==='fulfilled'?areas.value:{features:[],status:'unavailable'},
-    monitors.status==='fulfilled'?monitors.value:{features:[],monitorSources:[]});
-   result=await composeAirDisplay(inputs,{mode,signal:controller.signal});
+   result=await loadAirSurface({mode,signal:controller.signal,force,previous,onUpdate:commit});
    if(!controller.signal.aborted)airWindAt=Date.now();
   }
   else if(id==='wildlife'){if(wildlifeOptions.mapView!=='reports')drawFeatures(id,{query:wildlifeOptions});result=await loadWildlife({...wildlifeOptions,signal:controller.signal});}
@@ -660,7 +656,9 @@ async function loadLayer(id,{force=false}={}){
   if(id==='air')console.warn('Air overlay could not load:',error?.message);
   if(!controller.signal.aborted&&enabled.has(id)&&requests.get(id)===controller){
    if(id==='traffic'&&drawn.has(id))data.set(id,trafficCollection({status:'partial',raster:true,source:'TomTom',note:'Traffic metadata could not load. Tile receipt does not establish observation age.'},trafficState));
-   else{removeDrawing(id);data.set(id,{status:'unavailable',features:[],checkedAt:new Date().toISOString(),note:'This source could not be reached. Try again shortly.'});}
+   else if(id==='air'&&data.get(id)?.airOverlayMode===mode&&data.get(id)?.features?.length){
+    commit({...data.get(id),status:'partial',airRetry:true});
+   }else{removeDrawing(id);data.set(id,{status:'unavailable',features:[],checkedAt:new Date().toISOString(),note:'This source could not be reached. Try again shortly.'});}
   }
  }finally{
   completeRequest();finishWait();if(requests.get(id)===controller){layerRefreshAt.set(id,Date.now());requests.delete(id);queueLayerUI(id);if(id==='sky'&&skyPanelOpen)renderSky();if(id==='weather'&&weatherPanelOpen)renderWeather();}
@@ -1063,7 +1061,7 @@ function expireAirOverlay(){
 window.addEventListener('pageshow',refreshVisibleWeather);window.addEventListener('online',()=>{airWindAt=0;weatherReadingsAt=0;refreshVisibleWeather();});
 let lastHoursMinute=Math.floor(Date.now()/60000);function tickOpeningHours(){const minute=Math.floor(Date.now()/60000);if(minute===lastHoursMinute)return;lastHoursMinute=minute;if(todayOnly)refreshTodayView();if(openNow)refreshHoursView();if(displayedHours?.node.isConnected)renderHoursLine(displayedHours.node,displayedHours.properties);}setInterval(()=>{if(!document.hidden){eventExpiryClock.tick();tickOpeningHours();}},1000);document.addEventListener('visibilitychange',()=>{if(!document.hidden){eventExpiryClock.tick(true);refreshVisibleWeather();expireRoadworks();expireExtraPlaces();tickOpeningHours();}});setInterval(()=>{if(!document.hidden)expireExtraPlaces();},15000);
 map.on('moveend',()=>{if(spotMode){spotMoved=true;return;}renderPlaceMarkers();renderEnvironmentKey();clearTimeout(moveTimer);moveTimer=setTimeout(()=>{for(const id of enabled)if(!['wildlife','history','gyms','joyrides','haunted'].includes(id)&&!(id==='crime'&&layerModes.crime==='recent')&&!(id==='terrain'&&(GEOLOGY_MODES.has(layerModes[id])||layerModes[id]==='streams'))&&(['osm','snapshot'].includes(BY_ID[id].kind)||['sky','weather','civic','demographics','terrain','crime','outages','foliage','foodtrucks','businesses'].includes(id)))loadLayer(id);renderResults();},400);});
-setInterval(()=>{if(document.hidden)return;refreshVisibleWeather();expireRoadworks();for(const id of enabled){if(id==='alerts')continue;const d=data.get(id);const period={crime:300000,traffic:300000,foodtrucks:300000,businesses:86400000,outages:600000,foliage:21600000,transit:30000,aircraft:180000,rivers:300000,air:1800000,alerts:120000,radar:300000,roadworks:180000,sky:600000,weather:600000,movies:900000,concerts:900000,festivals:900000,sports:900000,arts:900000,free:900000,exhibitions:900000,communityevents:300000,recreation:600000,culture:600000,localfood:600000}[id];if(shouldRefreshLayer({lastCompletedAt:layerRefreshAt.get(id),period,status:d?.status,inFlight:requests.has(id)}))loadLayer(id);}},15000);
+setInterval(()=>{if(document.hidden)return;refreshVisibleWeather();expireRoadworks();for(const id of enabled){if(id==='alerts')continue;const d=data.get(id);const period={crime:300000,traffic:300000,foodtrucks:300000,businesses:86400000,outages:600000,foliage:21600000,transit:30000,aircraft:180000,rivers:300000,air:d?.airRetry||!d?.background?.length||airMode!=='no2'&&!d?.regionalFeatures?.length?60000:1800000,alerts:120000,radar:300000,roadworks:180000,sky:600000,weather:600000,movies:900000,concerts:900000,festivals:900000,sports:900000,arts:900000,free:900000,exhibitions:900000,communityevents:300000,recreation:600000,culture:600000,localfood:600000}[id];if(shouldRefreshLayer({lastCompletedAt:layerRefreshAt.get(id),period,status:d?.status,inFlight:requests.has(id)}))loadLayer(id);}},15000);
 async function openSharedPlace(place){
  applyState(placeState(place,mapStyle),{shared:true});
  const pin=cleanStop({id:'shared:'+place.token,layer:place.layer,lat:place.lat,lng:place.lng,title:'Shared location',description:'Loading place details…'});

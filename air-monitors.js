@@ -46,16 +46,20 @@ export function weatherWinds(rows) {
 }
 export const loadWindReadings=async options=>weatherWinds(await loadRegionalWeather(options));
 export const windSignature=rows=>JSON.stringify((rows||[]).map(r=>[r.id,r.label,r.lat,r.lng,r.observedAt,r.windMph,r.windFromDeg,r.windVariable,r.dryWeather,r.sourceUrl]));
-export async function loadAirMonitors({now=Date.now(),mode='pm25',signal,fetcher=fetch,force=false}={}){
+export async function loadAirMeasurements({now=Date.now(),mode='pm25',signal,fetcher=fetch,force=false}={}){
  const query=new URLSearchParams({f:'json',where:'Latitude >= 38.1 AND Latitude <= 39.2 AND Longitude >= -91.2 AND Longitude <= -89.4',outFields:'*',returnGeometry:'false',resultRecordCount:'1000'});
  const sources=[{name:'EPA AirNow monitors',url:AIR_MONITOR_URL+'?'+query,parse:airNowStations},{name:'Missouri DNR local monitors',url:'/data/air-local-observations.json',parse:dnrStations},{name:'EPA AirNow gas monitors',url:'/data/airnow-gases.json',parse:(p,o)=>dnrStations(p,{...o,epa:true})}];
- const results=await Promise.allSettled([...sources.map(async s=>{
-  const json=await weatherJson(s.url,{signal,now,fetcher,timeout:8000,maxAge:120000,staleIfError:true});
+ const results=await Promise.allSettled(sources.map(async s=>{
+  const json=await weatherJson(s.url,{signal,now,fetcher,force,cacheMode:'no-cache',timeout:8000,maxAge:120000,staleIfError:true});
   return s.parse(json,{now,mode});
- }),loadWindReadings({now,signal,fetcher,force})]);
+ }));
  const rows=results.map(r=>r.status==='fulfilled'?r.value:[]);
- return {features:combineMonitorStations(rows.slice(0,3).flat()), airportReadings:rows[3],
-  monitorSources:[...sources,{name:'Regional weather stations'}].map((s,i)=>({name:s.name,status:results[i].status==='fulfilled'?(rows[i].length?'ready':'no fresh readings'):'unavailable'}))};
+ return {features:combineMonitorStations(rows.flat()),
+  monitorSources:sources.map((s,i)=>({name:s.name,status:results[i].status==='fulfilled'?(rows[i].length?'ready':'no fresh readings'):'unavailable'}))};
+}
+export async function loadAirMonitors(options={}){
+ const [measurements,wind]=await Promise.all([loadAirMeasurements(options),loadWindReadings(options).then(rows=>({rows,status:rows.length?'ready':'no fresh readings'}),()=>({rows:[],status:'unavailable'}))]);
+ return {...measurements,airportReadings:wind.rows,monitorSources:[...measurements.monitorSources,{name:'Regional weather stations',status:wind.status}]};
 }
 export function mergeAirMonitors(regional,monitors) {
  const regions=(regional?.features||[]).filter(f=>!f.properties?.airMonitor);

@@ -1,12 +1,14 @@
 # Air-quality grades
 
-Reviewed November 15, 2026. Implementation: `air-grades.js`, scoped styling: `air-grades.css`; `layer-insights.js` re-exports the existing app interface. No extra network requests. The visible card is intentionally compact.
+The compact score card uses `air-grades.js` and `air-grades.css`. The map and spot inspector share the regional air reader in `air-load.js`.
 
 The pollutant-only ladder below supplies the background grade. Inside a modeled landfill footprint the displayed Open The Windows Score also accounts for local nuisance potential. Its Estimated label, fill colors, fallbacks and source attribution are described in [Local air measurements](LOCAL-AIR-MEASUREMENTS.md#landfill-estimates-in-the-air-quality-fill). The EPA reading and its health guidance retain their source values.
 
 ## Pollutant display contract
 
-The live `/api/layers/air` feed supplies EPA AirNow regional **category contours**, not a numeric AQI or a PM2.5 concentration. Preserve its original six categories, colors, observation time, preliminary-data status and source attribution. A shaded area is interpolated between monitors, not measured at every address. Missing pollutant data is unknown. A location can still have a labeled landfill-only estimate.
+EPA AirNow supplies hourly regional **category contours** for PM2.5 and ozone. Andymap reads the EPA feature service, its existing API and an hourly copy at `data/air-regional.json`. The first usable result can paint while other requests finish. A newer observation takes precedence. Each contour expires four hours after its EPA timestamp. The hourly Pages workflow runs `node scripts/build-regional-air.mjs` to update the copy within the map boundaries. Run `node --test scripts/air-load-test.mjs` to check coverage, loading, failover and expiry.
+
+The map preserves the six original categories, colors, observation times and source attribution. A shaded area is interpolated between monitors. The key shows a loading message until sources respond. Locations without pollutant coverage can still have a local landfill grade.
 
 The 17 grades are **Andymap display subdivisions**, not EPA health categories or validated personal health scores. Lower AQI means a better tier for the same pollutant and time basis. Subtiers within an official category share its health guidance. Never claim that S+ means zero pollution, uniquely “best possible air,” or no health risk.
 

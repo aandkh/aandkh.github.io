@@ -43,6 +43,10 @@ console.log(`PASS: release-day dates, midnight return to randomized palettes, sl
 // All gradient stops meet primary text contrast; gradients interpolate between them.
 for(const [fg,stops] of [['#34162e',['#91a7ff','#d98dff','#ff83ca','#ffae68','#cbd5ff','#f0c7fa','#ffc9e3','#ffd5af']],['#ffffff',['#353dc8','#8d19b3','#ae126e','#b72b3e','#363c93','#702d80','#8f2361','#91352c']]])for(const bg of stops)assert.ok(contrast(fg,bg)>=4.5,`${fg}/${bg} gradient contrast`);
 assert.ok(css.includes('box-shadow:var(--vice-glow)')&&css.includes('box-shadow:var(--control-glow)'),'both treatments apply their own static glow');
+const releaseRules=css.split('/* The session picker')[0];
+assert.doesNotMatch(releaseRules,/:is\(\.map-toolbar[,)]/,'the full-width desktop positioner must stay transparent');
+assert.match(releaseRules,/@media \(min-width:801px\)\s*\{\s*html[^{}]+\.map-toolbar :is\(\.map-tools-left,#results-toggle\)/,'desktop glow belongs to visible controls');
+assert.match(releaseRules,/@media \(max-width:800px\)\s*\{\s*html[^{}]+body \.map-toolbar \{box-shadow:var\(--vice-glow\)/,'the compact mobile dock retains its glow');
 assert.ok(css.includes('@media (forced-colors: none)')&&css.includes('--action-gradient:linear-gradient(112deg in srgb,'),'randomized controls use the tested interpolation and respect forced colors');
 assert.ok(!css.includes('animation:'),'glow is static, not distracting/pulsing');
 const html=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8');
