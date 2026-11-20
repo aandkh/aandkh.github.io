@@ -1,5 +1,22 @@
 {
   "articles": {
+    "https://www.firstalert4.com/2026/11/01/triple-shooting-leaves-1-dead-2-injured-north-county/": {
+      "changedAt": "2026-11-20T11:59:48.070162+00:00",
+      "discoveredAt": "2026-11-20T11:59:48.070162+00:00",
+      "publishedAt": "2026-11-19T14:53:19+00:00",
+      "review": {
+        "checkedAt": "2026-11-20T12:09:20.462132+00:00",
+        "disposition": "already-mapped",
+        "note": "The revision confirms the existing November 1 North Highway 67 record; charging details did not change mapped occurrence facts.",
+        "revision": "96bf0346f916e61b9b64b9e75e56ce107a32f3b76546e392f75b3aad325ace8b"
+      },
+      "revision": "96bf0346f916e61b9b64b9e75e56ce107a32f3b76546e392f75b3aad325ace8b",
+      "sources": [
+        "firstalert-crime"
+      ],
+      "title": "Triple shooting leaves 1 dead, 2 injured at North County gas station",
+      "url": "https://www.firstalert4.com/2026/11/01/triple-shooting-leaves-1-dead-2-injured-north-county/"
+    },
     "https://www.firstalert4.com/2026/11/10/2-charged-after-flock-cameras-stolen-damaged-halloween-night-st-louis-county/": {
       "changedAt": "2026-11-17T15:20:52.330050+00:00",
       "discoveredAt": "2026-11-17T15:20:52.330050+00:00",
@@ -617,11 +634,123 @@
       ],
       "title": "Police: Yorkie seen being repeatedly hit in circulating video ‘in good spirits’",
       "url": "https://www.firstalert4.com/2026/11/18/police-yorkie-seen-being-repeatedly-hit-circulating-video-good-spirits/"
+    },
+    "https://www.firstalert4.com/2026/11/19/troopers-seek-vehicle-believed-have-struck-pedestrian-deadly-wellston-crash/": {
+      "changedAt": "2026-11-20T11:59:48.070162+00:00",
+      "discoveredAt": "2026-11-20T11:59:48.070162+00:00",
+      "publishedAt": "2026-11-19T12:37:41+00:00",
+      "review": {
+        "checkedAt": "2026-11-20T12:09:20.532715+00:00",
+        "disposition": "mapped",
+        "note": "Added the verified November 14 fatal pedestrian crash on the published Page Avenue road segment.",
+        "revision": "840d42c07beb2ff477937cb938937b53079a7c145254671304c371ead635ea25"
+      },
+      "revision": "840d42c07beb2ff477937cb938937b53079a7c145254671304c371ead635ea25",
+      "sources": [
+        "firstalert-county",
+        "firstalert-crime"
+      ],
+      "title": "Troopers seek vehicle believed to have struck pedestrian in deadly Wellston crash",
+      "url": "https://www.firstalert4.com/2026/11/19/troopers-seek-vehicle-believed-have-struck-pedestrian-deadly-wellston-crash/"
+    },
+    "https://www.firstalert4.com/2026/11/19/victim-hit-by-car-killed-during-road-rage-incident-hazelwood-police-say/": {
+      "changedAt": "2026-11-20T11:59:48.070162+00:00",
+      "discoveredAt": "2026-11-20T11:59:48.070162+00:00",
+      "publishedAt": "2026-11-19T23:47:26+00:00",
+      "review": {
+        "checkedAt": "2026-11-20T12:09:20.367816+00:00",
+        "disposition": "mapped",
+        "note": "Added the verified November 18 fatal Hazelwood vehicle strike.",
+        "revision": "be90a60992c4dda1db916b320acc90a35cb33c0a9ae80ffc9b588cf6cba56e3c"
+      },
+      "revision": "be90a60992c4dda1db916b320acc90a35cb33c0a9ae80ffc9b588cf6cba56e3c",
+      "sources": [
+        "firstalert-county",
+        "firstalert-crime"
+      ],
+      "title": "Victim hit by car, killed during road rage incident in Hazelwood, police say",
+      "url": "https://www.firstalert4.com/2026/11/19/victim-hit-by-car-killed-during-road-rage-incident-hazelwood-police-say/"
+    },
+    "https://www.firstalert4.com/2026/11/20/2-hospitalized-after-car-hits-building-overturns-jennings/": {
+      "changedAt": "2026-11-20T11:59:48.070162+00:00",
+      "discoveredAt": "2026-11-20T11:59:48.070162+00:00",
+      "publishedAt": "2026-11-20T11:25:32+00:00",
+      "review": {
+        "checkedAt": "2026-11-20T12:09:20.116722+00:00",
+        "disposition": "mapped",
+        "note": "Added the verified November 20 Jennings rollover with two reported non-life-threatening injuries.",
+        "revision": "6af86ebeb7989894886b41177aaac5b3d25ea5fdc6271b947ec734fc9d8a4367"
+      },
+      "revision": "6af86ebeb7989894886b41177aaac5b3d25ea5fdc6271b947ec734fc9d8a4367",
+      "sources": [
+        "firstalert-county"
+      ],
+      "title": "2 hospitalized after car hits building, overturns in Jennings",
+      "url": "https://www.firstalert4.com/2026/11/20/2-hospitalized-after-car-hits-building-overturns-jennings/"
+    },
+    "https://www.firstalert4.com/2026/11/20/driving-instructor-says-emotional-control-is-top-lesson-drivers-light-recent-road-rage-incidents/": {
+      "changedAt": "2026-11-20T11:59:48.070162+00:00",
+      "discoveredAt": "2026-11-20T11:59:48.070162+00:00",
+      "publishedAt": "2026-11-20T04:34:46+00:00",
+      "review": {
+        "checkedAt": "2026-11-20T12:09:20.223876+00:00",
+        "disposition": "already-mapped",
+        "note": "Analysis story summarizes the separately reviewed Hazelwood and Florissant incidents; no duplicate marker created.",
+        "revision": "dbab5c376252c779a0e2c533e145179424fe7ba280816e2649ac5c2f571767e2"
+      },
+      "revision": "dbab5c376252c779a0e2c533e145179424fe7ba280816e2649ac5c2f571767e2",
+      "sources": [
+        "firstalert-crime"
+      ],
+      "title": "Driving instructor says emotional control is a top lesson for drivers in light of recent road rage incidents",
+      "url": "https://www.firstalert4.com/2026/11/20/driving-instructor-says-emotional-control-is-top-lesson-drivers-light-recent-road-rage-incidents/"
+    },
+    "https://www.firstalert4.com/2026/11/20/man-shot-near-his-4-year-old-grandson-outside-florissant-gas-station-police-say/": {
+      "changedAt": "2026-11-20T11:59:48.070162+00:00",
+      "discoveredAt": "2026-11-20T11:59:48.070162+00:00",
+      "publishedAt": "2026-11-20T02:32:53+00:00",
+      "review": {
+        "checkedAt": "2026-11-20T12:09:20.298634+00:00",
+        "disposition": "mapped",
+        "note": "Updated the existing November 16 Florissant QuikTrip shooting record with the reported child-unharmed and charging follow-up.",
+        "revision": "fd318d4eb4a5ec3d7c5f3b95ae4f1b44ef3345b2d18210c8e16e10334ca09162"
+      },
+      "revision": "fd318d4eb4a5ec3d7c5f3b95ae4f1b44ef3345b2d18210c8e16e10334ca09162",
+      "sources": [
+        "firstalert-county",
+        "firstalert-crime"
+      ],
+      "title": "Man shot near his 4-year-old grandson outside Florissant gas station, police say",
+      "url": "https://www.firstalert4.com/2026/11/20/man-shot-near-his-4-year-old-grandson-outside-florissant-gas-station-police-say/"
+    },
+    "https://www.firstalert4.com/2026/11/20/person-police-custody-after-smoke-shop-burglarized/": {
+      "changedAt": "2026-11-20T11:59:48.070162+00:00",
+      "discoveredAt": "2026-11-20T11:59:48.070162+00:00",
+      "publishedAt": "2026-11-20T11:56:13+00:00",
+      "review": {
+        "checkedAt": "2026-11-20T12:09:20.024493+00:00",
+        "disposition": "mapped",
+        "note": "Added the verified November 20 downtown Locust Street burglary using only the published general area.",
+        "revision": "df5ff0190b1f840ab3a6c246051bab91c20a0ca309fe14d00e575a4571078ce8"
+      },
+      "revision": "df5ff0190b1f840ab3a6c246051bab91c20a0ca309fe14d00e575a4571078ce8",
+      "sources": [
+        "firstalert-crime"
+      ],
+      "title": "Person in police custody after smoke shop burglarized",
+      "url": "https://www.firstalert4.com/2026/11/20/person-police-custody-after-smoke-shop-burglarized/"
     }
   },
   "sources": {
     "firstalert-county": {
       "articleUrls": [
+        "https://www.firstalert4.com/2026/11/20/2-hospitalized-after-car-hits-building-overturns-jennings/",
+        "https://www.firstalert4.com/2026/11/20/sale-vacant-kirkwood-ball-fields-approved-by-city-council-private-group-plans-sports-food-complex/",
+        "https://www.firstalert4.com/2026/11/20/man-shot-near-his-4-year-old-grandson-outside-florissant-gas-station-police-say/",
+        "https://www.firstalert4.com/2026/11/20/kirkwood-withholding-11-million-contractor-train-station-stays-closed/",
+        "https://www.firstalert4.com/2026/11/19/victim-hit-by-car-killed-during-road-rage-incident-hazelwood-police-say/",
+        "https://www.firstalert4.com/2026/11/19/normandy-schools-collaborative-deploys-15-electric-buses/",
+        "https://www.firstalert4.com/2026/11/19/troopers-seek-vehicle-believed-have-struck-pedestrian-deadly-wellston-crash/",
         "https://www.firstalert4.com/2026/11/19/st-louis-county-welcomes-more-than-20-new-corrections-officers-graduation-ceremony/",
         "https://www.firstalert4.com/2026/11/18/inside-normandy-schools-command-center-monitoring-330-cameras/",
         "https://www.firstalert4.com/2026/11/18/police-yorkie-seen-being-repeatedly-hit-circulating-video-good-spirits/",
@@ -634,24 +763,24 @@
         "https://www.firstalert4.com/2026/11/16/new-sexual-assault-allegations-revealed-lawsuit-against-former-riverview-officer-city/",
         "https://www.firstalert4.com/2026/11/16/st-louis-county-man-accused-child-abuse-lunging-officer-with-scissors/",
         "https://www.firstalert4.com/2026/11/16/man-killed-hit-and-run-jennings-police-investigating/",
-        "https://www.firstalert4.com/2026/11/16/woman-injured-rollover-crash-i-70-st-louis-county/",
-        "https://www.firstalert4.com/2026/11/15/19-year-old-seriously-injured-shooting-bellefontaine-neighbors/",
-        "https://www.firstalert4.com/2026/11/14/woman-arrested-connection-with-video-circulating-apparent-animal-abuse/",
-        "https://www.firstalert4.com/2026/11/13/flights-lambert-stop-faa-issues-national-ground-stop/",
-        "https://www.firstalert4.com/2026/11/12/police-investigating-after-man-shot-killed-following-altercation/",
-        "https://www.firstalert4.com/2026/11/12/coaches-families-gather-ferguson-honor-man-killed-youth-football-game/",
-        "https://www.firstalert4.com/2026/11/12/i-64-closed-both-directions-chesterfield-due-downed-powerline-highway/",
-        "https://www.firstalert4.com/2026/11/11/former-st-louis-county-jail-officer-charged-with-accepting-bribes-smuggle-contraband/"
+        "https://www.firstalert4.com/2026/11/16/woman-injured-rollover-crash-i-70-st-louis-county/"
       ],
-      "contentChangedAt": "2026-11-19T11:58:31.180461+00:00",
-      "etag": "W/\"d7d9-K+7Z5RfEetNKUIk7Twi1iZaK/t0\"",
-      "lastModified": "Thu, 19 Nov 2026 11:58:35 GMT",
-      "latestPublishedAt": "2026-11-19T04:37:07+00:00",
-      "oldestPublishedAt": "2026-11-11T17:40:05+00:00",
+      "contentChangedAt": "2026-11-20T11:59:48.070162+00:00",
+      "etag": "W/\"ea97-T82XIapLrvgaAaerRwwSQTCZljA\"",
+      "lastModified": "Fri, 20 Nov 2026 11:59:52 GMT",
+      "latestPublishedAt": "2026-11-20T11:25:32+00:00",
+      "oldestPublishedAt": "2026-11-16T11:23:12+00:00",
       "url": "https://www.firstalert4.com/arc/outboundfeeds/rss/category/news/st-louis-county/?outputType=xml"
     },
     "firstalert-crime": {
       "articleUrls": [
+        "https://www.firstalert4.com/2026/11/20/person-police-custody-after-smoke-shop-burglarized/",
+        "https://www.firstalert4.com/2026/11/20/driving-instructor-says-emotional-control-is-top-lesson-drivers-light-recent-road-rage-incidents/",
+        "https://www.firstalert4.com/2026/11/20/man-shot-near-his-4-year-old-grandson-outside-florissant-gas-station-police-say/",
+        "https://www.firstalert4.com/2026/11/19/victim-hit-by-car-killed-during-road-rage-incident-hazelwood-police-say/",
+        "https://www.firstalert4.com/2026/11/19/st-louis-bill-would-use-marijuana-tax-money-code-blue-shelter-program/",
+        "https://www.firstalert4.com/2026/11/01/triple-shooting-leaves-1-dead-2-injured-north-county/",
+        "https://www.firstalert4.com/2026/11/19/troopers-seek-vehicle-believed-have-struck-pedestrian-deadly-wellston-crash/",
         "https://www.firstalert4.com/2026/11/18/federal-grand-jury-indicts-man-deadly-cahokia-heights-fire/",
         "https://www.firstalert4.com/2026/11/18/police-yorkie-seen-being-repeatedly-hit-circulating-video-good-spirits/",
         "https://www.firstalert4.com/2026/11/11/man-critically-injured-south-city-shooting/",
@@ -664,20 +793,13 @@
         "https://www.firstalert4.com/2026/11/17/police-pursuit-ends-crash-closing-lanes-westbound-i-70-st-peters/",
         "https://www.firstalert4.com/2026/11/17/parents-seek-safety-details-classes-resume-after-warrenton-school-stabbing/",
         "https://www.firstalert4.com/2026/11/16/car-crashes-into-lincoln-county-mobile-home-with-4-people-inside/",
-        "https://www.firstalert4.com/2026/11/16/st-louis-county-man-accused-child-abuse-lunging-officer-with-scissors/",
-        "https://www.firstalert4.com/2026/11/16/stifel-executive-charged-dent-county-fatal-atv-crash/",
-        "https://www.firstalert4.com/2026/11/16/suspect-arrested-connection-with-explosive-device-biourja-ethanol-plant-peoria/",
-        "https://www.firstalert4.com/2026/11/16/dutchtown-residents-share-mixed-reactions-after-police-shooting-that-killed-man/",
-        "https://www.firstalert4.com/2026/11/14/school-leader-says-district-policies-call-very-long-suspension-or-expulsion-after-black-hawk-middle-school-stabbing/",
-        "https://www.firstalert4.com/2026/11/12/police-investigating-after-man-shot-killed-following-altercation/",
-        "https://www.firstalert4.com/2026/11/13/parent-student-who-witnessed-black-hawk-middle-school-stabbing-speaks-out/",
-        "https://www.firstalert4.com/2026/11/13/there-is-no-right-way-feel-after-trauma-psychologist-aftermath-stabbing-warren-county-middle-school/"
+        "https://www.firstalert4.com/2026/11/16/st-louis-county-man-accused-child-abuse-lunging-officer-with-scissors/"
       ],
-      "contentChangedAt": "2026-11-19T11:58:31.180461+00:00",
-      "etag": "W/\"eef2-BczdR/gJgcuGuaViCkkzdc72idU\"",
-      "lastModified": "Thu, 19 Nov 2026 11:58:39 GMT",
-      "latestPublishedAt": "2026-11-18T22:25:24+00:00",
-      "oldestPublishedAt": "2026-11-13T01:22:09+00:00",
+      "contentChangedAt": "2026-11-20T11:59:48.070162+00:00",
+      "etag": "W/\"bdf3-Jmj9BXQIGMBY+Z7W4jn2xeqGTvI\"",
+      "lastModified": "Fri, 20 Nov 2026 11:59:56 GMT",
+      "latestPublishedAt": "2026-11-20T11:56:13+00:00",
+      "oldestPublishedAt": "2026-11-16T22:13:37+00:00",
       "url": "https://www.firstalert4.com/arc/outboundfeeds/rss/category/news/crime/?outputType=xml"
     }
   },

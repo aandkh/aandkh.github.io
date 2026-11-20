@@ -1,5 +1,5 @@
 {
-  "reviewedAt": "2026-11-18T12:04:28.818648+00:00",
+  "reviewedAt": "2026-11-20T12:08:06.737804+00:00",
   "features": [
     {
       "type": "Feature",
@@ -1152,10 +1152,10 @@
         "address": "QuikTrip, 2100 block of N. Highway 67 at Thunderbird Avenue, Florissant, MO",
         "sourceId": "county-reviewed-news",
         "source": "First Alert 4 · Florissant Police reporting",
-        "sourceUrl": "https://www.firstalert4.com/2026/11/16/police-responding-possible-road-rage-shooting-quiktrip/",
-        "url": "https://www.firstalert4.com/2026/11/16/police-responding-possible-road-rage-shooting-quiktrip/",
-        "sourceCheckedAt": "2026-11-17T15:19:32.335693+00:00",
-        "description": "Florissant police reported a shooting in the rear parking lot of the QuikTrip around 3:45 p.m. on November 16. One person was hospitalized in stable condition. Police said preliminary information suggested a road-rage incident; the investigation remained ongoing.",
+        "sourceUrl": "https://www.firstalert4.com/2026/11/20/man-shot-near-his-4-year-old-grandson-outside-florissant-gas-station-police-say/",
+        "url": "https://www.firstalert4.com/2026/11/20/man-shot-near-his-4-year-old-grandson-outside-florissant-gas-station-police-say/",
+        "sourceCheckedAt": "2026-11-20T12:08:06.737804+00:00",
+        "description": "Florissant police reported a shooting in the rear parking lot of the QuikTrip around 3:45 p.m. on November 16. One man was shot and hospitalized; his 4-year-old passenger was not hurt. Police later reported two people were charged in connection with the shooting.",
         "locationAccuracy": "Approximate reported public business/intersection area, rounded to about 100 m; not an exact position in the parking lot.",
         "locationSourceUrl": "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?SingleLine=N+Highway+67+%26+Thunderbird+Ave%2C+Florissant%2C+Missouri&f=json&outFields=Addr_type%2CMatch_addr%2CLongLabel%2CScore&maxLocations=3",
         "color": "#c52f73",
@@ -1418,13 +1418,143 @@
           }
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.193,
+          38.63
+        ]
+      },
+      "properties": {
+        "id": "incident:city-smokey-bear-burglary-20261120",
+        "title": "Smoke-shop burglary · Downtown Locust Street",
+        "incidentAt": "2026-11-20T01:30:00-06:00",
+        "incidentDate": "2026-11-20",
+        "incidentTimeAccuracy": "approximate",
+        "incidentKind": "burglary",
+        "incidentTypes": [
+          "burglary"
+        ],
+        "jurisdiction": "city",
+        "address": "Locust Street, Downtown St. Louis, MO",
+        "sourceId": "city-reviewed-news",
+        "source": "First Alert 4 · St. Louis police reporting",
+        "sourceUrl": "https://www.firstalert4.com/2026/11/20/person-police-custody-after-smoke-shop-burglarized/",
+        "url": "https://www.firstalert4.com/2026/11/20/person-police-custody-after-smoke-shop-burglarized/",
+        "sourceCheckedAt": "2026-11-20T12:08:06.737804+00:00",
+        "description": "St. Louis police reported that the front glass door of the Smokey Bear Smoke/Vape Shop on Locust Street was broken around 1:30 a.m. on November 20. Officers located a man matching the description about a block away and reported finding store merchandise in his backpack. The person was taken into custody.",
+        "locationAccuracy": "Approximate downtown Locust Street area; the article does not publish the exact storefront address.",
+        "color": "#c52f73"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.266,
+          38.72
+        ]
+      },
+      "properties": {
+        "id": "incident:county-jennings-west-florissant-college-rollover-20261120",
+        "title": "Rollover into buildings · Jennings",
+        "incidentAt": "2026-11-20T00:00:00-06:00",
+        "incidentDate": "2026-11-20",
+        "incidentTimeAccuracy": "approximate",
+        "incidentKind": "crash",
+        "incidentTypes": [
+          "crash"
+        ],
+        "jurisdiction": "county",
+        "address": "West Florissant Avenue near College Avenue, Jennings, MO",
+        "sourceId": "county-reviewed-news",
+        "source": "First Alert 4 · St. Louis County Police reporting",
+        "sourceUrl": "https://www.firstalert4.com/2026/11/20/2-hospitalized-after-car-hits-building-overturns-jennings/",
+        "url": "https://www.firstalert4.com/2026/11/20/2-hospitalized-after-car-hits-building-overturns-jennings/",
+        "sourceCheckedAt": "2026-11-20T12:08:06.737804+00:00",
+        "description": "County police reported that a driver lost control near West Florissant and College around midnight on November 20, hit the corner of a building, overturned and stopped against another building. Both occupants were hospitalized with injuries reported as non-life-threatening.",
+        "locationAccuracy": "Approximate reported public intersection, rounded to about 100 m; not an exact vehicle position.",
+        "color": "#ed5900",
+        "injuries": 2,
+        "severity": "injury"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.362,
+          38.78
+        ]
+      },
+      "properties": {
+        "id": "incident:county-hazelwood-dunn-road-fatal-road-rage-20261118",
+        "title": "Fatal vehicle strike · Dunn Road",
+        "incidentAt": "2026-11-18T18:55:00-06:00",
+        "incidentDate": "2026-11-18",
+        "incidentTimeAccuracy": "approximate",
+        "incidentKind": "crash",
+        "incidentTypes": [
+          "crash"
+        ],
+        "jurisdiction": "county",
+        "address": "Dunn Road at Old Dunn Road, Hazelwood, MO",
+        "sourceId": "county-reviewed-news",
+        "source": "First Alert 4 · Hazelwood Police reporting",
+        "sourceUrl": "https://www.firstalert4.com/2026/11/19/victim-hit-by-car-killed-during-road-rage-incident-hazelwood-police-say/",
+        "url": "https://www.firstalert4.com/2026/11/19/victim-hit-by-car-killed-during-road-rage-incident-hazelwood-police-say/",
+        "sourceCheckedAt": "2026-11-20T12:08:06.737804+00:00",
+        "description": "Hazelwood police reported that two drivers stopped during a road-rage incident near Dunn and Old Dunn shortly before 7 p.m. on November 18. One driver exited her vehicle and was struck by the other vehicle. She died at a hospital; police had not announced an arrest when the report was checked.",
+        "locationAccuracy": "Approximate reported public intersection, rounded to about 100 m; not an exact collision position.",
+        "color": "#ed5900",
+        "deaths": 1,
+        "severity": "fatal"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.286,
+          38.671
+        ]
+      },
+      "properties": {
+        "id": "incident:county-wellston-page-kienlen-fatal-pedestrian-crash-20261114",
+        "title": "Fatal pedestrian crash · Page Avenue",
+        "incidentAt": "2026-11-14T20:00:00-06:00",
+        "incidentDate": "2026-11-14",
+        "incidentTimeAccuracy": "approximate",
+        "incidentKind": "crash",
+        "incidentTypes": [
+          "crash"
+        ],
+        "jurisdiction": "county",
+        "address": "Page Avenue west of Kienlen Avenue, Wellston, MO",
+        "sourceId": "county-reviewed-news",
+        "source": "First Alert 4 · Missouri State Highway Patrol reporting",
+        "sourceUrl": "https://www.firstalert4.com/2026/11/19/troopers-seek-vehicle-believed-have-struck-pedestrian-deadly-wellston-crash/",
+        "url": "https://www.firstalert4.com/2026/11/19/troopers-seek-vehicle-believed-have-struck-pedestrian-deadly-wellston-crash/",
+        "sourceCheckedAt": "2026-11-20T12:08:06.737804+00:00",
+        "description": "The Missouri State Highway Patrol reported that a pedestrian was struck by two vehicles on Page Avenue west of Kienlen around 8 p.m. on November 14 and died. Troopers were still seeking one of the vehicles when the report was checked.",
+        "locationAccuracy": "Approximate reported public road segment west of the intersection, rounded to about 100 m; not an exact collision position.",
+        "color": "#ed5900",
+        "deaths": 1,
+        "severity": "fatal"
+      }
     }
   ],
   "sourceReviews": {
-    "county-reviewed-news": "2026-11-18T12:04:28.818648+00:00",
+    "county-reviewed-news": "2026-11-20T12:08:06.737804+00:00",
     "county-releases": "2026-11-15T19:44:02.622984+00:00",
     "city-releases": "2026-11-15T19:44:02.622984+00:00",
-    "county-chesterfield-bulletins": "2026-11-16T18:17:53.095226+00:00",
-    "city-reviewed-news": "2026-11-17T15:24:11.004855+00:00"
+    "county-chesterfield-bulletins": "2026-11-20T12:08:06.737804+00:00",
+    "city-reviewed-news": "2026-11-20T12:08:06.737804+00:00"
   }
 }
