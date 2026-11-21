@@ -654,16 +654,16 @@
       "url": "https://www.firstalert4.com/2026/11/19/troopers-seek-vehicle-believed-have-struck-pedestrian-deadly-wellston-crash/"
     },
     "https://www.firstalert4.com/2026/11/19/victim-hit-by-car-killed-during-road-rage-incident-hazelwood-police-say/": {
-      "changedAt": "2026-11-20T11:59:48.070162+00:00",
+      "changedAt": "2026-11-21T12:04:19.970938+00:00",
       "discoveredAt": "2026-11-20T11:59:48.070162+00:00",
       "publishedAt": "2026-11-19T23:47:26+00:00",
       "review": {
-        "checkedAt": "2026-11-20T12:09:20.367816+00:00",
-        "disposition": "mapped",
-        "note": "Added the verified November 18 fatal Hazelwood vehicle strike.",
-        "revision": "be90a60992c4dda1db916b320acc90a35cb33c0a9ae80ffc9b588cf6cba56e3c"
+        "checkedAt": "2026-11-21T12:15:55.606436+00:00",
+        "disposition": "already-mapped",
+        "note": "Article revision adds a company statement; existing November 18 fatal Hazelwood record already preserves the reported occurrence, location and outcome.",
+        "revision": "7fe086507b157dd1040e64cb2309c56b6948fb210769706560805ce9fc35bfe1"
       },
-      "revision": "be90a60992c4dda1db916b320acc90a35cb33c0a9ae80ffc9b588cf6cba56e3c",
+      "revision": "7fe086507b157dd1040e64cb2309c56b6948fb210769706560805ce9fc35bfe1",
       "sources": [
         "firstalert-county",
         "firstalert-crime"
@@ -705,6 +705,41 @@
       "title": "Driving instructor says emotional control is a top lesson for drivers in light of recent road rage incidents",
       "url": "https://www.firstalert4.com/2026/11/20/driving-instructor-says-emotional-control-is-top-lesson-drivers-light-recent-road-rage-incidents/"
     },
+    "https://www.firstalert4.com/2026/11/20/man-charged-after-cutting-churchs-internet-lines-steal-copper-st-louis-police-say/": {
+      "changedAt": "2026-11-21T12:04:19.970938+00:00",
+      "discoveredAt": "2026-11-21T12:04:19.970938+00:00",
+      "publishedAt": "2026-11-20T16:59:39+00:00",
+      "review": {
+        "checkedAt": "2026-11-21T12:15:55.521126+00:00",
+        "disposition": "mapped",
+        "note": "Reviewed occurrence as November 15; mapped to the named church area in Jeff-Vander-Lou without inventing the affected utility pole location.",
+        "revision": "ef96f2c3b99dface40241e09f4c01c44ae97f53cb9aadc1bc12471e5427f5dc1"
+      },
+      "revision": "ef96f2c3b99dface40241e09f4c01c44ae97f53cb9aadc1bc12471e5427f5dc1",
+      "sources": [
+        "firstalert-crime"
+      ],
+      "title": "Man charged after cutting church’s internet lines to steal copper, St. Louis police say",
+      "url": "https://www.firstalert4.com/2026/11/20/man-charged-after-cutting-churchs-internet-lines-steal-copper-st-louis-police-say/"
+    },
+    "https://www.firstalert4.com/2026/11/20/man-sentenced-assault-ferguson-officer-during-2024-protest/": {
+      "changedAt": "2026-11-21T12:04:19.970938+00:00",
+      "discoveredAt": "2026-11-21T12:04:19.970938+00:00",
+      "publishedAt": "2026-11-20T17:25:39+00:00",
+      "review": {
+        "checkedAt": "2026-11-21T12:15:55.451023+00:00",
+        "disposition": "historical-followup",
+        "note": "Sentencing update for an assault that occurred during a 2024 protest; no new 2026 map incident.",
+        "revision": "d9bfc77dc7f133a8430d6c694376ece23e6986daf65a3fb16c5125b7b9fe16c2"
+      },
+      "revision": "d9bfc77dc7f133a8430d6c694376ece23e6986daf65a3fb16c5125b7b9fe16c2",
+      "sources": [
+        "firstalert-county",
+        "firstalert-crime"
+      ],
+      "title": "Man sentenced for assault of Ferguson officer during 2024 protest",
+      "url": "https://www.firstalert4.com/2026/11/20/man-sentenced-assault-ferguson-officer-during-2024-protest/"
+    },
     "https://www.firstalert4.com/2026/11/20/man-shot-near-his-4-year-old-grandson-outside-florissant-gas-station-police-say/": {
       "changedAt": "2026-11-20T11:59:48.070162+00:00",
       "discoveredAt": "2026-11-20T11:59:48.070162+00:00",
@@ -739,11 +774,30 @@
       ],
       "title": "Person in police custody after smoke shop burglarized",
       "url": "https://www.firstalert4.com/2026/11/20/person-police-custody-after-smoke-shop-burglarized/"
+    },
+    "https://www.firstalert4.com/2026/11/21/woman-dies-overnight-after-south-city-shooting/": {
+      "changedAt": "2026-11-21T12:04:19.970938+00:00",
+      "discoveredAt": "2026-11-21T12:04:19.970938+00:00",
+      "publishedAt": "2026-11-21T11:28:57+00:00",
+      "review": {
+        "checkedAt": "2026-11-21T12:15:55.355963+00:00",
+        "disposition": "mapped",
+        "note": "Reviewed occurrence as November 21 shortly after 1:30 a.m.; mapped to the reported 3700 block of California Avenue with one explicitly reported homicide death.",
+        "revision": "3414fa94129b1ebd8543de5bfc4017f0d3bc4d67302325701eed88e3ab2bb035"
+      },
+      "revision": "3414fa94129b1ebd8543de5bfc4017f0d3bc4d67302325701eed88e3ab2bb035",
+      "sources": [
+        "firstalert-crime"
+      ],
+      "title": "Woman dies overnight after South City shooting",
+      "url": "https://www.firstalert4.com/2026/11/21/woman-dies-overnight-after-south-city-shooting/"
     }
   },
   "sources": {
     "firstalert-county": {
       "articleUrls": [
+        "https://www.firstalert4.com/2026/11/20/st-louis-county-animal-shelter-asking-families-foster-dogs-over-thanksgiving/",
+        "https://www.firstalert4.com/2026/11/20/man-sentenced-assault-ferguson-officer-during-2024-protest/",
         "https://www.firstalert4.com/2026/11/20/2-hospitalized-after-car-hits-building-overturns-jennings/",
         "https://www.firstalert4.com/2026/11/20/sale-vacant-kirkwood-ball-fields-approved-by-city-council-private-group-plans-sports-food-complex/",
         "https://www.firstalert4.com/2026/11/20/man-shot-near-his-4-year-old-grandson-outside-florissant-gas-station-police-say/",
@@ -761,19 +815,20 @@
         "https://www.firstalert4.com/2026/11/17/jake-zimmerman-vows-make-st-louis-county-government-boring-again/",
         "https://www.firstalert4.com/2026/11/16/police-responding-possible-road-rage-shooting-quiktrip/",
         "https://www.firstalert4.com/2026/11/16/new-sexual-assault-allegations-revealed-lawsuit-against-former-riverview-officer-city/",
-        "https://www.firstalert4.com/2026/11/16/st-louis-county-man-accused-child-abuse-lunging-officer-with-scissors/",
-        "https://www.firstalert4.com/2026/11/16/man-killed-hit-and-run-jennings-police-investigating/",
-        "https://www.firstalert4.com/2026/11/16/woman-injured-rollover-crash-i-70-st-louis-county/"
+        "https://www.firstalert4.com/2026/11/16/st-louis-county-man-accused-child-abuse-lunging-officer-with-scissors/"
       ],
-      "contentChangedAt": "2026-11-20T11:59:48.070162+00:00",
-      "etag": "W/\"ea97-T82XIapLrvgaAaerRwwSQTCZljA\"",
-      "lastModified": "Fri, 20 Nov 2026 11:59:52 GMT",
-      "latestPublishedAt": "2026-11-20T11:25:32+00:00",
-      "oldestPublishedAt": "2026-11-16T11:23:12+00:00",
+      "contentChangedAt": "2026-11-21T12:04:19.970938+00:00",
+      "etag": "W/\"f6e2-jmM8Ei4FU+nfGeVmXOxa501gJEI\"",
+      "lastModified": "Sat, 21 Nov 2026 12:04:24 GMT",
+      "latestPublishedAt": "2026-11-20T22:28:52+00:00",
+      "oldestPublishedAt": "2026-11-16T22:13:37+00:00",
       "url": "https://www.firstalert4.com/arc/outboundfeeds/rss/category/news/st-louis-county/?outputType=xml"
     },
     "firstalert-crime": {
       "articleUrls": [
+        "https://www.firstalert4.com/2026/11/21/woman-dies-overnight-after-south-city-shooting/",
+        "https://www.firstalert4.com/2026/11/20/man-sentenced-assault-ferguson-officer-during-2024-protest/",
+        "https://www.firstalert4.com/2026/11/20/man-charged-after-cutting-churchs-internet-lines-steal-copper-st-louis-police-say/",
         "https://www.firstalert4.com/2026/11/20/person-police-custody-after-smoke-shop-burglarized/",
         "https://www.firstalert4.com/2026/11/20/driving-instructor-says-emotional-control-is-top-lesson-drivers-light-recent-road-rage-incidents/",
         "https://www.firstalert4.com/2026/11/20/man-shot-near-his-4-year-old-grandson-outside-florissant-gas-station-police-say/",
@@ -790,16 +845,13 @@
         "https://www.firstalert4.com/2026/11/17/florissant-police-investigating-shooting/",
         "https://www.firstalert4.com/2026/11/17/man-admits-shooting-ballwin-officer/",
         "https://www.firstalert4.com/2026/11/17/man-sentenced-sending-racist-job-rejection-emails-after-being-fired/",
-        "https://www.firstalert4.com/2026/11/17/police-pursuit-ends-crash-closing-lanes-westbound-i-70-st-peters/",
-        "https://www.firstalert4.com/2026/11/17/parents-seek-safety-details-classes-resume-after-warrenton-school-stabbing/",
-        "https://www.firstalert4.com/2026/11/16/car-crashes-into-lincoln-county-mobile-home-with-4-people-inside/",
-        "https://www.firstalert4.com/2026/11/16/st-louis-county-man-accused-child-abuse-lunging-officer-with-scissors/"
+        "https://www.firstalert4.com/2026/11/17/police-pursuit-ends-crash-closing-lanes-westbound-i-70-st-peters/"
       ],
-      "contentChangedAt": "2026-11-20T11:59:48.070162+00:00",
-      "etag": "W/\"bdf3-Jmj9BXQIGMBY+Z7W4jn2xeqGTvI\"",
-      "lastModified": "Fri, 20 Nov 2026 11:59:56 GMT",
-      "latestPublishedAt": "2026-11-20T11:56:13+00:00",
-      "oldestPublishedAt": "2026-11-16T22:13:37+00:00",
+      "contentChangedAt": "2026-11-21T12:04:19.970938+00:00",
+      "etag": "W/\"be53-FQeyVEf+kcKfkW8oLrTAKlRmNrA\"",
+      "lastModified": "Sat, 21 Nov 2026 12:04:28 GMT",
+      "latestPublishedAt": "2026-11-21T11:28:57+00:00",
+      "oldestPublishedAt": "2026-11-17T14:16:18+00:00",
       "url": "https://www.firstalert4.com/arc/outboundfeeds/rss/category/news/crime/?outputType=xml"
     }
   },

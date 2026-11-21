@@ -1,5 +1,5 @@
 {
-  "reviewedAt": "2026-11-20T12:08:06.737804+00:00",
+  "reviewedAt": "2026-11-21T12:15:04.073776+00:00",
   "features": [
     {
       "type": "Feature",
@@ -1548,13 +1548,86 @@
         "deaths": 1,
         "severity": "fatal"
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.231,
+          38.588
+        ]
+      },
+      "properties": {
+        "id": "incident:city-california-avenue-fatal-shooting-20261121",
+        "title": "Fatal shooting · California Avenue",
+        "incidentAt": "2026-11-21T01:30:00-06:00",
+        "incidentDate": "2026-11-21",
+        "incidentTimeAccuracy": "approximate",
+        "incidentKind": "shooting",
+        "incidentTypes": [
+          "shooting"
+        ],
+        "jurisdiction": "city",
+        "address": "3700 block of California Avenue, St. Louis, MO",
+        "sourceId": "city-reviewed-news",
+        "source": "First Alert 4 · St. Louis police reporting",
+        "sourceUrl": "https://www.firstalert4.com/2026/11/21/woman-dies-overnight-after-south-city-shooting/",
+        "url": "https://www.firstalert4.com/2026/11/21/woman-dies-overnight-after-south-city-shooting/",
+        "sourceCheckedAt": "2026-11-21T12:15:04.073776+00:00",
+        "description": "St. Louis police reported that a woman was shot in the 3700 block of California Avenue shortly after 1:30 a.m. on November 21. She was taken to a hospital in critical condition and died. Homicide detectives were investigating when the report was checked.",
+        "locationAccuracy": "Approximate reported public block, rounded to about 100 m; not an exact shooting position.",
+        "color": "#c52f73",
+        "deaths": 1,
+        "severity": "fatal",
+        "fatalityEvidence": [
+          {
+            "category": "other-homicide",
+            "deaths": 1,
+            "sourceUrl": "https://www.firstalert4.com/2026/11/21/woman-dies-overnight-after-south-city-shooting/",
+            "summary": "First Alert 4, citing St. Louis police, reported that the shooting victim died and homicide detectives were investigating.",
+            "checkedAt": "2026-11-21T12:15:04.073776+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.215,
+          38.642
+        ]
+      },
+      "properties": {
+        "id": "incident:city-jeff-vander-lou-church-copper-theft-20261115",
+        "title": "Church utility-line copper theft · Jeff-Vander-Lou",
+        "incidentAt": "2026-11-15",
+        "incidentDate": "2026-11-15",
+        "incidentTimeAccuracy": "date-only",
+        "incidentKind": "theft",
+        "incidentTypes": [
+          "theft"
+        ],
+        "jurisdiction": "city",
+        "address": "Temple Church of Christ area, Jeff-Vander-Lou, St. Louis, MO",
+        "sourceId": "city-reviewed-news",
+        "source": "First Alert 4 · court and St. Louis police reporting",
+        "sourceUrl": "https://www.firstalert4.com/2026/11/20/man-charged-after-cutting-churchs-internet-lines-steal-copper-st-louis-police-say/",
+        "url": "https://www.firstalert4.com/2026/11/20/man-charged-after-cutting-churchs-internet-lines-steal-copper-st-louis-police-say/",
+        "sourceCheckedAt": "2026-11-21T12:15:04.073776+00:00",
+        "description": "A probable cause statement alleged that AT&T internet lines connecting Temple Church of Christ were cut on November 15 to steal copper. St. Louis police later located the reported vehicle and made an arrest. The report did not publish the affected utility pole's exact location.",
+        "locationAccuracy": "Approximate named public institution and neighborhood, rounded to about 100 m; not an exact utility-pole or arrest location.",
+        "color": "#c52f73"
+      }
     }
   ],
   "sourceReviews": {
-    "county-reviewed-news": "2026-11-20T12:08:06.737804+00:00",
+    "county-reviewed-news": "2026-11-21T12:15:04.073776+00:00",
     "county-releases": "2026-11-15T19:44:02.622984+00:00",
     "city-releases": "2026-11-15T19:44:02.622984+00:00",
-    "county-chesterfield-bulletins": "2026-11-20T12:08:06.737804+00:00",
-    "city-reviewed-news": "2026-11-20T12:08:06.737804+00:00"
+    "county-chesterfield-bulletins": "2026-11-21T12:15:04.073776+00:00",
+    "city-reviewed-news": "2026-11-21T12:15:04.073776+00:00"
   }
 }
