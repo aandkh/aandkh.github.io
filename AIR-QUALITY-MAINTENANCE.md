@@ -8,6 +8,8 @@ The pollutant-only ladder below supplies the background grade. Inside a modeled 
 
 EPA AirNow supplies hourly regional **category contours** for PM2.5 and ozone. Andymap reads the EPA feature service, its existing API and an hourly copy at `data/air-regional.json`. The first usable result can paint while other requests finish. A newer observation takes precedence. Each contour expires four hours after its EPA timestamp. The hourly Pages workflow runs `node scripts/build-regional-air.mjs` to update the copy within the map boundaries. Run `node --test scripts/air-load-test.mjs` to check coverage, loading, failover and expiry.
 
+The browser retains the last validated public regional contour product per pollutant as an outage fallback across reloads. It stores no visitor identifiers or selected locations. The same four-hour observation-time expiry applies to stored and in-memory fallback data; fetching or saving a copy never restarts its lifetime. Newer observations replace it, and a blocked/full browser store does not prevent live requests.
+
 The map preserves the six original categories, colors, observation times and source attribution. A shaded area is interpolated between monitors. The key shows a loading message until sources respond. Locations without pollutant coverage can still have a local landfill grade.
 
 The 17 grades are **Andymap display subdivisions**, not EPA health categories or validated personal health scores. Lower AQI means a better tier for the same pollutant and time basis. Subtiers within an official category share its health guidance. Never claim that S+ means zero pollution, uniquely “best possible air,” or no health risk.

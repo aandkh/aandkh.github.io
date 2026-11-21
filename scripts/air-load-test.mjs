@@ -78,3 +78,23 @@ test('late inputs cannot publish after the user closes the layer or changes poll
  controller.abort();later.resolve(product());
  await assert.rejects(waiting,{name:'AbortError'});assert.deepEqual(updates,[]);
 });
+
+test('reload outage uses the last verified observation only until its original expiry',async()=>{
+ const values=new Map(),storage={getItem:key=>values.get(key),setItem:(key,value)=>values.set(key,value)};
+ const first=await loadRegionalAir('pm25',{now,storage,fetcher:async url=>route(url)==='direct'?reply(contour()):fail()});
+ const offline=await loadRegionalAir('pm25',{now:now+hour,storage,fetcher:fail});
+ assert.equal(offline.observedAt,first.observedAt);
+ assert.deepEqual(offline.features[0].geometry,first.features[0].geometry);
+ await assert.rejects(loadRegionalAir('pm25',{now:now+3*hour+1,storage,fetcher:fail}),/No current regional/);
+ await assert.rejects(loadRegionalAir('ozone',{now,storage,fetcher:fail}),/No current regional/);
+ const fresh=await loadRegionalAir('pm25',{now,storage,fetcher:async url=>route(url)==='direct'?reply(contour(now,2)):fail()});
+ assert.equal(fresh.observedAt,iso(now));assert.equal(fresh.features[0].properties.category,2);
+});
+
+test('blocked or malformed browser storage does not block a live air reading',async()=>{
+ for(const storage of [{getItem(){throw Error('blocked');},setItem(){throw Error('quota');}},
+  {getItem:()=>'{broken',setItem(){}}]){
+  const result=await loadRegionalAir('pm25',{now,storage,fetcher:async url=>route(url)==='direct'?reply(contour()):fail()});
+  assert.equal(result.features.length,1);
+ }
+});

@@ -11,6 +11,9 @@ const bbox=[west,south,east,north].join(',');
 const boundary=[[[west,south],[east,south],[east,north],[west,north],[west,south]]];
 const products={pm25:['PM25','PM2.5'],ozone:['Ozone','Ozone']};
 const maxAge=4*3600000;
+const savedKey=mode=>'andymap:regional-air:v1:'+mode;
+function browserStorage(){try{return globalThis.localStorage;}catch{return null;}}
+
 
 function regionalResult(payload,mode,service,direct,now){
  if(!Array.isArray(payload?.features)||payload.error||payload.exceededTransferLimit||
@@ -41,13 +44,13 @@ function regionalResult(payload,mode,service,direct,now){
 
 // Paint the first usable EPA product, then accept newer observation hours.
 // For a correction in the same hour, prefer EPA's own service.
-export async function loadRegionalAir(mode,{signal,force=false,fetcher=fetch,now=Date.now(),onUpdate}={}){
+export async function loadRegionalAir(mode,{signal,force=false,fetcher=fetch,now=Date.now(),onUpdate,storage=browserStorage()}={}){
  if(!Object.hasOwn(products,mode))return {id:'air',mode,status:'unavailable',features:[]};
  signal?.throwIfAborted();
  const service='https://services.arcgis.com/cJ9YHowT8TU7DUyn/ArcGIS/rest/services/AirNowLatestContours'+products[mode][0]+'/FeatureServer/0';
  const query=new URLSearchParams({f:'geojson',where:'1=1',geometry:bbox,geometryType:'esriGeometryEnvelope',inSR:'4326',outSR:'4326',
   spatialRel:'esriSpatialRelIntersects',returnGeometry:'true',outFields:'OBJECTID,gridcode,Timestamp',geometryPrecision:'4',maxAllowableOffset:'0.002'});
- const read=url=>weatherJson(url,{fetcher,signal,force,now,maxAge:120000,timeout:8000,cacheMode:force?'reload':'no-cache'});
+ const read=url=>weatherJson(url,{fetcher,signal,force,now,maxAge:120000,timeout:8000,cacheMode:force?'reload':'no-cache',staleIfError:true});
  let latest,priority=-1;
  const accept=(payload,rank)=>{
   signal?.throwIfAborted();
@@ -56,8 +59,13 @@ export async function loadRegionalAir(mode,{signal,force=false,fetcher=fetch,now
   priority=rank;
   if(latest&&result.observedAt===latest.observedAt&&JSON.stringify(result.features)===JSON.stringify(latest.features))return;
   latest=result;
+  // This is an outage copy, not a refreshed observation. regionalResult applies
+  // the exact same original-time expiry when it is read again after a reload.
+  if(rank>=0)try{storage?.setItem(savedKey(mode),JSON.stringify(result));}catch{}
   onUpdate?.(result);
  };
+ // Saved values never extend the four-hour data lifetime or cross pollutants.
+ try{const saved=storage?.getItem(savedKey(mode));if(saved)accept(JSON.parse(saved),-1);}catch{}
  await Promise.allSettled([
   read('/data/air-regional.json').then(file=>accept(file?.products?.[mode],0)),
   read(service+'/query?'+query).then(file=>accept(file,2)),

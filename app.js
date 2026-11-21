@@ -1,7 +1,8 @@
+import {loadSkyForecast} from './sky-forecast-fallback.js';
 import {WEATHER_POLL,AIR_WIND_POLL,WIND_MAX_AGE,usableAge} from './regional-weather.js?v=20261118-station-delivery';
 import {composeAirDisplay,currentAirGeometry,currentAirOverlay,airFeatureAtPoint} from './air-overlay-integration.js?v=20261118-air-coverage';
 import {loadAirMonitors,appendAirLocationMeasurements,loadWindReadings,weatherWinds,windSignature} from './air-monitors.js?v=20261118-air-coverage';
-import {loadAirSurface,loadRegionalAir} from './air-load.js?v=20261118-air-coverage';
+import {loadAirSurface,loadRegionalAir} from './air-load.js?v=20261119-repair';
 import {ODOR_BANDS} from './air-grades.js?v=20261118-local-air';
 import {trafficFeature,appendTrafficDetails} from './traffic-details.js?v=20261117-construction-layer';
 import {trafficCollection,currentTrafficRecord,savedTrafficFeature} from './traffic-experience.js?v=20261117-construction-layer';
@@ -14,7 +15,7 @@ import {createObservedRadar} from './observed-radar.js?v=20261117-weather-suite'
 import {createWeatherAlerts} from './weather-alerts.js?v=20261117-weather-suite';
 import {createWarningBanner,alertFeature,appendAlertDetails} from './weather-alert-ui.js?v=20261117-weather-suite';
 import {createTrafficFlowLayer} from './traffic-flow.js?v=20261117-construction-layer';
-import {referenceLayer,referenceLayerFile} from './reference-layers.js?v=20261117-coverage';
+import {referenceLayer,referenceLayerFile} from './reference-layers.js?v=20261119-repair';
 import {selectionAnchor,selectionFeatureId} from './selection-focus.js?v=20261117-close-selection';
 import {createSpotExplorer} from './spot-explorer.js?v=20261117-seasonal-stories';
 import {installPanelDrag} from './panel-drag.js?v=20261117-explore-layout';
@@ -32,13 +33,13 @@ import {loadWeatherForecast} from './forecast-fallback.js?v=20261117-weather-sui
 import {PARK_SORTS,enrichParkAnalytics,availableParkSorts,sortParkAnalytics,parkSummary,filterParkAnalytics,appendParkAnalytics} from './park-analytics.js?v=20261116-security';
 import {quietParksSnapshot,enrichQuieterSurroundings,sortQuieterSurroundings,quieterSummary,appendQuieterDetails} from './quieter-surroundings.js?v=20261116-security';
 import {JOYRIDES_SORTS,joyrideRoutes,availableJoyrideSorts,sortJoyrides,joyrideSummary,appendJoyrideDetails} from './joyrides.js?v=20261116-security';
-import {loadProgressiveLayer} from './progressive-layer.js?v=20261117-performance';
+import {loadProgressiveLayer} from './progressive-layer.js?v=20261119-repair';
 import {enrichSports} from './sports-events.js?v=20261116-full-speed';
 import {enrichDiscovery} from './local-discovery.js?v=20261116-full-speed';
 import {CYCLING_SORTS,enrichCycling,sortCycling,cyclingSummary,appendCyclingDetails,availableCyclingSorts,refreshCyclingAir} from './cycling-routes.js?v=20261117-performance';
 import {terrainStreams} from './terrain-streams.js?v=20261115-road-insights';
 import {enrichOutages,appendUtilityStatus,refreshOutageWater,appendOutageCredit} from './outages-expanded.js?v=20261116-security';
-import {sortRivers,enrichRivers,riverAverages} from './river-insights.js?v=20261115-road-insights';
+import {sortRivers,enrichRivers,riverAverages,loadRiverGauges} from './river-insights.js?v=20261119-repair';
 import {appendSkySummary} from './sky-quality.js?v=20261115-road-insights';
 import {gymPlaces,gymGroup,GYM_GROUPS,sortGyms} from './gyms.js?v=20261115-road-insights';
 import {enrichMovies,movieFacts} from './movie-screenings.js?v=20261116-full-speed';
@@ -48,7 +49,7 @@ import {TERRAIN_OPTIONS,GEOLOGY_MODES,terrainGeology} from './terrain-geology.js
 import {recentIncidents,incidentExplorer,incidentFilters,filterIncidents,incidentStamp} from './recent-incidents.js?v=20261116-security';
 import {eventDay,eventOrder,eventTime,eventStamp,groupEventCards} from './event-dates.js?v=20261116-full-speed';
 import {venueEvents,mergeVenueEvents} from './concert-calendar.js?v=20261116-full-speed';
-import {createSkyCloudMap} from './sky-cloud-map.js?v=20261117-weather-suite';
+import {createSkyCloudMap} from './sky-cloud-map.js?v=20261119-repair';
 import {COMMUNITY_SOURCES,HIDDEN_LAYERS,CRIME_TYPES,combineCrime,appendAirAdvice,distance,routeMiles,pointInGeometry} from './layer-insights.js?v=20261118-local-air';
 import {createTrafficIncidents} from './traffic-incidents.js?v=20261118-marker-clicks';
 import {loadRoadworks} from './roadworks-source.js?v=20261117-construction-layer';
@@ -572,7 +573,14 @@ async function localLayerSnapshot(id,result={features:[],status:'unavailable'},o
  if(id==='sports')return enrichSports(result,options);
  if(['foodtrucks','localfood','businesses'].includes(id))return enrichDiscovery(id,result);
  if(id==='outages')return enrichOutages(result);
- if(id==='parks')return result.id==='parks'&&result.status!=='unavailable'?result:quietParksSnapshot();
+ if(id==='parks'){
+  // An HTTP-success empty, malformed or unavailable live parks response is not
+  // a deletion of the published park directory. Keep its original source dates.
+  const usable=result?.id==='parks'&&!['unavailable','empty','error'].includes(result.status)&&Array.isArray(result.features)
+   ?result.features.filter(f=>f?.type==='Feature'&&f.properties&&f.geometry&&Array.isArray(f.geometry.coordinates)&&f.geometry.coordinates.length):[];
+  if(usable.length)return usable.length===result.features.length?result:{...result,features:usable};
+  return quietParksSnapshot();
+ }
  if(id==='birding')return enrichBirding(result);
  if(id==='cycling')return enrichCycling(result);
  if(id==='joyrides')return joyrideRoutes();
@@ -621,6 +629,7 @@ async function loadLayer(id,{force=false}={}){
    result=await loadAirSurface({mode,signal:controller.signal,force,previous,onUpdate:commit});
    if(!controller.signal.aborted)airWindAt=Date.now();
   }
+  else if(id==='sky')result=await loadSkyForecast(center.lat,center.lng,{loadPrimary:()=>remote('sky',6000),signal:controller.signal,force});
   else if(id==='wildlife'){if(wildlifeOptions.mapView!=='reports')drawFeatures(id,{query:wildlifeOptions});result=await loadWildlife({...wildlifeOptions,signal:controller.signal});}
   else if(id==='history')result=historyView==='imagery'?{id:'history',status:'ready',features:[],raster:true}:await loadHistoricalEvents();
   else if(id==='roadworks')result=await loadRoadworks({signal:controller.signal,force});
@@ -644,7 +653,8 @@ async function loadLayer(id,{force=false}={}){
    result=await loadRadarMetadata(mode,{signal:controller.signal,force,loadPrimary:({signal})=>remote('radar',8000,signal),onUpdate:commit});
   }else if(id==='weather'){
    result=await loadWeatherForecast(center.lat,center.lng,{signal:controller.signal,force,loadPrimary:({signal})=>remote('weather',8000,signal),onUpdate:value=>{if(commit(value)&&weatherPanelOpen)renderWeather();}});
-  }else result=await remote();
+  }else if(id==='rivers')result=await loadRiverGauges(()=>remote('rivers',7500),{signal:controller.signal});
+  else result=await remote();
   if(id==='rivers'){result=await enrichRivers(result);result=await riverAverages(result);}
   if(id==='crime'&&layerModes.crime!=='recent')result=combineCrime(result,crimeTypes);
   commit(result);
@@ -701,7 +711,7 @@ function renderSky(){
  import('./sky-now.js?v=20261116-sky-now').then(({mountSkyNow})=>{if(!finder.isConnected||!skyPanelOpen)return;finder.replaceChildren();skyNowController=mountSkyNow(finder,{lat:finderLocation.lat,lng:finderLocation.lng,clouds:sky?.clouds,state:skyNowState});if(inspection)requestAnimationFrame(()=>restoreInspection(inspection));restoreViewScroll();}).catch(()=>{if(!finder.isConnected)return;finder.replaceChildren(el('p','small','Sky finder could not load.'),btn('Try again',renderSky,'sky-refresh'));});
  if(!sky||!coordinate(sky.lat,sky.lng)){box.append(el('p','sky-note',result?.status==='loading'?'Loading cloud and tonight conditions…':'Cloud and tonight conditions are unavailable for this location.'),btn('Try again',()=>loadLayer('sky'),'sky-refresh'));if(inspection)restoreInspection(inspection);else focusDetailHeading();return;}
  box.append(el('p','sky-location',`${sky.lat.toFixed(3)}, ${sky.lng.toFixed(3)} · St. Louis time`));
- appendSkySummary(box,sky,format);box.append(btn('Best places to stargaze tonight',()=>showSkyCloudMap(sky),'sky-refresh'));const skyDetails=el('details','extra-disclosure');skyDetails.append(el('summary','','Explore planet positions'));appendSkyDiagram(skyDetails,sky,{format,selectedBody:skySelectedBody,onSelection:name=>{skySelectedBody=name;}});
+ if(sky.planetsAt)appendSkySummary(box,sky,format);box.append(btn('Best places to stargaze tonight',()=>showSkyCloudMap(sky),'sky-refresh'));const skyDetails=el('details','extra-disclosure');skyDetails.append(el('summary','','Explore planet positions'));appendSkyDiagram(skyDetails,sky,{format,selectedBody:skySelectedBody,onSelection:name=>{skySelectedBody=name;}});
  const facts=el('div','sky-facts'),fact=(label,value)=>{const item=el('dl');item.append(el('dt','',label),el('dd','',value));facts.append(item);};
  for(const [key,label]of [['sunset','Sunset'],['darknessStart','Darkness begins'],['darknessEnd','Dawn begins'],['sunrise','Sunrise'],['moonrise','Moonrise'],['moonset','Moonset']])if(typeof sky[key]==='string'&&Number.isFinite(Date.parse(sky[key])))fact(label,format(sky[key]));
  if(Number.isFinite(sky.moonIllumination)&&sky.moonIllumination>=0&&sky.moonIllumination<=1)fact('Moon illuminated',Math.round(sky.moonIllumination*100)+'%');
@@ -709,9 +719,10 @@ function renderSky(){
  box.append(el('h3','sky-section-title','Cloud forecast'));
  const clouds=skyCloudRows(sky);
  if(clouds.length){const hours=el('div','sky-hours');hours.tabIndex=0;hours.setAttribute('aria-label','Hourly cloud cover');for(const row of clouds){const hour=el('div','sky-hour'),time=el('time','',new Intl.DateTimeFormat('en-US',{timeZone:'America/Chicago',hour:'numeric'}).format(Date.parse(row.time))),date=el('small','',new Intl.DateTimeFormat('en-US',{timeZone:'America/Chicago',month:'short',day:'numeric'}).format(Date.parse(row.time))),bar=el('span','sky-cloud-bar'),fill=el('i');time.dateTime=row.time;time.title=format(row.time);fill.style.setProperty('--cloud-cover',row.percent+'%');bar.append(fill);hour.append(time,date,el('strong','',Math.round(row.percent)+'%'),bar);hours.append(hour);}box.append(hours);}else box.append(el('p','sky-note',sky.forecastNote||'Cloud forecast unavailable for this location.'));
+ if(sky.cloudSample)box.append(el('p','sky-note',`Regional cloud sample ${sky.cloudSample.lat.toFixed(2)}, ${sky.cloudSample.lng.toFixed(2)}`));
  if(sky.forecastUpdatedAt)box.append(el('p','sky-note','NWS forecast updated '+format(sky.forecastUpdatedAt)));
  if(facts.childElementCount)box.append(el('h3','sky-section-title','Sun and Moon'),facts,el('p','sky-note','Sun and Moon values are calculated.'+(sky.moonAt?' Moon illumination at '+format(sky.moonAt)+'.':'')));
- appendSkyExtras(box,sky,{format});box.append(skyDetails);const refresh=btn('Update for map center',()=>loadLayer('sky',{force:true}),'sky-refresh');refresh.dataset.inspectionKey='sky-refresh';box.append(refresh);
+ appendSkyExtras(box,sky,{format});if(sky.planetsAt)box.append(skyDetails);const refresh=btn('Update for map center',()=>loadLayer('sky',{force:true}),'sky-refresh');refresh.dataset.inspectionKey='sky-refresh';box.append(refresh);
  if(inspection)restoreInspection(inspection);else focusDetailHeading();
 }
 function selectedPointMarker(stop,id){

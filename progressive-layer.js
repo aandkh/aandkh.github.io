@@ -6,9 +6,10 @@ export async function loadProgressiveLayer(snapshot, remote, onProgress, signal)
  const empty={features:[],status:'unavailable'};
  let remoteDone=false,localDone=false,onAbort;
  const remoteTask=Promise.resolve().then(remote).then(live=>{
+  if(!live||typeof live!=='object'||(!Array.isArray(live.features)&&!live.raster))throw Error('Invalid source response');
   // A slow saved-file decode or enrichment must not hold back usable live
   // entries. The final result below still merges the complete local snapshot.
-  if(!localDone&&!signal?.aborted&&live?.features?.length)onProgress?.(live);
+  if(!localDone&&!signal?.aborted&&live.status!=='unavailable'&&live.features?.length)onProgress?.(live);
   return live;
  }).finally(()=>{remoteDone=true;});
  const localTask=Promise.resolve().then(()=>snapshot(empty)).finally(()=>{localDone=true;});
@@ -21,7 +22,15 @@ export async function loadProgressiveLayer(snapshot, remote, onProgress, signal)
   const [local,live]=await (cancelled?Promise.race([settled,cancelled]):settled);
   if(signal?.aborted)throw cancellation();
   if(live.status==='fulfilled'){
-   let result;try{result=await snapshot(live.value);}catch{result=live.value;}
+   let result;
+   try{result=await snapshot(live.value);}catch{
+    // The first snapshot was usable, but a second enrichment/merge failed.
+    // Do not erase visible saved results just because an empty or unavailable
+    // live response fulfilled rather than rejecting.
+    if(local.status==='fulfilled'&&local.value?.features?.length&&
+       (live.value.status==='unavailable'||!live.value.features?.length&&!live.value.raster))result=local.value;
+    else result=live.value;
+   }
    if(signal?.aborted)throw cancellation();
    return result;
   }

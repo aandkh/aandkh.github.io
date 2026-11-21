@@ -42,22 +42,26 @@ def modern(site):
     return rows
 
 def batch(sites):
+    # v1 is the primary delivery path; don't first wait for the retiring legacy
+    # service. An empty successful series is not a failure (retired gauges).
     output={}
-    try:
-        if NOW.date() >= dt.date(2027,1,1): raise RuntimeError('Modern API preferred during WaterServices retirement')
-        q=urllib.parse.urlencode({'format':'json','sites':','.join(sites),'parameterCd':'00065','startDT':START.isoformat(),'endDT':END.isoformat(),'siteStatus':'all'})
-        d=fetch('https://waterservices.usgs.gov/nwis/iv/?'+q)
-        for s in d.get('value',{}).get('timeSeries',[]):
-            site=s['sourceInfo']['siteCode'][0]['value']
-            if s.get('variable',{}).get('unit',{}).get('unitCode')!='ft': continue
-            rows=[(v['dateTime'],v['value']) for group in s.get('values',[]) for v in group.get('value',[]) if not set(v.get('qualifiers',[])) & {'Ice','Eqp','Ssn'}]
-            output[site]=aggregate(rows)
-    except Exception as e:
-        print('Legacy batch unavailable; using modern USGS endpoint:',type(e).__name__,flush=True)
+    failed=[]
     for site in sites:
-        if site not in output:
-            try: output[site]=aggregate(modern(site))
-            except Exception as e: print(site,'not refreshed:',type(e).__name__,flush=True)
+        try: output[site]=aggregate(modern(site))
+        except Exception as e:
+            failed.append(site)
+            print(site,'modern source unavailable:',type(e).__name__,flush=True)
+    if failed and NOW.date() < dt.date(2027,1,1):
+        try:
+            q=urllib.parse.urlencode({'format':'json','sites':','.join(failed),'parameterCd':'00065','startDT':START.isoformat(),'endDT':END.isoformat(),'siteStatus':'all'})
+            d=fetch('https://waterservices.usgs.gov/nwis/iv/?'+q)
+            for series in d.get('value',{}).get('timeSeries',[]):
+                site=series['sourceInfo']['siteCode'][0]['value']
+                if site not in failed or series.get('variable',{}).get('unit',{}).get('unitCode')!='ft': continue
+                rows=[(v['dateTime'],v['value']) for group in series.get('values',[]) for v in group.get('value',[]) if not set(v.get('qualifiers',[])) & {'Ice','Eqp','Ssn'}]
+                output[site]=aggregate(rows)
+        except Exception as e:
+            print('Legacy backup unavailable:',type(e).__name__,flush=True)
     return output
 
 def main():

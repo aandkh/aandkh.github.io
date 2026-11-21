@@ -16,6 +16,15 @@ const liveFirst=loadProgressiveLayer(async value=>value.status==='unavailable'?f
 await new Promise(resolve=>setImmediate(resolve));assert.equal(updates[0]?.features[0].id,'fast-live');
 finishLocal({features:[local]});assert.deepEqual((await liveFirst).features.map(f=>f.id),['fast-live','snapshot']);assert.equal(updates.length,1,'the final merged snapshot is returned, without a redundant local-only redraw');
 assert.deepEqual((await loadProgressiveLayer(snapshot,async()=>{throw Error('offline');})).features,[local]);
+const failingMerge=async value=>{if(value.note==='first request')throw Error('enrichment failed');return {features:[local],status:'partial',checkedAt:'2026-11-18T12:00:00Z'};};
+for(const status of ['empty','unavailable']){
+ const recovered=await loadProgressiveLayer(failingMerge,async()=>({features:[],status,note:'first request'}));
+ assert.deepEqual(recovered.features,[local],'empty remote response must not erase a usable fallback after merge failure');
+ assert.equal(recovered.checkedAt,'2026-11-18T12:00:00Z','the saved source keeps its original timestamp');
+}
+assert.deepEqual((await loadProgressiveLayer(snapshot,async()=>({error:'gateway'}))).features,[local],'malformed live payload uses saved results');
+const liveOnly={features:[{id:'live-only'}],status:'ready',note:'first request'};
+assert.deepEqual(await loadProgressiveLayer(failingMerge,async()=>liveOnly),liveOnly,'valid live results remain usable if enrichment fails');
 const controller=new AbortController();controller.abort();
 await assert.rejects(loadProgressiveLayer(snapshot,async()=>({features:[]}),()=>assert.fail('cancelled progress'),controller.signal),{name:'AbortError'});
 console.log('PASS: immediate snapshot, live merge, offline fallback, cancellation');
