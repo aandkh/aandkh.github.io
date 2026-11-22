@@ -1,304 +1,304 @@
 {
-  "checkedAt": "2026-11-21T12:03:25.434517+00:00",
-  "expiresAt": "2026-11-24T12:03:25.434517+00:00",
-  "periodStart": "2026-10-22T00:00:00-05:00",
-  "periodEnd": "2026-11-21T00:00:00-06:00",
+  "checkedAt": "2026-11-22T11:57:27.529475+00:00",
+  "expiresAt": "2026-11-25T11:57:27.529475+00:00",
+  "periodStart": "2026-10-23T00:00:00-05:00",
+  "periodEnd": "2026-11-22T00:00:00-06:00",
   "source": "USGS continuous gauge-height measurements",
   "sourceUrl": "https://api.waterdata.usgs.gov/ogcapi/v1/collections/continuous",
   "unit": "ft",
   "note": "Each gauge is compared only with its own recent 30-day baseline. This is not a seasonal normal or a flood-risk classification.",
   "baselines": {
     "05514500": {
-      "meanFt": 5.2325,
+      "meanFt": 5.2349,
       "days": 30,
       "minDailyMeanFt": 5.1917,
-      "maxDailyMeanFt": 5.2931,
+      "maxDailyMeanFt": 5.3032,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "05514705": {
-      "meanFt": 13.6557,
+      "meanFt": 13.6198,
       "days": 30,
       "minDailyMeanFt": 11.5964,
       "maxDailyMeanFt": 15.7234,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "05514840": {
-      "meanFt": 0.8316,
+      "meanFt": 0.8319,
       "days": 30,
       "minDailyMeanFt": 0.7702,
       "maxDailyMeanFt": 1.1088,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "05514860": {
-      "meanFt": 1.4645,
+      "meanFt": 1.4629,
       "days": 30,
       "minDailyMeanFt": 1.2561,
       "maxDailyMeanFt": 3.2156,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "05587450": {
-      "meanFt": 15.8826,
+      "meanFt": 15.8805,
       "days": 30,
       "minDailyMeanFt": 15.351,
       "maxDailyMeanFt": 16.2708,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "05587498": {
-      "meanFt": 18.6242,
+      "meanFt": 18.627,
       "days": 30,
       "minDailyMeanFt": 17.2488,
       "maxDailyMeanFt": 19.3402,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "05587900": {
-      "meanFt": 3.2991,
+      "meanFt": 3.3025,
       "days": 24,
       "minDailyMeanFt": 3.17,
       "maxDailyMeanFt": 3.5585,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "05588000": {
-      "meanFt": 0.3477,
+      "meanFt": 0.3515,
       "days": 30,
       "minDailyMeanFt": 0.2561,
       "maxDailyMeanFt": 0.637,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "05593575": {
-      "meanFt": 4.8781,
+      "meanFt": 4.8782,
       "days": 30,
       "minDailyMeanFt": 4.7939,
       "maxDailyMeanFt": 5.0618,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "05593945": {
-      "meanFt": 42.0651,
+      "meanFt": 42.064,
       "days": 30,
       "minDailyMeanFt": 41.9541,
       "maxDailyMeanFt": 42.2632,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "05594000": {
-      "meanFt": 1.18,
+      "meanFt": 1.1847,
       "days": 30,
       "minDailyMeanFt": 1.1129,
-      "maxDailyMeanFt": 1.3028,
+      "maxDailyMeanFt": 1.3073,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "05594070": {
-      "meanFt": 2.555,
+      "meanFt": 2.5629,
       "days": 30,
       "minDailyMeanFt": 2.3887,
       "maxDailyMeanFt": 2.7138,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "05594100": {
-      "meanFt": 0.8783,
+      "meanFt": 0.8657,
       "days": 30,
       "minDailyMeanFt": 0.7199,
-      "maxDailyMeanFt": 1.1384,
+      "maxDailyMeanFt": 1.1006,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "05594450": {
-      "meanFt": 3.708,
+      "meanFt": 3.7011,
       "days": 30,
-      "minDailyMeanFt": 3.6162,
+      "minDailyMeanFt": 3.4269,
       "maxDailyMeanFt": 4.3654,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "05594600": {
-      "meanFt": 8.1793,
+      "meanFt": 8.1857,
       "days": 30,
       "minDailyMeanFt": 7.8329,
       "maxDailyMeanFt": 8.7478,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "05594800": {
-      "meanFt": 0.1276,
+      "meanFt": 0.1279,
       "days": 30,
       "minDailyMeanFt": -0.0427,
       "maxDailyMeanFt": 0.5948,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "05595000": {
-      "meanFt": 68.6316,
+      "meanFt": 68.624,
       "days": 30,
-      "minDailyMeanFt": 68.5001,
+      "minDailyMeanFt": 68.4169,
       "maxDailyMeanFt": 68.7081,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "05595200": {
-      "meanFt": 27.0847,
+      "meanFt": 27.0921,
       "days": 30,
       "minDailyMeanFt": 26.8193,
       "maxDailyMeanFt": 28.5106,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "05595240": {
-      "meanFt": 68.6566,
+      "meanFt": 68.6499,
       "days": 30,
-      "minDailyMeanFt": 68.5515,
+      "minDailyMeanFt": 68.4548,
       "maxDailyMeanFt": 68.7621,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "06935450": {
-      "meanFt": 4.9526,
+      "meanFt": 4.8459,
       "days": 29,
-      "minDailyMeanFt": 2.818,
+      "minDailyMeanFt": 2.581,
       "maxDailyMeanFt": 10.1178,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "06935550": {
-      "meanFt": 5.8641,
+      "meanFt": 5.7578,
       "days": 28,
-      "minDailyMeanFt": 3.6764,
+      "minDailyMeanFt": 3.4174,
       "maxDailyMeanFt": 10.5944,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "06935755": {
-      "meanFt": 3.1761,
+      "meanFt": 3.1764,
       "days": 30,
       "minDailyMeanFt": 3.1581,
       "maxDailyMeanFt": 3.282,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "06935770": {
-      "meanFt": 6.2365,
+      "meanFt": 6.2386,
       "days": 30,
       "minDailyMeanFt": 6.1949,
       "maxDailyMeanFt": 6.3679,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "06935830": {
-      "meanFt": 1.5627,
+      "meanFt": 1.561,
       "days": 30,
       "minDailyMeanFt": 1.51,
       "maxDailyMeanFt": 1.9273,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "06935850": {
-      "meanFt": 6.1742,
+      "meanFt": 6.1746,
       "days": 30,
       "minDailyMeanFt": 6.0464,
       "maxDailyMeanFt": 6.7295,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "06935890": {
-      "meanFt": 3.2096,
+      "meanFt": 3.2214,
       "days": 30,
       "minDailyMeanFt": 2.9474,
       "maxDailyMeanFt": 3.9812,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "06935955": {
-      "meanFt": 3.8767,
+      "meanFt": 3.8832,
       "days": 30,
       "minDailyMeanFt": 3.7452,
       "maxDailyMeanFt": 4.5753,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "06935965": {
-      "meanFt": 11.8783,
+      "meanFt": 11.7789,
       "days": 30,
-      "minDailyMeanFt": 9.7656,
+      "minDailyMeanFt": 9.4969,
       "maxDailyMeanFt": 16.6908,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "06935980": {
-      "meanFt": 1.9227,
+      "meanFt": 1.9216,
       "days": 30,
       "minDailyMeanFt": 1.8697,
       "maxDailyMeanFt": 2.5168,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "06935997": {
-      "meanFt": 1.144,
+      "meanFt": 1.1444,
       "days": 30,
       "minDailyMeanFt": 1.1249,
       "maxDailyMeanFt": 1.2909,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "06936475": {
-      "meanFt": 1.258,
+      "meanFt": 1.2574,
       "days": 30,
       "minDailyMeanFt": 1.1686,
       "maxDailyMeanFt": 1.9319,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "06936530": {
-      "meanFt": 1.3891,
+      "meanFt": 1.3912,
       "days": 30,
       "minDailyMeanFt": 1.3192,
       "maxDailyMeanFt": 1.5557,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "07001910": {
-      "meanFt": 3.1021,
+      "meanFt": 3.1028,
       "days": 30,
       "minDailyMeanFt": 3.0428,
       "maxDailyMeanFt": 3.3562,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "07001960": {
-      "meanFt": 3.0601,
+      "meanFt": 3.0617,
       "days": 30,
       "minDailyMeanFt": 2.9866,
       "maxDailyMeanFt": 3.3847,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "07005000": {
-      "meanFt": 2.3205,
+      "meanFt": 2.3239,
       "days": 30,
-      "minDailyMeanFt": 2.2267,
+      "minDailyMeanFt": 2.2307,
       "maxDailyMeanFt": 2.7805,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "07010000": {
-      "meanFt": 7.4473,
+      "meanFt": 7.3108,
       "days": 30,
       "minDailyMeanFt": 2.8183,
       "maxDailyMeanFt": 12.77,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "07010022": {
-      "meanFt": 3.4977,
+      "meanFt": 3.4972,
       "days": 30,
       "minDailyMeanFt": 3.4403,
       "maxDailyMeanFt": 4.0018,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "07010030": {
-      "meanFt": 2.421,
+      "meanFt": 2.4216,
       "days": 30,
-      "minDailyMeanFt": 2.356,
+      "minDailyMeanFt": 2.3594,
       "maxDailyMeanFt": 2.8718,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "07010035": {
-      "meanFt": 1.0608,
+      "meanFt": 1.0639,
       "days": 30,
       "minDailyMeanFt": 0.9855,
       "maxDailyMeanFt": 1.3012,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "07010038": {
-      "meanFt": 2.1977,
+      "meanFt": 2.198,
       "days": 30,
-      "minDailyMeanFt": 2.1518,
+      "minDailyMeanFt": 2.1528,
       "maxDailyMeanFt": 3.0911,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "07010040": {
-      "meanFt": 2.0183,
+      "meanFt": 2.0152,
       "days": 30,
       "minDailyMeanFt": 1.9365,
       "maxDailyMeanFt": 2.4565,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "07010055": {
-      "meanFt": 1.7297,
+      "meanFt": 1.7313,
       "days": 30,
-      "minDailyMeanFt": 1.6348,
+      "minDailyMeanFt": 1.6372,
       "maxDailyMeanFt": 2.2512,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
@@ -310,35 +310,35 @@
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "07010070": {
-      "meanFt": 2.4474,
+      "meanFt": 2.4471,
       "days": 30,
       "minDailyMeanFt": 2.42,
       "maxDailyMeanFt": 2.6651,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "07010075": {
-      "meanFt": 2.4564,
+      "meanFt": 2.4591,
       "days": 30,
       "minDailyMeanFt": 2.3169,
       "maxDailyMeanFt": 3.1678,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "07010082": {
-      "meanFt": 2.5246,
+      "meanFt": 2.5282,
       "days": 30,
       "minDailyMeanFt": 2.464,
       "maxDailyMeanFt": 2.9215,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "07010086": {
-      "meanFt": 1.0192,
+      "meanFt": 1.0172,
       "days": 30,
       "minDailyMeanFt": 0.83,
       "maxDailyMeanFt": 2.2377,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "07010088": {
-      "meanFt": 1.6247,
+      "meanFt": 1.6246,
       "days": 30,
       "minDailyMeanFt": 1.5115,
       "maxDailyMeanFt": 2.5148,
@@ -352,91 +352,91 @@
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "07010094": {
-      "meanFt": 4.0084,
+      "meanFt": 4.0066,
       "days": 30,
       "minDailyMeanFt": 3.904,
       "maxDailyMeanFt": 4.3281,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "07010097": {
-      "meanFt": 2.5798,
-      "days": 29,
+      "meanFt": 2.5772,
+      "days": 30,
       "minDailyMeanFt": 2.4331,
       "maxDailyMeanFt": 3.3177,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "07010180": {
-      "meanFt": 2.6377,
+      "meanFt": 2.6381,
       "days": 30,
       "minDailyMeanFt": 2.568,
       "maxDailyMeanFt": 3.271,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "07010208": {
-      "meanFt": 2.7398,
+      "meanFt": 2.7396,
       "days": 30,
       "minDailyMeanFt": 2.65,
       "maxDailyMeanFt": 3.226,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "07014500": {
-      "meanFt": 3.0486,
+      "meanFt": 3.0488,
       "days": 30,
       "minDailyMeanFt": 2.9985,
       "maxDailyMeanFt": 3.1325,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "07016500": {
-      "meanFt": 3.1276,
+      "meanFt": 3.1293,
       "days": 30,
       "minDailyMeanFt": 3.0961,
-      "maxDailyMeanFt": 3.1647,
+      "maxDailyMeanFt": 3.167,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "07017020": {
-      "meanFt": -1.6128,
+      "meanFt": -1.6133,
       "days": 30,
       "minDailyMeanFt": -1.6518,
       "maxDailyMeanFt": -1.5537,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "07018100": {
-      "meanFt": 1.9061,
+      "meanFt": 1.9079,
       "days": 30,
       "minDailyMeanFt": 1.8107,
       "maxDailyMeanFt": 2.2378,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "07018500": {
-      "meanFt": 1.8816,
+      "meanFt": 1.8855,
       "days": 30,
       "minDailyMeanFt": 1.7194,
       "maxDailyMeanFt": 2.3227,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "07019000": {
-      "meanFt": 2.7067,
+      "meanFt": 2.7072,
       "days": 30,
       "minDailyMeanFt": 2.649,
       "maxDailyMeanFt": 2.8109,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "07019072": {
-      "meanFt": 1.8276,
+      "meanFt": 1.8229,
       "days": 30,
-      "minDailyMeanFt": 1.7548,
+      "minDailyMeanFt": 1.6672,
       "maxDailyMeanFt": 2.0366,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "07019090": {
-      "meanFt": 4.1913,
+      "meanFt": 4.1931,
       "days": 30,
       "minDailyMeanFt": 4.15,
       "maxDailyMeanFt": 4.3929,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "07019120": {
-      "meanFt": 1.8316,
+      "meanFt": 1.8315,
       "days": 30,
       "minDailyMeanFt": 1.7777,
       "maxDailyMeanFt": 2.0521,
@@ -450,58 +450,58 @@
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "07019150": {
-      "meanFt": 1.7706,
+      "meanFt": 1.7703,
       "days": 30,
       "minDailyMeanFt": 1.7452,
       "maxDailyMeanFt": 1.9545,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "07019175": {
-      "meanFt": 3.7639,
+      "meanFt": 3.7654,
       "days": 30,
-      "minDailyMeanFt": 3.7231,
+      "minDailyMeanFt": 3.7353,
       "maxDailyMeanFt": 3.9628,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "07019185": {
-      "meanFt": 2.3225,
+      "meanFt": 2.3218,
       "days": 30,
       "minDailyMeanFt": 2.2048,
       "maxDailyMeanFt": 3.0183,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "07019195": {
-      "meanFt": 1.419,
+      "meanFt": 1.4181,
       "days": 30,
       "minDailyMeanFt": 1.36,
       "maxDailyMeanFt": 1.8133,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "07019210": {
-      "meanFt": 1.2318,
-      "days": 29,
-      "minDailyMeanFt": 1.1161,
-      "maxDailyMeanFt": 1.5941,
+      "meanFt": 1.233,
+      "days": 30,
+      "minDailyMeanFt": 1.1064,
+      "maxDailyMeanFt": 1.581,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "07019220": {
-      "meanFt": 1.9633,
+      "meanFt": 1.9635,
       "days": 30,
       "minDailyMeanFt": 1.9346,
       "maxDailyMeanFt": 2.244,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "07019317": {
-      "meanFt": 3.4976,
+      "meanFt": 3.5041,
       "days": 30,
       "minDailyMeanFt": 3.377,
       "maxDailyMeanFt": 4.0319,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     },
     "07019500": {
-      "meanFt": 1.6239,
+      "meanFt": 1.6246,
       "days": 30,
-      "minDailyMeanFt": 1.5442,
+      "minDailyMeanFt": 1.5467,
       "maxDailyMeanFt": 1.8493,
       "method": "Mean of daily means, each built from at least 18 populated UTC hours; equal weight per day. Provisional measurements may be revised."
     }

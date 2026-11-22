@@ -654,16 +654,16 @@
       "url": "https://www.firstalert4.com/2026/11/19/troopers-seek-vehicle-believed-have-struck-pedestrian-deadly-wellston-crash/"
     },
     "https://www.firstalert4.com/2026/11/19/victim-hit-by-car-killed-during-road-rage-incident-hazelwood-police-say/": {
-      "changedAt": "2026-11-21T12:04:19.970938+00:00",
+      "changedAt": "2026-11-22T11:58:25.666787+00:00",
       "discoveredAt": "2026-11-20T11:59:48.070162+00:00",
-      "publishedAt": "2026-11-19T23:47:26+00:00",
+      "publishedAt": "2026-11-21T16:28:04+00:00",
       "review": {
-        "checkedAt": "2026-11-21T12:15:55.606436+00:00",
+        "checkedAt": "2026-11-22T12:04:38.089735+00:00",
         "disposition": "already-mapped",
-        "note": "Article revision adds a company statement; existing November 18 fatal Hazelwood record already preserves the reported occurrence, location and outcome.",
-        "revision": "7fe086507b157dd1040e64cb2309c56b6948fb210769706560805ce9fc35bfe1"
+        "note": "Reviewed revised article; it does not change the mapped November 18 occurrence, reported Dunn Road location, or one explicitly reported death.",
+        "revision": "9ab9c81d6ce66856afe3938c75269e0a702a93e03e81ae041ba5f2aa9d193e2f"
       },
-      "revision": "7fe086507b157dd1040e64cb2309c56b6948fb210769706560805ce9fc35bfe1",
+      "revision": "9ab9c81d6ce66856afe3938c75269e0a702a93e03e81ae041ba5f2aa9d193e2f",
       "sources": [
         "firstalert-county",
         "firstalert-crime"
@@ -776,33 +776,52 @@
       "url": "https://www.firstalert4.com/2026/11/20/person-police-custody-after-smoke-shop-burglarized/"
     },
     "https://www.firstalert4.com/2026/11/21/woman-dies-overnight-after-south-city-shooting/": {
-      "changedAt": "2026-11-21T12:04:19.970938+00:00",
+      "changedAt": "2026-11-22T12:04:38.597198+00:00",
       "discoveredAt": "2026-11-21T12:04:19.970938+00:00",
-      "publishedAt": "2026-11-21T11:28:57+00:00",
+      "publishedAt": "2026-11-22T11:57:38+00:00",
       "review": {
-        "checkedAt": "2026-11-21T12:15:55.355963+00:00",
+        "checkedAt": "2026-11-22T12:05:27.428379+00:00",
         "disposition": "mapped",
-        "note": "Reviewed occurrence as November 21 shortly after 1:30 a.m.; mapped to the reported 3700 block of California Avenue with one explicitly reported homicide death.",
-        "revision": "3414fa94129b1ebd8543de5bfc4017f0d3bc4d67302325701eed88e3ab2bb035"
+        "note": "Reviewed latest revision and corrected the mapped occurrence time from about 1:30 a.m. to the article’s current police-reported time of about 1:15 a.m.; location and fatal outcome are unchanged.",
+        "revision": "d749e3b31ab10c5024a37d8a73508ddec357a278a861d84ea56c28396b27def9"
       },
-      "revision": "3414fa94129b1ebd8543de5bfc4017f0d3bc4d67302325701eed88e3ab2bb035",
+      "revision": "d749e3b31ab10c5024a37d8a73508ddec357a278a861d84ea56c28396b27def9",
       "sources": [
         "firstalert-crime"
       ],
-      "title": "Woman dies overnight after South City shooting",
+      "title": "Woman dies after South City shooting overnight",
       "url": "https://www.firstalert4.com/2026/11/21/woman-dies-overnight-after-south-city-shooting/"
+    },
+    "https://www.firstalert4.com/2026/11/22/person-killed-single-car-crash-i-170-north-county/": {
+      "changedAt": "2026-11-22T11:58:25.666787+00:00",
+      "discoveredAt": "2026-11-22T11:58:25.666787+00:00",
+      "publishedAt": "2026-11-22T11:37:07+00:00",
+      "review": {
+        "checkedAt": "2026-11-22T12:04:37.955753+00:00",
+        "disposition": "mapped",
+        "note": "Verified against Missouri State Highway Patrol official crash report 260492908: November 21 at 3:50 p.m., southbound I-170 north of I-70, one fatality; added with official rounded coordinates.",
+        "revision": "205fdbb53172e4514e372d34870cae1f500e758bd80c4f7d698d711eabe43af2"
+      },
+      "revision": "205fdbb53172e4514e372d34870cae1f500e758bd80c4f7d698d711eabe43af2",
+      "sources": [
+        "firstalert-county"
+      ],
+      "title": "Person killed in single-car crash on I-170 in North County",
+      "url": "https://www.firstalert4.com/2026/11/22/person-killed-single-car-crash-i-170-north-county/"
     }
   },
   "sources": {
     "firstalert-county": {
       "articleUrls": [
+        "https://www.firstalert4.com/2026/11/22/person-killed-single-car-crash-i-170-north-county/",
+        "https://www.firstalert4.com/2026/11/22/wreath-every-veteran-nonprofit-campaign-helping-honor-those-jefferson-barracks/",
+        "https://www.firstalert4.com/2026/11/19/victim-hit-by-car-killed-during-road-rage-incident-hazelwood-police-say/",
         "https://www.firstalert4.com/2026/11/20/st-louis-county-animal-shelter-asking-families-foster-dogs-over-thanksgiving/",
         "https://www.firstalert4.com/2026/11/20/man-sentenced-assault-ferguson-officer-during-2024-protest/",
         "https://www.firstalert4.com/2026/11/20/2-hospitalized-after-car-hits-building-overturns-jennings/",
         "https://www.firstalert4.com/2026/11/20/sale-vacant-kirkwood-ball-fields-approved-by-city-council-private-group-plans-sports-food-complex/",
         "https://www.firstalert4.com/2026/11/20/man-shot-near-his-4-year-old-grandson-outside-florissant-gas-station-police-say/",
         "https://www.firstalert4.com/2026/11/20/kirkwood-withholding-11-million-contractor-train-station-stays-closed/",
-        "https://www.firstalert4.com/2026/11/19/victim-hit-by-car-killed-during-road-rage-incident-hazelwood-police-say/",
         "https://www.firstalert4.com/2026/11/19/normandy-schools-collaborative-deploys-15-electric-buses/",
         "https://www.firstalert4.com/2026/11/19/troopers-seek-vehicle-believed-have-struck-pedestrian-deadly-wellston-crash/",
         "https://www.firstalert4.com/2026/11/19/st-louis-county-welcomes-more-than-20-new-corrections-officers-graduation-ceremony/",
@@ -813,26 +832,24 @@
         "https://www.firstalert4.com/2026/11/17/man-admits-shooting-ballwin-officer/",
         "https://www.firstalert4.com/2026/11/17/police-woman-arrested-accused-threatening-school-staff-students/",
         "https://www.firstalert4.com/2026/11/17/jake-zimmerman-vows-make-st-louis-county-government-boring-again/",
-        "https://www.firstalert4.com/2026/11/16/police-responding-possible-road-rage-shooting-quiktrip/",
-        "https://www.firstalert4.com/2026/11/16/new-sexual-assault-allegations-revealed-lawsuit-against-former-riverview-officer-city/",
-        "https://www.firstalert4.com/2026/11/16/st-louis-county-man-accused-child-abuse-lunging-officer-with-scissors/"
+        "https://www.firstalert4.com/2026/11/16/police-responding-possible-road-rage-shooting-quiktrip/"
       ],
-      "contentChangedAt": "2026-11-21T12:04:19.970938+00:00",
-      "etag": "W/\"f6e2-jmM8Ei4FU+nfGeVmXOxa501gJEI\"",
-      "lastModified": "Sat, 21 Nov 2026 12:04:24 GMT",
-      "latestPublishedAt": "2026-11-20T22:28:52+00:00",
-      "oldestPublishedAt": "2026-11-16T22:13:37+00:00",
+      "contentChangedAt": "2026-11-22T11:58:25.666787+00:00",
+      "etag": "W/\"e062-vwmXBoOZ6SXDVWGUtuSTnmryixQ\"",
+      "lastModified": "Sun, 22 Nov 2026 11:58:30 GMT",
+      "latestPublishedAt": "2026-11-22T11:37:07+00:00",
+      "oldestPublishedAt": "2026-11-16T23:49:49+00:00",
       "url": "https://www.firstalert4.com/arc/outboundfeeds/rss/category/news/st-louis-county/?outputType=xml"
     },
     "firstalert-crime": {
       "articleUrls": [
         "https://www.firstalert4.com/2026/11/21/woman-dies-overnight-after-south-city-shooting/",
+        "https://www.firstalert4.com/2026/11/19/victim-hit-by-car-killed-during-road-rage-incident-hazelwood-police-say/",
         "https://www.firstalert4.com/2026/11/20/man-sentenced-assault-ferguson-officer-during-2024-protest/",
         "https://www.firstalert4.com/2026/11/20/man-charged-after-cutting-churchs-internet-lines-steal-copper-st-louis-police-say/",
         "https://www.firstalert4.com/2026/11/20/person-police-custody-after-smoke-shop-burglarized/",
         "https://www.firstalert4.com/2026/11/20/driving-instructor-says-emotional-control-is-top-lesson-drivers-light-recent-road-rage-incidents/",
         "https://www.firstalert4.com/2026/11/20/man-shot-near-his-4-year-old-grandson-outside-florissant-gas-station-police-say/",
-        "https://www.firstalert4.com/2026/11/19/victim-hit-by-car-killed-during-road-rage-incident-hazelwood-police-say/",
         "https://www.firstalert4.com/2026/11/19/st-louis-bill-would-use-marijuana-tax-money-code-blue-shelter-program/",
         "https://www.firstalert4.com/2026/11/01/triple-shooting-leaves-1-dead-2-injured-north-county/",
         "https://www.firstalert4.com/2026/11/19/troopers-seek-vehicle-believed-have-struck-pedestrian-deadly-wellston-crash/",
@@ -847,10 +864,10 @@
         "https://www.firstalert4.com/2026/11/17/man-sentenced-sending-racist-job-rejection-emails-after-being-fired/",
         "https://www.firstalert4.com/2026/11/17/police-pursuit-ends-crash-closing-lanes-westbound-i-70-st-peters/"
       ],
-      "contentChangedAt": "2026-11-21T12:04:19.970938+00:00",
-      "etag": "W/\"be53-FQeyVEf+kcKfkW8oLrTAKlRmNrA\"",
-      "lastModified": "Sat, 21 Nov 2026 12:04:28 GMT",
-      "latestPublishedAt": "2026-11-21T11:28:57+00:00",
+      "contentChangedAt": "2026-11-22T12:04:38.597198+00:00",
+      "etag": "W/\"c022-UQ4ZYDEtUGzzvbKeF5amHEOrwXs\"",
+      "lastModified": "Sun, 22 Nov 2026 12:04:48 GMT",
+      "latestPublishedAt": "2026-11-22T11:57:38+00:00",
       "oldestPublishedAt": "2026-11-17T14:16:18+00:00",
       "url": "https://www.firstalert4.com/arc/outboundfeeds/rss/category/news/crime/?outputType=xml"
     }

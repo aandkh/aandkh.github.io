@@ -1,5 +1,5 @@
 {
-  "reviewedAt": "2026-11-21T12:15:04.073776+00:00",
+  "reviewedAt": "2026-11-22T12:03:50.608450+00:00",
   "features": [
     {
       "type": "Feature",
@@ -1561,7 +1561,7 @@
       "properties": {
         "id": "incident:city-california-avenue-fatal-shooting-20261121",
         "title": "Fatal shooting · California Avenue",
-        "incidentAt": "2026-11-21T01:30:00-06:00",
+      "incidentAt": "2026-11-21T01:15:00-06:00",
         "incidentDate": "2026-11-21",
         "incidentTimeAccuracy": "approximate",
         "incidentKind": "shooting",
@@ -1574,8 +1574,8 @@
         "source": "First Alert 4 · St. Louis police reporting",
         "sourceUrl": "https://www.firstalert4.com/2026/11/21/woman-dies-overnight-after-south-city-shooting/",
         "url": "https://www.firstalert4.com/2026/11/21/woman-dies-overnight-after-south-city-shooting/",
-        "sourceCheckedAt": "2026-11-21T12:15:04.073776+00:00",
-        "description": "St. Louis police reported that a woman was shot in the 3700 block of California Avenue shortly after 1:30 a.m. on November 21. She was taken to a hospital in critical condition and died. Homicide detectives were investigating when the report was checked.",
+      "sourceCheckedAt": "2026-11-22T12:03:50.608450+00:00",
+      "description": "St. Louis police reported that a woman was shot multiple times in the 3700 block of California Avenue around 1:15 a.m. on November 21. She was taken to a hospital and died. Homicide detectives were investigating when the report was checked.",
         "locationAccuracy": "Approximate reported public block, rounded to about 100 m; not an exact shooting position.",
         "color": "#c52f73",
         "deaths": 1,
@@ -1621,13 +1621,48 @@
         "locationAccuracy": "Approximate named public institution and neighborhood, rounded to about 100 m; not an exact utility-pole or arrest location.",
         "color": "#c52f73"
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.334,
+          38.736
+        ]
+      },
+      "properties": {
+        "id": "incident:county-mshp:260492908",
+        "title": "Fatal single-vehicle crash · I-170",
+        "incidentAt": "2026-11-21T15:50:00-06:00",
+        "incidentDate": "2026-11-21",
+        "incidentTimeAccuracy": "reported local time",
+        "incidentKind": "crash",
+        "incidentTypes": [
+          "crash"
+        ],
+        "jurisdiction": "county",
+        "address": "Southbound Interstate 170 north of Interstate 70, Berkeley, MO",
+        "sourceId": "county-reviewed-news",
+        "source": "Missouri State Highway Patrol · official crash report",
+        "sourceUrl": "https://mshp.dps.mo.gov/HP68/AccidentDetailsAction?ACC_RPT_NUM=260492908",
+        "url": "https://mshp.dps.mo.gov/HP68/AccidentDetailsAction?ACC_RPT_NUM=260492908",
+        "sourceCheckedAt": "2026-11-22T12:03:50.608450+00:00",
+        "reportNumber": "260492908",
+        "reportingAgency": "Missouri State Highway Patrol",
+        "description": "MSHP reported that an SUV traveling southbound on I-170 north of I-70 left the roadway, overturned and struck a rock embankment and a tree at about 3:50 p.m. on November 21. One person was pronounced dead at the scene.",
+        "locationAccuracy": "Official crash-report coordinates rounded to about 100 m.",
+        "color": "#ed5900",
+        "deaths": 1,
+        "severity": "fatal"
+      }
     }
   ],
   "sourceReviews": {
-    "county-reviewed-news": "2026-11-21T12:15:04.073776+00:00",
+    "county-reviewed-news": "2026-11-22T12:03:50.608450+00:00",
     "county-releases": "2026-11-15T19:44:02.622984+00:00",
     "city-releases": "2026-11-15T19:44:02.622984+00:00",
-    "county-chesterfield-bulletins": "2026-11-21T12:15:04.073776+00:00",
-    "city-reviewed-news": "2026-11-21T12:15:04.073776+00:00"
+    "county-chesterfield-bulletins": "2026-11-22T12:03:50.608450+00:00",
+    "city-reviewed-news": "2026-11-22T12:03:50.608450+00:00"
   }
 }
