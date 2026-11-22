@@ -1,0 +1,11 @@
+/* Smooth the assembled radar pane, not each tile: rain stays continuous
+   at tile boundaries, while roads, labels and alerts remain unfiltered. */
+#map .leaflet-weather-overlay-pane {
+  image-rendering: auto;
+  pointer-events: none;
+  filter: blur(clamp(2px, .245vw, 3.6px)) saturate(1.16);
+}
+
+body[data-map-style="dark"] #map .leaflet-weather-overlay-pane {
+  filter: blur(clamp(2px, .245vw, 3.6px)) saturate(1.24) brightness(1.11);
+}
