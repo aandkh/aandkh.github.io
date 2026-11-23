@@ -1,0 +1,26 @@
+/* Decorative descendants must not become a touch target instead of the
+   Leaflet marker or native button that owns activation. */
+#map .traffic-incident-marker.leaflet-interactive,
+#map .layout-badge.leaflet-interactive,
+#map .weather-alert-marker.leaflet-interactive {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+#map .traffic-incident-marker > *,
+#map .traffic-incident-marker > * *,
+#map .layout-badge > *,
+#map .layout-badge > * *,
+#map .weather-alert-marker > *,
+#map .weather-alert-marker > * *,
+.weather-card-grid .weather-reading > *,
+.weather-card-grid .weather-reading > * * {
+  pointer-events: none;
+}
+/* Feedback stays on focus/outline, not transient marker movement or opacity. */
+#map:not(.leaflet-zoom-anim) .traffic-incident-marker,
+#map:not(.leaflet-zoom-anim) .layout-badge,
+#map:not(.leaflet-zoom-anim) .weather-alert-marker,
+.weather-card-grid .weather-reading {
+  animation: none;
+  transition: none;
+}

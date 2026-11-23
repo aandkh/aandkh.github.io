@@ -12,7 +12,7 @@ import {loadRadarMetadata} from './radar-metadata.js?v=20261117-weather-suite';
 import {appendWeatherOutlook} from './weather-outlook.js?v=20261117-weather-suite';
 import {createWeatherExperience,currentWeatherVisible} from './weather-experience.js?v=20261117-construction-layer';
 import {createObservedRadar} from './observed-radar.js?v=20261117-weather-suite';
-import {createWeatherAlerts} from './weather-alerts.js?v=20261117-weather-suite';
+import {createWeatherAlerts} from './weather-alerts.js?v=20261122-stable-taps';
 import {createWarningBanner,alertFeature,appendAlertDetails} from './weather-alert-ui.js?v=20261117-weather-suite';
 import {createTrafficFlowLayer} from './traffic-flow.js?v=20261117-construction-layer';
 import {referenceLayer,referenceLayerFile} from './reference-layers.js?v=20261119-repair';
@@ -51,8 +51,8 @@ import {eventDay,eventOrder,eventTime,eventStamp,groupEventCards} from './event-
 import {venueEvents,mergeVenueEvents} from './concert-calendar.js?v=20261116-full-speed';
 import {createSkyCloudMap} from './sky-cloud-map.js?v=20261119-repair';
 import {COMMUNITY_SOURCES,HIDDEN_LAYERS,CRIME_TYPES,combineCrime,appendAirAdvice,distance,routeMiles,pointInGeometry} from './layer-insights.js?v=20261118-local-air';
-import {createTrafficIncidents} from './traffic-incidents.js?v=20261118-marker-clicks';
-import {loadRoadworks} from './roadworks-source.js?v=20261117-construction-layer';
+import {createTrafficIncidents} from './traffic-incidents.js?v=20261122-stable-taps';
+import {loadRoadworks} from './roadworks-source.js?v=20261122-stable-taps';
 import {attachSuggestions} from './search-suggestions.js?v=20261117-performance';
 import {createSearchClient} from './search-worker-client.js?v=20261117-performance';
 import {loadSearchFeature,safeSearchSourceFile} from './search-catalog.js?v=20261117-performance';
@@ -62,7 +62,7 @@ import {searchLayers} from './explore.js?v=20261116-wildlife-heat';
 import {placeHash,readPlaceHash,placeState,findSharedFeature,encodeViewState,decodeViewState,isViewHash} from './short-links.js?v=20261117-construction-layer';
 import {appendPlaceNavigation} from './place-navigation.js?v=20261115-road-insights';
 import {TODAY_LAYERS,happeningToday} from './today-filter.js?v=20261116-full-speed';
-import {createWeatherReadings} from './weather-readings.js?v=20261118-station-feed';
+import {createWeatherReadings} from './weather-readings.js?v=20261122-stable-taps';
 import {enrichCultureFeature,cultureFeatureDisplayable} from './place-enrichment.js?v=20261115-road-insights';
 import {apiFetch,apiUrl} from './api-client.js?v=20261117-performance';
 import {regionalViewportBounds} from './viewport-bounds.js?v=20261117-construction-layer';
@@ -73,8 +73,8 @@ import {createHoursChecks,placeOpeningState} from './open-now-filter.js?v=202611
 import {createMapKey} from './map-key.js?v=20261115-road-insights';
 import {layerMatchesSearch} from './layer-search.js?v=20261117-explore-layout';
 import {measureUI,startMeasurement} from './ui-performance.js?v=20261115-road-insights';
-import {clusterPlaceFeatures,separateSelectedPlace,aggregateOverviewGroups,layoutOverviewBadges} from './place-clusters.js?v=20261117-weather-suite';
-import {getMapBadgeLayout,badgeRectangle,badgeLeaderSegments} from './map-badge-layout.js?v=20261117-weather-suite';
+import {clusterPlaceFeatures,separateSelectedPlace,aggregateOverviewGroups,layoutOverviewBadges} from './place-clusters.js?v=20261122-stable-taps';
+import {getMapBadgeLayout,badgeRectangle,badgeLeaderSegments,activateMapBadge} from './map-badge-layout.js?v=20261122-stable-taps';
 import {appendSkyDiagram} from './forecast-visuals.js?v=20261116-full-speed';
 import {appendVehicleInspector} from './vehicles.js?v=20261115-road-insights';
 import {symbol} from './symbols.js?v=20261117-explore-layout';
@@ -240,7 +240,7 @@ async function inspectSpot(point){
  closeDetail();setResults(false);setControls(false);const token=spotUI.open(point);
  if(spotMarker)map.removeLayer(spotMarker);spotMarker=L.marker([point.lat,point.lng],{pane:'spot-selection',interactive:false,keyboard:false,icon:L.divIcon({className:'spot-selection-marker',html:'<svg viewBox="0 0 28 36" fill="none" aria-hidden="true"><path d="M6 34V3m0 1c6-4 10 4 16 0v14c-6 4-10-4-16 0" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><circle cx="6" cy="34" r="2" fill="currentColor"/></svg>',iconSize:[28,36],iconAnchor:[6,34]})}).addTo(map);
  try{
-  spotEngineModule??=import('./spot-data.js?v=20261118-air-coverage');const {createSpotInspector}=await spotEngineModule;if(controller.signal.aborted||revision!==spotRevision)return;
+  spotEngineModule??=import('./spot-data.js?v=20261122-stable-taps');const {createSpotInspector}=await spotEngineModule;if(controller.signal.aborted||revision!==spotRevision)return;
   const inspector=createSpotInspector({...point,signal:controller.signal,loadedLayers:data,layerModes,loadAirSources:loadAirMonitors,fetchJson:readSpotSource,fetchLayer:async(id,options={})=>{
    const {mode='',lat=point.lat,lng=point.lng,bbox,signal=controller.signal}=options;const query=new URLSearchParams({bbox:Array.isArray(bbox)?bbox.join(','):bbox||[Math.max(REGION.west,lng-.035),Math.max(REGION.south,lat-.028),Math.min(REGION.east,lng+.035),Math.min(REGION.north,lat+.028)].join(','),mode,lat:String(lat),lng:String(lng)});
    if(id==='air')return loadRegionalAir(mode,{signal});
@@ -308,8 +308,10 @@ function queueLayerUI(id){
  if(layerUIFrame)return;
  layerUIFrame=requestAnimationFrame(()=>{
   layerUIFrame=0;
-  const refreshResults=!currentResultsLayer||pendingLayerUI.has(currentResultsLayer)||(currentResultsLayer==='food'&&['restaurants','bars'].some(key=>pendingLayerUI.has(key)));
-  pendingLayerUI.clear();renderLayers();if(refreshResults)renderResults();
+  badgeLayout.afterInteraction('layer-ui',()=>{
+   const refreshResults=!currentResultsLayer||pendingLayerUI.has(currentResultsLayer)||(currentResultsLayer==='food'&&['restaurants','bars'].some(key=>pendingLayerUI.has(key)));
+   pendingLayerUI.clear();renderLayers();if(refreshResults)renderResults();
+  });
  });
 }
 function openLayer(id){
@@ -500,11 +502,10 @@ function appendClusterEntries(box,features,fallbackId){
  function appendHistory(){more?.remove();const next=historyFeatures.slice(shownHistory,shownHistory+80);shownHistory+=next.length;appendBatch(next);host.dataset.remainingHistory=String(historyFeatures.length-shownHistory);if(shownHistory<historyFeatures.length){more=btn('Show '+Math.min(80,historyFeatures.length-shownHistory)+' more · '+historyFeatures.length+' historical records',()=>{const scroll=box.scrollTop;appendHistory();box.scrollTop=scroll;},'results-more');host.append(more);}pruneClusterEvents(box);}
  appendBatch(ordered);box.append(host);appendHistory();
 }
-let placeRenderFrame=0;
 function renderPlaceMarkers(){badgeLayout.request('traffic');}
 function drawPlaceMarkersNow(){return measureUI('place-marker-render',drawPlaceMarkersContent);}
 function drawPlaceMarkersContent(){
- placeMarkers.clearLayers();const entries=[],bounds=map.getBounds(),size=map.getSize();
+ const entries=[],bounds=map.getBounds(),size=map.getSize();
  const selectedPlace=focus&&!['aircraft','transit'].includes(focus.layer)?focus:null,selectedTransit=focus?.layer==='transit'?focus:null,selectedAircraft=focus?.layer==='aircraft'?focus:null;
  if((selectedPlace||selectedTransit||selectedAircraft)&&selectedMarker&&!map.hasLayer(selectedMarker))selectedMarker.addTo(map);
  for(const id of enabled){if(['traffic','alerts','aircraft','transit'].includes(id)||id==='wildlife'&&wildlifeOptions.mapView!=='reports')continue;const result=data.get(id);if(!result?.features?.length)continue;
@@ -516,9 +517,14 @@ function drawPlaceMarkersContent(){
  const vehicleGroups=(id,selected)=>{const feed=data.get(id)?.features,features=enabled.has(id)&&Array.isArray(feed)?feed.filter(f=>f.geometry?.type==='Point'&&coordinate(f.geometry.coordinates?.[1],f.geometry.coordinates?.[0])):[];return clusterPoints(separateSelectedPlace(features,selected,id).remaining,map.getZoom(),{radius:id==='aircraft'?44:64,maxZoom:id==='aircraft'?18:16}).filter(cluster=>visiblePoint(map.latLngToContainerPoint(cluster.center))).map((cluster,index)=>({key:id+':'+index,provider:id,cluster}));};
  const groups=[...aggregateOverviewGroups([...clusters.map((cluster,index)=>({key:'place:'+index,provider:'place',cluster})),...vehicleGroups('transit',selectedTransit)],map.getZoom(),{width:size.x,height:size.y}),...vehicleGroups('aircraft',selectedAircraft)];
  const obstacles=badgeLayout.obstacles('places'),badges=layoutOverviewBadges(groups.map(group=>{const point=map.latLngToContainerPoint(group.cluster.center);return{...group,anchor:[point.x,point.y]};}),{obstacles,width:size.x,height:size.y}),visible=badges.filter(badge=>badge.clearance),boxes=visible.map(badgeRectangle);badgeLayout.publish('places',boxes);
+ // Identical updates should not remove focused or touched DOM targets. Keep
+ // source features in the key so changed results still reach detail handlers.
+ const signature=JSON.stringify([size,map.getZoom(),map.getCenter?.(),obstacles,visible,visible.map(b=>b.cluster.features.map(f=>markerPaint(f._layer||b.provider,{mixed:b.cluster.layerIds?.length>1})))]);
+ if(drawPlaceMarkersContent.signature===signature)return;
+ drawPlaceMarkersContent.signature=signature;placeMarkers.clearLayers();
  function sizeMarker(marker,badge){
   const old=marker.options.icon.options;marker.options.icon=L.divIcon({...old,className:(old.className||'')+' layout-badge'+(badge.compact?' badge-compact':''),iconSize:[badge.width,badge.height],iconAnchor:[badge.width/2,badge.height/2]});
-  marker.on('add',()=>{const node=marker.getElement();if(!node)return;node.setAttribute('data-badge-displaced',String(badge.displaced));const shape=node.querySelector('.cluster-badge')||node.querySelector('span');if(shape){Object.assign(shape.style,{width:badge.width+'px',minWidth:'0',height:badge.height+'px',padding:badge.compact?'0 3px':'0 5px',boxSizing:'border-box',gap:badge.compact?'2px':'4px'});const icon=shape.querySelector('svg');if(icon){icon.style.width=(badge.compact?13:16)+'px';icon.style.height=(badge.compact?13:16)+'px';}const count=shape.querySelector('b');if(count)count.style.fontSize=(badge.compact?10:12)+'px';}else if(node.classList.contains('aircraft-marker')){const plane=node.querySelector('svg');if(plane){plane.style.width=badge.width+'px';plane.style.height=badge.height+'px';}}});return marker;
+  marker.on('add',()=>{const node=marker.getElement();if(!node)return;node.setAttribute('data-badge-displaced',String(badge.displaced));const shape=node.querySelector('.cluster-badge')||node.querySelector('span');if(shape){Object.assign(shape.style,{width:badge.width+'px',minWidth:'0',height:badge.height+'px',padding:badge.compact?'0 3px':'0 5px',boxSizing:'border-box',gap:badge.compact?'2px':'4px'});const icon=shape.querySelector('svg');if(icon){icon.style.width=(badge.compact?13:16)+'px';icon.style.height=(badge.compact?13:16)+'px';}const count=shape.querySelector('b');if(count)count.style.fontSize=(badge.compact?10:12)+'px';}else if(node.classList.contains('aircraft-marker')){const plane=node.querySelector('svg');if(plane){plane.style.width=badge.width+'px';plane.style.height=badge.height+'px';}}});return activateMapBadge(marker);
  }
  for(const badge of visible){
   const cluster=badge.cluster,center=cluster.center,displayCenter=map.containerPointToLatLng(L.point(...badge.position));

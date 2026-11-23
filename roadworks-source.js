@@ -1,4 +1,4 @@
-import {queryTrafficLayer} from './traffic-incidents.js?v=20261117-construction-layer';
+import {queryTrafficLayer} from './traffic-incidents.js?v=20261122-stable-taps';
 import {trafficGeometry,trafficRoadParts,trafficLocationLabel,trafficFeature} from './traffic-details.js?v=20261117-construction-layer';
 import {localDate} from './date-range.js?v=20261117-weather-suite';
 import {REGION} from './core.js?v=20261117-construction-layer';

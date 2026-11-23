@@ -1,4 +1,4 @@
-import {getMapBadgeLayout} from './map-badge-layout.js?v=20261117-weather-suite';
+import {getMapBadgeLayout} from './map-badge-layout.js?v=20261122-stable-taps';
 
 export const COMPACT_WEATHER_SIZE=Object.freeze({w:72,h:44});
 export function windPresentation(reading){
@@ -99,7 +99,7 @@ export function createWeatherReadings(map,{formatTime,leaflet=globalThis.L,fitOn
  if(host.hidden||!host.getClientRects().length||getComputedStyle(host).visibility==='hidden'){badgeLayout.publish('weather',[]);return;}
  const a=safeArea(),cards=paintedCards,points=shown.map(r=>map.latLngToContainerPoint([r.lat,r.lng])),blocks=badgeLayout.obstacles('weather'),sizes=cards.map(c=>({w:c.offsetWidth||COMPACT_WEATHER_SIZE.w,h:c.offsetHeight||COMPACT_WEATHER_SIZE.h})),positions=solveLayout(points,{...a,obstacles:blocks,sizes,previous:shown.map(r=>lastPositions.get(r.id))},{moving});const layoutKey=JSON.stringify([a.width,a.height,points,positions,blocks]);badgeLayout.publish('weather',positions);if(layoutKey===layoutSignature)return;layoutSignature=layoutKey;svg.replaceChildren();svg.setAttribute('viewBox',`0 0 ${a.width} ${a.height}`);
  for(const [i,r] of shown.entries()){const card=cards[i];if(!card)continue;const point=points[i];card.hidden=false;const {x,y,w,h}=positions[i];lastPositions.set(r.id,positions[i]);
- card.style.left=x+'px';card.style.top=y+'px';
+ card.style.left=x+'px';card.style.top=y+'px';card.style.visibility='';
  const outside=point.x<0||point.y<0||point.x>a.width||point.y>a.height,end={x:Math.max(5,Math.min(a.width-5,point.x)),y:Math.max(5,Math.min(a.height-5,point.y))};
  card.title=(outside?r.label+' station is outside the current view':'Reading at the connected station location')+' · '+card.getAttribute('aria-description');
  for(const [from,to]of weatherLeaderSegments({x:x+w/2,y:y+h/2},end,[...blocks,...positions.filter((_,j)=>j!==i)])){const line=document.createElementNS(svg.namespaceURI,'line');line.setAttribute('x1',from.x);line.setAttribute('y1',from.y);line.setAttribute('x2',to.x);line.setAttribute('y2',to.y);if(outside)line.setAttribute('stroke-dasharray','3 4');svg.append(line);}
@@ -115,15 +115,20 @@ export function createWeatherReadings(map,{formatTime,leaflet=globalThis.L,fitOn
  const resizeObserver=typeof ResizeObserver==='function'?new ResizeObserver(scheduleLayout):null;resizeObserver?.observe(container);resizeObserver?.observe(host);
  map.on('unload',()=>{resizeObserver?.disconnect();unregisterLayout();});
 
- function paint(valid){shown=valid;paintedCards=[];layoutSignature='';host.replaceChildren(svg);for(const r of valid){
- const text=weatherCardText(r,{forecast}),card=document.createElement('button');card.type='button';card.className='weather-reading';if(text.wideWind)card.classList.add('weather-reading-wide-wind');card.setAttribute('aria-label','Forecast for '+r.label);card.setAttribute('aria-description',text.accessible);card.addEventListener('click',()=>onSelect?.(r));card.dataset.station=r.id;if(r.replacementFor)card.dataset.replacementFor=r.replacementFor;
+ const stationCards=new Map();
+ function paint(valid){badgeLayout.afterInteraction('weather-cards',()=>paintCards(valid));}
+ function paintCards(valid){shown=valid;paintedCards=[];layoutSignature='';const retained=new Set();for(const r of valid){
+ const text=weatherCardText(r,{forecast}),stamp=JSON.stringify([text,r.label,r.replacementFor]);retained.add(r.id);let entry=stationCards.get(r.id);
+ if(!entry){const card=document.createElement('button');card.type='button';card.dataset.station=r.id;card.style.visibility='hidden';entry={card,reading:r};stationCards.set(r.id,entry);card.addEventListener('click',()=>onSelect?.(entry.reading));host.append(card);}
+ const {card}=entry;entry.reading=r;paintedCards.push(card);if(entry.stamp===stamp)continue;entry.stamp=stamp;
+ card.className='weather-reading';if(text.wideWind)card.classList.add('weather-reading-wide-wind');card.setAttribute('aria-label','Forecast for '+r.label);card.setAttribute('aria-description',text.accessible);if(r.replacementFor)card.dataset.replacementFor=r.replacementFor;else delete card.dataset.replacementFor;
  const name=document.createElement('span');name.className='weather-reading-place';name.textContent=r.label;
  const temperature=document.createElement('strong');temperature.className='weather-reading-temperature';temperature.textContent=text.temperature;
  const line=document.createElement('span');line.className='weather-reading-wind';
  if(text.rotation!==null){const arrow=document.createElement('i');arrow.className='weather-wind-arrow';arrow.style.transform='rotate('+text.rotation+'deg)';arrow.setAttribute('aria-hidden','true');line.append(arrow);}
  line.append(document.createTextNode(text.windText));line.title=text.windLabel;
- const time=document.createElement('small');time.className='weather-reading-time';time.textContent=text.time;time.title=text.timeTitle;card.append(name,temperature,line,time);host.append(card);paintedCards.push(card);
- }scheduleLayout();}
+ const time=document.createElement('small');time.className='weather-reading-time';time.textContent=text.time;time.title=text.timeTitle;card.replaceChildren(name,temperature,line,time);
+ }for(const [key,{card}]of stationCards)if(!retained.has(key)){card.remove();stationCards.delete(key);lastPositions.delete(key);}scheduleLayout();}
  function render(readings=saved,visible=true,now=Date.now()){saved=Array.isArray(readings)?readings:[];if(forecast)return;const visibilityChanged=host.hidden===visible;host.hidden=!visible;const valid=weatherMarkerReadings(saved,now),next=JSON.stringify(valid);if(next!==signature){signature=next;paint(valid);}else if(visibilityChanged)scheduleLayout();if(overview&&valid.length){fit();overview=false;}}
  return{render,fitOverview,stopOverview,getReadings:()=>saved,forecast(readings){const next=JSON.stringify(readings);const changed=!forecast||next!==forecastSignature;forecast=true;forecastSignature=next;host.hidden=false;if(changed)paint(readings);},endForecast(visible){forecast=false;signature='';render(saved,visible);},hide(){host.hidden=true;badgeLayout.publish('weather',[]);},expire(visible,now=Date.now()){render(saved,visible,now);}};
 }

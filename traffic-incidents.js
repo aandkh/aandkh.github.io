@@ -1,5 +1,5 @@
-import {getMapBadgeLayout,badgeRectangle,badgeLeaderSegments} from './map-badge-layout.js?v=20261117-weather-suite';
-import {layoutOverviewBadges} from './place-clusters.js?v=20261117-weather-suite';
+import {getMapBadgeLayout,badgeRectangle,badgeLeaderSegments,activateMapBadge} from './map-badge-layout.js?v=20261122-stable-taps';
+import {layoutOverviewBadges} from './place-clusters.js?v=20261122-stable-taps';
 import {normalizeModotTraffic,reportedTrafficDelay,trafficGeometry,compareTrafficRoads} from './traffic-details.js?v=20261117-construction-layer';
 import {trafficIncidentIcon,TRAFFIC_INCIDENT_COLORS,cleanTrafficFilter} from './traffic-ui.js?v=20261117-construction-layer';
 // Official MoDOT active traffic impacts. Incident duration is NOT driving delay.
@@ -129,22 +129,43 @@ export function createTrafficFeed({query=queryTrafficLayer,additionalSources=[],
 }
 export function createTrafficIncidents(map,{onSelect=()=>{},onStatus=()=>{},onUpdate=()=>{},getSelected=()=>null,showConstruction=()=>false,showIncidents=()=>true,query=queryTrafficLayer,additionalSources=[],now=Date.now}={}){
  const group=L.layerGroup(),layout=getMapBadgeLayout(map),geometryCache=new Map();let active=false,records=[],timer,lastStatus='',filter='all',visibleCount=0;
+ const anchors=new Map(),badges=new Map();
  for(const[name,z]of[['traffic-incident-anchors',615],['traffic-incident-badges',620]]){if(!map.getPane(name))map.createPane(name);map.getPane(name).style.zIndex=String(z);}
  // SVG hit-tests only painted interactive paths. A Canvas in this pane would
  // cover lower place markers and swallow their clicks across the whole map.
  const anchorRenderer=L.svg({pane:'traffic-incident-anchors'});
- function draw(){group.clearLayers();if(!active){visibleCount=0;layout.publish('traffic',[]);return;}
+ const prune=(cache,keys)=>{for(const [key,entry]of cache)if(!keys.has(key)){group.removeLayer(entry.marker);if(entry.leader)group.removeLayer(entry.leader);cache.delete(key);}};
+ function draw(){if(!active){visibleCount=0;layout.publish('traffic',[]);return;}
   const size=map.getSize(),controls=layout.obstacles('traffic'),current=records.filter(r=>(isTrafficConstruction(r)?showConstruction():showIncidents()&&trafficMatchesFilter(r,filter))&&trafficSelectionId(r)!==getSelected()&&map.getBounds().contains([r.lat,r.lng]));visibleCount=current.length;
   const anchorBoxes=current.map(r=>{const p=map.latLngToContainerPoint([r.lat,r.lng]);return{x:p.x-5,y:p.y-5,w:10,h:10};}),obstacles=[...controls,...anchorBoxes],zoom=map.getZoom(),groups=trafficBadgeGroups(current,p=>map.latLngToContainerPoint(p),{zoom}).map(g=>({...g,priority:trafficBadgePresentation(g.cluster.features,{zoom}).priority,anchor:[g.anchor[0],g.anchor[1]-36]}));
   const placed=layoutOverviewBadges(groups,{width:size.x,height:size.y,obstacles,measure:(g,compact)=>trafficBadgePresentation(g.cluster.features,{zoom,compact})}).filter(b=>b.clearance),boxes=placed.map(badgeRectangle);layout.publish('traffic',[...boxes,...anchorBoxes]);
   // Every dot is a source coordinate. Group labels never replace these dots
   // with an invented center; leaders connect the label to each reported point.
-  for(const r of current){const look=trafficBadgePresentation([r],{zoom}),tooltip=document.createElement('span');tooltip.textContent=look.title;L.circleMarker([r.lat,r.lng],{pane:'traffic-incident-anchors',renderer:anchorRenderer,radius:zoom>=14?5:4,color:look.color,weight:2.5,fillColor:'#fff',fillOpacity:1}).bindTooltip(tooltip).on('click',event=>{if(event.originalEvent)L.DomEvent.stopPropagation(event.originalEvent);onSelect(r);}).addTo(group);}
-  for(const badge of placed){const items=badge.cluster.features,look=trafficBadgePresentation(items,{zoom,compact:badge.compact}),first=items[0],r=items.length===1?first:{...first,members:items,clusterCenter:badge.cluster.center,clusterBounds:badge.cluster.bounds,title:look.primary,label:look.primary,road:look.secondary,delay:null,description:'Choose a report to see its exact location and published details.'};
-   for(const item of items){const anchor=map.latLngToContainerPoint([item.lat,item.lng]);for(const line of badgeLeaderSegments([anchor.x,anchor.y],badge.position,[...controls,...boxes,...anchorBoxes]))L.polyline(line.map(p=>map.containerPointToLatLng(L.point(...p))),{pane:'traffic-incident-anchors',renderer:anchorRenderer,color:look.color,weight:1.6,opacity:.9,interactive:false,className:'traffic-badge-leader'}).addTo(group);}
-   const node=createTrafficBadgeElement(look,{width:badge.width,height:badge.height});
-   const display=map.containerPointToLatLng(L.point(...badge.position));L.marker(display,{pane:'traffic-incident-badges',icon:L.divIcon({className:'traffic-incident-marker',html:node,iconSize:[badge.width,badge.height],iconAnchor:[badge.width/2,badge.height/2]}),title:look.title,alt:look.title,keyboard:true}).on('add',function(){this.getElement()?.setAttribute('aria-label',look.title);}).on('click',()=>onSelect(r)).addTo(group);
+  const anchorKeys=new Set(),badgeKeys=new Set(),radius=zoom>=14?5:4;
+  for(const r of current){const key=trafficSelectionId(r),look=trafficBadgePresentation([r],{zoom});anchorKeys.add(key);let entry=anchors.get(key);
+   if(!entry){const tooltip=document.createElement('span');tooltip.textContent=look.title;
+    const marker=L.circleMarker([r.lat,r.lng],{pane:'traffic-incident-anchors',renderer:anchorRenderer,radius,color:look.color,weight:2.5,fillColor:'#fff',fillOpacity:1,bubblingMouseEvents:false}).bindTooltip(tooltip);
+    entry={marker,record:r,tooltip,radius,color:look.color};anchors.set(key,entry);marker.on('click',()=>onSelect(entry.record)).addTo(group);
+   }else{
+    if(entry.record.lat!==r.lat||entry.record.lng!==r.lng)entry.marker.setLatLng([r.lat,r.lng]);
+    if(entry.radius!==radius){entry.marker.setRadius(radius);entry.radius=radius;}
+    if(entry.color!==look.color){entry.marker.setStyle({color:look.color});entry.color=look.color;}
+    if(entry.tooltip.textContent!==look.title)entry.tooltip.textContent=look.title;entry.record=r;
+   }
   }
+  for(const badge of placed){const items=badge.cluster.features,look=trafficBadgePresentation(items,{zoom,compact:badge.compact}),first=items[0],r=items.length===1?first:{...first,members:items,clusterCenter:badge.cluster.center,clusterBounds:badge.cluster.bounds,title:look.primary,label:look.primary,road:look.secondary,delay:null,description:'Choose a report to see its exact location and published details.'};
+   const key=JSON.stringify(items.map(trafficSelectionId).sort()),visual=JSON.stringify([look,badge.width,badge.height]);badgeKeys.add(key);
+   const icon=()=>L.divIcon({className:'traffic-incident-marker',html:createTrafficBadgeElement(look,{width:badge.width,height:badge.height}),iconSize:[badge.width,badge.height],iconAnchor:[badge.width/2,badge.height/2]});
+   const display=map.containerPointToLatLng(L.point(...badge.position));let entry=badges.get(key);
+   if(!entry){const marker=L.marker(display,{pane:'traffic-incident-badges',icon:icon(),title:look.title,keyboard:true,bubblingMouseEvents:false});entry={marker,record:r,visual};badges.set(key,entry);
+    activateMapBadge(marker).on('add',()=>marker.getElement()?.setAttribute('aria-label',marker.options.title)).on('click',()=>onSelect(entry.record)).addTo(group);
+   }else{entry.record=r;if(!entry.marker.getLatLng().equals(display,0))entry.marker.setLatLng(display);
+    if(entry.visual!==visual){entry.visual=visual;entry.marker.options.title=look.title;entry.marker.setIcon(icon());const node=entry.marker.getElement();if(node){node.title=look.title;node.setAttribute('aria-label',look.title);}}
+   }
+   const lines=items.flatMap(item=>{const anchor=map.latLngToContainerPoint([item.lat,item.lng]);return badgeLeaderSegments([anchor.x,anchor.y],badge.position,[...controls,...boxes,...anchorBoxes]).map(line=>line.map(p=>{const ll=map.containerPointToLatLng(L.point(...p));return[ll.lat,ll.lng];}));}),leaderKey=JSON.stringify([look.color,lines]);
+   if(entry.leaderKey!==leaderKey){entry.leaderKey=leaderKey;if(entry.leader)entry.leader.setLatLngs(lines).setStyle({color:look.color});else if(lines.length)entry.leader=L.polyline(lines,{pane:'traffic-incident-anchors',renderer:anchorRenderer,color:look.color,weight:1.6,opacity:.9,interactive:false,className:'traffic-badge-leader'}).addTo(group);}
+  }
+  prune(anchors,anchorKeys);prune(badges,badgeKeys);
  }
  const unregister=layout.register('traffic',draw),scheduleDraw=()=>layout.request('traffic');
  function getState(){const state=feed.snapshot(),filteredRecords=state.records.filter(r=>trafficMatchesFilter(r,filter));return{...state,filter,filteredRecords,counts:{all:state.records.length,crashes:state.records.filter(r=>trafficMatchesFilter(r,'crashes')).length,closures:state.records.filter(r=>trafficMatchesFilter(r,'closures')).length,other:state.records.filter(r=>trafficMatchesFilter(r,'other')).length},visibleCount,visible:active};}
@@ -154,7 +175,7 @@ export function createTrafficIncidents(map,{onSelect=()=>{},onStatus=()=>{},onUp
  }
  const feed=createTrafficFeed({query,additionalSources,now,onUpdate:update});
  function refresh(options){if(active&&!document.hidden)return feed.refresh(options);return Promise.resolve(getState());}
- function setVisible(value){if(active===!!value){if(value)refresh();return;}active=!!value;if(active){group.addTo(map);refresh();clearInterval(timer);timer=setInterval(refresh,30000);}else{feed.cancel();clearInterval(timer);group.remove();layout.publish('traffic',[]);lastStatus='';onStatus('');onUpdate(getState());}}
+ function setVisible(value){if(active===!!value){if(value)refresh();return;}active=!!value;if(active){group.addTo(map);refresh();clearInterval(timer);timer=setInterval(refresh,30000);}else{feed.cancel();clearInterval(timer);group.clearLayers();anchors.clear();badges.clear();group.remove();visibleCount=0;layout.publish('traffic',[]);lastStatus='';onStatus('');onUpdate(getState());}}
  function setFilter(value){const next=cleanTrafficFilter(value);if(next===filter)return;filter=next;scheduleDraw();onUpdate(getState());}
  function lookup(id){return feed.snapshot().records.find(r=>trafficSelectionId(r)===id)||null;}
  async function loadGeometry(record,{signal}={}){

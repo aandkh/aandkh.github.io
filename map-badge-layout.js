@@ -15,26 +15,52 @@ export function mapControlRectangles(map){
  }return rectangles;
 }
 export function createBadgeReservations({schedule=fn=>requestAnimationFrame(fn),cancel=id=>cancelAnimationFrame(id),controls=()=>[]}={}){
- const providers=new Map(),boxes=new Map();let frame=null,dirty=Infinity,running=false,controlBoxes=[];
+ const providers=new Map(),boxes=new Map(),deferred=new Map();let frame=null,dirty=Infinity,running=false,held=false,controlBoxes=[];
  const priority=id=>PRIORITY[id]??20;
- function request(id='fixed'){dirty=Math.min(dirty,priority(id));if(frame===null&&!running)frame=schedule(flush);}
- function flush(){frame=null;const first=dirty;dirty=Infinity;running=true;controlBoxes=controls().filter(valid);
+ function arm(){if(!held&&frame===null&&!running&&dirty!==Infinity)frame=schedule(flush);}
+ function request(id='fixed'){dirty=Math.min(dirty,priority(id));arm();}
+ function flush(){frame=null;if(held)return;const first=dirty;dirty=Infinity;running=true;controlBoxes=controls().filter(valid);
   try{for(const[id,draw]of [...providers].sort((a,b)=>priority(a[0])-priority(b[0])||a[0].localeCompare(b[0])))if(priority(id)>=first)draw();}
-  finally{running=false;if(dirty!==Infinity&&frame===null)frame=schedule(flush);}
+  finally{running=false;arm();}
  }
- function publish(id,rectangles){const next=rectangles.filter(valid).map(({x,y,w,h})=>({x,y,w,h}));if(JSON.stringify(next)===JSON.stringify(boxes.get(id)||[]))return;boxes.set(id,next);if(!running){dirty=Math.min(dirty,priority(id)+.5);if(frame===null)frame=schedule(flush);}}
- return{request,publish,register(id,draw){providers.set(id,draw);return()=>{providers.delete(id);publish(id,[]);};},obstacles(id){return[...(running?controlBoxes:controls().filter(valid)),...[...boxes].filter(([name])=>priority(name)<priority(id)).flatMap(([,rectangles])=>rectangles)];},rectangles:id=>boxes.get(id)||[],destroy(){if(frame!==null)cancel(frame);providers.clear();boxes.clear();dirty=Infinity;frame=null;},flush};
+ function publish(id,rectangles){const next=rectangles.filter(valid).map(({x,y,w,h})=>({x,y,w,h}));if(JSON.stringify(next)===JSON.stringify(boxes.get(id)||[]))return;boxes.set(id,next);if(!running){dirty=Math.min(dirty,priority(id)+.5);arm();}}
+ function hold(value){held=value;if(held)return;const work=[...deferred.values()];deferred.clear();for(const fn of work)fn();arm();}
+ function afterInteraction(key,fn){if(held)deferred.set(key,fn);else fn();}
+ return{request,publish,hold,afterInteraction,register(id,draw){providers.set(id,draw);return()=>{providers.delete(id);publish(id,[]);};},obstacles(id){return[...(running?controlBoxes:controls().filter(valid)),...[...boxes].filter(([name])=>priority(name)<priority(id)).flatMap(([,rectangles])=>rectangles)];},rectangles:id=>boxes.get(id)||[],destroy(){if(frame!==null)cancel(frame);providers.clear();boxes.clear();deferred.clear();dirty=Infinity;frame=null;},flush};
+}
+const TAP_TARGET='.leaflet-interactive,button,a[href],input,select,textarea,summary,[role="button"],label';
+// These markers are already packed inside the viewport. Leaflet's optional
+// focus pan can move an edge marker between touch-down and activation.
+export function activateMapBadge(marker){
+ marker.options.autoPanOnFocus=false;
+ return marker.on('keydown',event=>{
+  const e=event.originalEvent;
+  if(!e||!['Enter',' '].includes(e.key))return;
+  e.preventDefault();e.stopPropagation();if(!e.repeat)marker.fire('click',{latlng:marker.getLatLng(),originalEvent:e});
+ });
+}
+export function protectMapTaps(root,registry){
+ const win=root.ownerDocument.defaultView,controller=new AbortController(),options={capture:true,passive:true,signal:controller.signal};let pointer=null,timer=null;
+ const release=()=>{clearTimeout(timer);timer=null;pointer=null;registry.hold(false);};
+ root.addEventListener('pointerdown',e=>{if(!e.isPrimary||e.button!==0||!e.target.closest?.(TAP_TARGET))return;clearTimeout(timer);pointer=e.pointerId;registry.hold(true);},options);
+ win.addEventListener('pointerup',e=>{if(e.pointerId===pointer){pointer=null;timer=setTimeout(release,110);}},options);
+ win.addEventListener('pointercancel',e=>{if(e.pointerId===pointer)release();},options);
+ // Wait until the native click has reached its target before applying data
+ // updates. Doesn't capture pointers, prevent default or synthesize clicks.
+ win.addEventListener('click',()=>{if(timer!==null){clearTimeout(timer);timer=setTimeout(release,0);}},options);
+ win.addEventListener('blur',release,options);
+ return()=>{controller.abort();clearTimeout(timer);};
 }
 export function getMapBadgeLayout(map){
  if(registries.has(map))return registries.get(map);
  const registry=createBadgeReservations({controls:()=>mapControlRectangles(map)});registries.set(map,registry);const schedule=()=>registry.request();
  map.on('moveend zoomend resize',schedule);
- const root=map.getContainer().parentElement,observer=typeof MutationObserver==='function'?new MutationObserver(schedule):null,resize=typeof ResizeObserver==='function'?new ResizeObserver(schedule):null;
+ const root=map.getContainer().parentElement,disposeTaps=protectMapTaps(root.closest?.('#workspace')||root,registry),observer=typeof MutationObserver==='function'?new MutationObserver(schedule):null,resize=typeof ResizeObserver==='function'?new ResizeObserver(schedule):null;
  // Observe controls only. Marker/SVG redraws cannot recursively request work.
  const watched=new WeakSet(),attach=()=>{for(const node of map.getContainer().ownerDocument.querySelectorAll(CONTROL_SELECTORS)){if(watched.has(node)||node.matches('.aircraft-marker,.place-selected,.vehicle-selection-ring'))continue;watched.add(node);observer?.observe(node,{attributes:true,attributeFilter:['hidden','class','style','data-expanded','open'],childList:true});resize?.observe(node);}};attach();
  const additions=typeof MutationObserver==='function'?new MutationObserver(()=>{attach();schedule();}):null;additions?.observe(root,{childList:true});additions?.observe(document.body,{childList:true});
  observer?.observe(document.body,{attributes:true,attributeFilter:['class']});
- map.on('unload',()=>{observer?.disconnect();additions?.disconnect();resize?.disconnect();registry.destroy();registries.delete(map);});return registry;
+ map.on('unload',()=>{disposeTaps();observer?.disconnect();additions?.disconnect();resize?.disconnect();registry.destroy();registries.delete(map);});return registry;
 }
 // Greedy placement is bounded by rendered badge count, not source record count.
 // Nearby candidates win; a compact lattice supplies deterministic fallback slots.

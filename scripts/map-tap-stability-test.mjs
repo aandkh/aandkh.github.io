@@ -1,0 +1,25 @@
+import assert from 'node:assert/strict';
+import {createBadgeReservations,protectMapTaps,activateMapBadge} from '../map-badge-layout.js';
+const frames=[],seen=[];
+const win=new EventTarget(),root=new EventTarget();root.ownerDocument={defaultView:win};
+const registry=createBadgeReservations({schedule:fn=>frames.push(fn),cancel(){}});
+registry.register('traffic',()=>seen.push('traffic'));registry.register('places',()=>seen.push('places'));
+const dispose=protectMapTaps(root,registry);
+function fire(target,type,{hit=true,pointerId=4,isPrimary=true,button=0}={}){const event=new Event(type);Object.defineProperties(event,{target:{value:{closest:()=>hit?{}:null}},pointerId:{value:pointerId},isPrimary:{value:isPrimary},button:{value:button}});target.dispatchEvent(event);}
+registry.request('traffic');
+fire(root,'pointerdown');frames.shift()();
+registry.afterInteraction('weather',()=>seen.push('old'));registry.afterInteraction('weather',()=>seen.push('latest'));
+registry.request('places');assert.deepEqual(seen,[]);assert.equal(frames.length,0);
+fire(win,'pointerup');assert.deepEqual(seen,[],'targets survive pointerup until native click');
+fire(win,'click');assert.deepEqual(seen,[],'the click handler runs before deferred work');
+await new Promise(resolve=>setTimeout(resolve,10));
+assert.deepEqual(seen,['latest']);frames.shift()();assert.deepEqual(seen,['latest','traffic','places']);
+fire(root,'pointerdown',{hit:false});registry.request('traffic');frames.shift()();assert.deepEqual(seen.slice(-2),['traffic','places'],'a bare-map pan does not hold work');
+fire(root,'pointerdown');registry.request('traffic');fire(win,'pointercancel');frames.shift()();
+fire(root,'pointerdown');registry.request('traffic');fire(win,'blur');frames.shift()();
+dispose();registry.destroy();
+const keys=[],handlers={},marker={options:{},on:(key,fn)=>(handlers[key]=fn,marker),getLatLng:()=>[38.6,-90.3],fire:(key,event)=>keys.push([key,event.latlng])};
+activateMapBadge(marker);assert.equal(marker.options.autoPanOnFocus,false);
+for(const [key,repeat]of [['Enter',false],[' ',false],['Enter',true],['Escape',false]])handlers.keydown({originalEvent:{key,repeat,preventDefault(){},stopPropagation(){}}});
+assert.deepEqual(keys,[['click',[38.6,-90.3]],['click',[38.6,-90.3]]]);
+console.log('PASS: pointer-to-click stability, pending work coalescing, cancellation, and normal map movement.');
