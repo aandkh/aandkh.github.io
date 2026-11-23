@@ -1,5 +1,5 @@
 {
-  "reviewedAt": "2026-11-22T12:03:50.608450+00:00",
+  "reviewedAt": "2026-11-23T12:13:32.026771+00:00",
   "features": [
     {
       "type": "Feature",
@@ -1656,13 +1656,425 @@
         "deaths": 1,
         "severity": "fatal"
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-90.53, 38.647]
+      },
+      "properties": {
+        "id": "incident:county-chesterfield:26-4968",
+        "title": "Impaired-driving crash report · I-64 at Timberlake Manor",
+        "incidentAt": "2026-11-13T15:50:00-06:00",
+        "incidentDate": "2026-11-13",
+        "incidentTimeAccuracy": "reported local time",
+        "incidentKind": "impaired driving",
+        "incidentTypes": ["impaired driving", "crash"],
+        "jurisdiction": "county",
+        "address": "Westbound I-64 at Timberlake Manor Parkway, Chesterfield, MO",
+        "sourceId": "county-chesterfield-bulletins",
+        "source": "Chesterfield Police Department · daily crime bulletin",
+        "sourceUrl": "https://content.civicplus.com/api/assets/mo-chesterfield/6a58e9f1-659e-4fac-83a1-2db9410e158a?cache=1800",
+        "url": "https://content.civicplus.com/api/assets/mo-chesterfield/6a58e9f1-659e-4fac-83a1-2db9410e158a?cache=1800",
+        "sourceCheckedAt": "2026-11-23T12:13:32.026771+00:00",
+        "reportNumber": "26-4968",
+        "reportingAgency": "Chesterfield Police Department",
+        "description": "Chesterfield police reported that, while investigating a vehicle crash at I-64 and Timberlake Manor Parkway on November 13, officers found one driver to be intoxicated. The bulletin did not report injuries.",
+        "locationAccuracy": "Approximate reported public interchange, rounded to about 100 m; not an exact vehicle position.",
+        "color": "#c52f73"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-90.575, 38.625]
+      },
+      "properties": {
+        "id": "incident:county-chesterfield:26-4981",
+        "title": "Impaired-driving report · Country Ridge and Willow Ridge",
+        "incidentAt": "2026-11-14T12:06:00-06:00",
+        "incidentDate": "2026-11-14",
+        "incidentTimeAccuracy": "reported local time",
+        "incidentKind": "impaired driving",
+        "incidentTypes": ["impaired driving"],
+        "jurisdiction": "county",
+        "address": "Country Ridge Drive at Willow Ridge Lane, Chesterfield, MO",
+        "sourceId": "county-chesterfield-bulletins",
+        "source": "Chesterfield Police Department · daily crime bulletin",
+        "sourceUrl": "https://content.civicplus.com/api/assets/mo-chesterfield/6a58e9f1-659e-4fac-83a1-2db9410e158a?cache=1800",
+        "url": "https://content.civicplus.com/api/assets/mo-chesterfield/6a58e9f1-659e-4fac-83a1-2db9410e158a?cache=1800",
+        "sourceCheckedAt": "2026-11-23T12:13:32.026771+00:00",
+        "reportNumber": "26-4981",
+        "reportingAgency": "Chesterfield Police Department",
+        "description": "Chesterfield police reported that an intoxicated person drove away after an argument near Country Ridge Drive and Willow Ridge Lane on November 14.",
+        "locationAccuracy": "Approximate reported public intersection, rounded to about 100 m.",
+        "color": "#c52f73"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-90.637, 38.647]
+      },
+      "properties": {
+        "id": "incident:county-chesterfield:26-4975",
+        "title": "Identity-fraud report · Greystone Manor",
+        "incidentAt": "2026-10-19",
+        "incidentDate": "2026-10-19",
+        "incidentTimeAccuracy": "date-only",
+        "incidentKind": "fraud",
+        "incidentTypes": ["fraud"],
+        "jurisdiction": "county",
+        "address": "Greystone Manor area, Chesterfield, MO",
+        "sourceId": "county-chesterfield-bulletins",
+        "source": "Chesterfield Police Department · daily crime bulletin",
+        "sourceUrl": "https://content.civicplus.com/api/assets/mo-chesterfield/6a58e9f1-659e-4fac-83a1-2db9410e158a?cache=1800",
+        "url": "https://content.civicplus.com/api/assets/mo-chesterfield/6a58e9f1-659e-4fac-83a1-2db9410e158a?cache=1800",
+        "sourceCheckedAt": "2026-11-23T12:13:32.026771+00:00",
+        "reportNumber": "26-4975",
+        "reportingAgency": "Chesterfield Police Department",
+        "description": "Chesterfield police reported that a resident's identity was connected to a rental vehicle used in a Wisconsin retail theft. The bulletin lists the occurrence window as October 19 through November 13.",
+        "locationAccuracy": "Approximate named subdivision area, rounded to about 100 m; not a private-home position.",
+        "color": "#c52f73"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-90.571, 38.626]
+      },
+      "properties": {
+        "id": "incident:county-chesterfield:26-4996",
+        "title": "Vehicle break-in report · Meadowbrook Farm",
+        "incidentAt": "2026-11-15T02:23:00-06:00",
+        "incidentDate": "2026-11-15",
+        "incidentTimeAccuracy": "reported local time",
+        "incidentKind": "vehicle break-in",
+        "incidentTypes": ["vehicle break-in", "theft"],
+        "jurisdiction": "county",
+        "address": "Meadowbrook Farm area, Chesterfield, MO",
+        "sourceId": "county-chesterfield-bulletins",
+        "source": "Chesterfield Police Department · daily crime bulletin",
+        "sourceUrl": "https://content.civicplus.com/api/assets/mo-chesterfield/6a58e9f1-659e-4fac-83a1-2db9410e158a?cache=1800",
+        "url": "https://content.civicplus.com/api/assets/mo-chesterfield/6a58e9f1-659e-4fac-83a1-2db9410e158a?cache=1800",
+        "sourceCheckedAt": "2026-11-23T12:13:32.026771+00:00",
+        "reportNumber": "26-4996",
+        "reportingAgency": "Chesterfield Police Department",
+        "description": "Chesterfield police reported that a notebook was stolen from a vehicle in the Meadowbrook Farm area during the morning of November 15.",
+        "locationAccuracy": "Approximate named subdivision area, rounded to about 100 m; not a private-home position.",
+        "color": "#c52f73"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-90.588, 38.666]
+      },
+      "properties": {
+        "id": "incident:county-chesterfield:26-4997",
+        "title": "Shoplifting report · THF Boulevard",
+        "incidentAt": "2026-11-14T18:35:00-06:00",
+        "incidentDate": "2026-11-14",
+        "incidentTimeAccuracy": "reported local time",
+        "incidentKind": "theft",
+        "incidentTypes": ["theft"],
+        "jurisdiction": "county",
+        "address": "Dick's Sporting Goods, THF Boulevard, Chesterfield, MO",
+        "sourceId": "county-chesterfield-bulletins",
+        "source": "Chesterfield Police Department · daily crime bulletin",
+        "sourceUrl": "https://content.civicplus.com/api/assets/mo-chesterfield/6a58e9f1-659e-4fac-83a1-2db9410e158a?cache=1800",
+        "url": "https://content.civicplus.com/api/assets/mo-chesterfield/6a58e9f1-659e-4fac-83a1-2db9410e158a?cache=1800",
+        "sourceCheckedAt": "2026-11-23T12:13:32.026771+00:00",
+        "reportNumber": "26-4997",
+        "reportingAgency": "Chesterfield Police Department",
+        "description": "Chesterfield police reported that two people stole about $1,200 in merchandise from a sporting-goods store on THF Boulevard on November 14.",
+        "locationAccuracy": "Approximate named public business, rounded to about 100 m.",
+        "color": "#c52f73"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-90.509, 38.661]
+      },
+      "properties": {
+        "id": "incident:county-chesterfield:26-4985",
+        "title": "Wire-fraud report · Ladue Trails",
+        "incidentAt": "2026-09-01",
+        "incidentDate": "2026-09-01",
+        "incidentTimeAccuracy": "date-only",
+        "incidentKind": "fraud",
+        "incidentTypes": ["fraud"],
+        "jurisdiction": "county",
+        "address": "Ladue Trails area, Chesterfield, MO",
+        "sourceId": "county-chesterfield-bulletins",
+        "source": "Chesterfield Police Department · daily crime bulletin",
+        "sourceUrl": "https://content.civicplus.com/api/assets/mo-chesterfield/6a58e9f1-659e-4fac-83a1-2db9410e158a?cache=1800",
+        "url": "https://content.civicplus.com/api/assets/mo-chesterfield/6a58e9f1-659e-4fac-83a1-2db9410e158a?cache=1800",
+        "sourceCheckedAt": "2026-11-23T12:13:32.026771+00:00",
+        "reportNumber": "26-4985",
+        "reportingAgency": "Chesterfield Police Department",
+        "description": "Chesterfield police reported that a resident's bank-account information was used to pay debts. The bulletin lists the occurrence window as September 1 through November 14.",
+        "locationAccuracy": "Approximate named subdivision area, rounded to about 100 m; not a private-home position.",
+        "color": "#c52f73"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-90.589, 38.668]
+      },
+      "properties": {
+        "id": "incident:county-chesterfield:26-5037",
+        "title": "Felony drug-possession report · Chesterfield Airport Road",
+        "incidentAt": "2026-11-18T10:21:00-06:00",
+        "incidentDate": "2026-11-18",
+        "incidentTimeAccuracy": "reported local time",
+        "incidentKind": "drugs",
+        "incidentTypes": ["drugs"],
+        "jurisdiction": "county",
+        "address": "17000 block of Chesterfield Airport Road, Chesterfield, MO",
+        "sourceId": "county-chesterfield-bulletins",
+        "source": "Chesterfield Police Department · daily crime bulletin",
+        "sourceUrl": "https://content.civicplus.com/api/assets/mo-chesterfield/71addb45-17fd-415f-a52d-46e3e17cdb3a?cache=1800",
+        "url": "https://content.civicplus.com/api/assets/mo-chesterfield/71addb45-17fd-415f-a52d-46e3e17cdb3a?cache=1800",
+        "sourceCheckedAt": "2026-11-23T12:13:32.026771+00:00",
+        "reportNumber": "26-5037",
+        "reportingAgency": "Chesterfield Police Department",
+        "description": "Chesterfield police reported finding suspected amphetamines while checking on a person sleeping in a vehicle on Chesterfield Airport Road on November 18.",
+        "locationAccuracy": "Approximate reported public block, rounded to about 100 m; not an exact vehicle position.",
+        "color": "#c52f73"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-90.563, 38.627]
+      },
+      "properties": {
+        "id": "incident:county-chesterfield:26-5019",
+        "title": "Credit-card fraud report · Meadowbrook Farm",
+        "incidentAt": "2026-09-17",
+        "incidentDate": "2026-09-17",
+        "incidentTimeAccuracy": "date-only",
+        "incidentKind": "fraud",
+        "incidentTypes": ["fraud"],
+        "jurisdiction": "county",
+        "address": "Meadowbrook Farm area, Chesterfield, MO",
+        "sourceId": "county-chesterfield-bulletins",
+        "source": "Chesterfield Police Department · daily crime bulletin",
+        "sourceUrl": "https://content.civicplus.com/api/assets/mo-chesterfield/71addb45-17fd-415f-a52d-46e3e17cdb3a?cache=1800",
+        "url": "https://content.civicplus.com/api/assets/mo-chesterfield/71addb45-17fd-415f-a52d-46e3e17cdb3a?cache=1800",
+        "sourceCheckedAt": "2026-11-23T12:13:32.026771+00:00",
+        "reportNumber": "26-5019",
+        "reportingAgency": "Chesterfield Police Department",
+        "description": "Chesterfield police reported about $1,800 in unauthorized charges to a resident's online-retail account. The bulletin lists the occurrence window as September 17 through November 17.",
+        "locationAccuracy": "Approximate named subdivision area, rounded to about 100 m; not a private-home position.",
+        "color": "#c52f73"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-90.601, 38.654]
+      },
+      "properties": {
+        "id": "incident:county-chesterfield:26-5026",
+        "title": "Identity-fraud report · Wild Horse Bluffs",
+        "incidentAt": "2026-08-31",
+        "incidentDate": "2026-08-31",
+        "incidentTimeAccuracy": "date-only",
+        "incidentKind": "fraud",
+        "incidentTypes": ["fraud"],
+        "jurisdiction": "county",
+        "address": "Wild Horse Bluffs area, Chesterfield, MO",
+        "sourceId": "county-chesterfield-bulletins",
+        "source": "Chesterfield Police Department · daily crime bulletin",
+        "sourceUrl": "https://content.civicplus.com/api/assets/mo-chesterfield/71addb45-17fd-415f-a52d-46e3e17cdb3a?cache=1800",
+        "url": "https://content.civicplus.com/api/assets/mo-chesterfield/71addb45-17fd-415f-a52d-46e3e17cdb3a?cache=1800",
+        "sourceCheckedAt": "2026-11-23T12:13:32.026771+00:00",
+        "reportNumber": "26-5026",
+        "reportingAgency": "Chesterfield Police Department",
+        "description": "Chesterfield police reported that a resident's identity information was used to open a mobile-phone account. The bulletin lists the occurrence window as August 31 through November 17.",
+        "locationAccuracy": "Approximate named subdivision area, rounded to about 100 m; not a private-home position.",
+        "color": "#c52f73"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-90.573, 38.664]
+      },
+      "properties": {
+        "id": "incident:county-chesterfield:26-5036",
+        "title": "License-plate theft report · Chesterfield Mobile Home Park",
+        "incidentAt": "2026-11-18T08:24:00-06:00",
+        "incidentDate": "2026-11-18",
+        "incidentTimeAccuracy": "reported local time",
+        "incidentKind": "theft",
+        "incidentTypes": ["theft"],
+        "jurisdiction": "county",
+        "address": "Chesterfield Mobile Home Park area, Chesterfield, MO",
+        "sourceId": "county-chesterfield-bulletins",
+        "source": "Chesterfield Police Department · daily crime bulletin",
+        "sourceUrl": "https://content.civicplus.com/api/assets/mo-chesterfield/71addb45-17fd-415f-a52d-46e3e17cdb3a?cache=1800",
+        "url": "https://content.civicplus.com/api/assets/mo-chesterfield/71addb45-17fd-415f-a52d-46e3e17cdb3a?cache=1800",
+        "sourceCheckedAt": "2026-11-23T12:13:32.026771+00:00",
+        "reportNumber": "26-5036",
+        "reportingAgency": "Chesterfield Police Department",
+        "description": "Chesterfield police reported that a license plate was removed from a vehicle in the Chesterfield Mobile Home Park area on November 18.",
+        "locationAccuracy": "Approximate named community area, rounded to about 100 m; not a private-home position.",
+        "color": "#c52f73"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-90.499, 38.679]
+      },
+      "properties": {
+        "id": "incident:county-chesterfield:26-5021",
+        "title": "Package-theft report · Forum Apartments",
+        "incidentAt": "2026-11-16T12:29:00-06:00",
+        "incidentDate": "2026-11-16",
+        "incidentTimeAccuracy": "reported local time",
+        "incidentKind": "theft",
+        "incidentTypes": ["theft"],
+        "jurisdiction": "county",
+        "address": "Forum Apartments area, North Woods Mill Road, Chesterfield, MO",
+        "sourceId": "county-chesterfield-bulletins",
+        "source": "Chesterfield Police Department · daily crime bulletin",
+        "sourceUrl": "https://content.civicplus.com/api/assets/mo-chesterfield/71addb45-17fd-415f-a52d-46e3e17cdb3a?cache=1800",
+        "url": "https://content.civicplus.com/api/assets/mo-chesterfield/71addb45-17fd-415f-a52d-46e3e17cdb3a?cache=1800",
+        "sourceCheckedAt": "2026-11-23T12:13:32.026771+00:00",
+        "reportNumber": "26-5021",
+        "reportingAgency": "Chesterfield Police Department",
+        "description": "Chesterfield police reported that a package was stolen from a porch in the Forum Apartments area between November 16 and 17.",
+        "locationAccuracy": "Approximate named apartment-community area, rounded to about 100 m; not a private-home position.",
+        "color": "#c52f73"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-90.552, 38.643]
+      },
+      "properties": {
+        "id": "incident:county-chesterfield:26-5032",
+        "title": "Domestic-assault report · Schoettler Valley Estates",
+        "incidentAt": "2026-11-17T20:20:00-06:00",
+        "incidentDate": "2026-11-17",
+        "incidentTimeAccuracy": "reported local time",
+        "incidentKind": "assault",
+        "incidentTypes": ["assault"],
+        "jurisdiction": "county",
+        "address": "Schoettler Valley Estates area, Chesterfield, MO",
+        "sourceId": "county-chesterfield-bulletins",
+        "source": "Chesterfield Police Department · daily crime bulletin",
+        "sourceUrl": "https://content.civicplus.com/api/assets/mo-chesterfield/71addb45-17fd-415f-a52d-46e3e17cdb3a?cache=1800",
+        "url": "https://content.civicplus.com/api/assets/mo-chesterfield/71addb45-17fd-415f-a52d-46e3e17cdb3a?cache=1800",
+        "sourceCheckedAt": "2026-11-23T12:13:32.026771+00:00",
+        "reportNumber": "26-5032",
+        "reportingAgency": "Chesterfield Police Department",
+        "description": "Chesterfield police reported that people struck each other during an argument in the Schoettler Valley Estates area on November 17. The bulletin did not report injuries.",
+        "locationAccuracy": "Approximate named subdivision area, rounded to about 100 m; not a private-home position.",
+        "color": "#c52f73"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.221,
+          38.659
+        ]
+      },
+      "properties": {
+        "id": "incident:city-jeff-vander-lou-spring-sullivan-shooting-20261122",
+        "title": "Shooting · Spring and Sullivan",
+        "incidentAt": "2026-11-22T21:00:00-06:00",
+        "incidentDate": "2026-11-22",
+        "incidentTimeAccuracy": "approximate",
+        "incidentKind": "shooting",
+        "incidentTypes": [
+          "shooting"
+        ],
+        "jurisdiction": "city",
+        "address": "Spring Avenue at Sullivan Avenue, St. Louis, MO",
+        "sourceId": "city-reviewed-news",
+        "source": "First Alert 4 · St. Louis police reporting",
+        "sourceUrl": "https://www.firstalert4.com/2026/11/23/14-year-old-girl-critically-injured-st-louis-shooting-police-say/",
+        "url": "https://www.firstalert4.com/2026/11/23/14-year-old-girl-critically-injured-st-louis-shooting-police-say/",
+        "sourceCheckedAt": "2026-11-23T12:13:32.026771+00:00",
+        "description": "St. Louis police reported that one person was shot near Spring Avenue and Sullivan Avenue shortly after 9 p.m. on November 22. The person was taken to a hospital in critical and unstable condition.",
+        "locationAccuracy": "Approximate reported public intersection, rounded to about 100 m; not an exact shooting position.",
+        "color": "#c52f73",
+        "injuries": 1,
+        "severity": "critical"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.22,
+          38.635
+        ]
+      },
+      "properties": {
+        "id": "incident:city-midtown-olive-huntley-triple-shooting-20261122",
+        "title": "Fatal shooting · Olive and T.E. Huntley",
+        "incidentAt": "2026-11-22T22:00:00-06:00",
+        "incidentDate": "2026-11-22",
+        "incidentTimeAccuracy": "approximate",
+        "incidentKind": "shooting",
+        "incidentTypes": [
+          "shooting"
+        ],
+        "jurisdiction": "city",
+        "address": "Olive Street near T.E. Huntley Avenue, St. Louis, MO",
+        "sourceId": "city-reviewed-news",
+        "source": "First Alert 4 · St. Louis police reporting",
+        "sourceUrl": "https://www.firstalert4.com/2026/11/23/14-year-old-boy-dead-2-others-critically-injured-midtown-st-louis-shooting/",
+        "url": "https://www.firstalert4.com/2026/11/23/14-year-old-boy-dead-2-others-critically-injured-midtown-st-louis-shooting/",
+        "sourceCheckedAt": "2026-11-23T12:13:32.026771+00:00",
+        "description": "St. Louis police reported that three people were shot on Olive Street near T.E. Huntley Avenue around 10 p.m. on November 22. One person died at the scene and two others were hospitalized in critical condition.",
+        "locationAccuracy": "Approximate reported public intersection, rounded to about 100 m; not an exact shooting position.",
+        "color": "#c52f73",
+        "deaths": 1,
+        "injuries": 2,
+        "severity": "fatal",
+        "fatalityEvidence": [
+          {
+            "category": "other-homicide",
+            "deaths": 1,
+            "sourceUrl": "https://www.firstalert4.com/2026/11/23/14-year-old-boy-dead-2-others-critically-injured-midtown-st-louis-shooting/",
+            "summary": "First Alert 4, citing St. Louis police, reported that one shooting victim died at the scene.",
+            "checkedAt": "2026-11-23T12:13:32.026771+00:00"
+          }
+        ]
+      }
     }
   ],
   "sourceReviews": {
     "county-reviewed-news": "2026-11-22T12:03:50.608450+00:00",
     "county-releases": "2026-11-15T19:44:02.622984+00:00",
     "city-releases": "2026-11-15T19:44:02.622984+00:00",
-    "county-chesterfield-bulletins": "2026-11-22T12:03:50.608450+00:00",
-    "city-reviewed-news": "2026-11-22T12:03:50.608450+00:00"
+    "county-chesterfield-bulletins": "2026-11-23T12:13:32.026771+00:00",
+    "city-reviewed-news": "2026-11-23T12:13:32.026771+00:00"
   }
 }

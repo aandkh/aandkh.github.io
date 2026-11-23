@@ -808,6 +808,40 @@
       ],
       "title": "Person killed in single-car crash on I-170 in North County",
       "url": "https://www.firstalert4.com/2026/11/22/person-killed-single-car-crash-i-170-north-county/"
+    },
+    "https://www.firstalert4.com/2026/11/23/14-year-old-boy-dead-2-others-critically-injured-midtown-st-louis-shooting/": {
+      "changedAt": "2026-11-23T12:01:07.307203+00:00",
+      "discoveredAt": "2026-11-23T12:01:07.307203+00:00",
+      "publishedAt": "2026-11-23T11:24:52+00:00",
+      "review": {
+        "checkedAt": "2026-11-23T12:22:50.628636+00:00",
+        "disposition": "mapped",
+        "note": "Mapped as approximate Olive Street near T.E. Huntley Avenue shooting; one death and two critical injuries reported.",
+        "revision": "1dcf217e067400e673c52ffa19a1fe620eeb2cf34778152063737505d299ca7d"
+      },
+      "revision": "1dcf217e067400e673c52ffa19a1fe620eeb2cf34778152063737505d299ca7d",
+      "sources": [
+        "firstalert-crime"
+      ],
+      "title": "14-year-old boy dead, 2 others critically injured in Midtown St. Louis shooting",
+      "url": "https://www.firstalert4.com/2026/11/23/14-year-old-boy-dead-2-others-critically-injured-midtown-st-louis-shooting/"
+    },
+    "https://www.firstalert4.com/2026/11/23/14-year-old-girl-critically-injured-st-louis-shooting-police-say/": {
+      "changedAt": "2026-11-23T12:01:07.307203+00:00",
+      "discoveredAt": "2026-11-23T12:01:07.307203+00:00",
+      "publishedAt": "2026-11-23T11:43:43+00:00",
+      "review": {
+        "checkedAt": "2026-11-23T12:22:50.547855+00:00",
+        "disposition": "mapped",
+        "note": "Mapped as approximate Spring Avenue at Sullivan Avenue shooting; one critical injury reported.",
+        "revision": "c65d7e9bc42164468ea818624721541bfba1720d50a80d3fb2aef28e115cbc67"
+      },
+      "revision": "c65d7e9bc42164468ea818624721541bfba1720d50a80d3fb2aef28e115cbc67",
+      "sources": [
+        "firstalert-crime"
+      ],
+      "title": "14-year-old girl critically injured in St. Louis shooting, police say",
+      "url": "https://www.firstalert4.com/2026/11/23/14-year-old-girl-critically-injured-st-louis-shooting-police-say/"
     }
   },
   "sources": {
@@ -843,6 +877,8 @@
     },
     "firstalert-crime": {
       "articleUrls": [
+        "https://www.firstalert4.com/2026/11/23/14-year-old-girl-critically-injured-st-louis-shooting-police-say/",
+        "https://www.firstalert4.com/2026/11/23/14-year-old-boy-dead-2-others-critically-injured-midtown-st-louis-shooting/",
         "https://www.firstalert4.com/2026/11/21/woman-dies-overnight-after-south-city-shooting/",
         "https://www.firstalert4.com/2026/11/19/victim-hit-by-car-killed-during-road-rage-incident-hazelwood-police-say/",
         "https://www.firstalert4.com/2026/11/20/man-sentenced-assault-ferguson-officer-during-2024-protest/",
@@ -860,15 +896,13 @@
         "https://www.firstalert4.com/2026/11/17/man-spend-rest-his-life-prison-after-st-louis-jury-finds-him-guilty-sexually-abusing-2-girls/",
         "https://www.firstalert4.com/2026/11/17/police-man-orders-doordash-hospital-shoots-delivery-drivers-after-complaints-with-order/",
         "https://www.firstalert4.com/2026/11/17/florissant-police-investigating-shooting/",
-        "https://www.firstalert4.com/2026/11/17/man-admits-shooting-ballwin-officer/",
-        "https://www.firstalert4.com/2026/11/17/man-sentenced-sending-racist-job-rejection-emails-after-being-fired/",
-        "https://www.firstalert4.com/2026/11/17/police-pursuit-ends-crash-closing-lanes-westbound-i-70-st-peters/"
+        "https://www.firstalert4.com/2026/11/17/man-admits-shooting-ballwin-officer/"
       ],
-      "contentChangedAt": "2026-11-22T12:04:38.597198+00:00",
-      "etag": "W/\"c022-UQ4ZYDEtUGzzvbKeF5amHEOrwXs\"",
-      "lastModified": "Sun, 22 Nov 2026 12:04:48 GMT",
-      "latestPublishedAt": "2026-11-22T11:57:38+00:00",
-      "oldestPublishedAt": "2026-11-17T14:16:18+00:00",
+      "contentChangedAt": "2026-11-23T12:01:07.307203+00:00",
+      "etag": "W/\"c3f7-Ox8il9Y4kf6YVhXTwWNAXD0hdK4\"",
+      "lastModified": "Mon, 23 Nov 2026 12:01:16 GMT",
+      "latestPublishedAt": "2026-11-23T11:43:43+00:00",
+      "oldestPublishedAt": "2026-11-17T18:19:45+00:00",
       "url": "https://www.firstalert4.com/arc/outboundfeeds/rss/category/news/crime/?outputType=xml"
     }
   },
