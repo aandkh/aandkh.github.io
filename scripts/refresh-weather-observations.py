@@ -1,6 +1,8 @@
 """Fetch one bounded, temperature/wind-only snapshot for Andymap."""
 import argparse
-from concurrent.futures import ThreadPoolExecutor
+from queue import Empty, Queue
+from threading import Thread
+from time import monotonic
 from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 from html import unescape
@@ -213,14 +215,45 @@ def collect(source, now):
         return []
 
 
+def collect_available(sources, now, *, reader=collect, seconds=22):
+    # Each provider gets a separate worker. A stalled read cannot discard
+    # healthy providers or keep the process alive after publication.
+    results = Queue()
+    def run(source):
+        try:
+            results.put((source, reader(source, now)))
+        except Exception as error:
+            print(f"{source}: {error}", file=sys.stderr)
+            results.put((source, []))
+    deadline = monotonic() + seconds
+    pending = set(sources)
+    batches = {}
+    for source in pending:
+        Thread(target=run, args=(source,), daemon=True).start()
+    while pending:
+        remaining = deadline - monotonic()
+        if remaining <= 0:
+            break
+        try:
+            source, payload = results.get(timeout=remaining)
+        except Empty:
+            break
+        pending.remove(source)
+        batches[source] = payload
+    if pending:
+        print("Source deadline exceeded: " + ", ".join(sorted(pending)), file=sys.stderr)
+    return batches
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("output", type=Path)
     args = parser.parse_args()
     now = datetime.now(timezone.utc)
-    with ThreadPoolExecutor(max_workers=6) as pool:
-        positions, *batches = pool.map(lambda source: collect(source, now), ["positions", "wxalerts", "findu", "madis", *MU])
-    rows = [r for batch in batches for r in batch]
+    sources = ["positions", "wxalerts", "findu", "madis", *MU]
+    batches = collect_available(sources, now)
+    positions = batches.get("positions") or {}
+    rows = [r for source in sources[1:] for r in batches.get(source, [])]
     for r in rows:
         if r["feed"] in {"findu-cwop","findu-aprs"} and r["id"] in positions:
             r.update(positions[r["id"]])
@@ -236,7 +269,9 @@ def main():
         if key not in latest or stamp >= parse_time(latest[key]["observedAt"]):
             latest[key] = r
     snapshot = dict(schema=1, attribution="WxAlerts (wxalerts.org), CWOP/APRS via findU, NOAA MADIS, NOAA aviation and University of Missouri Mesonet.", readings=[latest[k] for k in sorted(latest)])
-    args.output.write_text(json.dumps(snapshot, separators=(",",":"),allow_nan=False)+"\n")
+    temporary = args.output.with_name(args.output.name + ".tmp")
+    temporary.write_text(json.dumps(snapshot, separators=(",",":"),allow_nan=False)+"\n")
+    temporary.replace(args.output)
     stations = {r["id"] for r in latest.values()}
     print(f"{len(stations)} measured stations. Latest report {max(r['observedAt'] for r in rows)}")
 

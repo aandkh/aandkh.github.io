@@ -2,7 +2,9 @@ import {weatherJson,weatherAbort} from './weather-request.js?v=20261118-station-
 import {STATIONS,FINDU_RELOCATIONS} from './weather-stations.js?v=20261118-live-stations';
 
 export const MINUTE = 60000;
-export const CARD_MAX_AGE = 8 * MINUTE;
+export const CARD_PREFERRED_AGE = 8 * MINUTE;
+// Current cards can use recent measured backups when the high-cadence relay stalls.
+export const CARD_MAX_AGE = 25 * MINUTE;
 export const WIND_MAX_AGE = 45 * MINUTE;
 export const WEATHER_POLL = 30000;
 export const AIR_WIND_POLL = 2 * MINUTE;
@@ -122,7 +124,8 @@ export function snapshotReports(p,{now=Date.now()}={}) {
  });
 }
 // Bounded, independent histories also cover quiet sectors when the regional feed is delayed.
-const firstHistories=['C7014','F6176','G6790','MOA28'];
+// NWS often has a more recent airport report than the IEM bulk endpoint.
+const firstHistories=['C7014','F6176','G6790','MOA28','KSTL','KSUS'];
 const extraHistories=['E1948','G6295','D4248','G1169','D0367','G3356','D6513','F6595','G5557','F0271','E4319','G2231','UP912','UP916','UR616','SCLM7'];
 const botanical={...STATIONS.get('MBGM7'),network:'MO_DCP'};
 export async function loadRegionalWeather({now=Date.now(),signal,fetcher=fetch,responseCache,onBatch,force=false}={}) {

@@ -1,5 +1,5 @@
 import {loadSkyForecast} from './sky-forecast-fallback.js';
-import {WEATHER_POLL,AIR_WIND_POLL,WIND_MAX_AGE,usableAge} from './regional-weather.js?v=20261118-station-delivery';
+import {WEATHER_POLL,AIR_WIND_POLL,WIND_MAX_AGE,usableAge} from './regional-weather.js?v=20261123-observation-recovery';
 import {composeAirDisplay,currentAirGeometry,currentAirOverlay,airFeatureAtPoint} from './air-overlay-integration.js?v=20261118-air-coverage';
 import {loadAirMonitors,appendAirLocationMeasurements,loadWindReadings,weatherWinds,windSignature} from './air-monitors.js?v=20261118-air-coverage';
 import {loadAirSurface,loadRegionalAir} from './air-load.js?v=20261119-repair';
@@ -43,7 +43,7 @@ import {sortRivers,enrichRivers,riverAverages,loadRiverGauges} from './river-ins
 import {appendSkySummary} from './sky-quality.js?v=20261115-road-insights';
 import {gymPlaces,gymGroup,GYM_GROUPS,sortGyms} from './gyms.js?v=20261115-road-insights';
 import {enrichMovies,movieFacts} from './movie-screenings.js?v=20261116-full-speed';
-import {metroWeatherReadings} from './metro-weather.js?v=20261118-station-delivery';
+import {metroWeatherReadings} from './metro-weather.js?v=20261123-observation-recovery';
 import {enrichBirding,appendBirdingEvidence} from './birding-community.js?v=20261116-birding';
 import {TERRAIN_OPTIONS,GEOLOGY_MODES,terrainGeology} from './terrain-geology.js?v=20261117-explore-layout';
 import {recentIncidents,incidentExplorer,incidentFilters,filterIncidents,incidentStamp} from './recent-incidents.js?v=20261116-security';

@@ -1,4 +1,4 @@
-import {CARD_MAX_AGE,loadRegionalWeather,usableAge,normalizeReading} from './regional-weather.js?v=20261118-station-delivery';
+import {CARD_MAX_AGE,CARD_PREFERRED_AGE,loadRegionalWeather,usableAge,normalizeReading} from './regional-weather.js?v=20261123-observation-recovery';
 import {STATIONS} from './weather-stations.js?v=20261118-live-stations';
 
 export const OBSERVATION_MAX_AGE=CARD_MAX_AGE;
@@ -41,7 +41,7 @@ function spaced(chosen,r,i) {
 function score(selection,now) {
  const ages=selection.filter(r=>r.observedAt).map(r=>now-Date.parse(r.observedAt));
  return [4-selection.filter(complete).length,4-selection.filter(r=>Number.isFinite(r.temperatureF)).length,
-  4-ages.length,Math.max(0,...ages),ages.reduce((sum,v)=>sum+v,0),
+  4-ages.length,4-ages.filter(age=>age<CARD_PREFERRED_AGE).length,Math.max(0,...ages),ages.reduce((sum,v)=>sum+v,0),
   selection.reduce((sum,r,i)=>sum+distance(r,METRO_STATIONS[i]),0)];
 }
 function lowerScore(a,b) {

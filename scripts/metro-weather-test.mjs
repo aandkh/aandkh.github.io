@@ -24,10 +24,10 @@ test('quiet northern area can use St. Peters without crowding the western statio
  const quiet=[reading('C7014',2),reading('KSTL',24),reading('E8100',5),reading('D0367',3),reading('MOA28',5)];
  assert.deepEqual(selectMetroReadings(quiet,now).map(r=>r.id),['C7014','E8100','D0367','MOA28']);
  assert.equal(direction(selectMetroReadings([...quiet,reading('F6176',4)],now),'n').id,'F6176');
- assert.equal(direction(selectMetroReadings(quiet,now+6*minute),'n').unavailable,true);
+ assert.equal(direction(selectMetroReadings(quiet,now+25*minute),'n').unavailable,true);
 });
 test('out-of-sector clusters, expired and future updates cannot fill another corner',()=>{
- const old=selectMetroReadings([reading('C7014',8),reading('KSTL',-1),reading('G2231',1),...Array(8).fill(reading('G6295',2))],now);
+ const old=selectMetroReadings([reading('C7014',25),reading('KSTL',-1),reading('G2231',1),...Array(8).fill(reading('G6295',2))],now);
  assert.equal(old.filter(x=>x.observedAt).length,1);assert.equal(old[0].id,'G6295');
  const partial=selectMetroReadings([reading('C7014',2,{windMph:null}),reading('E1948',7),reading('G6295',30)],now)[0];
  assert.equal(partial.id,'E1948');assert.equal(selectMetroReadings([reading('C7014',2,{windMph:null})],now)[0].windMph,null);
@@ -78,7 +78,7 @@ test('a fresh neighbor beats a slower local station; at equal times the nearer o
  const north=direction(selectMetroReadings([...reports,reading('G1169',0)],now),'n');
  assert.equal(north.id,'G1169');assert.equal(north.observedAt,iso(0));
  assert.equal(direction(selectMetroReadings([...reports,reading('G1169',2)],now),'n').id,'KSTL');
- assert.ok(selectMetroReadings(METRO_STATIONS.map(s=>reading(s.id,8)),now).every(r=>r.unavailable));
+ assert.ok(selectMetroReadings(METRO_STATIONS.map(s=>reading(s.id,25)),now).every(r=>r.unavailable));
 });
 test('new measurements reach all four sectors when the raw CDN serves an older successful response',async()=>{
  for(const originAvailable of [true,false]){
@@ -108,4 +108,27 @@ test('findU source-grid distances, fixed amateur transmitters and newly discover
   packet('F1235','findu-cwop',20,'N',{lat:38.73,lng:-90.4255}),packet('W1TEST','findu-aprs',3.7,'N',{lat:38.73,lng:-90.4255})]},{now});
  assert.deepEqual(rows.map(r=>r.id),['G6014','G6295','K0PFX-8','F1234']);
  assert.equal(rows[1].label,'Murphy');assert.equal(rows[1].lat,38.497);assert.equal(rows[2].label,'Bridgeton');
+});
+
+test('relay outage keeps four measured cards visible and switches back to newer station data',async()=>{
+ const airFixtures={KSTL:14,KSUS:16},localFixtures={C7014:20,MOA28:23};
+ const calls=[];
+ const unavailable=url=>/github|jsdelivr/.test(url);
+ const fetcher=async(url)=>{
+  calls.push(url);
+  if(unavailable(url))return Response.json({schema:1,readings:METRO_STATIONS.map(s=>({...reading(s.id,80),feed:'wxalerts-cwop'}))});
+  const id=url.match(/stations\/([^/]+)\/observations/)?.[1],age={...localFixtures,...airFixtures}[id];
+  if(age!==undefined)return Response.json({features:[nws(iso(age),{station:'https://api.weather.gov/stations/'+id})]});
+  return Response.json(url.includes('currents.json')?{data:[]}:url.includes('current.py')?{}:{features:[]});
+ };
+ const opts={now,fetcher,responseCache:new Map(),observationCache:new Map()};
+ const cards=await metroWeatherReadings([],opts);
+ assert.ok(['KSTL','KSUS'].every(id=>calls.some(url=>url.includes('/stations/'+id+'/'))));
+ assert.equal(cards.length,4);
+ assert.deepEqual(cards.map(r=>r.id),['C7014','KSTL','KSUS','MOA28']);
+ assert.ok(cards.every(r=>r.observedAt===iso({...localFixtures,...airFixtures}[r.id])));
+ assert.ok(weatherMarkerReadings(cards,now).every(r=>r.temperatureF!==null));
+ assert.equal(weatherMarkerReadings(cards,now+2*minute).find(r=>r.id==='MOA28').temperatureF,null);
+ const restored=selectMetroReadings([...cards,reading('G6295',1),reading('F6176',1)],now);
+ assert.deepEqual(restored.slice(0,2).map(r=>r.observedAt),[iso(1),iso(1)]);
 });

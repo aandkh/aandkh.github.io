@@ -30,10 +30,20 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          queued=false
+          handoff() {
+            if timeout --kill-after=5s 20s gh workflow run weather-observations.yml --repo "$GITHUB_REPOSITORY" --ref main; then
+              queued=true
+            else
+              echo '::warning::Handoff delayed. Will retry; the independent schedule also remains active.'
+            fi
+          }
+          # Queue before touching collection/publishing network paths.
+          handoff
           ref=refs/heads/weather-observations-live
-          upstream=$(git ls-remote --heads origin "$ref" | cut -f1)
+          upstream=$(timeout 25s git ls-remote --heads origin "$ref" | cut -f1)
           if [[ -n "$upstream" ]]; then
-            git fetch --depth=1 origin "$ref"
+            timeout 30s git fetch --depth=1 origin "$ref"
             upstream=$(git rev-parse FETCH_HEAD)
             [[ "$(git ls-tree --name-only "$upstream")" == "observations.json" ]]
             git show "$upstream:observations.json" > observations.json
@@ -41,21 +51,12 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           start=$SECONDS
-          queued=false
           published=false
           for sample in 0 1 2 3; do
             delay=$((start + 120 * sample - SECONDS))
             if (( delay > 0 )); then sleep "$delay"; fi
-            # Queue one successor while this run still covers the interval. Native
-            # timers can be delayed for hours. The concurrency group admits one writer.
-            if (( sample >= 1 )) && [[ "$queued" == false ]]; then
-              if gh workflow run weather-observations.yml --repo "$GITHUB_REPOSITORY" --ref main; then
-                queued=true
-              else
-                echo '::warning::Handoff delayed. Will retry; the independent schedule also remains active.'
-              fi
-            fi
-            if ! python3 scripts/refresh-weather-observations.py observations.json; then
+            if [[ "$queued" == false ]]; then handoff; fi
+            if ! timeout --kill-after=5s 45s python3 scripts/refresh-weather-observations.py observations.json; then
               echo '::warning::Upstream observations unavailable in this sample.'
               continue
             fi
@@ -63,7 +64,7 @@ jobs:
             tree=$(printf '100644 blob %s\tobservations.json\n' "$blob" | git mktree)
             if [[ -z "$upstream" || "$(git rev-parse "$upstream^{tree}")" != "$tree" ]]; then
               commit=$(git commit-tree "$tree" -m 'Latest regional temperature and wind observations')
-              git push --force-with-lease="$ref:$upstream" origin "$commit:$ref"
+              timeout --kill-after=5s 30s git push --force-with-lease="$ref:$upstream" origin "$commit:$ref"
               upstream=$commit
             fi
             published=true

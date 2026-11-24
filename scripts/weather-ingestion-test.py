@@ -1,6 +1,7 @@
 import importlib.util
 from datetime import datetime, timezone
 from pathlib import Path
+from threading import Event
 import unittest
 
 spec = importlib.util.spec_from_file_location("refresh",Path(__file__).with_name("refresh-weather-observations.py"))
@@ -62,5 +63,18 @@ class ObservationTests(unittest.TestCase):
         self.assertEqual(len(rows),2)
         self.assertEqual((rows[0]['temperatureF'],rows[0]['windMph'],rows[0]['windFromDeg']),(32,0,None))
         self.assertIsNone(rows[1]['temperatureF']); self.assertAlmostEqual(rows[1]['windMph'],4.47)
+
+    def test_hung_source_cannot_hold_back_available_batches(self):
+        parked = Event()
+        def reader(source, now):
+            if source == "hung":
+                parked.wait(3)
+                return [{"id": "late"}]
+            return [{"id": "good"}]
+        try:
+            self.assertEqual(refresh.collect_available(["healthy", "hung"], self.now, reader=reader, seconds=.15),
+                             {"healthy": [{"id": "good"}]})
+        finally:
+            parked.set()
 
 if __name__=="__main__":unittest.main()
