@@ -809,6 +809,23 @@
       "title": "Person killed in single-car crash on I-170 in North County",
       "url": "https://www.firstalert4.com/2026/11/22/person-killed-single-car-crash-i-170-north-county/"
     },
+    "https://www.firstalert4.com/2026/11/23/14-year-old-boy-27-year-old-woman-dead-15-year-old-critically-injured-midtown-st-louis-shooting/": {
+      "changedAt": "2026-11-24T12:04:02.536116+00:00",
+      "discoveredAt": "2026-11-24T12:04:02.536116+00:00",
+      "publishedAt": "2026-11-23T11:24:52+00:00",
+      "review": {
+        "checkedAt": "2026-11-24T12:10:49.559180+00:00",
+        "disposition": "already-mapped",
+        "note": "Verified as the same November 22 Midtown shooting; the stable incident was corrected from the later police update.",
+        "revision": "ffc548c1909bff20b259279b81d053b09f647d1234cc2a8ed3da82d7494cff0a"
+      },
+      "revision": "ffc548c1909bff20b259279b81d053b09f647d1234cc2a8ed3da82d7494cff0a",
+      "sources": [
+        "firstalert-crime"
+      ],
+      "title": "14-year-old boy and 27-year-old woman dead, 15-year-old critically injured in Midtown St. Louis shooting",
+      "url": "https://www.firstalert4.com/2026/11/23/14-year-old-boy-27-year-old-woman-dead-15-year-old-critically-injured-midtown-st-louis-shooting/"
+    },
     "https://www.firstalert4.com/2026/11/23/14-year-old-boy-dead-2-others-critically-injured-midtown-st-louis-shooting/": {
       "changedAt": "2026-11-23T12:01:07.307203+00:00",
       "discoveredAt": "2026-11-23T12:01:07.307203+00:00",
@@ -842,11 +859,83 @@
       ],
       "title": "14-year-old girl critically injured in St. Louis shooting, police say",
       "url": "https://www.firstalert4.com/2026/11/23/14-year-old-girl-critically-injured-st-louis-shooting-police-say/"
+    },
+    "https://www.firstalert4.com/2026/11/23/documents-man-accused-messaging-an-underage-girl-caught-undercover-operation/": {
+      "changedAt": "2026-11-24T12:04:02.536116+00:00",
+      "discoveredAt": "2026-11-24T12:04:02.536116+00:00",
+      "publishedAt": "2026-11-23T19:54:02+00:00",
+      "review": {
+        "checkedAt": "2026-11-24T12:10:49.633513+00:00",
+        "disposition": "excluded-sensitive",
+        "note": "Reviewed; County sexual-offense and minor-related records are excluded under the incident privacy rules.",
+        "revision": "b96d1d20ba6d9b929c113782b2f7ad1dfbc1a56d466500ec3b5b2cb82df7c8c0"
+      },
+      "revision": "b96d1d20ba6d9b929c113782b2f7ad1dfbc1a56d466500ec3b5b2cb82df7c8c0",
+      "sources": [
+        "firstalert-county"
+      ],
+      "title": "DOCUMENTS: Man accused of messaging an underage girl, caught in undercover operation",
+      "url": "https://www.firstalert4.com/2026/11/23/documents-man-accused-messaging-an-underage-girl-caught-undercover-operation/"
+    },
+    "https://www.firstalert4.com/2026/11/23/former-st-francois-county-deputy-charged-with-sex-crimes-against-minor/": {
+      "changedAt": "2026-11-24T12:04:02.536116+00:00",
+      "discoveredAt": "2026-11-24T12:04:02.536116+00:00",
+      "publishedAt": "2026-11-23T17:04:16+00:00",
+      "review": {
+        "checkedAt": "2026-11-24T12:10:49.779646+00:00",
+        "disposition": "outside-region",
+        "note": "Reviewed; reported conduct was in St. Francois County, outside the St. Louis City and County incident region.",
+        "revision": "102f878345d8172e02ad3f866c2871e2e4959fad319a1cddfaf6e8dcccc63355"
+      },
+      "revision": "102f878345d8172e02ad3f866c2871e2e4959fad319a1cddfaf6e8dcccc63355",
+      "sources": [
+        "firstalert-crime"
+      ],
+      "title": "Former St. Francois County deputy charged with sex crimes against a minor",
+      "url": "https://www.firstalert4.com/2026/11/23/former-st-francois-county-deputy-charged-with-sex-crimes-against-minor/"
+    },
+    "https://www.firstalert4.com/2026/11/23/lindenwood-cheerleader-pleads-not-guilty-sexual-assault-charges-involving-student/": {
+      "changedAt": "2026-11-24T12:04:02.536116+00:00",
+      "discoveredAt": "2026-11-24T12:04:02.536116+00:00",
+      "publishedAt": "2026-11-23T18:16:55+00:00",
+      "review": {
+        "checkedAt": "2026-11-24T12:10:49.702984+00:00",
+        "disposition": "outside-region",
+        "note": "Reviewed; reported incident was in St. Charles City, outside the St. Louis City and County incident region.",
+        "revision": "f43cb9b577a529b5b126b81ba7541a49e6a771436d364595957f71d0d9bffa91"
+      },
+      "revision": "f43cb9b577a529b5b126b81ba7541a49e6a771436d364595957f71d0d9bffa91",
+      "sources": [
+        "firstalert-crime"
+      ],
+      "title": "Lindenwood cheerleader pleads not guilty to sexual assault charges involving teammate",
+      "url": "https://www.firstalert4.com/2026/11/23/lindenwood-cheerleader-pleads-not-guilty-sexual-assault-charges-involving-student/"
+    },
+    "https://www.firstalert4.com/2026/11/23/police-ask-public-help-after-siblings-killed-teen-critically-injured-outside-concert-venue/": {
+      "changedAt": "2026-11-24T12:04:02.536116+00:00",
+      "discoveredAt": "2026-11-24T12:04:02.536116+00:00",
+      "publishedAt": "2026-11-23T21:56:10+00:00",
+      "review": {
+        "checkedAt": "2026-11-24T12:10:49.502367+00:00",
+        "disposition": "mapped",
+        "note": "Verified updated police account; corrected the existing Midtown incident to two reported deaths and one critical injury.",
+        "revision": "b7f7a0d8c302ea437e79d87dfa9e9c34c2236cec0309c4d0bd9e884025f5a2b4"
+      },
+      "revision": "b7f7a0d8c302ea437e79d87dfa9e9c34c2236cec0309c4d0bd9e884025f5a2b4",
+      "sources": [
+        "firstalert-county",
+        "firstalert-crime"
+      ],
+      "title": "Police ask public for help after siblings killed, teen critically injured outside concert venue",
+      "url": "https://www.firstalert4.com/2026/11/23/police-ask-public-help-after-siblings-killed-teen-critically-injured-outside-concert-venue/"
     }
   },
   "sources": {
     "firstalert-county": {
       "articleUrls": [
+        "https://www.firstalert4.com/2026/11/23/police-ask-public-help-after-siblings-killed-teen-critically-injured-outside-concert-venue/",
+        "https://www.firstalert4.com/2026/11/23/documents-man-accused-messaging-an-underage-girl-caught-undercover-operation/",
+        "https://www.firstalert4.com/2026/11/23/children-prepare-hanukkah-brentwood-home-depot-18th-year-row/",
         "https://www.firstalert4.com/2026/11/22/person-killed-single-car-crash-i-170-north-county/",
         "https://www.firstalert4.com/2026/11/22/wreath-every-veteran-nonprofit-campaign-helping-honor-those-jefferson-barracks/",
         "https://www.firstalert4.com/2026/11/19/victim-hit-by-car-killed-during-road-rage-incident-hazelwood-police-say/",
@@ -863,22 +952,22 @@
         "https://www.firstalert4.com/2026/11/18/police-yorkie-seen-being-repeatedly-hit-circulating-video-good-spirits/",
         "https://www.firstalert4.com/2026/11/18/no-charges-be-issued-fatal-berkeley-road-rage-shooting/",
         "https://www.firstalert4.com/2026/11/17/florissant-police-investigating-shooting/",
-        "https://www.firstalert4.com/2026/11/17/man-admits-shooting-ballwin-officer/",
-        "https://www.firstalert4.com/2026/11/17/police-woman-arrested-accused-threatening-school-staff-students/",
-        "https://www.firstalert4.com/2026/11/17/jake-zimmerman-vows-make-st-louis-county-government-boring-again/",
-        "https://www.firstalert4.com/2026/11/16/police-responding-possible-road-rage-shooting-quiktrip/"
+        "https://www.firstalert4.com/2026/11/17/man-admits-shooting-ballwin-officer/"
       ],
-      "contentChangedAt": "2026-11-22T11:58:25.666787+00:00",
-      "etag": "W/\"e062-vwmXBoOZ6SXDVWGUtuSTnmryixQ\"",
-      "lastModified": "Sun, 22 Nov 2026 11:58:30 GMT",
-      "latestPublishedAt": "2026-11-22T11:37:07+00:00",
-      "oldestPublishedAt": "2026-11-16T23:49:49+00:00",
+      "contentChangedAt": "2026-11-24T12:04:02.536116+00:00",
+      "etag": "W/\"ec7c-n5nIXAKtgMVLNLV/zMB0Qil+bGM\"",
+      "lastModified": "Tue, 24 Nov 2026 12:04:06 GMT",
+      "latestPublishedAt": "2026-11-23T21:56:10+00:00",
+      "oldestPublishedAt": "2026-11-17T18:19:45+00:00",
       "url": "https://www.firstalert4.com/arc/outboundfeeds/rss/category/news/st-louis-county/?outputType=xml"
     },
     "firstalert-crime": {
       "articleUrls": [
+        "https://www.firstalert4.com/2026/11/23/police-ask-public-help-after-siblings-killed-teen-critically-injured-outside-concert-venue/",
+        "https://www.firstalert4.com/2026/11/23/lindenwood-cheerleader-pleads-not-guilty-sexual-assault-charges-involving-student/",
+        "https://www.firstalert4.com/2026/11/23/former-st-francois-county-deputy-charged-with-sex-crimes-against-minor/",
         "https://www.firstalert4.com/2026/11/23/14-year-old-girl-critically-injured-st-louis-shooting-police-say/",
-        "https://www.firstalert4.com/2026/11/23/14-year-old-boy-dead-2-others-critically-injured-midtown-st-louis-shooting/",
+        "https://www.firstalert4.com/2026/11/23/14-year-old-boy-27-year-old-woman-dead-15-year-old-critically-injured-midtown-st-louis-shooting/",
         "https://www.firstalert4.com/2026/11/21/woman-dies-overnight-after-south-city-shooting/",
         "https://www.firstalert4.com/2026/11/19/victim-hit-by-car-killed-during-road-rage-incident-hazelwood-police-say/",
         "https://www.firstalert4.com/2026/11/20/man-sentenced-assault-ferguson-officer-during-2024-protest/",
@@ -893,16 +982,13 @@
         "https://www.firstalert4.com/2026/11/18/police-yorkie-seen-being-repeatedly-hit-circulating-video-good-spirits/",
         "https://www.firstalert4.com/2026/11/11/man-critically-injured-south-city-shooting/",
         "https://www.firstalert4.com/2026/11/18/judge-denies-church-shooters-request-supervised-outings-mental-health-facility/",
-        "https://www.firstalert4.com/2026/11/17/man-spend-rest-his-life-prison-after-st-louis-jury-finds-him-guilty-sexually-abusing-2-girls/",
-        "https://www.firstalert4.com/2026/11/17/police-man-orders-doordash-hospital-shoots-delivery-drivers-after-complaints-with-order/",
-        "https://www.firstalert4.com/2026/11/17/florissant-police-investigating-shooting/",
-        "https://www.firstalert4.com/2026/11/17/man-admits-shooting-ballwin-officer/"
+        "https://www.firstalert4.com/2026/11/17/man-spend-rest-his-life-prison-after-st-louis-jury-finds-him-guilty-sexually-abusing-2-girls/"
       ],
-      "contentChangedAt": "2026-11-23T12:01:07.307203+00:00",
-      "etag": "W/\"c3f7-Ox8il9Y4kf6YVhXTwWNAXD0hdK4\"",
-      "lastModified": "Mon, 23 Nov 2026 12:01:16 GMT",
-      "latestPublishedAt": "2026-11-23T11:43:43+00:00",
-      "oldestPublishedAt": "2026-11-17T18:19:45+00:00",
+      "contentChangedAt": "2026-11-24T12:04:02.536116+00:00",
+      "etag": "W/\"d9d6-2/oGD2W6UYIJZR4xN9T5qVRB9b4\"",
+      "lastModified": "Tue, 24 Nov 2026 12:04:09 GMT",
+      "latestPublishedAt": "2026-11-23T21:56:10+00:00",
+      "oldestPublishedAt": "2026-11-17T20:55:09+00:00",
       "url": "https://www.firstalert4.com/arc/outboundfeeds/rss/category/news/crime/?outputType=xml"
     }
   },
