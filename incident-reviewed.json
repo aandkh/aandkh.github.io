@@ -1,5 +1,5 @@
 {
-  "reviewedAt": "2026-11-24T12:08:19.796799+00:00",
+  "reviewedAt": "2026-11-25T12:12:55.272474+00:00",
   "features": [
     {
       "type": "Feature",
@@ -2396,13 +2396,86 @@
           }
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.279,
+          38.757
+        ]
+      },
+      "properties": {
+        "id": "incident:county-yarwood-court-triple-shooting-20261124",
+        "title": "Triple shooting · Yarwood Court",
+        "incidentAt": "2026-11-24T11:00:00-06:00",
+        "incidentDate": "2026-11-24",
+        "incidentTimeAccuracy": "approximate",
+        "incidentKind": "shooting",
+        "incidentTypes": [
+          "shooting"
+        ],
+        "jurisdiction": "county",
+        "address": "10300 block of Yarwood Court, St. Louis County, MO",
+        "sourceId": "county-reviewed-news",
+        "source": "First Alert 4 · North County Police Cooperative reporting",
+        "sourceUrl": "https://www.firstalert4.com/2026/11/24/4-custody-after-triple-shooting-st-louis-county/",
+        "url": "https://www.firstalert4.com/2026/11/24/4-custody-after-triple-shooting-st-louis-county/",
+        "sourceCheckedAt": "2026-11-25T12:07:06.258165+00:00",
+        "description": "The North County Police Cooperative reported that three people were shot in the 10300 block of Yarwood Court around 11 a.m. on November 24. Two injuries were described as non-life-threatening; the third person's condition was not reported. Four people were taken into custody, and police reported recovering guns equipped with machine-gun conversion devices.",
+        "locationAccuracy": "Approximate reported public block, rounded to about 100 m; not an exact shooting position or private-home marker.",
+        "color": "#c52f73",
+        "injuries": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.646,
+          38.674
+        ]
+      },
+      "properties": {
+        "id": "incident:county-chesterfield:26-5116",
+        "title": "Drug-paraphernalia report · I-64 at Spirit of St. Louis Boulevard",
+        "incidentAt": "2026-11-23T12:34:00-06:00",
+        "incidentDate": "2026-11-23",
+        "incidentTimeAccuracy": "reported local time",
+        "incidentKind": "drugs",
+        "incidentTypes": [
+          "drugs"
+        ],
+        "jurisdiction": "county",
+        "address": "Eastbound I-64 at Spirit of St. Louis Boulevard, Chesterfield, MO",
+        "sourceId": "county-chesterfield-bulletins",
+        "source": "Chesterfield Police Department · daily crime bulletin",
+        "sourceUrl": "https://content.civicplus.com/api/assets/mo-chesterfield/b484c3dd-a043-459f-b819-55af6efb072d?cache=1800",
+        "url": "https://content.civicplus.com/api/assets/mo-chesterfield/b484c3dd-a043-459f-b819-55af6efb072d?cache=1800",
+        "sourceCheckedAt": "2026-11-25T12:12:55.272474+00:00",
+        "reportNumber": "26-5116",
+        "reportingAgency": "Chesterfield Police Department",
+        "description": "Chesterfield police reported that drug paraphernalia was discarded from a vehicle during a traffic stop on eastbound I-64 at Spirit of St. Louis Boulevard on November 23. Preliminary police report; not a finding of guilt. Injury and death counts were not supplied.",
+        "locationAccuracy": "Approximate reported public interchange, rounded to about 100 m; not an exact vehicle position.",
+        "locationSourceUrl": "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?SingleLine=I-64+%26+Spirit+of+St.+Louis+Blvd%2C+Chesterfield%2C+Missouri&f=json&outFields=Addr_type%2CMatch_addr%2CLongLabel%2CScore&maxLocations=3",
+        "color": "#c52f73"
+      }
     }
   ],
   "sourceReviews": {
-    "county-reviewed-news": "2026-11-22T12:03:50.608450+00:00",
+    "county-reviewed-news": "2026-11-25T12:07:06.258165+00:00",
     "county-releases": "2026-11-15T19:44:02.622984+00:00",
     "city-releases": "2026-11-15T19:44:02.622984+00:00",
-    "county-chesterfield-bulletins": "2026-11-24T12:08:19.796799+00:00",
+    "county-chesterfield-bulletins": "2026-11-25T12:12:55.272474+00:00",
     "city-reviewed-news": "2026-11-24T12:08:19.796799+00:00"
+  },
+  "sourceReviewDetails": {
+    "county-chesterfield-bulletins": {
+      "latestBulletinPublished": "2026-11-24",
+      "coverage": "Selected official Chesterfield daily bulletins supplement the weekly County feed. Reviewed reports with defensible public-area locations are mapped; private residential positions and juvenile cases are not. This is not complete municipal coverage.",
+      "sourceMethod": "AI review of official linked PDFs; not an unattended PDF feed."
+    }
   }
 }

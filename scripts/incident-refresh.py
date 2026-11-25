@@ -229,7 +229,14 @@ def main():
    new.append(f)
   for source in ['city-releases','city-reviewed-news','county-releases','county-reviewed-news','county-chesterfield-bulletins']:
    items=[f for f in reviewed.get('features',[]) if f['properties'].get('sourceId')==source]
-   if items and source in source_meta:source_meta[source].update({'checkedAt':reviewed.get('sourceReviews',{}).get(source,reviewed.get('reviewedAt')),'latestIncidentDate':max(f['properties']['incidentAt'][:10] for f in items)})
+   if items and source in source_meta:
+    details=reviewed.get('sourceReviewDetails',{}).get(source,{})
+    if not isinstance(details,dict):raise ValueError('Reviewed source details must be an object: '+source)
+    source_meta[source].update(details)
+    source_meta[source].update({'checkedAt':reviewed.get('sourceReviews',{}).get(source,reviewed.get('reviewedAt')),'latestIncidentDate':max(f['properties']['incidentAt'][:10] for f in items)})
+    if source=='county-chesterfield-bulletins':
+     source_meta[source].pop('reviewedBulletinDates',None)
+     source_meta[source]['mappedReviewedReports']=len(items)
  metadata['sources']=list(source_meta.values());metadata['coverageNote']='City and County are always shown together. City and Florissant public maps supplement County and participating municipal feeds, which update weekly. Chesterfield daily bulletins, reviewed municipal investigations and Highway Patrol reporting add newer County cases. Agency exclusions and approval delays remain. These are reported incidents, not a complete regional census or safety ranking. Locations are approximate; unknown outcomes are not zero.'
  features=merge_features(old,new);publish_archive(features,metadata,now)
  print(str(len(features))+' total archived incidents; '+str(len(metadata['features']))+' in fast recent snapshot')

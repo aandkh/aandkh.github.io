@@ -928,11 +928,66 @@
       ],
       "title": "Police ask public for help after siblings killed, teen critically injured outside concert venue",
       "url": "https://www.firstalert4.com/2026/11/23/police-ask-public-help-after-siblings-killed-teen-critically-injured-outside-concert-venue/"
+    },
+    "https://www.firstalert4.com/2026/11/24/4-custody-after-triple-shooting-st-louis-county/": {
+      "changedAt": "2026-11-25T12:02:59.188668+00:00",
+      "discoveredAt": "2026-11-25T12:02:59.188668+00:00",
+      "publishedAt": "2026-11-24T22:36:27+00:00",
+      "review": {
+        "checkedAt": "2026-11-25T12:07:06.258165+00:00",
+        "disposition": "mapped",
+        "note": "Mapped as the November 24 Yarwood Court triple shooting with an approximate public-block marker and three explicitly reported shooting injuries.",
+        "revision": "326277866faa083b695c5b2fec94c9e3b871c52090feb2a925ab4b615d2607ee"
+      },
+      "revision": "326277866faa083b695c5b2fec94c9e3b871c52090feb2a925ab4b615d2607ee",
+      "sources": [
+        "firstalert-county",
+        "firstalert-crime"
+      ],
+      "title": "4 in custody after triple shooting in St. Louis County",
+      "url": "https://www.firstalert4.com/2026/11/24/4-custody-after-triple-shooting-st-louis-county/"
+    },
+    "https://www.firstalert4.com/2026/11/24/man-sentenced-20-years-2020-murder-bicyclist-st-louis/": {
+      "changedAt": "2026-11-25T12:02:59.188668+00:00",
+      "discoveredAt": "2026-11-25T12:02:59.188668+00:00",
+      "publishedAt": "2026-11-24T17:28:09+00:00",
+      "review": {
+        "checkedAt": "2026-11-25T12:07:06.258165+00:00",
+        "disposition": "historical-followup",
+        "note": "Reviewed; this reports a 2026 sentencing for a September 2020 homicide, not a newly occurring incident for the current rolling feed.",
+        "revision": "d2ad0082a44745ff6fb0e9b8a89d509ee17f9067e82c42e9a020bdf9630f3164"
+      },
+      "revision": "d2ad0082a44745ff6fb0e9b8a89d509ee17f9067e82c42e9a020bdf9630f3164",
+      "sources": [
+        "firstalert-crime"
+      ],
+      "title": "Man sentenced to 20 years for 2020 murder of bicyclist in St. Louis",
+      "url": "https://www.firstalert4.com/2026/11/24/man-sentenced-20-years-2020-murder-bicyclist-st-louis/"
+    },
+    "https://www.firstalert4.com/2026/11/24/texas-man-sentenced-15-years-1992-sexual-assault-case-out-st-louis-county/": {
+      "changedAt": "2026-11-25T12:02:59.188668+00:00",
+      "discoveredAt": "2026-11-25T12:02:59.188668+00:00",
+      "publishedAt": "2026-11-24T22:08:23+00:00",
+      "review": {
+        "checkedAt": "2026-11-25T12:07:06.258165+00:00",
+        "disposition": "excluded-sensitive",
+        "note": "Reviewed; this is a historical County sexual-assault case involving a minor and is excluded under the incident privacy rules.",
+        "revision": "8344091a03a549cade8ef03aba91ba29acddca762ebda8f27d18624abbfcfa7f"
+      },
+      "revision": "8344091a03a549cade8ef03aba91ba29acddca762ebda8f27d18624abbfcfa7f",
+      "sources": [
+        "firstalert-county"
+      ],
+      "title": "Texas man sentenced to 15 years for 1992 sexual assault case out of St. Louis County",
+      "url": "https://www.firstalert4.com/2026/11/24/texas-man-sentenced-15-years-1992-sexual-assault-case-out-st-louis-county/"
     }
   },
   "sources": {
     "firstalert-county": {
       "articleUrls": [
+        "https://www.firstalert4.com/2026/11/24/4-custody-after-triple-shooting-st-louis-county/",
+        "https://www.firstalert4.com/2026/11/24/texas-man-sentenced-15-years-1992-sexual-assault-case-out-st-louis-county/",
+        "https://www.firstalert4.com/2026/11/24/adopted-children-thankful-new-forever-families-before-thanksgiving/",
         "https://www.firstalert4.com/2026/11/23/police-ask-public-help-after-siblings-killed-teen-critically-injured-outside-concert-venue/",
         "https://www.firstalert4.com/2026/11/23/documents-man-accused-messaging-an-underage-girl-caught-undercover-operation/",
         "https://www.firstalert4.com/2026/11/23/children-prepare-hanukkah-brentwood-home-depot-18th-year-row/",
@@ -949,20 +1004,19 @@
         "https://www.firstalert4.com/2026/11/19/troopers-seek-vehicle-believed-have-struck-pedestrian-deadly-wellston-crash/",
         "https://www.firstalert4.com/2026/11/19/st-louis-county-welcomes-more-than-20-new-corrections-officers-graduation-ceremony/",
         "https://www.firstalert4.com/2026/11/18/inside-normandy-schools-command-center-monitoring-330-cameras/",
-        "https://www.firstalert4.com/2026/11/18/police-yorkie-seen-being-repeatedly-hit-circulating-video-good-spirits/",
-        "https://www.firstalert4.com/2026/11/18/no-charges-be-issued-fatal-berkeley-road-rage-shooting/",
-        "https://www.firstalert4.com/2026/11/17/florissant-police-investigating-shooting/",
-        "https://www.firstalert4.com/2026/11/17/man-admits-shooting-ballwin-officer/"
+        "https://www.firstalert4.com/2026/11/18/police-yorkie-seen-being-repeatedly-hit-circulating-video-good-spirits/"
       ],
-      "contentChangedAt": "2026-11-24T12:04:02.536116+00:00",
-      "etag": "W/\"ec7c-n5nIXAKtgMVLNLV/zMB0Qil+bGM\"",
-      "lastModified": "Tue, 24 Nov 2026 12:04:06 GMT",
-      "latestPublishedAt": "2026-11-23T21:56:10+00:00",
-      "oldestPublishedAt": "2026-11-17T18:19:45+00:00",
+      "contentChangedAt": "2026-11-25T12:02:59.188668+00:00",
+      "etag": "W/\"12076-gMcA/osQpndoGO787km2kXWZ+bk\"",
+      "lastModified": "Wed, 25 Nov 2026 12:03:02 GMT",
+      "latestPublishedAt": "2026-11-24T22:36:27+00:00",
+      "oldestPublishedAt": "2026-11-18T17:48:55+00:00",
       "url": "https://www.firstalert4.com/arc/outboundfeeds/rss/category/news/st-louis-county/?outputType=xml"
     },
     "firstalert-crime": {
       "articleUrls": [
+        "https://www.firstalert4.com/2026/11/24/4-custody-after-triple-shooting-st-louis-county/",
+        "https://www.firstalert4.com/2026/11/24/man-sentenced-20-years-2020-murder-bicyclist-st-louis/",
         "https://www.firstalert4.com/2026/11/23/police-ask-public-help-after-siblings-killed-teen-critically-injured-outside-concert-venue/",
         "https://www.firstalert4.com/2026/11/23/lindenwood-cheerleader-pleads-not-guilty-sexual-assault-charges-involving-student/",
         "https://www.firstalert4.com/2026/11/23/former-st-francois-county-deputy-charged-with-sex-crimes-against-minor/",
@@ -980,15 +1034,13 @@
         "https://www.firstalert4.com/2026/11/19/troopers-seek-vehicle-believed-have-struck-pedestrian-deadly-wellston-crash/",
         "https://www.firstalert4.com/2026/11/18/federal-grand-jury-indicts-man-deadly-cahokia-heights-fire/",
         "https://www.firstalert4.com/2026/11/18/police-yorkie-seen-being-repeatedly-hit-circulating-video-good-spirits/",
-        "https://www.firstalert4.com/2026/11/11/man-critically-injured-south-city-shooting/",
-        "https://www.firstalert4.com/2026/11/18/judge-denies-church-shooters-request-supervised-outings-mental-health-facility/",
-        "https://www.firstalert4.com/2026/11/17/man-spend-rest-his-life-prison-after-st-louis-jury-finds-him-guilty-sexually-abusing-2-girls/"
+        "https://www.firstalert4.com/2026/11/11/man-critically-injured-south-city-shooting/"
       ],
-      "contentChangedAt": "2026-11-24T12:04:02.536116+00:00",
-      "etag": "W/\"d9d6-2/oGD2W6UYIJZR4xN9T5qVRB9b4\"",
-      "lastModified": "Tue, 24 Nov 2026 12:04:09 GMT",
-      "latestPublishedAt": "2026-11-23T21:56:10+00:00",
-      "oldestPublishedAt": "2026-11-17T20:55:09+00:00",
+      "contentChangedAt": "2026-11-25T12:02:59.188668+00:00",
+      "etag": "W/\"dd27-Z+MiOTx28QyK6Wc4IQj3GzQxETk\"",
+      "lastModified": "Wed, 25 Nov 2026 12:03:06 GMT",
+      "latestPublishedAt": "2026-11-24T22:36:27+00:00",
+      "oldestPublishedAt": "2026-11-18T16:54:43+00:00",
       "url": "https://www.firstalert4.com/arc/outboundfeeds/rss/category/news/crime/?outputType=xml"
     }
   },

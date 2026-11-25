@@ -41,6 +41,12 @@ def text(value):
 def local_time(value):
     return dt.datetime.strptime(text(value), '%m/%d/%Y %I:%M %p').replace(tzinfo=CENTRAL)
 
+def optional_local_time(value):
+    value = text(value)
+    if value.casefold() == 'none given':
+        return None
+    return local_time(value)
+
 def clock(value):
     return value.astimezone(CENTRAL).strftime('%b %-d, %-I:%M %p %Z') if value else ''
 
@@ -103,10 +109,13 @@ def city_features(raw, now):
         cells = re.findall(r'<td\b[^>]*>(.*?)</td>',row,re.S|re.I)
         if len(cells)!=3:
             continue
-        start,estimate=local_time(cells[0]),local_time(cells[1])
-        address=text(cells[2]); key='stl-water:'+hashlib.sha256((iso(start)+'|'+address).encode()).hexdigest()[:16]
-        description='Listed by St. Louis Water Division as a current service outage. Taken out of service '+clock(start)+'. Estimated restoration '+clock(estimate)+'.'
-        if estimate<now:
+        start,estimate=optional_local_time(cells[0]),optional_local_time(cells[1])
+        address=text(cells[2]); start_key=iso(start) if start else 'unknown'
+        key='stl-water:'+hashlib.sha256((start_key+'|'+address).encode()).hexdigest()[:16]
+        description='Listed by St. Louis Water Division as a current service outage.'
+        description+=(' Taken out of service '+clock(start)+'.' if start else ' Taken-out-of-service time not provided.')
+        description+=(' Estimated restoration '+clock(estimate)+'.' if estimate else ' Estimated restoration not provided.')
+        if estimate and estimate<now:
             description+=' The estimate has passed; the source still lists this outage. Restoration is not confirmed.'
         description+=' Published street location; no affected-property boundary was supplied.'
         results.append({'type':'Feature','id':key,'geometry':None,'properties':{
@@ -114,7 +123,7 @@ def city_features(raw, now):
             'title':'Water service · '+address,'description':description,'address':address+', St. Louis, MO',
             'source':'City of St. Louis Water Division','url':CITY,'sourceUrl':CITY,'observedAt':iso(updated),
             'sourceCheckedAt':iso(now),'expiresAt':iso(updated+dt.timedelta(hours=6)),
-            'estimatedRestoration':iso(estimate),'locationAccuracy':'Street location only; list entry, no guessed map boundary','color':'#1689d8'}})
+            'estimatedRestoration':iso(estimate) if estimate else None,'locationAccuracy':'Street location only; list entry, no guessed map boundary','color':'#1689d8'}})
     return results
 
 def main():
