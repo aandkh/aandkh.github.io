@@ -39,15 +39,30 @@ export function appendSkyExtras(box,sky,{format}){
  if(sky.planets?.length){const d=details('Planets and constellations');d.append(node('p','sky-note','Calculated for '+format(sky.planetsAt)+'. Above the horizon does not guarantee visibility; clouds, brightness and obstructions matter.'));for(const p of sky.planets){const card=node('div','planet-row');card.append(node('strong','',p.name),node('span','',`${number(p.azimuthDeg)}° direction · ${number(p.altitudeDeg,1)}° altitude`),node('small','',`${p.aboveHorizon?'Above':'Below'} horizon${p.constellation?' · '+p.constellation:''}`));d.append(card);}box.append(d);}
  if(sky.nextSolarEclipse){const e=sky.nextSolarEclipse,d=details('Next calculated solar eclipse');d.append(node('p','',String(e.kind||'Solar eclipse')),node('p','small','Peak: '+format(e.peak)),node('p','small',finite(e.obscuration)?number(e.obscuration*100,1)+'% of the Sun covered at peak.':'Coverage fraction unavailable.'),node('p','small',e.peakAboveHorizon?'Sun above the calculated horizon at peak.':'Sun below the calculated horizon at peak; not visible from this location then.'),node('p','sky-note','Calculated circumstances, not a weather or viewing-safety forecast.'));box.append(d);}
 }
+export function groupOpeningNotices(notices){
+ const groups=[];let winter;
+ for(const notice of notices){
+  if(notice.title==='Winter Storm Warning'){
+   if(!winter){winter={title:notice.title,manual:true,records:[]};groups.push(winter);}
+   winter.records.push(notice);
+  }else groups.push({title:notice.title,manual:false,records:[notice]});
+ }
+ return groups;
+}
 export function createOpeningNotices({format,onResult}){
  const trigger=node('button','notices-trigger');trigger.type='button';trigger.hidden=true;document.querySelector('.header-actions').prepend(trigger);
  const dialog=node('dialog','notices-dialog');dialog.setAttribute('aria-labelledby','notice-heading');document.body.append(dialog);
  let response=null,pending=false,lastChecked=0,seen=new Set(),signature='';
  const current=()=>response&&Date.parse(response.validUntil)>Date.now()?activeNotices(response.notices):[];
- function render(){const notices=current(),next=notices.map(n=>n.id+'|'+n.revision).join('\n');trigger.hidden=!notices.length;trigger.textContent=`Active notices · ${notices.length}`;if(!notices.length){if(dialog.open)dialog.close();signature='';return;}if(next===signature)return;signature=next;dialog.replaceChildren();const head=node('div','floating-head'),title=node('h2','','Active notices');title.id='notice-heading';const close=node('button','','×');close.type='button';close.setAttribute('aria-label','Close active notices');close.onclick=()=>dialog.close();head.append(title,close);dialog.append(head,node('p','small','Official notices affecting parts of Greater St. Louis. Check the named area and source time.'));
-  for(const n of notices){const card=node('article','notice-card');card.append(node('h3','',n.title));if(n.area)card.append(node('p','',n.area));if(n.description)card.append(node('p','',n.description));if(n.instruction)card.append(node('p','notice-instruction',n.instruction));card.append(node('p','small',`${format(n.sent||n.sourceUpdatedAt)} · Until ${format(n.expires)}`));if(safeUrl(n.url))card.append(link('Official notice ↗',n.url));dialog.append(card);}
+ function appendNoticeBody(card,n){if(n.area)card.append(node('p','',n.area));if(n.description)card.append(node('p','',n.description));if(n.instruction)card.append(node('p','notice-instruction',n.instruction));card.append(node('p','small',`${format(n.sent||n.sourceUpdatedAt)} · Until ${format(n.expires)}`));if(safeUrl(n.url))card.append(link('Official notice ↗',n.url));}
+ function render(){const notices=current(),groups=groupOpeningNotices(notices),next=notices.map(n=>n.id+'|'+n.revision).join('\n');trigger.hidden=!notices.length;trigger.textContent=`Active notices · ${groups.length}`;if(!groups.length){if(dialog.open)dialog.close();signature='';return;}if(next===signature)return;signature=next;dialog.replaceChildren();const head=node('div','floating-head'),title=node('h2','','Active notices');title.id='notice-heading';const close=node('button','','×');close.type='button';close.setAttribute('aria-label','Close active notices');close.onclick=()=>dialog.close();head.append(title,close);dialog.append(head,node('p','small','Official notices affecting parts of Greater St. Louis. Check the named area and source time.'));
+  for(const group of groups){const card=node('article','notice-card');card.append(node('h3','',group.title));
+   if(group.records.length===1)appendNoticeBody(card,group.records[0]);
+   else for(const record of group.records){const area=details(record.area||'Affected area');appendNoticeBody(area,record);card.append(area);}
+   dialog.append(card);
+  }
  }
- function showPending(force=false){const notices=current();if(document.hidden||!notices.length||dialog.open||document.querySelector('dialog[open]'))return;if(!force&&!notices.some(n=>!seen.has(n.id+'|'+n.revision)))return;dialog.showModal();for(const n of notices)seen.add(n.id+'|'+n.revision);while(seen.size>200)seen.delete(seen.values().next().value);}
+ function showPending(force=false){const notices=current();if(document.hidden||!notices.length||dialog.open||document.querySelector('dialog[open]'))return;if(!force&&!groupOpeningNotices(notices).some(g=>!g.manual&&g.records.some(n=>!seen.has(n.id+'|'+n.revision))))return;dialog.showModal();for(const n of notices)seen.add(n.id+'|'+n.revision);while(seen.size>200)seen.delete(seen.values().next().value);}
  trigger.onclick=()=>{render();showPending(true);};
  async function refresh(){if(pending)return;pending=true;try{const r=await apiFetch('/api/notices',{cache:'no-store',signal:AbortSignal.timeout(30000)});if(!r.ok)throw Error('Notices unavailable');response=await r.json();lastChecked=Date.now();onResult?.(response);render();showPending();}catch{response=null;onResult?.({status:'unavailable',notices:[],note:'Current official notices could not be checked. No all-clear is implied.'});render();}finally{pending=false;}}
  setInterval(()=>{render();showPending();if(!document.hidden&&(!response||Date.now()-lastChecked>=60000||Date.parse(response.validUntil)<=Date.now()+10000))refresh();},15000);

@@ -8,6 +8,7 @@ import {encodeViewState,decodeViewState} from '../short-links.js';
 import {createWeatherAlerts,createWeatherAlertFeed} from '../weather-alerts.js';
 import {createWarningBanner,alertFeature} from '../weather-alert-ui.js';
 import {BY_ID} from '../catalog.js';
+import {groupOpeningNotices} from '../expansion-ui.js';
 
 class Element{
  constructor(tag){this.tagName=tag;this.children=[];this.attributes={};this.textContent='';this.style={};this.hidden=false;const classes=new Set();this.classList={add:(...names)=>names.forEach(n=>classes.add(n)),remove:(...names)=>names.forEach(n=>classes.delete(n)),contains:n=>classes.has(n),toggle:(n,on)=>on?classes.add(n):classes.delete(n)};}
@@ -202,4 +203,12 @@ test('map drawing keeps winter boundaries only when checked and never drops othe
   alerts.setShowAll(true);assert.equal(areas.items.length,1,'the Layers toggle does not override the checkbox');
   alerts.setShowWinter(true);assert.equal(areas.items.length,5);
  }finally{alerts?.destroy();Object.assign(globalThis,old);}
+});
+
+test('winter records in general notices group without auto-opening; other notices retain automatic eligibility',()=>{
+ const winter=[{title:'Winter Storm Warning',id:'a',area:'St. Louis'},{title:'Winter Storm Warning',id:'b',area:'Franklin'}],tornado={title:'Tornado Warning',id:'c'};
+ const [group,other]=groupOpeningNotices([winter[0],tornado,winter[1]]);
+ assert.deepEqual(group,{title:'Winter Storm Warning',manual:true,records:winter});
+ assert.deepEqual(other,{title:'Tornado Warning',manual:false,records:[tornado]});
+ assert.ok(groupOpeningNotices(winter).every(g=>g.manual));
 });
