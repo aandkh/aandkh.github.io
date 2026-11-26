@@ -5,7 +5,7 @@ import vm from 'node:vm';
 import {createWeatherExperience,currentWeatherVisible} from '../weather-experience.js';
 import {cleanState} from '../core.js';
 import {encodeViewState,decodeViewState} from '../short-links.js';
-import {createWeatherAlertFeed} from '../weather-alerts.js';
+import {createWeatherAlerts,createWeatherAlertFeed} from '../weather-alerts.js';
 import {createWarningBanner,alertFeature} from '../weather-alert-ui.js';
 import {BY_ID} from '../catalog.js';
 
@@ -141,4 +141,65 @@ test('real official feed and compact banner retain unexpired warnings through fa
   now=start+3600001;feed.expire();assert.equal(feed.getState().count,0);assert.doesNotMatch(textOf(banner.element),/Tornado Warning/);assert.match(textOf(banner.element),/updates unavailable/,'expired warning is not falsely replaced with an all-clear message');
   fail=false;features=[];await feed.refresh({force:true});assert.equal(banner.element.hidden,true,'successful zero-alert check stays unobtrusive');banner.destroy();
  }finally{feed?.destroy();globalThis.document=oldDocument;}
+});
+
+test('four winter records use one top warning and one independently reversible checkbox',()=>{
+ const saved=globalThis.document;globalThis.document={createElement:tag=>new Element(tag),activeElement:null};
+ try{
+  const picks=[],visibility=[],shell=new Element('div');
+  const banner=createWarningBanner(shell,{onSelect:r=>picks.push(r.id),onWinterVisibility:v=>visibility.push(v)});
+  const expiry=Date.parse('2026-11-26T18:00:00Z');
+  const winters=Array.from({length:4},(_,i)=>({id:'winter'+i,dangerous:true,event:'Winter Storm Warning',expiresAt:expiry+(i>=2?21600000:0)}));
+  const state={status:'ready',alerts:winters};
+  banner.update(state);
+  assert.equal((textOf(banner.element).match(/Winter Storm Warning/g)||[]).length,1);
+  assert.doesNotMatch(textOf(banner.element),/\+3 more/);
+  assert.match(textOf(banner.element),/next expiry 2026-11-26T18:00:00/);
+  const input=()=>banner.element.querySelector('input'),button=()=>banner.element.querySelector('button');
+  assert.equal(input().checked,true);button().onclick();assert.deepEqual(picks,['winter0']);
+  input().checked=false;input().onchange();
+  assert.deepEqual(visibility,[false]);assert.equal(button(),null);assert.equal(input().checked,false);
+  assert.equal(banner.element.classList.contains('weather-warning-muted'),true);
+  assert.match(textOf(banner.element),/Show winter warning/);
+  banner.update({...state,alerts:winters.slice(1)});
+  assert.equal(input().checked,false,'an official feed refresh must not turn it back on');
+  const tornado={id:'tornado',dangerous:true,tornado:true,event:'Tornado Warning',expiresAt:expiry};
+  banner.update({...state,alerts:[tornado,...winters]});
+  assert.match(textOf(banner.element),/Tornado Warning/);assert.doesNotMatch(textOf(banner.element),/\+\d more/);
+  button().onclick();assert.equal(picks.at(-1),'tornado');
+  input().checked=true;input().onchange();
+  assert.deepEqual(visibility,[false,true]);
+  assert.match(textOf(banner.element),/\+1 more/,'other warning stays prominent and the winter groups count once');
+  banner.update({status:'ready',alerts:[]});
+  assert.equal(banner.element.hidden,true,'control disappears after the warnings expire');
+  const restored=createWarningBanner(shell,{showWinter:false});
+  restored.update(state);
+  assert.equal(restored.element.querySelector('input').checked,false);
+  assert.equal(restored.element.querySelector('button'),null);
+ }finally{globalThis.document=saved;}
+});
+
+test('map drawing keeps winter boundaries only when checked and never drops other warnings',async()=>{
+ const old={document:globalThis.document,L:globalThis.L,requestAnimationFrame:globalThis.requestAnimationFrame};
+ const groups=[],panes={},jobs=[];let nextId=0;
+ const noop=()=>{};
+ globalThis.document={hidden:false,createElement:tag=>new Element(tag),addEventListener:noop,removeEventListener:noop,querySelectorAll:()=>[]};
+ globalThis.requestAnimationFrame=fn=>(jobs.push(fn),++nextId);
+ const group=()=>({items:[],addTo(){return this;},remove(){return this;},clearLayers(){this.items=[];}});
+ const item=(kind,options={})=>({kind,options,on(){return this;},addTo(g){g.items.push(this);return this;}});
+ globalThis.L={layerGroup(){const g=group();groups.push(g);return g;},geoJSON:(data,options)=>item('area',{...options,data}),divIcon:x=>x,marker:(_position,options)=>item('marker',options),point:(x,y)=>({x,y}),polyline:()=>item('leader')};
+ const container={parentElement:{ownerDocument:{defaultView:{addEventListener:noop}},addEventListener:noop},ownerDocument:globalThis.document,getBoundingClientRect:()=>({left:0,top:0,right:390,bottom:700})};
+ const map={getPane:n=>panes[n],createPane:n=>panes[n]={style:{}},on:noop,off:noop,getContainer:()=>container,getSize:()=>({x:390,y:700}),getCenter:()=>({lat:38.6,lng:-90.5}),latLngToContainerPoint:()=>({x:195,y:350}),containerPointToLatLng:p=>p,getBounds:()=>({getWest:()=>-91.2,getEast:()=>-89.4,getSouth:()=>38.1,getNorth:()=>39.2})};
+ const now=Date.parse('2026-11-26T14:25:00Z'),geometry={type:'Polygon',coordinates:[[[-90.7,38.4],[-90.2,38.4],[-90.2,38.9],[-90.7,38.9],[-90.7,38.4]]]};
+ const records=['Winter Storm Warning','Winter Storm Warning','Winter Storm Warning','Winter Storm Warning','Tornado Warning'].map((event,i)=>({type:'Feature',id:'alert'+i,geometry,properties:{id:'alert'+i,event,status:'Actual',messageType:'Alert',severity:i===4?'Extreme':'Severe',sent:new Date(now).toISOString(),expires:new Date(now+3600000).toISOString()}}));
+ let alerts;
+ try{
+  alerts=createWeatherAlerts(map,{now:()=>now,fetcher:async()=>({ok:true,headers:{get:()=>null},text:async()=>JSON.stringify({type:'FeatureCollection',features:records})})});alerts.setVisible(true);await alerts.refresh();
+  while(jobs.length)jobs.shift()();
+  const [areas,badges]=groups;assert.equal(areas.items.length,5);assert.equal(badges.items.filter(a=>a.kind==='marker').length,1);
+  assert.equal(badges.items.find(a=>a.kind==='marker').options.title,'Tornado Warning');
+  alerts.setShowWinter(false);assert.equal(areas.items.length,1);assert.equal(alerts.getState().alerts.length,5,'official records remain readable');
+  alerts.setShowAll(true);assert.equal(areas.items.length,1,'the Layers toggle does not override the checkbox');
+  alerts.setShowWinter(true);assert.equal(areas.items.length,5);
+ }finally{alerts?.destroy();Object.assign(globalThis,old);}
 });

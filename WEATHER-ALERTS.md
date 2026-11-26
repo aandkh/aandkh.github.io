@@ -37,7 +37,7 @@ Zone fallback combines the official polygons without changing the raw alert feat
 
 ## Integration contract
 
-`createWeatherAlerts(map,{onStatus,onSelect,showAll,fetcher,now})` returns `setVisible`, `setShowAll`, `refresh`, `getState` and `destroy`. Construction does not fetch; `setVisible(true)` starts checks. The default drawing includes only serious warnings. `onSelect(record)` may open app details; without it, the controller opens an accessible Leaflet popup containing the official text.
+`createWeatherAlerts(map,{onStatus,onSelect,showAll,showWinter,fetcher,now})` returns `setVisible`, `setShowAll`, `setShowWinter`, `refresh`, `getState` and `destroy`. Construction does not fetch; `setVisible(true)` starts checks. The default drawing includes only serious warnings. `onSelect(record)` may open app details; without it, the controller opens an accessible Leaflet popup containing the official text.
 
 State includes `status`, `checkedAt` (receipt time in milliseconds), `alerts`, `features`, `count`, `dangerousCount`, `unmappedCount`, `partialCount`, `resolving`, `note` and `showAll`. `features` are the original current GeoJSON objects for storm-motion parsing, including CAP parameters and unchanged raw descriptions.
 
@@ -46,3 +46,5 @@ Normalized records include `id`, `feature`, `geometry`, `areaWide`, `event`, `he
 ## Validation
 
 Run `node scripts/weather-alerts-test.mjs`. It covers Actual/Update/Cancel relationships, invalid issuance times, expiration and earlier event ending, exact regional intersections and holes, serious-only/tornado presentation, county-query coverage, safe zone URLs, cached fallback boundaries, immediate polygon publication, shared refresh, stale warning retention and autonomous actual expiry, source-property preservation, and aborted late responses. Browser integration additionally checks the compact banner, red/tornado badges, overlap priority, official details, and current-warning labels during dated forecasts.
+
+Repeated Winter Storm Warnings are represented once in the top regional alert rather than as separate map badges. Their official boundaries and individually selectable records are retained. The checkbox hides those boundaries and collapses the warning to a restore control for this browser; it does not disable the feed, hide other warnings, or remove official details from Layers.

@@ -12,8 +12,8 @@ import {loadRadarMetadata} from './radar-metadata.js?v=20261117-weather-suite';
 import {appendWeatherOutlook} from './weather-outlook.js?v=20261117-weather-suite';
 import {createWeatherExperience,currentWeatherVisible} from './weather-experience.js?v=20261117-construction-layer';
 import {createObservedRadar} from './observed-radar.js?v=20261117-weather-suite';
-import {createWeatherAlerts} from './weather-alerts.js?v=20261122-stable-taps';
-import {createWarningBanner,alertFeature,appendAlertDetails} from './weather-alert-ui.js?v=20261117-weather-suite';
+import {createWeatherAlerts} from './weather-alerts.js?v=20261126-winter-warning';
+import {createWarningBanner,alertFeature,appendAlertDetails} from './weather-alert-ui.js?v=20261126-winter-warning';
 import {createTrafficFlowLayer} from './traffic-flow.js?v=20261117-construction-layer';
 import {referenceLayer,referenceLayerFile} from './reference-layers.js?v=20261119-repair';
 import {selectionAnchor,selectionFeatureId} from './selection-focus.js?v=20261117-close-selection';
@@ -164,8 +164,10 @@ const futureRadar=createFutureRadar(map,{weatherReadings,onPast:()=>{futureRadar
 observedRadar=createObservedRadar(map,{onStart(){if(futureRadar.active)futureRadar.stop();prepareWeatherPlayback();weatherReadings.hide();document.body.classList.add('observed-radar-open');syncCurrentWeather({past:true});},onClose(){document.body.classList.remove('observed-radar-open');syncCurrentWeather();if(enabled.has('radar')&&!futureRadar.active&&!spotMode)refreshWeatherReadings();},onForecast(){observedRadar.stop();futureRadar.start();}});
 weatherExperience=createWeatherExperience(map,{format,onChange:()=>queueMicrotask(renderEnvironmentKey),onSelect:selectWeatherAlert,onPreferences:()=>renderLegend()});
 function selectWeatherAlert(feature){const record=weatherAlerts?.getState().alerts.find(record=>record.id===String(feature.properties?.id||feature.id||'').replace(/^https:\/\/api\.weather\.gov\/alerts\//,''));showFeature('alerts',record?alertFeature(record):{...feature,properties:{...feature.properties,title:feature.properties?.event}});}
-const warningBanner=createWarningBanner($('#map').parentElement,{format,onLayout:()=>badgeLayout.request(),onSelect:record=>showFeature('alerts',alertFeature(record)),onRefresh:()=>weatherAlerts.refresh({force:true})});
-weatherAlerts=createWeatherAlerts(map,{onSelect:record=>showFeature('alerts',alertFeature(record)),onStatus(state){weatherExperience.updateAlerts(state.features||[]);warningBanner.update(state);const openAlert=$('#detail').dataset.weatherAlertId;if(openAlert&&!$('#detail').hidden&&!(state.alerts||[]).some(record=>record.id===openAlert)){closeDetail();toast('That official weather alert is no longer active.');}data.set('alerts',{id:'alerts',status:state.status,features:(state.alerts||[]).map(alertFeature),checkedAt:state.checkedAt,note:state.note});if(state.checkedAt)layerRefreshAt.set('alerts',state.checkedAt);queueMicrotask(()=>{renderEnvironmentKey();if(enabled.has('alerts'))queueLayerUI('alerts');});}});
+const winterWarningPreference='andymap:show-winter-warning';
+let showWinterWarning=true;try{showWinterWarning=storage?.getItem(winterWarningPreference)!=='off';}catch{}
+const warningBanner=createWarningBanner($('#map').parentElement,{format,showWinter:showWinterWarning,onWinterVisibility(visible){try{storage?.setItem(winterWarningPreference,visible?'on':'off');}catch{}weatherAlerts.setShowWinter(visible);},onLayout:()=>badgeLayout.request(),onSelect:record=>showFeature('alerts',alertFeature(record)),onRefresh:()=>weatherAlerts.refresh({force:true})});
+weatherAlerts=createWeatherAlerts(map,{showWinter:showWinterWarning,onSelect:record=>showFeature('alerts',alertFeature(record)),onStatus(state){weatherExperience.updateAlerts(state.features||[]);warningBanner.update(state);const openAlert=$('#detail').dataset.weatherAlertId;if(openAlert&&!$('#detail').hidden&&!(state.alerts||[]).some(record=>record.id===openAlert)){closeDetail();toast('That official weather alert is no longer active.');}data.set('alerts',{id:'alerts',status:state.status,features:(state.alerts||[]).map(alertFeature),checkedAt:state.checkedAt,note:state.note});if(state.checkedAt)layerRefreshAt.set('alerts',state.checkedAt);queueMicrotask(()=>{renderEnvironmentKey();if(enabled.has('alerts'))queueLayerUI('alerts');});}});
 
 const trafficNote=el('div','traffic-note');trafficNote.hidden=true;$('#map').parentElement.append(trafficNote);
 const trafficMessages={incidents:'',flow:''};function updateTrafficNote(part,text){trafficMessages[part]=text;trafficNote.textContent=Object.values(trafficMessages).filter(Boolean).join(' ');trafficNote.hidden=!trafficNote.textContent;}

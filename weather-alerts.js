@@ -4,6 +4,7 @@ import {selectionAnchor} from './selection-focus.js?v=20261117-close-selection';
 
 export const WEATHER_ALERT_REGION={west:-91.2,south:38.1,east:-89.4,north:39.2};
 export const WEATHER_ALERT_INTERVAL=90000;
+export const isWinterStormWarning=record=>record?.event==='Winter Storm Warning';
 const STALE_AFTER=300000,ZONE_TTL=86400000;
 // All counties intersecting REGION, verified against the official NWS reference
 // map on 2026-11-17. County queries include both county and forecast-zone alerts.
@@ -104,13 +105,13 @@ export function weatherAlertPopup(alert){
  const link=append('a','Open the official NWS alert');link.href=alert.sourceURL;link.target='_blank';link.rel='noopener noreferrer';return node;
 }
 const tornadoSVG='<svg viewBox="0 0 28 28" width="24" height="24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M3 5h22M5 9h18M8 13h13M10 17h8M13 21h4M15 25h2"/></svg>';
-export function createWeatherAlerts(map,{onStatus=()=>{},onSelect,showAll=false,fetcher=fetch,now=Date.now}={}){
- const layout=getMapBadgeLayout(map),areas=L.layerGroup(),badges=L.layerGroup();let visible=false,all=showAll,timer=null,state=null,lastAreas=null,popup=null,popupIds=[],lastBadges=null;
+export function createWeatherAlerts(map,{onStatus=()=>{},onSelect,showAll=false,showWinter=true,fetcher=fetch,now=Date.now}={}){
+ const layout=getMapBadgeLayout(map),areas=L.layerGroup(),badges=L.layerGroup();let visible=false,all=showAll,winter=showWinter,timer=null,state=null,lastAreas=null,popup=null,popupIds=[],lastBadges=null;
  for(const[name,z]of[['weather-alert-areas',470],['weather-alert-badges',650]]){if(!map.getPane(name))map.createPane(name);map.getPane(name).style.zIndex=String(z);}
  const open=(alert,latlng)=>{if(alert.expiresAt<=now())return;if(onSelect){onSelect(alert);return;}popupIds=[alert.id];popup=L.popup({maxWidth:360,maxHeight:440}).setLatLng(latlng||selectionAnchor(alert.geometry)||map.getCenter()).setContent(weatherAlertPopup(alert)).openOn(map);};
- function drawAreas(){const current=(state?.alerts||[]).filter(a=>all||a.dangerous);if(lastAreas?.length===current.length&&current.every((a,i)=>a.id===lastAreas[i].id&&a.geometry===lastAreas[i].geometry&&a.stale===lastAreas[i].stale))return;lastAreas=current;areas.clearLayers();for(const alert of current)if(alert.geometry)L.geoJSON({type:'Feature',properties:{},geometry:alert.geometry},{pane:'weather-alert-areas',style:{color:alert.color,weight:alert.dangerous?3:2,fillColor:alert.color,fillOpacity:alert.dangerous?.08:.035,dashArray:alert.areaWide?'7 5':null}}).on('click',event=>{if(event.originalEvent)L.DomEvent.stopPropagation(event.originalEvent);open(alert,event.latlng);}).addTo(areas);}
+ function drawAreas(){const current=(state?.alerts||[]).filter(a=>(all||a.dangerous)&&(winter||!isWinterStormWarning(a)));if(lastAreas?.length===current.length&&current.every((a,i)=>a.id===lastAreas[i].id&&a.geometry===lastAreas[i].geometry&&a.stale===lastAreas[i].stale))return;lastAreas=current;areas.clearLayers();for(const alert of current)if(alert.geometry)L.geoJSON({type:'Feature',properties:{},geometry:alert.geometry},{pane:'weather-alert-areas',style:{color:alert.color,weight:alert.dangerous?3:2,fillColor:alert.color,fillOpacity:alert.dangerous?.08:.035,dashArray:alert.areaWide?'7 5':null}}).on('click',event=>{if(event.originalEvent)L.DomEvent.stopPropagation(event.originalEvent);open(alert,event.latlng);}).addTo(areas);}
  function drawBadges(){if(!visible){layout.publish('alerts',[]);return;}const size=map.getSize(),bounds=map.getBounds(),box={west:bounds.getWest(),south:bounds.getSouth(),east:bounds.getEast(),north:bounds.getNorth()},obstacles=layout.obstacles('alerts'),groups=[];
-  for(const alert of state?.alerts||[]){if(!all&&!alert.dangerous||!alert.geometry||!alertGeometryIntersects(alert.geometry,box))continue;const center=selectionAnchor(alert.geometry,map.getCenter());if(!center)continue;const point=map.latLngToContainerPoint(center),anchor=[Math.max(22,Math.min(size.x-22,point.x)),Math.max(22,Math.min(size.y-22,point.y))];groups.push({key:alert.id,provider:'alerts',anchor,priority:alert.tornado?120:alert.dangerous?100:20,cluster:{features:[alert],center,bounds:[center,center],layerIds:['alerts']}});}
+  for(const alert of state?.alerts||[]){if(isWinterStormWarning(alert)||!all&&!alert.dangerous||!alert.geometry||!alertGeometryIntersects(alert.geometry,box))continue;const center=selectionAnchor(alert.geometry,map.getCenter());if(!center)continue;const point=map.latLngToContainerPoint(center),anchor=[Math.max(22,Math.min(size.x-22,point.x)),Math.max(22,Math.min(size.y-22,point.y))];groups.push({key:alert.id,provider:'alerts',anchor,priority:alert.tornado?120:alert.dangerous?100:20,cluster:{features:[alert],center,bounds:[center,center],layerIds:['alerts']}});}
   const placed=layoutOverviewBadges(groups,{width:size.x,height:size.y,obstacles,measure:(g,compact)=>({width:compact?84:g.cluster.features.length>1?174:Math.min(244,Math.max(152,g.cluster.features[0].event.length*6+78)),height:compact?38:44})}).filter(b=>b.clearance),boxes=placed.map(badgeRectangle);layout.publish('alerts',boxes);
   const key=JSON.stringify([obstacles,placed.map(b=>[b.position,b.anchor,b.width,b.height,b.compact,b.cluster.features.map(a=>a.id)])]),records=placed.flatMap(b=>b.cluster.features);
   if(lastBadges?.key===key&&records.every((r,i)=>r===lastBadges.records[i]))return;
@@ -126,7 +127,8 @@ export function createWeatherAlerts(map,{onStatus=()=>{},onSelect,showAll=false,
  function refresh(options){if(visible&&!document.hidden)return feed.refresh(options);feed.expire();}
  function setVisible(value){if(visible===!!value)return;visible=!!value;if(visible){areas.addTo(map);badges.addTo(map);feed.expire();refresh();timer=setInterval(refresh,WEATHER_ALERT_INTERVAL);}else{clearInterval(timer);timer=null;feed.abort();areas.remove();badges.remove();layout.publish('alerts',[]);if(popup)map.closePopup(popup);popup=null;}}
  function setShowAll(value){if(all===!!value)return;all=!!value;lastAreas=null;if(visible){drawAreas();layout.request('alerts');}onStatus({...feed.getState(),showAll:all});}
+ function setShowWinter(value){if(winter===!!value)return;winter=!!value;lastAreas=null;if(visible)drawAreas();}
  const visibility=()=>{if(document.hidden)feed.abort();else if(visible){feed.expire();refresh();}};document.addEventListener('visibilitychange',visibility);
  function destroy(){setVisible(false);feed.destroy();unregister();document.removeEventListener('visibilitychange',visibility);map.off('unload',destroy);}
- map.on('unload',destroy);return{setVisible,setShowAll,refresh,getState:()=>({...feed.getState(),showAll:all}),destroy};
+ map.on('unload',destroy);return{setVisible,setShowAll,setShowWinter,refresh,getState:()=>({...feed.getState(),showAll:all}),destroy};
 }
