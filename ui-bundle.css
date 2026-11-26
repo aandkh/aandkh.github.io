@@ -1767,6 +1767,16 @@ body.spot-inspection #map:active,.spot-inspection #map:active,.spot-mode #map:ac
 .weather-warning-muted{color:var(--ink);background:var(--surface);border-color:var(--line)}
 .weather-warning-muted .weather-warning-toggle{border:0}
 @media(max-width:360px){.weather-warning-toggle{white-space:normal;max-width:87px;padding:0 6px}}
+.weather-warning-snow{border-top:1px solid currentColor;padding:4px 8px 3px;font:600 11px/1.4 system-ui}
+.weather-warning-snow[hidden]{display:none}
+.winter-snow-summary{display:flex;flex-wrap:wrap;gap:2px 8px;margin:0}
+.winter-snow-summary span{white-space:nowrap}
+.weather-warning-snow summary{min-height:30px;padding-top:3px;cursor:pointer}
+.winter-snow-detail{max-height:min(240px,28dvh);overflow-y:auto;overscroll-behavior:contain;padding:0 1px 4px}
+.winter-snow-detail h3{font-size:11px;margin:4px 0}
+.winter-snow-detail p,.winter-snow-detail ul{margin:4px 0 8px}
+.winter-snow-detail ul{padding-left:17px}
+.winter-snow-detail a{color:inherit;text-decoration:underline}
 
 
 /* weather-outlook.css */

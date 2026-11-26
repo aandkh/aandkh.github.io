@@ -9,6 +9,7 @@ import {createWeatherAlerts,createWeatherAlertFeed} from '../weather-alerts.js';
 import {createWarningBanner,alertFeature} from '../weather-alert-ui.js';
 import {BY_ID} from '../catalog.js';
 import {groupOpeningNotices} from '../expansion-ui.js';
+import {normalizeSnowReports,winterForecastByArea} from '../winter-snow-reports.js';
 
 class Element{
  constructor(tag){this.tagName=tag;this.children=[];this.attributes={};this.textContent='';this.style={};this.hidden=false;const classes=new Set();this.classList={add:(...names)=>names.forEach(n=>classes.add(n)),remove:(...names)=>names.forEach(n=>classes.delete(n)),contains:n=>classes.has(n),toggle:(n,on)=>on?classes.add(n):classes.delete(n)};}
@@ -16,7 +17,7 @@ class Element{
  replaceChildren(...children){this.children=[];this.append(...children);}
  contains(node){return node===this||this.children.some(child=>child.contains(node));}
  querySelector(selector){return this.children.find(child=>child.tagName===selector)||this.children.flatMap(child=>child.querySelector(selector)||[])[0]||null;}
- focus(){}blur(){}
+ focus(){}blur(){}addEventListener(){}
  remove(){if(this.parentElement)this.parentElement.children=this.parentElement.children.filter(c=>c!==this);}
  setAttribute(key,value){this.attributes[key]=String(value);}
 }
@@ -211,4 +212,29 @@ test('winter records in general notices group without auto-opening; other notice
  assert.deepEqual(group,{title:'Winter Storm Warning',manual:true,records:winter});
  assert.deepEqual(other,{title:'Tornado Warning',manual:false,records:[tornado]});
  assert.ok(groupOpeningNotices(winter).every(g=>g.manual));
+});
+
+test('snow report amounts remain local, dated and separate from forecast amounts',async()=>{
+ const now=Date.parse('2026-11-26T15:00:00Z');
+ const report=(loc_desc,magnitude,age=0,attrs={},geometry={x:-90.5,y:38.6})=>({geometry,attributes:{descript:'Snow',units:'Inch',state:'MO',lsr_validtime:now-age,loc_desc,magnitude,...attrs}});
+ const reports=normalizeSnowReports({features:[
+  report('Chesterfield','9'),report('Chesterfield','7.5',1800000),report('Kirkwood','7.5',200000),
+  report('Old','9',90000000),report('Future','9',-3600000),report('Outside','9',0,{}, {x:-93,y:38}),report('Ice','0.25',0,{descript:'Freezing Rain'}),report('Trace','T'),report('Metric','9',0,{units:'cm'}),null
+ ]},now);
+ assert.deepEqual(reports.map(r=>[r.location,r.amount]),[['Chesterfield',9],['Kirkwood',7.5]]);
+ const warning=(id,areaDesc,amount)=>({id,areaDesc,event:'Winter Storm Warning',dangerous:true,expiresAt:now+3600000,description:'* WHAT...Additional snow accumulations '+amount+'.\n\n* WHERE...'+areaDesc+'.\n\n* WHEN...Until noon.'});
+ const rec=[warning('w1','Warren; Franklin','up to one\n inch'),warning('w2','Gasconade; Jefferson','up to one inch'),warning('w3','St. Louis','of 1 to 3 inches')];
+ assert.deepEqual(winterForecastByArea(rec),[{area:'Warren, Franklin, Gasconade, Jefferson',text:'Additional snow accumulations up to one inch.'},{area:'St. Louis',text:'Additional snow accumulations of 1 to 3 inches.'}]);
+ const original=globalThis.document;globalThis.document={createElement:tag=>new Element(tag),activeElement:null};
+ try{
+  let requests=0;
+  const banner=createWarningBanner(new Element('div'),{now:()=>now,loadSnowReports:async()=>{requests++;return reports;}});
+  banner.update({status:'ready',alerts:[]});await new Promise(resolve=>setImmediate(resolve));assert.equal(requests,0);
+  banner.update({status:'ready',alerts:rec});assert.match(textOf(banner.element),/Forecast snow by area/);
+  await new Promise(resolve=>setImmediate(resolve));assert.equal(requests,1);
+  const visible=textOf(banner.element);assert.match(visible,/Reported snow · past 24h/);assert.match(visible,/Chesterfield, MO: 9″/);assert.match(visible,/Kirkwood, MO: 7.5″/);assert.match(visible,/Official warning forecast/);
+  banner.update({status:'ready',alerts:rec});await new Promise(resolve=>setImmediate(resolve));assert.equal(requests,1);
+  const checkbox=banner.element.querySelector('input');checkbox.checked=false;checkbox.onchange();
+  assert.doesNotMatch(textOf(banner.element),/Chesterfield|Forecast snow/);
+ }finally{globalThis.document=original;}
 });
