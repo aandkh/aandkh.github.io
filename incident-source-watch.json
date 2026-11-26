@@ -930,21 +930,21 @@
       "url": "https://www.firstalert4.com/2026/11/23/police-ask-public-help-after-siblings-killed-teen-critically-injured-outside-concert-venue/"
     },
     "https://www.firstalert4.com/2026/11/24/4-custody-after-triple-shooting-st-louis-county/": {
-      "changedAt": "2026-11-25T12:02:59.188668+00:00",
+      "changedAt": "2026-11-26T11:57:51.594464+00:00",
       "discoveredAt": "2026-11-25T12:02:59.188668+00:00",
       "publishedAt": "2026-11-24T22:36:27+00:00",
       "review": {
-        "checkedAt": "2026-11-25T12:07:06.258165+00:00",
+        "checkedAt": "2026-11-26T12:01:37.803341+00:00",
         "disposition": "mapped",
-        "note": "Mapped as the November 24 Yarwood Court triple shooting with an approximate public-block marker and three explicitly reported shooting injuries.",
-        "revision": "326277866faa083b695c5b2fec94c9e3b871c52090feb2a925ab4b615d2607ee"
+        "note": "Reviewed the changed article and updated the existing November 24 Yarwood Court triple-shooting record with the subsequently reported charges; occurrence and injury counts did not change.",
+        "revision": "723ea379e2e4525e930a82758595d41341eecf12f069897eebb52380feb17eef"
       },
-      "revision": "326277866faa083b695c5b2fec94c9e3b871c52090feb2a925ab4b615d2607ee",
+      "revision": "723ea379e2e4525e930a82758595d41341eecf12f069897eebb52380feb17eef",
       "sources": [
         "firstalert-county",
         "firstalert-crime"
       ],
-      "title": "4 in custody after triple shooting in St. Louis County",
+      "title": "4 charged after triple shooting in St. Louis County",
       "url": "https://www.firstalert4.com/2026/11/24/4-custody-after-triple-shooting-st-louis-county/"
     },
     "https://www.firstalert4.com/2026/11/24/man-sentenced-20-years-2020-murder-bicyclist-st-louis/": {
@@ -980,6 +980,40 @@
       ],
       "title": "Texas man sentenced to 15 years for 1992 sexual assault case out of St. Louis County",
       "url": "https://www.firstalert4.com/2026/11/24/texas-man-sentenced-15-years-1992-sexual-assault-case-out-st-louis-county/"
+    },
+    "https://www.firstalert4.com/2026/11/25/man-killed-north-st-louis-shooting-one-person-detained-police-say/": {
+      "changedAt": "2026-11-26T11:57:51.594464+00:00",
+      "discoveredAt": "2026-11-26T11:57:51.594464+00:00",
+      "publishedAt": "2026-11-25T13:26:11+00:00",
+      "review": {
+        "checkedAt": "2026-11-26T12:01:37.803341+00:00",
+        "disposition": "mapped",
+        "note": "Mapped the November 25 fatal shooting near Ridge Avenue and Union Boulevard with one explicitly reported death and an approximate public-intersection marker.",
+        "revision": "c0061845d4e2566bee8bcc45412e5e8de54a5a15646e3c1f5e23e08159522b2c"
+      },
+      "revision": "c0061845d4e2566bee8bcc45412e5e8de54a5a15646e3c1f5e23e08159522b2c",
+      "sources": [
+        "firstalert-crime"
+      ],
+      "title": "Man killed in north St. Louis shooting; one person detained, police say",
+      "url": "https://www.firstalert4.com/2026/11/25/man-killed-north-st-louis-shooting-one-person-detained-police-say/"
+    },
+    "https://www.firstalert4.com/2026/11/25/police-searching-person-interest-cahokia-heights-shooting-that-killed-man-injured-baby/": {
+      "changedAt": "2026-11-26T11:57:51.594464+00:00",
+      "discoveredAt": "2026-11-26T11:57:51.594464+00:00",
+      "publishedAt": "2026-11-25T21:17:22+00:00",
+      "review": {
+        "checkedAt": "2026-11-26T12:01:37.803341+00:00",
+        "disposition": "outside-region",
+        "note": "Reviewed; the shooting occurred in Cahokia Heights, Illinois, outside the St. Louis City and County incident region.",
+        "revision": "3f267e4c10ee2ef7834b87a0d04ff492cbcce32e0b46b685827655b1db6d687e"
+      },
+      "revision": "3f267e4c10ee2ef7834b87a0d04ff492cbcce32e0b46b685827655b1db6d687e",
+      "sources": [
+        "firstalert-crime"
+      ],
+      "title": "Police searching for person of interest in Cahokia Heights shooting that killed man, injured baby",
+      "url": "https://www.firstalert4.com/2026/11/25/police-searching-person-interest-cahokia-heights-shooting-that-killed-man-injured-baby/"
     }
   },
   "sources": {
@@ -1015,6 +1049,9 @@
     },
     "firstalert-crime": {
       "articleUrls": [
+        "https://www.firstalert4.com/2026/11/25/police-searching-person-interest-cahokia-heights-shooting-that-killed-man-injured-baby/",
+        "https://www.firstalert4.com/2026/11/25/man-dies-while-st-louis-jail-custody-city-officials-say/",
+        "https://www.firstalert4.com/2026/11/25/man-killed-north-st-louis-shooting-one-person-detained-police-say/",
         "https://www.firstalert4.com/2026/11/24/4-custody-after-triple-shooting-st-louis-county/",
         "https://www.firstalert4.com/2026/11/24/man-sentenced-20-years-2020-murder-bicyclist-st-louis/",
         "https://www.firstalert4.com/2026/11/23/police-ask-public-help-after-siblings-killed-teen-critically-injured-outside-concert-venue/",
@@ -1031,16 +1068,13 @@
         "https://www.firstalert4.com/2026/11/20/man-shot-near-his-4-year-old-grandson-outside-florissant-gas-station-police-say/",
         "https://www.firstalert4.com/2026/11/19/st-louis-bill-would-use-marijuana-tax-money-code-blue-shelter-program/",
         "https://www.firstalert4.com/2026/11/01/triple-shooting-leaves-1-dead-2-injured-north-county/",
-        "https://www.firstalert4.com/2026/11/19/troopers-seek-vehicle-believed-have-struck-pedestrian-deadly-wellston-crash/",
-        "https://www.firstalert4.com/2026/11/18/federal-grand-jury-indicts-man-deadly-cahokia-heights-fire/",
-        "https://www.firstalert4.com/2026/11/18/police-yorkie-seen-being-repeatedly-hit-circulating-video-good-spirits/",
-        "https://www.firstalert4.com/2026/11/11/man-critically-injured-south-city-shooting/"
+        "https://www.firstalert4.com/2026/11/19/troopers-seek-vehicle-believed-have-struck-pedestrian-deadly-wellston-crash/"
       ],
-      "contentChangedAt": "2026-11-25T12:02:59.188668+00:00",
-      "etag": "W/\"dd27-Z+MiOTx28QyK6Wc4IQj3GzQxETk\"",
-      "lastModified": "Wed, 25 Nov 2026 12:03:06 GMT",
-      "latestPublishedAt": "2026-11-24T22:36:27+00:00",
-      "oldestPublishedAt": "2026-11-18T16:54:43+00:00",
+      "contentChangedAt": "2026-11-26T11:57:51.594464+00:00",
+      "etag": "W/\"e20b-BjauE+xMXDncAkB+85/sBKINSbk\"",
+      "lastModified": "Thu, 26 Nov 2026 11:53:15 GMT",
+      "latestPublishedAt": "2026-11-25T21:17:22+00:00",
+      "oldestPublishedAt": "2026-11-19T12:37:41+00:00",
       "url": "https://www.firstalert4.com/arc/outboundfeeds/rss/category/news/crime/?outputType=xml"
     }
   },

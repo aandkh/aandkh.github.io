@@ -163,5 +163,16 @@
     "matchedAddress": "816 GEYER AVE, SAINT LOUIS, MO, 63104",
     "source": "US Census Geocoder",
     "sourceUrl": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=816+Geyer+Ave+St.+Louis%2C+MO+63104&benchmark=Public_AR_Current&format=json"
+  },
+  "930 holly hills ave. st. louis, mo 63111": {
+    "address": "930 Holly Hills Ave. St. Louis, MO 63111",
+    "coordinates": [
+      -90.258768423394,
+      38.561980872332
+    ],
+    "locationAccuracy": "Approximate published street address · Census address interpolation",
+    "matchedAddress": "930 HOLLY HILLS AVE, SAINT LOUIS, MO, 63111",
+    "source": "US Census Geocoder",
+    "sourceUrl": "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?address=930+Holly+Hills+Ave.+St.+Louis%2C+MO+63111&benchmark=Public_AR_Current&format=json"
   }
 }

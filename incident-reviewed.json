@@ -1,5 +1,5 @@
 {
-  "reviewedAt": "2026-11-25T12:12:55.272474+00:00",
+  "reviewedAt": "2026-11-26T12:01:37.803341+00:00",
   "features": [
     {
       "type": "Feature",
@@ -2402,6 +2402,49 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          -90.27,
+          38.663
+        ]
+      },
+      "properties": {
+        "id": "incident:city-ridge-union-fatal-shooting-20261125",
+        "title": "Fatal shooting · Ridge and Union",
+        "incidentAt": "2026-11-25T06:40:00-06:00",
+        "incidentDate": "2026-11-25",
+        "incidentTimeAccuracy": "approximate",
+        "incidentKind": "shooting",
+        "incidentTypes": [
+          "shooting"
+        ],
+        "jurisdiction": "city",
+        "address": "Ridge Avenue at Union Boulevard, St. Louis, MO",
+        "sourceId": "city-reviewed-news",
+        "source": "First Alert 4 · St. Louis police reporting",
+        "sourceUrl": "https://www.firstalert4.com/2026/11/25/man-killed-north-st-louis-shooting-one-person-detained-police-say/",
+        "url": "https://www.firstalert4.com/2026/11/25/man-killed-north-st-louis-shooting-one-person-detained-police-say/",
+        "sourceCheckedAt": "2026-11-26T12:01:37.803341+00:00",
+        "description": "St. Louis police reported that one person was fatally shot near Ridge Avenue and Union Boulevard around 6:40 a.m. on November 25. One person was detained while homicide detectives investigated.",
+        "locationAccuracy": "Approximate reported public intersection, rounded to about 100 m; not an exact shooting position.",
+        "locationSourceUrl": "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?SingleLine=Ridge+Avenue+and+Union+Boulevard%2C+St.+Louis%2C+Missouri&f=json&outFields=Addr_type%2CMatch_addr%2CLongLabel%2CScore&maxLocations=3",
+        "color": "#c52f73",
+        "deaths": 1,
+        "severity": "fatal",
+        "fatalityEvidence": [
+          {
+            "category": "other-homicide",
+            "deaths": 1,
+            "sourceUrl": "https://www.firstalert4.com/2026/11/25/man-killed-north-st-louis-shooting-one-person-detained-police-say/",
+            "summary": "First Alert 4, citing St. Louis police, reported that one person died in the November 25 shooting.",
+            "checkedAt": "2026-11-26T12:01:37.803341+00:00"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           -90.279,
           38.757
         ]
@@ -2422,8 +2465,8 @@
         "source": "First Alert 4 · North County Police Cooperative reporting",
         "sourceUrl": "https://www.firstalert4.com/2026/11/24/4-custody-after-triple-shooting-st-louis-county/",
         "url": "https://www.firstalert4.com/2026/11/24/4-custody-after-triple-shooting-st-louis-county/",
-        "sourceCheckedAt": "2026-11-25T12:07:06.258165+00:00",
-        "description": "The North County Police Cooperative reported that three people were shot in the 10300 block of Yarwood Court around 11 a.m. on November 24. Two injuries were described as non-life-threatening; the third person's condition was not reported. Four people were taken into custody, and police reported recovering guns equipped with machine-gun conversion devices.",
+        "sourceCheckedAt": "2026-11-26T12:01:37.803341+00:00",
+        "description": "The North County Police Cooperative reported that three people were shot in the 10300 block of Yarwood Court around 11 a.m. on November 24. Two injuries were described as non-life-threatening; the third person's condition was not reported. Police later reported that four suspects faced assault, weapons or related charges after officers recovered guns equipped with machine-gun conversion devices. Preliminary accusations; not findings of guilt.",
         "locationAccuracy": "Approximate reported public block, rounded to about 100 m; not an exact shooting position or private-home marker.",
         "color": "#c52f73",
         "injuries": 3
@@ -2465,11 +2508,11 @@
     }
   ],
   "sourceReviews": {
-    "county-reviewed-news": "2026-11-25T12:07:06.258165+00:00",
+    "county-reviewed-news": "2026-11-26T12:01:37.803341+00:00",
     "county-releases": "2026-11-15T19:44:02.622984+00:00",
     "city-releases": "2026-11-15T19:44:02.622984+00:00",
     "county-chesterfield-bulletins": "2026-11-25T12:12:55.272474+00:00",
-    "city-reviewed-news": "2026-11-24T12:08:19.796799+00:00"
+    "city-reviewed-news": "2026-11-26T12:01:37.803341+00:00"
   },
   "sourceReviewDetails": {
     "county-chesterfield-bulletins": {
