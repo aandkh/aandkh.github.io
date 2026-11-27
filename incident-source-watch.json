@@ -982,16 +982,16 @@
       "url": "https://www.firstalert4.com/2026/11/24/texas-man-sentenced-15-years-1992-sexual-assault-case-out-st-louis-county/"
     },
     "https://www.firstalert4.com/2026/11/25/man-killed-north-st-louis-shooting-one-person-detained-police-say/": {
-      "changedAt": "2026-11-26T11:57:51.594464+00:00",
+      "changedAt": "2026-11-27T12:05:08.802830+00:00",
       "discoveredAt": "2026-11-26T11:57:51.594464+00:00",
       "publishedAt": "2026-11-25T13:26:11+00:00",
       "review": {
-        "checkedAt": "2026-11-26T12:01:37.803341+00:00",
-        "disposition": "mapped",
-        "note": "Mapped the November 25 fatal shooting near Ridge Avenue and Union Boulevard with one explicitly reported death and an approximate public-intersection marker.",
-        "revision": "c0061845d4e2566bee8bcc45412e5e8de54a5a15646e3c1f5e23e08159522b2c"
+        "checkedAt": "2026-11-27T12:10:30.648477+00:00",
+        "disposition": "already-mapped",
+        "note": "Reviewed the changed article revision; the reported November 25 occurrence time, Ridge and Union location, one death, and detention status remain represented by the existing mapped record.",
+        "revision": "07cfc4b0d97da155eb3a65c09d0642fc930bc088d553a1fc8f471f4883f45134"
       },
-      "revision": "c0061845d4e2566bee8bcc45412e5e8de54a5a15646e3c1f5e23e08159522b2c",
+      "revision": "07cfc4b0d97da155eb3a65c09d0642fc930bc088d553a1fc8f471f4883f45134",
       "sources": [
         "firstalert-crime"
       ],
@@ -1014,11 +1014,32 @@
       ],
       "title": "Police searching for person of interest in Cahokia Heights shooting that killed man, injured baby",
       "url": "https://www.firstalert4.com/2026/11/25/police-searching-person-interest-cahokia-heights-shooting-that-killed-man-injured-baby/"
+    },
+    "https://www.firstalert4.com/2026/11/26/driver-hits-st-louis-firefighter-with-car-house-fire-police-say/": {
+      "changedAt": "2026-11-27T12:05:08.802830+00:00",
+      "discoveredAt": "2026-11-27T12:05:08.802830+00:00",
+      "publishedAt": "2026-11-26T18:03:05+00:00",
+      "review": {
+        "checkedAt": "2026-11-27T12:10:30.578572+00:00",
+        "disposition": "mapped",
+        "note": "Mapped the November 25 serious-injury vehicle strike in the 2800 block of Keokuk Street using the reported public block and one explicitly reported serious injury.",
+        "revision": "ac17bbd1cdeeb4cc4fff405b8a670b4f62218c18257711755ff0bfa52075c50d"
+      },
+      "revision": "ac17bbd1cdeeb4cc4fff405b8a670b4f62218c18257711755ff0bfa52075c50d",
+      "sources": [
+        "firstalert-crime"
+      ],
+      "title": "Driver hits St. Louis firefighter with car at house fire, police say",
+      "url": "https://www.firstalert4.com/2026/11/26/driver-hits-st-louis-firefighter-with-car-house-fire-police-say/"
     }
   },
   "sources": {
     "firstalert-county": {
       "articleUrls": [
+        "https://www.firstalert4.com/2026/11/27/winter-storm-knocks-out-power-disrupts-thanksgiving-plans-across-st-louis-region/",
+        "https://www.firstalert4.com/2026/11/26/power-outage-prompts-boil-water-advisory-some-wildwood-residents/",
+        "https://www.firstalert4.com/2026/11/26/winter-storm-prompts-cancellation-annual-turkey-day-football-game/",
+        "https://www.firstalert4.com/2026/11/26/modot-warns-slick-roads-traffic-signal-outages-across-st-louis-area-thanksgiving-morning/",
         "https://www.firstalert4.com/2026/11/24/4-custody-after-triple-shooting-st-louis-county/",
         "https://www.firstalert4.com/2026/11/24/texas-man-sentenced-15-years-1992-sexual-assault-case-out-st-louis-county/",
         "https://www.firstalert4.com/2026/11/24/adopted-children-thankful-new-forever-families-before-thanksgiving/",
@@ -1034,21 +1055,18 @@
         "https://www.firstalert4.com/2026/11/20/sale-vacant-kirkwood-ball-fields-approved-by-city-council-private-group-plans-sports-food-complex/",
         "https://www.firstalert4.com/2026/11/20/man-shot-near-his-4-year-old-grandson-outside-florissant-gas-station-police-say/",
         "https://www.firstalert4.com/2026/11/20/kirkwood-withholding-11-million-contractor-train-station-stays-closed/",
-        "https://www.firstalert4.com/2026/11/19/normandy-schools-collaborative-deploys-15-electric-buses/",
-        "https://www.firstalert4.com/2026/11/19/troopers-seek-vehicle-believed-have-struck-pedestrian-deadly-wellston-crash/",
-        "https://www.firstalert4.com/2026/11/19/st-louis-county-welcomes-more-than-20-new-corrections-officers-graduation-ceremony/",
-        "https://www.firstalert4.com/2026/11/18/inside-normandy-schools-command-center-monitoring-330-cameras/",
-        "https://www.firstalert4.com/2026/11/18/police-yorkie-seen-being-repeatedly-hit-circulating-video-good-spirits/"
+        "https://www.firstalert4.com/2026/11/19/normandy-schools-collaborative-deploys-15-electric-buses/"
       ],
-      "contentChangedAt": "2026-11-25T12:02:59.188668+00:00",
-      "etag": "W/\"12076-gMcA/osQpndoGO787km2kXWZ+bk\"",
-      "lastModified": "Wed, 25 Nov 2026 12:03:02 GMT",
-      "latestPublishedAt": "2026-11-24T22:36:27+00:00",
-      "oldestPublishedAt": "2026-11-18T17:48:55+00:00",
+      "contentChangedAt": "2026-11-27T12:05:08.802830+00:00",
+      "etag": "W/\"12237-FA8u0ilfzKdKiqlqDSyNJye6kxc\"",
+      "lastModified": "Fri, 27 Nov 2026 12:05:14 GMT",
+      "latestPublishedAt": "2026-11-27T00:18:17+00:00",
+      "oldestPublishedAt": "2026-11-19T22:45:06+00:00",
       "url": "https://www.firstalert4.com/arc/outboundfeeds/rss/category/news/st-louis-county/?outputType=xml"
     },
     "firstalert-crime": {
       "articleUrls": [
+        "https://www.firstalert4.com/2026/11/26/driver-hits-st-louis-firefighter-with-car-house-fire-police-say/",
         "https://www.firstalert4.com/2026/11/25/police-searching-person-interest-cahokia-heights-shooting-that-killed-man-injured-baby/",
         "https://www.firstalert4.com/2026/11/25/man-dies-while-st-louis-jail-custody-city-officials-say/",
         "https://www.firstalert4.com/2026/11/25/man-killed-north-st-louis-shooting-one-person-detained-police-say/",
@@ -1067,14 +1085,13 @@
         "https://www.firstalert4.com/2026/11/20/driving-instructor-says-emotional-control-is-top-lesson-drivers-light-recent-road-rage-incidents/",
         "https://www.firstalert4.com/2026/11/20/man-shot-near-his-4-year-old-grandson-outside-florissant-gas-station-police-say/",
         "https://www.firstalert4.com/2026/11/19/st-louis-bill-would-use-marijuana-tax-money-code-blue-shelter-program/",
-        "https://www.firstalert4.com/2026/11/01/triple-shooting-leaves-1-dead-2-injured-north-county/",
-        "https://www.firstalert4.com/2026/11/19/troopers-seek-vehicle-believed-have-struck-pedestrian-deadly-wellston-crash/"
+        "https://www.firstalert4.com/2026/11/01/triple-shooting-leaves-1-dead-2-injured-north-county/"
       ],
-      "contentChangedAt": "2026-11-26T11:57:51.594464+00:00",
-      "etag": "W/\"e20b-BjauE+xMXDncAkB+85/sBKINSbk\"",
-      "lastModified": "Thu, 26 Nov 2026 11:53:15 GMT",
-      "latestPublishedAt": "2026-11-25T21:17:22+00:00",
-      "oldestPublishedAt": "2026-11-19T12:37:41+00:00",
+      "contentChangedAt": "2026-11-27T12:05:08.802830+00:00",
+      "etag": "W/\"e3d6-B31KLxcB4hAVkLxUnSGTiq6ywKQ\"",
+      "lastModified": "Fri, 27 Nov 2026 12:03:41 GMT",
+      "latestPublishedAt": "2026-11-26T18:03:05+00:00",
+      "oldestPublishedAt": "2026-11-19T14:53:19+00:00",
       "url": "https://www.firstalert4.com/arc/outboundfeeds/rss/category/news/crime/?outputType=xml"
     }
   },

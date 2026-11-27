@@ -1,5 +1,5 @@
 {
-  "reviewedAt": "2026-11-26T12:01:37.803341+00:00",
+  "reviewedAt": "2026-11-27T12:09:59.895111+00:00",
   "features": [
     {
       "type": "Feature",
@@ -69,6 +69,40 @@
             "checkedAt": "2026-11-15T19:44:02.622984+00:00"
           }
         ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.233,
+          38.585
+        ]
+      },
+      "properties": {
+        "id": "incident:city-keokuk-firefighter-vehicle-strike-20261125",
+        "title": "Serious-injury vehicle strike · Dutchtown",
+        "incidentAt": "2026-11-25T23:00:00-06:00",
+        "incidentDate": "2026-11-25",
+        "incidentTimeAccuracy": "approximate",
+        "incidentKind": "crash",
+        "incidentTypes": [
+          "crash"
+        ],
+        "jurisdiction": "city",
+        "address": "2800 block of Keokuk Street, St. Louis, MO",
+        "sourceId": "city-reviewed-news",
+        "source": "First Alert 4 · St. Louis police reporting",
+        "sourceUrl": "https://www.firstalert4.com/2026/11/26/driver-hits-st-louis-firefighter-with-car-house-fire-police-say/",
+        "url": "https://www.firstalert4.com/2026/11/26/driver-hits-st-louis-firefighter-with-car-house-fire-police-say/",
+        "sourceCheckedAt": "2026-11-27T12:09:59.895111+00:00",
+        "description": "St. Louis police reported that a driver passed emergency vehicles at a house fire and struck a firefighter in the 2800 block of Keokuk Street just after 11 p.m. on November 25. The firefighter was hospitalized with serious injuries and later released. Police reported an arrest on suspicion of reckless-driving and traffic offenses; preliminary allegations are not findings of guilt.",
+        "locationAccuracy": "Approximate reported public block, rounded to about 100 m; not an exact crash or private-home position.",
+        "locationSourceUrl": "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?SingleLine=2800+block+Keokuk+Street%2C+St.+Louis%2C+Missouri&f=json&outFields=Addr_type%2CMatch_addr%2CLongLabel%2CScore&maxLocations=3",
+        "color": "#ed5900",
+        "injuries": 1,
+        "severity": "serious"
       }
     },
     {
@@ -2512,7 +2546,7 @@
     "county-releases": "2026-11-15T19:44:02.622984+00:00",
     "city-releases": "2026-11-15T19:44:02.622984+00:00",
     "county-chesterfield-bulletins": "2026-11-25T12:12:55.272474+00:00",
-    "city-reviewed-news": "2026-11-26T12:01:37.803341+00:00"
+    "city-reviewed-news": "2026-11-27T12:09:59.895111+00:00"
   },
   "sourceReviewDetails": {
     "county-chesterfield-bulletins": {
