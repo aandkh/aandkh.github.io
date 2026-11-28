@@ -1036,8 +1036,10 @@
   "sources": {
     "firstalert-county": {
       "articleUrls": [
-        "https://www.firstalert4.com/2026/11/27/winter-storm-knocks-out-power-disrupts-thanksgiving-plans-across-st-louis-region/",
+        "https://www.firstalert4.com/2026/11/28/crews-scene-water-main-break-manchester/",
+        "https://www.firstalert4.com/2026/11/28/local-small-businesses-impacted-by-power-outages-after-winter-storm/",
         "https://www.firstalert4.com/2026/11/26/power-outage-prompts-boil-water-advisory-some-wildwood-residents/",
+        "https://www.firstalert4.com/2026/11/27/winter-storm-knocks-out-power-disrupts-thanksgiving-plans-across-st-louis-region/",
         "https://www.firstalert4.com/2026/11/26/winter-storm-prompts-cancellation-annual-turkey-day-football-game/",
         "https://www.firstalert4.com/2026/11/26/modot-warns-slick-roads-traffic-signal-outages-across-st-louis-area-thanksgiving-morning/",
         "https://www.firstalert4.com/2026/11/24/4-custody-after-triple-shooting-st-louis-county/",
@@ -1053,15 +1055,13 @@
         "https://www.firstalert4.com/2026/11/20/man-sentenced-assault-ferguson-officer-during-2024-protest/",
         "https://www.firstalert4.com/2026/11/20/2-hospitalized-after-car-hits-building-overturns-jennings/",
         "https://www.firstalert4.com/2026/11/20/sale-vacant-kirkwood-ball-fields-approved-by-city-council-private-group-plans-sports-food-complex/",
-        "https://www.firstalert4.com/2026/11/20/man-shot-near-his-4-year-old-grandson-outside-florissant-gas-station-police-say/",
-        "https://www.firstalert4.com/2026/11/20/kirkwood-withholding-11-million-contractor-train-station-stays-closed/",
-        "https://www.firstalert4.com/2026/11/19/normandy-schools-collaborative-deploys-15-electric-buses/"
+        "https://www.firstalert4.com/2026/11/20/man-shot-near-his-4-year-old-grandson-outside-florissant-gas-station-police-say/"
       ],
-      "contentChangedAt": "2026-11-27T12:05:08.802830+00:00",
-      "etag": "W/\"12237-FA8u0ilfzKdKiqlqDSyNJye6kxc\"",
-      "lastModified": "Fri, 27 Nov 2026 12:05:14 GMT",
-      "latestPublishedAt": "2026-11-27T00:18:17+00:00",
-      "oldestPublishedAt": "2026-11-19T22:45:06+00:00",
+      "contentChangedAt": "2026-11-28T11:59:29.290076+00:00",
+      "etag": "W/\"11f0e-TEOY7hkMdHpzCdzCKfDZHVFD6Ns\"",
+      "lastModified": "Sat, 28 Nov 2026 11:59:33 GMT",
+      "latestPublishedAt": "2026-11-28T03:46:40+00:00",
+      "oldestPublishedAt": "2026-11-20T02:32:53+00:00",
       "url": "https://www.firstalert4.com/arc/outboundfeeds/rss/category/news/st-louis-county/?outputType=xml"
     },
     "firstalert-crime": {
